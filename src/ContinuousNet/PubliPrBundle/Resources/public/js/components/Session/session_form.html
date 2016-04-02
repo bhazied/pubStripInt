@@ -1,0 +1,86 @@
+
+<!-- start: PAGE TITLE -->
+<section id="page-title">
+    <div class="row">
+        <div class="col-sm-8">
+            <h1 class="mainTitle" translate="content.list.SESSIONS">Sessions</h1>
+            <span class="mainDescription"></span>
+        </div>
+        <div ncy-breadcrumb></div>
+    </div>
+</section>
+<!-- end: PAGE TITLE -->
+
+<!-- start: FORM -->
+<div class="container-fluid container-fullw bg-white">
+    <div class="row">
+        <div class="col-md-12" ng-controller="SessionFormCtrl">
+            <div>
+                    <fieldset>
+                        <legend translate="content.list.NEWSESSION" ng-if="session.id == 0">
+                            New Session
+                        </legend>
+                        <legend translate="content.list.EDITSESSION" ng-if="session.id > 0">
+                            Edit Session
+                        </legend>
+                        <form name="sessionForm" id="sessionForm" novalidate ng-submit="submitForm(sessionForm)">
+                        <div class="row">
+                            <input type="hidden" name="id" id="sessionId" ng-model="session.id" />
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':sessionForm.ip.$dirty && sessionForm.ip.$invalid, 'has-success':sessionForm.ip.$valid}">
+                                    <label for="sessionIp" class="control-label">
+                                        <span translate="content.list.fields.IP">Ip</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="session.ip" type="text" name="ip" id="sessionIp" class="form-control" placeholder="[[ 'content.form.messages.ENTERIP' | translate ]]" ng-required="true" />
+                                        <i class="ti-marker-alt"></i>
+                                    </span><!--/input-icon-->
+                                    <span class="error text-small block" ng-if="sessionForm.ip.$dirty && sessionForm.ip.$error.required" translate="content.form.messages.IPREQUIRED">Ip is required.</span>
+                                    <span class="success text-small block" ng-if="sessionForm.ip.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="checkbox clip-check check-primary">
+                                    <input ng-model="session.is_valid" type="checkbox" name="isValid" id="sessionIsValid" />
+                                    <label for="sessionIsValid" translate="content.list.fields.ISVALID">Is Valid</label>
+                                </div><!--/checkbox clip-check check-primary-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':sessionForm.userAgent.$dirty && sessionForm.userAgent.$invalid, 'has-success':sessionForm.userAgent.$valid}">
+                                    <label for="sessionUserAgent" class="control-label">
+                                        <span translate="content.list.fields.USERAGENT">User Agent</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <div class="note-editor">
+                                        <textarea ng-model="session.user_agent" name="userAgent" id="sessionUserAgent" class="form-control" placeholder="[[ 'content.form.messages.ENTERUSERAGENT' | translate ]]" class="form-control autosize area-animated msd-elastic: \n;" ng-required="true"></textarea>
+                                    </div>
+                                    <span class="error text-small block" ng-if="sessionForm.userAgent.$dirty && sessionForm.userAgent.$error.required" translate="content.form.messages.USERAGENTREQUIRED">User Agent is required.</span>
+                                    <span class="success text-small block" ng-if="sessionForm.userAgent.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        </form>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <button ng-click="list()" class="btn btn-primary pull-left">
+                                    <i class="ti-layout-list-thumb"></i> <span translate="content.list.BACKSESSIONS">Back to Sessions list</span>
+                                </button>
+                            </div>
+                            <div class="col-md-4">
+                            </div>
+                            <div class="col-md-4">
+                                <button type="button" ng-click="submitForm(sessionForm)" class="btn btn-primary pull-right"> <!--  ng-disabled="sessionForm.$invalid" -->
+                                    <i class="ti-save"></i> <span translate="content.common.SAVE">Save</span>
+                                </button>
+                            </div>
+                        </div>
+                   </fieldset>
+            </div>
+        </div><!--/col-md-12-->
+    </div><!--/row-->
+</div><!--/container-fluid container-fullw-->
+<!-- end: FORM -->
+

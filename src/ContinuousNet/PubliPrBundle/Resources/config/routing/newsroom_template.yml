@@ -1,0 +1,30 @@
+newsroomtemplate:
+    path:     /
+    defaults: { _controller: "PubliPrBundle:NewsroomTemplate:index" }
+
+newsroomtemplate_details:
+    path:     /{id}/details
+    defaults: { _controller: "PubliPrBundle:NewsroomTemplate:show" }
+
+newsroomtemplate_new:
+    path:     /new
+    defaults: { _controller: "PubliPrBundle:NewsroomTemplate:new" }
+
+newsroomtemplate_create:
+    path:     /create
+    defaults: { _controller: "PubliPrBundle:NewsroomTemplate:create" }
+    methods:  POST
+
+newsroomtemplate_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "PubliPrBundle:NewsroomTemplate:edit" }
+
+newsroomtemplate_update:
+    path:     /{id}/update
+    defaults: { _controller: "PubliPrBundle:NewsroomTemplate:update" }
+    methods:  [POST, PUT]
+
+newsroomtemplate_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "PubliPrBundle:NewsroomTemplate:delete" }
+    methods:  [POST, DELETE]

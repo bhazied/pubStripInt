@@ -1,0 +1,122 @@
+
+<!-- start: PAGE TITLE -->
+<section id="page-title">
+    <div class="row">
+        <div class="col-sm-8">
+            <h1 class="mainTitle" translate="content.list.CONTACTS">Contacts</h1>
+            <span class="mainDescription"></span>
+        </div>
+        <div ncy-breadcrumb></div>
+    </div>
+</section>
+<!-- end: PAGE TITLE -->
+<!-- start: DETAILS -->
+<div class="container-fluid container-fullw bg-white">
+    <div class="row">
+        <div class="col-md-12" ng-controller="ContactCtrl">
+            <div>
+                <div class="row margin-bottom-10">
+                    <div class="col-md-4">
+                           <button ng-click="list()" class="btn btn-primary pull-left">
+                               <i class="ti-layout-list-thumb"></i> <span translate="content.list.BACKCONTACTS">Back to Contacts list</span>
+                           </button>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <button type="button" ng-click="add()" class="btn btn-primary">
+                            <i class="ti-plus"></i> <span translate="content.list.ADDCONTACT">Add Contact</span>
+                        </button>
+                    </div>
+                    <div class="col-md-4">
+                        <button type="button" ng-click="edit(contact)" class="btn btn-primary pull-right">
+                            <i class="ti-pencil-alt"></i> <span translate="content.list.EDITCONTACT">Edit Contact</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-condensed table-bordered">
+                        <thead>
+                            <tr>
+                                <th colspan="2" translate="content.list.CONTACTDETAILS">Contact Details</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span translate="content.list.fields.ID">Id</span></td>
+                                <td>
+                                    <div ng-bind-html="contact.id"></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span translate="content.list.fields.CONTACTGROUP">Contact Group</span></td>
+                                <td><a ui-sref="app.contactmanager.contactgroupsdetails({id: contact.contact_group.id})">[[ contact.contact_group.name ]]</a></span></td>
+                            </tr>
+                            <tr>
+                                <td><span translate="content.list.fields.FIRSTNAME">First Name</span></td>
+                                <td>
+                                    <div ng-bind-html="contact.first_name"></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span translate="content.list.fields.LASTNAME">Last Name</span></td>
+                                <td>
+                                    <div ng-bind-html="contact.last_name"></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span translate="content.list.fields.EMAIL">Email</span></td>
+                                <td>
+                                    <div ng-bind-html="contact.email"></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span translate="content.list.fields.PHONE">Phone</span></td>
+                                <td>
+                                    <div ng-bind-html="contact.phone"></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span translate="content.list.fields.ACTIVE">Active</span></td>
+                                <td>
+                                    <span my-boolean="[[ contact.active ]]"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span translate="content.list.fields.UNSUBSCRIBED">Unsubscribed</span></td>
+                                <td>
+                                    <span my-boolean="[[ contact.unsubscribed ]]"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span translate="content.list.fields.UNSUBSCRIBEDAT">Unsubscribed At</span></td>
+                                <td>
+                                    <span>[[ contact.unsubscribed_at | date: datetimeFormat ]]</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span translate="content.list.fields.CREATORUSER">Creator User</span></td>
+                                <td><a ui-sref="app.access.usersdetails({id: contact.creator_user.id})">[[ contact.creator_user.username ]]</a></span></td>
+                            </tr>
+                            <tr>
+                                <td><span translate="content.list.fields.CREATEDAT">Created At</span></td>
+                                <td>
+                                    <span>[[ contact.created_at | date: datetimeFormat ]]</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span translate="content.list.fields.MODIFIERUSER">Modifier User</span></td>
+                                <td><a ui-sref="app.access.usersdetails({id: contact.modifier_user.id})">[[ contact.modifier_user.username ]]</a></span></td>
+                            </tr>
+                            <tr>
+                                <td><span translate="content.list.fields.MODIFIEDAT">Modified At</span></td>
+                                <td>
+                                    <span>[[ contact.modified_at | date: datetimeFormat ]]</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div><!--/col-md-12-->
+    </div><!--/row-->
+</div><!--/container-fluid container-fullw-->
+<!-- end: DETAILS -->

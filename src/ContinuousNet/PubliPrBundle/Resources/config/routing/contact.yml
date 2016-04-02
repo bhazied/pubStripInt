@@ -1,0 +1,30 @@
+contact:
+    path:     /
+    defaults: { _controller: "PubliPrBundle:Contact:index" }
+
+contact_details:
+    path:     /{id}/details
+    defaults: { _controller: "PubliPrBundle:Contact:show" }
+
+contact_new:
+    path:     /new
+    defaults: { _controller: "PubliPrBundle:Contact:new" }
+
+contact_create:
+    path:     /create
+    defaults: { _controller: "PubliPrBundle:Contact:create" }
+    methods:  POST
+
+contact_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "PubliPrBundle:Contact:edit" }
+
+contact_update:
+    path:     /{id}/update
+    defaults: { _controller: "PubliPrBundle:Contact:update" }
+    methods:  [POST, PUT]
+
+contact_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "PubliPrBundle:Contact:delete" }
+    methods:  [POST, DELETE]

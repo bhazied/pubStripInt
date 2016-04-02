@@ -1,0 +1,237 @@
+
+<!-- start: PAGE TITLE -->
+<section id="page-title">
+    <div class="row">
+        <div class="col-sm-8">
+            <h1 class="mainTitle" translate="content.list.NEWSROOMS">Newsrooms</h1>
+            <span class="mainDescription"></span>
+        </div>
+        <div ncy-breadcrumb></div>
+    </div>
+</section>
+<!-- end: PAGE TITLE -->
+
+<!-- start: FORM -->
+<div class="container-fluid container-fullw bg-white">
+    <div class="row">
+        <div class="col-md-12" ng-controller="NewsroomFormCtrl">
+            <div>
+                    <fieldset>
+                        <legend translate="content.list.NEWNEWSROOM" ng-if="newsroom.id == 0">
+                            New Newsroom
+                        </legend>
+                        <legend translate="content.list.EDITNEWSROOM" ng-if="newsroom.id > 0">
+                            Edit Newsroom
+                        </legend>
+                        <form name="newsroomForm" id="newsroomForm" novalidate ng-submit="submitForm(newsroomForm)">
+                        <div class="row">
+                            <input type="hidden" name="id" id="newsroomId" ng-model="newsroom.id" />
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':newsroomForm.name.$dirty && newsroomForm.name.$invalid, 'has-success':newsroomForm.name.$valid}">
+                                    <label for="newsroomName" class="control-label">
+                                        <span translate="content.list.fields.NAME">Name</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="newsroom.name" type="text" name="name" id="newsroomName" class="form-control" placeholder="[[ 'content.form.messages.ENTERNAME' | translate ]]" ng-required="true" />
+                                        <i class="ti-tag"></i>
+                                    </span><!--/input-icon-->
+                                    <span class="error text-small block" ng-if="newsroomForm.name.$dirty && newsroomForm.name.$error.required" translate="content.form.messages.NAMEREQUIRED">Name is required.</span>
+                                    <span class="success text-small block" ng-if="newsroomForm.name.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                                    <slug from="newsroom.name" to="newsroom.slug"></slug>
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':newsroomForm.slug.$dirty && newsroomForm.slug.$invalid, 'has-success':newsroomForm.slug.$valid}">
+                                    <label for="newsroomSlug" class="control-label">
+                                        <span translate="content.list.fields.SLUG">Slug</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="newsroom.slug" type="text" name="slug" id="newsroomSlug" class="form-control" placeholder="[[ 'content.form.messages.ENTERSLUG' | translate ]]" ng-required="true" />
+                                        <i class="ti-anchor"></i>
+                                    </span><!--/input-icon-->
+                                    <span class="error text-small block" ng-if="newsroomForm.slug.$dirty && newsroomForm.slug.$error.required" translate="content.form.messages.SLUGREQUIRED">Slug is required.</span>
+                                    <span class="success text-small block" ng-if="newsroomForm.slug.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="newsroomDescription" class="control-label">
+                                        <span translate="content.list.fields.DESCRIPTION">Description</span>
+                                    </label>
+                                    <div class="note-editor">
+                                        <div ckeditor="editorOptions" ready="onReadyEditor()"ng-model="newsroom.description" name="description" id="newsroomDescription" class="form-control" placeholder="[[ 'content.form.messages.ENTERDESCRIPTION' | translate ]]" class="form-control autosize area-animated msd-elastic: \n;"></div>
+                                    </div>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="newsroomUrl" class="control-label">
+                                        <span translate="content.list.fields.URL">Url</span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="newsroom.url" type="text" name="url" id="newsroomUrl" class="form-control" placeholder="[[ 'content.form.messages.ENTERURL' | translate ]]" />
+                                        <i class="ti-link"></i>
+                                    </span><!--/input-icon-->
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="newsroomEmail" class="control-label">
+                                        <span translate="content.list.fields.EMAIL">Email</span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="newsroom.email" type="email" name="email" id="newsroomEmail" class="form-control" placeholder="[[ 'content.form.messages.ENTEREMAIL' | translate ]]" />
+                                        <i class="ti-email"></i>
+                                    </span><!--/input-icon-->
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':newsroomForm.logoPicture.$dirty && newsroomForm.logoPicture.$invalid, 'has-success':newsroomForm.logoPicture.$valid}">
+                                    <label for="newsroomLogoPicture" class="control-label">
+                                        <span translate="content.list.fields.LOGOPICTURE">Logo Picture</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <div class="input-group">
+                                    <span class="input-icon">
+                                        <input ng-model="newsroom.logo_picture" type="email" name="logoPicture" id="newsroomLogoPicture" class="form-control" placeholder="[[ 'content.form.messages.ENTERLOGOPICTURE' | translate ]]" ng-required="true" />
+                                        <i class="ti-image"></i>
+                                    </span><!--/input-icon-->
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-primary" ng-click="showFileManager('logo_picture')">
+                                                <i class="ti-cloud"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                    <div class="user-image margin-top-10" ng-if="newsroom.logo_picture != '' && newsroom.logo_picture != null">
+                                        <div class="thumbnail">
+                                            <img ng-src="[[ thumbURL + newsroom.logo_picture ]]" alt="" />
+                                        </div>
+                                        <div class="user-image-buttons">
+                                            <span class="btn btn-primary"  ng-click="showFileManager('logo_picture')"><i class="fa fa-pencil"></i></span>
+                                            <span class="btn btn-danger" ng-click="newsroom.logo_picture = ''"> <i class="fa fa-times"></i></span>
+                                        </div>
+                                    </div>
+                                    <span class="error text-small block" ng-if="newsroomForm.logoPicture.$dirty && newsroomForm.logoPicture.$error.required" translate="content.form.messages.LOGOPICTUREREQUIRED">Logo Picture is required.</span>
+                                    <span class="success text-small block" ng-if="newsroomForm.logoPicture.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':newsroomForm.bannerPicture.$dirty && newsroomForm.bannerPicture.$invalid, 'has-success':newsroomForm.bannerPicture.$valid}">
+                                    <label for="newsroomBannerPicture" class="control-label">
+                                        <span translate="content.list.fields.BANNERPICTURE">Banner Picture</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <div class="input-group">
+                                    <span class="input-icon">
+                                        <input ng-model="newsroom.banner_picture" type="email" name="bannerPicture" id="newsroomBannerPicture" class="form-control" placeholder="[[ 'content.form.messages.ENTERBANNERPICTURE' | translate ]]" ng-required="true" />
+                                        <i class="ti-image"></i>
+                                    </span><!--/input-icon-->
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-primary" ng-click="showFileManager('banner_picture')">
+                                                <i class="ti-cloud"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                    <div class="user-image margin-top-10" ng-if="newsroom.banner_picture != '' && newsroom.banner_picture != null">
+                                        <div class="thumbnail">
+                                            <img ng-src="[[ thumbURL + newsroom.banner_picture ]]" alt="" />
+                                        </div>
+                                        <div class="user-image-buttons">
+                                            <span class="btn btn-primary"  ng-click="showFileManager('banner_picture')"><i class="fa fa-pencil"></i></span>
+                                            <span class="btn btn-danger" ng-click="newsroom.banner_picture = ''"> <i class="fa fa-times"></i></span>
+                                        </div>
+                                    </div>
+                                    <span class="error text-small block" ng-if="newsroomForm.bannerPicture.$dirty && newsroomForm.bannerPicture.$error.required" translate="content.form.messages.BANNERPICTUREREQUIRED">Banner Picture is required.</span>
+                                    <span class="success text-small block" ng-if="newsroomForm.bannerPicture.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="newsroomPressReleasesPerPage" class="control-label">
+                                        <span translate="content.list.fields.PRESSRELEASESPERPAGE">Press Releases Per Page</span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="newsroom.press_releases_per_page" type="text" name="pressReleasesPerPage" id="newsroomPressReleasesPerPage" class="form-control" placeholder="[[ 'content.form.messages.ENTERPRESSRELEASESPERPAGE' | translate ]]" touchspin data-min="-10000000" data-max="10000000" data-verticalbuttons="true" data-verticalupclass="ti-angle-up" data-verticaldownclass="ti-angle-down" />
+                                        <i class="ti-marker-alt"></i>
+                                    </span><!--/input-icon-->
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="newsroomCss" class="control-label">
+                                        <span translate="content.list.fields.CSS">Css</span>
+                                    </label>
+                                    <div class="note-editor">
+                                        <div ckeditor="editorOptions" ready="onReadyEditor()"ng-model="newsroom.css" name="css" id="newsroomCss" class="form-control" placeholder="[[ 'content.form.messages.ENTERCSS' | translate ]]" class="form-control autosize area-animated msd-elastic: \n;"></div>
+                                    </div>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="checkbox clip-check check-primary">
+                                    <input ng-model="newsroom.enable_search" type="checkbox" name="enableSearch" id="newsroomEnableSearch" />
+                                    <label for="newsroomEnableSearch" translate="content.list.fields.ENABLESEARCH">Enable Search</label>
+                                </div><!--/checkbox clip-check check-primary-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="checkbox clip-check check-primary">
+                                    <input ng-model="newsroom.enable_social_networks" type="checkbox" name="enableSocialNetworks" id="newsroomEnableSocialNetworks" />
+                                    <label for="newsroomEnableSocialNetworks" translate="content.list.fields.ENABLESOCIALNETWORKS">Enable Social Networks</label>
+                                </div><!--/checkbox clip-check check-primary-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="checkbox clip-check check-primary">
+                                    <input ng-model="newsroom.enable_media" type="checkbox" name="enableMedia" id="newsroomEnableMedia" />
+                                    <label for="newsroomEnableMedia" translate="content.list.fields.ENABLEMEDIA">Enable Media</label>
+                                </div><!--/checkbox clip-check check-primary-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="checkbox clip-check check-primary">
+                                    <input ng-model="newsroom.enable_date" type="checkbox" name="enableDate" id="newsroomEnableDate" />
+                                    <label for="newsroomEnableDate" translate="content.list.fields.ENABLEDATE">Enable Date</label>
+                                </div><!--/checkbox clip-check check-primary-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="checkbox clip-check check-primary">
+                                    <input ng-model="newsroom.published" type="checkbox" name="published" id="newsroomPublished" />
+                                    <label for="newsroomPublished" translate="content.list.fields.PUBLISHED">Published</label>
+                                </div><!--/checkbox clip-check check-primary-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        </form>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <button ng-click="list()" class="btn btn-primary pull-left">
+                                    <i class="ti-layout-list-thumb"></i> <span translate="content.list.BACKNEWSROOMS">Back to Newsrooms list</span>
+                                </button>
+                            </div>
+                            <div class="col-md-4">
+                            </div>
+                            <div class="col-md-4">
+                                <button type="button" ng-click="submitForm(newsroomForm)" class="btn btn-primary pull-right"> <!--  ng-disabled="newsroomForm.$invalid" -->
+                                    <i class="ti-save"></i> <span translate="content.common.SAVE">Save</span>
+                                </button>
+                            </div>
+                        </div>
+                   </fieldset>
+            </div>
+        </div><!--/col-md-12-->
+    </div><!--/row-->
+</div><!--/container-fluid container-fullw-->
+<!-- end: FORM -->
+

@@ -1,0 +1,181 @@
+
+<!-- start: PAGE TITLE -->
+<section id="page-title">
+    <div class="row">
+        <div class="col-sm-8">
+            <h1 class="mainTitle" translate="content.list.CONTENTBLOCKS">Content Blocks</h1>
+            <span class="mainDescription"></span>
+        </div>
+        <div ncy-breadcrumb></div>
+    </div>
+</section>
+<!-- end: PAGE TITLE -->
+
+<!-- start: FORM -->
+<div class="container-fluid container-fullw bg-white">
+    <div class="row">
+        <div class="col-md-12" ng-controller="ContentBlockFormCtrl">
+            <div>
+                    <fieldset>
+                        <legend translate="content.list.NEWCONTENTBLOCK" ng-if="contentBlock.id == 0">
+                            New Content Block
+                        </legend>
+                        <legend translate="content.list.EDITCONTENTBLOCK" ng-if="contentBlock.id > 0">
+                            Edit Content Block
+                        </legend>
+                        <form name="contentBlockForm" id="contentBlockForm" novalidate ng-submit="submitForm(contentBlockForm)">
+                        <div class="row">
+                            <input type="hidden" name="id" id="contentBlockId" ng-model="contentBlock.id" />
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':contentBlockForm.name.$dirty && contentBlockForm.name.$invalid, 'has-success':contentBlockForm.name.$valid}">
+                                    <label for="contentBlockName" class="control-label">
+                                        <span translate="content.list.fields.NAME">Name</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="contentBlock.name" type="text" name="name" id="contentBlockName" class="form-control" placeholder="[[ 'content.form.messages.ENTERNAME' | translate ]]" ng-required="true" />
+                                        <i class="ti-tag"></i>
+                                    </span><!--/input-icon-->
+                                    <span class="error text-small block" ng-if="contentBlockForm.name.$dirty && contentBlockForm.name.$error.required" translate="content.form.messages.NAMEREQUIRED">Name is required.</span>
+                                    <span class="success text-small block" ng-if="contentBlockForm.name.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-12">
+                                <div class="form-group" ng-class="{'has-error':contentBlockForm.description.$dirty && contentBlockForm.description.$invalid, 'has-success':contentBlockForm.description.$valid}">
+                                    <label for="contentBlockDescription" class="control-label">
+                                        <span translate="content.list.fields.DESCRIPTION">Description</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <div class="note-editor">
+                                        <div ckeditor="editorOptions" ready="onReadyEditor()"ng-model="contentBlock.description" name="description" id="contentBlockDescription" class="form-control" placeholder="[[ 'content.form.messages.ENTERDESCRIPTION' | translate ]]" class="form-control autosize area-animated msd-elastic: \n;" ng-required="true"></div>
+                                    </div>
+                                    <span class="error text-small block" ng-if="contentBlockForm.description.$dirty && contentBlockForm.description.$error.required" translate="content.form.messages.DESCRIPTIONREQUIRED">Description is required.</span>
+                                    <span class="success text-small block" ng-if="contentBlockForm.description.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group" ng-class="{'has-error':contentBlockForm.htmlTemplate.$dirty && contentBlockForm.htmlTemplate.$invalid, 'has-success':contentBlockForm.htmlTemplate.$valid}">
+                                    <label for="contentBlockHtmlTemplate" class="control-label">
+                                        <span translate="content.list.fields.HTMLTEMPLATE">Html Template</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <div class="note-editor">
+                                        <div ckeditor="editorOptions" ready="onReadyEditor()"ng-model="contentBlock.html_template" name="htmlTemplate" id="contentBlockHtmlTemplate" class="form-control" placeholder="[[ 'content.form.messages.ENTERHTMLTEMPLATE' | translate ]]" class="form-control autosize area-animated msd-elastic: \n;" ng-required="true"></div>
+                                    </div>
+                                    <span class="error text-small block" ng-if="contentBlockForm.htmlTemplate.$dirty && contentBlockForm.htmlTemplate.$error.required" translate="content.form.messages.HTMLTEMPLATEREQUIRED">Html Template is required.</span>
+                                    <span class="success text-small block" ng-if="contentBlockForm.htmlTemplate.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="contentBlockSettings" class="control-label">
+                                        <span translate="content.list.fields.SETTINGS">Settings</span>
+                                    </label>
+                                    <div class="note-editor">
+                                        <textarea ng-model="contentBlock.settings" name="settings" id="contentBlockSettings" class="form-control" placeholder="[[ 'content.form.messages.ENTERSETTINGS' | translate ]]" class="form-control autosize area-animated msd-elastic: \n;"></textarea>
+                                    </div>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':contentBlockForm.picture.$dirty && contentBlockForm.picture.$invalid, 'has-success':contentBlockForm.picture.$valid}">
+                                    <label for="contentBlockPicture" class="control-label">
+                                        <span translate="content.list.fields.PICTURE">Picture</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <div class="input-group">
+                                    <span class="input-icon">
+                                        <input ng-model="contentBlock.picture" type="text" name="picture" id="contentBlockPicture" class="form-control" placeholder="[[ 'content.form.messages.ENTERPICTURE' | translate ]]" ng-required="true" />
+                                        <i class="ti-image"></i>
+                                    </span><!--/input-icon-->
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-primary" ng-click="showFileManager('picture')">
+                                                <i class="ti-cloud"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                    <div class="user-image margin-top-10" ng-if="contentBlock.picture != '' && contentBlock.picture != null">
+                                        <div class="thumbnail">
+                                            <img ng-src="[[ thumbURL + contentBlock.picture ]]" alt="" />
+                                        </div>
+                                        <div class="user-image-buttons">
+                                            <span class="btn btn-primary"  ng-click="showFileManager('picture')"><i class="fa fa-pencil"></i></span>
+                                            <span class="btn btn-danger" ng-click="contentBlock.picture = ''"> <i class="fa fa-times"></i></span>
+                                        </div>
+                                    </div>
+                                    <span class="error text-small block" ng-if="contentBlockForm.picture.$dirty && contentBlockForm.picture.$error.required" translate="content.form.messages.PICTUREREQUIRED">Picture is required.</span>
+                                    <span class="success text-small block" ng-if="contentBlockForm.picture.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':contentBlockForm.blockType.$dirty && contentBlockForm.blockType.$invalid, 'has-success':contentBlockForm.blockType.$valid}">
+                                    <label for="contentBlockBlockType" class="control-label">
+                                        <span translate="content.list.fields.BLOCKTYPE">Block Type</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <div class="clip-radio radio-primary" ng-if="blockTypes.length < 10">
+                                        <input ng-disabled="false" ng-repeat-start="blockType in blockTypes" ng-model="contentBlock.block_type" type="radio" id="block_type[[ blockType.id ]]" value="[[ blockType.id ]]" name="blockType" ng-required="true" />
+                                        <label ng-repeat-end for="block_type[[ blockType.id ]]">
+                                            [[ blockType.title ]]
+                                        </label>
+                                    </div>
+                                    <div class="block" ng-if="blockTypes.length >= 10">
+                                        <select ng-disabled="false" ng-options="item.id as item.title for item in blockTypes" ng-model="contentBlock.block_type" name="block_type" id="contentBlockBlockType" class="form-control" ng-required="true">
+                                            <option translate="content.form.messages.SELECTBLOCKTYPE" value="">Select Block Type</option>
+                                        </select>
+                                        <span my-enum="[[ contentBlock.block_type ]]" my-enum-list="[[ blockTypes ]]"></span>
+                                    </div>
+                                    <span class="error text-small block" ng-if="contentBlockForm.blockType.$dirty && contentBlockForm.blockType.$error.required" translate="content.form.messages.BLOCKTYPEREQUIRED">Block Type is required.</span>
+                                    <span class="success text-small block" ng-if="contentBlockForm.blockType.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':contentBlockForm.status.$dirty && contentBlockForm.status.$invalid, 'has-success':contentBlockForm.status.$valid}">
+                                    <label for="contentBlockStatus" class="control-label">
+                                        <span translate="content.list.fields.STATUS">Status</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <div class="clip-radio radio-primary" ng-if="statuses.length < 10">
+                                        <input ng-disabled="false" ng-repeat-start="status in statuses" ng-model="contentBlock.status" type="radio" id="status[[ status.id ]]" value="[[ status.id ]]" name="status" ng-required="true" />
+                                        <label ng-repeat-end for="status[[ status.id ]]">
+                                            [[ status.title ]]
+                                        </label>
+                                    </div>
+                                    <div class="block" ng-if="statuses.length >= 10">
+                                        <select ng-disabled="false" ng-options="item.id as item.title for item in statuses" ng-model="contentBlock.status" name="status" id="contentBlockStatus" class="form-control" ng-required="true">
+                                            <option translate="content.form.messages.SELECTSTATUS" value="">Select Status</option>
+                                        </select>
+                                        <span my-enum="[[ contentBlock.status ]]" my-enum-list="[[ statuses ]]"></span>
+                                    </div>
+                                    <span class="error text-small block" ng-if="contentBlockForm.status.$dirty && contentBlockForm.status.$error.required" translate="content.form.messages.STATUSREQUIRED">Status is required.</span>
+                                    <span class="success text-small block" ng-if="contentBlockForm.status.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        </form>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <button ng-click="list()" class="btn btn-primary pull-left">
+                                    <i class="ti-layout-list-thumb"></i> <span translate="content.list.BACKCONTENTBLOCKS">Back to Content Blocks list</span>
+                                </button>
+                            </div>
+                            <div class="col-md-4">
+                            </div>
+                            <div class="col-md-4">
+                                <button type="button" ng-click="submitForm(contentBlockForm)" class="btn btn-primary pull-right"> <!--  ng-disabled="contentBlockForm.$invalid" -->
+                                    <i class="ti-save"></i> <span translate="content.common.SAVE">Save</span>
+                                </button>
+                            </div>
+                        </div>
+                   </fieldset>
+            </div>
+        </div><!--/col-md-12-->
+    </div><!--/row-->
+</div><!--/container-fluid container-fullw-->
+<!-- end: FORM -->
+

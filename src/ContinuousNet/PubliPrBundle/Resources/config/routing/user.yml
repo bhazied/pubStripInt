@@ -1,0 +1,30 @@
+user:
+    path:     /
+    defaults: { _controller: "PubliPrBundle:User:index" }
+
+user_details:
+    path:     /{id}/details
+    defaults: { _controller: "PubliPrBundle:User:show" }
+
+user_new:
+    path:     /new
+    defaults: { _controller: "PubliPrBundle:User:new" }
+
+user_create:
+    path:     /create
+    defaults: { _controller: "PubliPrBundle:User:create" }
+    methods:  POST
+
+user_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "PubliPrBundle:User:edit" }
+
+user_update:
+    path:     /{id}/update
+    defaults: { _controller: "PubliPrBundle:User:update" }
+    methods:  [POST, PUT]
+
+user_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "PubliPrBundle:User:delete" }
+    methods:  [POST, DELETE]

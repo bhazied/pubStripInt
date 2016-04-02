@@ -1,0 +1,76 @@
+
+<!-- start: PAGE TITLE -->
+<section id="page-title">
+    <div class="row">
+        <div class="col-sm-8">
+            <h1 class="mainTitle" translate="content.list.PRESSRELEASES">Press Releases</h1>
+            <span class="mainDescription"></span>
+        </div>
+        <div ncy-breadcrumb></div>
+    </div>
+</section>
+<!-- end: PAGE TITLE -->
+<!-- start: TABLE WITH SORTING -->
+<div class="container-fluid container-fullw bg-white">
+    <div class="row">
+        <div class="col-md-12" ng-controller="PressReleasesCtrl">
+            <div>
+                <div class="row margin-bottom-10">
+                    <div class="col-md-2">
+                        <span class="setting-title pull-left" translate="content.common.SHOWFILTERROW">Show filter row</span>
+                        <span class="setting-switch pull-right"><switch ng-model="isFiltersVisible" class="green"></switch></span>
+                    </div>
+                    <div class="col-md-2">
+                        <button ng-click="tableParams.filter({})" class="btn btn-primary">
+                            <i class="ti-filter"></i> <span  translate="content.common.CLEARFILTER">Clear filter</span>
+                        </button>
+                    </div>
+                    <div class="col-md-2">
+                        <button ng-click="tableParams.sorting({})" class="btn btn-primary">
+                            <i class="ti-split-v"></i> <span  translate="content.common.CLEARSORTING">Clear sorting</span>
+                        </button>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-primary">
+                                <i class="ti-layout-grid3"></i>
+                                <span translate="content.common.FIELDS">Fields</span>
+                            </button>
+                            <button type="button" class="btn btn-primary dropdown-toggle" ng-class="{'dropup': showFieldsMenu}" ng-click="showFieldsMenu = !showFieldsMenu">
+                                <span class="caret"></span>
+                                <span class="sr-only"></span>
+                            </button>
+                            <ul class="dropdown-menu my-dropdown" ng-show="showFieldsMenu">
+                                <li ng-repeat="(i, col) in cols">
+                                    <div class="checkbox clip-check check-primary check-sm" style="margin: 3px 5px;">
+                                        <input type="checkbox" id="field[[i]]" ng-model="col.show" ng-change="setParamValue(col.field + '_show_filed', col.show)" />
+                                        <label for="field[[i]]">[[col.title]]</label>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <button type="button" ng-click="add()" class="btn btn-primary pull-right">
+                            <i class="ti-plus"></i> <span translate="content.list.ADDPRESSRELEASE">Add Press Release</span>
+                        </button>
+                    </div>
+                </div>
+                <p>
+                    <strong translate="content.common.PAGE">Page:</strong> [[tableParams.page()]] - <strong translate="content.common.TOTAL">Total:</strong> [[tableParams.total()]] - <strong translate="content.common.COUNTPERPAGE">Count per page:</strong> [[tableParams.count()]]
+                </p>
+                <div class="table-responsive">
+                    <table ng-table-dynamic="tableParams with cols" class="table table-condensed table-bordered table-striped" show-filter="isFiltersVisible">
+                        <colgroup>
+                            <col ng-repeat="col in $columns" />
+                        </colgroup>
+                        <tr ng-repeat="row in $data">
+                            <td ng-repeat="col in $columns" bind-html-compile="col.getValue(this, row)"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div><!--/col-md-12-->
+    </div><!--/row-->
+</div><!--/container-fluid container-fullw-->
+<!-- end: TABLE WITH SORTING -->

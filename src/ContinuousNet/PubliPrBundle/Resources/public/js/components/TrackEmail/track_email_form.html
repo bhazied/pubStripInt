@@ -1,0 +1,107 @@
+
+<!-- start: PAGE TITLE -->
+<section id="page-title">
+    <div class="row">
+        <div class="col-sm-8">
+            <h1 class="mainTitle" translate="content.list.TRACKEMAILS">Track Emails</h1>
+            <span class="mainDescription"></span>
+        </div>
+        <div ncy-breadcrumb></div>
+    </div>
+</section>
+<!-- end: PAGE TITLE -->
+
+<!-- start: FORM -->
+<div class="container-fluid container-fullw bg-white">
+    <div class="row">
+        <div class="col-md-12" ng-controller="TrackEmailFormCtrl">
+            <div>
+                    <fieldset>
+                        <legend translate="content.list.NEWTRACKEMAIL" ng-if="trackEmail.id == 0">
+                            New Track Email
+                        </legend>
+                        <legend translate="content.list.EDITTRACKEMAIL" ng-if="trackEmail.id > 0">
+                            Edit Track Email
+                        </legend>
+                        <form name="trackEmailForm" id="trackEmailForm" novalidate ng-submit="submitForm(trackEmailForm)">
+                        <div class="row">
+                            <input type="hidden" name="id" id="trackEmailId" ng-model="trackEmail.id" />
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':trackEmailForm.email.$dirty && trackEmailForm.email.$invalid, 'has-success':trackEmailForm.email.$valid}">
+                                    <label for="trackEmailEmail" class="control-label">
+                                        <span translate="content.list.fields.EMAIL">Email</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                <div class="block" ng-if="emailsLoaded">
+                                    <span class="input-icon">
+                                        <select ng-options="item.id as item.email for item in emails | filter:{ hidden : false }" ng-model="trackEmail.email" name="email" id="trackEmailEmail" class="form-control" ng-required="true">
+                                            <option translate="content.form.messages.SELECTEMAIL" value="">Select Email</option>
+                                        </select>
+                                        <i class="ti-marker-alt"></i>
+                                    </span><!--/input-icon-->
+                                </div>
+                                    <span class="error text-small block" ng-if="trackEmailForm.email.$dirty && trackEmailForm.email.$error.required" translate="content.form.messages.EMAILREQUIRED">Email is required.</span>
+                                    <span class="success text-small block" ng-if="trackEmailForm.email.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':trackEmailForm.section.$dirty && trackEmailForm.section.$invalid, 'has-success':trackEmailForm.section.$valid}">
+                                    <label for="trackEmailSection" class="control-label">
+                                        <span translate="content.list.fields.SECTION">Section</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="trackEmail.section" type="text" name="section" id="trackEmailSection" class="form-control" placeholder="[[ 'content.form.messages.ENTERSECTION' | translate ]]" ng-required="true" />
+                                        <i class="ti-marker-alt"></i>
+                                    </span><!--/input-icon-->
+                                    <span class="error text-small block" ng-if="trackEmailForm.section.$dirty && trackEmailForm.section.$error.required" translate="content.form.messages.SECTIONREQUIRED">Section is required.</span>
+                                    <span class="success text-small block" ng-if="trackEmailForm.section.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':trackEmailForm.action.$dirty && trackEmailForm.action.$invalid, 'has-success':trackEmailForm.action.$valid}">
+                                    <label for="trackEmailAction" class="control-label">
+                                        <span translate="content.list.fields.ACTION">Action</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <div class="clip-radio radio-primary" ng-if="actions.length < 10">
+                                        <input ng-disabled="false" ng-repeat-start="action in actions" ng-model="trackEmail.action" type="radio" id="action[[ action.id ]]" value="[[ action.id ]]" name="action" ng-required="true" />
+                                        <label ng-repeat-end for="action[[ action.id ]]">
+                                            [[ action.title ]]
+                                        </label>
+                                    </div>
+                                    <div class="block" ng-if="actions.length >= 10">
+                                        <select ng-disabled="false" ng-options="item.id as item.title for item in actions" ng-model="trackEmail.action" name="action" id="trackEmailAction" class="form-control" ng-required="true">
+                                            <option translate="content.form.messages.SELECTACTION" value="">Select Action</option>
+                                        </select>
+                                        <span my-enum="[[ trackEmail.action ]]" my-enum-list="[[ actions ]]"></span>
+                                    </div>
+                                    <span class="error text-small block" ng-if="trackEmailForm.action.$dirty && trackEmailForm.action.$error.required" translate="content.form.messages.ACTIONREQUIRED">Action is required.</span>
+                                    <span class="success text-small block" ng-if="trackEmailForm.action.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        </form>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <button ng-click="list()" class="btn btn-primary pull-left">
+                                    <i class="ti-layout-list-thumb"></i> <span translate="content.list.BACKTRACKEMAILS">Back to Track Emails list</span>
+                                </button>
+                            </div>
+                            <div class="col-md-4">
+                            </div>
+                            <div class="col-md-4">
+                                <button type="button" ng-click="submitForm(trackEmailForm)" class="btn btn-primary pull-right"> <!--  ng-disabled="trackEmailForm.$invalid" -->
+                                    <i class="ti-save"></i> <span translate="content.common.SAVE">Save</span>
+                                </button>
+                            </div>
+                        </div>
+                   </fieldset>
+            </div>
+        </div><!--/col-md-12-->
+    </div><!--/row-->
+</div><!--/container-fluid container-fullw-->
+<!-- end: FORM -->
+

@@ -1,0 +1,30 @@
+emailtemplate:
+    path:     /
+    defaults: { _controller: "PubliPrBundle:EmailTemplate:index" }
+
+emailtemplate_details:
+    path:     /{id}/details
+    defaults: { _controller: "PubliPrBundle:EmailTemplate:show" }
+
+emailtemplate_new:
+    path:     /new
+    defaults: { _controller: "PubliPrBundle:EmailTemplate:new" }
+
+emailtemplate_create:
+    path:     /create
+    defaults: { _controller: "PubliPrBundle:EmailTemplate:create" }
+    methods:  POST
+
+emailtemplate_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "PubliPrBundle:EmailTemplate:edit" }
+
+emailtemplate_update:
+    path:     /{id}/update
+    defaults: { _controller: "PubliPrBundle:EmailTemplate:update" }
+    methods:  [POST, PUT]
+
+emailtemplate_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "PubliPrBundle:EmailTemplate:delete" }
+    methods:  [POST, DELETE]

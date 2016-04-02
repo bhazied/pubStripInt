@@ -1,0 +1,98 @@
+
+<!-- start: PAGE TITLE -->
+<section id="page-title">
+    <div class="row">
+        <div class="col-sm-8">
+            <h1 class="mainTitle" translate="content.list.NEWSROOMTEMPLATES">Newsroom Templates</h1>
+            <span class="mainDescription"></span>
+        </div>
+        <div ncy-breadcrumb></div>
+    </div>
+</section>
+<!-- end: PAGE TITLE -->
+<!-- start: DETAILS -->
+<div class="container-fluid container-fullw bg-white">
+    <div class="row">
+        <div class="col-md-12" ng-controller="NewsroomTemplateCtrl">
+            <div>
+                <div class="row margin-bottom-10">
+                    <div class="col-md-4">
+                           <button ng-click="list()" class="btn btn-primary pull-left">
+                               <i class="ti-layout-list-thumb"></i> <span translate="content.list.BACKNEWSROOMTEMPLATES">Back to Newsroom Templates list</span>
+                           </button>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <button type="button" ng-click="add()" class="btn btn-primary">
+                            <i class="ti-plus"></i> <span translate="content.list.ADDNEWSROOMTEMPLATE">Add Newsroom Template</span>
+                        </button>
+                    </div>
+                    <div class="col-md-4">
+                        <button type="button" ng-click="edit(newsroomTemplate)" class="btn btn-primary pull-right">
+                            <i class="ti-pencil-alt"></i> <span translate="content.list.EDITNEWSROOMTEMPLATE">Edit Newsroom Template</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-condensed table-bordered">
+                        <thead>
+                            <tr>
+                                <th colspan="2" translate="content.list.NEWSROOMTEMPLATEDETAILS">Newsroom Template Details</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span translate="content.list.fields.ID">Id</span></td>
+                                <td>
+                                    <div ng-bind-html="newsroomTemplate.id"></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span translate="content.list.fields.NAME">Name</span></td>
+                                <td>
+                                    <div ng-bind-html="newsroomTemplate.name"></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span translate="content.list.fields.HTMLFILE">Html File</span></td>
+                                <td>
+                                    <div ng-if="newsroomTemplate.html_file != '' && newsroomTemplate.html_file != null">
+                                        <a class="btn btn-wide btn-primary" target="_blank" href="[[ newsroomTemplate.html_file ]]" alt=""><i class="ti-download"></i> [[newsroomTemplate.html_file]]</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span translate="content.list.fields.CSSFILE">Css File</span></td>
+                                <td>
+                                    <div ng-if="newsroomTemplate.css_file != '' && newsroomTemplate.css_file != null">
+                                        <a class="btn btn-wide btn-primary" target="_blank" href="[[ newsroomTemplate.css_file ]]" alt=""><i class="ti-download"></i> [[newsroomTemplate.css_file]]</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span translate="content.list.fields.CREATEDAT">Created At</span></td>
+                                <td>
+                                    <span>[[ newsroomTemplate.created_at | date: datetimeFormat ]]</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span translate="content.list.fields.CREATORUSER">Creator User</span></td>
+                                <td><a ui-sref="app.access.usersdetails({id: newsroomTemplate.creator_user.id})">[[ newsroomTemplate.creator_user.username ]]</a></span></td>
+                            </tr>
+                            <tr>
+                                <td><span translate="content.list.fields.MODIFIEDAT">Modified At</span></td>
+                                <td>
+                                    <span>[[ newsroomTemplate.modified_at | date: datetimeFormat ]]</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span translate="content.list.fields.MODIFIERUSER">Modifier User</span></td>
+                                <td><a ui-sref="app.access.usersdetails({id: newsroomTemplate.modifier_user.id})">[[ newsroomTemplate.modifier_user.username ]]</a></span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div><!--/col-md-12-->
+    </div><!--/row-->
+</div><!--/container-fluid container-fullw-->
+<!-- end: DETAILS -->

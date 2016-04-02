@@ -1,0 +1,30 @@
+newsroom:
+    path:     /
+    defaults: { _controller: "PubliPrBundle:Newsroom:index" }
+
+newsroom_details:
+    path:     /{id}/details
+    defaults: { _controller: "PubliPrBundle:Newsroom:show" }
+
+newsroom_new:
+    path:     /new
+    defaults: { _controller: "PubliPrBundle:Newsroom:new" }
+
+newsroom_create:
+    path:     /create
+    defaults: { _controller: "PubliPrBundle:Newsroom:create" }
+    methods:  POST
+
+newsroom_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "PubliPrBundle:Newsroom:edit" }
+
+newsroom_update:
+    path:     /{id}/update
+    defaults: { _controller: "PubliPrBundle:Newsroom:update" }
+    methods:  [POST, PUT]
+
+newsroom_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "PubliPrBundle:Newsroom:delete" }
+    methods:  [POST, DELETE]

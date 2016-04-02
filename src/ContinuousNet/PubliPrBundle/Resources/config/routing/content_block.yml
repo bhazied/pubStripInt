@@ -1,0 +1,30 @@
+contentblock:
+    path:     /
+    defaults: { _controller: "PubliPrBundle:ContentBlock:index" }
+
+contentblock_details:
+    path:     /{id}/details
+    defaults: { _controller: "PubliPrBundle:ContentBlock:show" }
+
+contentblock_new:
+    path:     /new
+    defaults: { _controller: "PubliPrBundle:ContentBlock:new" }
+
+contentblock_create:
+    path:     /create
+    defaults: { _controller: "PubliPrBundle:ContentBlock:create" }
+    methods:  POST
+
+contentblock_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "PubliPrBundle:ContentBlock:edit" }
+
+contentblock_update:
+    path:     /{id}/update
+    defaults: { _controller: "PubliPrBundle:ContentBlock:update" }
+    methods:  [POST, PUT]
+
+contentblock_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "PubliPrBundle:ContentBlock:delete" }
+    methods:  [POST, DELETE]

@@ -1,0 +1,30 @@
+language:
+    path:     /
+    defaults: { _controller: "PubliPrBundle:Language:index" }
+
+language_details:
+    path:     /{id}/details
+    defaults: { _controller: "PubliPrBundle:Language:show" }
+
+language_new:
+    path:     /new
+    defaults: { _controller: "PubliPrBundle:Language:new" }
+
+language_create:
+    path:     /create
+    defaults: { _controller: "PubliPrBundle:Language:create" }
+    methods:  POST
+
+language_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "PubliPrBundle:Language:edit" }
+
+language_update:
+    path:     /{id}/update
+    defaults: { _controller: "PubliPrBundle:Language:update" }
+    methods:  [POST, PUT]
+
+language_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "PubliPrBundle:Language:delete" }
+    methods:  [POST, DELETE]

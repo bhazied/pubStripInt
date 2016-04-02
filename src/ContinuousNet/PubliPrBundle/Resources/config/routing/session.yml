@@ -1,0 +1,30 @@
+session:
+    path:     /
+    defaults: { _controller: "PubliPrBundle:Session:index" }
+
+session_details:
+    path:     /{id}/details
+    defaults: { _controller: "PubliPrBundle:Session:show" }
+
+session_new:
+    path:     /new
+    defaults: { _controller: "PubliPrBundle:Session:new" }
+
+session_create:
+    path:     /create
+    defaults: { _controller: "PubliPrBundle:Session:create" }
+    methods:  POST
+
+session_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "PubliPrBundle:Session:edit" }
+
+session_update:
+    path:     /{id}/update
+    defaults: { _controller: "PubliPrBundle:Session:update" }
+    methods:  [POST, PUT]
+
+session_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "PubliPrBundle:Session:delete" }
+    methods:  [POST, DELETE]

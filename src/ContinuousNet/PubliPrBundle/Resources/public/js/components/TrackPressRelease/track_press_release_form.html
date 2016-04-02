@@ -1,0 +1,115 @@
+
+<!-- start: PAGE TITLE -->
+<section id="page-title">
+    <div class="row">
+        <div class="col-sm-8">
+            <h1 class="mainTitle" translate="content.list.TRACKPRESSRELEASES">Track Press Releases</h1>
+            <span class="mainDescription"></span>
+        </div>
+        <div ncy-breadcrumb></div>
+    </div>
+</section>
+<!-- end: PAGE TITLE -->
+
+<!-- start: FORM -->
+<div class="container-fluid container-fullw bg-white">
+    <div class="row">
+        <div class="col-md-12" ng-controller="TrackPressReleaseFormCtrl">
+            <div>
+                    <fieldset>
+                        <legend translate="content.list.NEWTRACKPRESSRELEASE" ng-if="trackPressRelease.id == 0">
+                            New Track Press Release
+                        </legend>
+                        <legend translate="content.list.EDITTRACKPRESSRELEASE" ng-if="trackPressRelease.id > 0">
+                            Edit Track Press Release
+                        </legend>
+                        <form name="trackPressReleaseForm" id="trackPressReleaseForm" novalidate ng-submit="submitForm(trackPressReleaseForm)">
+                        <div class="row">
+                            <input type="hidden" name="id" id="trackPressReleaseId" ng-model="trackPressRelease.id" />
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':trackPressReleaseForm.pressRelease.$dirty && trackPressReleaseForm.pressRelease.$invalid, 'has-success':trackPressReleaseForm.pressRelease.$valid}">
+                                    <label for="trackPressReleasePressRelease" class="control-label">
+                                        <span translate="content.list.fields.PRESSRELEASE">Press Release</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                <div class="block" ng-if="pressReleasesLoaded">
+                                    <span class="input-icon">
+                                        <select ng-options="item.id as item.title for item in pressReleases | filter:{ hidden : false }" ng-model="trackPressRelease.press_release" name="pressRelease" id="trackPressReleasePressRelease" class="form-control" ng-required="true">
+                                            <option translate="content.form.messages.SELECTPRESSRELEASE" value="">Select Press Release</option>
+                                        </select>
+                                        <i class="ti-marker-alt"></i>
+                                    </span><!--/input-icon-->
+                                </div>
+                                    <span class="error text-small block" ng-if="trackPressReleaseForm.pressRelease.$dirty && trackPressReleaseForm.pressRelease.$error.required" translate="content.form.messages.PRESSRELEASEREQUIRED">Press Release is required.</span>
+                                    <span class="success text-small block" ng-if="trackPressReleaseForm.pressRelease.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="trackPressReleaseSection" class="control-label">
+                                        <span translate="content.list.fields.SECTION">Section</span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="trackPressRelease.section" type="text" name="section" id="trackPressReleaseSection" class="form-control" placeholder="[[ 'content.form.messages.ENTERSECTION' | translate ]]" />
+                                        <i class="ti-marker-alt"></i>
+                                    </span><!--/input-icon-->
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="trackPressReleaseSource" class="control-label">
+                                        <span translate="content.list.fields.SOURCE">Source</span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="trackPressRelease.source" type="text" name="source" id="trackPressReleaseSource" class="form-control" placeholder="[[ 'content.form.messages.ENTERSOURCE' | translate ]]" />
+                                        <i class="ti-marker-alt"></i>
+                                    </span><!--/input-icon-->
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':trackPressReleaseForm.action.$dirty && trackPressReleaseForm.action.$invalid, 'has-success':trackPressReleaseForm.action.$valid}">
+                                    <label for="trackPressReleaseAction" class="control-label">
+                                        <span translate="content.list.fields.ACTION">Action</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <div class="clip-radio radio-primary" ng-if="actions.length < 10">
+                                        <input ng-disabled="false" ng-repeat-start="action in actions" ng-model="trackPressRelease.action" type="radio" id="action[[ action.id ]]" value="[[ action.id ]]" name="action" ng-required="true" />
+                                        <label ng-repeat-end for="action[[ action.id ]]">
+                                            [[ action.title ]]
+                                        </label>
+                                    </div>
+                                    <div class="block" ng-if="actions.length >= 10">
+                                        <select ng-disabled="false" ng-options="item.id as item.title for item in actions" ng-model="trackPressRelease.action" name="action" id="trackPressReleaseAction" class="form-control" ng-required="true">
+                                            <option translate="content.form.messages.SELECTACTION" value="">Select Action</option>
+                                        </select>
+                                        <span my-enum="[[ trackPressRelease.action ]]" my-enum-list="[[ actions ]]"></span>
+                                    </div>
+                                    <span class="error text-small block" ng-if="trackPressReleaseForm.action.$dirty && trackPressReleaseForm.action.$error.required" translate="content.form.messages.ACTIONREQUIRED">Action is required.</span>
+                                    <span class="success text-small block" ng-if="trackPressReleaseForm.action.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        </form>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <button ng-click="list()" class="btn btn-primary pull-left">
+                                    <i class="ti-layout-list-thumb"></i> <span translate="content.list.BACKTRACKPRESSRELEASES">Back to Track Press Releases list</span>
+                                </button>
+                            </div>
+                            <div class="col-md-4">
+                            </div>
+                            <div class="col-md-4">
+                                <button type="button" ng-click="submitForm(trackPressReleaseForm)" class="btn btn-primary pull-right"> <!--  ng-disabled="trackPressReleaseForm.$invalid" -->
+                                    <i class="ti-save"></i> <span translate="content.common.SAVE">Save</span>
+                                </button>
+                            </div>
+                        </div>
+                   </fieldset>
+            </div>
+        </div><!--/col-md-12-->
+    </div><!--/row-->
+</div><!--/container-fluid container-fullw-->
+<!-- end: FORM -->
+

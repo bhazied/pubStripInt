@@ -1,0 +1,122 @@
+
+<!-- start: PAGE TITLE -->
+<section id="page-title">
+    <div class="row">
+        <div class="col-sm-8">
+            <h1 class="mainTitle" translate="content.list.NEWSROOMTEMPLATES">Newsroom Templates</h1>
+            <span class="mainDescription"></span>
+        </div>
+        <div ncy-breadcrumb></div>
+    </div>
+</section>
+<!-- end: PAGE TITLE -->
+
+<!-- start: FORM -->
+<div class="container-fluid container-fullw bg-white">
+    <div class="row">
+        <div class="col-md-12" ng-controller="NewsroomTemplateFormCtrl">
+            <div>
+                    <fieldset>
+                        <legend translate="content.list.NEWNEWSROOMTEMPLATE" ng-if="newsroomTemplate.id == 0">
+                            New Newsroom Template
+                        </legend>
+                        <legend translate="content.list.EDITNEWSROOMTEMPLATE" ng-if="newsroomTemplate.id > 0">
+                            Edit Newsroom Template
+                        </legend>
+                        <form name="newsroomTemplateForm" id="newsroomTemplateForm" novalidate ng-submit="submitForm(newsroomTemplateForm)">
+                        <div class="row">
+                            <input type="hidden" name="id" id="newsroomTemplateId" ng-model="newsroomTemplate.id" />
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':newsroomTemplateForm.name.$dirty && newsroomTemplateForm.name.$invalid, 'has-success':newsroomTemplateForm.name.$valid}">
+                                    <label for="newsroomTemplateName" class="control-label">
+                                        <span translate="content.list.fields.NAME">Name</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="newsroomTemplate.name" type="text" name="name" id="newsroomTemplateName" class="form-control" placeholder="[[ 'content.form.messages.ENTERNAME' | translate ]]" ng-required="true" my-unique-field="newsroomTemplate.name" my-resource-url="newsroomtemplates" my-current-id="[[ newsroomTemplate.id ]]" />
+                                        <i class="ti-tag"></i>
+                                    </span><!--/input-icon-->
+                                    <span class="error text-small block" ng-if="newsroomTemplateForm.name.$dirty && newsroomTemplateForm.name.$error.required" translate="content.form.messages.NAMEREQUIRED">Name is required.</span>
+                                    <span class="error text-small block" ng-if="newsroomTemplateForm.name.$dirty && newsroomTemplateForm.name.$error.myUniqueField" translate="content.form.messages.NAMEALREADYINUSE">This Name is already in use. Please choose another one.</span>
+                                    <span class="success text-small block" ng-if="newsroomTemplateForm.name.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="newsroomTemplateHtmlFile" class="control-label">
+                                        <span translate="content.list.fields.HTMLFILE">Html File</span>
+                                    </label>
+                                    <div class="input-group">
+                                    <span class="input-icon">
+                                        <input ng-model="newsroomTemplate.html_file" type="text" name="htmlFile" id="newsroomTemplateHtmlFile" class="form-control" placeholder="[[ 'content.form.messages.ENTERHTMLFILE' | translate ]]" />
+                                        <i class="ti-html5"></i>
+                                    </span><!--/input-icon-->
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-primary" ng-click="showFileManager('html_file')">
+                                                <i class="ti-cloud"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                    <div class="user-image margin-top-10" ng-if="newsroomTemplate.html_file != '' && newsroomTemplate.html_file != null">
+                                        <div class="thumbnail">
+                                            <img ng-src="[[ thumbURL + newsroomTemplate.html_file ]]" alt="" />
+                                        </div>
+                                        <div class="user-image-buttons">
+                                            <span class="btn btn-primary"  ng-click="showFileManager('html_file')"><i class="fa fa-pencil"></i></span>
+                                            <span class="btn btn-danger" ng-click="newsroomTemplate.html_file = ''"> <i class="fa fa-times"></i></span>
+                                        </div>
+                                    </div>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="newsroomTemplateCssFile" class="control-label">
+                                        <span translate="content.list.fields.CSSFILE">Css File</span>
+                                    </label>
+                                    <div class="input-group">
+                                    <span class="input-icon">
+                                        <input ng-model="newsroomTemplate.css_file" type="text" name="cssFile" id="newsroomTemplateCssFile" class="form-control" placeholder="[[ 'content.form.messages.ENTERCSSFILE' | translate ]]" />
+                                        <i class="ti-css3"></i>
+                                    </span><!--/input-icon-->
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-primary" ng-click="showFileManager('css_file')">
+                                                <i class="ti-cloud"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                    <div class="user-image margin-top-10" ng-if="newsroomTemplate.css_file != '' && newsroomTemplate.css_file != null">
+                                        <div class="thumbnail">
+                                            <img ng-src="[[ thumbURL + newsroomTemplate.css_file ]]" alt="" />
+                                        </div>
+                                        <div class="user-image-buttons">
+                                            <span class="btn btn-primary"  ng-click="showFileManager('css_file')"><i class="fa fa-pencil"></i></span>
+                                            <span class="btn btn-danger" ng-click="newsroomTemplate.css_file = ''"> <i class="fa fa-times"></i></span>
+                                        </div>
+                                    </div>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        </form>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <button ng-click="list()" class="btn btn-primary pull-left">
+                                    <i class="ti-layout-list-thumb"></i> <span translate="content.list.BACKNEWSROOMTEMPLATES">Back to Newsroom Templates list</span>
+                                </button>
+                            </div>
+                            <div class="col-md-4">
+                            </div>
+                            <div class="col-md-4">
+                                <button type="button" ng-click="submitForm(newsroomTemplateForm)" class="btn btn-primary pull-right"> <!--  ng-disabled="newsroomTemplateForm.$invalid" -->
+                                    <i class="ti-save"></i> <span translate="content.common.SAVE">Save</span>
+                                </button>
+                            </div>
+                        </div>
+                   </fieldset>
+            </div>
+        </div><!--/col-md-12-->
+    </div><!--/row-->
+</div><!--/container-fluid container-fullw-->
+<!-- end: FORM -->
+

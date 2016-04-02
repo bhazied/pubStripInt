@@ -1,0 +1,30 @@
+contactgroup:
+    path:     /
+    defaults: { _controller: "PubliPrBundle:ContactGroup:index" }
+
+contactgroup_details:
+    path:     /{id}/details
+    defaults: { _controller: "PubliPrBundle:ContactGroup:show" }
+
+contactgroup_new:
+    path:     /new
+    defaults: { _controller: "PubliPrBundle:ContactGroup:new" }
+
+contactgroup_create:
+    path:     /create
+    defaults: { _controller: "PubliPrBundle:ContactGroup:create" }
+    methods:  POST
+
+contactgroup_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "PubliPrBundle:ContactGroup:edit" }
+
+contactgroup_update:
+    path:     /{id}/update
+    defaults: { _controller: "PubliPrBundle:ContactGroup:update" }
+    methods:  [POST, PUT]
+
+contactgroup_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "PubliPrBundle:ContactGroup:delete" }
+    methods:  [POST, DELETE]

@@ -1,0 +1,83 @@
+
+<!-- start: PAGE TITLE -->
+<section id="page-title">
+    <div class="row">
+        <div class="col-sm-8">
+            <h1 class="mainTitle" translate="content.list.NEWSROOMSUSERSS">Newsrooms Users</h1>
+            <span class="mainDescription"></span>
+        </div>
+        <div ncy-breadcrumb></div>
+    </div>
+</section>
+<!-- end: PAGE TITLE -->
+
+<!-- start: FORM -->
+<div class="container-fluid container-fullw bg-white">
+    <div class="row">
+        <div class="col-md-12" ng-controller="NewsroomsUsersFormCtrl">
+            <div>
+                    <fieldset>
+                        <legend translate="content.list.NEWNEWSROOMSUSERS" ng-if="newsroomsUsers.id == 0">
+                            New Newsrooms Users
+                        </legend>
+                        <legend translate="content.list.EDITNEWSROOMSUSERS" ng-if="newsroomsUsers.id > 0">
+                            Edit Newsrooms Users
+                        </legend>
+                        <form name="newsroomsUsersForm" id="newsroomsUsersForm" novalidate ng-submit="submitForm(newsroomsUsersForm)">
+                        <div class="row">
+                            <input type="hidden" name="id" id="newsroomsUsersId" ng-model="newsroomsUsers.id" />
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':newsroomsUsersForm.newsroomJd.$dirty && newsroomsUsersForm.newsroomJd.$invalid, 'has-success':newsroomsUsersForm.newsroomJd.$valid}">
+                                    <label for="newsroomsUsersNewsroomJd" class="control-label">
+                                        <span translate="content.list.fields.NEWSROOMJD">Newsroom Jd</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="newsroomsUsers.newsroom_jd" type="text" name="newsroomJd" id="newsroomsUsersNewsroomJd" class="form-control" placeholder="[[ 'content.form.messages.ENTERNEWSROOMJD' | translate ]]" touchspin data-min="0" data-max="10000000" data-verticalbuttons="true" data-verticalupclass="ti-angle-up" data-verticaldownclass="ti-angle-down" ng-required="true" />
+                                        <i class="ti-marker-alt"></i>
+                                    </span><!--/input-icon-->
+                                    <span class="error text-small block" ng-if="newsroomsUsersForm.newsroomJd.$dirty && newsroomsUsersForm.newsroomJd.$error.required" translate="content.form.messages.NEWSROOMJDREQUIRED">Newsroom Jd is required.</span>
+                                    <span class="success text-small block" ng-if="newsroomsUsersForm.newsroomJd.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':newsroomsUsersForm.user.$dirty && newsroomsUsersForm.user.$invalid, 'has-success':newsroomsUsersForm.user.$valid}">
+                                    <label for="newsroomsUsersUser" class="control-label">
+                                        <span translate="content.list.fields.USER">User</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                <div class="block" ng-if="usersLoaded">
+                                    <span class="input-icon">
+                                        <select ng-options="item.id as item.username for item in users | filter:{ hidden : false }" ng-model="newsroomsUsers.user" name="user" id="newsroomsUsersUser" class="form-control" ng-required="true">
+                                            <option translate="content.form.messages.SELECTUSER" value="">Select User</option>
+                                        </select>
+                                        <i class="ti-marker-alt"></i>
+                                    </span><!--/input-icon-->
+                                </div>
+                                    <span class="error text-small block" ng-if="newsroomsUsersForm.user.$dirty && newsroomsUsersForm.user.$error.required" translate="content.form.messages.USERREQUIRED">User is required.</span>
+                                    <span class="success text-small block" ng-if="newsroomsUsersForm.user.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        </form>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <button ng-click="list()" class="btn btn-primary pull-left">
+                                    <i class="ti-layout-list-thumb"></i> <span translate="content.list.BACKNEWSROOMSUSERSS">Back to Newsrooms Users list</span>
+                                </button>
+                            </div>
+                            <div class="col-md-4">
+                            </div>
+                            <div class="col-md-4">
+                                <button type="button" ng-click="submitForm(newsroomsUsersForm)" class="btn btn-primary pull-right"> <!--  ng-disabled="newsroomsUsersForm.$invalid" -->
+                                    <i class="ti-save"></i> <span translate="content.common.SAVE">Save</span>
+                                </button>
+                            </div>
+                        </div>
+                   </fieldset>
+            </div>
+        </div><!--/col-md-12-->
+    </div><!--/row-->
+</div><!--/container-fluid container-fullw-->
+<!-- end: FORM -->
+

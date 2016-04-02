@@ -1,0 +1,30 @@
+emailcampaign:
+    path:     /
+    defaults: { _controller: "PubliPrBundle:EmailCampaign:index" }
+
+emailcampaign_details:
+    path:     /{id}/details
+    defaults: { _controller: "PubliPrBundle:EmailCampaign:show" }
+
+emailcampaign_new:
+    path:     /new
+    defaults: { _controller: "PubliPrBundle:EmailCampaign:new" }
+
+emailcampaign_create:
+    path:     /create
+    defaults: { _controller: "PubliPrBundle:EmailCampaign:create" }
+    methods:  POST
+
+emailcampaign_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "PubliPrBundle:EmailCampaign:edit" }
+
+emailcampaign_update:
+    path:     /{id}/update
+    defaults: { _controller: "PubliPrBundle:EmailCampaign:update" }
+    methods:  [POST, PUT]
+
+emailcampaign_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "PubliPrBundle:EmailCampaign:delete" }
+    methods:  [POST, DELETE]

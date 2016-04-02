@@ -1,0 +1,170 @@
+
+<!-- start: PAGE TITLE -->
+<section id="page-title">
+    <div class="row">
+        <div class="col-sm-8">
+            <h1 class="mainTitle" translate="content.list.TEMPLATES">Templates</h1>
+            <span class="mainDescription"></span>
+        </div>
+        <div ncy-breadcrumb></div>
+    </div>
+</section>
+<!-- end: PAGE TITLE -->
+
+<!-- start: FORM -->
+<div class="container-fluid container-fullw bg-white">
+    <div class="row">
+        <div class="col-md-12" ng-controller="TemplateFormCtrl">
+            <div>
+                    <fieldset>
+                        <legend translate="content.list.NEWTEMPLATE" ng-if="template.id == 0">
+                            New Template
+                        </legend>
+                        <legend translate="content.list.EDITTEMPLATE" ng-if="template.id > 0">
+                            Edit Template
+                        </legend>
+                        <form name="templateForm" id="templateForm" novalidate ng-submit="submitForm(templateForm)">
+                        <div class="row">
+                            <input type="hidden" name="id" id="templateId" ng-model="template.id" />
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':templateForm.name.$dirty && templateForm.name.$invalid, 'has-success':templateForm.name.$valid}">
+                                    <label for="templateName" class="control-label">
+                                        <span translate="content.list.fields.NAME">Name</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="template.name" type="text" name="name" id="templateName" class="form-control" placeholder="[[ 'content.form.messages.ENTERNAME' | translate ]]" ng-required="true" />
+                                        <i class="ti-tag"></i>
+                                    </span><!--/input-icon-->
+                                    <span class="error text-small block" ng-if="templateForm.name.$dirty && templateForm.name.$error.required" translate="content.form.messages.NAMEREQUIRED">Name is required.</span>
+                                    <span class="success text-small block" ng-if="templateForm.name.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                                    <slug from="template.name" to="template.slug"></slug>
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':templateForm.slug.$dirty && templateForm.slug.$invalid, 'has-success':templateForm.slug.$valid}">
+                                    <label for="templateSlug" class="control-label">
+                                        <span translate="content.list.fields.SLUG">Slug</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="template.slug" type="text" name="slug" id="templateSlug" class="form-control" placeholder="[[ 'content.form.messages.ENTERSLUG' | translate ]]" ng-required="true" />
+                                        <i class="ti-anchor"></i>
+                                    </span><!--/input-icon-->
+                                    <span class="error text-small block" ng-if="templateForm.slug.$dirty && templateForm.slug.$error.required" translate="content.form.messages.SLUGREQUIRED">Slug is required.</span>
+                                    <span class="success text-small block" ng-if="templateForm.slug.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':templateForm.picture.$dirty && templateForm.picture.$invalid, 'has-success':templateForm.picture.$valid}">
+                                    <label for="templatePicture" class="control-label">
+                                        <span translate="content.list.fields.PICTURE">Picture</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <div class="input-group">
+                                    <span class="input-icon">
+                                        <input ng-model="template.picture" type="text" name="picture" id="templatePicture" class="form-control" placeholder="[[ 'content.form.messages.ENTERPICTURE' | translate ]]" ng-required="true" />
+                                        <i class="ti-image"></i>
+                                    </span><!--/input-icon-->
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-primary" ng-click="showFileManager('picture')">
+                                                <i class="ti-cloud"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                    <div class="user-image margin-top-10" ng-if="template.picture != '' && template.picture != null">
+                                        <div class="thumbnail">
+                                            <img ng-src="[[ thumbURL + template.picture ]]" alt="" />
+                                        </div>
+                                        <div class="user-image-buttons">
+                                            <span class="btn btn-primary"  ng-click="showFileManager('picture')"><i class="fa fa-pencil"></i></span>
+                                            <span class="btn btn-danger" ng-click="template.picture = ''"> <i class="fa fa-times"></i></span>
+                                        </div>
+                                    </div>
+                                    <span class="error text-small block" ng-if="templateForm.picture.$dirty && templateForm.picture.$error.required" translate="content.form.messages.PICTUREREQUIRED">Picture is required.</span>
+                                    <span class="success text-small block" ng-if="templateForm.picture.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':templateForm.type.$dirty && templateForm.type.$invalid, 'has-success':templateForm.type.$valid}">
+                                    <label for="templateType" class="control-label">
+                                        <span translate="content.list.fields.TYPE">Type</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <div class="clip-radio radio-primary" ng-if="types.length < 10">
+                                        <input ng-disabled="false" ng-repeat-start="type in types" ng-model="template.type" type="radio" id="type[[ type.id ]]" value="[[ type.id ]]" name="type" ng-required="true" />
+                                        <label ng-repeat-end for="type[[ type.id ]]">
+                                            [[ type.title ]]
+                                        </label>
+                                    </div>
+                                    <div class="block" ng-if="types.length >= 10">
+                                        <select ng-disabled="false" ng-options="item.id as item.title for item in types" ng-model="template.type" name="type" id="templateType" class="form-control" ng-required="true">
+                                            <option translate="content.form.messages.SELECTTYPE" value="">Select Type</option>
+                                        </select>
+                                        <span my-enum="[[ template.type ]]" my-enum-list="[[ types ]]"></span>
+                                    </div>
+                                    <span class="error text-small block" ng-if="templateForm.type.$dirty && templateForm.type.$error.required" translate="content.form.messages.TYPEREQUIRED">Type is required.</span>
+                                    <span class="success text-small block" ng-if="templateForm.type.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="templateBody" class="control-label">
+                                        <span translate="content.list.fields.BODY">Body</span>
+                                    </label>
+                                    <div class="note-editor">
+                                        <div ckeditor="editorOptions" ready="onReadyEditor()"ng-model="template.body" name="body" id="templateBody" class="form-control" placeholder="[[ 'content.form.messages.ENTERBODY' | translate ]]" class="form-control autosize area-animated msd-elastic: \n;"></div>
+                                    </div>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':templateForm.status.$dirty && templateForm.status.$invalid, 'has-success':templateForm.status.$valid}">
+                                    <label for="templateStatus" class="control-label">
+                                        <span translate="content.list.fields.STATUS">Status</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <div class="clip-radio radio-primary" ng-if="statuses.length < 10">
+                                        <input ng-disabled="false" ng-repeat-start="status in statuses" ng-model="template.status" type="radio" id="status[[ status.id ]]" value="[[ status.id ]]" name="status" ng-required="true" />
+                                        <label ng-repeat-end for="status[[ status.id ]]">
+                                            [[ status.title ]]
+                                        </label>
+                                    </div>
+                                    <div class="block" ng-if="statuses.length >= 10">
+                                        <select ng-disabled="false" ng-options="item.id as item.title for item in statuses" ng-model="template.status" name="status" id="templateStatus" class="form-control" ng-required="true">
+                                            <option translate="content.form.messages.SELECTSTATUS" value="">Select Status</option>
+                                        </select>
+                                        <span my-enum="[[ template.status ]]" my-enum-list="[[ statuses ]]"></span>
+                                    </div>
+                                    <span class="error text-small block" ng-if="templateForm.status.$dirty && templateForm.status.$error.required" translate="content.form.messages.STATUSREQUIRED">Status is required.</span>
+                                    <span class="success text-small block" ng-if="templateForm.status.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        </form>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <button ng-click="list()" class="btn btn-primary pull-left">
+                                    <i class="ti-layout-list-thumb"></i> <span translate="content.list.BACKTEMPLATES">Back to Templates list</span>
+                                </button>
+                            </div>
+                            <div class="col-md-4">
+                            </div>
+                            <div class="col-md-4">
+                                <button type="button" ng-click="submitForm(templateForm)" class="btn btn-primary pull-right"> <!--  ng-disabled="templateForm.$invalid" -->
+                                    <i class="ti-save"></i> <span translate="content.common.SAVE">Save</span>
+                                </button>
+                            </div>
+                        </div>
+                   </fieldset>
+            </div>
+        </div><!--/col-md-12-->
+    </div><!--/row-->
+</div><!--/container-fluid container-fullw-->
+<!-- end: FORM -->
+

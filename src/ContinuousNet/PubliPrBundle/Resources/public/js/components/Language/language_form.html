@@ -1,0 +1,101 @@
+
+<!-- start: PAGE TITLE -->
+<section id="page-title">
+    <div class="row">
+        <div class="col-sm-8">
+            <h1 class="mainTitle" translate="content.list.LANGUAGES">Languages</h1>
+            <span class="mainDescription"></span>
+        </div>
+        <div ncy-breadcrumb></div>
+    </div>
+</section>
+<!-- end: PAGE TITLE -->
+
+<!-- start: FORM -->
+<div class="container-fluid container-fullw bg-white">
+    <div class="row">
+        <div class="col-md-12" ng-controller="LanguageFormCtrl">
+            <div>
+                    <fieldset>
+                        <legend translate="content.list.NEWLANGUAGE" ng-if="language.id == 0">
+                            New Language
+                        </legend>
+                        <legend translate="content.list.EDITLANGUAGE" ng-if="language.id > 0">
+                            Edit Language
+                        </legend>
+                        <form name="languageForm" id="languageForm" novalidate ng-submit="submitForm(languageForm)">
+                        <div class="row">
+                            <input type="hidden" name="id" id="languageId" ng-model="language.id" />
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':languageForm.name.$dirty && languageForm.name.$invalid, 'has-success':languageForm.name.$valid}">
+                                    <label for="languageName" class="control-label">
+                                        <span translate="content.list.fields.NAME">Name</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="language.name" type="text" name="name" id="languageName" class="form-control" placeholder="[[ 'content.form.messages.ENTERNAME' | translate ]]" ng-required="true" />
+                                        <i class="ti-tag"></i>
+                                    </span><!--/input-icon-->
+                                    <span class="error text-small block" ng-if="languageForm.name.$dirty && languageForm.name.$error.required" translate="content.form.messages.NAMEREQUIRED">Name is required.</span>
+                                    <span class="success text-small block" ng-if="languageForm.name.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':languageForm.locale.$dirty && languageForm.locale.$invalid, 'has-success':languageForm.locale.$valid}">
+                                    <label for="languageLocale" class="control-label">
+                                        <span translate="content.list.fields.LOCALE">Locale</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="language.locale" type="text" name="locale" id="languageLocale" class="form-control" placeholder="[[ 'content.form.messages.ENTERLOCALE' | translate ]]" ng-required="true" />
+                                        <i class="ti-marker-alt"></i>
+                                    </span><!--/input-icon-->
+                                    <span class="error text-small block" ng-if="languageForm.locale.$dirty && languageForm.locale.$error.required" translate="content.form.messages.LOCALEREQUIRED">Locale is required.</span>
+                                    <span class="success text-small block" ng-if="languageForm.locale.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':languageForm.code.$dirty && languageForm.code.$invalid, 'has-success':languageForm.code.$valid}">
+                                    <label for="languageCode" class="control-label">
+                                        <span translate="content.list.fields.CODE">Code</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="language.code" type="text" name="code" id="languageCode" class="form-control" placeholder="[[ 'content.form.messages.ENTERCODE' | translate ]]" ng-required="true" />
+                                        <i class="ti-shortcode"></i>
+                                    </span><!--/input-icon-->
+                                    <span class="error text-small block" ng-if="languageForm.code.$dirty && languageForm.code.$error.required" translate="content.form.messages.CODEREQUIRED">Code is required.</span>
+                                    <span class="success text-small block" ng-if="languageForm.code.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="checkbox clip-check check-primary">
+                                    <input ng-model="language.preferred" type="checkbox" name="preferred" id="languagePreferred" />
+                                    <label for="languagePreferred" translate="content.list.fields.PREFERRED">Preferred</label>
+                                </div><!--/checkbox clip-check check-primary-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        </form>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <button ng-click="list()" class="btn btn-primary pull-left">
+                                    <i class="ti-layout-list-thumb"></i> <span translate="content.list.BACKLANGUAGES">Back to Languages list</span>
+                                </button>
+                            </div>
+                            <div class="col-md-4">
+                            </div>
+                            <div class="col-md-4">
+                                <button type="button" ng-click="submitForm(languageForm)" class="btn btn-primary pull-right"> <!--  ng-disabled="languageForm.$invalid" -->
+                                    <i class="ti-save"></i> <span translate="content.common.SAVE">Save</span>
+                                </button>
+                            </div>
+                        </div>
+                   </fieldset>
+            </div>
+        </div><!--/col-md-12-->
+    </div><!--/row-->
+</div><!--/container-fluid container-fullw-->
+<!-- end: FORM -->
+

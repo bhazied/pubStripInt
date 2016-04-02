@@ -1,0 +1,387 @@
+
+<!-- start: PAGE TITLE -->
+<section id="page-title">
+    <div class="row">
+        <div class="col-sm-8">
+            <h1 class="mainTitle" translate="content.list.PRESSRELEASES">Press Releases</h1>
+            <span class="mainDescription"></span>
+        </div>
+        <div ncy-breadcrumb></div>
+    </div>
+</section>
+<!-- end: PAGE TITLE -->
+
+<!-- start: FORM -->
+<div class="container-fluid container-fullw bg-white">
+    <div class="row">
+        <div class="col-md-12" ng-controller="PressReleaseFormCtrl">
+            <div>
+                    <fieldset>
+                        <legend translate="content.list.NEWPRESSRELEASE" ng-if="pressRelease.id == 0">
+                            New Press Release
+                        </legend>
+                        <legend translate="content.list.EDITPRESSRELEASE" ng-if="pressRelease.id > 0">
+                            Edit Press Release
+                        </legend>
+                        <form name="pressReleaseForm" id="pressReleaseForm" novalidate ng-submit="submitForm(pressReleaseForm)">
+                        <div class="row">
+                            <input type="hidden" name="id" id="pressReleaseId" ng-model="pressRelease.id" />
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':pressReleaseForm.newsroom.$dirty && pressReleaseForm.newsroom.$invalid, 'has-success':pressReleaseForm.newsroom.$valid}">
+                                    <label for="pressReleaseNewsroom" class="control-label">
+                                        <span translate="content.list.fields.NEWSROOM">Newsroom</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                <div class="block" ng-if="newsroomsLoaded">
+                                    <span class="input-icon">
+                                        <select ng-options="item.id as item.name for item in newsrooms | filter:{ hidden : false }" ng-model="pressRelease.newsroom" name="newsroom" id="pressReleaseNewsroom" class="form-control" ng-required="true">
+                                            <option translate="content.form.messages.SELECTNEWSROOM" value="">Select Newsroom</option>
+                                        </select>
+                                        <i class="ti-marker-alt"></i>
+                                    </span><!--/input-icon-->
+                                </div>
+                                    <span class="error text-small block" ng-if="pressReleaseForm.newsroom.$dirty && pressReleaseForm.newsroom.$error.required" translate="content.form.messages.NEWSROOMREQUIRED">Newsroom is required.</span>
+                                    <span class="success text-small block" ng-if="pressReleaseForm.newsroom.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':pressReleaseForm.title.$dirty && pressReleaseForm.title.$invalid, 'has-success':pressReleaseForm.title.$valid}">
+                                    <label for="pressReleaseTitle" class="control-label">
+                                        <span translate="content.list.fields.TITLE">Title</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="pressRelease.title" type="text" name="title" id="pressReleaseTitle" class="form-control" placeholder="[[ 'content.form.messages.ENTERTITLE' | translate ]]" ng-required="true" />
+                                        <i class="ti-marker-alt"></i>
+                                    </span><!--/input-icon-->
+                                    <span class="error text-small block" ng-if="pressReleaseForm.title.$dirty && pressReleaseForm.title.$error.required" translate="content.form.messages.TITLEREQUIRED">Title is required.</span>
+                                    <span class="success text-small block" ng-if="pressReleaseForm.title.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                                    <slug from="pressRelease.title" to="pressRelease.slug"></slug>
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':pressReleaseForm.slug.$dirty && pressReleaseForm.slug.$invalid, 'has-success':pressReleaseForm.slug.$valid}">
+                                    <label for="pressReleaseSlug" class="control-label">
+                                        <span translate="content.list.fields.SLUG">Slug</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="pressRelease.slug" type="text" name="slug" id="pressReleaseSlug" class="form-control" placeholder="[[ 'content.form.messages.ENTERSLUG' | translate ]]" ng-required="true" />
+                                        <i class="ti-anchor"></i>
+                                    </span><!--/input-icon-->
+                                    <span class="error text-small block" ng-if="pressReleaseForm.slug.$dirty && pressReleaseForm.slug.$error.required" translate="content.form.messages.SLUGREQUIRED">Slug is required.</span>
+                                    <span class="success text-small block" ng-if="pressReleaseForm.slug.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="pressReleaseDescription" class="control-label">
+                                        <span translate="content.list.fields.DESCRIPTION">Description</span>
+                                    </label>
+                                    <div class="note-editor">
+                                        <textarea ng-model="pressRelease.description" name="description" id="pressReleaseDescription" class="form-control" placeholder="[[ 'content.form.messages.ENTERDESCRIPTION' | translate ]]" class="form-control autosize area-animated msd-elastic: \n;"></textarea>
+                                    </div>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="pressReleasePicturePreview" class="control-label">
+                                        <span translate="content.list.fields.PICTUREPREVIEW">Picture Preview</span>
+                                    </label>
+                                    <div class="input-group">
+                                    <span class="input-icon">
+                                        <input ng-model="pressRelease.picture_preview" type="text" name="picturePreview" id="pressReleasePicturePreview" class="form-control" placeholder="[[ 'content.form.messages.ENTERPICTUREPREVIEW' | translate ]]" />
+                                        <i class="ti-image"></i>
+                                    </span><!--/input-icon-->
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-primary" ng-click="showFileManager('picture_preview')">
+                                                <i class="ti-cloud"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                    <div class="user-image margin-top-10" ng-if="pressRelease.picture_preview != '' && pressRelease.picture_preview != null">
+                                        <div class="thumbnail">
+                                            <img ng-src="[[ thumbURL + pressRelease.picture_preview ]]" alt="" />
+                                        </div>
+                                        <div class="user-image-buttons">
+                                            <span class="btn btn-primary"  ng-click="showFileManager('picture_preview')"><i class="fa fa-pencil"></i></span>
+                                            <span class="btn btn-danger" ng-click="pressRelease.picture_preview = ''"> <i class="fa fa-times"></i></span>
+                                        </div>
+                                    </div>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-12">
+                                <div class="form-group" ng-class="{'has-error':pressReleaseForm.content.$dirty && pressReleaseForm.content.$invalid, 'has-success':pressReleaseForm.content.$valid}">
+                                    <label for="pressReleaseContent" class="control-label">
+                                        <span translate="content.list.fields.CONTENT">Content</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <div class="note-editor">
+                                        <div ckeditor="editorOptions" ready="onReadyEditor()"ng-model="pressRelease.content" name="content" id="pressReleaseContent" class="form-control" placeholder="[[ 'content.form.messages.ENTERCONTENT' | translate ]]" class="form-control autosize area-animated msd-elastic: \n;" ng-required="true"></div>
+                                    </div>
+                                    <span class="error text-small block" ng-if="pressReleaseForm.content.$dirty && pressReleaseForm.content.$error.required" translate="content.form.messages.CONTENTREQUIRED">Content is required.</span>
+                                    <span class="success text-small block" ng-if="pressReleaseForm.content.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="checkbox clip-check check-primary">
+                                    <input ng-model="pressRelease.is_headline" type="checkbox" name="isHeadline" id="pressReleaseIsHeadline" />
+                                    <label for="pressReleaseIsHeadline" translate="content.list.fields.ISHEADLINE">Is Headline</label>
+                                </div><!--/checkbox clip-check check-primary-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="checkbox clip-check check-primary">
+                                    <input ng-model="pressRelease.auto_publishing" type="checkbox" name="autoPublishing" id="pressReleaseAutoPublishing" />
+                                    <label for="pressReleaseAutoPublishing" translate="content.list.fields.AUTOPUBLISHING">Auto Publishing</label>
+                                </div><!--/checkbox clip-check check-primary-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="pressReleaseStartPublishing" class="control-label">
+                                        <span translate="content.list.fields.STARTPUBLISHING">Start Publishing</span>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-icon">
+                                            <input ng-model="pressRelease.start_publishing" type="text" name="startPublishing" id="pressReleaseStartPublishing" class="form-control" placeholder="[[ 'content.form.messages.SELECTSTARTPUBLISHING' | translate ]]" is-open="startPublishingOpened" uib-datepicker-popup="[[dateTimeFormat]]" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="[[ 'content.common.CLOSE' | translate ]]" current-text="[[ 'content.common.CURRENT' | translate ]]" clear-text="[[ 'content.common.CLEAR' | translate ]]" time-text="[[ 'content.common.TIME' | translate ]]" date-text="[[ 'content.common.DATE' | translate ]]" />
+                                            <i class="ti-marker-alt"></i>
+                                        </span><!--/input-icon-->
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-primary" ng-click="startPublishingToggle($event)">
+                                            <i class="fa fa-calendar"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="pressReleaseEndPublishing" class="control-label">
+                                        <span translate="content.list.fields.ENDPUBLISHING">End Publishing</span>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-icon">
+                                            <input ng-model="pressRelease.end_publishing" type="text" name="endPublishing" id="pressReleaseEndPublishing" class="form-control" placeholder="[[ 'content.form.messages.SELECTENDPUBLISHING' | translate ]]" is-open="endPublishingOpened" uib-datepicker-popup="[[dateTimeFormat]]" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="[[ 'content.common.CLOSE' | translate ]]" current-text="[[ 'content.common.CURRENT' | translate ]]" clear-text="[[ 'content.common.CLEAR' | translate ]]" time-text="[[ 'content.common.TIME' | translate ]]" date-text="[[ 'content.common.DATE' | translate ]]" />
+                                            <i class="ti-marker-alt"></i>
+                                        </span><!--/input-icon-->
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-primary" ng-click="endPublishingToggle($event)">
+                                            <i class="fa fa-calendar"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':pressReleaseForm.publishDateTime.$dirty && pressReleaseForm.publishDateTime.$invalid, 'has-success':pressReleaseForm.publishDateTime.$valid}">
+                                    <label for="pressReleasePublishDateTime" class="control-label">
+                                        <span translate="content.list.fields.PUBLISHDATETIME">Publish Date Time</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-icon">
+                                            <input ng-model="pressRelease.publish_date_time" type="text" name="publishDateTime" id="pressReleasePublishDateTime" class="form-control" placeholder="[[ 'content.form.messages.SELECTPUBLISHDATETIME' | translate ]]" is-open="publishDateTimeOpened" uib-datepicker-popup="[[dateTimeFormat]]" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="[[ 'content.common.CLOSE' | translate ]]" current-text="[[ 'content.common.CURRENT' | translate ]]" clear-text="[[ 'content.common.CLEAR' | translate ]]" time-text="[[ 'content.common.TIME' | translate ]]" date-text="[[ 'content.common.DATE' | translate ]]" ng-required="true" />
+                                            <i class="ti-calendar"></i>
+                                        </span><!--/input-icon-->
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-primary" ng-click="publishDateTimeToggle($event)">
+                                            <i class="fa fa-calendar"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                    <span class="error text-small block" ng-if="pressReleaseForm.publishDateTime.$dirty && pressReleaseForm.publishDateTime.$error.required" translate="content.form.messages.PUBLISHDATETIMEREQUIRED">Publish Date Time is required.</span>
+                                    <span class="success text-small block" ng-if="pressReleaseForm.publishDateTime.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="pressReleaseMetaTitle" class="control-label">
+                                        <span translate="content.list.fields.METATITLE">Meta Title</span>
+                                    </label>
+                                    <div class="note-editor">
+                                        <textarea ng-model="pressRelease.meta_title" name="metaTitle" id="pressReleaseMetaTitle" class="form-control" placeholder="[[ 'content.form.messages.ENTERMETATITLE' | translate ]]" class="form-control autosize area-animated msd-elastic: \n;"></textarea>
+                                    </div>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="pressReleaseMetaDescription" class="control-label">
+                                        <span translate="content.list.fields.METADESCRIPTION">Meta Description</span>
+                                    </label>
+                                    <div class="note-editor">
+                                        <textarea ng-model="pressRelease.meta_description" name="metaDescription" id="pressReleaseMetaDescription" class="form-control" placeholder="[[ 'content.form.messages.ENTERMETADESCRIPTION' | translate ]]" class="form-control autosize area-animated msd-elastic: \n;"></textarea>
+                                    </div>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="pressReleaseMetaKeywords" class="control-label">
+                                        <span translate="content.list.fields.METAKEYWORDS">Meta Keywords</span>
+                                    </label>
+                                    <div class="note-editor">
+                                        <textarea ng-model="pressRelease.meta_keywords" name="metaKeywords" id="pressReleaseMetaKeywords" class="form-control" placeholder="[[ 'content.form.messages.ENTERMETAKEYWORDS' | translate ]]" class="form-control autosize area-animated msd-elastic: \n;"></textarea>
+                                    </div>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':pressReleaseForm.status.$dirty && pressReleaseForm.status.$invalid, 'has-success':pressReleaseForm.status.$valid}">
+                                    <label for="pressReleaseStatus" class="control-label">
+                                        <span translate="content.list.fields.STATUS">Status</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <div class="clip-radio radio-primary" ng-if="statuses.length < 10">
+                                        <input ng-disabled="(user.roles.join('').indexOf('ROLE_ADMIN_PUBLISHER') == -1)" ng-repeat-start="status in statuses" ng-model="pressRelease.status" type="radio" id="status[[ status.id ]]" value="[[ status.id ]]" name="status" ng-required="true" />
+                                        <label ng-repeat-end for="status[[ status.id ]]">
+                                            [[ status.title ]]
+                                        </label>
+                                    </div>
+                                    <div class="block" ng-if="statuses.length >= 10">
+                                        <select ng-disabled="(user.roles.join('').indexOf('ROLE_ADMIN_PUBLISHER') == -1)" ng-options="item.id as item.title for item in statuses" ng-model="pressRelease.status" name="status" id="pressReleaseStatus" class="form-control" ng-required="true">
+                                            <option translate="content.form.messages.SELECTSTATUS" value="">Select Status</option>
+                                        </select>
+                                        <span my-enum="[[ pressRelease.status ]]" my-enum-list="[[ statuses ]]"></span>
+                                    </div>
+                                    <span class="error text-small block" ng-if="pressReleaseForm.status.$dirty && pressReleaseForm.status.$error.required" translate="content.form.messages.STATUSREQUIRED">Status is required.</span>
+                                    <span class="success text-small block" ng-if="pressReleaseForm.status.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="pressReleaseTotalPrints" class="control-label">
+                                        <span translate="content.list.fields.TOTALPRINTS">Total Prints</span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="pressRelease.total_prints" type="text" name="totalPrints" id="pressReleaseTotalPrints" class="form-control" placeholder="[[ 'content.form.messages.ENTERTOTALPRINTS' | translate ]]" touchspin data-min="0" data-max="10000000" data-verticalbuttons="true" data-verticalupclass="ti-angle-up" data-verticaldownclass="ti-angle-down" />
+                                        <i class="ti-marker-alt"></i>
+                                    </span><!--/input-icon-->
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="pressReleaseTotalHits" class="control-label">
+                                        <span translate="content.list.fields.TOTALHITS">Total Hits</span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="pressRelease.total_hits" type="text" name="totalHits" id="pressReleaseTotalHits" class="form-control" placeholder="[[ 'content.form.messages.ENTERTOTALHITS' | translate ]]" touchspin data-min="0" data-max="10000000" data-verticalbuttons="true" data-verticalupclass="ti-angle-up" data-verticaldownclass="ti-angle-down" />
+                                        <i class="ti-marker-alt"></i>
+                                    </span><!--/input-icon-->
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="pressReleaseTotalComments" class="control-label">
+                                        <span translate="content.list.fields.TOTALCOMMENTS">Total Comments</span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="pressRelease.total_comments" type="text" name="totalComments" id="pressReleaseTotalComments" class="form-control" placeholder="[[ 'content.form.messages.ENTERTOTALCOMMENTS' | translate ]]" touchspin data-min="0" data-max="10000000" data-verticalbuttons="true" data-verticalupclass="ti-angle-up" data-verticaldownclass="ti-angle-down" />
+                                        <i class="ti-marker-alt"></i>
+                                    </span><!--/input-icon-->
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="pressReleaseTotalRatings" class="control-label">
+                                        <span translate="content.list.fields.TOTALRATINGS">Total Ratings</span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="pressRelease.total_ratings" type="text" name="totalRatings" id="pressReleaseTotalRatings" class="form-control" placeholder="[[ 'content.form.messages.ENTERTOTALRATINGS' | translate ]]" touchspin data-min="0" data-max="10000000" data-verticalbuttons="true" data-verticalupclass="ti-angle-up" data-verticaldownclass="ti-angle-down" />
+                                        <i class="ti-marker-alt"></i>
+                                    </span><!--/input-icon-->
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="pressReleaseAverageRatings" class="control-label">
+                                        <span translate="content.list.fields.AVERAGERATINGS">Average Ratings</span>
+                                    </label>
+                                        <input ng-model="pressRelease.average_ratings" type="text" name="averageRatings" id="pressReleaseAverageRatings" class="form-control" placeholder="[[ 'content.form.messages.ENTERAVERAGERATINGS' | translate ]]" touchspin data-min="0" data-max="10000000"  data-verticalbuttons="true" data-verticalupclass="ti-angle-up" data-verticaldownclass="ti-angle-down" />
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="pressReleaseTotalLikes" class="control-label">
+                                        <span translate="content.list.fields.TOTALLIKES">Total Likes</span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="pressRelease.total_likes" type="text" name="totalLikes" id="pressReleaseTotalLikes" class="form-control" placeholder="[[ 'content.form.messages.ENTERTOTALLIKES' | translate ]]" touchspin data-min="0" data-max="10000000" data-verticalbuttons="true" data-verticalupclass="ti-angle-up" data-verticaldownclass="ti-angle-down" />
+                                        <i class="ti-marker-alt"></i>
+                                    </span><!--/input-icon-->
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="pressReleaseTotalDislikes" class="control-label">
+                                        <span translate="content.list.fields.TOTALDISLIKES">Total Dislikes</span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="pressRelease.total_dislikes" type="text" name="totalDislikes" id="pressReleaseTotalDislikes" class="form-control" placeholder="[[ 'content.form.messages.ENTERTOTALDISLIKES' | translate ]]" touchspin data-min="0" data-max="10000000" data-verticalbuttons="true" data-verticalupclass="ti-angle-up" data-verticaldownclass="ti-angle-down" />
+                                        <i class="ti-marker-alt"></i>
+                                    </span><!--/input-icon-->
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="pressReleaseTotalBookmarks" class="control-label">
+                                        <span translate="content.list.fields.TOTALBOOKMARKS">Total Bookmarks</span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="pressRelease.total_bookmarks" type="text" name="totalBookmarks" id="pressReleaseTotalBookmarks" class="form-control" placeholder="[[ 'content.form.messages.ENTERTOTALBOOKMARKS' | translate ]]" touchspin data-min="0" data-max="10000000" data-verticalbuttons="true" data-verticalupclass="ti-angle-up" data-verticaldownclass="ti-angle-down" />
+                                        <i class="ti-marker-alt"></i>
+                                    </span><!--/input-icon-->
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="pressReleaseTotalShares" class="control-label">
+                                        <span translate="content.list.fields.TOTALSHARES">Total Shares</span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="pressRelease.total_shares" type="text" name="totalShares" id="pressReleaseTotalShares" class="form-control" placeholder="[[ 'content.form.messages.ENTERTOTALSHARES' | translate ]]" touchspin data-min="0" data-max="10000000" data-verticalbuttons="true" data-verticalupclass="ti-angle-up" data-verticaldownclass="ti-angle-down" />
+                                        <i class="ti-marker-alt"></i>
+                                    </span><!--/input-icon-->
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        </form>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <button ng-click="list()" class="btn btn-primary pull-left">
+                                    <i class="ti-layout-list-thumb"></i> <span translate="content.list.BACKPRESSRELEASES">Back to Press Releases list</span>
+                                </button>
+                            </div>
+                            <div class="col-md-4">
+                            </div>
+                            <div class="col-md-4">
+                                <button type="button" ng-click="submitForm(pressReleaseForm)" class="btn btn-primary pull-right"> <!--  ng-disabled="pressReleaseForm.$invalid" -->
+                                    <i class="ti-save"></i> <span translate="content.common.SAVE">Save</span>
+                                </button>
+                            </div>
+                        </div>
+                   </fieldset>
+            </div>
+        </div><!--/col-md-12-->
+    </div><!--/row-->
+</div><!--/container-fluid container-fullw-->
+<!-- end: FORM -->
+
