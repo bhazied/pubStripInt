@@ -1,0 +1,203 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/bin/nodejs',
+1 verbose cli   '/usr/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   '-g',
+1 verbose cli   'grunt-karma' ]
+2 info using npm@3.7.1
+3 info using node@v5.6.0
+4 silly loadCurrentTree Starting
+5 silly install loadCurrentTree
+6 silly install readGlobalPackageData
+7 silly fetchPackageMetaData grunt-karma
+8 silly fetchNamedPackageData grunt-karma
+9 silly mapToRegistry name grunt-karma
+10 silly mapToRegistry using default registry
+11 silly mapToRegistry registry https://registry.npmjs.org/
+12 silly mapToRegistry uri https://registry.npmjs.org/grunt-karma
+13 verbose get https://registry.npmjs.org/grunt-karma not expired, no request
+14 silly install normalizeTree
+15 silly loadCurrentTree Finishing
+16 silly loadIdealTree Starting
+17 silly install loadIdealTree
+18 silly cloneCurrentTree Starting
+19 silly install cloneCurrentTreeToIdealTree
+20 silly cloneCurrentTree Finishing
+21 silly loadShrinkwrap Starting
+22 silly install loadShrinkwrap
+23 silly loadShrinkwrap Finishing
+24 silly loadAllDepsIntoIdealTree Starting
+25 silly install loadAllDepsIntoIdealTree
+26 silly resolveWithNewModule grunt-karma@0.12.2 checking installable status
+27 silly cache add args [ 'grunt-karma', null ]
+28 verbose cache add spec grunt-karma
+29 silly cache add parsed spec Result {
+29 silly cache add   raw: 'grunt-karma',
+29 silly cache add   scope: null,
+29 silly cache add   name: 'grunt-karma',
+29 silly cache add   rawSpec: '',
+29 silly cache add   spec: 'latest',
+29 silly cache add   type: 'tag' }
+30 silly addNamed grunt-karma@latest
+31 verbose addNamed "latest" is being treated as a dist-tag for grunt-karma
+32 info addNameTag [ 'grunt-karma', 'latest' ]
+33 silly mapToRegistry name grunt-karma
+34 silly mapToRegistry using default registry
+35 silly mapToRegistry registry https://registry.npmjs.org/
+36 silly mapToRegistry uri https://registry.npmjs.org/grunt-karma
+37 verbose addNameTag registry:https://registry.npmjs.org/grunt-karma not in flight; fetching
+38 verbose get https://registry.npmjs.org/grunt-karma not expired, no request
+39 silly addNameTag next cb for grunt-karma with tag latest
+40 silly addNamed grunt-karma@0.12.2
+41 verbose addNamed "0.12.2" is a plain semver version for grunt-karma
+42 silly cache afterAdd grunt-karma@0.12.2
+43 verbose afterAdd /home/sahbi/.npm/grunt-karma/0.12.2/package/package.json not in flight; writing
+44 verbose correctMkdir /home/sahbi/.npm correctMkdir not in flight; initializing
+45 verbose afterAdd /home/sahbi/.npm/grunt-karma/0.12.2/package/package.json written
+46 silly fetchNamedPackageData lodash
+47 silly mapToRegistry name lodash
+48 silly mapToRegistry using default registry
+49 silly mapToRegistry registry https://registry.npmjs.org/
+50 silly mapToRegistry uri https://registry.npmjs.org/lodash
+51 verbose get https://registry.npmjs.org/lodash not expired, no request
+52 silly resolveWithNewModule lodash@3.10.1 checking installable status
+53 silly cache add args [ 'lodash@^3.10.1', null ]
+54 verbose cache add spec lodash@^3.10.1
+55 silly cache add parsed spec Result {
+55 silly cache add   raw: 'lodash@^3.10.1',
+55 silly cache add   scope: null,
+55 silly cache add   name: 'lodash',
+55 silly cache add   rawSpec: '^3.10.1',
+55 silly cache add   spec: '>=3.10.1 <4.0.0',
+55 silly cache add   type: 'range' }
+56 silly addNamed lodash@>=3.10.1 <4.0.0
+57 verbose addNamed ">=3.10.1 <4.0.0" is a valid semver range for lodash
+58 silly addNameRange { name: 'lodash', range: '>=3.10.1 <4.0.0', hasData: false }
+59 silly mapToRegistry name lodash
+60 silly mapToRegistry using default registry
+61 silly mapToRegistry registry https://registry.npmjs.org/
+62 silly mapToRegistry uri https://registry.npmjs.org/lodash
+63 verbose addNameRange registry:https://registry.npmjs.org/lodash not in flight; fetching
+64 verbose get https://registry.npmjs.org/lodash not expired, no request
+65 silly addNameRange number 2 { name: 'lodash', range: '>=3.10.1 <4.0.0', hasData: true }
+66 silly addNameRange versions [ 'lodash',
+66 silly addNameRange   [ '0.1.0',
+66 silly addNameRange     '0.2.0',
+66 silly addNameRange     '0.2.1',
+66 silly addNameRange     '0.2.2',
+66 silly addNameRange     '0.3.0',
+66 silly addNameRange     '0.3.1',
+66 silly addNameRange     '0.3.2',
+66 silly addNameRange     '0.4.0',
+66 silly addNameRange     '0.4.1',
+66 silly addNameRange     '0.4.2',
+66 silly addNameRange     '0.5.0-rc.1',
+66 silly addNameRange     '0.5.0',
+66 silly addNameRange     '0.5.1',
+66 silly addNameRange     '0.5.2',
+66 silly addNameRange     '0.6.0',
+66 silly addNameRange     '0.6.1',
+66 silly addNameRange     '0.7.0',
+66 silly addNameRange     '0.8.0',
+66 silly addNameRange     '0.8.1',
+66 silly addNameRange     '0.8.2',
+66 silly addNameRange     '0.9.0',
+66 silly addNameRange     '0.9.1',
+66 silly addNameRange     '0.9.2',
+66 silly addNameRange     '0.10.0',
+66 silly addNameRange     '1.0.0-rc.1',
+66 silly addNameRange     '1.0.0-rc.2',
+66 silly addNameRange     '1.0.0-rc.3',
+66 silly addNameRange     '1.0.0',
+66 silly addNameRange     '1.0.1',
+66 silly addNameRange     '1.1.0',
+66 silly addNameRange     '1.1.1',
+66 silly addNameRange     '1.2.0',
+66 silly addNameRange     '1.2.1',
+66 silly addNameRange     '1.3.0',
+66 silly addNameRange     '1.3.1',
+66 silly addNameRange     '2.0.0',
+66 silly addNameRange     '2.1.0',
+66 silly addNameRange     '2.2.0',
+66 silly addNameRange     '2.2.1',
+66 silly addNameRange     '2.3.0',
+66 silly addNameRange     '2.4.0',
+66 silly addNameRange     '2.4.1',
+66 silly addNameRange     '3.0.0',
+66 silly addNameRange     '3.0.1',
+66 silly addNameRange     '3.1.0',
+66 silly addNameRange     '3.2.0',
+66 silly addNameRange     '3.3.0',
+66 silly addNameRange     '3.3.1',
+66 silly addNameRange     '3.4.0',
+66 silly addNameRange     '3.5.0',
+66 silly addNameRange     '3.6.0',
+66 silly addNameRange     '1.0.2',
+66 silly addNameRange     '3.7.0',
+66 silly addNameRange     '2.4.2',
+66 silly addNameRange     '3.8.0',
+66 silly addNameRange     '3.9.0',
+66 silly addNameRange     '3.9.1',
+66 silly addNameRange     '3.9.2',
+66 silly addNameRange     '3.9.3',
+66 silly addNameRange     '3.10.0',
+66 silly addNameRange     '3.10.1',
+66 silly addNameRange     '4.0.0',
+66 silly addNameRange     '4.0.1',
+66 silly addNameRange     '4.1.0',
+66 silly addNameRange     '4.2.0',
+66 silly addNameRange     '4.2.1',
+66 silly addNameRange     '4.3.0',
+66 silly addNameRange     '4.4.0',
+66 silly addNameRange     '4.5.0',
+66 silly addNameRange     '4.5.1',
+66 silly addNameRange     '4.6.0',
+66 silly addNameRange     '4.6.1',
+66 silly addNameRange     '4.7.0' ] ]
+67 silly addNamed lodash@3.10.1
+68 verbose addNamed "3.10.1" is a plain semver version for lodash
+69 silly cache afterAdd lodash@3.10.1
+70 verbose afterAdd /home/sahbi/.npm/lodash/3.10.1/package/package.json not in flight; writing
+71 verbose correctMkdir /home/sahbi/.npm correctMkdir not in flight; initializing
+72 verbose afterAdd /home/sahbi/.npm/lodash/3.10.1/package/package.json written
+73 silly loadAllDepsIntoIdealTree Finishing
+74 silly idealTree:prePrune lib
+74 silly idealTree:prePrune └─┬ grunt-karma@0.12.2
+74 silly idealTree:prePrune   └── lodash@3.10.1
+75 silly loadIdealTree Finishing
+76 silly currentTree lib
+76 silly currentTree └─┬ grunt-karma@0.12.2
+76 silly currentTree   └── lodash@3.10.1
+77 silly idealTree lib
+77 silly idealTree └─┬ grunt-karma@0.12.2
+77 silly idealTree   └── lodash@3.10.1
+78 silly generateActionsToTake Starting
+79 silly install generateActionsToTake
+80 warn checkPermissions Missing write access to /usr/lib/node_modules/grunt-karma
+81 silly rollbackFailedOptional Starting
+82 silly rollbackFailedOptional Finishing
+83 silly runTopLevelLifecycles Starting
+84 silly runTopLevelLifecycles Finishing
+85 silly install printInstalled
+86 warn grunt-karma@0.12.2 requires a peer of grunt@>=0.4.x but none was installed.
+87 warn grunt-karma@0.12.2 requires a peer of karma@^0.13.0 || >= 0.14.0-rc.0 but none was installed.
+88 verbose stack Error: EACCES: permission denied, access '/usr/lib/node_modules/grunt-karma'
+88 verbose stack     at Error (native)
+89 verbose cwd /var/www/urban/angular
+90 error Linux 3.19.0-56-generic
+91 error argv "/usr/bin/nodejs" "/usr/bin/npm" "install" "-g" "grunt-karma"
+92 error node v5.6.0
+93 error npm  v3.7.1
+94 error path /usr/lib/node_modules/grunt-karma
+95 error code EACCES
+96 error errno -13
+97 error syscall access
+98 error Error: EACCES: permission denied, access '/usr/lib/node_modules/grunt-karma'
+98 error     at Error (native)
+98 error  { [Error: EACCES: permission denied, access '/usr/lib/node_modules/grunt-karma']
+98 error   errno: -13,
+98 error   code: 'EACCES',
+98 error   syscall: 'access',
+98 error   path: '/usr/lib/node_modules/grunt-karma' }
+99 error Please try running this command again as root/Administrator.
+100 verbose exit [ -13, true ]

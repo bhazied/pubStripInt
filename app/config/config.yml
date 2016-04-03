@@ -10,17 +10,20 @@ parameters:
 
 framework:
     #esi:             ~
-    #translator:      { fallbacks: ["%locale%"] }
+    translator:
+          { fallbacks: ["%locale%"] }
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
         strict_requirements: ~
     form:            ~
-    csrf_protection: ~
+    csrf_protection:
+        enabled:        false
     validation:      { enable_annotations: true }
     #serializer:      { enable_annotations: true }
     templating:
         engines: ['twig']
+        #assets_version: SomeVersionScheme
     default_locale:  "%locale%"
     trusted_hosts:   ~
     trusted_proxies: ~
@@ -64,3 +67,280 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+# FOS User
+fos_user:
+    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
+    firewall_name: main
+    user_class: ContinuousNet\PubliPrBundle\Entity\User
+    use_listener:           true
+    use_username_form_type: true
+    model_manager_name:     null  # change it to the name of your entity/document manager if you don't want to use the default one.
+    from_email:
+        address:        contact@continuousnet.com
+        sender_name:    publipr
+    profile:
+        form:
+            type:               FOS\UserBundle\Form\Type\ProfileFormType # or 'fos_user_profile' on Symfony < 2.8
+            name:               fos_user_profile_form
+            validation_groups:  [Profile, Default]
+    change_password:
+        form:
+            type:               FOS\UserBundle\Form\Type\ChangePasswordFormType # or 'fos_user_change_password' on Symfony < 2.8
+            name:               fos_user_change_password_form
+            validation_groups:  [ChangePassword, Default]
+    registration:
+        confirmation:
+            from_email: # Use this node only if you don't want the global email address for the confirmation email
+                address:        contact@continuousnet.com
+                sender_name:    Publi Pr Registration
+            enabled:    true # change to true for required email confirmation
+            template:   PubliPrBundle:Auth:registration.email.txt.twig
+        form:
+            type:               ContinuousNet\PubliPrBundle\Form\RegistrationType # or 'fos_user_registration' on Symfony < 2.8
+            name:               app_user_registration
+            validation_groups:  [Registration, Default]
+    resetting:
+        token_ttl: 86400
+        email:
+            from_email: # Use this node only if you don't want the global email address for the resetting email
+                address:        contact@continuousnet.com
+                sender_name:    Publi Pr Resetting
+            template:   PubliPrBundle:Auth:resetting.email.txt.twig
+        form:
+            type:               FOS\UserBundle\Form\Type\ResettingFormType # or 'fos_user_resetting' on Symfony < 2.8
+            name:               fos_user_resetting_form
+            validation_groups:  [ResetPassword, Default]
+    service:
+        mailer:                 fos_user.mailer.default
+        email_canonicalizer:    fos_user.util.canonicalizer.default
+        username_canonicalizer: fos_user.util.canonicalizer.default
+        token_generator:        fos_user.util.token_generator.default
+        user_manager:           fos_user.user_manager.default
+    group:
+        group_class:    ContinuousNet\PubliPrBundle\Entity\Group # Required when using groups
+        group_manager:  fos_user.group_manager.default
+        form:
+            type:               FOS\UserBundle\Form\Type\GroupFormType # or 'fos_user_group' on Symfony < 2.8
+            name:               fos_user_group_form
+            validation_groups:  [Registration, Default]
+
+
+# JMS Serializer
+jms_serializer:
+    metadata:
+        auto_detection: true
+
+# FOS Rest
+fos_rest:
+    #format_listener:
+    #    rules:
+    #        - { path: '^/api', priorities: ['json'], fallback_format: json, prefer_extension: false }
+    #        - { path: '^/', priorities: ['html'], fallback_format: html, prefer_extension: false }
+    view:
+        view_response_listener: true
+        formats:
+            json: true
+            xml:  false
+    routing_loader:
+        default_format: json
+    serializer:
+        serialize_null: true
+    param_fetcher_listener: true
+    access_denied_listener:
+        json: true
+    disable_csrf_role: ROLE_API
+    body_listener:
+        array_normalizer:
+            service: fos_rest.normalizer.camel_keys
+            forms: true
+
+nelmio_cors:
+    defaults:
+        allow_credentials: false
+        allow_origin: []
+        allow_headers: []
+        allow_methods: []
+        expose_headers: []
+        max_age: 0
+        hosts: []
+    paths:
+        '^/api/':
+            allow_origin: ['*']
+            allow_headers: ['*']
+            allow_methods: ['POST', 'PUT', 'PATCH', 'GET', 'DELETE']
+            max_age: 3600
+        '^/efconnect':
+            allow_origin: ['*']
+            allow_headers: ['X-Custom-Auth', 'Content-Type', 'X-Requested-With']
+            allow_methods: ['POST', 'GET', 'PATCH', 'PUT', 'DELETE']
+            max_age: 3600
+            allow_credentials: true
+
+sensio_framework_extra:
+    request: { converters: true }
+    view:    { annotations: false }
+    router:  { annotations: true }
+
+lexik_jwt_authentication:
+    private_key_path: %jwt_private_key_path%
+    public_key_path:  %jwt_public_key_path%
+    pass_phrase:      %jwt_key_pass_phrase%
+    token_ttl:        %jwt_token_ttl%
+    encoder_service:     lexik_jwt_authentication.jwt_encoder    # token encoder / decoder service - defaults to the jwt encoder (based on the namshi/jose library)
+    user_identity_field: email                                # key under which the user identity will be stored in the token payload - defaults to username
+
+fm_elfinder:
+    instances:
+        default:
+            locale: %locale% # defaults to current request locale
+            cors_support: true # allows cross domain responses handling (default false)
+            editor: ckeditor # other options are tinymce, tinymce4, fm_tinymce,  form, simple, custom
+            #editor_template: set custom template for your editor # default null
+            #path_prefix: / # for setting custom assets path prefix, useful for non vhost configurations, i.e. http://127.0.0.1/mysite/
+            #fullscreen: true|false # defaults true, applies to simple and ckeditor editors
+            theme: 'base' # jquery theme, default is 'smoothness'
+            include_assets: true # disable if you want to handle loading of the javascript and css assets yourself
+            visible_mime_types: ['image', 'video'] # only show these mime types, defaults to show all
+            connector:
+                #debug: true|false # defaults to false
+                roots:       # at least one root must be defined
+                    uploads:
+                        #show_hidden: true|false # defaults to false, hide files that
+                        driver: LocalFileSystem
+                        path: uploads
+                        upload_allow: ['image', 'video']
+                        upload_deny: ['all']
+                        upload_max_size: 2M
+                        #attributes: example of setting attributes permission
+                        #    - { pattern: '/(.*?)/', read: true, write: false, locked: true }
+
+assetic:
+    debug:          '%kernel.debug%'
+    use_controller: '%kernel.debug%'
+    filters:
+        cssrewrite: ~
+    assets:
+        google_fonts:
+            inputs:
+                #- 'http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic'
+                - assets/css/fonts.googleapis.com.css
+        bootstrap:
+            inputs:
+                - 'assets/bower_components/bootstrap/dist/css/bootstrap.min.css'
+        font_awesome:
+            inputs:
+                - 'assets/bower_components/font-awesome/css/font-awesome.min.css'
+        themify_icons:
+            inputs:
+                - 'assets/bower_components/themify-icons/themify-icons.css'
+        loading_bar_css:
+            inputs:
+                - 'assets/bower_components/angular-loading-bar/build/loading-bar.min.css'
+        animate_css:
+            inputs:
+                - 'assets/bower_components/animate.css/animate.min.css'
+        toaster_css:
+            inputs:
+                - 'assets/bower_components/AngularJS-Toaster/toaster.css'
+        jqueryui_css:
+            inputs:
+                - 'components/jquery-ui/themes/base/jquery-ui.min.css'
+        elfinder_css:
+            inputs:
+                - 'components/elfinder/dist/css/elfinder.min.css'
+                - 'components/elfinder/dist/css/theme.css' #.min
+        continuous_net_css:
+            inputs:
+                - 'assets/css/styles.css'
+                - 'assets/css/plugins.css'
+        jquery:
+            inputs:
+                - 'assets/bower_components/jquery/dist/jquery.js' #.min
+        jqueryui:
+            inputs:
+                - 'components/jquery-ui/jquery-ui.min.js'
+        elfinder:
+            inputs:
+                - 'components/elfinder/dist/js/elfinder.min.js'
+                - 'components/elfinder/dist/js/i18n/elfinder.fr.js'
+        fastclick:
+            inputs:
+                - 'assets/bower_components/fastclick/lib/fastclick.js'
+        angular:
+            inputs:
+                - 'assets/bower_components/angular/angular.js' #.min
+                - 'assets/bower_components/angular-cookies/angular-cookies.js' #.min
+                - 'assets/bower_components/angular-animate/angular-animate.js' #.min
+                - 'assets/bower_components/angular-touch/angular-touch.js' #.min
+                - 'assets/bower_components/angular-sanitize/angular-sanitize.js' #.min
+                - 'assets/bower_components/angular-ui-router/release/angular-ui-router.js' #.min
+                - 'assets/bower_components/angular-resource/angular-resource.js' #.min
+                - 'assets/bower_components/angular-bind-html-compile/angular-bind-html-compile.js'
+                - 'assets/bower_components/angular-slugify/angular-slugify.js'
+                - 'assets/bower_components/AngularJS-Toaster/toaster.js'
+        angular_storage:
+            inputs:
+                - 'assets/bower_components/ngstorage/ngStorage.js' #.min
+        angular_translate:
+            inputs:
+                - 'assets/bower_components/angular-translate/angular-translate.js' #.min
+                - 'assets/bower_components/angular-translate-loader-url/angular-translate-loader-url.js' #.min
+                - 'assets/bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js' #.min
+                - 'assets/bower_components/angular-translate-storage-local/angular-translate-storage-local.js' #.min
+                - 'assets/bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.js' #.min
+        angular_scroll:
+            inputs:
+                - 'assets/bower_components/angular-scroll/angular-scroll.js' #.min
+        oclazyload:
+            inputs:
+                - 'assets/bower_components/oclazyload/dist/ocLazyLoad.js' #.min
+        breadcrumb:
+            inputs:
+                - 'assets/bower_components/angular-breadcrumb/dist/angular-breadcrumb.js' #.min
+        ui_bootstrap:
+            inputs:
+                - 'assets/bower_components/angular-bootstrap/ui-bootstrap-tpls.js' #.min
+        loading_bar:
+            inputs:
+                - 'assets/bower_components/angular-loading-bar/build/loading-bar.js' #.min
+        continuous_net_scripts:
+            inputs:
+                - 'assets/js/app.js'
+                - 'assets/js/main.js'
+                - 'assets/js/config.constant.js'
+                - 'bundles/publipr/js/constant.js'
+                - 'assets/js/config.router.js'
+                - 'bundles/publipr/js/router.js'
+        continuous_net_services:
+            inputs:
+                - 'assets/js/services/savable.js'
+        continuous_net_directives:
+            inputs:
+                - 'assets/js/directives/toggle.js'
+                - 'assets/js/directives/perfect-scrollbar.js'
+                - 'assets/js/directives/empty-links.js'
+                - 'assets/js/directives/sidebars.js'
+                - 'assets/js/directives/off-click.js'
+                - 'assets/js/directives/full-height.js'
+                - 'assets/js/directives/panel-tools.js'
+                - 'assets/js/directives/char-limit.js'
+                - 'assets/js/directives/dismiss.js'
+                - 'assets/js/directives/compare-to.js'
+                - 'assets/js/directives/select.js'
+                - 'assets/js/directives/messages.js'
+                - 'assets/js/directives/chat.js'
+                - 'assets/js/directives/sparkline.js'
+                - 'assets/js/directives/touchspin.js'
+                - 'assets/js/directives/file-upload.js'
+                - 'assets/js/directives/my-boolean.js'
+                - 'assets/js/directives/my-enum.js'
+                - 'assets/js/directives/my-unique-field.js'
+        continuous_net_controllers:
+            inputs:
+                - 'bundles/publipr/js/components/Main/AppCtrl.js'
+                - 'bundles/publipr/js/common/FileManager/FileManagerCtrl.js'
+                - 'assets/js/controllers/bootstrapCtrl.js'
+        continuous_net_tools:
+            inputs:
+                - 'assets/js/tools/toQueryString.js'

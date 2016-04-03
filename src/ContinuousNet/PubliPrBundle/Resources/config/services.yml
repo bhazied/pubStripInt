@@ -1,0 +1,4 @@
+services:
+#    publi_pr.example:
+#        class: ContinuousNet\PubliPrBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
