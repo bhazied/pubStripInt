@@ -49,6 +49,10 @@ class PaymentType extends AbstractType
             ->add('amount', TextType::class)
             ->add('currency', TextType::class)
             ->add('status', TextType::class)
+            ->add('discountCode', TextType::class)
+            ->add('invoiceNumber', TextType::class)
+            ->add('details', TextareaType::class)
+            ->add('note', TextType::class)
             ->add('isValid', CheckboxType::class)
             ->add('token', TextareaType::class)
         ;

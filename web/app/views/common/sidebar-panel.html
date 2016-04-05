@@ -2,7 +2,7 @@
 
   <!-- logo -->
   <div class="brand-logo">
-    <img data-ng-src="images/logo.png" height="15" alt="">
+    <img data-ng-src="/app/images/logo.png" height="15" alt="">
   </div>
   <!-- /logo -->
 
@@ -30,6 +30,20 @@
       </a>
     </li>
     <!-- /dashboard -->
+
+    <li ui-sref-active="active">
+      <a href="#/app/newsrooms">
+        <i class="fa fa-newspaper-o"></i>
+        <span>Newsrooms</span>
+      </a>
+    </li>
+
+    <li ui-sref-active="active">
+      <a href="#/app/users">
+        <i class="fa user-secret"></i>
+        <span>Users</span>
+      </a>
+    </li>
 
     <!-- ui -->
     <li data-ng-class="{open: $state.includes('app.ui')}">

@@ -16,14 +16,14 @@
     <div class="row">
         <div class="col-md-12" ng-controller="ContactGroupFormCtrl">
             <div>
-                    <fieldset>
-                        <legend translate="content.list.NEWCONTACTGROUP" ng-if="contactGroup.id == 0">
-                            New Contact Group
-                        </legend>
-                        <legend translate="content.list.EDITCONTACTGROUP" ng-if="contactGroup.id > 0">
-                            Edit Contact Group
-                        </legend>
-                        <form name="contactGroupForm" id="contactGroupForm" novalidate ng-submit="submitForm(contactGroupForm)">
+                <fieldset>
+                    <legend translate="content.list.NEWCONTACTGROUP" ng-if="contactGroup.id == 0">
+                        New Contact Group
+                    </legend>
+                    <legend translate="content.list.EDITCONTACTGROUP" ng-if="contactGroup.id > 0">
+                        Edit Contact Group
+                    </legend>
+                    <form name="contactGroupForm" id="contactGroupForm" novalidate ng-submit="submitForm(contactGroupForm)">
                         <div class="row">
                             <input type="hidden" name="id" id="contactGroupId" ng-model="contactGroup.id" />
                             <div class="col-md-6">
@@ -41,7 +41,6 @@
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
                         </div><!--/row-->
-                        </form>
                         <div class="row">
                             <div class="col-md-4">
                                 <button ng-click="list()" class="btn btn-primary pull-left">
@@ -51,12 +50,13 @@
                             <div class="col-md-4">
                             </div>
                             <div class="col-md-4">
-                                <button type="button" ng-click="submitForm(contactGroupForm)" class="btn btn-primary pull-right"> <!--  ng-disabled="contactGroupForm.$invalid" -->
-                                    <i class="ti-save"></i> <span translate="content.common.SAVE">Save</span>
+                                <button type="button" ng-click="submitForm(contactGroupForm)" class="btn btn-primary pull-right" ng-disabled="disableSubmit"> <!--  ng-disabled="contactGroupForm.$invalid" -->
+                                    <i class="fa fa-spinner fa-spin" ng-if="disableSubmit"></i><i class="ti-save" ng-if="!disableSubmit"></i> <span translate="content.common.SAVE">Save</span>
                                 </button>
                             </div>
                         </div>
-                   </fieldset>
+                    </form>
+                </fieldset>
             </div>
         </div><!--/col-md-12-->
     </div><!--/row-->

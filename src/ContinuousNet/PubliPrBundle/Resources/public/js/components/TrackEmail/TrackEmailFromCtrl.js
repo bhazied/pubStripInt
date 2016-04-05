@@ -9,6 +9,8 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
 
     $scope.locale = (angular.isDefined($localStorage.language))?$localStorage.language:'en';
 
+    $scope.disableSubmit = false;
+
     // Editor options.
     $scope.editorOptions = {
         language: $scope.locale,
@@ -99,25 +101,32 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
             }
             angular.element('.ng-invalid[name=' + firstError + ']').focus();
             SweetAlert.swal($filter('translate')('content.form.messages.FORMCANNOTBESUBMITTED'), $filter('translate')('content.form.messages.ERRORSAREMARKED'), "error");
-            return;
+            return false;
         } else {
             if ($scope.trackEmail.id > 0) {
+                $scope.disableSubmit = true;
                 $trackEmailsDataFactory.update($scope.trackEmail).$promise.then(function(data) {
+                    $scope.disableSubmit = false;
                     toaster.pop('success', $filter('translate')('content.common.NOTIFICATION'), $filter('translate')('content.list.TRACKEMAILUPDATED'));
                     $scope.list();
                 }, function(error) {
+                    $scope.disableSubmit = false;
                     toaster.pop('error', $filter('translate')('content.common.ERROR'), $filter('translate')('content.list.TRACKEMAILNOTUPDATED'));
                     console.warn(error);
                 });
             } else {
+                $scope.disableSubmit = true;
                 $trackEmailsDataFactory.create($scope.trackEmail).$promise.then(function(data) {
+                    $scope.disableSubmit = false;
                     toaster.pop('success', $filter('translate')('content.common.NOTIFICATION'), $filter('translate')('content.list.TRACKEMAILCREATED'));
                     $scope.list();
                 }, function(error) {
+                    $scope.disableSubmit = false;
                     toaster.pop('error', $filter('translate')('content.common.ERROR'), $filter('translate')('content.list.TRACKEMAILNOTCREATED'));
                     console.warn(error);
                 });
             }
+            return false;
         }
     };
 

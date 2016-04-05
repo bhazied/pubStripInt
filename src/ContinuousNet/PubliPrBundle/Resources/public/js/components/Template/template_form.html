@@ -16,14 +16,14 @@
     <div class="row">
         <div class="col-md-12" ng-controller="TemplateFormCtrl">
             <div>
-                    <fieldset>
-                        <legend translate="content.list.NEWTEMPLATE" ng-if="template.id == 0">
-                            New Template
-                        </legend>
-                        <legend translate="content.list.EDITTEMPLATE" ng-if="template.id > 0">
-                            Edit Template
-                        </legend>
-                        <form name="templateForm" id="templateForm" novalidate ng-submit="submitForm(templateForm)">
+                <fieldset>
+                    <legend translate="content.list.NEWTEMPLATE" ng-if="template.id == 0">
+                        New Template
+                    </legend>
+                    <legend translate="content.list.EDITTEMPLATE" ng-if="template.id > 0">
+                        Edit Template
+                    </legend>
+                    <form name="templateForm" id="templateForm" novalidate ng-submit="submitForm(templateForm)">
                         <div class="row">
                             <input type="hidden" name="id" id="templateId" ng-model="template.id" />
                             <div class="col-md-6">
@@ -146,7 +146,6 @@
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
                         </div><!--/row-->
-                        </form>
                         <div class="row">
                             <div class="col-md-4">
                                 <button ng-click="list()" class="btn btn-primary pull-left">
@@ -156,12 +155,13 @@
                             <div class="col-md-4">
                             </div>
                             <div class="col-md-4">
-                                <button type="button" ng-click="submitForm(templateForm)" class="btn btn-primary pull-right"> <!--  ng-disabled="templateForm.$invalid" -->
-                                    <i class="ti-save"></i> <span translate="content.common.SAVE">Save</span>
+                                <button type="button" ng-click="submitForm(templateForm)" class="btn btn-primary pull-right" ng-disabled="disableSubmit"> <!--  ng-disabled="templateForm.$invalid" -->
+                                    <i class="fa fa-spinner fa-spin" ng-if="disableSubmit"></i><i class="ti-save" ng-if="!disableSubmit"></i> <span translate="content.common.SAVE">Save</span>
                                 </button>
                             </div>
                         </div>
-                   </fieldset>
+                    </form>
+                </fieldset>
             </div>
         </div><!--/col-md-12-->
     </div><!--/row-->

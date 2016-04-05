@@ -9,6 +9,8 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
 
     $scope.locale = (angular.isDefined($localStorage.language))?$localStorage.language:'en';
 
+    $scope.disableSubmit = false;
+
     // Editor options.
     $scope.editorOptions = {
         language: $scope.locale,
@@ -65,25 +67,32 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
             }
             angular.element('.ng-invalid[name=' + firstError + ']').focus();
             SweetAlert.swal($filter('translate')('content.form.messages.FORMCANNOTBESUBMITTED'), $filter('translate')('content.form.messages.ERRORSAREMARKED'), "error");
-            return;
+            return false;
         } else {
             if ($scope.newsroomsUsers.id > 0) {
+                $scope.disableSubmit = true;
                 $newsroomsUsersDataFactory.update($scope.newsroomsUsers).$promise.then(function(data) {
+                    $scope.disableSubmit = false;
                     toaster.pop('success', $filter('translate')('content.common.NOTIFICATION'), $filter('translate')('content.list.NEWSROOMSUSERSUPDATED'));
                     $scope.list();
                 }, function(error) {
+                    $scope.disableSubmit = false;
                     toaster.pop('error', $filter('translate')('content.common.ERROR'), $filter('translate')('content.list.NEWSROOMSUSERSNOTUPDATED'));
                     console.warn(error);
                 });
             } else {
+                $scope.disableSubmit = true;
                 $newsroomsUsersDataFactory.create($scope.newsroomsUsers).$promise.then(function(data) {
+                    $scope.disableSubmit = false;
                     toaster.pop('success', $filter('translate')('content.common.NOTIFICATION'), $filter('translate')('content.list.NEWSROOMSUSERSCREATED'));
                     $scope.list();
                 }, function(error) {
+                    $scope.disableSubmit = false;
                     toaster.pop('error', $filter('translate')('content.common.ERROR'), $filter('translate')('content.list.NEWSROOMSUSERSNOTCREATED'));
                     console.warn(error);
                 });
             }
+            return false;
         }
     };
 

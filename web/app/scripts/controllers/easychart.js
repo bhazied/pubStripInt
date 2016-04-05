@@ -105,5 +105,5 @@ function easyChartCtrl($scope) {
 }
 
 angular
-  .module('urbanApp')
+  .module('publiPrApp')
   .controller('easyChartCtrl', ['$scope', easyChartCtrl]);

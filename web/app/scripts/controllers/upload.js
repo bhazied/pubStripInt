@@ -16,5 +16,5 @@ function uploadCtrl($scope, FileUploader) {
 }
 
 angular
-  .module('urbanApp')
+  .module('publiPrApp')
   .controller('uploadCtrl', ['$scope', 'FileUploader', uploadCtrl]);

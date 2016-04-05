@@ -46,16 +46,13 @@ class JWTResponseListener
         $data['user'] = array(
             'email' => $user->getEmail(),
             'gender' => $user->getGender(),
-            'nickname' => $user->getNickname(),
             'name' => $user->getName(),
             'address' => $user->getAddress(),
             'city' => $user->getCity(),
             'phone' => $user->getPhone(),
             'country' => null,
             'picture' => $user->getPicture(),
-            'roles' => $user->getRoles(),
-            'currentLevel' => $user->getCurrentLevel(),
-            'currentScore' => $user->getCurrentScore()
+            'roles' => $user->getRoles()
         );
 
         if (!is_null($user->getCountry())) {

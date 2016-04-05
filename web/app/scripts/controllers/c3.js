@@ -62,5 +62,5 @@ function c3Ctrl($scope) {
 }
 
 angular
-  .module('urbanApp')
+  .module('publiPrApp')
   .controller('c3Ctrl', ['$scope', c3Ctrl]);

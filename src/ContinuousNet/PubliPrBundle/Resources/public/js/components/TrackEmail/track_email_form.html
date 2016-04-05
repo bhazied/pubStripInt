@@ -16,14 +16,14 @@
     <div class="row">
         <div class="col-md-12" ng-controller="TrackEmailFormCtrl">
             <div>
-                    <fieldset>
-                        <legend translate="content.list.NEWTRACKEMAIL" ng-if="trackEmail.id == 0">
-                            New Track Email
-                        </legend>
-                        <legend translate="content.list.EDITTRACKEMAIL" ng-if="trackEmail.id > 0">
-                            Edit Track Email
-                        </legend>
-                        <form name="trackEmailForm" id="trackEmailForm" novalidate ng-submit="submitForm(trackEmailForm)">
+                <fieldset>
+                    <legend translate="content.list.NEWTRACKEMAIL" ng-if="trackEmail.id == 0">
+                        New Track Email
+                    </legend>
+                    <legend translate="content.list.EDITTRACKEMAIL" ng-if="trackEmail.id > 0">
+                        Edit Track Email
+                    </legend>
+                    <form name="trackEmailForm" id="trackEmailForm" novalidate ng-submit="submitForm(trackEmailForm)">
                         <div class="row">
                             <input type="hidden" name="id" id="trackEmailId" ng-model="trackEmail.id" />
                             <div class="col-md-6">
@@ -83,7 +83,6 @@
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
                         </div><!--/row-->
-                        </form>
                         <div class="row">
                             <div class="col-md-4">
                                 <button ng-click="list()" class="btn btn-primary pull-left">
@@ -93,12 +92,13 @@
                             <div class="col-md-4">
                             </div>
                             <div class="col-md-4">
-                                <button type="button" ng-click="submitForm(trackEmailForm)" class="btn btn-primary pull-right"> <!--  ng-disabled="trackEmailForm.$invalid" -->
-                                    <i class="ti-save"></i> <span translate="content.common.SAVE">Save</span>
+                                <button type="button" ng-click="submitForm(trackEmailForm)" class="btn btn-primary pull-right" ng-disabled="disableSubmit"> <!--  ng-disabled="trackEmailForm.$invalid" -->
+                                    <i class="fa fa-spinner fa-spin" ng-if="disableSubmit"></i><i class="ti-save" ng-if="!disableSubmit"></i> <span translate="content.common.SAVE">Save</span>
                                 </button>
                             </div>
                         </div>
-                   </fieldset>
+                    </form>
+                </fieldset>
             </div>
         </div><!--/col-md-12-->
     </div><!--/row-->

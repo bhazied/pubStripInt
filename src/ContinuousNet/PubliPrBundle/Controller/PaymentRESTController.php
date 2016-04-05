@@ -84,7 +84,7 @@ class PaymentRESTController extends BaseRESTController
             $qb->from('PubliPrBundle:Payment', 'p_');
             $qb->leftJoin('ContinuousNet\PubliPrBundle\Entity\User', 'creator_user', \Doctrine\ORM\Query\Expr\Join::WITH, 'p_.creatorUser = creator_user.id');
             $qb->leftJoin('ContinuousNet\PubliPrBundle\Entity\User', 'modifier_user', \Doctrine\ORM\Query\Expr\Join::WITH, 'p_.modifierUser = modifier_user.id');
-            $textFields = array('payment.ip', 'payment.currency', 'payment.status', 'payment.token');
+            $textFields = array('payment.ip', 'payment.currency', 'payment.status', 'payment.discountCode', 'payment.invoiceNumber', 'payment.details', 'payment.note', 'payment.token');
             foreach ($filters as $field => $value) {
                 $_field = str_replace('payment.', 'p_.', $field);
                 $key = str_replace('.', '', $field);

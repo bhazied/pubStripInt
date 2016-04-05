@@ -339,5 +339,5 @@ function nvd3Ctrl($scope, COLORS) {
 }
 
 angular
-  .module('urbanApp')
+  .module('publiPrApp')
   .controller('nvd3Ctrl', ['$scope', 'COLORS', nvd3Ctrl]);

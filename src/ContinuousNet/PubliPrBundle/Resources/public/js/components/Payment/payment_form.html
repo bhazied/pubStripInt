@@ -16,14 +16,14 @@
     <div class="row">
         <div class="col-md-12" ng-controller="PaymentFormCtrl">
             <div>
-                    <fieldset>
-                        <legend translate="content.list.NEWPAYMENT" ng-if="payment.id == 0">
-                            New Payment
-                        </legend>
-                        <legend translate="content.list.EDITPAYMENT" ng-if="payment.id > 0">
-                            Edit Payment
-                        </legend>
-                        <form name="paymentForm" id="paymentForm" novalidate ng-submit="submitForm(paymentForm)">
+                <fieldset>
+                    <legend translate="content.list.NEWPAYMENT" ng-if="payment.id == 0">
+                        New Payment
+                    </legend>
+                    <legend translate="content.list.EDITPAYMENT" ng-if="payment.id > 0">
+                        Edit Payment
+                    </legend>
+                    <form name="paymentForm" id="paymentForm" novalidate ng-submit="submitForm(paymentForm)">
                         <div class="row">
                             <input type="hidden" name="id" id="paymentId" ng-model="payment.id" />
                             <div class="col-md-6">
@@ -84,6 +84,53 @@
                         </div><!--/row-->
                         <div class="row">
                             <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="paymentDiscountCode" class="control-label">
+                                        <span translate="content.list.fields.DISCOUNTCODE">Discount Code</span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="payment.discount_code" type="text" name="discountCode" id="paymentDiscountCode" class="form-control" placeholder="[[ 'content.form.messages.ENTERDISCOUNTCODE' | translate ]]" />
+                                        <i class="ti-shortcode"></i>
+                                    </span><!--/input-icon-->
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="paymentInvoiceNumber" class="control-label">
+                                        <span translate="content.list.fields.INVOICENUMBER">Invoice Number</span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="payment.invoice_number" type="text" name="invoiceNumber" id="paymentInvoiceNumber" class="form-control" placeholder="[[ 'content.form.messages.ENTERINVOICENUMBER' | translate ]]" />
+                                        <i class="ti-marker-alt"></i>
+                                    </span><!--/input-icon-->
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="paymentDetails" class="control-label">
+                                        <span translate="content.list.fields.DETAILS">Details</span>
+                                    </label>
+                                    <div class="note-editor">
+                                        <textarea ng-model="payment.details" name="details" id="paymentDetails" class="form-control" placeholder="[[ 'content.form.messages.ENTERDETAILS' | translate ]]" class="form-control autosize area-animated msd-elastic: \n;"></textarea>
+                                    </div>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="paymentNote" class="control-label">
+                                        <span translate="content.list.fields.NOTE">Note</span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="payment.note" type="text" name="note" id="paymentNote" class="form-control" placeholder="[[ 'content.form.messages.ENTERNOTE' | translate ]]" />
+                                        <i class="ti-marker-alt"></i>
+                                    </span><!--/input-icon-->
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
                                 <div class="checkbox clip-check check-primary">
                                     <input ng-model="payment.is_valid" type="checkbox" name="isValid" id="paymentIsValid" />
                                     <label for="paymentIsValid" translate="content.list.fields.ISVALID">Is Valid</label>
@@ -103,7 +150,6 @@
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
                         </div><!--/row-->
-                        </form>
                         <div class="row">
                             <div class="col-md-4">
                                 <button ng-click="list()" class="btn btn-primary pull-left">
@@ -113,12 +159,13 @@
                             <div class="col-md-4">
                             </div>
                             <div class="col-md-4">
-                                <button type="button" ng-click="submitForm(paymentForm)" class="btn btn-primary pull-right"> <!--  ng-disabled="paymentForm.$invalid" -->
-                                    <i class="ti-save"></i> <span translate="content.common.SAVE">Save</span>
+                                <button type="button" ng-click="submitForm(paymentForm)" class="btn btn-primary pull-right" ng-disabled="disableSubmit"> <!--  ng-disabled="paymentForm.$invalid" -->
+                                    <i class="fa fa-spinner fa-spin" ng-if="disableSubmit"></i><i class="ti-save" ng-if="!disableSubmit"></i> <span translate="content.common.SAVE">Save</span>
                                 </button>
                             </div>
                         </div>
-                   </fieldset>
+                    </form>
+                </fieldset>
             </div>
         </div><!--/col-md-12-->
     </div><!--/row-->

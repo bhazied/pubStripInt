@@ -14,25 +14,17 @@ function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q,
         title: $filter('translate')('content.list.fields.types.GUEST'),
         css: 'info'
     }, {
-        id: 'Subscriber',
-        title: $filter('translate')('content.list.fields.types.SUBSCRIBER'),
+        id: 'Manager',
+        title: $filter('translate')('content.list.fields.types.MANAGER'),
         css: 'success'
+    }, {
+        id: 'Contributor',
+        title: $filter('translate')('content.list.fields.types.CONTRIBUTOR'),
+        css: 'warning'
     }, {
         id: 'Administrator',
         title: $filter('translate')('content.list.fields.types.ADMINISTRATOR'),
-        css: 'warning'
-    }, {
-        id: 'Publisher',
-        title: $filter('translate')('content.list.fields.types.PUBLISHER'),
         css: 'inverse'
-    }, {
-        id: 'ContentProvider',
-        title: $filter('translate')('content.list.fields.types.CONTENTPROVIDER'),
-        css: 'danger'
-    }, {
-        id: 'ServiceProvider',
-        title: $filter('translate')('content.list.fields.types.SERVICEPROVIDER'),
-        css: 'primary'
     }];
     $scope.genders = [{
         id: 'Male',
@@ -61,21 +53,17 @@ function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q,
         title: $filter('translate')('content.list.fields.roles.ROLE_API'),
         css: 'info'
     }, {
-        id: 'ROLE_SUBSCRIBER',
-        title: $filter('translate')('content.list.fields.roles.ROLE_SUBSCRIBER'),
+        id: 'ROLE_MANAGER',
+        title: $filter('translate')('content.list.fields.roles.ROLE_MANAGER'),
         css: 'success'
     }, {
-        id: 'ROLE_ADMIN',
-        title: $filter('translate')('content.list.fields.roles.ROLE_ADMIN'),
+        id: 'ROLE_CONTRIBUTOR',
+        title: $filter('translate')('content.list.fields.roles.ROLE_CONTRIBUTOR'),
         css: 'warning'
-    }, {
-        id: 'ROLE_ADMIN_PUBLISHER',
-        title: $filter('translate')('content.list.fields.roles.ROLE_ADMIN_PUBLISHER'),
-        css: 'inverse'
     }, {
         id: 'ROLE_SUPER_ADMIN',
         title: $filter('translate')('content.list.fields.roles.ROLE_SUPER_ADMIN'),
-        css: 'danger'
+        css: 'inverse'
     }];
 
     $scope.booleanOptions = [{
@@ -274,6 +262,7 @@ function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q,
             { field: 'email', title: $filter('translate')('content.list.fields.EMAIL'), sortable: 'user.email', filter: { 'user.email': 'text' }, show: $scope.getParamValue('email_show_filed', true), getValue: $scope.textValue },
             { field: 'username_canonical', title: $filter('translate')('content.list.fields.USERNAMECANONICAL'), sortable: 'user.usernameCanonical', filter: { 'user.usernameCanonical': 'text' }, show: $scope.getParamValue('username_canonical_show_filed', false), getValue: $scope.textValue },
             { field: 'email_canonical', title: $filter('translate')('content.list.fields.EMAILCANONICAL'), sortable: 'user.emailCanonical', filter: { 'user.emailCanonical': 'text' }, show: $scope.getParamValue('email_canonical_show_filed', false), getValue: $scope.textValue },
+            { field: 'name', title: $filter('translate')('content.list.fields.NAME'), sortable: 'user.name', filter: { 'user.name': 'text' }, show: $scope.getParamValue('name_show_filed', false), getValue: $scope.textValue },
             { field: 'gender', title: $filter('translate')('content.list.fields.GENDER'), sortable: 'user.gender', filter: { 'user.gender': 'select' }, show: $scope.getParamValue('gender_show_filed', false), getValue: $scope.interpolatedValue, filterData : $scope.genders, interpolateExpr: $interpolate('<span my-enum="[[ row.gender ]]" my-enum-list=\'[[ genders ]]\'></span>') },
             { field: 'first_name', title: $filter('translate')('content.list.fields.FIRSTNAME'), sortable: 'user.firstName', filter: { 'user.firstName': 'text' }, show: $scope.getParamValue('first_name_show_filed', false), getValue: $scope.textValue },
             { field: 'last_name', title: $filter('translate')('content.list.fields.LASTNAME'), sortable: 'user.lastName', filter: { 'user.lastName': 'text' }, show: $scope.getParamValue('last_name_show_filed', false), getValue: $scope.textValue },

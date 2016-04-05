@@ -189,5 +189,5 @@ function tableEditableCtrl($scope, $filter, $http, editableOptions, editableThem
 }
 
 angular
-  .module('urbanApp')
+  .module('publiPrApp')
   .controller('tableEditableCtrl', ['$scope', '$filter', '$http', 'editableOptions', 'editableThemes', tableEditableCtrl]);

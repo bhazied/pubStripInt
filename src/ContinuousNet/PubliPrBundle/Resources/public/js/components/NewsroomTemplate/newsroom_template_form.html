@@ -16,14 +16,14 @@
     <div class="row">
         <div class="col-md-12" ng-controller="NewsroomTemplateFormCtrl">
             <div>
-                    <fieldset>
-                        <legend translate="content.list.NEWNEWSROOMTEMPLATE" ng-if="newsroomTemplate.id == 0">
-                            New Newsroom Template
-                        </legend>
-                        <legend translate="content.list.EDITNEWSROOMTEMPLATE" ng-if="newsroomTemplate.id > 0">
-                            Edit Newsroom Template
-                        </legend>
-                        <form name="newsroomTemplateForm" id="newsroomTemplateForm" novalidate ng-submit="submitForm(newsroomTemplateForm)">
+                <fieldset>
+                    <legend translate="content.list.NEWNEWSROOMTEMPLATE" ng-if="newsroomTemplate.id == 0">
+                        New Newsroom Template
+                    </legend>
+                    <legend translate="content.list.EDITNEWSROOMTEMPLATE" ng-if="newsroomTemplate.id > 0">
+                        Edit Newsroom Template
+                    </legend>
+                    <form name="newsroomTemplateForm" id="newsroomTemplateForm" novalidate ng-submit="submitForm(newsroomTemplateForm)">
                         <div class="row">
                             <input type="hidden" name="id" id="newsroomTemplateId" ng-model="newsroomTemplate.id" />
                             <div class="col-md-6">
@@ -98,7 +98,6 @@
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
                         </div><!--/row-->
-                        </form>
                         <div class="row">
                             <div class="col-md-4">
                                 <button ng-click="list()" class="btn btn-primary pull-left">
@@ -108,12 +107,13 @@
                             <div class="col-md-4">
                             </div>
                             <div class="col-md-4">
-                                <button type="button" ng-click="submitForm(newsroomTemplateForm)" class="btn btn-primary pull-right"> <!--  ng-disabled="newsroomTemplateForm.$invalid" -->
-                                    <i class="ti-save"></i> <span translate="content.common.SAVE">Save</span>
+                                <button type="button" ng-click="submitForm(newsroomTemplateForm)" class="btn btn-primary pull-right" ng-disabled="disableSubmit"> <!--  ng-disabled="newsroomTemplateForm.$invalid" -->
+                                    <i class="fa fa-spinner fa-spin" ng-if="disableSubmit"></i><i class="ti-save" ng-if="!disableSubmit"></i> <span translate="content.common.SAVE">Save</span>
                                 </button>
                             </div>
                         </div>
-                   </fieldset>
+                    </form>
+                </fieldset>
             </div>
         </div><!--/col-md-12-->
     </div><!--/row-->

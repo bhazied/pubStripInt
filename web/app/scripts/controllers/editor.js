@@ -11,5 +11,5 @@ function editorCtrl($scope) {
 }
 
 angular
-  .module('urbanApp')
+  .module('publiPrApp')
   .controller('editorCtrl', ['$scope', editorCtrl]);

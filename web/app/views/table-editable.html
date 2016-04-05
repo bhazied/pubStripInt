@@ -16,19 +16,19 @@
           <td>
             <!-- editable username (text with validation) -->
             <span editable-text="user.name" e-name="name" e-form="rowform" onbeforesave="checkName($data, user.id)" e-required>
-              {{ user.name || 'empty' }}
+              [[ user.name || 'empty' ]]
             </span>
           </td>
           <td>
             <!-- editable status (select-local) -->
             <span editable-select="user.status" e-name="status" e-form="rowform" e-ng-options="s.value as s.text for s in statuses">
-              {{ showStatus(user) }}
+              [[ showStatus(user) ]]
             </span>
           </td>
           <td>
             <!-- editable group (select-remote) -->
             <span editable-select="user.group" e-name="group" onshow="loadGroups()" e-form="rowform" e-ng-options="g.id as g.text for g in groups">
-              {{ showGroup(user) }}
+              [[ showGroup(user) ]]
             </span>
           </td>
           <td style="white-space: nowrap">
@@ -115,21 +115,21 @@
           <td>
             <!-- editable username (text with validation) -->
             <span editable-text="user.name" e-name="name" e-form="nameform" onbeforesave="checkName2($data)">
-          {{ user.name || 'empty' }}
+          [[ user.name || 'empty' ]]
         </span>
           </td>
 
           <td>
             <!-- editable status (select-local) -->
             <span editable-select="user.status" e-name="status" e-form="statusform" e-ng-options="s.value as s.text for s in statuses">
-          {{ showStatus(user) }}
+          [[ showStatus(user) ]]
         </span>
           </td>
 
           <td>
             <!-- editable group (select-remote) -->
             <span editable-select="user.group" e-name="group" onshow="loadGroups()" e-form="groupform" e-ng-options="g.id as g.text for g in groups">
-          {{ showGroup(user) }}
+          [[ showGroup(user) ]]
         </span>
           </td>
         </tr>
@@ -157,19 +157,19 @@
             <td>
               <!-- editable username (text with validation) -->
               <span editable-text="user.name" e-form="tableform" onbeforesave="checkName3($data, user.id)">
-            {{ user.name || 'empty' }}
+            [[ user.name || 'empty' ]]
           </span>
             </td>
             <td>
               <!-- editable status (select-local) -->
               <span editable-select="user.status" e-form="tableform" e-ng-options="s.value as s.text for s in statuses">
-            {{ showStatus(user) }}
+            [[ showStatus(user) ]]
           </span>
             </td>
             <td>
               <!-- editable group (select-remote) -->
               <span editable-select="user.group" e-form="tableform" onshow="loadGroups()" e-ng-options="g.id as g.text for g in groups">
-            {{ showGroup(user) }}
+            [[ showGroup(user) ]]
           </span>
             </td>
             <td>

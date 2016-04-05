@@ -9,6 +9,8 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
 
     $scope.locale = (angular.isDefined($localStorage.language))?$localStorage.language:'en';
 
+    $scope.disableSubmit = false;
+
     // Editor options.
     $scope.editorOptions = {
         language: $scope.locale,
@@ -65,25 +67,32 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
             }
             angular.element('.ng-invalid[name=' + firstError + ']').focus();
             SweetAlert.swal($filter('translate')('content.form.messages.FORMCANNOTBESUBMITTED'), $filter('translate')('content.form.messages.ERRORSAREMARKED'), "error");
-            return;
+            return false;
         } else {
             if ($scope.payment.id > 0) {
+                $scope.disableSubmit = true;
                 $paymentsDataFactory.update($scope.payment).$promise.then(function(data) {
+                    $scope.disableSubmit = false;
                     toaster.pop('success', $filter('translate')('content.common.NOTIFICATION'), $filter('translate')('content.list.PAYMENTUPDATED'));
                     $scope.list();
                 }, function(error) {
+                    $scope.disableSubmit = false;
                     toaster.pop('error', $filter('translate')('content.common.ERROR'), $filter('translate')('content.list.PAYMENTNOTUPDATED'));
                     console.warn(error);
                 });
             } else {
+                $scope.disableSubmit = true;
                 $paymentsDataFactory.create($scope.payment).$promise.then(function(data) {
+                    $scope.disableSubmit = false;
                     toaster.pop('success', $filter('translate')('content.common.NOTIFICATION'), $filter('translate')('content.list.PAYMENTCREATED'));
                     $scope.list();
                 }, function(error) {
+                    $scope.disableSubmit = false;
                     toaster.pop('error', $filter('translate')('content.common.ERROR'), $filter('translate')('content.list.PAYMENTNOTCREATED'));
                     console.warn(error);
                 });
             }
+            return false;
         }
     };
 

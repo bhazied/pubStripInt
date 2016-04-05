@@ -19,7 +19,7 @@
         <requirement key="_method">GET</requirement>
     </route>
 
-    <route id="fos_user_resetting_reset" pattern="/reset/{token}">
+    <route id="fos_user_resetting_reset" pattern="/reset/{token}/fr">
         <default key="_controller">FOSUserBundle:Resetting:reset</default>
         <requirement key="_method">GET|POST</requirement>
     </route>

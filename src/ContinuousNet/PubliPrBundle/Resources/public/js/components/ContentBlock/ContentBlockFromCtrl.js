@@ -9,6 +9,8 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
 
     $scope.locale = (angular.isDefined($localStorage.language))?$localStorage.language:'en';
 
+    $scope.disableSubmit = false;
+
     // Editor options.
     $scope.editorOptions = {
         language: $scope.locale,
@@ -147,25 +149,32 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
             }
             angular.element('.ng-invalid[name=' + firstError + ']').focus();
             SweetAlert.swal($filter('translate')('content.form.messages.FORMCANNOTBESUBMITTED'), $filter('translate')('content.form.messages.ERRORSAREMARKED'), "error");
-            return;
+            return false;
         } else {
             if ($scope.contentBlock.id > 0) {
+                $scope.disableSubmit = true;
                 $contentBlocksDataFactory.update($scope.contentBlock).$promise.then(function(data) {
+                    $scope.disableSubmit = false;
                     toaster.pop('success', $filter('translate')('content.common.NOTIFICATION'), $filter('translate')('content.list.CONTENTBLOCKUPDATED'));
                     $scope.list();
                 }, function(error) {
+                    $scope.disableSubmit = false;
                     toaster.pop('error', $filter('translate')('content.common.ERROR'), $filter('translate')('content.list.CONTENTBLOCKNOTUPDATED'));
                     console.warn(error);
                 });
             } else {
+                $scope.disableSubmit = true;
                 $contentBlocksDataFactory.create($scope.contentBlock).$promise.then(function(data) {
+                    $scope.disableSubmit = false;
                     toaster.pop('success', $filter('translate')('content.common.NOTIFICATION'), $filter('translate')('content.list.CONTENTBLOCKCREATED'));
                     $scope.list();
                 }, function(error) {
+                    $scope.disableSubmit = false;
                     toaster.pop('error', $filter('translate')('content.common.ERROR'), $filter('translate')('content.list.CONTENTBLOCKNOTCREATED'));
                     console.warn(error);
                 });
             }
+            return false;
         }
     };
 

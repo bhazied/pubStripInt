@@ -27,7 +27,7 @@
         </li>
         <li data-ng-repeat="favourite in favourites">
           <a href="javascript:;">
-                        {{favourite.name}}
+                        [[favourite.name]]
                     </a>
         </li>
       </ul>
@@ -40,7 +40,7 @@
         </li>
         <li data-ng-repeat="filter in filters">
           <a href="javascript:;">
-                        {{filter.name}}
+                        [[filter.name]]
                     </a>
         </li>
       </ul>
@@ -49,7 +49,7 @@
       <div class="gallery">
         <div class="col-md-3 col-sm-4 col-xs-6" data-ng-repeat="id in ran">
           <a href="http://placeimg.com/800/440" title="Gallery Demo" data-gallery="">
-            <img data-ng-src="http://placeimg.com/600/500?{{id}}" alt="">
+            <img data-ng-src="http://placeimg.com/600/500?[[id]]" alt="">
           </a>
         </div>
       </div>

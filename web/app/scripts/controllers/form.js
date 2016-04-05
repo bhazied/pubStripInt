@@ -46,5 +46,5 @@ function advancedFormCtrl($scope) {
 }
 
 angular
-  .module('urbanApp')
+  .module('publiPrApp')
   .controller('advancedFormCtrl', ['$scope', advancedFormCtrl]);

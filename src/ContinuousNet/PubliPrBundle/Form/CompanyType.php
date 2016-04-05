@@ -51,6 +51,11 @@ class CompanyType extends AbstractType
             ->add('email', EmailType::class)
             ->add('phone', TextType::class)
             ->add('fax', TextType::class)
+            ->add('siren', TextType::class)
+            ->add('siret', TextType::class)
+            ->add('rcs', TextType::class)
+            ->add('ape', TextType::class)
+            ->add('vat', TextType::class)
             ->add('isActive', CheckboxType::class)
         ;
     }

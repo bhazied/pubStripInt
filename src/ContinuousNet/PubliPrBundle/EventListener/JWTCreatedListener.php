@@ -34,10 +34,10 @@ class JWTCreatedListener
         
         $payload       = $event->getData();
 
-        $userRepository = $this->em->getRepository('BucksHunterBundle:User');
+        $userRepository = $this->em->getRepository('PubliPrBundle:User');
         $user = $userRepository->findOneByEmail($payload['email']);
         
-        $sessionRepository = $this->em->getRepository('BucksHunterBundle:Session');
+        $sessionRepository = $this->em->getRepository('PubliPrBundle:Session');
         $sessions = $sessionRepository->findBy(array('creatorUser' => $user->getId(), 'isValid' => true));
         foreach ($sessions as $session) {
             $session->setIsValid(false);

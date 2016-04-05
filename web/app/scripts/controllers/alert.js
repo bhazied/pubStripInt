@@ -67,5 +67,5 @@ function sweetAlertCtrl($scope, SweetAlert, COLORS) {
 }
 
 angular
-  .module('urbanApp')
+  .module('publiPrApp')
   .controller('sweetAlertCtrl', ['$scope', 'SweetAlert', 'COLORS', sweetAlertCtrl]);

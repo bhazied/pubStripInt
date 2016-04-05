@@ -10,16 +10,16 @@
           <div class="panel-body">
             <div ng-controller="RatingDemoCtrl">
               <rating ng-model="rate" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null"></rating>
-              <span class="label" ng-class="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}" ng-show="overStar && !isReadonly">{{percent}}%</span>
+              <span class="label" ng-class="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}" ng-show="overStar && !isReadonly">[[percent]]%</span>
 
-              <pre style="margin:15px 0;">Rate: <b>{{rate}}</b> - Readonly is: <i>{{isReadonly}}</i> - Hovering over: <b>{{overStar || "none"}}</b></pre>
+              <pre style="margin:15px 0;">Rate: <b>[[rate]]</b> - Readonly is: <i>[[isReadonly]]</i> - Hovering over: <b>[[overStar || "none"]]</b></pre>
 
               <button class="btn btn-sm btn-danger" ng-click="rate = 0" ng-disabled="isReadonly">Clear</button>
               <button class="btn btn-sm btn-default" ng-click="isReadonly = ! isReadonly">Toggle Readonly</button>
 
               <h6>Custom icons</h6>
               <div ng-init="x = 5">
-                <rating ng-model="x" max="15" state-on="'fa fa-circle'" state-off="'fa fa-circle-thin'"></rating> <b>(<i>Rate:</i> {{x}})</b>
+                <rating ng-model="x" max="15" state-on="'fa fa-circle'" state-off="'fa fa-circle-thin'"></rating> <b>(<i>Rate:</i> [[x]])</b>
               </div>
             </div>
           </div>
@@ -34,13 +34,13 @@
             <accordion-group heading="Static Header, initially expanded" is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled">
               This content is straight in the template.
             </accordion-group>
-            <accordion-group heading="{{group.title}}" ng-repeat="group in groups">
-              {{group.content}}
+            <accordion-group heading="[[group.title]]" ng-repeat="group in groups">
+              [[group.content]]
             </accordion-group>
             <accordion-group heading="Dynamic Body Content">
               <p>The body of the accordion group grows to fit the contents</p>
               <button class="btn btn-default btn-sm" ng-click="addItem()">Add Item</button>
-              <div ng-repeat="item in items">{{item}}</div>
+              <div ng-repeat="item in items">[[item]]</div>
             </accordion-group>
             <accordion-group is-open="status.open">
               <accordion-heading>
@@ -66,7 +66,7 @@
         <h5>Alerts</h5>
 
         <div ng-controller="AlertDemoCtrl">
-          <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+          <alert ng-repeat="alert in alerts" type="[[alert.type]]" close="closeAlert($index)">[[alert.msg]]</alert>
           <button class='btn btn-default btn-sm' ng-click="addAlert()">Add Alert</button>
         </div>
       </div>
@@ -79,19 +79,19 @@
           <div class="panel-body">
             <div ng-controller="ButtonsCtrl">
               <p>Single toggle</p>
-              <pre>{{singleModel}}</pre>
+              <pre>[[singleModel]]</pre>
               <button type="button" class="btn btn-primary btn-sm" ng-model="singleModel" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0">
                 Single Toggle
               </button>
               <h6>Checkbox</h6>
-              <pre>{{checkModel}}</pre>
+              <pre>[[checkModel]]</pre>
               <div class="btn-group">
                 <label class="btn btn-primary btn-sm" ng-model="checkModel.left" btn-checkbox>Left</label>
                 <label class="btn btn-primary btn-sm" ng-model="checkModel.middle" btn-checkbox>Middle</label>
                 <label class="btn btn-primary btn-sm" ng-model="checkModel.right" btn-checkbox>Right</label>
               </div>
               <h6>Radio &amp; Uncheckable Radio</h6>
-              <pre>{{radioModel || 'null'}}</pre>
+              <pre>[[radioModel || 'null']]</pre>
               <div class="btn-group">
                 <label class="btn btn-primary btn-sm" ng-model="radioModel" btn-radio="'Left'">Left</label>
                 <label class="btn btn-primary btn-sm" ng-model="radioModel" btn-radio="'Middle'">Middle</label>
@@ -114,10 +114,10 @@
 
               <carousel interval="myInterval" class="mb15">
                 <slide ng-repeat="slide in slides" active="slide.active">
-                  <img data-ng-src="{{slide.image}}" style="margin:auto;">
+                  <img data-ng-src="[[slide.image]]" style="margin:auto;">
                   <div class="carousel-caption">
-                    <h4>Slide {{$index}}</h4>
-                    <p>{{slide.text}}</p>
+                    <h4>Slide [[$index]]</h4>
+                    <p>[[slide.text]]</p>
                   </div>
                 </slide>
               </carousel>
@@ -142,7 +142,7 @@
           <button class="btn btn-default btn-sm" ng-click="open()">Open modal!</button>
           <button class="btn btn-default btn-sm" ng-click="open('lg')">Open large modal</button>
           <button class="btn btn-default btn-sm" ng-click="open('sm')">Open small modal</button>
-          <div ng-show="selected">Selection from a modal: {{ selected }}</div>
+          <div ng-show="selected">Selection from a modal: [[ selected ]]</div>
         </div>
       </div>
 
@@ -199,7 +199,7 @@
               <a href="#" class="btn btn-primary btn-sm" tooltip-placement="right" tooltip="On the Right!">Tooltip on right</a>
               <a href="#" class="btn btn-success btn-sm" tooltip-placement="bottom" tooltip="On the Bottom!">Tooltip on bottom</a>
               <a href="#" class="btn btn-info btn-sm" tooltip-placement="left" tooltip="On the Left!">Tooltip on left</a>
-              <a href="#" class="btn btn-warning btn-sm" tooltip-html-unsafe="{{htmlTooltip}}">Tooltip with HTML</a>
+              <a href="#" class="btn btn-warning btn-sm" tooltip-html-unsafe="[[htmlTooltip]]">Tooltip with HTML</a>
               <a href="#" class="btn btn-danger btn-sm" tooltip-placement="bottom" tooltip-popup-delay='1000' tooltip='appears with delay'>Tooltip with delay</a>
             </div>
           </div>
@@ -215,7 +215,7 @@
           <li>
             <a href="javascript:;">UI Elements</a>
           </li>
-          <li class="active">{{$state.current.data.title}}</li>
+          <li class="active">[[$state.current.data.title]]</li>
         </ol>
 
         <ol class="breadcrumb">
@@ -225,7 +225,7 @@
           <li>
             <a href="javascript:;"><i class="fa fa-toggle-on mr5"></i>Ui Elements</a>
           </li>
-          <li class="active">{{$state.current.data.title}}</li>
+          <li class="active">[[$state.current.data.title]]</li>
         </ol>
 
         <ol class="breadcrumb bordered">
@@ -235,7 +235,7 @@
           <li>
             <a href="javascript:;">Ui Elements</a>
           </li>
-          <li class="active">{{$state.current.data.title}}</li>
+          <li class="active">[[$state.current.data.title]]</li>
         </ol>
       </div>
 
@@ -248,16 +248,16 @@
             <div ng-controller="TypeaheadCtrl">
 
               <p>Static arrays</p>
-              <pre>Model: {{selected | json}}</pre>
+              <pre>Model: [[selected | json]]</pre>
               <input type="text" ng-model="selected" typeahead="state for state in states | filter:$viewValue | limitTo:8" class="form-control">
 
               <p>Asynchronous results</p>
-              <pre>Model: {{asyncSelected | json}}</pre>
+              <pre>Model: [[asyncSelected | json]]</pre>
               <input type="text" ng-model="asyncSelected" placeholder="Locations loaded via $http" typeahead="address for address in getLocation($viewValue)" typeahead-loading="loadingLocations" class="form-control">
               <i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
 
               <p>Custom templates for results</p>
-              <pre>Model: {{customSelected | json}}</pre>
+              <pre>Model: [[customSelected | json]]</pre>
               <input type="text" ng-model="customSelected" placeholder="Custom template" typeahead="state as state.name for state in statesWithFlags | filter:{name:$viewValue}" typeahead-template-url="customTemplate.html" class="form-control">
             </div>
           </div>
@@ -268,7 +268,7 @@
         <h5>Datepicker</h5>
 
         <div ng-controller="DatepickerDemoCtrl">
-          <pre>Selected date is: <em>{{dt | date:'fullDate' }}</em></pre>
+          <pre>Selected date is: <em>[[dt | date:'fullDate' ]]</em></pre>
 
           <h6>Inline</h6>
           <div class="inline">
@@ -279,7 +279,7 @@
           <div class="row">
             <div class="col-md-6">
               <p class="input-group ui-datepicker">
-                <input type="text" class="form-control input-sm" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                <input type="text" class="form-control input-sm" datepicker-popup="[[format]]" ng-model="dt" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
                 <span class="input-group-btn">
                                     <button type="button" class="btn btn-default btn-sm" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
                                 </span>
@@ -310,7 +310,7 @@
 
           <timepicker ng-model="mytime" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></timepicker>
 
-          <pre class="alert alert-info">Time is: {{mytime | date:'shortTime' }}</pre>
+          <pre class="alert alert-info">Time is: [[mytime | date:'shortTime' ]]</pre>
 
           <div class="row">
             <div class="col-xs-6">
@@ -355,10 +355,10 @@
   <div class="modal-body">
     <ul>
       <li ng-repeat="item in items">
-        <a ng-click="selected.item = item">{{ item }}</a>
+        <a ng-click="selected.item = item">[[ item ]]</a>
       </li>
     </ul>
-    Selected: <b>{{ selected.item }}</b>
+    Selected: <b>[[ selected.item ]]</b>
   </div>
   <div class="modal-footer">
     <button class="btn btn-primary btn-sm" ng-click="ok()">OK</button>
@@ -368,7 +368,7 @@
 
 <script type="text/ng-template" id="customTemplate.html">
   <a>
-    <img data-ng-src="http://upload.wikimedia.org/wikipedia/commons/thumb/{{match.model.flag}}" width="16">
+    <img data-ng-src="http://upload.wikimedia.org/wikipedia/commons/thumb/[[match.model.flag]]" width="16">
     <span bind-html-unsafe="match.label | typeaheadHighlight:query"></span>
   </a>
 </script>

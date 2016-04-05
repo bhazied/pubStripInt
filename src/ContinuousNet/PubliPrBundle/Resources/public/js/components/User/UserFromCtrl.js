@@ -9,6 +9,8 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
 
     $scope.locale = (angular.isDefined($localStorage.language))?$localStorage.language:'en';
 
+    $scope.disableSubmit = false;
+
     // Editor options.
     $scope.editorOptions = {
         language: $scope.locale,
@@ -26,25 +28,17 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
         title: $filter('translate')('content.list.fields.types.GUEST'),
         css: 'info'
     }, {
-        id: 'Subscriber',
-        title: $filter('translate')('content.list.fields.types.SUBSCRIBER'),
+        id: 'Manager',
+        title: $filter('translate')('content.list.fields.types.MANAGER'),
         css: 'success'
+    }, {
+        id: 'Contributor',
+        title: $filter('translate')('content.list.fields.types.CONTRIBUTOR'),
+        css: 'warning'
     }, {
         id: 'Administrator',
         title: $filter('translate')('content.list.fields.types.ADMINISTRATOR'),
-        css: 'warning'
-    }, {
-        id: 'Publisher',
-        title: $filter('translate')('content.list.fields.types.PUBLISHER'),
         css: 'inverse'
-    }, {
-        id: 'ContentProvider',
-        title: $filter('translate')('content.list.fields.types.CONTENTPROVIDER'),
-        css: 'danger'
-    }, {
-        id: 'ServiceProvider',
-        title: $filter('translate')('content.list.fields.types.SERVICEPROVIDER'),
-        css: 'primary'
     }];
     $scope.genders = [{
         id: 'Male',
@@ -80,21 +74,17 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
         title: $filter('translate')('content.list.fields.rolesoptions.ROLE_API'),
         css: 'info'
     }, {
-        id: 'ROLE_SUBSCRIBER',
-        title: $filter('translate')('content.list.fields.rolesoptions.ROLE_SUBSCRIBER'),
+        id: 'ROLE_MANAGER',
+        title: $filter('translate')('content.list.fields.rolesoptions.ROLE_MANAGER'),
         css: 'success'
     }, {
-        id: 'ROLE_ADMIN',
-        title: $filter('translate')('content.list.fields.rolesoptions.ROLE_ADMIN'),
+        id: 'ROLE_CONTRIBUTOR',
+        title: $filter('translate')('content.list.fields.rolesoptions.ROLE_CONTRIBUTOR'),
         css: 'warning'
-    }, {
-        id: 'ROLE_ADMIN_PUBLISHER',
-        title: $filter('translate')('content.list.fields.rolesoptions.ROLE_ADMIN_PUBLISHER'),
-        css: 'inverse'
     }, {
         id: 'ROLE_SUPER_ADMIN',
         title: $filter('translate')('content.list.fields.rolesoptions.ROLE_SUPER_ADMIN'),
-        css: 'danger'
+        css: 'inverse'
     }];
 
     $scope.passwordRequestedAtOpened = false;
@@ -276,25 +266,32 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
             }
             angular.element('.ng-invalid[name=' + firstError + ']').focus();
             SweetAlert.swal($filter('translate')('content.form.messages.FORMCANNOTBESUBMITTED'), $filter('translate')('content.form.messages.ERRORSAREMARKED'), "error");
-            return;
+            return false;
         } else {
             if ($scope.user.id > 0) {
+                $scope.disableSubmit = true;
                 $usersDataFactory.update($scope.user).$promise.then(function(data) {
+                    $scope.disableSubmit = false;
                     toaster.pop('success', $filter('translate')('content.common.NOTIFICATION'), $filter('translate')('content.list.USERUPDATED'));
                     $scope.list();
                 }, function(error) {
+                    $scope.disableSubmit = false;
                     toaster.pop('error', $filter('translate')('content.common.ERROR'), $filter('translate')('content.list.USERNOTUPDATED'));
                     console.warn(error);
                 });
             } else {
+                $scope.disableSubmit = true;
                 $usersDataFactory.create($scope.user).$promise.then(function(data) {
+                    $scope.disableSubmit = false;
                     toaster.pop('success', $filter('translate')('content.common.NOTIFICATION'), $filter('translate')('content.list.USERCREATED'));
                     $scope.list();
                 }, function(error) {
+                    $scope.disableSubmit = false;
                     toaster.pop('error', $filter('translate')('content.common.ERROR'), $filter('translate')('content.list.USERNOTCREATED'));
                     console.warn(error);
                 });
             }
+            return false;
         }
     };
 

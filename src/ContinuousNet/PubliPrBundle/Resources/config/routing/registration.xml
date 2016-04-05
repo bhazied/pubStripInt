@@ -13,7 +13,7 @@
         <requirement key="_method">GET</requirement>
     </route>
 
-    <route id="fos_user_registration_confirm" pattern="/confirm/{token}">
+    <route id="fos_user_registration_confirm" pattern="/email-confirm/{token}/fr">
         <default key="_controller">FOSUserBundle:Registration:confirm</default>
         <requirement key="_method">GET</requirement>
     </route>

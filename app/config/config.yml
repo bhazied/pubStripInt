@@ -7,6 +7,20 @@ imports:
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: en
+    jwt_private_key_path: '%kernel.root_dir%/var/jwt/private.pem'
+    jwt_public_key_path: '%kernel.root_dir%/var/jwt/public.pem'
+    jwt_key_pass_phrase: publipr
+    jwt_token_ttl: 86400
+    router.options.generator_class: "ContinuousNet\\PubliPrBundle\\Routing\\Generator\\UrlGenerator"
+    router.options.generator_base_class: "ContinuousNet\\PubliPrBundle\\Routing\\Generator\\UrlGenerator"
+
+lexik_jwt_authentication:
+    private_key_path: %jwt_private_key_path%
+    public_key_path:  %jwt_public_key_path%
+    pass_phrase:      %jwt_key_pass_phrase%
+    token_ttl:        %jwt_token_ttl%
+    encoder_service:     lexik_jwt_authentication.jwt_encoder    # token encoder / decoder service - defaults to the jwt encoder (based on the namshi/jose library)
+    user_identity_field: email
 
 framework:
     #esi:             ~
@@ -93,9 +107,9 @@ fos_user:
         confirmation:
             from_email: # Use this node only if you don't want the global email address for the confirmation email
                 address:        contact@continuousnet.com
-                sender_name:    Publi Pr Registration
+                sender_name:    PUBLI PR Registration Service
             enabled:    true # change to true for required email confirmation
-            template:   PubliPrBundle:Auth:registration.email.txt.twig
+            template:   emails/registration.email.html.twig
         form:
             type:               ContinuousNet\PubliPrBundle\Form\RegistrationType # or 'fos_user_registration' on Symfony < 2.8
             name:               app_user_registration
@@ -105,14 +119,14 @@ fos_user:
         email:
             from_email: # Use this node only if you don't want the global email address for the resetting email
                 address:        contact@continuousnet.com
-                sender_name:    Publi Pr Resetting
-            template:   PubliPrBundle:Auth:resetting.email.txt.twig
+                sender_name:    PUBLI PR Resetting Service
+            template:   emails/resetting.email.html.twig
         form:
             type:               FOS\UserBundle\Form\Type\ResettingFormType # or 'fos_user_resetting' on Symfony < 2.8
             name:               fos_user_resetting_form
             validation_groups:  [ResetPassword, Default]
     service:
-        mailer:                 fos_user.mailer.default
+        mailer:                 fos_user.mailer.twig_swift
         email_canonicalizer:    fos_user.util.canonicalizer.default
         username_canonicalizer: fos_user.util.canonicalizer.default
         token_generator:        fos_user.util.token_generator.default
@@ -125,6 +139,15 @@ fos_user:
             name:               fos_user_group_form
             validation_groups:  [Registration, Default]
 
+ewz_recaptcha:
+    public_key:  6LdZbxwTAAAAAPMYxr2yVuTCSd3ceQxV9HfkOB8b
+    private_key: 6LdZbxwTAAAAAOTHXg8ih6xCvQnvwqSBQsRkFK9G
+    locale_key:  %kernel.default_locale%
+    enabled: true
+    ajax: false
+    # host: proxy.mycompany.com
+    # port: 3128
+    # auth: proxy_username:proxy_password
 
 # JMS Serializer
 jms_serializer:
@@ -221,28 +244,30 @@ assetic:
     filters:
         cssrewrite: ~
     assets:
-        google_fonts:
-            inputs:
-                #- 'http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic'
-                - assets/css/fonts.googleapis.com.css
         bootstrap:
             inputs:
-                - 'assets/bower_components/bootstrap/dist/css/bootstrap.min.css'
+                - 'bower_components/bootstrap/dist/css/bootstrap.min.css'
         font_awesome:
             inputs:
-                - 'assets/bower_components/font-awesome/css/font-awesome.min.css'
+                - 'styles/font-awesome.css'
+        feather:
+            inputs:
+                - 'styles/feather.css'
+        roboto:
+            inputs:
+                - 'styles/roboto.css'
         themify_icons:
             inputs:
-                - 'assets/bower_components/themify-icons/themify-icons.css'
+                - 'bower_components/themify-icons/themify-icons.css'
         loading_bar_css:
             inputs:
-                - 'assets/bower_components/angular-loading-bar/build/loading-bar.min.css'
+                - 'bower_components/angular-loading-bar/build/loading-bar.min.css'
         animate_css:
             inputs:
-                - 'assets/bower_components/animate.css/animate.min.css'
+                - 'bower_components/animate.css/animate.min.css'
         toaster_css:
             inputs:
-                - 'assets/bower_components/AngularJS-Toaster/toaster.css'
+                - 'bower_components/AngularJS-Toaster/toaster.css'
         jqueryui_css:
             inputs:
                 - 'components/jquery-ui/themes/base/jquery-ui.min.css'
@@ -252,11 +277,14 @@ assetic:
                 - 'components/elfinder/dist/css/theme.css' #.min
         continuous_net_css:
             inputs:
-                - 'assets/css/styles.css'
-                - 'assets/css/plugins.css'
+                - 'bower_components/checkbo/src/0.1.4/css/checkBo.css' #.min
+                - 'styles/animate.css'
+                - 'styles/panel.css'
+                - 'styles/publipr.css'
+                - 'styles/publipr.skins.css'
         jquery:
             inputs:
-                - 'assets/bower_components/jquery/dist/jquery.js' #.min
+                - 'bower_components/jquery/dist/jquery.js' #.min
         jqueryui:
             inputs:
                 - 'components/jquery-ui/jquery-ui.min.js'
@@ -264,83 +292,108 @@ assetic:
             inputs:
                 - 'components/elfinder/dist/js/elfinder.min.js'
                 - 'components/elfinder/dist/js/i18n/elfinder.fr.js'
-        fastclick:
+        perfect_scrollbar:
             inputs:
-                - 'assets/bower_components/fastclick/lib/fastclick.js'
-        angular:
-            inputs:
-                - 'assets/bower_components/angular/angular.js' #.min
-                - 'assets/bower_components/angular-cookies/angular-cookies.js' #.min
-                - 'assets/bower_components/angular-animate/angular-animate.js' #.min
-                - 'assets/bower_components/angular-touch/angular-touch.js' #.min
-                - 'assets/bower_components/angular-sanitize/angular-sanitize.js' #.min
-                - 'assets/bower_components/angular-ui-router/release/angular-ui-router.js' #.min
-                - 'assets/bower_components/angular-resource/angular-resource.js' #.min
-                - 'assets/bower_components/angular-bind-html-compile/angular-bind-html-compile.js'
-                - 'assets/bower_components/angular-slugify/angular-slugify.js'
-                - 'assets/bower_components/AngularJS-Toaster/toaster.js'
-        angular_storage:
-            inputs:
-                - 'assets/bower_components/ngstorage/ngStorage.js' #.min
-        angular_translate:
-            inputs:
-                - 'assets/bower_components/angular-translate/angular-translate.js' #.min
-                - 'assets/bower_components/angular-translate-loader-url/angular-translate-loader-url.js' #.min
-                - 'assets/bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js' #.min
-                - 'assets/bower_components/angular-translate-storage-local/angular-translate-storage-local.js' #.min
-                - 'assets/bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.js' #.min
-        angular_scroll:
-            inputs:
-                - 'assets/bower_components/angular-scroll/angular-scroll.js' #.min
+                - 'bower_components/perfect-scrollbar/js/perfect-scrollbar.jquery.js'
         oclazyload:
             inputs:
-                - 'assets/bower_components/oclazyload/dist/ocLazyLoad.js' #.min
+                - 'bower_components/oclazyload/dist/ocLazyLoad.js' #.min
+        fastclick:
+            inputs:
+                - 'bower_components/fastclick/lib/fastclick.js'
+        angular:
+            inputs:
+                - 'bower_components/angular/angular.js' #.min
+                - 'bower_components/angular-cookies/angular-cookies.js' #.min
+                - 'bower_components/angular-animate/angular-animate.js' #.min
+                - 'bower_components/angular-touch/angular-touch.js' #.min
+                - 'bower_components/angular-sanitize/angular-sanitize.js' #.min
+                - 'bower_components/angular-ui-router/release/angular-ui-router.js' #.min
+                - 'bower_components/angular-ui-utils/ui-utils.js' #.min
+                - 'bower_components/angular-resource/angular-resource.js' #.min
+                - 'bower_components/angular-bind-html-compile/angular-bind-html-compile.js'
+                - 'bower_components/angular-slugify/angular-slugify.js'
+                - 'bower_components/angular-recaptcha/release/angular-recaptcha.js' #.min
+                - 'bower_components/AngularJS-Toaster/toaster.js'
+
+        angular_storage:
+            inputs:
+                - 'bower_components/ngstorage/ngStorage.js' #.min
+        angular_translate:
+            inputs:
+                - 'bower_components/angular-translate/angular-translate.js' #.min
+                - 'bower_components/angular-translate-loader-url/angular-translate-loader-url.js' #.min
+                - 'bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js' #.min
+                - 'bower_components/angular-translate-storage-local/angular-translate-storage-local.js' #.min
+                - 'bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.js' #.min
+        angular_scroll:
+            inputs:
+                - 'bower_components/angular-scroll/angular-scroll.js' #.min
+        oclazyload:
+            inputs:
+                - 'bower_components/oclazyload/dist/ocLazyLoad.js' #.min
         breadcrumb:
             inputs:
-                - 'assets/bower_components/angular-breadcrumb/dist/angular-breadcrumb.js' #.min
+                - 'bower_components/angular-breadcrumb/dist/angular-breadcrumb.js' #.min
         ui_bootstrap:
             inputs:
-                - 'assets/bower_components/angular-bootstrap/ui-bootstrap-tpls.js' #.min
+                - 'bower_components/angular-bootstrap/ui-bootstrap-tpls.js' #.min
         loading_bar:
             inputs:
-                - 'assets/bower_components/angular-loading-bar/build/loading-bar.js' #.min
+                - 'bower_components/angular-loading-bar/build/loading-bar.js' #.min
+        extentions:
+              inputs:
+                - 'bower_components/checkbo/src/0.1.4/js/checkBo.js' #.min
+                - 'app/scripts/extentions/modernizr.js'
+                - 'app/scripts/extentions/lib.js'
         continuous_net_scripts:
             inputs:
-                - 'assets/js/app.js'
-                - 'assets/js/main.js'
-                - 'assets/js/config.constant.js'
+                - 'app/scripts/app.js'
+                - 'app/scripts/app.main.js'
                 - 'bundles/publipr/js/constant.js'
-                - 'assets/js/config.router.js'
+                - 'app/scripts/config.router.js'
                 - 'bundles/publipr/js/router.js'
         continuous_net_services:
             inputs:
-                - 'assets/js/services/savable.js'
+                - 'app/scripts/services/savable.js'
         continuous_net_directives:
             inputs:
-                - 'assets/js/directives/toggle.js'
-                - 'assets/js/directives/perfect-scrollbar.js'
-                - 'assets/js/directives/empty-links.js'
-                - 'assets/js/directives/sidebars.js'
-                - 'assets/js/directives/off-click.js'
-                - 'assets/js/directives/full-height.js'
-                - 'assets/js/directives/panel-tools.js'
-                - 'assets/js/directives/char-limit.js'
-                - 'assets/js/directives/dismiss.js'
-                - 'assets/js/directives/compare-to.js'
-                - 'assets/js/directives/select.js'
-                - 'assets/js/directives/messages.js'
-                - 'assets/js/directives/chat.js'
-                - 'assets/js/directives/sparkline.js'
-                - 'assets/js/directives/touchspin.js'
-                - 'assets/js/directives/file-upload.js'
-                - 'assets/js/directives/my-boolean.js'
-                - 'assets/js/directives/my-enum.js'
-                - 'assets/js/directives/my-unique-field.js'
+                - 'app/scripts/directives/anchor-scroll.js'
+                - 'app/scripts/directives/c3.js'
+                - 'app/scripts/directives/chosen.js'
+                - 'app/scripts/directives/navigation.js'
+                - 'app/scripts/directives/offscreen.js'
+                - 'app/scripts/directives/panel-control-collapse.js'
+                - 'app/scripts/directives/panel-control-refresh.js'
+                - 'app/scripts/directives/panel-control-remove.js'
+                - 'app/scripts/directives/preloader.js'
+                - 'app/scripts/directives/quick-launch.js'
+                - 'app/scripts/directives/rickshaw.js'
+                - 'app/scripts/directives/scrollup.js'
+                - 'app/scripts/directives/vector.js'
+                - 'app/scripts/directives/toggle.js'
+                - 'app/scripts/directives/perfect-scrollbar.js'
+                - 'app/scripts/directives/empty-links.js'
+                - 'app/scripts/directives/sidebars.js'
+                - 'app/scripts/directives/off-click.js'
+                - 'app/scripts/directives/full-height.js'
+                - 'app/scripts/directives/panel-tools.js'
+                - 'app/scripts/directives/char-limit.js'
+                - 'app/scripts/directives/dismiss.js'
+                - 'app/scripts/directives/compare-to.js'
+                - 'app/scripts/directives/select.js'
+                - 'app/scripts/directives/messages.js'
+                - 'app/scripts/directives/chat.js'
+                - 'app/scripts/directives/sparkline.js'
+                - 'app/scripts/directives/touchspin.js'
+                - 'app/scripts/directives/file-upload.js'
+                - 'app/scripts/directives/my-boolean.js'
+                - 'app/scripts/directives/my-enum.js'
+                - 'app/scripts/directives/my-unique-field.js'
         continuous_net_controllers:
             inputs:
-                - 'bundles/publipr/js/components/Main/AppCtrl.js'
                 - 'bundles/publipr/js/common/FileManager/FileManagerCtrl.js'
-                - 'assets/js/controllers/bootstrapCtrl.js'
+                - 'app/scripts/controllers/bootstrapCtrl.js'
         continuous_net_tools:
             inputs:
-                - 'assets/js/tools/toQueryString.js'
+                - 'app/scripts/tools/toQueryString.js'

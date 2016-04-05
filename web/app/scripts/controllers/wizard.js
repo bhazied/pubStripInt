@@ -60,5 +60,5 @@ function wizardCtrl($scope) {
 }
 
 angular
-  .module('urbanApp')
+  .module('publiPrApp')
   .controller('wizardCtrl', ['$scope', wizardCtrl]);

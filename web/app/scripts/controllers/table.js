@@ -7,5 +7,5 @@ function tableCtrl($scope) {
 }
 
 angular
-  .module('urbanApp')
+  .module('publiPrApp')
   .controller('tableCtrl', ['$scope', tableCtrl]);

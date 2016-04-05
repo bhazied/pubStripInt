@@ -231,5 +231,5 @@ function FlotCtrl($scope, $interval, COLORS) {
 }
 
 angular
-  .module('urbanApp')
+  .module('publiPrApp')
   .controller('FlotCtrl', ['$scope', '$interval', 'COLORS', FlotCtrl]);

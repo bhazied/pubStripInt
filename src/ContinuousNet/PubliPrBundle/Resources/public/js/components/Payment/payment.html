@@ -71,6 +71,30 @@
                                 </td>
                             </tr>
                             <tr>
+                                <td><span translate="content.list.fields.DISCOUNTCODE">Discount Code</span></td>
+                                <td>
+                                    <div ng-bind-html="payment.discount_code"></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span translate="content.list.fields.INVOICENUMBER">Invoice Number</span></td>
+                                <td>
+                                    <div ng-bind-html="payment.invoice_number"></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span translate="content.list.fields.DETAILS">Details</span></td>
+                                <td>
+                                    <div ng-bind-html="payment.details"></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span translate="content.list.fields.NOTE">Note</span></td>
+                                <td>
+                                    <div ng-bind-html="payment.note"></div>
+                                </td>
+                            </tr>
+                            <tr>
                                 <td><span translate="content.list.fields.ISVALID">Is Valid</span></td>
                                 <td>
                                     <span my-boolean="[[ payment.is_valid ]]"></span>

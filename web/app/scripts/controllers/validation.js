@@ -17,5 +17,5 @@ function validationCtrl($scope) {
 }
 
 angular
-  .module('urbanApp')
+  .module('publiPrApp')
   .controller('validationCtrl', ['$scope', validationCtrl]);

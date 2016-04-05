@@ -29,7 +29,7 @@
     <div class="col-md-9">
 
       <h4 class="mt0">Upload queue</h4>
-      <p>Queue length: {{ uploader.queue.length }}</p>
+      <p>Queue length: [[ uploader.queue.length ]]</p>
 
       <table class="table table-bordered table-hover table-condensed align-middle bl br">
         <thead>
@@ -43,9 +43,9 @@
         </thead>
         <tbody>
           <tr ng-repeat="item in uploader.queue">
-            <td><strong>{{ item.file.name }}</strong>
+            <td><strong>[[ item.file.name ]]</strong>
             </td>
-            <td ng-show="uploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
+            <td ng-show="uploader.isHTML5" nowrap>[[ item.file.size/1024/1024|number:2 ]] MB</td>
             <td ng-show="uploader.isHTML5">
               <div class="progress" style="margin-bottom: 0;">
                 <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>

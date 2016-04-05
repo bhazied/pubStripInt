@@ -8,5 +8,5 @@ function sortableCtrl($scope) {
 }
 
 angular
-  .module('urbanApp')
+  .module('publiPrApp')
   .controller('sortableCtrl', ['$scope', sortableCtrl]);

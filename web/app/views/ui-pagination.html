@@ -11,7 +11,7 @@
         <br/>
         <pagination direction-links="false" total-items="totalItems" ng-model="currentPage" num-pages="smallnumPages" class="pagination-sm"></pagination>
         <br/>
-        <pre>The selected page no: {{currentPage}}</pre>
+        <pre>The selected page no: [[currentPage]]</pre>
         <button class="btn btn-info" ng-click="setPage(3)">Set current page to: 3</button>
       </div>
     </div>
@@ -24,7 +24,7 @@
         <br/>
         <pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" boundary-links="true" rotate="false" num-pages="numPages"></pagination>
         <br/>
-        <pre>Page: {{bigCurrentPage}} / {{numPages}}</pre>
+        <pre>Page: [[bigCurrentPage]] / [[numPages]]</pre>
         <br/>
         <p>Pagers</p>
         <pager total-items="bigTotalItems" ng-model="bigCurrentPage"></pager>

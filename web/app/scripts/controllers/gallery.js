@@ -32,5 +32,5 @@ function galleryCtrl($scope) {
 }
 
 angular
-  .module('urbanApp')
+  .module('publiPrApp')
   .controller('galleryCtrl', ['$scope', galleryCtrl]);

@@ -204,5 +204,5 @@ function dashboardCtrl($scope, $interval, COLORS) {
 }
 
 angular
-  .module('urbanApp')
+  .module('publiPrApp')
   .controller('dashboardCtrl', ['$scope', '$interval', 'COLORS', dashboardCtrl]);

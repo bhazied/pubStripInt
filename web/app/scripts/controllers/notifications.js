@@ -61,5 +61,5 @@ function NotificationsCtrl($scope) {
 }
 
 angular
-  .module('urbanApp')
+  .module('publiPrApp')
   .controller('NotificationsCtrl', ['$scope', NotificationsCtrl]);

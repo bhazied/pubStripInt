@@ -324,5 +324,5 @@ function mapCtrl($scope, COLORS) {
 }
 
 angular
-  .module('urbanApp')
+  .module('publiPrApp')
   .controller('mapCtrl', ['$scope', 'COLORS', mapCtrl]);

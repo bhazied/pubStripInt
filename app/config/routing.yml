@@ -1,4 +1,4 @@
-biody_xpert:
+publi_pr:
     resource: "@PubliPrBundle/Resources/config/routing.yml"
     
 fos_user_security:

@@ -11,5 +11,5 @@ function sessionCtrl($scope, $state) {
 }
 
 angular
-  .module('urbanApp')
+  .module('publiPrApp')
   .controller('sessionCtrl', ['$scope', '$state', sessionCtrl]);

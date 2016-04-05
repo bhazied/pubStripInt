@@ -38,5 +38,5 @@ function messages($q, $http) {
 }
 
 angular
-  .module('urbanApp')
+  .module('publiPrApp')
   .factory('messages', ['$q', '$http', messages]);

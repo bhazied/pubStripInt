@@ -16,14 +16,14 @@
     <div class="row">
         <div class="col-md-12" ng-controller="UserFormCtrl">
             <div>
-                    <fieldset>
-                        <legend translate="content.list.NEWUSER" ng-if="user.id == 0">
-                            New User
-                        </legend>
-                        <legend translate="content.list.EDITUSER" ng-if="user.id > 0">
-                            Edit User
-                        </legend>
-                        <form name="userForm" id="userForm" novalidate ng-submit="submitForm(userForm)">
+                <fieldset>
+                    <legend translate="content.list.NEWUSER" ng-if="user.id == 0">
+                        New User
+                    </legend>
+                    <legend translate="content.list.EDITUSER" ng-if="user.id > 0">
+                        Edit User
+                    </legend>
+                    <form name="userForm" id="userForm" novalidate ng-submit="submitForm(userForm)">
                         <div class="row">
                             <input type="hidden" name="id" id="userId" ng-model="user.id" />
                             <div class="col-md-6">
@@ -146,6 +146,17 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
+                                    <label for="userName" class="control-label">
+                                        <span translate="content.list.fields.NAME">Name</span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="user.name" type="text" name="name" id="userName" class="form-control" placeholder="[[ 'content.form.messages.ENTERNAME' | translate ]]" />
+                                        <i class="ti-tag"></i>
+                                    </span><!--/input-icon-->
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="form-group">
                                     <label for="userGender" class="control-label">
                                         <span translate="content.list.fields.GENDER">Gender</span>
                                     </label>
@@ -163,6 +174,8 @@
                                     </div>
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="userFirstName" class="control-label">
@@ -174,8 +187,6 @@
                                     </span><!--/input-icon-->
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
-                        </div><!--/row-->
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="userLastName" class="control-label">
@@ -187,6 +198,8 @@
                                     </span><!--/input-icon-->
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="userBirthDate" class="control-label">
@@ -205,8 +218,6 @@
                                     </div>
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
-                        </div><!--/row-->
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="userPicture" class="control-label">
@@ -234,6 +245,8 @@
                                     </div>
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="userAddress" class="control-label">
@@ -245,8 +258,6 @@
                                     </span><!--/input-icon-->
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
-                        </div><!--/row-->
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="userZipCode" class="control-label">
@@ -258,6 +269,8 @@
                                     </span><!--/input-icon-->
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="userCompany" class="control-label">
@@ -273,8 +286,6 @@
                                 </div>
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
-                        </div><!--/row-->
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="userJob" class="control-label">
@@ -286,6 +297,8 @@
                                     </span><!--/input-icon-->
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="userCountry" class="control-label">
@@ -301,8 +314,6 @@
                                 </div>
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
-                        </div><!--/row-->
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="userCity" class="control-label">
@@ -314,6 +325,8 @@
                                     </span><!--/input-icon-->
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="userLanguage" class="control-label">
@@ -329,14 +342,14 @@
                                 </div>
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
-                        </div><!--/row-->
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="checkbox clip-check check-primary">
                                     <input ng-model="user.enable_oauth" type="checkbox" name="enableOauth" id="userEnableOauth" />
                                     <label for="userEnableOauth" translate="content.list.fields.ENABLEOAUTH">Enable Oauth</label>
                                 </div><!--/checkbox clip-check check-primary-->
                             </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="userSessionTimeout" class="control-label">
@@ -348,22 +361,20 @@
                                     </span><!--/input-icon-->
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
-                        </div><!--/row-->
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="checkbox clip-check check-primary">
                                     <input ng-model="user.multiple_session" type="checkbox" name="multipleSession" id="userMultipleSession" />
                                     <label for="userMultipleSession" translate="content.list.fields.MULTIPLESESSION">Multiple Session</label>
                                 </div><!--/checkbox clip-check check-primary-->
                             </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="checkbox clip-check check-primary">
                                     <input ng-model="user.phone_validated" type="checkbox" name="phoneValidated" id="userPhoneValidated" />
                                     <label for="userPhoneValidated" translate="content.list.fields.PHONEVALIDATED">Phone Validated</label>
                                 </div><!--/checkbox clip-check check-primary-->
                             </div><!--/col-md-6-->
-                        </div><!--/row-->
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="userPhoneValidationCode" class="control-label">
@@ -375,14 +386,14 @@
                                     </span><!--/input-icon-->
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="checkbox clip-check check-primary">
                                     <input ng-model="user.email_validated" type="checkbox" name="emailValidated" id="userEmailValidated" />
                                     <label for="userEmailValidated" translate="content.list.fields.EMAILVALIDATED">Email Validated</label>
                                 </div><!--/checkbox clip-check check-primary-->
                             </div><!--/col-md-6-->
-                        </div><!--/row-->
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="userEmailValidationCode" class="control-label">
@@ -394,6 +405,8 @@
                                     </span><!--/input-icon-->
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="userAuthenticationMode" class="control-label">
@@ -413,8 +426,6 @@
                                     </div>
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
-                        </div><!--/row-->
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group" ng-class="{'has-error':userForm.roles.$dirty && userForm.roles.$invalid, 'has-success':userForm.roles.$valid}">
                                     <label for="userRoles" class="control-label">
@@ -433,14 +444,14 @@
                                     <span class="success text-small block" ng-if="userForm.roles.$valid" translate="content.form.messages.OK">Ok!</span>
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="checkbox clip-check check-primary">
                                     <input ng-model="user.enabled" type="checkbox" name="enabled" id="userEnabled" />
                                     <label for="userEnabled" translate="content.list.fields.ENABLED">Enabled</label>
                                 </div><!--/checkbox clip-check check-primary-->
                             </div><!--/col-md-6-->
-                        </div><!--/row-->
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="userConfirmationToken" class="control-label">
@@ -452,6 +463,8 @@
                                     </span><!--/input-icon-->
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="userPasswordRequestedAt" class="control-label">
@@ -470,22 +483,20 @@
                                     </div>
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
-                        </div><!--/row-->
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="checkbox clip-check check-primary">
                                     <input ng-model="user.locked" type="checkbox" name="locked" id="userLocked" />
                                     <label for="userLocked" translate="content.list.fields.LOCKED">Locked</label>
                                 </div><!--/checkbox clip-check check-primary-->
                             </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="checkbox clip-check check-primary">
                                     <input ng-model="user.expired" type="checkbox" name="expired" id="userExpired" />
                                     <label for="userExpired" translate="content.list.fields.EXPIRED">Expired</label>
                                 </div><!--/checkbox clip-check check-primary-->
                             </div><!--/col-md-6-->
-                        </div><!--/row-->
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="userExpiresAt" class="control-label">
@@ -504,14 +515,14 @@
                                     </div>
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="checkbox clip-check check-primary">
                                     <input ng-model="user.credentials_expired" type="checkbox" name="credentialsExpired" id="userCredentialsExpired" />
                                     <label for="userCredentialsExpired" translate="content.list.fields.CREDENTIALSEXPIRED">Credentials Expired</label>
                                 </div><!--/checkbox clip-check check-primary-->
                             </div><!--/col-md-6-->
-                        </div><!--/row-->
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="userCredentialsExpireAt" class="control-label">
@@ -530,6 +541,8 @@
                                     </div>
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="userLastLogin" class="control-label">
@@ -548,8 +561,6 @@
                                     </div>
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
-                        </div><!--/row-->
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="userLastFailedLogin" class="control-label">
@@ -568,6 +579,8 @@
                                     </div>
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="userLoginCount" class="control-label">
@@ -579,8 +592,6 @@
                                     </span><!--/input-icon-->
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
-                        </div><!--/row-->
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="userFailedLoginCount" class="control-label">
@@ -592,6 +603,8 @@
                                     </span><!--/input-icon-->
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="userLastFailedLoginCount" class="control-label">
@@ -604,7 +617,6 @@
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
                         </div><!--/row-->
-                        </form>
                         <div class="row">
                             <div class="col-md-4">
                                 <button ng-click="list()" class="btn btn-primary pull-left">
@@ -614,12 +626,13 @@
                             <div class="col-md-4">
                             </div>
                             <div class="col-md-4">
-                                <button type="button" ng-click="submitForm(userForm)" class="btn btn-primary pull-right"> <!--  ng-disabled="userForm.$invalid" -->
-                                    <i class="ti-save"></i> <span translate="content.common.SAVE">Save</span>
+                                <button type="button" ng-click="submitForm(userForm)" class="btn btn-primary pull-right" ng-disabled="disableSubmit"> <!--  ng-disabled="userForm.$invalid" -->
+                                    <i class="fa fa-spinner fa-spin" ng-if="disableSubmit"></i><i class="ti-save" ng-if="!disableSubmit"></i> <span translate="content.common.SAVE">Save</span>
                                 </button>
                             </div>
                         </div>
-                   </fieldset>
+                    </form>
+                </fieldset>
             </div>
         </div><!--/col-md-12-->
     </div><!--/row-->

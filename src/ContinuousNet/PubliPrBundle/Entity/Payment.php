@@ -97,6 +97,50 @@ class Payment
     private $status;
 
     /**
+     * @var string
+     * @access private
+     *
+     * @ORM\Column(name="discount_code", type="string", length=20, nullable=true, unique=false)
+     * 
+     * @Expose
+     * 
+     */
+    private $discountCode;
+
+    /**
+     * @var string
+     * @access private
+     *
+     * @ORM\Column(name="invoice_number", type="string", length=20, nullable=true, unique=false)
+     * 
+     * @Expose
+     * 
+     */
+    private $invoiceNumber;
+
+    /**
+     * @var array
+     * @access private
+     *
+     * @ORM\Column(name="details", type="array", nullable=true, unique=false)
+     * 
+     * @Expose
+     * 
+     */
+    private $details;
+
+    /**
+     * @var string
+     * @access private
+     *
+     * @ORM\Column(name="note", type="string", length=100, nullable=true, unique=false)
+     * 
+     * @Expose
+     * 
+     */
+    private $note;
+
+    /**
      * @var boolean
      * @access private
      *
@@ -284,6 +328,102 @@ class Payment
     public function getStatus()
     {
         return $this->status;
+    }
+
+    /**
+     * Set discountCode
+     *
+     * @access public
+     * @param string $discountCode
+     * @return Payment
+     */
+    public function setDiscountCode($discountCode = null)
+    {
+        $this->discountCode = $discountCode;
+        return $this;
+    }
+
+    /**
+     * Get discountCode
+     *
+     * @access public
+     * @return string 
+     */
+    public function getDiscountCode()
+    {
+        return $this->discountCode;
+    }
+
+    /**
+     * Set invoiceNumber
+     *
+     * @access public
+     * @param string $invoiceNumber
+     * @return Payment
+     */
+    public function setInvoiceNumber($invoiceNumber = null)
+    {
+        $this->invoiceNumber = $invoiceNumber;
+        return $this;
+    }
+
+    /**
+     * Get invoiceNumber
+     *
+     * @access public
+     * @return string 
+     */
+    public function getInvoiceNumber()
+    {
+        return $this->invoiceNumber;
+    }
+
+    /**
+     * Set details
+     *
+     * @access public
+     * @param array $details
+     * @return Payment
+     */
+    public function setDetails(array $details = null)
+    {
+        $this->details = $details;
+        return $this;
+    }
+
+    /**
+     * Get details
+     *
+     * @access public
+     * @return array 
+     */
+    public function getDetails()
+    {
+        return $this->details;
+    }
+
+    /**
+     * Set note
+     *
+     * @access public
+     * @param string $note
+     * @return Payment
+     */
+    public function setNote($note = null)
+    {
+        $this->note = $note;
+        return $this;
+    }
+
+    /**
+     * Get note
+     *
+     * @access public
+     * @return string 
+     */
+    public function getNote()
+    {
+        return $this->note;
     }
 
     /**

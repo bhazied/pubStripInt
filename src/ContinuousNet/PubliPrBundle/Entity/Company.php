@@ -119,6 +119,61 @@ class Company
     private $fax;
 
     /**
+     * @var string
+     * @access private
+     *
+     * @ORM\Column(name="siren", type="string", length=25, nullable=false, unique=false)
+     * 
+     * @Expose
+     * 
+     */
+    private $siren;
+
+    /**
+     * @var string
+     * @access private
+     *
+     * @ORM\Column(name="siret", type="string", length=25, nullable=false, unique=false)
+     * 
+     * @Expose
+     * 
+     */
+    private $siret;
+
+    /**
+     * @var string
+     * @access private
+     *
+     * @ORM\Column(name="rcs", type="string", length=25, nullable=false, unique=false)
+     * 
+     * @Expose
+     * 
+     */
+    private $rcs;
+
+    /**
+     * @var string
+     * @access private
+     *
+     * @ORM\Column(name="ape", type="string", length=25, nullable=false, unique=false)
+     * 
+     * @Expose
+     * 
+     */
+    private $ape;
+
+    /**
+     * @var string
+     * @access private
+     *
+     * @ORM\Column(name="vat", type="string", length=25, nullable=false, unique=false)
+     * 
+     * @Expose
+     * 
+     */
+    private $vat;
+
+    /**
      * @var boolean
      * @access private
      *
@@ -343,6 +398,126 @@ class Company
     public function getFax()
     {
         return $this->fax;
+    }
+
+    /**
+     * Set siren
+     *
+     * @access public
+     * @param string $siren
+     * @return Company
+     */
+    public function setSiren($siren)
+    {
+        $this->siren = $siren;
+        return $this;
+    }
+
+    /**
+     * Get siren
+     *
+     * @access public
+     * @return string 
+     */
+    public function getSiren()
+    {
+        return $this->siren;
+    }
+
+    /**
+     * Set siret
+     *
+     * @access public
+     * @param string $siret
+     * @return Company
+     */
+    public function setSiret($siret)
+    {
+        $this->siret = $siret;
+        return $this;
+    }
+
+    /**
+     * Get siret
+     *
+     * @access public
+     * @return string 
+     */
+    public function getSiret()
+    {
+        return $this->siret;
+    }
+
+    /**
+     * Set rcs
+     *
+     * @access public
+     * @param string $rcs
+     * @return Company
+     */
+    public function setRcs($rcs)
+    {
+        $this->rcs = $rcs;
+        return $this;
+    }
+
+    /**
+     * Get rcs
+     *
+     * @access public
+     * @return string 
+     */
+    public function getRcs()
+    {
+        return $this->rcs;
+    }
+
+    /**
+     * Set ape
+     *
+     * @access public
+     * @param string $ape
+     * @return Company
+     */
+    public function setApe($ape)
+    {
+        $this->ape = $ape;
+        return $this;
+    }
+
+    /**
+     * Get ape
+     *
+     * @access public
+     * @return string 
+     */
+    public function getApe()
+    {
+        return $this->ape;
+    }
+
+    /**
+     * Set vat
+     *
+     * @access public
+     * @param string $vat
+     * @return Company
+     */
+    public function setVat($vat)
+    {
+        $this->vat = $vat;
+        return $this;
+    }
+
+    /**
+     * Get vat
+     *
+     * @access public
+     * @return string 
+     */
+    public function getVat()
+    {
+        return $this->vat;
     }
 
     /**

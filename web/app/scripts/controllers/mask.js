@@ -7,5 +7,5 @@ function maskCtrl($scope) {
 }
 
 angular
-  .module('urbanApp')
+  .module('publiPrApp')
   .controller('maskCtrl', ['$scope', maskCtrl]);

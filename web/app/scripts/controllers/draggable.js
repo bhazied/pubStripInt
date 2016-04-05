@@ -14,5 +14,5 @@ function draggablePortletsCtrl($scope) {
 }
 
 angular
-  .module('urbanApp')
+  .module('publiPrApp')
   .controller('draggablePortletsCtrl', ['$scope', draggablePortletsCtrl]);

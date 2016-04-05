@@ -16,14 +16,14 @@
     <div class="row">
         <div class="col-md-12" ng-controller="LogFormCtrl">
             <div>
-                    <fieldset>
-                        <legend translate="content.list.NEWLOG" ng-if="log.id == 0">
-                            New Log
-                        </legend>
-                        <legend translate="content.list.EDITLOG" ng-if="log.id > 0">
-                            Edit Log
-                        </legend>
-                        <form name="logForm" id="logForm" novalidate ng-submit="submitForm(logForm)">
+                <fieldset>
+                    <legend translate="content.list.NEWLOG" ng-if="log.id == 0">
+                        New Log
+                    </legend>
+                    <legend translate="content.list.EDITLOG" ng-if="log.id > 0">
+                        Edit Log
+                    </legend>
+                    <form name="logForm" id="logForm" novalidate ng-submit="submitForm(logForm)">
                         <div class="row">
                             <input type="hidden" name="id" id="logId" ng-model="log.id" />
                             <div class="col-md-6">
@@ -153,7 +153,6 @@
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
                         </div><!--/row-->
-                        </form>
                         <div class="row">
                             <div class="col-md-4">
                                 <button ng-click="list()" class="btn btn-primary pull-left">
@@ -163,12 +162,13 @@
                             <div class="col-md-4">
                             </div>
                             <div class="col-md-4">
-                                <button type="button" ng-click="submitForm(logForm)" class="btn btn-primary pull-right"> <!--  ng-disabled="logForm.$invalid" -->
-                                    <i class="ti-save"></i> <span translate="content.common.SAVE">Save</span>
+                                <button type="button" ng-click="submitForm(logForm)" class="btn btn-primary pull-right" ng-disabled="disableSubmit"> <!--  ng-disabled="logForm.$invalid" -->
+                                    <i class="fa fa-spinner fa-spin" ng-if="disableSubmit"></i><i class="ti-save" ng-if="!disableSubmit"></i> <span translate="content.common.SAVE">Save</span>
                                 </button>
                             </div>
                         </div>
-                   </fieldset>
+                    </form>
+                </fieldset>
             </div>
         </div><!--/col-md-12-->
     </div><!--/row-->

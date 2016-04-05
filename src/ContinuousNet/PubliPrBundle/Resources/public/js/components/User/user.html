@@ -95,6 +95,12 @@
                                 </td>
                             </tr>
                             <tr>
+                                <td><span translate="content.list.fields.NAME">Name</span></td>
+                                <td>
+                                    <div ng-bind-html="user.name"></div>
+                                </td>
+                            </tr>
+                            <tr>
                                 <td><span translate="content.list.fields.GENDER">Gender</span></td>
                                 <td>
                                     <span my-enum="[[ user.gender ]]" my-enum-list="[[ genders ]]"></span>

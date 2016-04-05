@@ -1,0 +1,107 @@
+<script src="https://www.google.com/recaptcha/api.js?onload=vcRecaptchaApiLoaded&render=explicit" async defer></script>
+
+<div class="center-wrapper" ng-controller="RegisterCtrl">
+	<div class="center-content">
+		<div class="row no-margin">
+			<div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+				<form role="form" class="form-layout" name="signUpForm" id="signUpForm">
+					<div class="text-center mb15">
+						<img data-ng-src="/app/images/logo-dark.png" />
+					</div>
+
+					<p class="text-center mb30" translate="register.CREATEYOURACCOUNT"> Create your account.</p>
+
+					<div class="form-inputs">
+
+						<div class="form-group" ng-class="{'has-error':signUpForm.name.$dirty && signUpForm.name.$invalid, 'has-success':signUpForm.name.$valid}">
+							<label class="control-label">
+								<span translate="content.list.fields.NAME">Name</span>
+								<span class="symbol required"></span>
+							</label>
+							<div class="input-group input-group-lg">
+								<input type="text" placeholder="[[ 'content.form.messages.ENTERNAME' | translate ]]" class="form-control input-lg" name="name" ng-model="user.name" ng-required="true"/>
+								<span class="input-group-addon">
+									<i class="ti-user"></i>
+								</span>
+							</div>
+							<span class="error text-small block" ng-if="signUpForm.name.$dirty && signUpForm.name.$invalid" translate="content.form.messages.FIRSTNAMEREQUIRED">Name is required</span>
+							<span class="success text-small" ng-if="signUpForm.name.$valid" translate="content.form.messages.OK">Ok!</span>
+						</div>
+
+						<div class="form-group" ng-class="{'has-error':signUpForm.email.$dirty && signUpForm.email.$invalid, 'has-success':signUpForm.email.$valid}">
+							<label class="control-label">
+								<span translate="content.list.fields.EMAIL">Email</span>
+								<span class="symbol required"></span>
+							</label>
+							<div class="input-group input-group-lg">
+								<input type="email" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" placeholder="[[ 'content.form.messages.ENTEREMAIL' | translate ]]" class="form-control input-lg" name="email" ng-model="user.email" email-validator ng-required="true">
+								<span class="input-group-addon">
+									<i ng-class="{'ti-email': !signUpForm.email.$pending, 'fa fa-spinner fa-spin': signUpForm.email.$pending} "></i>
+								</span>
+							</div>
+							<span class="error text-small block" ng-if="signUpForm.email.$dirty && signUpForm.email.$error.pattern" translate="content.form.messages.INVALIDEMAIL">Please, enter a valid email address.</span>
+							<span class="error text-small block" ng-if="signUpForm.email.$dirty && signUpForm.email.$error.required" translate="content.form.messages.EMAILREQUIRED">Email is required.</span>
+							<span class="error text-small block" ng-if="signUpForm.email.$dirty && signUpForm.email.$error.emailValidator" translate="content.form.messages.EMAILALREADYINUSE">Email already used by another user!</span>
+							<span class="success text-small" ng-if="signUpForm.email.$valid" translate="content.form.messages.VALIDEMAIL">It's a valid e-mail!</span>
+						</div>
+
+						<div class="form-group" ng-class="{'has-error':signUpForm.password.$dirty && signUpForm.password.$invalid, 'has-success':signUpForm.password.$valid}">
+							<label class="control-label">
+								<span translate="content.list.fields.PASSWORD">Password</span>
+								<span class="symbol required"></span>
+							</label>
+							<div class="input-group input-group-lg">
+								<input ng-minlength="6" ng-maxlength="20" autocomplete="off" type="password" placeholder="[[ 'content.form.messages.ENTERPASSWORD' | translate ]]" class="form-control input-lg" name="password" ng-model="user.password" ng-required="true"/>
+								<span class="input-group-addon">
+									<i class="ti-lock"></i>
+								</span>
+							</div>
+							<span class="error text-small block" ng-if="signUpForm.password.$error.minlength" translate="content.form.messages.TOOSHORT">Too short!</span>
+							<span class="error text-small block" ng-if="signUpForm.password.$error.maxlength" translate="content.form.messages.TOOLONG">Too long!</span>
+							<span class="error text-small block" ng-if="signUpForm.password.$dirty && signUpForm.password.$error.required" translate="content.form.messages.PASSWORDREQUIRED">Password is required.</span>
+							<span class="success text-small block" ng-if="signUpForm.password.$valid">Ok!</span>
+						</div>
+
+						<div class="form-group" ng-class="{'has-error':signUpForm.password2.$dirty && signUpForm.password2.$error.compareTo || signUpForm.password2.$dirty && signUpForm.password2.$invalid, 'has-success':signUpForm.password2.$valid}">
+							<label class="control-label">
+								<span translate="content.list.fields.REPEATPASSWORD">Repeat Password</span>
+								<span class="symbol required"></span>
+							</label>
+							<div class="input-group input-group-lg">
+								<input ng-minlength="6" ng-maxlength="20" type="password" placeholder="[[ 'content.form.messages.REENTERPASSWORD' | translate ]]" class="form-control input-lg" name="password2" ng-model="user.password2" compare-to="user.password" ng-required="true"/>
+								<span class="input-group-addon">
+									<i class="ti-lock"></i>
+								</span>
+							</div>
+							<span class="error text-small block" ng-if="signUpForm.password2.$dirty && signUpForm.password2.$error.required" translate="content.form.messages.REPEATPASSWORDREQUIRED">Repeat password is required!</span>
+							<span class="error text-small block" ng-if="signUpForm.password2.$dirty && signUpForm.password2.$error.compareTo" translate="content.form.messages.PASSWORDSDONOTMATCH">Passwords do not match!</span>
+							<span class="success text-small block" ng-if="signUpForm.password2.$valid" translate="content.form.messages.PASSWORDSMATCH">Passwords match!</span>
+						</div>
+
+						<div class="form-group">
+							<label class="control-label">
+								<span translate="content.list.fields.CAPTCHA">CAPTCHA</span>
+								<span class="symbol required"></span>
+							</label>
+							<div ng-model="user['g-recaptcha-response']" vc-recaptcha key="'6LdZbxwTAAAAAPMYxr2yVuTCSd3ceQxV9HfkOB8b'"></div>
+						</div>
+
+						<div class="form-group" ui-jq="checkBo">
+							<label class="cb-checkbox cb-md">
+								<input type="checkbox" name="checked-checkbox-name" value="1" name="terms" id="terms" ng-required="true" />
+								<span class="text-left" translate="register.TERMS">You agree to our Terms of services & Policies.</span>
+							</label>
+						</div>
+
+					</div>
+
+					<button class="btn btn-success btn-block btn-lg mb15" type="submit" ng-click="submit(signUpForm)" ng-disabled="disableSubmit">
+						<i class="fa fa-spinner fa-spin" ng-if="disableSubmit"></i>
+						<span translate="register.SIGNUP">Sign Up</span>
+					</button>
+
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

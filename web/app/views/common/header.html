@@ -8,7 +8,7 @@
 
   <!-- logo -->
   <div class="brand-logo">
-    <img data-ng-src="images/logo-dark.png" height="15" alt="">
+    <img data-ng-src="/app/images/logo-dark.png" height="15" alt="">
   </div>
   <!-- /logo -->
 
@@ -27,7 +27,7 @@
 <ul class="nav navbar-nav hidden-xs">
   <li>
     <p class="navbar-text">
-      {{$state.current.data.title}}
+      [[$state.current.data.title]]
     </p>
   </li>
 </ul>
@@ -95,9 +95,9 @@
 
   <li class="dropdown" dropdown>
     <a href="javascript:;" class="dropdown-toggle" dropdown-toggle>
-      <img data-ng-src="{{user.avatar}}" class="header-avatar img-circle ml10" alt="user" title="user">
+      <img data-ng-src="[[user.avatar]]" class="header-avatar img-circle ml10" alt="user" title="user">
       <span class="pull-left">
-        {{user.fname}} {{user.lname}}
+        [[user.fname]] [[user.lname]]
       </span>
     </a>
     <ul class="dropdown-menu">
@@ -117,7 +117,7 @@
         <a href="javascript:;">Help</a>
       </li>
       <li>
-        <a ui-sref="user.signin">Logout</a>
+        <a ui-sref="auth.login">Logout</a>
       </li>
     </ul>
 

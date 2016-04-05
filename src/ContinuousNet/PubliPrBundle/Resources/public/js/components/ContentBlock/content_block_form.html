@@ -16,14 +16,14 @@
     <div class="row">
         <div class="col-md-12" ng-controller="ContentBlockFormCtrl">
             <div>
-                    <fieldset>
-                        <legend translate="content.list.NEWCONTENTBLOCK" ng-if="contentBlock.id == 0">
-                            New Content Block
-                        </legend>
-                        <legend translate="content.list.EDITCONTENTBLOCK" ng-if="contentBlock.id > 0">
-                            Edit Content Block
-                        </legend>
-                        <form name="contentBlockForm" id="contentBlockForm" novalidate ng-submit="submitForm(contentBlockForm)">
+                <fieldset>
+                    <legend translate="content.list.NEWCONTENTBLOCK" ng-if="contentBlock.id == 0">
+                        New Content Block
+                    </legend>
+                    <legend translate="content.list.EDITCONTENTBLOCK" ng-if="contentBlock.id > 0">
+                        Edit Content Block
+                    </legend>
+                    <form name="contentBlockForm" id="contentBlockForm" novalidate ng-submit="submitForm(contentBlockForm)">
                         <div class="row">
                             <input type="hidden" name="id" id="contentBlockId" ng-model="contentBlock.id" />
                             <div class="col-md-6">
@@ -157,7 +157,6 @@
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
                         </div><!--/row-->
-                        </form>
                         <div class="row">
                             <div class="col-md-4">
                                 <button ng-click="list()" class="btn btn-primary pull-left">
@@ -167,12 +166,13 @@
                             <div class="col-md-4">
                             </div>
                             <div class="col-md-4">
-                                <button type="button" ng-click="submitForm(contentBlockForm)" class="btn btn-primary pull-right"> <!--  ng-disabled="contentBlockForm.$invalid" -->
-                                    <i class="ti-save"></i> <span translate="content.common.SAVE">Save</span>
+                                <button type="button" ng-click="submitForm(contentBlockForm)" class="btn btn-primary pull-right" ng-disabled="disableSubmit"> <!--  ng-disabled="contentBlockForm.$invalid" -->
+                                    <i class="fa fa-spinner fa-spin" ng-if="disableSubmit"></i><i class="ti-save" ng-if="!disableSubmit"></i> <span translate="content.common.SAVE">Save</span>
                                 </button>
                             </div>
                         </div>
-                   </fieldset>
+                    </form>
+                </fieldset>
             </div>
         </div><!--/col-md-12-->
     </div><!--/row-->

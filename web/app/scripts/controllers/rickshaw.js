@@ -125,5 +125,5 @@ function rickshawCtrl($scope, COLORS) {
 }
 
 angular
-  .module('urbanApp')
+  .module('publiPrApp')
   .controller('rickshawCtrl', ['$scope', 'COLORS', rickshawCtrl]);

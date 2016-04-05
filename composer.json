@@ -28,7 +28,6 @@
         "sensio/generator-bundle": "2.5",
         "voryx/restgeneratorbundle": "^0.3.0",
         "symfony/assetic-bundle": "^2.7",
-        "lexik/jwt-authentication-bundle": "^1.4",
         "friendsofsymfony/user-bundle": "^1.3",
         "willdurand/propel-typehintable-behavior": "^1.0",
         "helios-ag/fm-elfinder-bundle": "^6.0",
@@ -36,7 +35,9 @@
         "php-ffmpeg/php-ffmpeg": "^0.6.0",
         "symfony/finder": "^3.0",
         "liip/imagine-bundle": "^1.5",
-        "richsage/rms-push-notifications-bundle": "^0.1.9"
+        "richsage/rms-push-notifications-bundle": "^0.1.9",
+        "lexik/jwt-authentication-bundle": "^1.4",
+        "excelwebzone/recaptcha-bundle": "^1.4"
     },
     "require-dev": {
         "symfony/phpunit-bridge": "~2.7"

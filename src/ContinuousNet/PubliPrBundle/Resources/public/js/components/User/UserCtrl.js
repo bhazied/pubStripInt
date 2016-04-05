@@ -12,25 +12,17 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $q, $interpolate
         title: $filter('translate')('content.list.fields.types.GUEST'),
         css: 'info'
     }, {
-        id: 'Subscriber',
-        title: $filter('translate')('content.list.fields.types.SUBSCRIBER'),
+        id: 'Manager',
+        title: $filter('translate')('content.list.fields.types.MANAGER'),
         css: 'success'
+    }, {
+        id: 'Contributor',
+        title: $filter('translate')('content.list.fields.types.CONTRIBUTOR'),
+        css: 'warning'
     }, {
         id: 'Administrator',
         title: $filter('translate')('content.list.fields.types.ADMINISTRATOR'),
-        css: 'warning'
-    }, {
-        id: 'Publisher',
-        title: $filter('translate')('content.list.fields.types.PUBLISHER'),
         css: 'inverse'
-    }, {
-        id: 'ContentProvider',
-        title: $filter('translate')('content.list.fields.types.CONTENTPROVIDER'),
-        css: 'danger'
-    }, {
-        id: 'ServiceProvider',
-        title: $filter('translate')('content.list.fields.types.SERVICEPROVIDER'),
-        css: 'primary'
     }];
     $scope.genders = [{
         id: 'Male',
@@ -59,21 +51,17 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $q, $interpolate
         title: $filter('translate')('content.list.fields.roles.ROLE_API'),
         css: 'info'
     }, {
-        id: 'ROLE_SUBSCRIBER',
-        title: $filter('translate')('content.list.fields.roles.ROLE_SUBSCRIBER'),
+        id: 'ROLE_MANAGER',
+        title: $filter('translate')('content.list.fields.roles.ROLE_MANAGER'),
         css: 'success'
     }, {
-        id: 'ROLE_ADMIN',
-        title: $filter('translate')('content.list.fields.roles.ROLE_ADMIN'),
+        id: 'ROLE_CONTRIBUTOR',
+        title: $filter('translate')('content.list.fields.roles.ROLE_CONTRIBUTOR'),
         css: 'warning'
-    }, {
-        id: 'ROLE_ADMIN_PUBLISHER',
-        title: $filter('translate')('content.list.fields.roles.ROLE_ADMIN_PUBLISHER'),
-        css: 'inverse'
     }, {
         id: 'ROLE_SUPER_ADMIN',
         title: $filter('translate')('content.list.fields.roles.ROLE_SUPER_ADMIN'),
-        css: 'danger'
+        css: 'inverse'
     }];
 
     $scope.dateFormat = $filter('translate')('formats.DATE');

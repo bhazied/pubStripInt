@@ -64,5 +64,5 @@ function MessagesCtrl($scope, messages) {
 }
 
 angular
-  .module('urbanApp')
+  .module('publiPrApp')
   .controller('MessagesCtrl', ['$scope', 'messages', MessagesCtrl]);
