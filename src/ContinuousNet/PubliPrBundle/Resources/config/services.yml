@@ -1,0 +1,26 @@
+parameters:
+    publi_pr.event.jwt_response_listener.class: ContinuousNet\PubliPrBundle\EventListener\JWTResponseListener
+    publi_pr.event.jwt_created_listener.class: ContinuousNet\PubliPrBundle\EventListener\JWTCreatedListener
+    publi_pr.event.jwt_decoded_listener.class: ContinuousNet\PubliPrBundle\EventListener\JWTDecodedListener
+
+services:
+    publi_pr.event.jwt_response_listener:
+        class: %publi_pr.event.jwt_response_listener.class%
+        arguments:
+            - @doctrine.orm.entity_manager
+        tags:
+            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_authentication_success, method: onAuthenticationSuccessResponse }
+            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_authentication_failure, method: onAuthenticationFailureResponse }
+    publi_pr.event.jwt_created_listener:
+        class: %publi_pr.event.jwt_created_listener.class%
+        arguments:
+            - @doctrine.orm.entity_manager
+        tags:
+            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_created, method: onJWTCreated }
+    publi_pr.event.jwt_decoded_listener:
+        class: %publi_pr.event.jwt_decoded_listener.class%
+        arguments:
+            - @doctrine.orm.entity_manager
+            - 1800 # integer $maxInactivityTime (seconds)
+        tags:
+            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_decoded, method: onJWTDecoded }

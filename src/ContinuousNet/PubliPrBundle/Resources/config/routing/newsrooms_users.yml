@@ -1,0 +1,30 @@
+newsroomsusers:
+    path:     /
+    defaults: { _controller: "PubliPrBundle:NewsroomsUsers:index" }
+
+newsroomsusers_details:
+    path:     /{id}/details
+    defaults: { _controller: "PubliPrBundle:NewsroomsUsers:show" }
+
+newsroomsusers_new:
+    path:     /new
+    defaults: { _controller: "PubliPrBundle:NewsroomsUsers:new" }
+
+newsroomsusers_create:
+    path:     /create
+    defaults: { _controller: "PubliPrBundle:NewsroomsUsers:create" }
+    methods:  POST
+
+newsroomsusers_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "PubliPrBundle:NewsroomsUsers:edit" }
+
+newsroomsusers_update:
+    path:     /{id}/update
+    defaults: { _controller: "PubliPrBundle:NewsroomsUsers:update" }
+    methods:  [POST, PUT]
+
+newsroomsusers_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "PubliPrBundle:NewsroomsUsers:delete" }
+    methods:  [POST, DELETE]

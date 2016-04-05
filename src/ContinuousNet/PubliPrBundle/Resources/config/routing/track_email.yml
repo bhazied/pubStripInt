@@ -1,0 +1,30 @@
+trackemail:
+    path:     /
+    defaults: { _controller: "PubliPrBundle:TrackEmail:index" }
+
+trackemail_details:
+    path:     /{id}/details
+    defaults: { _controller: "PubliPrBundle:TrackEmail:show" }
+
+trackemail_new:
+    path:     /new
+    defaults: { _controller: "PubliPrBundle:TrackEmail:new" }
+
+trackemail_create:
+    path:     /create
+    defaults: { _controller: "PubliPrBundle:TrackEmail:create" }
+    methods:  POST
+
+trackemail_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "PubliPrBundle:TrackEmail:edit" }
+
+trackemail_update:
+    path:     /{id}/update
+    defaults: { _controller: "PubliPrBundle:TrackEmail:update" }
+    methods:  [POST, PUT]
+
+trackemail_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "PubliPrBundle:TrackEmail:delete" }
+    methods:  [POST, DELETE]

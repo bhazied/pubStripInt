@@ -1,0 +1,30 @@
+font:
+    path:     /
+    defaults: { _controller: "PubliPrBundle:Font:index" }
+
+font_details:
+    path:     /{id}/details
+    defaults: { _controller: "PubliPrBundle:Font:show" }
+
+font_new:
+    path:     /new
+    defaults: { _controller: "PubliPrBundle:Font:new" }
+
+font_create:
+    path:     /create
+    defaults: { _controller: "PubliPrBundle:Font:create" }
+    methods:  POST
+
+font_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "PubliPrBundle:Font:edit" }
+
+font_update:
+    path:     /{id}/update
+    defaults: { _controller: "PubliPrBundle:Font:update" }
+    methods:  [POST, PUT]
+
+font_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "PubliPrBundle:Font:delete" }
+    methods:  [POST, DELETE]

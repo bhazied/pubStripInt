@@ -1,0 +1,233 @@
+
+publi_pr:
+    resource: "@PubliPrBundle/Controller/DefaultController.php"
+    type:     annotation
+    prefix:   /
+
+thumb:
+    resource: "@PubliPrBundle/Controller/ThumbController.php"
+    type:     annotation
+    prefix:   /
+
+api_login_check:
+    path: /api/login_check
+
+api_login_check_lang:
+    path: /{_locale}/api/login_check
+    requirements:
+        _locale: en|fr|ar
+
+publi_pr_v1_api:
+    resource: "@PubliPrBundle/Controller/ApiV1RESTController.php"
+    type:   rest
+    prefix:   /{_locale}/api/v1
+    requirements:
+        _locale: en|fr|ar
+
+publi_pr_company_api:
+    resource: "@PubliPrBundle/Controller/CompanyRESTController.php"
+    type:   rest
+    prefix:   /api
+
+publi_pr_contact_api:
+    resource: "@PubliPrBundle/Controller/ContactRESTController.php"
+    type:   rest
+    prefix:   /api
+
+publi_pr_contact_group_api:
+    resource: "@PubliPrBundle/Controller/ContactGroupRESTController.php"
+    type:   rest
+    prefix:   /api
+
+publi_pr_content_block_api:
+    resource: "@PubliPrBundle/Controller/ContentBlockRESTController.php"
+    type:   rest
+    prefix:   /api
+
+publi_pr_country_api:
+    resource: "@PubliPrBundle/Controller/CountryRESTController.php"
+    type:   rest
+    prefix:   /api
+
+publi_pr_email_api:
+    resource: "@PubliPrBundle/Controller/EmailRESTController.php"
+    type:   rest
+    prefix:   /api
+
+publi_pr_email_campaign_api:
+    resource: "@PubliPrBundle/Controller/EmailCampaignRESTController.php"
+    type:   rest
+    prefix:   /api
+
+publi_pr_email_template_api:
+    resource: "@PubliPrBundle/Controller/EmailTemplateRESTController.php"
+    type:   rest
+    prefix:   /api
+
+publi_pr_font_api:
+    resource: "@PubliPrBundle/Controller/FontRESTController.php"
+    type:   rest
+    prefix:   /api
+
+publi_pr_language_api:
+    resource: "@PubliPrBundle/Controller/LanguageRESTController.php"
+    type:   rest
+    prefix:   /api
+
+publi_pr_layout_api:
+    resource: "@PubliPrBundle/Controller/LayoutRESTController.php"
+    type:   rest
+    prefix:   /api
+
+publi_pr_log_api:
+    resource: "@PubliPrBundle/Controller/LogRESTController.php"
+    type:   rest
+    prefix:   /api
+
+publi_pr_newsroom_api:
+    resource: "@PubliPrBundle/Controller/NewsroomRESTController.php"
+    type:   rest
+    prefix:   /api
+
+publi_pr_newsroom_template_api:
+    resource: "@PubliPrBundle/Controller/NewsroomTemplateRESTController.php"
+    type:   rest
+    prefix:   /api
+
+publi_pr_newsrooms_users_api:
+    resource: "@PubliPrBundle/Controller/NewsroomsUsersRESTController.php"
+    type:   rest
+    prefix:   /api
+
+publi_pr_payment_api:
+    resource: "@PubliPrBundle/Controller/PaymentRESTController.php"
+    type:   rest
+    prefix:   /api
+
+publi_pr_press_release_api:
+    resource: "@PubliPrBundle/Controller/PressReleaseRESTController.php"
+    type:   rest
+    prefix:   /api
+
+publi_pr_session_api:
+    resource: "@PubliPrBundle/Controller/SessionRESTController.php"
+    type:   rest
+    prefix:   /api
+
+publi_pr_setting_api:
+    resource: "@PubliPrBundle/Controller/SettingRESTController.php"
+    type:   rest
+    prefix:   /api
+
+publi_pr_template_api:
+    resource: "@PubliPrBundle/Controller/TemplateRESTController.php"
+    type:   rest
+    prefix:   /api
+
+publi_pr_track_email_api:
+    resource: "@PubliPrBundle/Controller/TrackEmailRESTController.php"
+    type:   rest
+    prefix:   /api
+
+publi_pr_track_press_release_api:
+    resource: "@PubliPrBundle/Controller/TrackPressReleaseRESTController.php"
+    type:   rest
+    prefix:   /api
+
+publi_pr_user_api:
+    resource: "@PubliPrBundle/Controller/UserRESTController.php"
+    type:   rest
+    prefix:   /api
+
+publi_pr_company:
+    resource: "@PubliPrBundle/Resources/config/routing/company.yml"
+    prefix:   /company
+
+publi_pr_contact:
+    resource: "@PubliPrBundle/Resources/config/routing/contact.yml"
+    prefix:   /contact
+
+publi_pr_contact_group:
+    resource: "@PubliPrBundle/Resources/config/routing/contact_group.yml"
+    prefix:   /contact-group
+
+publi_pr_content_block:
+    resource: "@PubliPrBundle/Resources/config/routing/content_block.yml"
+    prefix:   /content-block
+
+publi_pr_country:
+    resource: "@PubliPrBundle/Resources/config/routing/country.yml"
+    prefix:   /country
+
+publi_pr_email:
+    resource: "@PubliPrBundle/Resources/config/routing/email.yml"
+    prefix:   /email
+
+publi_pr_email_campaign:
+    resource: "@PubliPrBundle/Resources/config/routing/email_campaign.yml"
+    prefix:   /email-campaign
+
+publi_pr_email_template:
+    resource: "@PubliPrBundle/Resources/config/routing/email_template.yml"
+    prefix:   /email-template
+
+publi_pr_font:
+    resource: "@PubliPrBundle/Resources/config/routing/font.yml"
+    prefix:   /font
+
+publi_pr_language:
+    resource: "@PubliPrBundle/Resources/config/routing/language.yml"
+    prefix:   /language
+
+publi_pr_layout:
+    resource: "@PubliPrBundle/Resources/config/routing/layout.yml"
+    prefix:   /layout
+
+publi_pr_log:
+    resource: "@PubliPrBundle/Resources/config/routing/log.yml"
+    prefix:   /log
+
+publi_pr_newsroom:
+    resource: "@PubliPrBundle/Resources/config/routing/newsroom.yml"
+    prefix:   /newsroom
+
+publi_pr_newsroom_template:
+    resource: "@PubliPrBundle/Resources/config/routing/newsroom_template.yml"
+    prefix:   /newsroom-template
+
+publi_pr_newsrooms_users:
+    resource: "@PubliPrBundle/Resources/config/routing/newsrooms_users.yml"
+    prefix:   /newsrooms-users
+
+publi_pr_payment:
+    resource: "@PubliPrBundle/Resources/config/routing/payment.yml"
+    prefix:   /payment
+
+publi_pr_press_release:
+    resource: "@PubliPrBundle/Resources/config/routing/press_release.yml"
+    prefix:   /press-release
+
+publi_pr_session:
+    resource: "@PubliPrBundle/Resources/config/routing/session.yml"
+    prefix:   /session
+
+publi_pr_setting:
+    resource: "@PubliPrBundle/Resources/config/routing/setting.yml"
+    prefix:   /setting
+
+publi_pr_template:
+    resource: "@PubliPrBundle/Resources/config/routing/template.yml"
+    prefix:   /template
+
+publi_pr_track_email:
+    resource: "@PubliPrBundle/Resources/config/routing/track_email.yml"
+    prefix:   /track-email
+
+publi_pr_track_press_release:
+    resource: "@PubliPrBundle/Resources/config/routing/track_press_release.yml"
+    prefix:   /track-press-release
+
+publi_pr_user:
+    resource: "@PubliPrBundle/Resources/config/routing/user.yml"
+    prefix:   /user
+

@@ -1,0 +1,30 @@
+pressrelease:
+    path:     /
+    defaults: { _controller: "PubliPrBundle:PressRelease:index" }
+
+pressrelease_details:
+    path:     /{id}/details
+    defaults: { _controller: "PubliPrBundle:PressRelease:show" }
+
+pressrelease_new:
+    path:     /new
+    defaults: { _controller: "PubliPrBundle:PressRelease:new" }
+
+pressrelease_create:
+    path:     /create
+    defaults: { _controller: "PubliPrBundle:PressRelease:create" }
+    methods:  POST
+
+pressrelease_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "PubliPrBundle:PressRelease:edit" }
+
+pressrelease_update:
+    path:     /{id}/update
+    defaults: { _controller: "PubliPrBundle:PressRelease:update" }
+    methods:  [POST, PUT]
+
+pressrelease_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "PubliPrBundle:PressRelease:delete" }
+    methods:  [POST, DELETE]

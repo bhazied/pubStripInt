@@ -1,0 +1,30 @@
+template:
+    path:     /
+    defaults: { _controller: "PubliPrBundle:Template:index" }
+
+template_details:
+    path:     /{id}/details
+    defaults: { _controller: "PubliPrBundle:Template:show" }
+
+template_new:
+    path:     /new
+    defaults: { _controller: "PubliPrBundle:Template:new" }
+
+template_create:
+    path:     /create
+    defaults: { _controller: "PubliPrBundle:Template:create" }
+    methods:  POST
+
+template_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "PubliPrBundle:Template:edit" }
+
+template_update:
+    path:     /{id}/update
+    defaults: { _controller: "PubliPrBundle:Template:update" }
+    methods:  [POST, PUT]
+
+template_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "PubliPrBundle:Template:delete" }
+    methods:  [POST, DELETE]

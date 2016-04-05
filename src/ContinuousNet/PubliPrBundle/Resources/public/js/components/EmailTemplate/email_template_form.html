@@ -1,0 +1,163 @@
+
+<!-- start: PAGE TITLE -->
+<section id="page-title">
+    <div class="row">
+        <div class="col-sm-8">
+            <h1 class="mainTitle" translate="content.list.EMAILTEMPLATES">Email Templates</h1>
+            <span class="mainDescription"></span>
+        </div>
+        <div ncy-breadcrumb></div>
+    </div>
+</section>
+<!-- end: PAGE TITLE -->
+
+<!-- start: FORM -->
+<div class="container-fluid container-fullw bg-white">
+    <div class="row">
+        <div class="col-md-12" ng-controller="EmailTemplateFormCtrl">
+            <div>
+                <fieldset>
+                    <legend translate="content.list.NEWEMAILTEMPLATE" ng-if="emailTemplate.id == 0">
+                        New Email Template
+                    </legend>
+                    <legend translate="content.list.EDITEMAILTEMPLATE" ng-if="emailTemplate.id > 0">
+                        Edit Email Template
+                    </legend>
+                    <form name="emailTemplateForm" id="emailTemplateForm" novalidate ng-submit="submitForm(emailTemplateForm)">
+                        <div class="row">
+                            <input type="hidden" name="id" id="emailTemplateId" ng-model="emailTemplate.id" />
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':emailTemplateForm.name.$dirty && emailTemplateForm.name.$invalid, 'has-success':emailTemplateForm.name.$valid}">
+                                    <label for="emailTemplateName" class="control-label">
+                                        <span translate="content.list.fields.NAME">Name</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="emailTemplate.name" type="text" name="name" id="emailTemplateName" class="form-control" placeholder="[[ 'content.form.messages.ENTERNAME' | translate ]]" ng-required="true" />
+                                        <i class="ti-tag"></i>
+                                    </span><!--/input-icon-->
+                                    <span class="error text-small block" ng-if="emailTemplateForm.name.$dirty && emailTemplateForm.name.$error.required" translate="content.form.messages.NAMEREQUIRED">Name is required.</span>
+                                    <span class="success text-small block" ng-if="emailTemplateForm.name.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                                    <slug from="emailTemplate.name" to="emailTemplate.slug"></slug>
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':emailTemplateForm.slug.$dirty && emailTemplateForm.slug.$invalid, 'has-success':emailTemplateForm.slug.$valid}">
+                                    <label for="emailTemplateSlug" class="control-label">
+                                        <span translate="content.list.fields.SLUG">Slug</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="emailTemplate.slug" type="text" name="slug" id="emailTemplateSlug" class="form-control" placeholder="[[ 'content.form.messages.ENTERSLUG' | translate ]]" ng-required="true" />
+                                        <i class="ti-anchor"></i>
+                                    </span><!--/input-icon-->
+                                    <span class="error text-small block" ng-if="emailTemplateForm.slug.$dirty && emailTemplateForm.slug.$error.required" translate="content.form.messages.SLUGREQUIRED">Slug is required.</span>
+                                    <span class="success text-small block" ng-if="emailTemplateForm.slug.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':emailTemplateForm.fromEmail.$dirty && emailTemplateForm.fromEmail.$invalid, 'has-success':emailTemplateForm.fromEmail.$valid}">
+                                    <label for="emailTemplateFromEmail" class="control-label">
+                                        <span translate="content.list.fields.FROMEMAIL">From Email</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="emailTemplate.from_email" type="text" name="fromEmail" id="emailTemplateFromEmail" class="form-control" placeholder="[[ 'content.form.messages.ENTERFROMEMAIL' | translate ]]" ng-required="true" />
+                                        <i class="ti-marker-alt"></i>
+                                    </span><!--/input-icon-->
+                                    <span class="error text-small block" ng-if="emailTemplateForm.fromEmail.$dirty && emailTemplateForm.fromEmail.$error.required" translate="content.form.messages.FROMEMAILREQUIRED">From Email is required.</span>
+                                    <span class="success text-small block" ng-if="emailTemplateForm.fromEmail.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':emailTemplateForm.replyToEmail.$dirty && emailTemplateForm.replyToEmail.$invalid, 'has-success':emailTemplateForm.replyToEmail.$valid}">
+                                    <label for="emailTemplateReplyToEmail" class="control-label">
+                                        <span translate="content.list.fields.REPLYTOEMAIL">Reply To Email</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="emailTemplate.reply_to_email" type="text" name="replyToEmail" id="emailTemplateReplyToEmail" class="form-control" placeholder="[[ 'content.form.messages.ENTERREPLYTOEMAIL' | translate ]]" ng-required="true" />
+                                        <i class="ti-marker-alt"></i>
+                                    </span><!--/input-icon-->
+                                    <span class="error text-small block" ng-if="emailTemplateForm.replyToEmail.$dirty && emailTemplateForm.replyToEmail.$error.required" translate="content.form.messages.REPLYTOEMAILREQUIRED">Reply To Email is required.</span>
+                                    <span class="success text-small block" ng-if="emailTemplateForm.replyToEmail.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':emailTemplateForm.subject.$dirty && emailTemplateForm.subject.$invalid, 'has-success':emailTemplateForm.subject.$valid}">
+                                    <label for="emailTemplateSubject" class="control-label">
+                                        <span translate="content.list.fields.SUBJECT">Subject</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="emailTemplate.subject" type="text" name="subject" id="emailTemplateSubject" class="form-control" placeholder="[[ 'content.form.messages.ENTERSUBJECT' | translate ]]" ng-required="true" />
+                                        <i class="ti-marker-alt"></i>
+                                    </span><!--/input-icon-->
+                                    <span class="error text-small block" ng-if="emailTemplateForm.subject.$dirty && emailTemplateForm.subject.$error.required" translate="content.form.messages.SUBJECTREQUIRED">Subject is required.</span>
+                                    <span class="success text-small block" ng-if="emailTemplateForm.subject.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-12">
+                                <div class="form-group" ng-class="{'has-error':emailTemplateForm.body.$dirty && emailTemplateForm.body.$invalid, 'has-success':emailTemplateForm.body.$valid}">
+                                    <label for="emailTemplateBody" class="control-label">
+                                        <span translate="content.list.fields.BODY">Body</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <div class="note-editor">
+                                        <div ckeditor="editorOptions" ready="onReadyEditor()"ng-model="emailTemplate.body" name="body" id="emailTemplateBody" class="form-control" placeholder="[[ 'content.form.messages.ENTERBODY' | translate ]]" class="form-control autosize area-animated msd-elastic: \n;" ng-required="true"></div>
+                                    </div>
+                                    <span class="error text-small block" ng-if="emailTemplateForm.body.$dirty && emailTemplateForm.body.$error.required" translate="content.form.messages.BODYREQUIRED">Body is required.</span>
+                                    <span class="success text-small block" ng-if="emailTemplateForm.body.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':emailTemplateForm.status.$dirty && emailTemplateForm.status.$invalid, 'has-success':emailTemplateForm.status.$valid}">
+                                    <label for="emailTemplateStatus" class="control-label">
+                                        <span translate="content.list.fields.STATUS">Status</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <div class="clip-radio radio-primary" ng-if="statuses.length < 10">
+                                        <input ng-disabled="false" ng-repeat-start="status in statuses" ng-model="emailTemplate.status" type="radio" id="status[[ status.id ]]" value="[[ status.id ]]" name="status" ng-required="true" />
+                                        <label ng-repeat-end for="status[[ status.id ]]">
+                                            [[ status.title ]]
+                                        </label>
+                                    </div>
+                                    <div class="block" ng-if="statuses.length >= 10">
+                                        <select ng-disabled="false" ng-options="item.id as item.title for item in statuses" ng-model="emailTemplate.status" name="status" id="emailTemplateStatus" class="form-control" ng-required="true">
+                                            <option translate="content.form.messages.SELECTSTATUS" value="">Select Status</option>
+                                        </select>
+                                        <span my-enum="[[ emailTemplate.status ]]" my-enum-list="[[ statuses ]]"></span>
+                                    </div>
+                                    <span class="error text-small block" ng-if="emailTemplateForm.status.$dirty && emailTemplateForm.status.$error.required" translate="content.form.messages.STATUSREQUIRED">Status is required.</span>
+                                    <span class="success text-small block" ng-if="emailTemplateForm.status.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-4">
+                                <button ng-click="list()" class="btn btn-primary pull-left">
+                                    <i class="ti-layout-list-thumb"></i> <span translate="content.list.BACKEMAILTEMPLATES">Back to Email Templates list</span>
+                                </button>
+                            </div>
+                            <div class="col-md-4">
+                            </div>
+                            <div class="col-md-4">
+                                <button type="button" ng-click="submitForm(emailTemplateForm)" class="btn btn-primary pull-right" ng-disabled="disableSubmit"> <!--  ng-disabled="emailTemplateForm.$invalid" -->
+                                    <i class="fa fa-spinner fa-spin" ng-if="disableSubmit"></i><i class="ti-save" ng-if="!disableSubmit"></i> <span translate="content.common.SAVE">Save</span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </fieldset>
+            </div>
+        </div><!--/col-md-12-->
+    </div><!--/row-->
+</div><!--/container-fluid container-fullw-->
+<!-- end: FORM -->
+

@@ -1,0 +1,30 @@
+layout:
+    path:     /
+    defaults: { _controller: "PubliPrBundle:Layout:index" }
+
+layout_details:
+    path:     /{id}/details
+    defaults: { _controller: "PubliPrBundle:Layout:show" }
+
+layout_new:
+    path:     /new
+    defaults: { _controller: "PubliPrBundle:Layout:new" }
+
+layout_create:
+    path:     /create
+    defaults: { _controller: "PubliPrBundle:Layout:create" }
+    methods:  POST
+
+layout_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "PubliPrBundle:Layout:edit" }
+
+layout_update:
+    path:     /{id}/update
+    defaults: { _controller: "PubliPrBundle:Layout:update" }
+    methods:  [POST, PUT]
+
+layout_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "PubliPrBundle:Layout:delete" }
+    methods:  [POST, DELETE]

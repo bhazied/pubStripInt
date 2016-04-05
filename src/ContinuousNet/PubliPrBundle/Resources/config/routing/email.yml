@@ -1,0 +1,30 @@
+email:
+    path:     /
+    defaults: { _controller: "PubliPrBundle:Email:index" }
+
+email_details:
+    path:     /{id}/details
+    defaults: { _controller: "PubliPrBundle:Email:show" }
+
+email_new:
+    path:     /new
+    defaults: { _controller: "PubliPrBundle:Email:new" }
+
+email_create:
+    path:     /create
+    defaults: { _controller: "PubliPrBundle:Email:create" }
+    methods:  POST
+
+email_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "PubliPrBundle:Email:edit" }
+
+email_update:
+    path:     /{id}/update
+    defaults: { _controller: "PubliPrBundle:Email:update" }
+    methods:  [POST, PUT]
+
+email_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "PubliPrBundle:Email:delete" }
+    methods:  [POST, DELETE]

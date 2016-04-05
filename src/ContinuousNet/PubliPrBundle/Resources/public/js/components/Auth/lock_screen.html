@@ -1,0 +1,33 @@
+<!-- start: LOCK SCREEN -->
+<div class="row">
+	<div class="lock-screen">
+		<div class="logo text-center">
+			<img src="/assets/images/logo_big.png" alt="[[app.name]]"/><!-- ng-src="[[app.layout.logo]]" -->
+		</div>
+		<div class="box-ls">
+			<img style="max-width: 80%;" ng-src="[[ user.picture ]]" alt="[[ user.name ]]"  class="img-rounded" />
+			<div class="user-info">
+				<h4>[[ user.name ]]</h4>
+				<span>[[ user.email ]]</span>
+				<form ng-controller="LockScreenCtrl">
+					<div class="alert alert-danger" ng-if="status == 'error'">
+						<button data-ct-dismiss="alert" class="close">
+							&times;
+						</button>
+						<span translate="login.ERROR">Incorrect Email or Password.</span>
+					</div>
+					<div class="input-group">
+						<input type="text" placeholder="[[ 'content.form.messages.PASSWORDTOUNLOCK' | translate ]]" ng-model="password" class="form-control">
+						<span class="input-group-btn">
+							<button class="btn btn-primary" type="button" ng-click="submit()" ng-disabled="disableSubmit">
+								<i class="fa fa-spinner fa-spin" ng-if="disableSubmit"></i>
+								<i class="fa fa-chevron-right" ng-if="!disableSubmit"></i>
+							</button>
+						</span>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- end: LOCK SCREEN -->

@@ -1,0 +1,30 @@
+setting:
+    path:     /
+    defaults: { _controller: "PubliPrBundle:Setting:index" }
+
+setting_details:
+    path:     /{id}/details
+    defaults: { _controller: "PubliPrBundle:Setting:show" }
+
+setting_new:
+    path:     /new
+    defaults: { _controller: "PubliPrBundle:Setting:new" }
+
+setting_create:
+    path:     /create
+    defaults: { _controller: "PubliPrBundle:Setting:create" }
+    methods:  POST
+
+setting_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "PubliPrBundle:Setting:edit" }
+
+setting_update:
+    path:     /{id}/update
+    defaults: { _controller: "PubliPrBundle:Setting:update" }
+    methods:  [POST, PUT]
+
+setting_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "PubliPrBundle:Setting:delete" }
+    methods:  [POST, DELETE]

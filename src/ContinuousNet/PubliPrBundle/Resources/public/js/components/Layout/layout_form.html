@@ -1,0 +1,173 @@
+
+<!-- start: PAGE TITLE -->
+<section id="page-title">
+    <div class="row">
+        <div class="col-sm-8">
+            <h1 class="mainTitle" translate="content.list.LAYOUTS">Layouts</h1>
+            <span class="mainDescription"></span>
+        </div>
+        <div ncy-breadcrumb></div>
+    </div>
+</section>
+<!-- end: PAGE TITLE -->
+
+<!-- start: FORM -->
+<div class="container-fluid container-fullw bg-white">
+    <div class="row">
+        <div class="col-md-12" ng-controller="LayoutFormCtrl">
+            <div>
+                <fieldset>
+                    <legend translate="content.list.NEWLAYOUT" ng-if="layout.id == 0">
+                        New Layout
+                    </legend>
+                    <legend translate="content.list.EDITLAYOUT" ng-if="layout.id > 0">
+                        Edit Layout
+                    </legend>
+                    <form name="layoutForm" id="layoutForm" novalidate ng-submit="submitForm(layoutForm)">
+                        <div class="row">
+                            <input type="hidden" name="id" id="layoutId" ng-model="layout.id" />
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':layoutForm.name.$dirty && layoutForm.name.$invalid, 'has-success':layoutForm.name.$valid}">
+                                    <label for="layoutName" class="control-label">
+                                        <span translate="content.list.fields.NAME">Name</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="layout.name" type="text" name="name" id="layoutName" class="form-control" placeholder="[[ 'content.form.messages.ENTERNAME' | translate ]]" ng-required="true" />
+                                        <i class="ti-tag"></i>
+                                    </span><!--/input-icon-->
+                                    <span class="error text-small block" ng-if="layoutForm.name.$dirty && layoutForm.name.$error.required" translate="content.form.messages.NAMEREQUIRED">Name is required.</span>
+                                    <span class="success text-small block" ng-if="layoutForm.name.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-12">
+                                <div class="form-group" ng-class="{'has-error':layoutForm.description.$dirty && layoutForm.description.$invalid, 'has-success':layoutForm.description.$valid}">
+                                    <label for="layoutDescription" class="control-label">
+                                        <span translate="content.list.fields.DESCRIPTION">Description</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <div class="note-editor">
+                                        <div ckeditor="editorOptions" ready="onReadyEditor()"ng-model="layout.description" name="description" id="layoutDescription" class="form-control" placeholder="[[ 'content.form.messages.ENTERDESCRIPTION' | translate ]]" class="form-control autosize area-animated msd-elastic: \n;" ng-required="true"></div>
+                                    </div>
+                                    <span class="error text-small block" ng-if="layoutForm.description.$dirty && layoutForm.description.$error.required" translate="content.form.messages.DESCRIPTIONREQUIRED">Description is required.</span>
+                                    <span class="success text-small block" ng-if="layoutForm.description.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group" ng-class="{'has-error':layoutForm.htmlTemplate.$dirty && layoutForm.htmlTemplate.$invalid, 'has-success':layoutForm.htmlTemplate.$valid}">
+                                    <label for="layoutHtmlTemplate" class="control-label">
+                                        <span translate="content.list.fields.HTMLTEMPLATE">Html Template</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <div class="note-editor">
+                                        <div ckeditor="editorOptions" ready="onReadyEditor()"ng-model="layout.html_template" name="htmlTemplate" id="layoutHtmlTemplate" class="form-control" placeholder="[[ 'content.form.messages.ENTERHTMLTEMPLATE' | translate ]]" class="form-control autosize area-animated msd-elastic: \n;" ng-required="true"></div>
+                                    </div>
+                                    <span class="error text-small block" ng-if="layoutForm.htmlTemplate.$dirty && layoutForm.htmlTemplate.$error.required" translate="content.form.messages.HTMLTEMPLATEREQUIRED">Html Template is required.</span>
+                                    <span class="success text-small block" ng-if="layoutForm.htmlTemplate.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="layoutSettings" class="control-label">
+                                        <span translate="content.list.fields.SETTINGS">Settings</span>
+                                    </label>
+                                    <div class="note-editor">
+                                        <textarea ng-model="layout.settings" name="settings" id="layoutSettings" class="form-control" placeholder="[[ 'content.form.messages.ENTERSETTINGS' | translate ]]" class="form-control autosize area-animated msd-elastic: \n;"></textarea>
+                                    </div>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':layoutForm.picture.$dirty && layoutForm.picture.$invalid, 'has-success':layoutForm.picture.$valid}">
+                                    <label for="layoutPicture" class="control-label">
+                                        <span translate="content.list.fields.PICTURE">Picture</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <div class="input-group">
+                                    <span class="input-icon">
+                                        <input ng-model="layout.picture" type="text" name="picture" id="layoutPicture" class="form-control" placeholder="[[ 'content.form.messages.ENTERPICTURE' | translate ]]" ng-required="true" />
+                                        <i class="ti-image"></i>
+                                    </span><!--/input-icon-->
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-primary" ng-click="showFileManager('picture')">
+                                                <i class="ti-cloud"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                    <div class="user-image margin-top-10" ng-if="layout.picture != '' && layout.picture != null">
+                                        <div class="thumbnail">
+                                            <img ng-src="[[ thumbURL + layout.picture ]]" alt="" />
+                                        </div>
+                                        <div class="user-image-buttons">
+                                            <span class="btn btn-primary"  ng-click="showFileManager('picture')"><i class="fa fa-pencil"></i></span>
+                                            <span class="btn btn-danger" ng-click="layout.picture = ''"> <i class="fa fa-times"></i></span>
+                                        </div>
+                                    </div>
+                                    <span class="error text-small block" ng-if="layoutForm.picture.$dirty && layoutForm.picture.$error.required" translate="content.form.messages.PICTUREREQUIRED">Picture is required.</span>
+                                    <span class="success text-small block" ng-if="layoutForm.picture.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':layoutForm.columnsCount.$dirty && layoutForm.columnsCount.$invalid, 'has-success':layoutForm.columnsCount.$valid}">
+                                    <label for="layoutColumnsCount" class="control-label">
+                                        <span translate="content.list.fields.COLUMNSCOUNT">Columns Count</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="layout.columns_count" type="text" name="columnsCount" id="layoutColumnsCount" class="form-control" placeholder="[[ 'content.form.messages.ENTERCOLUMNSCOUNT' | translate ]]" touchspin data-min="0" data-max="10000000" data-verticalbuttons="true" data-verticalupclass="ti-angle-up" data-verticaldownclass="ti-angle-down" ng-required="true" />
+                                        <i class="ti-marker-alt"></i>
+                                    </span><!--/input-icon-->
+                                    <span class="error text-small block" ng-if="layoutForm.columnsCount.$dirty && layoutForm.columnsCount.$error.required" translate="content.form.messages.COLUMNSCOUNTREQUIRED">Columns Count is required.</span>
+                                    <span class="success text-small block" ng-if="layoutForm.columnsCount.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':layoutForm.status.$dirty && layoutForm.status.$invalid, 'has-success':layoutForm.status.$valid}">
+                                    <label for="layoutStatus" class="control-label">
+                                        <span translate="content.list.fields.STATUS">Status</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <div class="clip-radio radio-primary" ng-if="statuses.length < 10">
+                                        <input ng-disabled="false" ng-repeat-start="status in statuses" ng-model="layout.status" type="radio" id="status[[ status.id ]]" value="[[ status.id ]]" name="status" ng-required="true" />
+                                        <label ng-repeat-end for="status[[ status.id ]]">
+                                            [[ status.title ]]
+                                        </label>
+                                    </div>
+                                    <div class="block" ng-if="statuses.length >= 10">
+                                        <select ng-disabled="false" ng-options="item.id as item.title for item in statuses" ng-model="layout.status" name="status" id="layoutStatus" class="form-control" ng-required="true">
+                                            <option translate="content.form.messages.SELECTSTATUS" value="">Select Status</option>
+                                        </select>
+                                        <span my-enum="[[ layout.status ]]" my-enum-list="[[ statuses ]]"></span>
+                                    </div>
+                                    <span class="error text-small block" ng-if="layoutForm.status.$dirty && layoutForm.status.$error.required" translate="content.form.messages.STATUSREQUIRED">Status is required.</span>
+                                    <span class="success text-small block" ng-if="layoutForm.status.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-4">
+                                <button ng-click="list()" class="btn btn-primary pull-left">
+                                    <i class="ti-layout-list-thumb"></i> <span translate="content.list.BACKLAYOUTS">Back to Layouts list</span>
+                                </button>
+                            </div>
+                            <div class="col-md-4">
+                            </div>
+                            <div class="col-md-4">
+                                <button type="button" ng-click="submitForm(layoutForm)" class="btn btn-primary pull-right" ng-disabled="disableSubmit"> <!--  ng-disabled="layoutForm.$invalid" -->
+                                    <i class="fa fa-spinner fa-spin" ng-if="disableSubmit"></i><i class="ti-save" ng-if="!disableSubmit"></i> <span translate="content.common.SAVE">Save</span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </fieldset>
+            </div>
+        </div><!--/col-md-12-->
+    </div><!--/row-->
+</div><!--/container-fluid container-fullw-->
+<!-- end: FORM -->
+

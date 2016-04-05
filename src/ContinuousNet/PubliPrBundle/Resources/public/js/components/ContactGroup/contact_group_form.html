@@ -1,0 +1,65 @@
+
+<!-- start: PAGE TITLE -->
+<section id="page-title">
+    <div class="row">
+        <div class="col-sm-8">
+            <h1 class="mainTitle" translate="content.list.CONTACTGROUPS">Contact Groups</h1>
+            <span class="mainDescription"></span>
+        </div>
+        <div ncy-breadcrumb></div>
+    </div>
+</section>
+<!-- end: PAGE TITLE -->
+
+<!-- start: FORM -->
+<div class="container-fluid container-fullw bg-white">
+    <div class="row">
+        <div class="col-md-12" ng-controller="ContactGroupFormCtrl">
+            <div>
+                <fieldset>
+                    <legend translate="content.list.NEWCONTACTGROUP" ng-if="contactGroup.id == 0">
+                        New Contact Group
+                    </legend>
+                    <legend translate="content.list.EDITCONTACTGROUP" ng-if="contactGroup.id > 0">
+                        Edit Contact Group
+                    </legend>
+                    <form name="contactGroupForm" id="contactGroupForm" novalidate ng-submit="submitForm(contactGroupForm)">
+                        <div class="row">
+                            <input type="hidden" name="id" id="contactGroupId" ng-model="contactGroup.id" />
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':contactGroupForm.name.$dirty && contactGroupForm.name.$invalid, 'has-success':contactGroupForm.name.$valid}">
+                                    <label for="contactGroupName" class="control-label">
+                                        <span translate="content.list.fields.NAME">Name</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="contactGroup.name" type="text" name="name" id="contactGroupName" class="form-control" placeholder="[[ 'content.form.messages.ENTERNAME' | translate ]]" ng-required="true" />
+                                        <i class="ti-tag"></i>
+                                    </span><!--/input-icon-->
+                                    <span class="error text-small block" ng-if="contactGroupForm.name.$dirty && contactGroupForm.name.$error.required" translate="content.form.messages.NAMEREQUIRED">Name is required.</span>
+                                    <span class="success text-small block" ng-if="contactGroupForm.name.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-4">
+                                <button ng-click="list()" class="btn btn-primary pull-left">
+                                    <i class="ti-layout-list-thumb"></i> <span translate="content.list.BACKCONTACTGROUPS">Back to Contact Groups list</span>
+                                </button>
+                            </div>
+                            <div class="col-md-4">
+                            </div>
+                            <div class="col-md-4">
+                                <button type="button" ng-click="submitForm(contactGroupForm)" class="btn btn-primary pull-right" ng-disabled="disableSubmit"> <!--  ng-disabled="contactGroupForm.$invalid" -->
+                                    <i class="fa fa-spinner fa-spin" ng-if="disableSubmit"></i><i class="ti-save" ng-if="!disableSubmit"></i> <span translate="content.common.SAVE">Save</span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </fieldset>
+            </div>
+        </div><!--/col-md-12-->
+    </div><!--/row-->
+</div><!--/container-fluid container-fullw-->
+<!-- end: FORM -->
+

@@ -1,0 +1,13 @@
+{% block subject %} PUBLI PR - Inscription {% endblock %}
+
+{% block body_text %}
+    {% autoescape false %}
+        Bonjour {{ user.name }},
+
+        Pour valider votre compte utilisateur, merci de cliquer sur lien suivant :
+        {{ confirmationUrl }}
+
+        Cordialement,
+        L'équipe PUBLI PR.
+    {% endautoescape %}
+{% endblock %}

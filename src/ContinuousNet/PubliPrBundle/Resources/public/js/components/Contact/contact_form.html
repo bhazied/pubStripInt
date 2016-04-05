@@ -1,0 +1,153 @@
+
+<!-- start: PAGE TITLE -->
+<section id="page-title">
+    <div class="row">
+        <div class="col-sm-8">
+            <h1 class="mainTitle" translate="content.list.CONTACTS">Contacts</h1>
+            <span class="mainDescription"></span>
+        </div>
+        <div ncy-breadcrumb></div>
+    </div>
+</section>
+<!-- end: PAGE TITLE -->
+
+<!-- start: FORM -->
+<div class="container-fluid container-fullw bg-white">
+    <div class="row">
+        <div class="col-md-12" ng-controller="ContactFormCtrl">
+            <div>
+                <fieldset>
+                    <legend translate="content.list.NEWCONTACT" ng-if="contact.id == 0">
+                        New Contact
+                    </legend>
+                    <legend translate="content.list.EDITCONTACT" ng-if="contact.id > 0">
+                        Edit Contact
+                    </legend>
+                    <form name="contactForm" id="contactForm" novalidate ng-submit="submitForm(contactForm)">
+                        <div class="row">
+                            <input type="hidden" name="id" id="contactId" ng-model="contact.id" />
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':contactForm.contactGroup.$dirty && contactForm.contactGroup.$invalid, 'has-success':contactForm.contactGroup.$valid}">
+                                    <label for="contactContactGroup" class="control-label">
+                                        <span translate="content.list.fields.CONTACTGROUP">Contact Group</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                <div class="block" ng-if="contactGroupsLoaded">
+                                    <span class="input-icon">
+                                        <select ng-options="item.id as item.name for item in contactGroups | filter:{ hidden : false }" ng-model="contact.contact_group" name="contactGroup" id="contactContactGroup" class="form-control" ng-required="true">
+                                            <option translate="content.form.messages.SELECTCONTACTGROUP" value="">Select Contact Group</option>
+                                        </select>
+                                        <i class="ti-marker-alt"></i>
+                                    </span><!--/input-icon-->
+                                </div>
+                                    <span class="error text-small block" ng-if="contactForm.contactGroup.$dirty && contactForm.contactGroup.$error.required" translate="content.form.messages.CONTACTGROUPREQUIRED">Contact Group is required.</span>
+                                    <span class="success text-small block" ng-if="contactForm.contactGroup.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="contactFirstName" class="control-label">
+                                        <span translate="content.list.fields.FIRSTNAME">First Name</span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="contact.first_name" type="text" name="firstName" id="contactFirstName" class="form-control" placeholder="[[ 'content.form.messages.ENTERFIRSTNAME' | translate ]]" />
+                                        <i class="ti-id-badge"></i>
+                                    </span><!--/input-icon-->
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="contactLastName" class="control-label">
+                                        <span translate="content.list.fields.LASTNAME">Last Name</span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="contact.last_name" type="text" name="lastName" id="contactLastName" class="form-control" placeholder="[[ 'content.form.messages.ENTERLASTNAME' | translate ]]" />
+                                        <i class="ti-id-badge"></i>
+                                    </span><!--/input-icon-->
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':contactForm.email.$dirty && contactForm.email.$invalid, 'has-success':contactForm.email.$valid}">
+                                    <label for="contactEmail" class="control-label">
+                                        <span translate="content.list.fields.EMAIL">Email</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="contact.email" type="email" name="email" id="contactEmail" class="form-control" placeholder="[[ 'content.form.messages.ENTEREMAIL' | translate ]]" ng-required="true" my-unique-field="contact.email" my-resource-url="contacts" my-current-id="[[ contact.id ]]" />
+                                        <i class="ti-email"></i>
+                                    </span><!--/input-icon-->
+                                    <span class="error text-small block" ng-if="contactForm.email.$dirty && contactForm.email.$error.required" translate="content.form.messages.EMAILREQUIRED">Email is required.</span>
+                                    <span class="error text-small block" ng-if="contactForm.email.$dirty && contactForm.email.$error.myUniqueField" translate="content.form.messages.EMAILALREADYINUSE">This Email is already in use. Please choose another one.</span>
+                                    <span class="success text-small block" ng-if="contactForm.email.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="contactPhone" class="control-label">
+                                        <span translate="content.list.fields.PHONE">Phone</span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="contact.phone" type="text" name="phone" id="contactPhone" class="form-control" placeholder="[[ 'content.form.messages.ENTERPHONE' | translate ]]" my-unique-field="contact.phone" my-resource-url="contacts" my-current-id="[[ contact.id ]]" />
+                                        <i class="fa fa-phone"></i>
+                                    </span><!--/input-icon-->
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="checkbox clip-check check-primary">
+                                    <input ng-model="contact.active" type="checkbox" name="active" id="contactActive" />
+                                    <label for="contactActive" translate="content.list.fields.ACTIVE">Active</label>
+                                </div><!--/checkbox clip-check check-primary-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="checkbox clip-check check-primary">
+                                    <input ng-model="contact.unsubscribed" type="checkbox" name="unsubscribed" id="contactUnsubscribed" />
+                                    <label for="contactUnsubscribed" translate="content.list.fields.UNSUBSCRIBED">Unsubscribed</label>
+                                </div><!--/checkbox clip-check check-primary-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="contactUnsubscribedAt" class="control-label">
+                                        <span translate="content.list.fields.UNSUBSCRIBEDAT">Unsubscribed At</span>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-icon">
+                                            <input ng-model="contact.unsubscribed_at" type="text" name="unsubscribedAt" id="contactUnsubscribedAt" class="form-control" placeholder="[[ 'content.form.messages.SELECTUNSUBSCRIBEDAT' | translate ]]" is-open="unsubscribedAtOpened" uib-datepicker-popup="[[dateTimeFormat]]" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="[[ 'content.common.CLOSE' | translate ]]" current-text="[[ 'content.common.CURRENT' | translate ]]" clear-text="[[ 'content.common.CLEAR' | translate ]]" time-text="[[ 'content.common.TIME' | translate ]]" date-text="[[ 'content.common.DATE' | translate ]]" />
+                                            <i class="ti-marker-alt"></i>
+                                        </span><!--/input-icon-->
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-primary" ng-click="unsubscribedAtToggle($event)">
+                                            <i class="fa fa-calendar"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-4">
+                                <button ng-click="list()" class="btn btn-primary pull-left">
+                                    <i class="ti-layout-list-thumb"></i> <span translate="content.list.BACKCONTACTS">Back to Contacts list</span>
+                                </button>
+                            </div>
+                            <div class="col-md-4">
+                            </div>
+                            <div class="col-md-4">
+                                <button type="button" ng-click="submitForm(contactForm)" class="btn btn-primary pull-right" ng-disabled="disableSubmit"> <!--  ng-disabled="contactForm.$invalid" -->
+                                    <i class="fa fa-spinner fa-spin" ng-if="disableSubmit"></i><i class="ti-save" ng-if="!disableSubmit"></i> <span translate="content.common.SAVE">Save</span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </fieldset>
+            </div>
+        </div><!--/col-md-12-->
+    </div><!--/row-->
+</div><!--/container-fluid container-fullw-->
+<!-- end: FORM -->
+

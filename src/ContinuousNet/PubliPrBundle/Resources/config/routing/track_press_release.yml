@@ -1,0 +1,30 @@
+trackpressrelease:
+    path:     /
+    defaults: { _controller: "PubliPrBundle:TrackPressRelease:index" }
+
+trackpressrelease_details:
+    path:     /{id}/details
+    defaults: { _controller: "PubliPrBundle:TrackPressRelease:show" }
+
+trackpressrelease_new:
+    path:     /new
+    defaults: { _controller: "PubliPrBundle:TrackPressRelease:new" }
+
+trackpressrelease_create:
+    path:     /create
+    defaults: { _controller: "PubliPrBundle:TrackPressRelease:create" }
+    methods:  POST
+
+trackpressrelease_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "PubliPrBundle:TrackPressRelease:edit" }
+
+trackpressrelease_update:
+    path:     /{id}/update
+    defaults: { _controller: "PubliPrBundle:TrackPressRelease:update" }
+    methods:  [POST, PUT]
+
+trackpressrelease_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "PubliPrBundle:TrackPressRelease:delete" }
+    methods:  [POST, DELETE]

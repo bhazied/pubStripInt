@@ -1,0 +1,136 @@
+
+<!-- start: PAGE TITLE -->
+<section id="page-title">
+    <div class="row">
+        <div class="col-sm-8">
+            <h1 class="mainTitle" translate="content.list.COUNTRIES">Countries</h1>
+            <span class="mainDescription"></span>
+        </div>
+        <div ncy-breadcrumb></div>
+    </div>
+</section>
+<!-- end: PAGE TITLE -->
+
+<!-- start: FORM -->
+<div class="container-fluid container-fullw bg-white">
+    <div class="row">
+        <div class="col-md-12" ng-controller="CountryFormCtrl">
+            <div>
+                <fieldset>
+                    <legend translate="content.list.NEWCOUNTRY" ng-if="country.id == 0">
+                        New Country
+                    </legend>
+                    <legend translate="content.list.EDITCOUNTRY" ng-if="country.id > 0">
+                        Edit Country
+                    </legend>
+                    <form name="countryForm" id="countryForm" novalidate ng-submit="submitForm(countryForm)">
+                        <div class="row">
+                            <input type="hidden" name="id" id="countryId" ng-model="country.id" />
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':countryForm.name.$dirty && countryForm.name.$invalid, 'has-success':countryForm.name.$valid}">
+                                    <label for="countryName" class="control-label">
+                                        <span translate="content.list.fields.NAME">Name</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="country.name" type="text" name="name" id="countryName" class="form-control" placeholder="[[ 'content.form.messages.ENTERNAME' | translate ]]" ng-required="true" my-unique-field="country.name" my-resource-url="countries" my-current-id="[[ country.id ]]" />
+                                        <i class="ti-tag"></i>
+                                    </span><!--/input-icon-->
+                                    <span class="error text-small block" ng-if="countryForm.name.$dirty && countryForm.name.$error.required" translate="content.form.messages.NAMEREQUIRED">Name is required.</span>
+                                    <span class="error text-small block" ng-if="countryForm.name.$dirty && countryForm.name.$error.myUniqueField" translate="content.form.messages.NAMEALREADYINUSE">This Name is already in use. Please choose another one.</span>
+                                    <span class="success text-small block" ng-if="countryForm.name.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="countryPicture" class="control-label">
+                                        <span translate="content.list.fields.PICTURE">Picture</span>
+                                    </label>
+                                    <div class="input-group">
+                                    <span class="input-icon">
+                                        <input ng-model="country.picture" type="text" name="picture" id="countryPicture" class="form-control" placeholder="[[ 'content.form.messages.ENTERPICTURE' | translate ]]" />
+                                        <i class="ti-image"></i>
+                                    </span><!--/input-icon-->
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-primary" ng-click="showFileManager('picture')">
+                                                <i class="ti-cloud"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                    <div class="user-image margin-top-10" ng-if="country.picture != '' && country.picture != null">
+                                        <div class="thumbnail">
+                                            <img ng-src="[[ thumbURL + country.picture ]]" alt="" />
+                                        </div>
+                                        <div class="user-image-buttons">
+                                            <span class="btn btn-primary"  ng-click="showFileManager('picture')"><i class="fa fa-pencil"></i></span>
+                                            <span class="btn btn-danger" ng-click="country.picture = ''"> <i class="fa fa-times"></i></span>
+                                        </div>
+                                    </div>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':countryForm.code.$dirty && countryForm.code.$invalid, 'has-success':countryForm.code.$valid}">
+                                    <label for="countryCode" class="control-label">
+                                        <span translate="content.list.fields.CODE">Code</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="country.code" type="text" name="code" id="countryCode" class="form-control" placeholder="[[ 'content.form.messages.ENTERCODE' | translate ]]" ng-required="true" />
+                                        <i class="ti-shortcode"></i>
+                                    </span><!--/input-icon-->
+                                    <span class="error text-small block" ng-if="countryForm.code.$dirty && countryForm.code.$error.required" translate="content.form.messages.CODEREQUIRED">Code is required.</span>
+                                    <span class="success text-small block" ng-if="countryForm.code.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':countryForm.longCode.$dirty && countryForm.longCode.$invalid, 'has-success':countryForm.longCode.$valid}">
+                                    <label for="countryLongCode" class="control-label">
+                                        <span translate="content.list.fields.LONGCODE">Long Code</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="country.long_code" type="text" name="longCode" id="countryLongCode" class="form-control" placeholder="[[ 'content.form.messages.ENTERLONGCODE' | translate ]]" ng-required="true" />
+                                        <i class="ti-shortcode"></i>
+                                    </span><!--/input-icon-->
+                                    <span class="error text-small block" ng-if="countryForm.longCode.$dirty && countryForm.longCode.$error.required" translate="content.form.messages.LONGCODEREQUIRED">Long Code is required.</span>
+                                    <span class="success text-small block" ng-if="countryForm.longCode.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="countryPrefix" class="control-label">
+                                        <span translate="content.list.fields.PREFIX">Prefix</span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="country.prefix" type="text" name="prefix" id="countryPrefix" class="form-control" placeholder="[[ 'content.form.messages.ENTERPREFIX' | translate ]]" />
+                                        <i class="ti-marker-alt"></i>
+                                    </span><!--/input-icon-->
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-4">
+                                <button ng-click="list()" class="btn btn-primary pull-left">
+                                    <i class="ti-layout-list-thumb"></i> <span translate="content.list.BACKCOUNTRIES">Back to Countries list</span>
+                                </button>
+                            </div>
+                            <div class="col-md-4">
+                            </div>
+                            <div class="col-md-4">
+                                <button type="button" ng-click="submitForm(countryForm)" class="btn btn-primary pull-right" ng-disabled="disableSubmit"> <!--  ng-disabled="countryForm.$invalid" -->
+                                    <i class="fa fa-spinner fa-spin" ng-if="disableSubmit"></i><i class="ti-save" ng-if="!disableSubmit"></i> <span translate="content.common.SAVE">Save</span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </fieldset>
+            </div>
+        </div><!--/col-md-12-->
+    </div><!--/row-->
+</div><!--/container-fluid container-fullw-->
+<!-- end: FORM -->
+

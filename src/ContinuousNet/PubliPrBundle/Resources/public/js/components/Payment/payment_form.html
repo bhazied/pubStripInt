@@ -1,0 +1,174 @@
+
+<!-- start: PAGE TITLE -->
+<section id="page-title">
+    <div class="row">
+        <div class="col-sm-8">
+            <h1 class="mainTitle" translate="content.list.PAYMENTS">Payments</h1>
+            <span class="mainDescription"></span>
+        </div>
+        <div ncy-breadcrumb></div>
+    </div>
+</section>
+<!-- end: PAGE TITLE -->
+
+<!-- start: FORM -->
+<div class="container-fluid container-fullw bg-white">
+    <div class="row">
+        <div class="col-md-12" ng-controller="PaymentFormCtrl">
+            <div>
+                <fieldset>
+                    <legend translate="content.list.NEWPAYMENT" ng-if="payment.id == 0">
+                        New Payment
+                    </legend>
+                    <legend translate="content.list.EDITPAYMENT" ng-if="payment.id > 0">
+                        Edit Payment
+                    </legend>
+                    <form name="paymentForm" id="paymentForm" novalidate ng-submit="submitForm(paymentForm)">
+                        <div class="row">
+                            <input type="hidden" name="id" id="paymentId" ng-model="payment.id" />
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':paymentForm.ip.$dirty && paymentForm.ip.$invalid, 'has-success':paymentForm.ip.$valid}">
+                                    <label for="paymentIp" class="control-label">
+                                        <span translate="content.list.fields.IP">Ip</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="payment.ip" type="text" name="ip" id="paymentIp" class="form-control" placeholder="[[ 'content.form.messages.ENTERIP' | translate ]]" ng-required="true" />
+                                        <i class="ti-marker-alt"></i>
+                                    </span><!--/input-icon-->
+                                    <span class="error text-small block" ng-if="paymentForm.ip.$dirty && paymentForm.ip.$error.required" translate="content.form.messages.IPREQUIRED">Ip is required.</span>
+                                    <span class="success text-small block" ng-if="paymentForm.ip.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':paymentForm.amount.$dirty && paymentForm.amount.$invalid, 'has-success':paymentForm.amount.$valid}">
+                                    <label for="paymentAmount" class="control-label">
+                                        <span translate="content.list.fields.AMOUNT">Amount</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                        <input ng-model="payment.amount" type="text" name="amount" id="paymentAmount" class="form-control" placeholder="[[ 'content.form.messages.ENTERAMOUNT' | translate ]]" touchspin data-min="0" data-max="10000000"  data-verticalbuttons="true" data-verticalupclass="ti-angle-up" data-verticaldownclass="ti-angle-down" ng-required="true" />
+                                    <span class="error text-small block" ng-if="paymentForm.amount.$dirty && paymentForm.amount.$error.required" translate="content.form.messages.AMOUNTREQUIRED">Amount is required.</span>
+                                    <span class="success text-small block" ng-if="paymentForm.amount.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':paymentForm.currency.$dirty && paymentForm.currency.$invalid, 'has-success':paymentForm.currency.$valid}">
+                                    <label for="paymentCurrency" class="control-label">
+                                        <span translate="content.list.fields.CURRENCY">Currency</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="payment.currency" type="text" name="currency" id="paymentCurrency" class="form-control" placeholder="[[ 'content.form.messages.ENTERCURRENCY' | translate ]]" ng-required="true" />
+                                        <i class="ti-marker-alt"></i>
+                                    </span><!--/input-icon-->
+                                    <span class="error text-small block" ng-if="paymentForm.currency.$dirty && paymentForm.currency.$error.required" translate="content.form.messages.CURRENCYREQUIRED">Currency is required.</span>
+                                    <span class="success text-small block" ng-if="paymentForm.currency.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':paymentForm.status.$dirty && paymentForm.status.$invalid, 'has-success':paymentForm.status.$valid}">
+                                    <label for="paymentStatus" class="control-label">
+                                        <span translate="content.list.fields.STATUS">Status</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="payment.status" type="text" name="status" id="paymentStatus" class="form-control" placeholder="[[ 'content.form.messages.ENTERSTATUS' | translate ]]" ng-required="true" />
+                                        <i class="ti-marker-alt"></i>
+                                    </span><!--/input-icon-->
+                                    <span class="error text-small block" ng-if="paymentForm.status.$dirty && paymentForm.status.$error.required" translate="content.form.messages.STATUSREQUIRED">Status is required.</span>
+                                    <span class="success text-small block" ng-if="paymentForm.status.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="paymentDiscountCode" class="control-label">
+                                        <span translate="content.list.fields.DISCOUNTCODE">Discount Code</span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="payment.discount_code" type="text" name="discountCode" id="paymentDiscountCode" class="form-control" placeholder="[[ 'content.form.messages.ENTERDISCOUNTCODE' | translate ]]" />
+                                        <i class="ti-shortcode"></i>
+                                    </span><!--/input-icon-->
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="paymentInvoiceNumber" class="control-label">
+                                        <span translate="content.list.fields.INVOICENUMBER">Invoice Number</span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="payment.invoice_number" type="text" name="invoiceNumber" id="paymentInvoiceNumber" class="form-control" placeholder="[[ 'content.form.messages.ENTERINVOICENUMBER' | translate ]]" />
+                                        <i class="ti-marker-alt"></i>
+                                    </span><!--/input-icon-->
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="paymentDetails" class="control-label">
+                                        <span translate="content.list.fields.DETAILS">Details</span>
+                                    </label>
+                                    <div class="note-editor">
+                                        <textarea ng-model="payment.details" name="details" id="paymentDetails" class="form-control" placeholder="[[ 'content.form.messages.ENTERDETAILS' | translate ]]" class="form-control autosize area-animated msd-elastic: \n;"></textarea>
+                                    </div>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="paymentNote" class="control-label">
+                                        <span translate="content.list.fields.NOTE">Note</span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="payment.note" type="text" name="note" id="paymentNote" class="form-control" placeholder="[[ 'content.form.messages.ENTERNOTE' | translate ]]" />
+                                        <i class="ti-marker-alt"></i>
+                                    </span><!--/input-icon-->
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="checkbox clip-check check-primary">
+                                    <input ng-model="payment.is_valid" type="checkbox" name="isValid" id="paymentIsValid" />
+                                    <label for="paymentIsValid" translate="content.list.fields.ISVALID">Is Valid</label>
+                                </div><!--/checkbox clip-check check-primary-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':paymentForm.token.$dirty && paymentForm.token.$invalid, 'has-success':paymentForm.token.$valid}">
+                                    <label for="paymentToken" class="control-label">
+                                        <span translate="content.list.fields.TOKEN">Token</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <div class="note-editor">
+                                        <textarea ng-model="payment.token" name="token" id="paymentToken" class="form-control" placeholder="[[ 'content.form.messages.ENTERTOKEN' | translate ]]" class="form-control autosize area-animated msd-elastic: \n;" ng-required="true"></textarea>
+                                    </div>
+                                    <span class="error text-small block" ng-if="paymentForm.token.$dirty && paymentForm.token.$error.required" translate="content.form.messages.TOKENREQUIRED">Token is required.</span>
+                                    <span class="success text-small block" ng-if="paymentForm.token.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-4">
+                                <button ng-click="list()" class="btn btn-primary pull-left">
+                                    <i class="ti-layout-list-thumb"></i> <span translate="content.list.BACKPAYMENTS">Back to Payments list</span>
+                                </button>
+                            </div>
+                            <div class="col-md-4">
+                            </div>
+                            <div class="col-md-4">
+                                <button type="button" ng-click="submitForm(paymentForm)" class="btn btn-primary pull-right" ng-disabled="disableSubmit"> <!--  ng-disabled="paymentForm.$invalid" -->
+                                    <i class="fa fa-spinner fa-spin" ng-if="disableSubmit"></i><i class="ti-save" ng-if="!disableSubmit"></i> <span translate="content.common.SAVE">Save</span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </fieldset>
+            </div>
+        </div><!--/col-md-12-->
+    </div><!--/row-->
+</div><!--/container-fluid container-fullw-->
+<!-- end: FORM -->
+

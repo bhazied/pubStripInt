@@ -1,0 +1,141 @@
+
+<!-- start: PAGE TITLE -->
+<section id="page-title">
+    <div class="row">
+        <div class="col-sm-8">
+            <h1 class="mainTitle" translate="content.list.EMAILS">Emails</h1>
+            <span class="mainDescription"></span>
+        </div>
+        <div ncy-breadcrumb></div>
+    </div>
+</section>
+<!-- end: PAGE TITLE -->
+
+<!-- start: FORM -->
+<div class="container-fluid container-fullw bg-white">
+    <div class="row">
+        <div class="col-md-12" ng-controller="EmailFormCtrl">
+            <div>
+                <fieldset>
+                    <legend translate="content.list.NEWEMAIL" ng-if="email.id == 0">
+                        New Email
+                    </legend>
+                    <legend translate="content.list.EDITEMAIL" ng-if="email.id > 0">
+                        Edit Email
+                    </legend>
+                    <form name="emailForm" id="emailForm" novalidate ng-submit="submitForm(emailForm)">
+                        <div class="row">
+                            <input type="hidden" name="id" id="emailId" ng-model="email.id" />
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':emailForm.pressRelease.$dirty && emailForm.pressRelease.$invalid, 'has-success':emailForm.pressRelease.$valid}">
+                                    <label for="emailPressRelease" class="control-label">
+                                        <span translate="content.list.fields.PRESSRELEASE">Press Release</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                <div class="block" ng-if="pressReleasesLoaded">
+                                    <span class="input-icon">
+                                        <select ng-options="item.id as item.title for item in pressReleases | filter:{ hidden : false }" ng-model="email.press_release" name="pressRelease" id="emailPressRelease" class="form-control" ng-required="true">
+                                            <option translate="content.form.messages.SELECTPRESSRELEASE" value="">Select Press Release</option>
+                                        </select>
+                                        <i class="ti-marker-alt"></i>
+                                    </span><!--/input-icon-->
+                                </div>
+                                    <span class="error text-small block" ng-if="emailForm.pressRelease.$dirty && emailForm.pressRelease.$error.required" translate="content.form.messages.PRESSRELEASEREQUIRED">Press Release is required.</span>
+                                    <span class="success text-small block" ng-if="emailForm.pressRelease.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':emailForm.contact.$dirty && emailForm.contact.$invalid, 'has-success':emailForm.contact.$valid}">
+                                    <label for="emailContact" class="control-label">
+                                        <span translate="content.list.fields.CONTACT">Contact</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                <div class="block" ng-if="contactsLoaded">
+                                    <span class="input-icon">
+                                        <select ng-options="item.id as item.firstName for item in contacts | filter:{ hidden : false }" ng-model="email.contact" name="contact" id="emailContact" class="form-control" ng-required="true">
+                                            <option translate="content.form.messages.SELECTCONTACT" value="">Select Contact</option>
+                                        </select>
+                                        <i class="ti-marker-alt"></i>
+                                    </span><!--/input-icon-->
+                                </div>
+                                    <span class="error text-small block" ng-if="emailForm.contact.$dirty && emailForm.contact.$error.required" translate="content.form.messages.CONTACTREQUIRED">Contact is required.</span>
+                                    <span class="success text-small block" ng-if="emailForm.contact.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':emailForm.email.$dirty && emailForm.email.$invalid, 'has-success':emailForm.email.$valid}">
+                                    <label for="emailEmail" class="control-label">
+                                        <span translate="content.list.fields.EMAIL">Email</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="email.email" type="email" name="email" id="emailEmail" class="form-control" placeholder="[[ 'content.form.messages.ENTEREMAIL' | translate ]]" ng-required="true" />
+                                        <i class="ti-email"></i>
+                                    </span><!--/input-icon-->
+                                    <span class="error text-small block" ng-if="emailForm.email.$dirty && emailForm.email.$error.required" translate="content.form.messages.EMAILREQUIRED">Email is required.</span>
+                                    <span class="success text-small block" ng-if="emailForm.email.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':emailForm.section.$dirty && emailForm.section.$invalid, 'has-success':emailForm.section.$valid}">
+                                    <label for="emailSection" class="control-label">
+                                        <span translate="content.list.fields.SECTION">Section</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="email.section" type="text" name="section" id="emailSection" class="form-control" placeholder="[[ 'content.form.messages.ENTERSECTION' | translate ]]" ng-required="true" />
+                                        <i class="ti-marker-alt"></i>
+                                    </span><!--/input-icon-->
+                                    <span class="error text-small block" ng-if="emailForm.section.$dirty && emailForm.section.$error.required" translate="content.form.messages.SECTIONREQUIRED">Section is required.</span>
+                                    <span class="success text-small block" ng-if="emailForm.section.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':emailForm.sendingStatus.$dirty && emailForm.sendingStatus.$invalid, 'has-success':emailForm.sendingStatus.$valid}">
+                                    <label for="emailSendingStatus" class="control-label">
+                                        <span translate="content.list.fields.SENDINGSTATUS">Sending Status</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <div class="clip-radio radio-primary" ng-if="sendingStatuses.length < 10">
+                                        <input ng-disabled="false" ng-repeat-start="sendingStatus in sendingStatuses" ng-model="email.sending_status" type="radio" id="sending_status[[ sendingStatus.id ]]" value="[[ sendingStatus.id ]]" name="sendingStatus" ng-required="true" />
+                                        <label ng-repeat-end for="sending_status[[ sendingStatus.id ]]">
+                                            [[ sendingStatus.title ]]
+                                        </label>
+                                    </div>
+                                    <div class="block" ng-if="sendingStatuses.length >= 10">
+                                        <select ng-disabled="false" ng-options="item.id as item.title for item in sendingStatuses" ng-model="email.sending_status" name="sending_status" id="emailSendingStatus" class="form-control" ng-required="true">
+                                            <option translate="content.form.messages.SELECTSENDINGSTATUS" value="">Select Sending Status</option>
+                                        </select>
+                                        <span my-enum="[[ email.sending_status ]]" my-enum-list="[[ sendingStatuses ]]"></span>
+                                    </div>
+                                    <span class="error text-small block" ng-if="emailForm.sendingStatus.$dirty && emailForm.sendingStatus.$error.required" translate="content.form.messages.SENDINGSTATUSREQUIRED">Sending Status is required.</span>
+                                    <span class="success text-small block" ng-if="emailForm.sendingStatus.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-4">
+                                <button ng-click="list()" class="btn btn-primary pull-left">
+                                    <i class="ti-layout-list-thumb"></i> <span translate="content.list.BACKEMAILS">Back to Emails list</span>
+                                </button>
+                            </div>
+                            <div class="col-md-4">
+                            </div>
+                            <div class="col-md-4">
+                                <button type="button" ng-click="submitForm(emailForm)" class="btn btn-primary pull-right" ng-disabled="disableSubmit"> <!--  ng-disabled="emailForm.$invalid" -->
+                                    <i class="fa fa-spinner fa-spin" ng-if="disableSubmit"></i><i class="ti-save" ng-if="!disableSubmit"></i> <span translate="content.common.SAVE">Save</span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </fieldset>
+            </div>
+        </div><!--/col-md-12-->
+    </div><!--/row-->
+</div><!--/container-fluid container-fullw-->
+<!-- end: FORM -->
+

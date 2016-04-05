@@ -1,0 +1,69 @@
+<div class="center-wrapper" ng-controller="ResetCtrl">
+    <div class="center-content">
+        <div class="row no-margin">
+            <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+
+                <div class="text-center mb15">
+                    <img src="/app/images/logo-dark.png" />
+                </div>
+
+                <form class="form-layout">
+                    <fieldset ng-if="showForm">
+                        <legend translate="resetpassword.FORGET">
+                            Forget Password?
+                        </legend>
+                        <p translate="resetpassword.ENTERNEWPASSWORD">
+                            Enter your new password.
+                        </p>
+                        <h2 ng-if="status == 'progress'" class="text-center">
+                            <i class="fa fa-spinner fa-spin fa-2x text-primary block margin-bottom-10"></i>
+                            <span translate="resetpassword.RESETPASSWORDRESETINPROGRESS">Reset password reset in progress...</span>
+                        </h2>
+                        <h2 ng-if="status == 'success'" class="text-center">
+                            <i class="fa fa-check-circle-o fa-2x text-success block margin-bottom-10"></i>
+                            <span translate="resetpassword.PASSWORDCHANGED">Password changed</span>
+                            <a ng-if="authenticated" class="btn btn-primary btn-o " ui-sref="app.dashboard" translate="content.form.messages.GOTODASHBOARD" ng-if="authenticated">
+                                Go to Dashboard
+                            </a>
+                        </h2>
+                        <h2 ng-if="status == 'error'" class="text-center">
+                            <i class="fa fa-times-circle  fa-2x text-danger block margin-bottom-10"></i>
+                            <span translate="resetpassword.NEWPASSWORDNOTSET">New password not set!</span>
+                        </h2>
+                        <div class="form-group">
+                            <span class="input-group input-group-lg">
+                                <input type="password" class="form-control" name="new[first]" placeholder="[[ 'content.form.messages.ENTERPASSWORD' | translate ]]" ng-model="password.new.first" ng-required="true" />
+                                <span class="input-group-addon"><i class="ti-lock"></i></span>
+                            </span>
+                        </div>
+                        <div class="form-group">
+                            <span class="input-group input-group-lg">
+                                <input type="password" class="form-control" name="new[second]" placeholder="[[ 'content.form.messages.REENTERPASSWORD' | translate ]]" ng-model="password.new.second" ng-required="true" />
+                                <span class="input-group-addon"><i class="ti-lock"></i></span>
+                            </span>
+                        </div>
+                        <div class="form-actions">
+                            <a class="btn btn-primary btn-o" ui-sref="auth.login">
+                                <i class="fa fa-chevron-circle-left"></i>
+                                <span translate="resetpassword.LOGIN">Log-In</span>
+                            </a>
+                            <button type="button" class="btn btn-primary pull-right" ng-click="submit()" ng-disabled="disableSubmit">
+                                <i class="fa fa-spinner fa-spin" ng-if="disableSubmit"></i>
+                                <i class="fa fa-arrow-circle-right" ng-if="!disableSubmit"></i>
+                                <span translate="resetpassword.SUBMIT">Submit</span>
+                            </button>
+                        </div>
+                    </fieldset>
+                    <div ng-if="!showForm">
+                        <h2 ng-if="status == 'error'" class="text-center">
+                            <i class="fa fa-times-circle  fa-2x text-danger block margin-bottom-10"></i>
+                            <span translate="resetpassword.INVALIDTOKEN">Invalid token!</span>
+                        </h2>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+

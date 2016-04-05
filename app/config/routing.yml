@@ -1,0 +1,24 @@
+publi_pr:
+    resource: "@PubliPrBundle/Resources/config/routing.yml"
+    
+fos_user_security:
+    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+ 
+fos_user_profile:
+    resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
+    prefix: /profile
+ 
+fos_user_register:
+    resource: "@PubliPrBundle/Resources/config/routing/registration.xml"
+    prefix: '#/auth'
+ 
+fos_user_resetting:
+    resource: "@PubliPrBundle/Resources/config/routing/resetting.xml"
+    prefix: '#/auth'
+ 
+fos_user_change_password:
+    resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
+    prefix: /profile
+
+elfinder:
+     resource: "@FMElfinderBundle/Resources/config/routing.yml"
