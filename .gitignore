@@ -10,5 +10,6 @@
 /vendor/
 /bin/
 /web/uploads/*
-/web/media/cache
+/web/media/cache/*
+/.idea/*
 /composer.phar
