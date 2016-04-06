@@ -74358,6 +74358,9 @@ app.constant('JS_REQUIRES', {
             '/bower_components/angular-flot/angular-flot.js'
         ]
     }, {
+        name: 'checkbo',
+        files: ['/bower_components/checkbo/src/0.1.4/css/checkBo.min.css', '/bower_components/checkbo/src/0.1.4/js/checkBo.min.js']
+    }, {
         name: 'toaster',
         files: ['/bower_components/AngularJS-Toaster/toaster.js', '/bower_components/AngularJS-Toaster/toaster.css']
     }, {
@@ -74644,7 +74647,7 @@ angular
       $stateProvider.state('app', {
         url: '/app',
         templateUrl: '/app/views/common/layout.html',
-        resolve: loadSequence('modernizr', 'moment', 'angularMoment', 'uiSwitch', 'perfect-scrollbar-plugin', 'toaster', 'ngAside', 'vAccordion', 'chartjs', 'tc.chartjs', 'sweet-alert', 'oitozero.ngSweetAlert', 'truncate', 'htmlToPlaintext', 'angular-notification-icons', 'd3', 'rickshaw', 'flot'),
+        resolve: loadSequence('modernizr', 'moment', 'angularMoment', 'uiSwitch', 'perfect-scrollbar-plugin', 'toaster', 'ngAside', 'vAccordion', 'chartjs', 'tc.chartjs', 'sweet-alert', 'oitozero.ngSweetAlert', 'truncate', 'htmlToPlaintext', 'angular-notification-icons', 'checkbo', 'd3', 'rickshaw', 'flot'),
         abstract: true
       })
 
@@ -74659,24 +74662,24 @@ angular
                 insertBefore: '#load_styles_before',
                 files: [
                                 'styles/climacons-font.css',
-                                '/bower_componentsrickshaw/rickshaw.min.css'
+                                '/bower_components/rickshaw/rickshaw.min.css'
                             ]
                         },
               {
                 serie: true,
                 files: [
-                                '/bower_componentsd3/d3.min.js',
-                                '/bower_componentsrickshaw/rickshaw.min.js',
-                                '/bower_componentsflot/jquery.flot.js',
-                                '/bower_componentsflot/jquery.flot.resize.js',
-                                '/bower_componentsflot/jquery.flot.pie.js',
-                                '/bower_componentsflot/jquery.flot.categories.js',
+                                '/bower_components/d3/d3.min.js',
+                                '/bower_components/rickshaw/rickshaw.min.js',
+                                '/bower_components/flot/jquery.flot.js',
+                                '/bower_components/flot/jquery.flot.resize.js',
+                                '/bower_components/flot/jquery.flot.pie.js',
+                                '/bower_components/flot/jquery.flot.categories.js',
                             ]
                         },
               {
                   name: 'angular-flot',
                   files: [
-                                '/bower_componentsangular-flot/angular-flot.js'
+                                '/bower_components/angular-flot/angular-flot.js'
                             ]
                         }]).then(function () {
               return $ocLazyLoad.load('/app/scripts/controllers/dashboard.js');
@@ -74711,14 +74714,14 @@ angular
                 {
                   insertBefore: '#load_styles_before',
                   files: [
-                                '/bower_componentscheckbo/src/0.1.4/css/checkBo.min.css',
-                                '/bower_componentschosen_v1.4.0/chosen.min.css'
+                                '/bower_components/checkbo/src/0.1.4/css/checkBo.min.css',
+                                '/bower_components/chosen_v1.4.0/chosen.min.css'
                             ]
                         },
                 {
                   files: [
-                                '/bower_componentscheckbo/src/0.1.4/js/checkBo.min.js',
-                                '/bower_componentschosen_v1.4.0/chosen.jquery.min.js'
+                                '/bower_components/checkbo/src/0.1.4/js/checkBo.min.js',
+                                '/bower_components/chosen_v1.4.0/chosen.jquery.min.js'
                             ]
                         }]).then(function () {
                 return $ocLazyLoad.load('/app/scripts/controllers/bootstrap.ui.js');
@@ -74745,11 +74748,11 @@ angular
                 {
                   serie: true,
                   files: [
-                                '/bower_componentsperfect-scrollbar/js/perfect-scrollbar.jquery.js',
-                                '/bower_componentsjquery.ui/ui/core.js',
-                                '/bower_componentsjquery.ui/ui/widget.js',
-                                '/bower_componentsjquery.ui/ui/mouse.js',
-                                '/bower_componentsjquery.ui/ui/sortable.js'
+                                '/bower_components/perfect-scrollbar/js/perfect-scrollbar.jquery.js',
+                                '/bower_components/jquery.ui/ui/core.js',
+                                '/bower_components/jquery.ui/ui/widget.js',
+                                '/bower_components/jquery.ui/ui/mouse.js',
+                                '/bower_components/jquery.ui/ui/sortable.js'
                             ]
                         }]).then(function () {
                 return $ocLazyLoad.load('/app/scripts/controllers/draggable.js');
@@ -74807,10 +74810,10 @@ angular
                 {
                   serie: true,
                   files: [
-                                '/bower_componentsjquery.ui/ui/core.js',
-                                '/bower_componentsjquery.ui/ui/widget.js',
-                                '/bower_componentsjquery.ui/ui/mouse.js',
-                                '/bower_componentsjquery.ui/ui/slider.js'
+                                '/bower_components/jquery.ui/ui/core.js',
+                                '/bower_components/jquery.ui/ui/widget.js',
+                                '/bower_components/jquery.ui/ui/mouse.js',
+                                '/bower_components/jquery.ui/ui/slider.js'
                             ]
                         }]).then(function () {
                 return $ocLazyLoad.load('/app/scripts/controllers/slider.js');
@@ -74841,13 +74844,13 @@ angular
               return $ocLazyLoad.load([
                 {
                   insertBefore: '#load_styles_before',
-                  files: ['/bower_componentschosen_v1.4.0/chosen.min.css']
+                  files: ['/bower_components/chosen_v1.4.0/chosen.min.css']
                         },
                 {
                   serie: true,
                   files: [
-                                '/bower_componentschosen_v1.4.0/chosen.jquery.min.js',
-                                '/bower_componentsnoty/js/noty/packaged/jquery.noty.packaged.min.js',
+                                '/bower_components/chosen_v1.4.0/chosen.jquery.min.js',
+                                '/bower_components/noty/js/noty/packaged/jquery.noty.packaged.min.js',
                                 '/app/scripts/extentions/noty-defaults.js'
                             ]
                         }]).then(function () {
@@ -74867,13 +74870,13 @@ angular
               return $ocLazyLoad.load([
                 {
                   insertBefore: '#load_styles_before',
-                  files: ['/bower_componentssweetalert/dist/sweetalert.css']
+                  files: ['/bower_components/sweetalert/dist/sweetalert.css']
                         },
                 {
                   name: 'oitozero.ngSweetAlert',
                   files: [
-                                '/bower_componentssweetalert/dist/sweetalert.min.js',
-                                '/bower_componentsangular-sweetalert/SweetAlert.min.js'
+                                '/bower_components/sweetalert/dist/sweetalert.min.js',
+                                '/bower_components/angular-sweetalert/SweetAlert.min.js'
                             ]
                         }]).then(function () {
                 return $ocLazyLoad.load('/app/scripts/controllers/alert.js');
@@ -74908,32 +74911,32 @@ angular
                 {
                   insertBefore: '#load_styles_before',
                   files: [
-                                '/bower_componentsbootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css',
-                                '/bower_componentschosen_v1.4.0/chosen.min.css',
-                                '/bower_componentsjquery.tagsinput/src/jquery.tagsinput.css',
-                                '/bower_componentscheckbo/src/0.1.4/css/checkBo.min.css',
-                                '/bower_componentsintl-tel-input/build/css/intlTelInput.css',
-                                '/bower_componentsbootstrap-daterangepicker/daterangepicker-bs3.css',
-                                '/bower_componentsbootstrap-datepicker/dist/css/bootstrap-datepicker3.css',
-                                '/bower_componentsbootstrap-timepicker/css/bootstrap-timepicker.min.css',
-                                '/bower_componentsclockpicker/dist/bootstrap-clockpicker.min.css',
-                                '/bower_componentsmjolnic-bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css'
+                                '/bower_components/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css',
+                                '/bower_components/chosen_v1.4.0/chosen.min.css',
+                                '/bower_components/jquery.tagsinput/src/jquery.tagsinput.css',
+                                '/bower_components/checkbo/src/0.1.4/css/checkBo.min.css',
+                                '/bower_components/intl-tel-input/build/css/intlTelInput.css',
+                                '/bower_components/bootstrap-daterangepicker/daterangepicker-bs3.css',
+                                '/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css',
+                                '/bower_components/bootstrap-timepicker/css/bootstrap-timepicker.min.css',
+                                '/bower_components/clockpicker/dist/bootstrap-clockpicker.min.css',
+                                '/bower_components/mjolnic-bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css'
                             ]
                         },
                 {
                   serie: true,
                   files: [
-                                '/bower_componentsbootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js',
-                                '/bower_componentschosen_v1.4.0/chosen.jquery.min.js',
-                                '/bower_componentsjquery.tagsinput/src/jquery.tagsinput.js',
-                                '/bower_componentscheckbo/src/0.1.4/js/checkBo.min.js',
-                                '/bower_componentsintl-tel-input//build/js/intlTelInput.min.js',
-                                '/bower_componentsmoment/min/moment.min.js',
-                                '/bower_componentsbootstrap-daterangepicker/daterangepicker.js',
-                                '/bower_componentsbootstrap-datepicker/dist/js/bootstrap-datepicker.js',
-                                '/bower_componentsbootstrap-timepicker/js/bootstrap-timepicker.min.js',
-                                '/bower_componentsclockpicker/dist/jquery-clockpicker.min.js',
-                                '/bower_componentsmjolnic-bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js'
+                                '/bower_components/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js',
+                                '/bower_components/chosen_v1.4.0/chosen.jquery.min.js',
+                                '/bower_components/jquery.tagsinput/src/jquery.tagsinput.js',
+                                '/bower_components/checkbo/src/0.1.4/js/checkBo.min.js',
+                                '/bower_components/intl-tel-input//build/js/intlTelInput.min.js',
+                                '/bower_components/moment/min/moment.min.js',
+                                '/bower_components/bootstrap-daterangepicker/daterangepicker.js',
+                                '/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.js',
+                                '/bower_components/bootstrap-timepicker/js/bootstrap-timepicker.min.js',
+                                '/bower_components/clockpicker/dist/jquery-clockpicker.min.js',
+                                '/bower_components/mjolnic-bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js'
                             ]
                         }]).then(function () {
                 return $ocLazyLoad.load('/app/scripts/controllers/form.js');
@@ -74949,7 +74952,7 @@ angular
           templateUrl: '/app/views/form-validation.html',
           resolve: {
             deps: ['$ocLazyLoad', function ($ocLazyLoad) {
-              return $ocLazyLoad.load('/bower_componentsjquery-validation/dist/jquery.validate.min.js').then(function () {
+              return $ocLazyLoad.load('/bower_components/jquery-validation/dist/jquery.validate.min.js').then(function () {
                 return $ocLazyLoad.load('/app/scripts/controllers/validation.js');
               });
                     }]
@@ -74967,18 +74970,18 @@ angular
                 {
                   insertBefore: '#load_styles_before',
                   files: [
-                                '/bower_componentscheckbo/src/0.1.4/css/checkBo.min.css',
-                                '/bower_componentschosen_v1.4.0/chosen.min.css'
+                                '/bower_components/checkbo/src/0.1.4/css/checkBo.min.css',
+                                '/bower_components/chosen_v1.4.0/chosen.min.css'
                             ]
                         },
                 {
                   files: [
-                                '/bower_componentscheckbo/src/0.1.4/js/checkBo.min.js',
-                                '/bower_componentschosen_v1.4.0/chosen.jquery.min.js',
-                                '/bower_componentscard/lib/js/jquery.card.js',
-                                '/bower_componentsbootstrap/js/tab.js',
-                                '/bower_componentsjquery-validation/dist/jquery.validate.min.js',
-                                '/bower_componentstwitter-bootstrap-wizard/jquery.bootstrap.wizard.min.js'
+                                '/bower_components/checkbo/src/0.1.4/js/checkBo.min.js',
+                                '/bower_components/chosen_v1.4.0/chosen.jquery.min.js',
+                                '/bower_components/card/lib/js/jquery.card.js',
+                                '/bower_components/bootstrap/js/tab.js',
+                                '/bower_components/jquery-validation/dist/jquery.validate.min.js',
+                                '/bower_components/twitter-bootstrap-wizard/jquery.bootstrap.wizard.min.js'
                             ]
                         }]).then(function () {
                 return $ocLazyLoad.load('/app/scripts/controllers/wizard.js');
@@ -74998,23 +75001,23 @@ angular
                 {
                   insertBefore: '#load_styles_before',
                   files: [
-                                '/bower_componentssummernote/dist/summernote.css',
-                                '/bower_componentsbootstrap3-wysihtml5-bower/dist/bootstrap3-wysihtml5.min.css'
+                                '/bower_components/summernote/dist/summernote.css',
+                                '/bower_components/bootstrap3-wysihtml5-bower/dist/bootstrap3-wysihtml5.min.css'
                             ]
                         },
                 {
                   files: [
-                                '/bower_componentsbootstrap/js/tooltip.js',
-                                '/bower_componentsbootstrap/js/dropdown.js',
-                                '/bower_componentsbootstrap/js/modal.js',
-                                '/bower_componentsbootstrap3-wysihtml5-bower/dist/bootstrap3-wysihtml5.all.js',
-                                '/bower_componentssummernote/dist/summernote.min.js'
+                                '/bower_components/bootstrap/js/tooltip.js',
+                                '/bower_components/bootstrap/js/dropdown.js',
+                                '/bower_components/bootstrap/js/modal.js',
+                                '/bower_components/bootstrap3-wysihtml5-bower/dist/bootstrap3-wysihtml5.all.js',
+                                '/bower_components/summernote/dist/summernote.min.js'
                             ]
                         },
                 {
                   name: 'summernote',
                   files: [
-                                '/bower_componentsangular-summernote/dist/angular-summernote.min.js'
+                                '/bower_components/angular-summernote/dist/angular-summernote.min.js'
                             ]
                         }]).then(function () {
                 return $ocLazyLoad.load('/app/scripts/controllers/editor.js');
@@ -75030,7 +75033,7 @@ angular
           templateUrl: '/app/views/form-masks.html',
           resolve: {
             deps: ['$ocLazyLoad', function ($ocLazyLoad) {
-              return $ocLazyLoad.load('/bower_componentsjquery.maskedinput/dist/jquery.maskedinput.min.js').then(function () {
+              return $ocLazyLoad.load('/bower_components/jquery.maskedinput/dist/jquery.maskedinput.min.js').then(function () {
                 return $ocLazyLoad.load('/app/scripts/controllers/mask.js');
               });
                     }]
@@ -75048,7 +75051,7 @@ angular
                 {
                   name: 'angularFileUpload',
                   files: [
-                                '/bower_componentsangular-file-upload/angular-file-upload.min.js'
+                                '/bower_components/angular-file-upload/angular-file-upload.min.js'
                             ]
                         }]).then(function () {
                 return $ocLazyLoad.load('/app/scripts/controllers/upload.js');
@@ -75076,12 +75079,12 @@ angular
                 {
                   insertBefore: '#load_styles_before',
                   files: [
-                                '/bower_componentssortable/css/sortable-theme-bootstrap.css'
+                                '/bower_components/sortable/css/sortable-theme-bootstrap.css'
                             ]
                         },
                 {
                   files: [
-                                '/bower_componentssortable/js/sortable.min.js'
+                                '/bower_components/sortable/js/sortable.min.js'
                             ]
                         }]).then(function () {
                 Sortable.init();
@@ -75108,15 +75111,15 @@ angular
                 {
                   insertBefore: '#load_styles_before',
                   files: [
-                                '/bower_componentschosen_v1.4.0/chosen.min.css',
-                                '/bower_componentsdatatables/media/css/jquery.dataTables.css'
+                                '/bower_components/chosen_v1.4.0/chosen.min.css',
+                                '/bower_components/datatables/media/css/jquery.dataTables.css'
                             ]
                         },
                 {
                   serie: true,
                   files: [
-                                '/bower_componentschosen_v1.4.0/chosen.jquery.min.js',
-                                '/bower_componentsdatatables/media/js/jquery.dataTables.js',
+                                '/bower_components/chosen_v1.4.0/chosen.jquery.min.js',
+                                '/bower_components/datatables/media/js/jquery.dataTables.js',
                                 '/app/scripts/extentions/bootstrap-datatables.js'
                             ]
                         }]).then(function () {
@@ -75137,13 +75140,13 @@ angular
                 {
                   insertBefore: '#load_styles_before',
                   files: [
-                                '/bower_componentsangular-xeditable/dist/css/xeditable.css'
+                                '/bower_components/angular-xeditable/dist/css/xeditable.css'
                             ]
                         },
                 {
                   name: 'xeditable',
                   files: [
-                                '/bower_componentsangular-xeditable/dist/js/xeditable.js'
+                                '/bower_components/angular-xeditable/dist/js/xeditable.js'
                             ]
                         }]).then(function () {
                 return $ocLazyLoad.load('/app/scripts/controllers/editable.js');
@@ -75171,20 +75174,20 @@ angular
                 {
                   serie: true,
                   files: [
-                                '/bower_componentsflot/jquery.flot.js',
-                                '/bower_componentsflot/jquery.flot.resize.js',
-                                '/bower_componentsflot/jquery.flot.categories.js',
-                                '/bower_componentsflot/jquery.flot.stack.js',
-                                '/bower_componentsflot/jquery.flot.time.js',
-                                '/bower_componentsflot/jquery.flot.pie.js',
-                                '/bower_componentsflot-spline/js/jquery.flot.spline.js',
-                                '/bower_componentsflot.orderbars/js/jquery.flot.orderBars.js'
+                                '/bower_components/flot/jquery.flot.js',
+                                '/bower_components/flot/jquery.flot.resize.js',
+                                '/bower_components/flot/jquery.flot.categories.js',
+                                '/bower_components/flot/jquery.flot.stack.js',
+                                '/bower_components/flot/jquery.flot.time.js',
+                                '/bower_components/flot/jquery.flot.pie.js',
+                                '/bower_components/flot-spline/js/jquery.flot.spline.js',
+                                '/bower_components/flot.orderbars/js/jquery.flot.orderBars.js'
                             ]
                         },
                 {
                   name: 'angular-flot',
                   files: [
-                                '/bower_componentsangular-flot/angular-flot.js'
+                                '/bower_components/angular-flot/angular-flot.js'
                             ]
                         }]).then(function () {
                 return $ocLazyLoad.load('/app/scripts/controllers/flot.js');
@@ -75204,7 +75207,7 @@ angular
                 {
                   name: 'easypiechart',
                   files: [
-                                '/bower_componentsjquery.easy-pie-chart/dist/angular.easypiechart.js'
+                                '/bower_components/jquery.easy-pie-chart/dist/angular.easypiechart.js'
                             ]
                         }]).then(function () {
                 return $ocLazyLoad.load('/app/scripts/controllers/easychart.js');
@@ -75223,14 +75226,14 @@ angular
               return $ocLazyLoad.load([
                  {
                   files: [
-                                '/bower_componentschartjs/Chart.js',
+                                '/bower_components/chartjs/Chart.js',
                             ]
                         },
                 {
                   name: 'angles',
                   serie: true,
                   files: [
-                                '/bower_componentsangles/angles.js'
+                                '/bower_components/angles/angles.js'
                             ]
                         }]).then(function () {
                 return $ocLazyLoad.load('/app/scripts/controllers/chartjs.js');
@@ -75250,14 +75253,14 @@ angular
                 {
                   insertBefore: '#load_styles_before',
                   files: [
-                                '/bower_componentsrickshaw/rickshaw.min.css'
+                                '/bower_components/rickshaw/rickshaw.min.css'
                             ]
                         },
                 {
                   serie: true,
                   files: [
-                                '/bower_componentsd3/d3.min.js',
-                                '/bower_componentsrickshaw/rickshaw.min.js'
+                                '/bower_components/d3/d3.min.js',
+                                '/bower_components/rickshaw/rickshaw.min.js'
                             ]
                         }]).then(function () {
                 return $ocLazyLoad.load('/app/scripts/controllers/rickshaw.js');
@@ -75277,16 +75280,16 @@ angular
                 {
                   insertBefore: '#load_styles_before',
                   files: [
-                                '/bower_componentsnvd3/nv.d3.min.css'
+                                '/bower_components/nvd3/nv.d3.min.css'
                             ]
                         },
                 {
                   name: 'nvd3',
                   serie: true,
                   files: [
-                                '/bower_componentsd3/d3.min.js',
-                                '/bower_componentsnvd3/nv.d3.min.js',
-                                '/bower_componentsangular-nvd3/dist/angular-nvd3.min.js'
+                                '/bower_components/d3/d3.min.js',
+                                '/bower_components/nvd3/nv.d3.min.js',
+                                '/bower_components/angular-nvd3/dist/angular-nvd3.min.js'
                             ]
                         }]).then(function () {
                 return $ocLazyLoad.load('/app/scripts/controllers/nvd3.js');
@@ -75306,14 +75309,14 @@ angular
                 {
                   insertBefore: '#load_styles_before',
                   files: [
-                                '/bower_componentsc3/c3.min.css'
+                                '/bower_components/c3/c3.min.css'
                             ]
                         },
                 {
                   serie: true,
                   files: [
-                                '/bower_componentsd3/d3.min.js',
-                                '/bower_componentsc3/c3.min.js'
+                                '/bower_components/d3/d3.min.js',
+                                '/bower_components/c3/c3.min.js'
                             ]
                         }]).then(function () {
                 return $ocLazyLoad.load('/app/scripts/controllers/c3.js');
@@ -75341,7 +75344,7 @@ angular
                 {
                   name: 'ui.map',
                   files: [
-                                '/bower_componentsangular-ui-map/ui-map.min.js'
+                                '/bower_components/angular-ui-map/ui-map.min.js'
                             ]
                         }]).then(function () {
                 return $ocLazyLoad.load('/app/scripts/controllers/google.js');
@@ -75362,13 +75365,13 @@ angular
                 {
                   insertBefore: '#load_styles_before',
                   files: [
-                                '/bower_componentsbower-jvectormap/jquery-jvectormap-1.2.2.css'
+                                '/bower_components/bower-jvectormap/jquery-jvectormap-1.2.2.css'
                             ]
                         },
                 {
                   serie: true,
                   files: [
-                                '/bower_componentsbower-jvectormap/jquery-jvectormap-1.2.2.min.js',
+                                '/bower_components/bower-jvectormap/jquery-jvectormap-1.2.2.min.js',
                                 'data/maps/jquery-jvectormap-world-mill-en.js'
                             ]
                         }]).then(function () {
@@ -75398,25 +75401,25 @@ angular
                 {
                   insertBefore: '#load_styles_before',
                   files: [
-                                '/bower_componentsfullcalendar/dist/fullcalendar.min.css'
+                                '/bower_components/fullcalendar/dist/fullcalendar.min.css'
                             ]
                         },
                 {
                   serie: true,
                   files: [
-                                '/bower_componentsjquery.ui/ui/core.js',
-                                '/bower_componentsjquery.ui/ui/widget.js',
-                                '/bower_componentsjquery.ui/ui/mouse.js',
-                                '/bower_componentsjquery.ui/ui/draggable.js',
-                                '/bower_componentsmoment/moment.js',
-                                '/bower_componentsfullcalendar/dist/fullcalendar.min.js',
-                                '/bower_componentsfullcalendar/dist/gcal.js'
+                                '/bower_components/jquery.ui/ui/core.js',
+                                '/bower_components/jquery.ui/ui/widget.js',
+                                '/bower_components/jquery.ui/ui/mouse.js',
+                                '/bower_components/jquery.ui/ui/draggable.js',
+                                '/bower_components/moment/moment.js',
+                                '/bower_components/fullcalendar/dist/fullcalendar.min.js',
+                                '/bower_components/fullcalendar/dist/gcal.js'
                             ]
                         },
                 {
                   name: 'ui.calendar',
                   files: [
-                                '/bower_componentsangular-ui-calendar/src/calendar.js'
+                                '/bower_components/angular-ui-calendar/src/calendar.js'
                             ]
                         }]).then(function () {
                 return $ocLazyLoad.load('/app/scripts/controllers/calendar.js');
@@ -75437,15 +75440,15 @@ angular
                   serie: true,
                   insertBefore: '#load_styles_before',
                   files: [
-                                '/bower_componentsblueimp-gallery/css/blueimp-gallery.min.css',
-                                '/bower_componentsblueimp-bootstrap-image-gallery/css/bootstrap-image-gallery.min.css'
+                                '/bower_components/blueimp-gallery/css/blueimp-gallery.min.css',
+                                '/bower_components/blueimp-bootstrap-image-gallery/css/bootstrap-image-gallery.min.css'
                             ]
                         },
                 {
                   serie: true,
                   files: [
-                                '/bower_componentsblueimp-gallery/js/jquery.blueimp-gallery.min.js',
-                                '/bower_componentsblueimp-bootstrap-image-gallery/js/bootstrap-image-gallery.min.js'
+                                '/bower_components/blueimp-gallery/js/jquery.blueimp-gallery.min.js',
+                                '/bower_components/blueimp-bootstrap-image-gallery/js/bootstrap-image-gallery.min.js'
                             ]
                         }]).then(function () {
                 return $ocLazyLoad.load('/app/scripts/controllers/gallery.js');
@@ -75517,10 +75520,10 @@ angular
                 {
                   serie: true,
                   files: [
-                                '/bower_componentsjquery.ui/ui/core.js',
-                                '/bower_componentsjquery.ui/ui/widget.js',
-                                '/bower_componentsjquery.ui/ui/mouse.js',
-                                '/bower_componentsjquery.ui/ui/sortable.js'
+                                '/bower_components/jquery.ui/ui/core.js',
+                                '/bower_components/jquery.ui/ui/widget.js',
+                                '/bower_components/jquery.ui/ui/mouse.js',
+                                '/bower_components/jquery.ui/ui/sortable.js'
                             ]
                         }]).then(function () {
                 return $ocLazyLoad.load('/app/scripts/controllers/sortable.js');
@@ -75536,7 +75539,7 @@ angular
           templateUrl: '/app/views/extras-nestable.html',
           resolve: {
             deps: ['$ocLazyLoad', function ($ocLazyLoad) {
-              return $ocLazyLoad.load('/bower_componentsnestable/jquery.nestable.js');
+              return $ocLazyLoad.load('/bower_components/nestable/jquery.nestable.js');
                     }]
           },
           data: {
@@ -75576,12 +75579,12 @@ angular
                 insertBefore: '#load_styles_before',
                 files: [
                                 'styles/climacons-font.css',
-                                '/bower_componentscheckbo/src/0.1.4/css/checkBo.min.css'
+                                '/bower_components/checkbo/src/0.1.4/css/checkBo.min.css'
                             ]
                         },
               {
                 files: [
-                                '/bower_componentscheckbo/src/0.1.4/js/checkBo.min.js'
+                                '/bower_components/checkbo/src/0.1.4/js/checkBo.min.js'
                             ]
                         }]);
                     }]
@@ -75675,8 +75678,8 @@ angular
               {
                 serie: true,
                 files: [
-                                '/bower_componentsprism/themes/prism.css',
-                                '/bower_componentsprism/prism.js',
+                                '/bower_components/prism/themes/prism.css',
+                                '/bower_components/prism/prism.js',
                             ]
                         }]);
                     }]

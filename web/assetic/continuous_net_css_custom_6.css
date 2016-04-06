@@ -1,6 +1,9 @@
 #page-title {display: none;}
+
 .list-toolbox .col-md-2 * {display: none;}
-div.bg-white {background-color: transparent!important;}
+
+.container-fluid.bg-white {background-color: transparent!important;}
+
 span.input-icon, span.input-help {
     display: block;
     position: relative;

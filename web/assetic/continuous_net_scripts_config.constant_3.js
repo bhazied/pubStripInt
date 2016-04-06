@@ -54,6 +54,9 @@ app.constant('JS_REQUIRES', {
             '/bower_components/angular-flot/angular-flot.js'
         ]
     }, {
+        name: 'checkbo',
+        files: ['/bower_components/checkbo/src/0.1.4/css/checkBo.min.css', '/bower_components/checkbo/src/0.1.4/js/checkBo.min.js']
+    }, {
         name: 'toaster',
         files: ['/bower_components/AngularJS-Toaster/toaster.js', '/bower_components/AngularJS-Toaster/toaster.css']
     }, {
