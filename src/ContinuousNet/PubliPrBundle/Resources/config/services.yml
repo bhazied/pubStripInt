@@ -2,6 +2,7 @@ parameters:
     publi_pr.event.jwt_response_listener.class: ContinuousNet\PubliPrBundle\EventListener\JWTResponseListener
     publi_pr.event.jwt_created_listener.class: ContinuousNet\PubliPrBundle\EventListener\JWTCreatedListener
     publi_pr.event.jwt_decoded_listener.class: ContinuousNet\PubliPrBundle\EventListener\JWTDecodedListener
+    publi_pr.form.handler.registration.class: ContinuousNet\PubliPrBundle\Form\Handler\RegistrationFormHandler
 
 services:
     publi_pr.event.jwt_response_listener:
@@ -24,3 +25,13 @@ services:
             - 1800 # integer $maxInactivityTime (seconds)
         tags:
             - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_decoded, method: onJWTDecoded }
+    publi_pr.form.handler.registration:
+        class: %publi_pr.form.handler.registration.class%
+        arguments:
+          - @fos_user.registration.form
+          - @request
+          - @fos_user.user_manager
+          - @fos_user.mailer
+          - @fos_user.util.token_generator
+        scope: request
+        public: false
