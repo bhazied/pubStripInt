@@ -11,10 +11,14 @@ fos_user_profile:
 fos_user_register:
     resource: "@PubliPrBundle/Resources/config/routing/registration.xml"
     prefix: '#/auth'
+    requirements:
+        _locale: en|fr
  
 fos_user_resetting:
     resource: "@PubliPrBundle/Resources/config/routing/resetting.xml"
     prefix: '#/auth'
+    requirements:
+        _locale: en|fr
  
 fos_user_change_password:
     resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"

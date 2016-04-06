@@ -61,7 +61,7 @@ function sweetAlertCtrl($scope, SweetAlert, COLORS) {
     SweetAlert.swal({
       title: 'Sweet!',
       text: 'Here\'s a custom image.',
-      imageUrl: 'images/avatar.jpg'
+      imageUrl: '/app/images/avatar.jpg'
     });
   };
 }
