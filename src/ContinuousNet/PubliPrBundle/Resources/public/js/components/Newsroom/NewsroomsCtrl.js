@@ -54,6 +54,27 @@ function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q,
     $scope.getUsers();
 
 
+    $scope.users = [];
+    $scope.usersLoaded = [];
+
+    $scope.getUsers = function() {
+        $timeout(function(){
+            if ($scope.users.length == 0) {
+                $scope.users.push({});
+                var def = $q.defer();
+                $usersDataFactory.query({offset: 0, limit: 10000, 'order_by[user.id]': 'desc'}).$promise.then(function(data) {
+                    $scope.users = data.results;
+                    def.resolve($scope.users);
+                });
+                return def;
+            } else {
+                return $scope.users;
+            }
+        });
+    };
+
+    $scope.getUsers();
+
     $scope.textValue = function($scope, row) {
         return $scope.$eval('row.' + this.field);
     };
@@ -65,6 +86,18 @@ function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q,
         }
         var html = '<a ui-sref="'+this.state+'({id: ' + row.id + '})">' + value[this.displayField] + '</a>';
         return $sce.trustAsHtml(html);
+    };
+
+    $scope.linksValue = function($scope, row) {
+        var values = row[this.field];
+        if (values.length == 0) {
+            return '';
+        }
+        var html = [];
+        for (var i in values) {
+            html.push('<a ui-sref="'+this.state+'({id: ' + values[i].id + '})">' + values[i][this.displayField] + '</a>');
+        }
+        return $sce.trustAsHtml(html.join(', '));
     };
 
     $scope.evaluatedValue = function($scope, row) {
@@ -110,8 +143,8 @@ function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q,
             { field: 'description', title: $filter('translate')('content.list.fields.DESCRIPTION'), sortable: 'newsroom.description', filter: { 'newsroom.description': 'text' }, show: $scope.getParamValue('description_show_filed', false), getValue: $scope.textValue },
             { field: 'url', title: $filter('translate')('content.list.fields.URL'), sortable: 'newsroom.url', filter: { 'newsroom.url': 'text' }, show: $scope.getParamValue('url_show_filed', true), getValue: $scope.textValue },
             { field: 'email', title: $filter('translate')('content.list.fields.EMAIL'), sortable: 'newsroom.email', filter: { 'newsroom.email': 'text' }, show: $scope.getParamValue('email_show_filed', true), getValue: $scope.textValue },
-            { field: 'logo_picture', title: $filter('translate')('content.list.fields.LOGOPICTURE'), sortable: 'newsroom.logoPicture', filter: { 'newsroom.logoPicture': 'text' }, show: $scope.getParamValue('logo_picture_show_filed', true), getValue: $scope.interpolatedValue, interpolateExpr: $interpolate('<img ng-src="'+$rootScope.app.thumbURL+'[[ (row.logoPicture)?row.logoPicture:\'/assets/images/picturenotavailable.'+$scope.locale+'.png\' ]]" alt="" class="img-thumbnail" />') },
-            { field: 'banner_picture', title: $filter('translate')('content.list.fields.BANNERPICTURE'), sortable: 'newsroom.bannerPicture', filter: { 'newsroom.bannerPicture': 'text' }, show: $scope.getParamValue('banner_picture_show_filed', false), getValue: $scope.interpolatedValue, interpolateExpr: $interpolate('<img ng-src="'+$rootScope.app.thumbURL+'[[ (row.bannerPicture)?row.bannerPicture:\'/assets/images/picturenotavailable.'+$scope.locale+'.png\' ]]" alt="" class="img-thumbnail" />') },
+            { field: 'logo_picture', title: $filter('translate')('content.list.fields.LOGOPICTURE'), sortable: 'newsroom.logoPicture', filter: { 'newsroom.logoPicture': 'text' }, show: $scope.getParamValue('logo_picture_show_filed', true), getValue: $scope.interpolatedValue, interpolateExpr: $interpolate('<img ng-src="'+$rootScope.app.thumbURL+'[[ (row.logo_picture)?row.logo_picture:\'/assets/images/picturenotavailable.'+$scope.locale+'.png\' ]]" alt="" class="img-thumbnail" />') },
+            { field: 'banner_picture', title: $filter('translate')('content.list.fields.BANNERPICTURE'), sortable: 'newsroom.bannerPicture', filter: { 'newsroom.bannerPicture': 'text' }, show: $scope.getParamValue('banner_picture_show_filed', false), getValue: $scope.interpolatedValue, interpolateExpr: $interpolate('<img ng-src="'+$rootScope.app.thumbURL+'[[ (row.banner_picture)?row.banner_picture:\'/assets/images/picturenotavailable.'+$scope.locale+'.png\' ]]" alt="" class="img-thumbnail" />') },
             { field: 'press_releases_per_page', title: $filter('translate')('content.list.fields.PRESSRELEASESPERPAGE'), sortable: 'newsroom.pressReleasesPerPage', filter: { 'newsroom.pressReleasesPerPage': 'number' }, show: $scope.getParamValue('press_releases_per_page_show_filed', false), getValue: $scope.textValue },
             { field: 'css', title: $filter('translate')('content.list.fields.CSS'), sortable: 'newsroom.css', filter: { 'newsroom.css': 'text' }, show: $scope.getParamValue('css_show_filed', false), getValue: $scope.textValue },
             { field: 'enable_search', title: $filter('translate')('content.list.fields.ENABLESEARCH'), sortable: 'newsroom.enableSearch', filter: { 'newsroom.enableSearch': 'select' }, show: $scope.getParamValue('enable_search_show_filed', false), getValue: $scope.interpolatedValue, filterData : $scope.booleanOptions, interpolateExpr: $interpolate('<span my-boolean="[[ row.enable_search ]]"></span>') },
@@ -123,7 +156,7 @@ function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q,
             { field: 'created_at', title: $filter('translate')('content.list.fields.CREATEDAT'), sortable: 'newsroom.createdAt', filter: { 'newsroom.createdAt': 'text' }, show: $scope.getParamValue('created_at_show_filed', false), getValue: $scope.evaluatedValue, valueFormatter: 'date:\''+$filter('translate')('formats.DATETIME')+'\''},
             { field: 'modifier_user', title: $filter('translate')('content.list.fields.MODIFIERUSER'), sortable: 'modifier_user.username', filter: { 'newsroom.modifierUser': 'select' }, getValue: $scope.linkValue, filterData: $scope.getUsers(), show: $scope.getParamValue('modifier_user_id_show_filed', false), displayField: 'username', state: 'app.access.usersdetails' },
             { field: 'modified_at', title: $filter('translate')('content.list.fields.MODIFIEDAT'), sortable: 'newsroom.modifiedAt', filter: { 'newsroom.modifiedAt': 'text' }, show: $scope.getParamValue('modified_at_show_filed', false), getValue: $scope.evaluatedValue, valueFormatter: 'date:\''+$filter('translate')('formats.DATETIME')+'\''},
-            { title: $filter('translate')('content.common.ACTIONS'), show: true, getValue: $scope.interpolatedValue, interpolateExpr: $interpolate('<div class="btn-group pull-right"><button type="button" class="btn btn-success" tooltip-placement="top" uib-tooltip="'+$filter('translate')('content.common.EDIT')+'" ng-click="edit(row)"><i class="ti-pencil-alt"></i></button><button type="button" class="btn btn-warning" tooltip-placement="top" uib-tooltip="'+$filter('translate')('content.common.SHOWDETAILS')+'" ng-click="details(row)"><i class="ti-clipboard"></i></button><button type="button" class="btn btn-danger" tooltip-placement="top" uib-tooltip="'+$filter('translate')('content.common.REMOVE')+'" ng-click="delete(row)"><i class="ti-trash"></i></button></div>') }
+            { field: 'users', title: $filter('translate')('content.list.fields.USERS'), show: $scope.getParamValue('users_show_filed', false), getValue: $scope.linksValue, state: 'app.access.usersdetails', displayField: 'username' },            { title: $filter('translate')('content.common.ACTIONS'), show: true, getValue: $scope.interpolatedValue, interpolateExpr: $interpolate('<div class="btn-group pull-right"><button type="button" class="btn btn-success" tooltip-placement="top" uib-tooltip="'+$filter('translate')('content.common.EDIT')+'" ng-click="edit(row)"><i class="ti-pencil-alt"></i></button><button type="button" class="btn btn-warning" tooltip-placement="top" uib-tooltip="'+$filter('translate')('content.common.SHOWDETAILS')+'" ng-click="details(row)"><i class="ti-clipboard"></i></button><button type="button" class="btn btn-danger" tooltip-placement="top" uib-tooltip="'+$filter('translate')('content.common.REMOVE')+'" ng-click="delete(row)"><i class="ti-trash"></i></button></div>') }
         ];
     };
 
@@ -213,15 +246,15 @@ function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q,
     };
 
     $scope.add = function() {
-        $state.go('app.settings.newsroomsnew');
+        $state.go('app.prmanager.newsroomsnew');
     };
 
     $scope.edit = function(row) {
-        $state.go('app.settings.newsroomsedit', {id: row.id});
+        $state.go('app.prmanager.newsroomsedit', {id: row.id});
     };
 
     $scope.details = function(row) {
-        $state.go('app.settings.newsroomsdetails', {id: row.id});
+        $state.go('app.prmanager.newsroomsdetails', {id: row.id});
     };
 
 }]);

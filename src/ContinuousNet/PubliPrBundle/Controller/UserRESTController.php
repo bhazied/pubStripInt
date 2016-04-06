@@ -99,6 +99,14 @@ class UserRESTController extends BaseRESTController
                    }
                 }
             }
+            $roles = $this->getUser()->getRoles();
+            if (!empty($roles)) {
+                foreach ($roles as $role) {
+                   if (substr_count($role, 'MAN') > 0) {
+                       $qb->andWhere('u_.creatorUser = :user')->setParameter('user', $this->getUser()->getId());
+                   }
+                }
+            }
             $qbList = clone $qb;
             $qb->select('count(u_.id)');
             $data['inlineCount'] = $qb->getQuery()->getSingleScalarResult();

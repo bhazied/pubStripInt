@@ -6,7 +6,7 @@ angular
     function AppCtrl($scope, $http, $localStorage, $state, $timeout) {
 
         $scope.anonymousStates = ['auth.login', 'auth.register', 'auth.resetpassword', 'auth.reset', 'auth.lockscreen', 'auth.emailconfirm'];
-
+        /*
         $timeout(function() {
             if ($scope.anonymousStates.indexOf($state.current.name) == -1 && !angular.isDefined($localStorage.access_token)) {
                 $timeout(function() {
@@ -15,7 +15,7 @@ angular
                 });
             }
         }, 2000);
-
+        */
         $scope.mobileView = 767;
 
         $scope.app = {
@@ -45,7 +45,7 @@ angular
             fname: 'Sahbi',
             lname: 'KHALFALLAH',
             jobDesc: 'Senior Web Consultant',
-            avatar: 'images/avatar.jpg',
+            avatar: '/app/images/avatar.jpg',
         };
 
         if (angular.isDefined($localStorage.layout)) {

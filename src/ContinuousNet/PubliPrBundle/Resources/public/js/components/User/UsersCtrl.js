@@ -10,8 +10,8 @@ function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q,
     $scope.isFiltersVisible = false;
 
     $scope.types = [{
-        id: 'Guest',
-        title: $filter('translate')('content.list.fields.types.GUEST'),
+        id: 'Free',
+        title: $filter('translate')('content.list.fields.types.FREE'),
         css: 'info'
     }, {
         id: 'Manager',
@@ -53,17 +53,21 @@ function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q,
         title: $filter('translate')('content.list.fields.roles.ROLE_API'),
         css: 'info'
     }, {
-        id: 'ROLE_MANAGER',
-        title: $filter('translate')('content.list.fields.roles.ROLE_MANAGER'),
+        id: 'FREE_ACCOUNT',
+        title: $filter('translate')('content.list.fields.roles.FREE_ACCOUNT'),
         css: 'success'
     }, {
-        id: 'ROLE_CONTRIBUTOR',
-        title: $filter('translate')('content.list.fields.roles.ROLE_CONTRIBUTOR'),
+        id: 'ROLE_ACCOUNT_MANAGER',
+        title: $filter('translate')('content.list.fields.roles.ROLE_ACCOUNT_MANAGER'),
         css: 'warning'
+    }, {
+        id: 'ROLE_CONTRIBUTOR_ACCOUNT',
+        title: $filter('translate')('content.list.fields.roles.ROLE_CONTRIBUTOR_ACCOUNT'),
+        css: 'inverse'
     }, {
         id: 'ROLE_SUPER_ADMIN',
         title: $filter('translate')('content.list.fields.roles.ROLE_SUPER_ADMIN'),
-        css: 'inverse'
+        css: 'danger'
     }];
 
     $scope.booleanOptions = [{

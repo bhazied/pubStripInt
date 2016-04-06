@@ -51,9 +51,9 @@ app.constant('APP_JS_REQUIRES', {
         'NewsroomTemplatesCtrl': '/bundles/publipr/js/components/NewsroomTemplate/NewsroomTemplatesCtrl.js',
         'NewsroomTemplateFormCtrl': '/bundles/publipr/js/components/NewsroomTemplate/NewsroomTemplateFromCtrl.js',
         'NewsroomTemplateCtrl': '/bundles/publipr/js/components/NewsroomTemplate/NewsroomTemplateCtrl.js',
-        'NewsroomsUsersCtrl': '/bundles/publipr/js/components/NewsroomsUsers/NewsroomsUsersCtrl.js',
-        'NewsroomsUsersFormCtrl': '/bundles/publipr/js/components/NewsroomsUsers/NewsroomsUsersFromCtrl.js',
-        'NewsroomsUsersCtrl': '/bundles/publipr/js/components/NewsroomsUsers/NewsroomsUsersCtrl.js',
+        'UsersCtrl': '/bundles/publipr/js/components/User/UsersCtrl.js',
+        'UserFormCtrl': '/bundles/publipr/js/components/User/UserFromCtrl.js',
+        'UserCtrl': '/bundles/publipr/js/components/User/UserCtrl.js',
         'PaymentsCtrl': '/bundles/publipr/js/components/Payment/PaymentsCtrl.js',
         'PaymentFormCtrl': '/bundles/publipr/js/components/Payment/PaymentFromCtrl.js',
         'PaymentCtrl': '/bundles/publipr/js/components/Payment/PaymentCtrl.js',
@@ -74,10 +74,7 @@ app.constant('APP_JS_REQUIRES', {
         'TrackEmailCtrl': '/bundles/publipr/js/components/TrackEmail/TrackEmailCtrl.js',
         'TrackPressReleasesCtrl': '/bundles/publipr/js/components/TrackPressRelease/TrackPressReleasesCtrl.js',
         'TrackPressReleaseFormCtrl': '/bundles/publipr/js/components/TrackPressRelease/TrackPressReleaseFromCtrl.js',
-        'TrackPressReleaseCtrl': '/bundles/publipr/js/components/TrackPressRelease/TrackPressReleaseCtrl.js',
-        'UsersCtrl': '/bundles/publipr/js/components/User/UsersCtrl.js',
-        'UserFormCtrl': '/bundles/publipr/js/components/User/UserFromCtrl.js',
-        'UserCtrl': '/bundles/publipr/js/components/User/UserCtrl.js'
+        'TrackPressReleaseCtrl': '/bundles/publipr/js/components/TrackPressRelease/TrackPressReleaseCtrl.js'
     },
     modules: [{
         name: 'LoginService',
@@ -134,8 +131,8 @@ app.constant('APP_JS_REQUIRES', {
         name: 'newsroomTemplateService',
         files: ['/bundles/publipr/js/components/NewsroomTemplate/NewsroomTemplateService.js']
     },{
-        name: 'newsroomsUsersService',
-        files: ['/bundles/publipr/js/components/NewsroomsUsers/NewsroomsUsersService.js']
+        name: 'userService',
+        files: ['/bundles/publipr/js/components/User/UserService.js']
     },{
         name: 'paymentService',
         files: ['/bundles/publipr/js/components/Payment/PaymentService.js']
@@ -157,8 +154,5 @@ app.constant('APP_JS_REQUIRES', {
     },{
         name: 'trackPressReleaseService',
         files: ['/bundles/publipr/js/components/TrackPressRelease/TrackPressReleaseService.js']
-    },{
-        name: 'userService',
-        files: ['/bundles/publipr/js/components/User/UserService.js']
     }]
 });

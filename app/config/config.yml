@@ -139,6 +139,56 @@ fos_user:
             name:               fos_user_group_form
             validation_groups:  [Registration, Default]
 
+liip_imagine:
+
+    resolvers:
+        default:
+            web_path:
+                web_root: %kernel.root_dir%/../web
+                cache_prefix: media/cache
+
+    loaders:
+        default:
+            filesystem:
+                data_root: %kernel.root_dir%/../web/
+
+    driver:               gd
+    cache:                default
+    data_loader:          default
+    default_image:        null
+    controller:
+        filter_action:         liip_imagine.controller:filterAction
+        filter_runtime_action: liip_imagine.controller:filterRuntimeAction
+
+    filter_sets:
+        cache: ~
+        widen:
+            quality: 100
+            filters:
+                relative_resize: { widen: 100 }
+        thumb:
+            quality: 80
+            filters:
+                relative_resize: { widen: 150 }
+
+        # Prototype
+        name:
+            quality:              100
+            jpeg_quality:         ~
+            png_compression_level:  ~
+            png_compression_filter: ~
+            animated:             false
+            format:               ~
+            cache:                ~
+            data_loader:          ~
+            default_image:        null
+            filters:
+                # Prototype
+                name:                 []
+            post_processors:
+                # Prototype
+                name:                 []
+
 ewz_recaptcha:
     public_key:  6LdZbxwTAAAAAPMYxr2yVuTCSd3ceQxV9HfkOB8b
     private_key: 6LdZbxwTAAAAAOTHXg8ih6xCvQnvwqSBQsRkFK9G
@@ -282,6 +332,7 @@ assetic:
                 - 'styles/panel.css'
                 - 'styles/publipr.css'
                 - 'styles/publipr.skins.css'
+                - 'styles/custom.css'
         jquery:
             inputs:
                 - 'bower_components/jquery/dist/jquery.js' #.min
@@ -309,7 +360,14 @@ assetic:
                 - 'bower_components/angular-touch/angular-touch.js' #.min
                 - 'bower_components/angular-sanitize/angular-sanitize.js' #.min
                 - 'bower_components/angular-ui-router/release/angular-ui-router.js' #.min
-                - 'bower_components/angular-ui-utils/ui-utils.js' #.min
+                - 'bower_components/angular-ui-event/dist/event.min.js'
+                - 'bower_components/angular-ui-scroll/dist/ui-scroll.min.js'
+                - 'bower_components/angular-ui-scrollpoint/dist/scrollpoint.min.js'
+                - 'bower_components/angular-ui-mask/dist/mask.min.js'
+                - 'bower_components/angular-ui-validate/dist/validate.min.js'
+                - 'bower_components/angular-ui-indeterminate/dist/indeterminate.min.js'
+                - 'bower_components/angular-ui-uploader/dist/uploader.min.js'
+                - 'bower_components/angular-ui-utils/index.js' #.min
                 - 'bower_components/angular-resource/angular-resource.js' #.min
                 - 'bower_components/angular-bind-html-compile/angular-bind-html-compile.js'
                 - 'bower_components/angular-slugify/angular-slugify.js'
@@ -344,12 +402,14 @@ assetic:
         extentions:
               inputs:
                 - 'bower_components/checkbo/src/0.1.4/js/checkBo.js' #.min
+                - 'bower_components/flot/jquery.flot.js'
                 - 'app/scripts/extentions/modernizr.js'
                 - 'app/scripts/extentions/lib.js'
         continuous_net_scripts:
             inputs:
                 - 'app/scripts/app.js'
                 - 'app/scripts/app.main.js'
+                - 'app/scripts/config.constant.js'
                 - 'bundles/publipr/js/constant.js'
                 - 'app/scripts/config.router.js'
                 - 'bundles/publipr/js/router.js'

@@ -24,6 +24,7 @@ class AppKernel extends Kernel
             new Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle(),
             new FM\ElfinderBundle\FMElfinderBundle(),
             new EWZ\Bundle\RecaptchaBundle\EWZRecaptchaBundle(),
+            new Liip\ImagineBundle\LiipImagineBundle(),
             new ContinuousNet\PubliPrBundle\PubliPrBundle()
         );
 

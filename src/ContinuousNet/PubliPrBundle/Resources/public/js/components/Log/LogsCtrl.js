@@ -226,15 +226,15 @@ function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q,
     };
 
     $scope.add = function() {
-        $state.go('app.accesscontrol.logsnew');
+        $state.go('app.access.logsnew');
     };
 
     $scope.edit = function(row) {
-        $state.go('app.accesscontrol.logsedit', {id: row.id});
+        $state.go('app.access.logsedit', {id: row.id});
     };
 
     $scope.details = function(row) {
-        $state.go('app.accesscontrol.logsdetails', {id: row.id});
+        $state.go('app.access.logsdetails', {id: row.id});
     };
 
 }]);

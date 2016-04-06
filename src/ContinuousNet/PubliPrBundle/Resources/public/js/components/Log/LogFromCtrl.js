@@ -122,7 +122,7 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
     };
 
     $scope.list = function() {
-        $state.go('app.accesscontrol.logs');
+        $state.go('app.access.logs');
     };
     
     if (angular.isDefined($stateParams.id)) {

@@ -158,6 +158,12 @@
                                     <span>[[ newsroom.modified_at | date: datetimeFormat ]]</span>
                                 </td>
                             </tr>
+                            <tr>
+                                <td><span translate="content.list.fields.USERS">Users</span></td>
+                                <td>
+                                    <a ng-repeat="user in newsroom.users" ui-sref="app.access.usersdetails({id: user.id})">[[ user.username ]]</a>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>

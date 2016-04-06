@@ -97,7 +97,7 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
     };
 
     $scope.list = function() {
-        $state.go('app.access.fonts');
+        $state.go('app.settings.fonts');
     };
     
     if (angular.isDefined($stateParams.id)) {

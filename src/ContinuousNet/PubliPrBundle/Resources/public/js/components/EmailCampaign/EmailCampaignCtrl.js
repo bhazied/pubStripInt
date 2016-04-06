@@ -13,15 +13,15 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $q, $interpolate
     $scope.timeFormat = $filter('translate')('formats.TIME');
 
     $scope.list = function() {
-        $state.go('app.templatemanager.emailcampaigns');
+        $state.go('app.distribution.emailcampaigns');
     };
 
     $scope.add = function() {
-        $state.go('app.templatemanager.emailcampaignsnew');
+        $state.go('app.distribution.emailcampaignsnew');
     };
 
     $scope.edit = function(row) {
-        $state.go('app.templatemanager.emailcampaignsedit', {id: row.id});
+        $state.go('app.distribution.emailcampaignsedit', {id: row.id});
     };
 
     if (angular.isDefined($stateParams.id)) {

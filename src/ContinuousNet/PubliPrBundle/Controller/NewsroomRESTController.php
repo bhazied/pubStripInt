@@ -96,6 +96,14 @@ class NewsroomRESTController extends BaseRESTController
                    }
                 }
             }
+            $roles = $this->getUser()->getRoles();
+            if (!empty($roles)) {
+                foreach ($roles as $role) {
+                   if (substr_count($role, 'MAN') > 0) {
+                       $qb->andWhere('n_.creatorUser = :user')->setParameter('user', $this->getUser()->getId());
+                   }
+                }
+            }
             $qbList = clone $qb;
             $qb->select('count(n_.id)');
             $data['inlineCount'] = $qb->getQuery()->getSingleScalarResult();
@@ -158,6 +166,10 @@ class NewsroomRESTController extends BaseRESTController
         try {
             $em = $this->getDoctrine()->getManager();
             $request->setMethod('PATCH'); //Treat all PUTs as PATCH
+            $previousUsers = $entity->getUsers()->toArray();
+            foreach ($previousUsers as $previousUser) {
+                $entity->removeUser($previousUser);
+            }
             $form = $this->createForm(new NewsroomType(), $entity, array('method' => $request->getMethod()));
             $this->removeExtraFields($request, $form);
             $form->handleRequest($request);

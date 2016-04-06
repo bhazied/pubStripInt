@@ -13936,6 +13936,3175 @@ module.exports = function (element) {
         })
     }
 })(jQuery, window, document);
+/* Javascript plotting library for jQuery, version 0.8.3.
+
+Copyright (c) 2007-2014 IOLA and Ole Laursen.
+Licensed under the MIT license.
+
+*/
+
+// first an inline dependency, jquery.colorhelpers.js, we inline it here
+// for convenience
+
+/* Plugin for jQuery for working with colors.
+ *
+ * Version 1.1.
+ *
+ * Inspiration from jQuery color animation plugin by John Resig.
+ *
+ * Released under the MIT license by Ole Laursen, October 2009.
+ *
+ * Examples:
+ *
+ *   $.color.parse("#fff").scale('rgb', 0.25).add('a', -0.5).toString()
+ *   var c = $.color.extract($("#mydiv"), 'background-color');
+ *   console.log(c.r, c.g, c.b, c.a);
+ *   $.color.make(100, 50, 25, 0.4).toString() // returns "rgba(100,50,25,0.4)"
+ *
+ * Note that .scale() and .add() return the same modified object
+ * instead of making a new one.
+ *
+ * V. 1.1: Fix error handling so e.g. parsing an empty string does
+ * produce a color rather than just crashing.
+ */
+(function($){$.color={};$.color.make=function(r,g,b,a){var o={};o.r=r||0;o.g=g||0;o.b=b||0;o.a=a!=null?a:1;o.add=function(c,d){for(var i=0;i<c.length;++i)o[c.charAt(i)]+=d;return o.normalize()};o.scale=function(c,f){for(var i=0;i<c.length;++i)o[c.charAt(i)]*=f;return o.normalize()};o.toString=function(){if(o.a>=1){return"rgb("+[o.r,o.g,o.b].join(",")+")"}else{return"rgba("+[o.r,o.g,o.b,o.a].join(",")+")"}};o.normalize=function(){function clamp(min,value,max){return value<min?min:value>max?max:value}o.r=clamp(0,parseInt(o.r),255);o.g=clamp(0,parseInt(o.g),255);o.b=clamp(0,parseInt(o.b),255);o.a=clamp(0,o.a,1);return o};o.clone=function(){return $.color.make(o.r,o.b,o.g,o.a)};return o.normalize()};$.color.extract=function(elem,css){var c;do{c=elem.css(css).toLowerCase();if(c!=""&&c!="transparent")break;elem=elem.parent()}while(elem.length&&!$.nodeName(elem.get(0),"body"));if(c=="rgba(0, 0, 0, 0)")c="transparent";return $.color.parse(c)};$.color.parse=function(str){var res,m=$.color.make;if(res=/rgb\(\s*([0-9]{1,3})\s*,\s*([0-9]{1,3})\s*,\s*([0-9]{1,3})\s*\)/.exec(str))return m(parseInt(res[1],10),parseInt(res[2],10),parseInt(res[3],10));if(res=/rgba\(\s*([0-9]{1,3})\s*,\s*([0-9]{1,3})\s*,\s*([0-9]{1,3})\s*,\s*([0-9]+(?:\.[0-9]+)?)\s*\)/.exec(str))return m(parseInt(res[1],10),parseInt(res[2],10),parseInt(res[3],10),parseFloat(res[4]));if(res=/rgb\(\s*([0-9]+(?:\.[0-9]+)?)\%\s*,\s*([0-9]+(?:\.[0-9]+)?)\%\s*,\s*([0-9]+(?:\.[0-9]+)?)\%\s*\)/.exec(str))return m(parseFloat(res[1])*2.55,parseFloat(res[2])*2.55,parseFloat(res[3])*2.55);if(res=/rgba\(\s*([0-9]+(?:\.[0-9]+)?)\%\s*,\s*([0-9]+(?:\.[0-9]+)?)\%\s*,\s*([0-9]+(?:\.[0-9]+)?)\%\s*,\s*([0-9]+(?:\.[0-9]+)?)\s*\)/.exec(str))return m(parseFloat(res[1])*2.55,parseFloat(res[2])*2.55,parseFloat(res[3])*2.55,parseFloat(res[4]));if(res=/#([a-fA-F0-9]{2})([a-fA-F0-9]{2})([a-fA-F0-9]{2})/.exec(str))return m(parseInt(res[1],16),parseInt(res[2],16),parseInt(res[3],16));if(res=/#([a-fA-F0-9])([a-fA-F0-9])([a-fA-F0-9])/.exec(str))return m(parseInt(res[1]+res[1],16),parseInt(res[2]+res[2],16),parseInt(res[3]+res[3],16));var name=$.trim(str).toLowerCase();if(name=="transparent")return m(255,255,255,0);else{res=lookupColors[name]||[0,0,0];return m(res[0],res[1],res[2])}};var lookupColors={aqua:[0,255,255],azure:[240,255,255],beige:[245,245,220],black:[0,0,0],blue:[0,0,255],brown:[165,42,42],cyan:[0,255,255],darkblue:[0,0,139],darkcyan:[0,139,139],darkgrey:[169,169,169],darkgreen:[0,100,0],darkkhaki:[189,183,107],darkmagenta:[139,0,139],darkolivegreen:[85,107,47],darkorange:[255,140,0],darkorchid:[153,50,204],darkred:[139,0,0],darksalmon:[233,150,122],darkviolet:[148,0,211],fuchsia:[255,0,255],gold:[255,215,0],green:[0,128,0],indigo:[75,0,130],khaki:[240,230,140],lightblue:[173,216,230],lightcyan:[224,255,255],lightgreen:[144,238,144],lightgrey:[211,211,211],lightpink:[255,182,193],lightyellow:[255,255,224],lime:[0,255,0],magenta:[255,0,255],maroon:[128,0,0],navy:[0,0,128],olive:[128,128,0],orange:[255,165,0],pink:[255,192,203],purple:[128,0,128],violet:[128,0,128],red:[255,0,0],silver:[192,192,192],white:[255,255,255],yellow:[255,255,0]}})(jQuery);
+
+// the actual Flot code
+(function($) {
+
+	// Cache the prototype hasOwnProperty for faster access
+
+	var hasOwnProperty = Object.prototype.hasOwnProperty;
+
+    // A shim to provide 'detach' to jQuery versions prior to 1.4.  Using a DOM
+    // operation produces the same effect as detach, i.e. removing the element
+    // without touching its jQuery data.
+
+    // Do not merge this into Flot 0.9, since it requires jQuery 1.4.4+.
+
+    if (!$.fn.detach) {
+        $.fn.detach = function() {
+            return this.each(function() {
+                if (this.parentNode) {
+                    this.parentNode.removeChild( this );
+                }
+            });
+        };
+    }
+
+	///////////////////////////////////////////////////////////////////////////
+	// The Canvas object is a wrapper around an HTML5 <canvas> tag.
+	//
+	// @constructor
+	// @param {string} cls List of classes to apply to the canvas.
+	// @param {element} container Element onto which to append the canvas.
+	//
+	// Requiring a container is a little iffy, but unfortunately canvas
+	// operations don't work unless the canvas is attached to the DOM.
+
+	function Canvas(cls, container) {
+
+		var element = container.children("." + cls)[0];
+
+		if (element == null) {
+
+			element = document.createElement("canvas");
+			element.className = cls;
+
+			$(element).css({ direction: "ltr", position: "absolute", left: 0, top: 0 })
+				.appendTo(container);
+
+			// If HTML5 Canvas isn't available, fall back to [Ex|Flash]canvas
+
+			if (!element.getContext) {
+				if (window.G_vmlCanvasManager) {
+					element = window.G_vmlCanvasManager.initElement(element);
+				} else {
+					throw new Error("Canvas is not available. If you're using IE with a fall-back such as Excanvas, then there's either a mistake in your conditional include, or the page has no DOCTYPE and is rendering in Quirks Mode.");
+				}
+			}
+		}
+
+		this.element = element;
+
+		var context = this.context = element.getContext("2d");
+
+		// Determine the screen's ratio of physical to device-independent
+		// pixels.  This is the ratio between the canvas width that the browser
+		// advertises and the number of pixels actually present in that space.
+
+		// The iPhone 4, for example, has a device-independent width of 320px,
+		// but its screen is actually 640px wide.  It therefore has a pixel
+		// ratio of 2, while most normal devices have a ratio of 1.
+
+		var devicePixelRatio = window.devicePixelRatio || 1,
+			backingStoreRatio =
+				context.webkitBackingStorePixelRatio ||
+				context.mozBackingStorePixelRatio ||
+				context.msBackingStorePixelRatio ||
+				context.oBackingStorePixelRatio ||
+				context.backingStorePixelRatio || 1;
+
+		this.pixelRatio = devicePixelRatio / backingStoreRatio;
+
+		// Size the canvas to match the internal dimensions of its container
+
+		this.resize(container.width(), container.height());
+
+		// Collection of HTML div layers for text overlaid onto the canvas
+
+		this.textContainer = null;
+		this.text = {};
+
+		// Cache of text fragments and metrics, so we can avoid expensively
+		// re-calculating them when the plot is re-rendered in a loop.
+
+		this._textCache = {};
+	}
+
+	// Resizes the canvas to the given dimensions.
+	//
+	// @param {number} width New width of the canvas, in pixels.
+	// @param {number} width New height of the canvas, in pixels.
+
+	Canvas.prototype.resize = function(width, height) {
+
+		if (width <= 0 || height <= 0) {
+			throw new Error("Invalid dimensions for plot, width = " + width + ", height = " + height);
+		}
+
+		var element = this.element,
+			context = this.context,
+			pixelRatio = this.pixelRatio;
+
+		// Resize the canvas, increasing its density based on the display's
+		// pixel ratio; basically giving it more pixels without increasing the
+		// size of its element, to take advantage of the fact that retina
+		// displays have that many more pixels in the same advertised space.
+
+		// Resizing should reset the state (excanvas seems to be buggy though)
+
+		if (this.width != width) {
+			element.width = width * pixelRatio;
+			element.style.width = width + "px";
+			this.width = width;
+		}
+
+		if (this.height != height) {
+			element.height = height * pixelRatio;
+			element.style.height = height + "px";
+			this.height = height;
+		}
+
+		// Save the context, so we can reset in case we get replotted.  The
+		// restore ensure that we're really back at the initial state, and
+		// should be safe even if we haven't saved the initial state yet.
+
+		context.restore();
+		context.save();
+
+		// Scale the coordinate space to match the display density; so even though we
+		// may have twice as many pixels, we still want lines and other drawing to
+		// appear at the same size; the extra pixels will just make them crisper.
+
+		context.scale(pixelRatio, pixelRatio);
+	};
+
+	// Clears the entire canvas area, not including any overlaid HTML text
+
+	Canvas.prototype.clear = function() {
+		this.context.clearRect(0, 0, this.width, this.height);
+	};
+
+	// Finishes rendering the canvas, including managing the text overlay.
+
+	Canvas.prototype.render = function() {
+
+		var cache = this._textCache;
+
+		// For each text layer, add elements marked as active that haven't
+		// already been rendered, and remove those that are no longer active.
+
+		for (var layerKey in cache) {
+			if (hasOwnProperty.call(cache, layerKey)) {
+
+				var layer = this.getTextLayer(layerKey),
+					layerCache = cache[layerKey];
+
+				layer.hide();
+
+				for (var styleKey in layerCache) {
+					if (hasOwnProperty.call(layerCache, styleKey)) {
+						var styleCache = layerCache[styleKey];
+						for (var key in styleCache) {
+							if (hasOwnProperty.call(styleCache, key)) {
+
+								var positions = styleCache[key].positions;
+
+								for (var i = 0, position; position = positions[i]; i++) {
+									if (position.active) {
+										if (!position.rendered) {
+											layer.append(position.element);
+											position.rendered = true;
+										}
+									} else {
+										positions.splice(i--, 1);
+										if (position.rendered) {
+											position.element.detach();
+										}
+									}
+								}
+
+								if (positions.length == 0) {
+									delete styleCache[key];
+								}
+							}
+						}
+					}
+				}
+
+				layer.show();
+			}
+		}
+	};
+
+	// Creates (if necessary) and returns the text overlay container.
+	//
+	// @param {string} classes String of space-separated CSS classes used to
+	//     uniquely identify the text layer.
+	// @return {object} The jQuery-wrapped text-layer div.
+
+	Canvas.prototype.getTextLayer = function(classes) {
+
+		var layer = this.text[classes];
+
+		// Create the text layer if it doesn't exist
+
+		if (layer == null) {
+
+			// Create the text layer container, if it doesn't exist
+
+			if (this.textContainer == null) {
+				this.textContainer = $("<div class='flot-text'></div>")
+					.css({
+						position: "absolute",
+						top: 0,
+						left: 0,
+						bottom: 0,
+						right: 0,
+						'font-size': "smaller",
+						color: "#545454"
+					})
+					.insertAfter(this.element);
+			}
+
+			layer = this.text[classes] = $("<div></div>")
+				.addClass(classes)
+				.css({
+					position: "absolute",
+					top: 0,
+					left: 0,
+					bottom: 0,
+					right: 0
+				})
+				.appendTo(this.textContainer);
+		}
+
+		return layer;
+	};
+
+	// Creates (if necessary) and returns a text info object.
+	//
+	// The object looks like this:
+	//
+	// {
+	//     width: Width of the text's wrapper div.
+	//     height: Height of the text's wrapper div.
+	//     element: The jQuery-wrapped HTML div containing the text.
+	//     positions: Array of positions at which this text is drawn.
+	// }
+	//
+	// The positions array contains objects that look like this:
+	//
+	// {
+	//     active: Flag indicating whether the text should be visible.
+	//     rendered: Flag indicating whether the text is currently visible.
+	//     element: The jQuery-wrapped HTML div containing the text.
+	//     x: X coordinate at which to draw the text.
+	//     y: Y coordinate at which to draw the text.
+	// }
+	//
+	// Each position after the first receives a clone of the original element.
+	//
+	// The idea is that that the width, height, and general 'identity' of the
+	// text is constant no matter where it is placed; the placements are a
+	// secondary property.
+	//
+	// Canvas maintains a cache of recently-used text info objects; getTextInfo
+	// either returns the cached element or creates a new entry.
+	//
+	// @param {string} layer A string of space-separated CSS classes uniquely
+	//     identifying the layer containing this text.
+	// @param {string} text Text string to retrieve info for.
+	// @param {(string|object)=} font Either a string of space-separated CSS
+	//     classes or a font-spec object, defining the text's font and style.
+	// @param {number=} angle Angle at which to rotate the text, in degrees.
+	//     Angle is currently unused, it will be implemented in the future.
+	// @param {number=} width Maximum width of the text before it wraps.
+	// @return {object} a text info object.
+
+	Canvas.prototype.getTextInfo = function(layer, text, font, angle, width) {
+
+		var textStyle, layerCache, styleCache, info;
+
+		// Cast the value to a string, in case we were given a number or such
+
+		text = "" + text;
+
+		// If the font is a font-spec object, generate a CSS font definition
+
+		if (typeof font === "object") {
+			textStyle = font.style + " " + font.variant + " " + font.weight + " " + font.size + "px/" + font.lineHeight + "px " + font.family;
+		} else {
+			textStyle = font;
+		}
+
+		// Retrieve (or create) the cache for the text's layer and styles
+
+		layerCache = this._textCache[layer];
+
+		if (layerCache == null) {
+			layerCache = this._textCache[layer] = {};
+		}
+
+		styleCache = layerCache[textStyle];
+
+		if (styleCache == null) {
+			styleCache = layerCache[textStyle] = {};
+		}
+
+		info = styleCache[text];
+
+		// If we can't find a matching element in our cache, create a new one
+
+		if (info == null) {
+
+			var element = $("<div></div>").html(text)
+				.css({
+					position: "absolute",
+					'max-width': width,
+					top: -9999
+				})
+				.appendTo(this.getTextLayer(layer));
+
+			if (typeof font === "object") {
+				element.css({
+					font: textStyle,
+					color: font.color
+				});
+			} else if (typeof font === "string") {
+				element.addClass(font);
+			}
+
+			info = styleCache[text] = {
+				width: element.outerWidth(true),
+				height: element.outerHeight(true),
+				element: element,
+				positions: []
+			};
+
+			element.detach();
+		}
+
+		return info;
+	};
+
+	// Adds a text string to the canvas text overlay.
+	//
+	// The text isn't drawn immediately; it is marked as rendering, which will
+	// result in its addition to the canvas on the next render pass.
+	//
+	// @param {string} layer A string of space-separated CSS classes uniquely
+	//     identifying the layer containing this text.
+	// @param {number} x X coordinate at which to draw the text.
+	// @param {number} y Y coordinate at which to draw the text.
+	// @param {string} text Text string to draw.
+	// @param {(string|object)=} font Either a string of space-separated CSS
+	//     classes or a font-spec object, defining the text's font and style.
+	// @param {number=} angle Angle at which to rotate the text, in degrees.
+	//     Angle is currently unused, it will be implemented in the future.
+	// @param {number=} width Maximum width of the text before it wraps.
+	// @param {string=} halign Horizontal alignment of the text; either "left",
+	//     "center" or "right".
+	// @param {string=} valign Vertical alignment of the text; either "top",
+	//     "middle" or "bottom".
+
+	Canvas.prototype.addText = function(layer, x, y, text, font, angle, width, halign, valign) {
+
+		var info = this.getTextInfo(layer, text, font, angle, width),
+			positions = info.positions;
+
+		// Tweak the div's position to match the text's alignment
+
+		if (halign == "center") {
+			x -= info.width / 2;
+		} else if (halign == "right") {
+			x -= info.width;
+		}
+
+		if (valign == "middle") {
+			y -= info.height / 2;
+		} else if (valign == "bottom") {
+			y -= info.height;
+		}
+
+		// Determine whether this text already exists at this position.
+		// If so, mark it for inclusion in the next render pass.
+
+		for (var i = 0, position; position = positions[i]; i++) {
+			if (position.x == x && position.y == y) {
+				position.active = true;
+				return;
+			}
+		}
+
+		// If the text doesn't exist at this position, create a new entry
+
+		// For the very first position we'll re-use the original element,
+		// while for subsequent ones we'll clone it.
+
+		position = {
+			active: true,
+			rendered: false,
+			element: positions.length ? info.element.clone() : info.element,
+			x: x,
+			y: y
+		};
+
+		positions.push(position);
+
+		// Move the element to its final position within the container
+
+		position.element.css({
+			top: Math.round(y),
+			left: Math.round(x),
+			'text-align': halign	// In case the text wraps
+		});
+	};
+
+	// Removes one or more text strings from the canvas text overlay.
+	//
+	// If no parameters are given, all text within the layer is removed.
+	//
+	// Note that the text is not immediately removed; it is simply marked as
+	// inactive, which will result in its removal on the next render pass.
+	// This avoids the performance penalty for 'clear and redraw' behavior,
+	// where we potentially get rid of all text on a layer, but will likely
+	// add back most or all of it later, as when redrawing axes, for example.
+	//
+	// @param {string} layer A string of space-separated CSS classes uniquely
+	//     identifying the layer containing this text.
+	// @param {number=} x X coordinate of the text.
+	// @param {number=} y Y coordinate of the text.
+	// @param {string=} text Text string to remove.
+	// @param {(string|object)=} font Either a string of space-separated CSS
+	//     classes or a font-spec object, defining the text's font and style.
+	// @param {number=} angle Angle at which the text is rotated, in degrees.
+	//     Angle is currently unused, it will be implemented in the future.
+
+	Canvas.prototype.removeText = function(layer, x, y, text, font, angle) {
+		if (text == null) {
+			var layerCache = this._textCache[layer];
+			if (layerCache != null) {
+				for (var styleKey in layerCache) {
+					if (hasOwnProperty.call(layerCache, styleKey)) {
+						var styleCache = layerCache[styleKey];
+						for (var key in styleCache) {
+							if (hasOwnProperty.call(styleCache, key)) {
+								var positions = styleCache[key].positions;
+								for (var i = 0, position; position = positions[i]; i++) {
+									position.active = false;
+								}
+							}
+						}
+					}
+				}
+			}
+		} else {
+			var positions = this.getTextInfo(layer, text, font, angle).positions;
+			for (var i = 0, position; position = positions[i]; i++) {
+				if (position.x == x && position.y == y) {
+					position.active = false;
+				}
+			}
+		}
+	};
+
+	///////////////////////////////////////////////////////////////////////////
+	// The top-level container for the entire plot.
+
+    function Plot(placeholder, data_, options_, plugins) {
+        // data is on the form:
+        //   [ series1, series2 ... ]
+        // where series is either just the data as [ [x1, y1], [x2, y2], ... ]
+        // or { data: [ [x1, y1], [x2, y2], ... ], label: "some label", ... }
+
+        var series = [],
+            options = {
+                // the color theme used for graphs
+                colors: ["#edc240", "#afd8f8", "#cb4b4b", "#4da74d", "#9440ed"],
+                legend: {
+                    show: true,
+                    noColumns: 1, // number of colums in legend table
+                    labelFormatter: null, // fn: string -> string
+                    labelBoxBorderColor: "#ccc", // border color for the little label boxes
+                    container: null, // container (as jQuery object) to put legend in, null means default on top of graph
+                    position: "ne", // position of default legend container within plot
+                    margin: 5, // distance from grid edge to default legend container within plot
+                    backgroundColor: null, // null means auto-detect
+                    backgroundOpacity: 0.85, // set to 0 to avoid background
+                    sorted: null    // default to no legend sorting
+                },
+                xaxis: {
+                    show: null, // null = auto-detect, true = always, false = never
+                    position: "bottom", // or "top"
+                    mode: null, // null or "time"
+                    font: null, // null (derived from CSS in placeholder) or object like { size: 11, lineHeight: 13, style: "italic", weight: "bold", family: "sans-serif", variant: "small-caps" }
+                    color: null, // base color, labels, ticks
+                    tickColor: null, // possibly different color of ticks, e.g. "rgba(0,0,0,0.15)"
+                    transform: null, // null or f: number -> number to transform axis
+                    inverseTransform: null, // if transform is set, this should be the inverse function
+                    min: null, // min. value to show, null means set automatically
+                    max: null, // max. value to show, null means set automatically
+                    autoscaleMargin: null, // margin in % to add if auto-setting min/max
+                    ticks: null, // either [1, 3] or [[1, "a"], 3] or (fn: axis info -> ticks) or app. number of ticks for auto-ticks
+                    tickFormatter: null, // fn: number -> string
+                    labelWidth: null, // size of tick labels in pixels
+                    labelHeight: null,
+                    reserveSpace: null, // whether to reserve space even if axis isn't shown
+                    tickLength: null, // size in pixels of ticks, or "full" for whole line
+                    alignTicksWithAxis: null, // axis number or null for no sync
+                    tickDecimals: null, // no. of decimals, null means auto
+                    tickSize: null, // number or [number, "unit"]
+                    minTickSize: null // number or [number, "unit"]
+                },
+                yaxis: {
+                    autoscaleMargin: 0.02,
+                    position: "left" // or "right"
+                },
+                xaxes: [],
+                yaxes: [],
+                series: {
+                    points: {
+                        show: false,
+                        radius: 3,
+                        lineWidth: 2, // in pixels
+                        fill: true,
+                        fillColor: "#ffffff",
+                        symbol: "circle" // or callback
+                    },
+                    lines: {
+                        // we don't put in show: false so we can see
+                        // whether lines were actively disabled
+                        lineWidth: 2, // in pixels
+                        fill: false,
+                        fillColor: null,
+                        steps: false
+                        // Omit 'zero', so we can later default its value to
+                        // match that of the 'fill' option.
+                    },
+                    bars: {
+                        show: false,
+                        lineWidth: 2, // in pixels
+                        barWidth: 1, // in units of the x axis
+                        fill: true,
+                        fillColor: null,
+                        align: "left", // "left", "right", or "center"
+                        horizontal: false,
+                        zero: true
+                    },
+                    shadowSize: 3,
+                    highlightColor: null
+                },
+                grid: {
+                    show: true,
+                    aboveData: false,
+                    color: "#545454", // primary color used for outline and labels
+                    backgroundColor: null, // null for transparent, else color
+                    borderColor: null, // set if different from the grid color
+                    tickColor: null, // color for the ticks, e.g. "rgba(0,0,0,0.15)"
+                    margin: 0, // distance from the canvas edge to the grid
+                    labelMargin: 5, // in pixels
+                    axisMargin: 8, // in pixels
+                    borderWidth: 2, // in pixels
+                    minBorderMargin: null, // in pixels, null means taken from points radius
+                    markings: null, // array of ranges or fn: axes -> array of ranges
+                    markingsColor: "#f4f4f4",
+                    markingsLineWidth: 2,
+                    // interactive stuff
+                    clickable: false,
+                    hoverable: false,
+                    autoHighlight: true, // highlight in case mouse is near
+                    mouseActiveRadius: 10 // how far the mouse can be away to activate an item
+                },
+                interaction: {
+                    redrawOverlayInterval: 1000/60 // time between updates, -1 means in same flow
+                },
+                hooks: {}
+            },
+        surface = null,     // the canvas for the plot itself
+        overlay = null,     // canvas for interactive stuff on top of plot
+        eventHolder = null, // jQuery object that events should be bound to
+        ctx = null, octx = null,
+        xaxes = [], yaxes = [],
+        plotOffset = { left: 0, right: 0, top: 0, bottom: 0},
+        plotWidth = 0, plotHeight = 0,
+        hooks = {
+            processOptions: [],
+            processRawData: [],
+            processDatapoints: [],
+            processOffset: [],
+            drawBackground: [],
+            drawSeries: [],
+            draw: [],
+            bindEvents: [],
+            drawOverlay: [],
+            shutdown: []
+        },
+        plot = this;
+
+        // public functions
+        plot.setData = setData;
+        plot.setupGrid = setupGrid;
+        plot.draw = draw;
+        plot.getPlaceholder = function() { return placeholder; };
+        plot.getCanvas = function() { return surface.element; };
+        plot.getPlotOffset = function() { return plotOffset; };
+        plot.width = function () { return plotWidth; };
+        plot.height = function () { return plotHeight; };
+        plot.offset = function () {
+            var o = eventHolder.offset();
+            o.left += plotOffset.left;
+            o.top += plotOffset.top;
+            return o;
+        };
+        plot.getData = function () { return series; };
+        plot.getAxes = function () {
+            var res = {}, i;
+            $.each(xaxes.concat(yaxes), function (_, axis) {
+                if (axis)
+                    res[axis.direction + (axis.n != 1 ? axis.n : "") + "axis"] = axis;
+            });
+            return res;
+        };
+        plot.getXAxes = function () { return xaxes; };
+        plot.getYAxes = function () { return yaxes; };
+        plot.c2p = canvasToAxisCoords;
+        plot.p2c = axisToCanvasCoords;
+        plot.getOptions = function () { return options; };
+        plot.highlight = highlight;
+        plot.unhighlight = unhighlight;
+        plot.triggerRedrawOverlay = triggerRedrawOverlay;
+        plot.pointOffset = function(point) {
+            return {
+                left: parseInt(xaxes[axisNumber(point, "x") - 1].p2c(+point.x) + plotOffset.left, 10),
+                top: parseInt(yaxes[axisNumber(point, "y") - 1].p2c(+point.y) + plotOffset.top, 10)
+            };
+        };
+        plot.shutdown = shutdown;
+        plot.destroy = function () {
+            shutdown();
+            placeholder.removeData("plot").empty();
+
+            series = [];
+            options = null;
+            surface = null;
+            overlay = null;
+            eventHolder = null;
+            ctx = null;
+            octx = null;
+            xaxes = [];
+            yaxes = [];
+            hooks = null;
+            highlights = [];
+            plot = null;
+        };
+        plot.resize = function () {
+        	var width = placeholder.width(),
+        		height = placeholder.height();
+            surface.resize(width, height);
+            overlay.resize(width, height);
+        };
+
+        // public attributes
+        plot.hooks = hooks;
+
+        // initialize
+        initPlugins(plot);
+        parseOptions(options_);
+        setupCanvases();
+        setData(data_);
+        setupGrid();
+        draw();
+        bindEvents();
+
+
+        function executeHooks(hook, args) {
+            args = [plot].concat(args);
+            for (var i = 0; i < hook.length; ++i)
+                hook[i].apply(this, args);
+        }
+
+        function initPlugins() {
+
+            // References to key classes, allowing plugins to modify them
+
+            var classes = {
+                Canvas: Canvas
+            };
+
+            for (var i = 0; i < plugins.length; ++i) {
+                var p = plugins[i];
+                p.init(plot, classes);
+                if (p.options)
+                    $.extend(true, options, p.options);
+            }
+        }
+
+        function parseOptions(opts) {
+
+            $.extend(true, options, opts);
+
+            // $.extend merges arrays, rather than replacing them.  When less
+            // colors are provided than the size of the default palette, we
+            // end up with those colors plus the remaining defaults, which is
+            // not expected behavior; avoid it by replacing them here.
+
+            if (opts && opts.colors) {
+            	options.colors = opts.colors;
+            }
+
+            if (options.xaxis.color == null)
+                options.xaxis.color = $.color.parse(options.grid.color).scale('a', 0.22).toString();
+            if (options.yaxis.color == null)
+                options.yaxis.color = $.color.parse(options.grid.color).scale('a', 0.22).toString();
+
+            if (options.xaxis.tickColor == null) // grid.tickColor for back-compatibility
+                options.xaxis.tickColor = options.grid.tickColor || options.xaxis.color;
+            if (options.yaxis.tickColor == null) // grid.tickColor for back-compatibility
+                options.yaxis.tickColor = options.grid.tickColor || options.yaxis.color;
+
+            if (options.grid.borderColor == null)
+                options.grid.borderColor = options.grid.color;
+            if (options.grid.tickColor == null)
+                options.grid.tickColor = $.color.parse(options.grid.color).scale('a', 0.22).toString();
+
+            // Fill in defaults for axis options, including any unspecified
+            // font-spec fields, if a font-spec was provided.
+
+            // If no x/y axis options were provided, create one of each anyway,
+            // since the rest of the code assumes that they exist.
+
+            var i, axisOptions, axisCount,
+                fontSize = placeholder.css("font-size"),
+                fontSizeDefault = fontSize ? +fontSize.replace("px", "") : 13,
+                fontDefaults = {
+                    style: placeholder.css("font-style"),
+                    size: Math.round(0.8 * fontSizeDefault),
+                    variant: placeholder.css("font-variant"),
+                    weight: placeholder.css("font-weight"),
+                    family: placeholder.css("font-family")
+                };
+
+            axisCount = options.xaxes.length || 1;
+            for (i = 0; i < axisCount; ++i) {
+
+                axisOptions = options.xaxes[i];
+                if (axisOptions && !axisOptions.tickColor) {
+                    axisOptions.tickColor = axisOptions.color;
+                }
+
+                axisOptions = $.extend(true, {}, options.xaxis, axisOptions);
+                options.xaxes[i] = axisOptions;
+
+                if (axisOptions.font) {
+                    axisOptions.font = $.extend({}, fontDefaults, axisOptions.font);
+                    if (!axisOptions.font.color) {
+                        axisOptions.font.color = axisOptions.color;
+                    }
+                    if (!axisOptions.font.lineHeight) {
+                        axisOptions.font.lineHeight = Math.round(axisOptions.font.size * 1.15);
+                    }
+                }
+            }
+
+            axisCount = options.yaxes.length || 1;
+            for (i = 0; i < axisCount; ++i) {
+
+                axisOptions = options.yaxes[i];
+                if (axisOptions && !axisOptions.tickColor) {
+                    axisOptions.tickColor = axisOptions.color;
+                }
+
+                axisOptions = $.extend(true, {}, options.yaxis, axisOptions);
+                options.yaxes[i] = axisOptions;
+
+                if (axisOptions.font) {
+                    axisOptions.font = $.extend({}, fontDefaults, axisOptions.font);
+                    if (!axisOptions.font.color) {
+                        axisOptions.font.color = axisOptions.color;
+                    }
+                    if (!axisOptions.font.lineHeight) {
+                        axisOptions.font.lineHeight = Math.round(axisOptions.font.size * 1.15);
+                    }
+                }
+            }
+
+            // backwards compatibility, to be removed in future
+            if (options.xaxis.noTicks && options.xaxis.ticks == null)
+                options.xaxis.ticks = options.xaxis.noTicks;
+            if (options.yaxis.noTicks && options.yaxis.ticks == null)
+                options.yaxis.ticks = options.yaxis.noTicks;
+            if (options.x2axis) {
+                options.xaxes[1] = $.extend(true, {}, options.xaxis, options.x2axis);
+                options.xaxes[1].position = "top";
+                // Override the inherit to allow the axis to auto-scale
+                if (options.x2axis.min == null) {
+                    options.xaxes[1].min = null;
+                }
+                if (options.x2axis.max == null) {
+                    options.xaxes[1].max = null;
+                }
+            }
+            if (options.y2axis) {
+                options.yaxes[1] = $.extend(true, {}, options.yaxis, options.y2axis);
+                options.yaxes[1].position = "right";
+                // Override the inherit to allow the axis to auto-scale
+                if (options.y2axis.min == null) {
+                    options.yaxes[1].min = null;
+                }
+                if (options.y2axis.max == null) {
+                    options.yaxes[1].max = null;
+                }
+            }
+            if (options.grid.coloredAreas)
+                options.grid.markings = options.grid.coloredAreas;
+            if (options.grid.coloredAreasColor)
+                options.grid.markingsColor = options.grid.coloredAreasColor;
+            if (options.lines)
+                $.extend(true, options.series.lines, options.lines);
+            if (options.points)
+                $.extend(true, options.series.points, options.points);
+            if (options.bars)
+                $.extend(true, options.series.bars, options.bars);
+            if (options.shadowSize != null)
+                options.series.shadowSize = options.shadowSize;
+            if (options.highlightColor != null)
+                options.series.highlightColor = options.highlightColor;
+
+            // save options on axes for future reference
+            for (i = 0; i < options.xaxes.length; ++i)
+                getOrCreateAxis(xaxes, i + 1).options = options.xaxes[i];
+            for (i = 0; i < options.yaxes.length; ++i)
+                getOrCreateAxis(yaxes, i + 1).options = options.yaxes[i];
+
+            // add hooks from options
+            for (var n in hooks)
+                if (options.hooks[n] && options.hooks[n].length)
+                    hooks[n] = hooks[n].concat(options.hooks[n]);
+
+            executeHooks(hooks.processOptions, [options]);
+        }
+
+        function setData(d) {
+            series = parseData(d);
+            fillInSeriesOptions();
+            processData();
+        }
+
+        function parseData(d) {
+            var res = [];
+            for (var i = 0; i < d.length; ++i) {
+                var s = $.extend(true, {}, options.series);
+
+                if (d[i].data != null) {
+                    s.data = d[i].data; // move the data instead of deep-copy
+                    delete d[i].data;
+
+                    $.extend(true, s, d[i]);
+
+                    d[i].data = s.data;
+                }
+                else
+                    s.data = d[i];
+                res.push(s);
+            }
+
+            return res;
+        }
+
+        function axisNumber(obj, coord) {
+            var a = obj[coord + "axis"];
+            if (typeof a == "object") // if we got a real axis, extract number
+                a = a.n;
+            if (typeof a != "number")
+                a = 1; // default to first axis
+            return a;
+        }
+
+        function allAxes() {
+            // return flat array without annoying null entries
+            return $.grep(xaxes.concat(yaxes), function (a) { return a; });
+        }
+
+        function canvasToAxisCoords(pos) {
+            // return an object with x/y corresponding to all used axes
+            var res = {}, i, axis;
+            for (i = 0; i < xaxes.length; ++i) {
+                axis = xaxes[i];
+                if (axis && axis.used)
+                    res["x" + axis.n] = axis.c2p(pos.left);
+            }
+
+            for (i = 0; i < yaxes.length; ++i) {
+                axis = yaxes[i];
+                if (axis && axis.used)
+                    res["y" + axis.n] = axis.c2p(pos.top);
+            }
+
+            if (res.x1 !== undefined)
+                res.x = res.x1;
+            if (res.y1 !== undefined)
+                res.y = res.y1;
+
+            return res;
+        }
+
+        function axisToCanvasCoords(pos) {
+            // get canvas coords from the first pair of x/y found in pos
+            var res = {}, i, axis, key;
+
+            for (i = 0; i < xaxes.length; ++i) {
+                axis = xaxes[i];
+                if (axis && axis.used) {
+                    key = "x" + axis.n;
+                    if (pos[key] == null && axis.n == 1)
+                        key = "x";
+
+                    if (pos[key] != null) {
+                        res.left = axis.p2c(pos[key]);
+                        break;
+                    }
+                }
+            }
+
+            for (i = 0; i < yaxes.length; ++i) {
+                axis = yaxes[i];
+                if (axis && axis.used) {
+                    key = "y" + axis.n;
+                    if (pos[key] == null && axis.n == 1)
+                        key = "y";
+
+                    if (pos[key] != null) {
+                        res.top = axis.p2c(pos[key]);
+                        break;
+                    }
+                }
+            }
+
+            return res;
+        }
+
+        function getOrCreateAxis(axes, number) {
+            if (!axes[number - 1])
+                axes[number - 1] = {
+                    n: number, // save the number for future reference
+                    direction: axes == xaxes ? "x" : "y",
+                    options: $.extend(true, {}, axes == xaxes ? options.xaxis : options.yaxis)
+                };
+
+            return axes[number - 1];
+        }
+
+        function fillInSeriesOptions() {
+
+            var neededColors = series.length, maxIndex = -1, i;
+
+            // Subtract the number of series that already have fixed colors or
+            // color indexes from the number that we still need to generate.
+
+            for (i = 0; i < series.length; ++i) {
+                var sc = series[i].color;
+                if (sc != null) {
+                    neededColors--;
+                    if (typeof sc == "number" && sc > maxIndex) {
+                        maxIndex = sc;
+                    }
+                }
+            }
+
+            // If any of the series have fixed color indexes, then we need to
+            // generate at least as many colors as the highest index.
+
+            if (neededColors <= maxIndex) {
+                neededColors = maxIndex + 1;
+            }
+
+            // Generate all the colors, using first the option colors and then
+            // variations on those colors once they're exhausted.
+
+            var c, colors = [], colorPool = options.colors,
+                colorPoolSize = colorPool.length, variation = 0;
+
+            for (i = 0; i < neededColors; i++) {
+
+                c = $.color.parse(colorPool[i % colorPoolSize] || "#666");
+
+                // Each time we exhaust the colors in the pool we adjust
+                // a scaling factor used to produce more variations on
+                // those colors. The factor alternates negative/positive
+                // to produce lighter/darker colors.
+
+                // Reset the variation after every few cycles, or else
+                // it will end up producing only white or black colors.
+
+                if (i % colorPoolSize == 0 && i) {
+                    if (variation >= 0) {
+                        if (variation < 0.5) {
+                            variation = -variation - 0.2;
+                        } else variation = 0;
+                    } else variation = -variation;
+                }
+
+                colors[i] = c.scale('rgb', 1 + variation);
+            }
+
+            // Finalize the series options, filling in their colors
+
+            var colori = 0, s;
+            for (i = 0; i < series.length; ++i) {
+                s = series[i];
+
+                // assign colors
+                if (s.color == null) {
+                    s.color = colors[colori].toString();
+                    ++colori;
+                }
+                else if (typeof s.color == "number")
+                    s.color = colors[s.color].toString();
+
+                // turn on lines automatically in case nothing is set
+                if (s.lines.show == null) {
+                    var v, show = true;
+                    for (v in s)
+                        if (s[v] && s[v].show) {
+                            show = false;
+                            break;
+                        }
+                    if (show)
+                        s.lines.show = true;
+                }
+
+                // If nothing was provided for lines.zero, default it to match
+                // lines.fill, since areas by default should extend to zero.
+
+                if (s.lines.zero == null) {
+                    s.lines.zero = !!s.lines.fill;
+                }
+
+                // setup axes
+                s.xaxis = getOrCreateAxis(xaxes, axisNumber(s, "x"));
+                s.yaxis = getOrCreateAxis(yaxes, axisNumber(s, "y"));
+            }
+        }
+
+        function processData() {
+            var topSentry = Number.POSITIVE_INFINITY,
+                bottomSentry = Number.NEGATIVE_INFINITY,
+                fakeInfinity = Number.MAX_VALUE,
+                i, j, k, m, length,
+                s, points, ps, x, y, axis, val, f, p,
+                data, format;
+
+            function updateAxis(axis, min, max) {
+                if (min < axis.datamin && min != -fakeInfinity)
+                    axis.datamin = min;
+                if (max > axis.datamax && max != fakeInfinity)
+                    axis.datamax = max;
+            }
+
+            $.each(allAxes(), function (_, axis) {
+                // init axis
+                axis.datamin = topSentry;
+                axis.datamax = bottomSentry;
+                axis.used = false;
+            });
+
+            for (i = 0; i < series.length; ++i) {
+                s = series[i];
+                s.datapoints = { points: [] };
+
+                executeHooks(hooks.processRawData, [ s, s.data, s.datapoints ]);
+            }
+
+            // first pass: clean and copy data
+            for (i = 0; i < series.length; ++i) {
+                s = series[i];
+
+                data = s.data;
+                format = s.datapoints.format;
+
+                if (!format) {
+                    format = [];
+                    // find out how to copy
+                    format.push({ x: true, number: true, required: true });
+                    format.push({ y: true, number: true, required: true });
+
+                    if (s.bars.show || (s.lines.show && s.lines.fill)) {
+                        var autoscale = !!((s.bars.show && s.bars.zero) || (s.lines.show && s.lines.zero));
+                        format.push({ y: true, number: true, required: false, defaultValue: 0, autoscale: autoscale });
+                        if (s.bars.horizontal) {
+                            delete format[format.length - 1].y;
+                            format[format.length - 1].x = true;
+                        }
+                    }
+
+                    s.datapoints.format = format;
+                }
+
+                if (s.datapoints.pointsize != null)
+                    continue; // already filled in
+
+                s.datapoints.pointsize = format.length;
+
+                ps = s.datapoints.pointsize;
+                points = s.datapoints.points;
+
+                var insertSteps = s.lines.show && s.lines.steps;
+                s.xaxis.used = s.yaxis.used = true;
+
+                for (j = k = 0; j < data.length; ++j, k += ps) {
+                    p = data[j];
+
+                    var nullify = p == null;
+                    if (!nullify) {
+                        for (m = 0; m < ps; ++m) {
+                            val = p[m];
+                            f = format[m];
+
+                            if (f) {
+                                if (f.number && val != null) {
+                                    val = +val; // convert to number
+                                    if (isNaN(val))
+                                        val = null;
+                                    else if (val == Infinity)
+                                        val = fakeInfinity;
+                                    else if (val == -Infinity)
+                                        val = -fakeInfinity;
+                                }
+
+                                if (val == null) {
+                                    if (f.required)
+                                        nullify = true;
+
+                                    if (f.defaultValue != null)
+                                        val = f.defaultValue;
+                                }
+                            }
+
+                            points[k + m] = val;
+                        }
+                    }
+
+                    if (nullify) {
+                        for (m = 0; m < ps; ++m) {
+                            val = points[k + m];
+                            if (val != null) {
+                                f = format[m];
+                                // extract min/max info
+                                if (f.autoscale !== false) {
+                                    if (f.x) {
+                                        updateAxis(s.xaxis, val, val);
+                                    }
+                                    if (f.y) {
+                                        updateAxis(s.yaxis, val, val);
+                                    }
+                                }
+                            }
+                            points[k + m] = null;
+                        }
+                    }
+                    else {
+                        // a little bit of line specific stuff that
+                        // perhaps shouldn't be here, but lacking
+                        // better means...
+                        if (insertSteps && k > 0
+                            && points[k - ps] != null
+                            && points[k - ps] != points[k]
+                            && points[k - ps + 1] != points[k + 1]) {
+                            // copy the point to make room for a middle point
+                            for (m = 0; m < ps; ++m)
+                                points[k + ps + m] = points[k + m];
+
+                            // middle point has same y
+                            points[k + 1] = points[k - ps + 1];
+
+                            // we've added a point, better reflect that
+                            k += ps;
+                        }
+                    }
+                }
+            }
+
+            // give the hooks a chance to run
+            for (i = 0; i < series.length; ++i) {
+                s = series[i];
+
+                executeHooks(hooks.processDatapoints, [ s, s.datapoints]);
+            }
+
+            // second pass: find datamax/datamin for auto-scaling
+            for (i = 0; i < series.length; ++i) {
+                s = series[i];
+                points = s.datapoints.points;
+                ps = s.datapoints.pointsize;
+                format = s.datapoints.format;
+
+                var xmin = topSentry, ymin = topSentry,
+                    xmax = bottomSentry, ymax = bottomSentry;
+
+                for (j = 0; j < points.length; j += ps) {
+                    if (points[j] == null)
+                        continue;
+
+                    for (m = 0; m < ps; ++m) {
+                        val = points[j + m];
+                        f = format[m];
+                        if (!f || f.autoscale === false || val == fakeInfinity || val == -fakeInfinity)
+                            continue;
+
+                        if (f.x) {
+                            if (val < xmin)
+                                xmin = val;
+                            if (val > xmax)
+                                xmax = val;
+                        }
+                        if (f.y) {
+                            if (val < ymin)
+                                ymin = val;
+                            if (val > ymax)
+                                ymax = val;
+                        }
+                    }
+                }
+
+                if (s.bars.show) {
+                    // make sure we got room for the bar on the dancing floor
+                    var delta;
+
+                    switch (s.bars.align) {
+                        case "left":
+                            delta = 0;
+                            break;
+                        case "right":
+                            delta = -s.bars.barWidth;
+                            break;
+                        default:
+                            delta = -s.bars.barWidth / 2;
+                    }
+
+                    if (s.bars.horizontal) {
+                        ymin += delta;
+                        ymax += delta + s.bars.barWidth;
+                    }
+                    else {
+                        xmin += delta;
+                        xmax += delta + s.bars.barWidth;
+                    }
+                }
+
+                updateAxis(s.xaxis, xmin, xmax);
+                updateAxis(s.yaxis, ymin, ymax);
+            }
+
+            $.each(allAxes(), function (_, axis) {
+                if (axis.datamin == topSentry)
+                    axis.datamin = null;
+                if (axis.datamax == bottomSentry)
+                    axis.datamax = null;
+            });
+        }
+
+        function setupCanvases() {
+
+            // Make sure the placeholder is clear of everything except canvases
+            // from a previous plot in this container that we'll try to re-use.
+
+            placeholder.css("padding", 0) // padding messes up the positioning
+                .children().filter(function(){
+                    return !$(this).hasClass("flot-overlay") && !$(this).hasClass('flot-base');
+                }).remove();
+
+            if (placeholder.css("position") == 'static')
+                placeholder.css("position", "relative"); // for positioning labels and overlay
+
+            surface = new Canvas("flot-base", placeholder);
+            overlay = new Canvas("flot-overlay", placeholder); // overlay canvas for interactive features
+
+            ctx = surface.context;
+            octx = overlay.context;
+
+            // define which element we're listening for events on
+            eventHolder = $(overlay.element).unbind();
+
+            // If we're re-using a plot object, shut down the old one
+
+            var existing = placeholder.data("plot");
+
+            if (existing) {
+                existing.shutdown();
+                overlay.clear();
+            }
+
+            // save in case we get replotted
+            placeholder.data("plot", plot);
+        }
+
+        function bindEvents() {
+            // bind events
+            if (options.grid.hoverable) {
+                eventHolder.mousemove(onMouseMove);
+
+                // Use bind, rather than .mouseleave, because we officially
+                // still support jQuery 1.2.6, which doesn't define a shortcut
+                // for mouseenter or mouseleave.  This was a bug/oversight that
+                // was fixed somewhere around 1.3.x.  We can return to using
+                // .mouseleave when we drop support for 1.2.6.
+
+                eventHolder.bind("mouseleave", onMouseLeave);
+            }
+
+            if (options.grid.clickable)
+                eventHolder.click(onClick);
+
+            executeHooks(hooks.bindEvents, [eventHolder]);
+        }
+
+        function shutdown() {
+            if (redrawTimeout)
+                clearTimeout(redrawTimeout);
+
+            eventHolder.unbind("mousemove", onMouseMove);
+            eventHolder.unbind("mouseleave", onMouseLeave);
+            eventHolder.unbind("click", onClick);
+
+            executeHooks(hooks.shutdown, [eventHolder]);
+        }
+
+        function setTransformationHelpers(axis) {
+            // set helper functions on the axis, assumes plot area
+            // has been computed already
+
+            function identity(x) { return x; }
+
+            var s, m, t = axis.options.transform || identity,
+                it = axis.options.inverseTransform;
+
+            // precompute how much the axis is scaling a point
+            // in canvas space
+            if (axis.direction == "x") {
+                s = axis.scale = plotWidth / Math.abs(t(axis.max) - t(axis.min));
+                m = Math.min(t(axis.max), t(axis.min));
+            }
+            else {
+                s = axis.scale = plotHeight / Math.abs(t(axis.max) - t(axis.min));
+                s = -s;
+                m = Math.max(t(axis.max), t(axis.min));
+            }
+
+            // data point to canvas coordinate
+            if (t == identity) // slight optimization
+                axis.p2c = function (p) { return (p - m) * s; };
+            else
+                axis.p2c = function (p) { return (t(p) - m) * s; };
+            // canvas coordinate to data point
+            if (!it)
+                axis.c2p = function (c) { return m + c / s; };
+            else
+                axis.c2p = function (c) { return it(m + c / s); };
+        }
+
+        function measureTickLabels(axis) {
+
+            var opts = axis.options,
+                ticks = axis.ticks || [],
+                labelWidth = opts.labelWidth || 0,
+                labelHeight = opts.labelHeight || 0,
+                maxWidth = labelWidth || (axis.direction == "x" ? Math.floor(surface.width / (ticks.length || 1)) : null),
+                legacyStyles = axis.direction + "Axis " + axis.direction + axis.n + "Axis",
+                layer = "flot-" + axis.direction + "-axis flot-" + axis.direction + axis.n + "-axis " + legacyStyles,
+                font = opts.font || "flot-tick-label tickLabel";
+
+            for (var i = 0; i < ticks.length; ++i) {
+
+                var t = ticks[i];
+
+                if (!t.label)
+                    continue;
+
+                var info = surface.getTextInfo(layer, t.label, font, null, maxWidth);
+
+                labelWidth = Math.max(labelWidth, info.width);
+                labelHeight = Math.max(labelHeight, info.height);
+            }
+
+            axis.labelWidth = opts.labelWidth || labelWidth;
+            axis.labelHeight = opts.labelHeight || labelHeight;
+        }
+
+        function allocateAxisBoxFirstPhase(axis) {
+            // find the bounding box of the axis by looking at label
+            // widths/heights and ticks, make room by diminishing the
+            // plotOffset; this first phase only looks at one
+            // dimension per axis, the other dimension depends on the
+            // other axes so will have to wait
+
+            var lw = axis.labelWidth,
+                lh = axis.labelHeight,
+                pos = axis.options.position,
+                isXAxis = axis.direction === "x",
+                tickLength = axis.options.tickLength,
+                axisMargin = options.grid.axisMargin,
+                padding = options.grid.labelMargin,
+                innermost = true,
+                outermost = true,
+                first = true,
+                found = false;
+
+            // Determine the axis's position in its direction and on its side
+
+            $.each(isXAxis ? xaxes : yaxes, function(i, a) {
+                if (a && (a.show || a.reserveSpace)) {
+                    if (a === axis) {
+                        found = true;
+                    } else if (a.options.position === pos) {
+                        if (found) {
+                            outermost = false;
+                        } else {
+                            innermost = false;
+                        }
+                    }
+                    if (!found) {
+                        first = false;
+                    }
+                }
+            });
+
+            // The outermost axis on each side has no margin
+
+            if (outermost) {
+                axisMargin = 0;
+            }
+
+            // The ticks for the first axis in each direction stretch across
+
+            if (tickLength == null) {
+                tickLength = first ? "full" : 5;
+            }
+
+            if (!isNaN(+tickLength))
+                padding += +tickLength;
+
+            if (isXAxis) {
+                lh += padding;
+
+                if (pos == "bottom") {
+                    plotOffset.bottom += lh + axisMargin;
+                    axis.box = { top: surface.height - plotOffset.bottom, height: lh };
+                }
+                else {
+                    axis.box = { top: plotOffset.top + axisMargin, height: lh };
+                    plotOffset.top += lh + axisMargin;
+                }
+            }
+            else {
+                lw += padding;
+
+                if (pos == "left") {
+                    axis.box = { left: plotOffset.left + axisMargin, width: lw };
+                    plotOffset.left += lw + axisMargin;
+                }
+                else {
+                    plotOffset.right += lw + axisMargin;
+                    axis.box = { left: surface.width - plotOffset.right, width: lw };
+                }
+            }
+
+             // save for future reference
+            axis.position = pos;
+            axis.tickLength = tickLength;
+            axis.box.padding = padding;
+            axis.innermost = innermost;
+        }
+
+        function allocateAxisBoxSecondPhase(axis) {
+            // now that all axis boxes have been placed in one
+            // dimension, we can set the remaining dimension coordinates
+            if (axis.direction == "x") {
+                axis.box.left = plotOffset.left - axis.labelWidth / 2;
+                axis.box.width = surface.width - plotOffset.left - plotOffset.right + axis.labelWidth;
+            }
+            else {
+                axis.box.top = plotOffset.top - axis.labelHeight / 2;
+                axis.box.height = surface.height - plotOffset.bottom - plotOffset.top + axis.labelHeight;
+            }
+        }
+
+        function adjustLayoutForThingsStickingOut() {
+            // possibly adjust plot offset to ensure everything stays
+            // inside the canvas and isn't clipped off
+
+            var minMargin = options.grid.minBorderMargin,
+                axis, i;
+
+            // check stuff from the plot (FIXME: this should just read
+            // a value from the series, otherwise it's impossible to
+            // customize)
+            if (minMargin == null) {
+                minMargin = 0;
+                for (i = 0; i < series.length; ++i)
+                    minMargin = Math.max(minMargin, 2 * (series[i].points.radius + series[i].points.lineWidth/2));
+            }
+
+            var margins = {
+                left: minMargin,
+                right: minMargin,
+                top: minMargin,
+                bottom: minMargin
+            };
+
+            // check axis labels, note we don't check the actual
+            // labels but instead use the overall width/height to not
+            // jump as much around with replots
+            $.each(allAxes(), function (_, axis) {
+                if (axis.reserveSpace && axis.ticks && axis.ticks.length) {
+                    if (axis.direction === "x") {
+                        margins.left = Math.max(margins.left, axis.labelWidth / 2);
+                        margins.right = Math.max(margins.right, axis.labelWidth / 2);
+                    } else {
+                        margins.bottom = Math.max(margins.bottom, axis.labelHeight / 2);
+                        margins.top = Math.max(margins.top, axis.labelHeight / 2);
+                    }
+                }
+            });
+
+            plotOffset.left = Math.ceil(Math.max(margins.left, plotOffset.left));
+            plotOffset.right = Math.ceil(Math.max(margins.right, plotOffset.right));
+            plotOffset.top = Math.ceil(Math.max(margins.top, plotOffset.top));
+            plotOffset.bottom = Math.ceil(Math.max(margins.bottom, plotOffset.bottom));
+        }
+
+        function setupGrid() {
+            var i, axes = allAxes(), showGrid = options.grid.show;
+
+            // Initialize the plot's offset from the edge of the canvas
+
+            for (var a in plotOffset) {
+                var margin = options.grid.margin || 0;
+                plotOffset[a] = typeof margin == "number" ? margin : margin[a] || 0;
+            }
+
+            executeHooks(hooks.processOffset, [plotOffset]);
+
+            // If the grid is visible, add its border width to the offset
+
+            for (var a in plotOffset) {
+                if(typeof(options.grid.borderWidth) == "object") {
+                    plotOffset[a] += showGrid ? options.grid.borderWidth[a] : 0;
+                }
+                else {
+                    plotOffset[a] += showGrid ? options.grid.borderWidth : 0;
+                }
+            }
+
+            $.each(axes, function (_, axis) {
+                var axisOpts = axis.options;
+                axis.show = axisOpts.show == null ? axis.used : axisOpts.show;
+                axis.reserveSpace = axisOpts.reserveSpace == null ? axis.show : axisOpts.reserveSpace;
+                setRange(axis);
+            });
+
+            if (showGrid) {
+
+                var allocatedAxes = $.grep(axes, function (axis) {
+                    return axis.show || axis.reserveSpace;
+                });
+
+                $.each(allocatedAxes, function (_, axis) {
+                    // make the ticks
+                    setupTickGeneration(axis);
+                    setTicks(axis);
+                    snapRangeToTicks(axis, axis.ticks);
+                    // find labelWidth/Height for axis
+                    measureTickLabels(axis);
+                });
+
+                // with all dimensions calculated, we can compute the
+                // axis bounding boxes, start from the outside
+                // (reverse order)
+                for (i = allocatedAxes.length - 1; i >= 0; --i)
+                    allocateAxisBoxFirstPhase(allocatedAxes[i]);
+
+                // make sure we've got enough space for things that
+                // might stick out
+                adjustLayoutForThingsStickingOut();
+
+                $.each(allocatedAxes, function (_, axis) {
+                    allocateAxisBoxSecondPhase(axis);
+                });
+            }
+
+            plotWidth = surface.width - plotOffset.left - plotOffset.right;
+            plotHeight = surface.height - plotOffset.bottom - plotOffset.top;
+
+            // now we got the proper plot dimensions, we can compute the scaling
+            $.each(axes, function (_, axis) {
+                setTransformationHelpers(axis);
+            });
+
+            if (showGrid) {
+                drawAxisLabels();
+            }
+
+            insertLegend();
+        }
+
+        function setRange(axis) {
+            var opts = axis.options,
+                min = +(opts.min != null ? opts.min : axis.datamin),
+                max = +(opts.max != null ? opts.max : axis.datamax),
+                delta = max - min;
+
+            if (delta == 0.0) {
+                // degenerate case
+                var widen = max == 0 ? 1 : 0.01;
+
+                if (opts.min == null)
+                    min -= widen;
+                // always widen max if we couldn't widen min to ensure we
+                // don't fall into min == max which doesn't work
+                if (opts.max == null || opts.min != null)
+                    max += widen;
+            }
+            else {
+                // consider autoscaling
+                var margin = opts.autoscaleMargin;
+                if (margin != null) {
+                    if (opts.min == null) {
+                        min -= delta * margin;
+                        // make sure we don't go below zero if all values
+                        // are positive
+                        if (min < 0 && axis.datamin != null && axis.datamin >= 0)
+                            min = 0;
+                    }
+                    if (opts.max == null) {
+                        max += delta * margin;
+                        if (max > 0 && axis.datamax != null && axis.datamax <= 0)
+                            max = 0;
+                    }
+                }
+            }
+            axis.min = min;
+            axis.max = max;
+        }
+
+        function setupTickGeneration(axis) {
+            var opts = axis.options;
+
+            // estimate number of ticks
+            var noTicks;
+            if (typeof opts.ticks == "number" && opts.ticks > 0)
+                noTicks = opts.ticks;
+            else
+                // heuristic based on the model a*sqrt(x) fitted to
+                // some data points that seemed reasonable
+                noTicks = 0.3 * Math.sqrt(axis.direction == "x" ? surface.width : surface.height);
+
+            var delta = (axis.max - axis.min) / noTicks,
+                dec = -Math.floor(Math.log(delta) / Math.LN10),
+                maxDec = opts.tickDecimals;
+
+            if (maxDec != null && dec > maxDec) {
+                dec = maxDec;
+            }
+
+            var magn = Math.pow(10, -dec),
+                norm = delta / magn, // norm is between 1.0 and 10.0
+                size;
+
+            if (norm < 1.5) {
+                size = 1;
+            } else if (norm < 3) {
+                size = 2;
+                // special case for 2.5, requires an extra decimal
+                if (norm > 2.25 && (maxDec == null || dec + 1 <= maxDec)) {
+                    size = 2.5;
+                    ++dec;
+                }
+            } else if (norm < 7.5) {
+                size = 5;
+            } else {
+                size = 10;
+            }
+
+            size *= magn;
+
+            if (opts.minTickSize != null && size < opts.minTickSize) {
+                size = opts.minTickSize;
+            }
+
+            axis.delta = delta;
+            axis.tickDecimals = Math.max(0, maxDec != null ? maxDec : dec);
+            axis.tickSize = opts.tickSize || size;
+
+            // Time mode was moved to a plug-in in 0.8, and since so many people use it
+            // we'll add an especially friendly reminder to make sure they included it.
+
+            if (opts.mode == "time" && !axis.tickGenerator) {
+                throw new Error("Time mode requires the flot.time plugin.");
+            }
+
+            // Flot supports base-10 axes; any other mode else is handled by a plug-in,
+            // like flot.time.js.
+
+            if (!axis.tickGenerator) {
+
+                axis.tickGenerator = function (axis) {
+
+                    var ticks = [],
+                        start = floorInBase(axis.min, axis.tickSize),
+                        i = 0,
+                        v = Number.NaN,
+                        prev;
+
+                    do {
+                        prev = v;
+                        v = start + i * axis.tickSize;
+                        ticks.push(v);
+                        ++i;
+                    } while (v < axis.max && v != prev);
+                    return ticks;
+                };
+
+				axis.tickFormatter = function (value, axis) {
+
+					var factor = axis.tickDecimals ? Math.pow(10, axis.tickDecimals) : 1;
+					var formatted = "" + Math.round(value * factor) / factor;
+
+					// If tickDecimals was specified, ensure that we have exactly that
+					// much precision; otherwise default to the value's own precision.
+
+					if (axis.tickDecimals != null) {
+						var decimal = formatted.indexOf(".");
+						var precision = decimal == -1 ? 0 : formatted.length - decimal - 1;
+						if (precision < axis.tickDecimals) {
+							return (precision ? formatted : formatted + ".") + ("" + factor).substr(1, axis.tickDecimals - precision);
+						}
+					}
+
+                    return formatted;
+                };
+            }
+
+            if ($.isFunction(opts.tickFormatter))
+                axis.tickFormatter = function (v, axis) { return "" + opts.tickFormatter(v, axis); };
+
+            if (opts.alignTicksWithAxis != null) {
+                var otherAxis = (axis.direction == "x" ? xaxes : yaxes)[opts.alignTicksWithAxis - 1];
+                if (otherAxis && otherAxis.used && otherAxis != axis) {
+                    // consider snapping min/max to outermost nice ticks
+                    var niceTicks = axis.tickGenerator(axis);
+                    if (niceTicks.length > 0) {
+                        if (opts.min == null)
+                            axis.min = Math.min(axis.min, niceTicks[0]);
+                        if (opts.max == null && niceTicks.length > 1)
+                            axis.max = Math.max(axis.max, niceTicks[niceTicks.length - 1]);
+                    }
+
+                    axis.tickGenerator = function (axis) {
+                        // copy ticks, scaled to this axis
+                        var ticks = [], v, i;
+                        for (i = 0; i < otherAxis.ticks.length; ++i) {
+                            v = (otherAxis.ticks[i].v - otherAxis.min) / (otherAxis.max - otherAxis.min);
+                            v = axis.min + v * (axis.max - axis.min);
+                            ticks.push(v);
+                        }
+                        return ticks;
+                    };
+
+                    // we might need an extra decimal since forced
+                    // ticks don't necessarily fit naturally
+                    if (!axis.mode && opts.tickDecimals == null) {
+                        var extraDec = Math.max(0, -Math.floor(Math.log(axis.delta) / Math.LN10) + 1),
+                            ts = axis.tickGenerator(axis);
+
+                        // only proceed if the tick interval rounded
+                        // with an extra decimal doesn't give us a
+                        // zero at end
+                        if (!(ts.length > 1 && /\..*0$/.test((ts[1] - ts[0]).toFixed(extraDec))))
+                            axis.tickDecimals = extraDec;
+                    }
+                }
+            }
+        }
+
+        function setTicks(axis) {
+            var oticks = axis.options.ticks, ticks = [];
+            if (oticks == null || (typeof oticks == "number" && oticks > 0))
+                ticks = axis.tickGenerator(axis);
+            else if (oticks) {
+                if ($.isFunction(oticks))
+                    // generate the ticks
+                    ticks = oticks(axis);
+                else
+                    ticks = oticks;
+            }
+
+            // clean up/labelify the supplied ticks, copy them over
+            var i, v;
+            axis.ticks = [];
+            for (i = 0; i < ticks.length; ++i) {
+                var label = null;
+                var t = ticks[i];
+                if (typeof t == "object") {
+                    v = +t[0];
+                    if (t.length > 1)
+                        label = t[1];
+                }
+                else
+                    v = +t;
+                if (label == null)
+                    label = axis.tickFormatter(v, axis);
+                if (!isNaN(v))
+                    axis.ticks.push({ v: v, label: label });
+            }
+        }
+
+        function snapRangeToTicks(axis, ticks) {
+            if (axis.options.autoscaleMargin && ticks.length > 0) {
+                // snap to ticks
+                if (axis.options.min == null)
+                    axis.min = Math.min(axis.min, ticks[0].v);
+                if (axis.options.max == null && ticks.length > 1)
+                    axis.max = Math.max(axis.max, ticks[ticks.length - 1].v);
+            }
+        }
+
+        function draw() {
+
+            surface.clear();
+
+            executeHooks(hooks.drawBackground, [ctx]);
+
+            var grid = options.grid;
+
+            // draw background, if any
+            if (grid.show && grid.backgroundColor)
+                drawBackground();
+
+            if (grid.show && !grid.aboveData) {
+                drawGrid();
+            }
+
+            for (var i = 0; i < series.length; ++i) {
+                executeHooks(hooks.drawSeries, [ctx, series[i]]);
+                drawSeries(series[i]);
+            }
+
+            executeHooks(hooks.draw, [ctx]);
+
+            if (grid.show && grid.aboveData) {
+                drawGrid();
+            }
+
+            surface.render();
+
+            // A draw implies that either the axes or data have changed, so we
+            // should probably update the overlay highlights as well.
+
+            triggerRedrawOverlay();
+        }
+
+        function extractRange(ranges, coord) {
+            var axis, from, to, key, axes = allAxes();
+
+            for (var i = 0; i < axes.length; ++i) {
+                axis = axes[i];
+                if (axis.direction == coord) {
+                    key = coord + axis.n + "axis";
+                    if (!ranges[key] && axis.n == 1)
+                        key = coord + "axis"; // support x1axis as xaxis
+                    if (ranges[key]) {
+                        from = ranges[key].from;
+                        to = ranges[key].to;
+                        break;
+                    }
+                }
+            }
+
+            // backwards-compat stuff - to be removed in future
+            if (!ranges[key]) {
+                axis = coord == "x" ? xaxes[0] : yaxes[0];
+                from = ranges[coord + "1"];
+                to = ranges[coord + "2"];
+            }
+
+            // auto-reverse as an added bonus
+            if (from != null && to != null && from > to) {
+                var tmp = from;
+                from = to;
+                to = tmp;
+            }
+
+            return { from: from, to: to, axis: axis };
+        }
+
+        function drawBackground() {
+            ctx.save();
+            ctx.translate(plotOffset.left, plotOffset.top);
+
+            ctx.fillStyle = getColorOrGradient(options.grid.backgroundColor, plotHeight, 0, "rgba(255, 255, 255, 0)");
+            ctx.fillRect(0, 0, plotWidth, plotHeight);
+            ctx.restore();
+        }
+
+        function drawGrid() {
+            var i, axes, bw, bc;
+
+            ctx.save();
+            ctx.translate(plotOffset.left, plotOffset.top);
+
+            // draw markings
+            var markings = options.grid.markings;
+            if (markings) {
+                if ($.isFunction(markings)) {
+                    axes = plot.getAxes();
+                    // xmin etc. is backwards compatibility, to be
+                    // removed in the future
+                    axes.xmin = axes.xaxis.min;
+                    axes.xmax = axes.xaxis.max;
+                    axes.ymin = axes.yaxis.min;
+                    axes.ymax = axes.yaxis.max;
+
+                    markings = markings(axes);
+                }
+
+                for (i = 0; i < markings.length; ++i) {
+                    var m = markings[i],
+                        xrange = extractRange(m, "x"),
+                        yrange = extractRange(m, "y");
+
+                    // fill in missing
+                    if (xrange.from == null)
+                        xrange.from = xrange.axis.min;
+                    if (xrange.to == null)
+                        xrange.to = xrange.axis.max;
+                    if (yrange.from == null)
+                        yrange.from = yrange.axis.min;
+                    if (yrange.to == null)
+                        yrange.to = yrange.axis.max;
+
+                    // clip
+                    if (xrange.to < xrange.axis.min || xrange.from > xrange.axis.max ||
+                        yrange.to < yrange.axis.min || yrange.from > yrange.axis.max)
+                        continue;
+
+                    xrange.from = Math.max(xrange.from, xrange.axis.min);
+                    xrange.to = Math.min(xrange.to, xrange.axis.max);
+                    yrange.from = Math.max(yrange.from, yrange.axis.min);
+                    yrange.to = Math.min(yrange.to, yrange.axis.max);
+
+                    var xequal = xrange.from === xrange.to,
+                        yequal = yrange.from === yrange.to;
+
+                    if (xequal && yequal) {
+                        continue;
+                    }
+
+                    // then draw
+                    xrange.from = Math.floor(xrange.axis.p2c(xrange.from));
+                    xrange.to = Math.floor(xrange.axis.p2c(xrange.to));
+                    yrange.from = Math.floor(yrange.axis.p2c(yrange.from));
+                    yrange.to = Math.floor(yrange.axis.p2c(yrange.to));
+
+                    if (xequal || yequal) {
+                        var lineWidth = m.lineWidth || options.grid.markingsLineWidth,
+                            subPixel = lineWidth % 2 ? 0.5 : 0;
+                        ctx.beginPath();
+                        ctx.strokeStyle = m.color || options.grid.markingsColor;
+                        ctx.lineWidth = lineWidth;
+                        if (xequal) {
+                            ctx.moveTo(xrange.to + subPixel, yrange.from);
+                            ctx.lineTo(xrange.to + subPixel, yrange.to);
+                        } else {
+                            ctx.moveTo(xrange.from, yrange.to + subPixel);
+                            ctx.lineTo(xrange.to, yrange.to + subPixel);                            
+                        }
+                        ctx.stroke();
+                    } else {
+                        ctx.fillStyle = m.color || options.grid.markingsColor;
+                        ctx.fillRect(xrange.from, yrange.to,
+                                     xrange.to - xrange.from,
+                                     yrange.from - yrange.to);
+                    }
+                }
+            }
+
+            // draw the ticks
+            axes = allAxes();
+            bw = options.grid.borderWidth;
+
+            for (var j = 0; j < axes.length; ++j) {
+                var axis = axes[j], box = axis.box,
+                    t = axis.tickLength, x, y, xoff, yoff;
+                if (!axis.show || axis.ticks.length == 0)
+                    continue;
+
+                ctx.lineWidth = 1;
+
+                // find the edges
+                if (axis.direction == "x") {
+                    x = 0;
+                    if (t == "full")
+                        y = (axis.position == "top" ? 0 : plotHeight);
+                    else
+                        y = box.top - plotOffset.top + (axis.position == "top" ? box.height : 0);
+                }
+                else {
+                    y = 0;
+                    if (t == "full")
+                        x = (axis.position == "left" ? 0 : plotWidth);
+                    else
+                        x = box.left - plotOffset.left + (axis.position == "left" ? box.width : 0);
+                }
+
+                // draw tick bar
+                if (!axis.innermost) {
+                    ctx.strokeStyle = axis.options.color;
+                    ctx.beginPath();
+                    xoff = yoff = 0;
+                    if (axis.direction == "x")
+                        xoff = plotWidth + 1;
+                    else
+                        yoff = plotHeight + 1;
+
+                    if (ctx.lineWidth == 1) {
+                        if (axis.direction == "x") {
+                            y = Math.floor(y) + 0.5;
+                        } else {
+                            x = Math.floor(x) + 0.5;
+                        }
+                    }
+
+                    ctx.moveTo(x, y);
+                    ctx.lineTo(x + xoff, y + yoff);
+                    ctx.stroke();
+                }
+
+                // draw ticks
+
+                ctx.strokeStyle = axis.options.tickColor;
+
+                ctx.beginPath();
+                for (i = 0; i < axis.ticks.length; ++i) {
+                    var v = axis.ticks[i].v;
+
+                    xoff = yoff = 0;
+
+                    if (isNaN(v) || v < axis.min || v > axis.max
+                        // skip those lying on the axes if we got a border
+                        || (t == "full"
+                            && ((typeof bw == "object" && bw[axis.position] > 0) || bw > 0)
+                            && (v == axis.min || v == axis.max)))
+                        continue;
+
+                    if (axis.direction == "x") {
+                        x = axis.p2c(v);
+                        yoff = t == "full" ? -plotHeight : t;
+
+                        if (axis.position == "top")
+                            yoff = -yoff;
+                    }
+                    else {
+                        y = axis.p2c(v);
+                        xoff = t == "full" ? -plotWidth : t;
+
+                        if (axis.position == "left")
+                            xoff = -xoff;
+                    }
+
+                    if (ctx.lineWidth == 1) {
+                        if (axis.direction == "x")
+                            x = Math.floor(x) + 0.5;
+                        else
+                            y = Math.floor(y) + 0.5;
+                    }
+
+                    ctx.moveTo(x, y);
+                    ctx.lineTo(x + xoff, y + yoff);
+                }
+
+                ctx.stroke();
+            }
+
+
+            // draw border
+            if (bw) {
+                // If either borderWidth or borderColor is an object, then draw the border
+                // line by line instead of as one rectangle
+                bc = options.grid.borderColor;
+                if(typeof bw == "object" || typeof bc == "object") {
+                    if (typeof bw !== "object") {
+                        bw = {top: bw, right: bw, bottom: bw, left: bw};
+                    }
+                    if (typeof bc !== "object") {
+                        bc = {top: bc, right: bc, bottom: bc, left: bc};
+                    }
+
+                    if (bw.top > 0) {
+                        ctx.strokeStyle = bc.top;
+                        ctx.lineWidth = bw.top;
+                        ctx.beginPath();
+                        ctx.moveTo(0 - bw.left, 0 - bw.top/2);
+                        ctx.lineTo(plotWidth, 0 - bw.top/2);
+                        ctx.stroke();
+                    }
+
+                    if (bw.right > 0) {
+                        ctx.strokeStyle = bc.right;
+                        ctx.lineWidth = bw.right;
+                        ctx.beginPath();
+                        ctx.moveTo(plotWidth + bw.right / 2, 0 - bw.top);
+                        ctx.lineTo(plotWidth + bw.right / 2, plotHeight);
+                        ctx.stroke();
+                    }
+
+                    if (bw.bottom > 0) {
+                        ctx.strokeStyle = bc.bottom;
+                        ctx.lineWidth = bw.bottom;
+                        ctx.beginPath();
+                        ctx.moveTo(plotWidth + bw.right, plotHeight + bw.bottom / 2);
+                        ctx.lineTo(0, plotHeight + bw.bottom / 2);
+                        ctx.stroke();
+                    }
+
+                    if (bw.left > 0) {
+                        ctx.strokeStyle = bc.left;
+                        ctx.lineWidth = bw.left;
+                        ctx.beginPath();
+                        ctx.moveTo(0 - bw.left/2, plotHeight + bw.bottom);
+                        ctx.lineTo(0- bw.left/2, 0);
+                        ctx.stroke();
+                    }
+                }
+                else {
+                    ctx.lineWidth = bw;
+                    ctx.strokeStyle = options.grid.borderColor;
+                    ctx.strokeRect(-bw/2, -bw/2, plotWidth + bw, plotHeight + bw);
+                }
+            }
+
+            ctx.restore();
+        }
+
+        function drawAxisLabels() {
+
+            $.each(allAxes(), function (_, axis) {
+                var box = axis.box,
+                    legacyStyles = axis.direction + "Axis " + axis.direction + axis.n + "Axis",
+                    layer = "flot-" + axis.direction + "-axis flot-" + axis.direction + axis.n + "-axis " + legacyStyles,
+                    font = axis.options.font || "flot-tick-label tickLabel",
+                    tick, x, y, halign, valign;
+
+                // Remove text before checking for axis.show and ticks.length;
+                // otherwise plugins, like flot-tickrotor, that draw their own
+                // tick labels will end up with both theirs and the defaults.
+
+                surface.removeText(layer);
+
+                if (!axis.show || axis.ticks.length == 0)
+                    return;
+
+                for (var i = 0; i < axis.ticks.length; ++i) {
+
+                    tick = axis.ticks[i];
+                    if (!tick.label || tick.v < axis.min || tick.v > axis.max)
+                        continue;
+
+                    if (axis.direction == "x") {
+                        halign = "center";
+                        x = plotOffset.left + axis.p2c(tick.v);
+                        if (axis.position == "bottom") {
+                            y = box.top + box.padding;
+                        } else {
+                            y = box.top + box.height - box.padding;
+                            valign = "bottom";
+                        }
+                    } else {
+                        valign = "middle";
+                        y = plotOffset.top + axis.p2c(tick.v);
+                        if (axis.position == "left") {
+                            x = box.left + box.width - box.padding;
+                            halign = "right";
+                        } else {
+                            x = box.left + box.padding;
+                        }
+                    }
+
+                    surface.addText(layer, x, y, tick.label, font, null, null, halign, valign);
+                }
+            });
+        }
+
+        function drawSeries(series) {
+            if (series.lines.show)
+                drawSeriesLines(series);
+            if (series.bars.show)
+                drawSeriesBars(series);
+            if (series.points.show)
+                drawSeriesPoints(series);
+        }
+
+        function drawSeriesLines(series) {
+            function plotLine(datapoints, xoffset, yoffset, axisx, axisy) {
+                var points = datapoints.points,
+                    ps = datapoints.pointsize,
+                    prevx = null, prevy = null;
+
+                ctx.beginPath();
+                for (var i = ps; i < points.length; i += ps) {
+                    var x1 = points[i - ps], y1 = points[i - ps + 1],
+                        x2 = points[i], y2 = points[i + 1];
+
+                    if (x1 == null || x2 == null)
+                        continue;
+
+                    // clip with ymin
+                    if (y1 <= y2 && y1 < axisy.min) {
+                        if (y2 < axisy.min)
+                            continue;   // line segment is outside
+                        // compute new intersection point
+                        x1 = (axisy.min - y1) / (y2 - y1) * (x2 - x1) + x1;
+                        y1 = axisy.min;
+                    }
+                    else if (y2 <= y1 && y2 < axisy.min) {
+                        if (y1 < axisy.min)
+                            continue;
+                        x2 = (axisy.min - y1) / (y2 - y1) * (x2 - x1) + x1;
+                        y2 = axisy.min;
+                    }
+
+                    // clip with ymax
+                    if (y1 >= y2 && y1 > axisy.max) {
+                        if (y2 > axisy.max)
+                            continue;
+                        x1 = (axisy.max - y1) / (y2 - y1) * (x2 - x1) + x1;
+                        y1 = axisy.max;
+                    }
+                    else if (y2 >= y1 && y2 > axisy.max) {
+                        if (y1 > axisy.max)
+                            continue;
+                        x2 = (axisy.max - y1) / (y2 - y1) * (x2 - x1) + x1;
+                        y2 = axisy.max;
+                    }
+
+                    // clip with xmin
+                    if (x1 <= x2 && x1 < axisx.min) {
+                        if (x2 < axisx.min)
+                            continue;
+                        y1 = (axisx.min - x1) / (x2 - x1) * (y2 - y1) + y1;
+                        x1 = axisx.min;
+                    }
+                    else if (x2 <= x1 && x2 < axisx.min) {
+                        if (x1 < axisx.min)
+                            continue;
+                        y2 = (axisx.min - x1) / (x2 - x1) * (y2 - y1) + y1;
+                        x2 = axisx.min;
+                    }
+
+                    // clip with xmax
+                    if (x1 >= x2 && x1 > axisx.max) {
+                        if (x2 > axisx.max)
+                            continue;
+                        y1 = (axisx.max - x1) / (x2 - x1) * (y2 - y1) + y1;
+                        x1 = axisx.max;
+                    }
+                    else if (x2 >= x1 && x2 > axisx.max) {
+                        if (x1 > axisx.max)
+                            continue;
+                        y2 = (axisx.max - x1) / (x2 - x1) * (y2 - y1) + y1;
+                        x2 = axisx.max;
+                    }
+
+                    if (x1 != prevx || y1 != prevy)
+                        ctx.moveTo(axisx.p2c(x1) + xoffset, axisy.p2c(y1) + yoffset);
+
+                    prevx = x2;
+                    prevy = y2;
+                    ctx.lineTo(axisx.p2c(x2) + xoffset, axisy.p2c(y2) + yoffset);
+                }
+                ctx.stroke();
+            }
+
+            function plotLineArea(datapoints, axisx, axisy) {
+                var points = datapoints.points,
+                    ps = datapoints.pointsize,
+                    bottom = Math.min(Math.max(0, axisy.min), axisy.max),
+                    i = 0, top, areaOpen = false,
+                    ypos = 1, segmentStart = 0, segmentEnd = 0;
+
+                // we process each segment in two turns, first forward
+                // direction to sketch out top, then once we hit the
+                // end we go backwards to sketch the bottom
+                while (true) {
+                    if (ps > 0 && i > points.length + ps)
+                        break;
+
+                    i += ps; // ps is negative if going backwards
+
+                    var x1 = points[i - ps],
+                        y1 = points[i - ps + ypos],
+                        x2 = points[i], y2 = points[i + ypos];
+
+                    if (areaOpen) {
+                        if (ps > 0 && x1 != null && x2 == null) {
+                            // at turning point
+                            segmentEnd = i;
+                            ps = -ps;
+                            ypos = 2;
+                            continue;
+                        }
+
+                        if (ps < 0 && i == segmentStart + ps) {
+                            // done with the reverse sweep
+                            ctx.fill();
+                            areaOpen = false;
+                            ps = -ps;
+                            ypos = 1;
+                            i = segmentStart = segmentEnd + ps;
+                            continue;
+                        }
+                    }
+
+                    if (x1 == null || x2 == null)
+                        continue;
+
+                    // clip x values
+
+                    // clip with xmin
+                    if (x1 <= x2 && x1 < axisx.min) {
+                        if (x2 < axisx.min)
+                            continue;
+                        y1 = (axisx.min - x1) / (x2 - x1) * (y2 - y1) + y1;
+                        x1 = axisx.min;
+                    }
+                    else if (x2 <= x1 && x2 < axisx.min) {
+                        if (x1 < axisx.min)
+                            continue;
+                        y2 = (axisx.min - x1) / (x2 - x1) * (y2 - y1) + y1;
+                        x2 = axisx.min;
+                    }
+
+                    // clip with xmax
+                    if (x1 >= x2 && x1 > axisx.max) {
+                        if (x2 > axisx.max)
+                            continue;
+                        y1 = (axisx.max - x1) / (x2 - x1) * (y2 - y1) + y1;
+                        x1 = axisx.max;
+                    }
+                    else if (x2 >= x1 && x2 > axisx.max) {
+                        if (x1 > axisx.max)
+                            continue;
+                        y2 = (axisx.max - x1) / (x2 - x1) * (y2 - y1) + y1;
+                        x2 = axisx.max;
+                    }
+
+                    if (!areaOpen) {
+                        // open area
+                        ctx.beginPath();
+                        ctx.moveTo(axisx.p2c(x1), axisy.p2c(bottom));
+                        areaOpen = true;
+                    }
+
+                    // now first check the case where both is outside
+                    if (y1 >= axisy.max && y2 >= axisy.max) {
+                        ctx.lineTo(axisx.p2c(x1), axisy.p2c(axisy.max));
+                        ctx.lineTo(axisx.p2c(x2), axisy.p2c(axisy.max));
+                        continue;
+                    }
+                    else if (y1 <= axisy.min && y2 <= axisy.min) {
+                        ctx.lineTo(axisx.p2c(x1), axisy.p2c(axisy.min));
+                        ctx.lineTo(axisx.p2c(x2), axisy.p2c(axisy.min));
+                        continue;
+                    }
+
+                    // else it's a bit more complicated, there might
+                    // be a flat maxed out rectangle first, then a
+                    // triangular cutout or reverse; to find these
+                    // keep track of the current x values
+                    var x1old = x1, x2old = x2;
+
+                    // clip the y values, without shortcutting, we
+                    // go through all cases in turn
+
+                    // clip with ymin
+                    if (y1 <= y2 && y1 < axisy.min && y2 >= axisy.min) {
+                        x1 = (axisy.min - y1) / (y2 - y1) * (x2 - x1) + x1;
+                        y1 = axisy.min;
+                    }
+                    else if (y2 <= y1 && y2 < axisy.min && y1 >= axisy.min) {
+                        x2 = (axisy.min - y1) / (y2 - y1) * (x2 - x1) + x1;
+                        y2 = axisy.min;
+                    }
+
+                    // clip with ymax
+                    if (y1 >= y2 && y1 > axisy.max && y2 <= axisy.max) {
+                        x1 = (axisy.max - y1) / (y2 - y1) * (x2 - x1) + x1;
+                        y1 = axisy.max;
+                    }
+                    else if (y2 >= y1 && y2 > axisy.max && y1 <= axisy.max) {
+                        x2 = (axisy.max - y1) / (y2 - y1) * (x2 - x1) + x1;
+                        y2 = axisy.max;
+                    }
+
+                    // if the x value was changed we got a rectangle
+                    // to fill
+                    if (x1 != x1old) {
+                        ctx.lineTo(axisx.p2c(x1old), axisy.p2c(y1));
+                        // it goes to (x1, y1), but we fill that below
+                    }
+
+                    // fill triangular section, this sometimes result
+                    // in redundant points if (x1, y1) hasn't changed
+                    // from previous line to, but we just ignore that
+                    ctx.lineTo(axisx.p2c(x1), axisy.p2c(y1));
+                    ctx.lineTo(axisx.p2c(x2), axisy.p2c(y2));
+
+                    // fill the other rectangle if it's there
+                    if (x2 != x2old) {
+                        ctx.lineTo(axisx.p2c(x2), axisy.p2c(y2));
+                        ctx.lineTo(axisx.p2c(x2old), axisy.p2c(y2));
+                    }
+                }
+            }
+
+            ctx.save();
+            ctx.translate(plotOffset.left, plotOffset.top);
+            ctx.lineJoin = "round";
+
+            var lw = series.lines.lineWidth,
+                sw = series.shadowSize;
+            // FIXME: consider another form of shadow when filling is turned on
+            if (lw > 0 && sw > 0) {
+                // draw shadow as a thick and thin line with transparency
+                ctx.lineWidth = sw;
+                ctx.strokeStyle = "rgba(0,0,0,0.1)";
+                // position shadow at angle from the mid of line
+                var angle = Math.PI/18;
+                plotLine(series.datapoints, Math.sin(angle) * (lw/2 + sw/2), Math.cos(angle) * (lw/2 + sw/2), series.xaxis, series.yaxis);
+                ctx.lineWidth = sw/2;
+                plotLine(series.datapoints, Math.sin(angle) * (lw/2 + sw/4), Math.cos(angle) * (lw/2 + sw/4), series.xaxis, series.yaxis);
+            }
+
+            ctx.lineWidth = lw;
+            ctx.strokeStyle = series.color;
+            var fillStyle = getFillStyle(series.lines, series.color, 0, plotHeight);
+            if (fillStyle) {
+                ctx.fillStyle = fillStyle;
+                plotLineArea(series.datapoints, series.xaxis, series.yaxis);
+            }
+
+            if (lw > 0)
+                plotLine(series.datapoints, 0, 0, series.xaxis, series.yaxis);
+            ctx.restore();
+        }
+
+        function drawSeriesPoints(series) {
+            function plotPoints(datapoints, radius, fillStyle, offset, shadow, axisx, axisy, symbol) {
+                var points = datapoints.points, ps = datapoints.pointsize;
+
+                for (var i = 0; i < points.length; i += ps) {
+                    var x = points[i], y = points[i + 1];
+                    if (x == null || x < axisx.min || x > axisx.max || y < axisy.min || y > axisy.max)
+                        continue;
+
+                    ctx.beginPath();
+                    x = axisx.p2c(x);
+                    y = axisy.p2c(y) + offset;
+                    if (symbol == "circle")
+                        ctx.arc(x, y, radius, 0, shadow ? Math.PI : Math.PI * 2, false);
+                    else
+                        symbol(ctx, x, y, radius, shadow);
+                    ctx.closePath();
+
+                    if (fillStyle) {
+                        ctx.fillStyle = fillStyle;
+                        ctx.fill();
+                    }
+                    ctx.stroke();
+                }
+            }
+
+            ctx.save();
+            ctx.translate(plotOffset.left, plotOffset.top);
+
+            var lw = series.points.lineWidth,
+                sw = series.shadowSize,
+                radius = series.points.radius,
+                symbol = series.points.symbol;
+
+            // If the user sets the line width to 0, we change it to a very 
+            // small value. A line width of 0 seems to force the default of 1.
+            // Doing the conditional here allows the shadow setting to still be 
+            // optional even with a lineWidth of 0.
+
+            if( lw == 0 )
+                lw = 0.0001;
+
+            if (lw > 0 && sw > 0) {
+                // draw shadow in two steps
+                var w = sw / 2;
+                ctx.lineWidth = w;
+                ctx.strokeStyle = "rgba(0,0,0,0.1)";
+                plotPoints(series.datapoints, radius, null, w + w/2, true,
+                           series.xaxis, series.yaxis, symbol);
+
+                ctx.strokeStyle = "rgba(0,0,0,0.2)";
+                plotPoints(series.datapoints, radius, null, w/2, true,
+                           series.xaxis, series.yaxis, symbol);
+            }
+
+            ctx.lineWidth = lw;
+            ctx.strokeStyle = series.color;
+            plotPoints(series.datapoints, radius,
+                       getFillStyle(series.points, series.color), 0, false,
+                       series.xaxis, series.yaxis, symbol);
+            ctx.restore();
+        }
+
+        function drawBar(x, y, b, barLeft, barRight, fillStyleCallback, axisx, axisy, c, horizontal, lineWidth) {
+            var left, right, bottom, top,
+                drawLeft, drawRight, drawTop, drawBottom,
+                tmp;
+
+            // in horizontal mode, we start the bar from the left
+            // instead of from the bottom so it appears to be
+            // horizontal rather than vertical
+            if (horizontal) {
+                drawBottom = drawRight = drawTop = true;
+                drawLeft = false;
+                left = b;
+                right = x;
+                top = y + barLeft;
+                bottom = y + barRight;
+
+                // account for negative bars
+                if (right < left) {
+                    tmp = right;
+                    right = left;
+                    left = tmp;
+                    drawLeft = true;
+                    drawRight = false;
+                }
+            }
+            else {
+                drawLeft = drawRight = drawTop = true;
+                drawBottom = false;
+                left = x + barLeft;
+                right = x + barRight;
+                bottom = b;
+                top = y;
+
+                // account for negative bars
+                if (top < bottom) {
+                    tmp = top;
+                    top = bottom;
+                    bottom = tmp;
+                    drawBottom = true;
+                    drawTop = false;
+                }
+            }
+
+            // clip
+            if (right < axisx.min || left > axisx.max ||
+                top < axisy.min || bottom > axisy.max)
+                return;
+
+            if (left < axisx.min) {
+                left = axisx.min;
+                drawLeft = false;
+            }
+
+            if (right > axisx.max) {
+                right = axisx.max;
+                drawRight = false;
+            }
+
+            if (bottom < axisy.min) {
+                bottom = axisy.min;
+                drawBottom = false;
+            }
+
+            if (top > axisy.max) {
+                top = axisy.max;
+                drawTop = false;
+            }
+
+            left = axisx.p2c(left);
+            bottom = axisy.p2c(bottom);
+            right = axisx.p2c(right);
+            top = axisy.p2c(top);
+
+            // fill the bar
+            if (fillStyleCallback) {
+                c.fillStyle = fillStyleCallback(bottom, top);
+                c.fillRect(left, top, right - left, bottom - top)
+            }
+
+            // draw outline
+            if (lineWidth > 0 && (drawLeft || drawRight || drawTop || drawBottom)) {
+                c.beginPath();
+
+                // FIXME: inline moveTo is buggy with excanvas
+                c.moveTo(left, bottom);
+                if (drawLeft)
+                    c.lineTo(left, top);
+                else
+                    c.moveTo(left, top);
+                if (drawTop)
+                    c.lineTo(right, top);
+                else
+                    c.moveTo(right, top);
+                if (drawRight)
+                    c.lineTo(right, bottom);
+                else
+                    c.moveTo(right, bottom);
+                if (drawBottom)
+                    c.lineTo(left, bottom);
+                else
+                    c.moveTo(left, bottom);
+                c.stroke();
+            }
+        }
+
+        function drawSeriesBars(series) {
+            function plotBars(datapoints, barLeft, barRight, fillStyleCallback, axisx, axisy) {
+                var points = datapoints.points, ps = datapoints.pointsize;
+
+                for (var i = 0; i < points.length; i += ps) {
+                    if (points[i] == null)
+                        continue;
+                    drawBar(points[i], points[i + 1], points[i + 2], barLeft, barRight, fillStyleCallback, axisx, axisy, ctx, series.bars.horizontal, series.bars.lineWidth);
+                }
+            }
+
+            ctx.save();
+            ctx.translate(plotOffset.left, plotOffset.top);
+
+            // FIXME: figure out a way to add shadows (for instance along the right edge)
+            ctx.lineWidth = series.bars.lineWidth;
+            ctx.strokeStyle = series.color;
+
+            var barLeft;
+
+            switch (series.bars.align) {
+                case "left":
+                    barLeft = 0;
+                    break;
+                case "right":
+                    barLeft = -series.bars.barWidth;
+                    break;
+                default:
+                    barLeft = -series.bars.barWidth / 2;
+            }
+
+            var fillStyleCallback = series.bars.fill ? function (bottom, top) { return getFillStyle(series.bars, series.color, bottom, top); } : null;
+            plotBars(series.datapoints, barLeft, barLeft + series.bars.barWidth, fillStyleCallback, series.xaxis, series.yaxis);
+            ctx.restore();
+        }
+
+        function getFillStyle(filloptions, seriesColor, bottom, top) {
+            var fill = filloptions.fill;
+            if (!fill)
+                return null;
+
+            if (filloptions.fillColor)
+                return getColorOrGradient(filloptions.fillColor, bottom, top, seriesColor);
+
+            var c = $.color.parse(seriesColor);
+            c.a = typeof fill == "number" ? fill : 0.4;
+            c.normalize();
+            return c.toString();
+        }
+
+        function insertLegend() {
+
+            if (options.legend.container != null) {
+                $(options.legend.container).html("");
+            } else {
+                placeholder.find(".legend").remove();
+            }
+
+            if (!options.legend.show) {
+                return;
+            }
+
+            var fragments = [], entries = [], rowStarted = false,
+                lf = options.legend.labelFormatter, s, label;
+
+            // Build a list of legend entries, with each having a label and a color
+
+            for (var i = 0; i < series.length; ++i) {
+                s = series[i];
+                if (s.label) {
+                    label = lf ? lf(s.label, s) : s.label;
+                    if (label) {
+                        entries.push({
+                            label: label,
+                            color: s.color
+                        });
+                    }
+                }
+            }
+
+            // Sort the legend using either the default or a custom comparator
+
+            if (options.legend.sorted) {
+                if ($.isFunction(options.legend.sorted)) {
+                    entries.sort(options.legend.sorted);
+                } else if (options.legend.sorted == "reverse") {
+                	entries.reverse();
+                } else {
+                    var ascending = options.legend.sorted != "descending";
+                    entries.sort(function(a, b) {
+                        return a.label == b.label ? 0 : (
+                            (a.label < b.label) != ascending ? 1 : -1   // Logical XOR
+                        );
+                    });
+                }
+            }
+
+            // Generate markup for the list of entries, in their final order
+
+            for (var i = 0; i < entries.length; ++i) {
+
+                var entry = entries[i];
+
+                if (i % options.legend.noColumns == 0) {
+                    if (rowStarted)
+                        fragments.push('</tr>');
+                    fragments.push('<tr>');
+                    rowStarted = true;
+                }
+
+                fragments.push(
+                    '<td class="legendColorBox"><div style="border:1px solid ' + options.legend.labelBoxBorderColor + ';padding:1px"><div style="width:4px;height:0;border:5px solid ' + entry.color + ';overflow:hidden"></div></div></td>' +
+                    '<td class="legendLabel">' + entry.label + '</td>'
+                );
+            }
+
+            if (rowStarted)
+                fragments.push('</tr>');
+
+            if (fragments.length == 0)
+                return;
+
+            var table = '<table style="font-size:smaller;color:' + options.grid.color + '">' + fragments.join("") + '</table>';
+            if (options.legend.container != null)
+                $(options.legend.container).html(table);
+            else {
+                var pos = "",
+                    p = options.legend.position,
+                    m = options.legend.margin;
+                if (m[0] == null)
+                    m = [m, m];
+                if (p.charAt(0) == "n")
+                    pos += 'top:' + (m[1] + plotOffset.top) + 'px;';
+                else if (p.charAt(0) == "s")
+                    pos += 'bottom:' + (m[1] + plotOffset.bottom) + 'px;';
+                if (p.charAt(1) == "e")
+                    pos += 'right:' + (m[0] + plotOffset.right) + 'px;';
+                else if (p.charAt(1) == "w")
+                    pos += 'left:' + (m[0] + plotOffset.left) + 'px;';
+                var legend = $('<div class="legend">' + table.replace('style="', 'style="position:absolute;' + pos +';') + '</div>').appendTo(placeholder);
+                if (options.legend.backgroundOpacity != 0.0) {
+                    // put in the transparent background
+                    // separately to avoid blended labels and
+                    // label boxes
+                    var c = options.legend.backgroundColor;
+                    if (c == null) {
+                        c = options.grid.backgroundColor;
+                        if (c && typeof c == "string")
+                            c = $.color.parse(c);
+                        else
+                            c = $.color.extract(legend, 'background-color');
+                        c.a = 1;
+                        c = c.toString();
+                    }
+                    var div = legend.children();
+                    $('<div style="position:absolute;width:' + div.width() + 'px;height:' + div.height() + 'px;' + pos +'background-color:' + c + ';"> </div>').prependTo(legend).css('opacity', options.legend.backgroundOpacity);
+                }
+            }
+        }
+
+
+        // interactive features
+
+        var highlights = [],
+            redrawTimeout = null;
+
+        // returns the data item the mouse is over, or null if none is found
+        function findNearbyItem(mouseX, mouseY, seriesFilter) {
+            var maxDistance = options.grid.mouseActiveRadius,
+                smallestDistance = maxDistance * maxDistance + 1,
+                item = null, foundPoint = false, i, j, ps;
+
+            for (i = series.length - 1; i >= 0; --i) {
+                if (!seriesFilter(series[i]))
+                    continue;
+
+                var s = series[i],
+                    axisx = s.xaxis,
+                    axisy = s.yaxis,
+                    points = s.datapoints.points,
+                    mx = axisx.c2p(mouseX), // precompute some stuff to make the loop faster
+                    my = axisy.c2p(mouseY),
+                    maxx = maxDistance / axisx.scale,
+                    maxy = maxDistance / axisy.scale;
+
+                ps = s.datapoints.pointsize;
+                // with inverse transforms, we can't use the maxx/maxy
+                // optimization, sadly
+                if (axisx.options.inverseTransform)
+                    maxx = Number.MAX_VALUE;
+                if (axisy.options.inverseTransform)
+                    maxy = Number.MAX_VALUE;
+
+                if (s.lines.show || s.points.show) {
+                    for (j = 0; j < points.length; j += ps) {
+                        var x = points[j], y = points[j + 1];
+                        if (x == null)
+                            continue;
+
+                        // For points and lines, the cursor must be within a
+                        // certain distance to the data point
+                        if (x - mx > maxx || x - mx < -maxx ||
+                            y - my > maxy || y - my < -maxy)
+                            continue;
+
+                        // We have to calculate distances in pixels, not in
+                        // data units, because the scales of the axes may be different
+                        var dx = Math.abs(axisx.p2c(x) - mouseX),
+                            dy = Math.abs(axisy.p2c(y) - mouseY),
+                            dist = dx * dx + dy * dy; // we save the sqrt
+
+                        // use <= to ensure last point takes precedence
+                        // (last generally means on top of)
+                        if (dist < smallestDistance) {
+                            smallestDistance = dist;
+                            item = [i, j / ps];
+                        }
+                    }
+                }
+
+                if (s.bars.show && !item) { // no other point can be nearby
+
+                    var barLeft, barRight;
+
+                    switch (s.bars.align) {
+                        case "left":
+                            barLeft = 0;
+                            break;
+                        case "right":
+                            barLeft = -s.bars.barWidth;
+                            break;
+                        default:
+                            barLeft = -s.bars.barWidth / 2;
+                    }
+
+                    barRight = barLeft + s.bars.barWidth;
+
+                    for (j = 0; j < points.length; j += ps) {
+                        var x = points[j], y = points[j + 1], b = points[j + 2];
+                        if (x == null)
+                            continue;
+
+                        // for a bar graph, the cursor must be inside the bar
+                        if (series[i].bars.horizontal ?
+                            (mx <= Math.max(b, x) && mx >= Math.min(b, x) &&
+                             my >= y + barLeft && my <= y + barRight) :
+                            (mx >= x + barLeft && mx <= x + barRight &&
+                             my >= Math.min(b, y) && my <= Math.max(b, y)))
+                                item = [i, j / ps];
+                    }
+                }
+            }
+
+            if (item) {
+                i = item[0];
+                j = item[1];
+                ps = series[i].datapoints.pointsize;
+
+                return { datapoint: series[i].datapoints.points.slice(j * ps, (j + 1) * ps),
+                         dataIndex: j,
+                         series: series[i],
+                         seriesIndex: i };
+            }
+
+            return null;
+        }
+
+        function onMouseMove(e) {
+            if (options.grid.hoverable)
+                triggerClickHoverEvent("plothover", e,
+                                       function (s) { return s["hoverable"] != false; });
+        }
+
+        function onMouseLeave(e) {
+            if (options.grid.hoverable)
+                triggerClickHoverEvent("plothover", e,
+                                       function (s) { return false; });
+        }
+
+        function onClick(e) {
+            triggerClickHoverEvent("plotclick", e,
+                                   function (s) { return s["clickable"] != false; });
+        }
+
+        // trigger click or hover event (they send the same parameters
+        // so we share their code)
+        function triggerClickHoverEvent(eventname, event, seriesFilter) {
+            var offset = eventHolder.offset(),
+                canvasX = event.pageX - offset.left - plotOffset.left,
+                canvasY = event.pageY - offset.top - plotOffset.top,
+            pos = canvasToAxisCoords({ left: canvasX, top: canvasY });
+
+            pos.pageX = event.pageX;
+            pos.pageY = event.pageY;
+
+            var item = findNearbyItem(canvasX, canvasY, seriesFilter);
+
+            if (item) {
+                // fill in mouse pos for any listeners out there
+                item.pageX = parseInt(item.series.xaxis.p2c(item.datapoint[0]) + offset.left + plotOffset.left, 10);
+                item.pageY = parseInt(item.series.yaxis.p2c(item.datapoint[1]) + offset.top + plotOffset.top, 10);
+            }
+
+            if (options.grid.autoHighlight) {
+                // clear auto-highlights
+                for (var i = 0; i < highlights.length; ++i) {
+                    var h = highlights[i];
+                    if (h.auto == eventname &&
+                        !(item && h.series == item.series &&
+                          h.point[0] == item.datapoint[0] &&
+                          h.point[1] == item.datapoint[1]))
+                        unhighlight(h.series, h.point);
+                }
+
+                if (item)
+                    highlight(item.series, item.datapoint, eventname);
+            }
+
+            placeholder.trigger(eventname, [ pos, item ]);
+        }
+
+        function triggerRedrawOverlay() {
+            var t = options.interaction.redrawOverlayInterval;
+            if (t == -1) {      // skip event queue
+                drawOverlay();
+                return;
+            }
+
+            if (!redrawTimeout)
+                redrawTimeout = setTimeout(drawOverlay, t);
+        }
+
+        function drawOverlay() {
+            redrawTimeout = null;
+
+            // draw highlights
+            octx.save();
+            overlay.clear();
+            octx.translate(plotOffset.left, plotOffset.top);
+
+            var i, hi;
+            for (i = 0; i < highlights.length; ++i) {
+                hi = highlights[i];
+
+                if (hi.series.bars.show)
+                    drawBarHighlight(hi.series, hi.point);
+                else
+                    drawPointHighlight(hi.series, hi.point);
+            }
+            octx.restore();
+
+            executeHooks(hooks.drawOverlay, [octx]);
+        }
+
+        function highlight(s, point, auto) {
+            if (typeof s == "number")
+                s = series[s];
+
+            if (typeof point == "number") {
+                var ps = s.datapoints.pointsize;
+                point = s.datapoints.points.slice(ps * point, ps * (point + 1));
+            }
+
+            var i = indexOfHighlight(s, point);
+            if (i == -1) {
+                highlights.push({ series: s, point: point, auto: auto });
+
+                triggerRedrawOverlay();
+            }
+            else if (!auto)
+                highlights[i].auto = false;
+        }
+
+        function unhighlight(s, point) {
+            if (s == null && point == null) {
+                highlights = [];
+                triggerRedrawOverlay();
+                return;
+            }
+
+            if (typeof s == "number")
+                s = series[s];
+
+            if (typeof point == "number") {
+                var ps = s.datapoints.pointsize;
+                point = s.datapoints.points.slice(ps * point, ps * (point + 1));
+            }
+
+            var i = indexOfHighlight(s, point);
+            if (i != -1) {
+                highlights.splice(i, 1);
+
+                triggerRedrawOverlay();
+            }
+        }
+
+        function indexOfHighlight(s, p) {
+            for (var i = 0; i < highlights.length; ++i) {
+                var h = highlights[i];
+                if (h.series == s && h.point[0] == p[0]
+                    && h.point[1] == p[1])
+                    return i;
+            }
+            return -1;
+        }
+
+        function drawPointHighlight(series, point) {
+            var x = point[0], y = point[1],
+                axisx = series.xaxis, axisy = series.yaxis,
+                highlightColor = (typeof series.highlightColor === "string") ? series.highlightColor : $.color.parse(series.color).scale('a', 0.5).toString();
+
+            if (x < axisx.min || x > axisx.max || y < axisy.min || y > axisy.max)
+                return;
+
+            var pointRadius = series.points.radius + series.points.lineWidth / 2;
+            octx.lineWidth = pointRadius;
+            octx.strokeStyle = highlightColor;
+            var radius = 1.5 * pointRadius;
+            x = axisx.p2c(x);
+            y = axisy.p2c(y);
+
+            octx.beginPath();
+            if (series.points.symbol == "circle")
+                octx.arc(x, y, radius, 0, 2 * Math.PI, false);
+            else
+                series.points.symbol(octx, x, y, radius, false);
+            octx.closePath();
+            octx.stroke();
+        }
+
+        function drawBarHighlight(series, point) {
+            var highlightColor = (typeof series.highlightColor === "string") ? series.highlightColor : $.color.parse(series.color).scale('a', 0.5).toString(),
+                fillStyle = highlightColor,
+                barLeft;
+
+            switch (series.bars.align) {
+                case "left":
+                    barLeft = 0;
+                    break;
+                case "right":
+                    barLeft = -series.bars.barWidth;
+                    break;
+                default:
+                    barLeft = -series.bars.barWidth / 2;
+            }
+
+            octx.lineWidth = series.bars.lineWidth;
+            octx.strokeStyle = highlightColor;
+
+            drawBar(point[0], point[1], point[2] || 0, barLeft, barLeft + series.bars.barWidth,
+                    function () { return fillStyle; }, series.xaxis, series.yaxis, octx, series.bars.horizontal, series.bars.lineWidth);
+        }
+
+        function getColorOrGradient(spec, bottom, top, defaultColor) {
+            if (typeof spec == "string")
+                return spec;
+            else {
+                // assume this is a gradient spec; IE currently only
+                // supports a simple vertical gradient properly, so that's
+                // what we support too
+                var gradient = ctx.createLinearGradient(0, top, 0, bottom);
+
+                for (var i = 0, l = spec.colors.length; i < l; ++i) {
+                    var c = spec.colors[i];
+                    if (typeof c != "string") {
+                        var co = $.color.parse(defaultColor);
+                        if (c.brightness != null)
+                            co = co.scale('rgb', c.brightness);
+                        if (c.opacity != null)
+                            co.a *= c.opacity;
+                        c = co.toString();
+                    }
+                    gradient.addColorStop(i / (l - 1), c);
+                }
+
+                return gradient;
+            }
+        }
+    }
+
+    // Add the plot function to the top level of the jQuery object
+
+    $.plot = function(placeholder, data, options) {
+        //var t0 = new Date();
+        var plot = new Plot($(placeholder), data, options, $.plot.plugins);
+        //(window.console ? console.log : alert)("time used (msecs): " + ((new Date()).getTime() - t0.getTime()));
+        return plot;
+    };
+
+    $.plot.version = "0.8.3";
+
+    $.plot.plugins = [];
+
+    // Also add the plot function as a chainable property
+
+    $.fn.plot = function(data, options) {
+        return this.each(function() {
+            $.plot(this, data, options);
+        });
+    };
+
+    // round to nearby lower multiple of base
+    function floorInBase(n, base) {
+        return base * Math.floor(n / base);
+    }
+
+})(jQuery);
+
 /* Modernizr 2.8.3 (Custom Build) | MIT & BSD
  * Build: http://modernizr.com/download/#-csstransforms-csstransforms3d-svg-touch-shiv-cssclasses-teststyles-testprop-testallprops-prefixes-domprefixes-load
  */
@@ -54880,2430 +58049,63 @@ angular.module('ui.router.state')
   .filter('isState', $IsStateFilter)
   .filter('includedByState', $IncludedByStateFilter);
 })(window, window.angular);
-/**
- * angular-ui-utils - Swiss-Army-Knife of AngularJS tools (with no external dependencies!)
- * @version v0.2.3 - 2015-03-30
- * @link http://angular-ui.github.com
- * @license MIT License, http://www.opensource.org/licenses/MIT
+/*!
+ * angular-ui-event
+ * https://github.com/angular-ui/ui-event
+ * Version: 1.0.0 - 2015-06-30T08:34:06.369Z
+ * License: MIT
  */
-angular.module('ui.alias', []).config(['$compileProvider', 'uiAliasConfig', function($compileProvider, uiAliasConfig){
-  'use strict';
-
-  uiAliasConfig = uiAliasConfig || {};
-  angular.forEach(uiAliasConfig, function(config, alias){
-    if (angular.isString(config)) {
-      config = {
-        replace: true,
-        template: config
-      };
-    }
-    $compileProvider.directive(alias, function(){
-      return config;
-    });
-  });
-}]);
-
-/**
- * General-purpose Event binding. Bind any event not natively supported by Angular
- * Pass an object with keynames for events to ui-event
- * Allows $event object and $params object to be passed
- *
- * @example <input ui-event="{ focus : 'counter++', blur : 'someCallback()' }">
- * @example <input ui-event="{ myCustomEvent : 'myEventHandler($event, $params)'}">
- *
- * @param ui-event {string|object literal} The event to bind to as a string or a hash of events with their callbacks
+!function(){"use strict";angular.module("ui.event",[]).directive("uiEvent",["$parse",function(n){return function(e,a,r){var t=e.$eval(r.uiEvent);angular.forEach(t,function(r,t){var i=n(r);a.bind(t,function(n){var a=Array.prototype.slice.call(arguments);a=a.splice(1),i(e,{$event:n,$params:a}),e.$$phase||e.$apply()})})}}])}();
+/*!
+ * angular-ui-scroll
+ * https://github.com/angular-ui/ui-scroll.git
+ * Version: 1.4.0 -- 2016-04-04T13:10:12.966Z
+ * License: MIT
  */
-angular.module('ui.event',[]).directive('uiEvent', ['$parse',
-  function ($parse) {
-    'use strict';
-
-    return function ($scope, elm, attrs) {
-      var events = $scope.$eval(attrs.uiEvent);
-      angular.forEach(events, function (uiEvent, eventName) {
-        var fn = $parse(uiEvent);
-        elm.bind(eventName, function (evt) {
-          var params = Array.prototype.slice.call(arguments);
-          //Take out first paramater (event object);
-          params = params.splice(1);
-          fn($scope, {$event: evt, $params: params});
-          if (!$scope.$$phase) {
-            $scope.$apply();
-          }
-        });
-      });
-    };
-  }]);
-
-/**
- * A replacement utility for internationalization very similar to sprintf.
- *
- * @param replace {mixed} The tokens to replace depends on type
- *  string: all instances of $0 will be replaced
- *  array: each instance of $0, $1, $2 etc. will be placed with each array item in corresponding order
- *  object: all attributes will be iterated through, with :key being replaced with its corresponding value
- * @return string
- *
- * @example: 'Hello :name, how are you :day'.format({ name:'John', day:'Today' })
- * @example: 'Records $0 to $1 out of $2 total'.format(['10', '20', '3000'])
- * @example: '$0 agrees to all mentions $0 makes in the event that $0 hits a tree while $0 is driving drunk'.format('Bob')
+!function(){"use strict";var a="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(a){return typeof a}:function(a){return a&&"function"==typeof Symbol&&a.constructor===Symbol?"symbol":typeof a};angular.module("ui.scroll",[]).directive("uiScrollViewport",function(){return{controller:["$scope","$element",function(a,b){return this.viewport=b,this}]}}).directive("uiScroll",["$log","$injector","$rootScope","$timeout","$q","$parse",function(b,c,d,e,f,g){function h(a,b){return b.after(a),[]}function i(a){return a.element.remove(),a.scope.$destroy(),[]}function j(b,c){if(!p)return h(b,c);if(q){var d=function(){var a=f.defer();return p.enter(b,null,c,function(){return a.resolve()}),{v:[a.promise]}}();if("object"===("undefined"==typeof d?"undefined":a(d)))return d.v}return[p.enter(b,null,c)]}function k(b){if(!p)return i(b);if(q){var c=function(){var a=f.defer();return p.leave(b.element,function(){return b.scope.$destroy(),a.resolve()}),{v:[a.promise]}}();if("object"===("undefined"==typeof c?"undefined":a(c)))return c.v}return[p.leave(b.element).then(function(){return b.scope.$destroy()})]}function l(a,b,c,d){function e(a){f.eof=!1,f.bof=!1,f.first=a,f.next=a,f.minIndex=Number.MAX_VALUE,f.maxIndex=Number.MIN_VALUE}var f=Object.create(Array.prototype);return angular.extend(f,{size:d,append:function(a){a.forEach(function(a){++f.next,f.insert("append",a)})},prepend:function(a){a.reverse().forEach(function(a){--f.first,f.insert("prepend",a)})},insert:function(d,e){var g=b.$new(),h={item:e,scope:g};if(g[a]=e,c(g,function(a){return h.element=a}),d%1===0)h.op="insert",f.splice(d,0,h);else switch(h.op=d,d){case"append":f.push(h);break;case"prepend":f.unshift(h)}},remove:function(a,b){if(angular.isNumber(a)){for(var c=a;b>c;c++)i(f[c]);return f.splice(a,b-a)}return f.splice(f.indexOf(a),1),k(a)},setUpper:function(){f.maxIndex=f.eof?f.next-1:Math.max(f.next-1,f.maxIndex)},setLower:function(){f.minIndex=f.bof?f.minIndex=f.first:Math.min(f.first,f.minIndex)},syncDatasource:function(a){var b=f.minIndex-Math.min(f.minIndex,a.minIndex||Number.MAX_VALUE);return a.minIndex=f.minIndex-=b,a.maxIndex=f.maxIndex=Math.max(f.maxIndex,a.maxIndex||Number.MIN_VALUE),b},clear:function(){f.remove(0,f.length),e(arguments.length?arguments[0]:1)}}),e(1),f}function m(a,b,c,d){function e(){return m.outerHeight()*Math.max(f,+d.padding||g)}var f=.3,g=.5,i=null,k=null,l=0,m=c[0]&&c[0].viewport?c[0].viewport:angular.element(window);m.css({"overflow-y":"auto",display:"block"});var n=m.offset()?function(){return m.offset()}:function(){return{top:0}};return angular.extend(m,{createPaddingElements:function(a){function c(a){var b=void 0,c=a.localName;switch(c){case"dl":throw new Error("ui-scroll directive does not support <"+c+"> as a repeating tag: "+a.outerHTML);case"tr":var d=angular.element("<table><tr><td><div></div></td></tr></table>");b=d.find("tr");break;case"li":b=angular.element("<li></li>");break;default:b=angular.element("<div></div>")}return b}i=new c(a),k=new c(a),b.before(i),b.after(k)},bottomDataPos:function(){var a=m[0].scrollHeight;return a=null!=a?a:m[0].document.documentElement.scrollHeight,a-k.height()},topDataPos:function(){return i.height()},bottomVisiblePos:function(){return m.scrollTop()+m.outerHeight()},topVisiblePos:function(){return m.scrollTop()},insertElement:function(a,b){return h(a,b||i)},insertElementAnimated:function(a,b){return j(a,b||i)},shouldLoadBottom:function(){return!a.eof&&m.bottomDataPos()<m.bottomVisiblePos()+e()},clipBottom:function(){for(var b=0,c=a.length-1;c>=0&&!(a[c].element.offset().top-n().top<=m.outerHeight()+e());c--)b++;b>0&&(a.eof=!1,a.remove(a.length-b,a.length),a.next-=b,m.adjustPadding())},shouldLoadTop:function(){return!a.bof&&m.topDataPos()>m.topVisiblePos()-e()},clipTop:function(){for(var b=0,c=0,d=0;d<a.length&&!(a[d].element.offset().top-n().top+a[d].element.outerHeight(!0)>=-1*e());d++)c+=a[d].element.outerHeight(!0),b++;b>0&&(i.height(i.height()+c),a.bof=!1,a.remove(0,b),a.first+=b)},adjustPadding:function(){if(a.length){var b=a[0].element,c=a[a.length-1].element;return l=(c.offset().top+c.outerHeight(!0)-b.offset().top)/a.length,i.height((a.first-a.minIndex)*l),k.height((a.maxIndex-a.next+1)*l)}},syncDatasource:function(b){if(a.length){var c=a.syncDatasource(b)*l;i.height(i.height()+c),m.scrollTop(m.scrollTop()+c),m.adjustPadding()}},adjustScrollTop:function(a){var b=i.height()-a;b>=0?i.height(b):(i.height(0),m.scrollTop(m.scrollTop()-b))},resetTopPaddingHeight:function(){i.height(0)},resetBottomPaddingHeight:function(){k.height(0)}}),m}function n(a,b,c,e){function f(a,b){if(angular.isArray(b)){var d=void 0,e=c.indexOf(a)+1;b.reverse().forEach(function(b){b===a.item?(d=!0,e--):c.insert(e,b)}),d||(a.op="remove")}}var h=b.scope()||d,i=a.topVisible?g(a.topVisible).assign:angular.noop,j=a.topVisibleElement?g(a.topVisibleElement).assign:angular.noop,k=a.topVisibleScope?g(a.topVisibleScope).assign:angular.noop,l=a.isLoading?g(a.isLoading).assign:angular.noop;this.isLoading=!1,this.applyUpdates=function(a,b){if(angular.isFunction(a))c.slice(0).forEach(function(b){f(b,a(b.item,b.scope,b.element))});else{if(a%1!==0)throw new Error("applyUpdates - "+a+" is not a valid index");var d=a-c.first;d>=0&&d<c.length&&f(c[d],b)}e()},this.append=function(a){c.append(a),e()},this.prepend=function(a){c.prepend(a),e()},this.loading=function(a){this.isLoading=a,l(h,a)},this.calculateProperties=function(){var a=void 0,d=void 0,e=void 0,f=void 0,g=void 0,l=void 0,m=0;for(a=0;a<c.length;a++){if(d=c[a],f=d.element.offset().top,g=l!==f,l=f,g&&(e=d.element.outerHeight(!0)),!(g&&b.topDataPos()+m+e<=b.topVisiblePos())){g&&(this.topVisible=d.item,this.topVisibleElement=d.element,this.topVisibleScope=d.scope,i(h,d.item),j(h,d.element),k(h,d.scope));break}m+=e}}}function o(a,b,h){var i=b.uiScroll.match(/^\s*(\w+)\s+in\s+([\w\.]+)\s*$/);if(!i)throw new Error("Expected uiScroll in form of '_item_ in _datasource_' but got '"+b.uiScroll+"'");var j=i[1],k=i[2],o=Math.max(3,+b.bufferSize||10);return function(a,b,i,p,q){function r(){J.bind("resize",D),J.bind("scroll",D)}function s(){J.unbind("resize",D),J.unbind("scroll",D)}function t(){G++,H=[]}function u(){return t(),J.resetTopPaddingHeight(),J.resetBottomPaddingHeight(),K.abCount=0,K.abfCount=0,K.sCount=0,arguments.length?I.clear(arguments[0]):I.clear(),A(G)}function v(a,b){return K.isLoading||K.loading(!0),1===H.push(b)?C(a):void 0}function w(a){return a.element.height()&&a.element[0].offsetParent}function x(a){return w(a)?(I.forEach(function(a){angular.isFunction(a.unregisterVisibilityWatcher)&&(a.unregisterVisibilityWatcher(),delete a.unregisterVisibilityWatcher)}),A()):void 0}function y(a,b){return J.insertElement(a.element,b),w(a)?!0:(a.unregisterVisibilityWatcher=a.scope.$watch(function(){return x(a)}),!1)}function z(a){function b(a){return a>0?I[a-1].element:void 0}var c=!1,d=[],e=[],g=[];if(I.forEach(function(a,f){switch(a.op){case"prepend":e.unshift(a);break;case"append":c=y(a,b(f))||c,a.op="none";break;case"insert":d=d.concat(J.insertElementAnimated(a.element,b(f))),a.op="none";break;case"remove":g.push(a)}}),g.forEach(function(a){return d=d.concat(I.remove(a))}),e.length){var h=0;e.forEach(function(a){c=y(a)||c,a.op="none",h+=a.element.outerHeight(!0)}),J.adjustScrollTop(h)}return I.forEach(function(a,b){return a.scope.$index=I.first+b}),d.length?f.all(d).then(function(){return J.adjustPadding(),A(a)}):(J.adjustPadding(),H.length||J.syncDatasource(F)),c}function A(a){return e(function(){return K.abCount++,z(a),J.shouldLoadBottom()?v(a,!0):J.shouldLoadTop()&&v(a,!1),H.length?void 0:K.calculateProperties()})}function B(a){return e(function(){K.abfCount++;var b=z(a);return J.shouldLoadBottom()&&b?v(a,!0):J.shouldLoadTop()&&(b||H[0])&&v(a,!1),H.shift(),H.length?C(a):(K.loading(!1),r(),K.calculateProperties())})}function C(b){return H[0]?I.length&&!J.shouldLoadBottom()?B(b):L(function(c){return b&&b!==G||a.$$destroyed?void 0:(c.length<o&&(I.eof=!0),c.length>0&&(J.clipTop(),I.append(c)),I.setUpper(),B(b))}):I.length&&!J.shouldLoadTop()?B(b):M(function(c){return b&&b!==G||a.$$destroyed?void 0:(c.length<o&&(I.bof=!0),c.length>0&&(I.length&&J.clipBottom(),I.prepend(c)),I.setLower(),B(b))})}function D(){d.$$phase||K.isLoading||(K.sCount++,J.shouldLoadBottom()?v(G,!0):J.shouldLoadTop()&&v(G,!1),H.length?s():(K.calculateProperties(),a.$apply()))}function E(a){var b=J[0].scrollTop,c=J[0].scrollHeight-J[0].clientHeight;(0===b&&!I.bof||b===c&&!I.eof)&&a.preventDefault()}q=q||h;var F=function(){function b(){return angular.isObject(d)&&angular.isFunction(d.get)}var d=g(k)(a);if(!b()&&(d=c.get(k),!b()))throw new Error(k+" is not a valid datasource");return d}(),G=0,H=[],I=new l(j,a,q,o),J=new m(I,b,p,i),K=new n(i,J,I,function(){return t(),A(G)}),L=function(){return 2!==F.get.length?function(a){return F.get(I.next,o,a)}:function(a){return F.get({index:I.next,append:I.length?I[I.length-1].item:void 0,count:o},a)}}(),M=function(){return 2!==F.get.length?function(a){return F.get(I.first-o,o,a)}:function(a){return F.get({index:I.first-o,prepend:I.length?I[0].item:void 0,count:o},a)}}();if(i.adapter){var N=g(i.adapter)(a);angular.isObject(N)||(g(i.adapter).assign(a,{}),N=g(i.adapter)(a)),K=angular.extend(N,K)}q(a.$new(),function(a,b){J.createPaddingElements(a[0]),b.$destroy(),a.remove()}),K.reload=u,J.bind("mousewheel",E),a.$on("$destroy",function(){I.clear(),s(),J.unbind("mousewheel",E)}),function(){function b(a){throw new Error(a+" event is no longer supported - use applyUpdates instead")}var c=F.scope?F.scope.$new():a.$new();c.$on("insert.item",function(){return b("insert")}),c.$on("update.items",function(){return b("update")}),c.$on("delete.items",function(){return b("delete")})}(),u()}}var p=c.has&&c.has("$animate")?c.get("$animate"):null,q=1===angular.version.major&&angular.version.minor<3;return{require:["?^uiScrollViewport"],transclude:"element",priority:1e3,terminal:!0,compile:o}}])}();
+/*!
+ * angular-ui-scrollpoint
+ * https://github.com/angular-ui/ui-scrollpoint
+ * Version: 2.1.1 - 2016-02-22T01:35:08.609Z
+ * License: MIT
  */
-angular.module('ui.format',[]).filter('format', function(){
-  'use strict';
-
-  return function(value, replace) {
-    var target = value;
-    if (angular.isString(target) && replace !== undefined) {
-      if (!angular.isArray(replace) && !angular.isObject(replace)) {
-        replace = [replace];
-      }
-      if (angular.isArray(replace)) {
-        var rlen = replace.length;
-        var rfx = function (str, i) {
-          i = parseInt(i, 10);
-          return (i >= 0 && i < rlen) ? replace[i] : str;
-        };
-        target = target.replace(/\$([0-9]+)/g, rfx);
-      }
-      else {
-        angular.forEach(replace, function(value, key){
-          target = target.split(':' + key).join(value);
-        });
-      }
-    }
-    return target;
-  };
-});
-
-/**
- * Wraps the
- * @param text {string} haystack to search through
- * @param search {string} needle to search for
- * @param [caseSensitive] {boolean} optional boolean to use case-sensitive searching
+!function(){"use strict";angular.module("ui.scrollpoint",[]).directive("uiScrollpoint",["$window","$timeout",function(t,e){function i(){if(angular.isDefined(t.pageYOffset))return t.pageYOffset;var e=document.compatMode&&"BackCompat"!==document.compatMode?document.documentElement:document.body;return e.scrollTop}function s(){return t.document.body.scrollHeight-t.innerHeight}function n(e){return e?t.document.body.clientHeight:t.innerHeight}return{require:["uiScrollpoint","^?uiScrollpointTarget"],controller:function(){function o(t){var e={shift:0,absolute:!1,percent:!1};if(t&&angular.isString(t))if(e.percent="%"==t.charAt(t.length-1),e.percent&&(t=t.substr(0,t.length-1)),"-"===t.charAt(0))e.absolute=e.percent,e.shift=-parseFloat(t.substr(1));else if("+"===t.charAt(0))e.absolute=e.percent,e.shift=parseFloat(t.substr(1));else{var i=parseFloat(t);!isNaN(i)&&isFinite(i)&&(e.absolute=!0,e.shift=i)}else if(angular.isNumber(t))return o(t.toString());return e}var r=this;this.$element=void 0,this.$target=void 0,this.hasTarget=!1,this.hit=void 0,this.edges={top:{top:!0}},this.hitEdge=void 0,this.default_edge={absolute:!1,percent:!1,shift:0},this.posCache={},this.ready=!1,this.enabled=!0,this.scrollpointClass="ui-scrollpoint",this.actions=void 0,this.addEdge=function(t,e){if(angular.isString(t))if(angular.isUndefined(e)&&(e=!0),"view"==t)this.addEdge("top","bottom"),this.addEdge("bottom","top");else{var i,s;if(angular.isObject(e))for(i in e)e[i]=e[i]===!0?!0:o(e[i]);else"top"==e||"bottom"==e?(i=e,s=o(),e={},e[i]=s):e===!0?(e={},e[t]=!0):(s=o(e),e={},e[t]=s);this.edges[t]=e}},this.addAction=function(t){t&&angular.isFunction(t)&&(angular.isUndefined(this.actions)?this.actions=[t]:-1==this.actions.indexOf(t)&&this.actions.push(t))},this.setScrollpoint=function(t){this.default_edge=o(t)},this.setClass=function(t){t||(t="ui-scrollpoint"),this.scrollpointClass=t},this.setEdges=function(t){if(angular.isString(t))this.edges={},this.addEdge(t);else if(angular.isArray(t)){this.edges={};for(var e=0;e<t.length;e++)this.addEdge(t[e])}else if(angular.isObject(t)){this.edges={};for(var i in t)this.addEdge(i,t[i])}else this.edges={},this.addEdge("top")},this.setElement=function(t){this.$element=t},this.setTarget=function(e){e?(this.$target=e,this.hasTarget=!0):(this.$target=angular.element(t),this.hasTarget=!1)},this.getEdge=function(t,e){if(t&&e){if(this.edges[t]&&this.edges[t][e]&&this.edges[t][e]!==!0)return this.edges[t][e]}else if(t&&!e){if(this.edges[t])return this.edges[t];return}return this.default_edge},this.checkOffset=function(t,e,i){var s;i||(i=this.default_edge);var n="bottom"==t,o="top"==e,r="bottom"==e,l=this.getScrollOffset();n&&(l+=this.getTargetHeight());var a;return i.absolute?(a=i.percent?i.shift/100*this.getTargetScrollHeight():i.shift,n&&(a=this.getTargetContentHeight()-a,this.hasTarget&&(a+=this.getTargetHeight()))):(o?a=this.getElementTop():r&&(a=this.getElementBottom()),a+=i.shift),s=l-a,n&&(s*=-1),s},this.scrollEdgeHit=function(){var t,e,i,s,n,o,r;i=0,s={};for(o in this.edges)for(r in this.edges[o]){n=this.getEdge(o,r);var l=this.checkOffset(o,r,n);n.absolute?(angular.isUndefined(s)&&(s={}),angular.isUndefined(s[o])&&(s[o]={}),s[o][r]=l,i++):(angular.isUndefined(t)||l>t)&&(t=l,e={scroll:o,element:r})}if(i&&!e){var a=!0;t=void 0;for(o in s)for(r in s[o])i>1&&s[o][r]<0?a=!1:(angular.isUndefined(t)||s[o][r]>t)&&(t=s[o][r],e={scroll:o,element:r});a||(e=void 0,t=void 0)}return this.hitEdge=t>=0?e:void 0,t},this.getScrollOffset=function(){return this.hasTarget?this.$target[0].scrollTop:i()},this.getTargetHeight=function(){return this.hasTarget?this.$target[0].offsetHeight:n()},this.getTargetContentHeight=function(){return this.hasTarget?this.$target[0].scrollHeight-this.$target[0].clientHeight:n(!0)},this.getTargetScrollHeight=function(){return this.hasTarget?this.$target[0].scrollHeight-this.$target[0].clientHeight:s()},this.getElementTop=function(t){if(!t&&angular.isDefined(this.posCache.top))return this.posCache.top;var e=this.$element[0].getBoundingClientRect(),i=e.top+this.getScrollOffset();if(this.hasTarget){var s=this.$target[0].getBoundingClientRect();i-=s.top}return i},this.getElementBottom=function(t){return this.getElementTop(t)+this.$element[0].offsetHeight},this.cachePosition=function(){this.posCache.top=this.getElementTop(!0)},this.onScroll=function(){if(r.ready&&r.enabled){var t=r.scrollEdgeHit(),e=!1;if(t>=0?r.hit||(r.$element.hasClass(r.scrollpointClass)||r.$element.addClass(r.scrollpointClass),e=!0,r.hit=!0):((r.hit||angular.isUndefined(r.hit))&&(r.$element.hasClass(r.scrollpointClass)&&r.$element.removeClass(r.scrollpointClass),e=!0,r.hit=!1),r.cachePosition()),e&&r.actions)for(var i=0;i<r.actions.length;i++)r.actions[i](t,r.$element,r.hitEdge?r.hitEdge.scroll:void 0,r.hitEdge?r.hitEdge.element:void 0)}},this.reset=function(){e(function(){r.$element.removeClass(r.scrollpointClass),r.hit=void 0,r.hitEdge=void 0,r.cachePosition(),r.onScroll()})}},link:function(t,e,i,s){function n(){o.$target.on("scroll",o.onScroll),t.$on("$destroy",function(){o.$target.off("scroll",o.onScroll)})}var o=s[0],r=s[1],l=!1;o.setElement(e),o.setTarget(r?r.$element:null),i.$observe("uiScrollpoint",function(t){o.setScrollpoint(t),o.reset()}),i.$observe("uiScrollpointEnabled",function(e){e=t.$eval(e),e!=o.enabled&&o.reset(),o.enabled=e}),i.$observe("uiScrollpointAbsolute",function(e){e=t.$eval(e),e!=l&&(o.$target&&o.$target.off("scroll",o.onScroll),o.setTarget(!e&&r?r.$element:null),n(),o.reset()),l=e}),i.$observe("uiScrollpointAction",function(e){var i=t.$eval(e);i&&angular.isFunction(i)&&o.addAction(i)}),i.$observe("uiScrollpointClass",function(t){e.removeClass(o.scrollpointClass),o.setClass(t),o.reset()}),i.$observe("uiScrollpointEdge",function(e){if(e){var i=["top","bottom","view"];-1==i.indexOf(e)&&(e=t.$eval(e)),o.setEdges(e),o.reset()}}),n(),e.ready(function(){o.ready=!0,o.onScroll()}),t.$on("scrollpointShouldReset",o.reset)}}}]).directive("uiScrollpointTarget",[function(){return{controller:["$element",function(t){this.$element=t}]}}])}();
+/*!
+ * angular-ui-mask
+ * https://github.com/angular-ui/ui-mask
+ * Version: 1.8.3 - 2016-03-30T21:12:43.955Z
+ * License: MIT
  */
-angular.module('ui.highlight',[]).filter('highlight', function () {
-  'use strict';
-
-  return function (text, search, caseSensitive) {
-    if (text && (search || angular.isNumber(search))) {
-      text = text.toString();
-      search = search.toString();
-      if (caseSensitive) {
-        return text.split(search).join('<span class="ui-match">' + search + '</span>');
-      } else {
-        return text.replace(new RegExp(search, 'gi'), '<span class="ui-match">$&</span>');
-      }
-    } else {
-      return text;
-    }
-  };
-});
-
-// modeled after: angular-1.0.7/src/ng/directive/ngInclude.js
-angular.module('ui.include',[])
-.directive('uiInclude', ['$http', '$templateCache', '$anchorScroll', '$compile',
-                 function($http,   $templateCache,   $anchorScroll,   $compile) {
-  'use strict';
-
-  return {
-    restrict: 'ECA',
-    terminal: true,
-    compile: function(element, attr) {
-      var srcExp = attr.uiInclude || attr.src,
-          fragExp = attr.fragment || '',
-          onloadExp = attr.onload || '',
-          autoScrollExp = attr.autoscroll;
-
-      return function(scope, element) {
-        var changeCounter = 0,
-            childScope;
-
-        var clearContent = function() {
-          if (childScope) {
-            childScope.$destroy();
-            childScope = null;
-          }
-
-          element.html('');
-        };
-
-        function ngIncludeWatchAction() {
-          var thisChangeId = ++changeCounter;
-          var src = scope.$eval(srcExp);
-          var fragment = scope.$eval(fragExp);
-
-          if (src) {
-            $http.get(src, {cache: $templateCache}).success(function(response) {
-              if (thisChangeId !== changeCounter) { return; }
-
-              if (childScope) { childScope.$destroy(); }
-              childScope = scope.$new();
-
-              var contents;
-              if (fragment) {
-                contents = angular.element('<div/>').html(response).find(fragment);
-              }
-              else {
-                contents = angular.element('<div/>').html(response).contents();
-              }
-              element.html(contents);
-              $compile(contents)(childScope);
-
-              if (angular.isDefined(autoScrollExp) && (!autoScrollExp || scope.$eval(autoScrollExp))) {
-                $anchorScroll();
-              }
-
-              childScope.$emit('$includeContentLoaded');
-              scope.$eval(onloadExp);
-            }).error(function() {
-              if (thisChangeId === changeCounter) { clearContent(); }
-            });
-          } else { clearContent(); }
-        }
-
-        scope.$watch(fragExp, ngIncludeWatchAction);
-        scope.$watch(srcExp, ngIncludeWatchAction);
-      };
-    }
-  };
-}]);
-
-/**
- * Provides an easy way to toggle a checkboxes indeterminate property
- *
- * @example <input type="checkbox" ui-indeterminate="isUnkown">
+!function(){"use strict";angular.module("ui.mask",[]).value("uiMaskConfig",{maskDefinitions:{9:/\d/,A:/[a-zA-Z]/,"*":/[a-zA-Z0-9]/},clearOnBlur:!0,clearOnBlurPlaceholder:!1,escChar:"\\",eventsToHandle:["input","keyup","click","focus"],addDefaultPlaceholder:!0}).provider("uiMask.Config",function(){var e={};this.maskDefinitions=function(n){return e.maskDefinitions=n},this.clearOnBlur=function(n){return e.clearOnBlur=n},this.clearOnBlurPlaceholder=function(n){return e.clearOnBlurPlaceholder=n},this.eventsToHandle=function(n){return e.eventsToHandle=n},this.addDefaultPlaceholder=function(n){return e.addDefaultPlaceholder=n},this.$get=["uiMaskConfig",function(n){var t=n;for(var r in e)angular.isObject(e[r])&&!angular.isArray(e[r])?angular.extend(t[r],e[r]):t[r]=e[r];return t}]}).directive("uiMask",["uiMask.Config",function(e){function n(e){return e===document.activeElement&&(!document.hasFocus||document.hasFocus())&&!!(e.type||e.href||~e.tabIndex)}return{priority:100,require:"ngModel",restrict:"A",compile:function(){var t=e;return function(e,r,i,a){function u(e){return angular.isDefined(e)?($(e),q?(h(),d(),!0):f()):f()}function l(e){e&&(B=e,!q||0===r.val().length&&angular.isDefined(i.placeholder)||r.val(m(p(r.val()))))}function o(){return u(i.uiMask)}function c(e){return q?(H=p(e||""),_=v(H),a.$setValidity("mask",_),_&&H.length?m(H):void 0):e}function s(e){return q?(H=p(e||""),_=v(H),a.$viewValue=H.length?m(H):"",a.$setValidity("mask",_),_?J?a.$viewValue:H:void 0):e}function f(){return q=!1,g(),angular.isDefined(K)?r.attr("placeholder",K):r.removeAttr("placeholder"),angular.isDefined(W)?r.attr("maxlength",W):r.removeAttr("maxlength"),r.val(a.$modelValue),a.$viewValue=a.$modelValue,!1}function h(){H=N=p(a.$modelValue||""),R=F=m(H),_=v(H),i.maxlength&&r.attr("maxlength",2*A[A.length-1]),!K&&Q.addDefaultPlaceholder&&r.attr("placeholder",B);for(var e=a.$modelValue,n=a.$formatters.length;n--;)e=a.$formatters[n](e);a.$viewValue=e||"",a.$render()}function d(){I||(r.bind("blur",y),r.bind("mousedown mouseup",E),r.bind("keydown",O),r.bind(Q.eventsToHandle.join(" "),x),I=!0)}function g(){I&&(r.unbind("blur",y),r.unbind("mousedown",E),r.unbind("mouseup",E),r.unbind("keydown",O),r.unbind("input",x),r.unbind("keyup",x),r.unbind("click",x),r.unbind("focus",x),I=!1)}function v(e){return e.length?e.length>=j:!0}function p(e){var n,t,i="",a=r[0],u=S.slice(),l=z,o=l+C(a),c="";return e=e.toString(),n=0,t=e.length-B.length,angular.forEach(T,function(r){var i=r.position;i>=l&&o>i||(i>=l&&(i+=t),e.substring(i,i+r.value.length)===r.value&&(c+=e.slice(n,i),n=i+r.value.length))}),e=c+e.slice(n),angular.forEach(e.split(""),function(e){u.length&&u[0].test(e)&&(i+=e,u.shift())}),i}function m(e){var n="",t=A.slice();return angular.forEach(B.split(""),function(r,i){e.length&&i===t[0]?(n+=e.charAt(0)||"_",e=e.substr(1),t.shift()):n+=r}),n}function b(e){var n,t=angular.isDefined(i.uiMaskPlaceholder)?i.uiMaskPlaceholder:i.placeholder;return angular.isDefined(t)&&t[e]?t[e]:(n=angular.isDefined(i.uiMaskPlaceholderChar)&&i.uiMaskPlaceholderChar?i.uiMaskPlaceholderChar:"_","space"===n.toLowerCase()?" ":n[0])}function k(){var e,n,t=B.split("");A&&!isNaN(A[0])&&angular.forEach(A,function(e){t[e]="_"}),e=t.join(""),n=e.replace(/[_]+/g,"_").split("_"),n=n.filter(function(e){return""!==e});var r=0;return n.map(function(n){var t=e.indexOf(n,r);return r=t+1,{value:n,position:t}})}function $(e){var n=0;if(A=[],S=[],B="",angular.isString(e)){j=0;var t=!1,r=0,i=e.split(""),a=!1;angular.forEach(i,function(e,i){a?(a=!1,B+=e,n++):Q.escChar===e?a=!0:Q.maskDefinitions[e]?(A.push(n),B+=b(i-r),S.push(Q.maskDefinitions[e]),n++,t||j++,t=!1):"?"===e?(t=!0,r++):(B+=e,n++)})}A.push(A.slice().pop()+1),T=k(),q=A.length>1?!0:!1}function y(){(Q.clearOnBlur||Q.clearOnBlurPlaceholder&&0===H.length&&i.placeholder)&&(z=0,L=0,_&&0!==H.length||(R="",r.val(""),e.$apply(function(){a.$pristine||a.$setViewValue("")}))),H!==U&&w(r[0]),U=H}function w(e){var n;angular.isFunction(window.Event)&&!e.fireEvent?(n=new Event("change",{view:window,bubbles:!0,cancelable:!1}),e.dispatchEvent(n)):"createEvent"in document?(n=document.createEvent("HTMLEvents"),n.initEvent("change",!1,!0),e.dispatchEvent(n)):e.fireEvent&&e.fireEvent("onchange")}function E(e){"mousedown"===e.type?r.bind("mouseout",M):r.unbind("mouseout",M)}function M(){L=C(this),r.unbind("mouseout",M)}function O(e){var n=8===e.which,t=P(this)-1||0;if(n){for(;t>=0;){if(D(t)){V(this,t+1);break}t--}Z=-1===t}}function x(n){n=n||{};var t=n.which,i=n.type;if(16!==t&&91!==t){var u,l=r.val(),o=F,c=!1,s=p(l),f=N,h=P(this)||0,d=z||0,g=h-d,v=A[0],b=A[s.length]||A.slice().shift(),k=L||0,$=C(this)>0,y=k>0,w=l.length>o.length||k&&l.length>o.length-k,E=l.length<o.length||k&&l.length===o.length-k,M=t>=37&&40>=t&&n.shiftKey,O=37===t,x=8===t||"keyup"!==i&&E&&-1===g,S=46===t||"keyup"!==i&&E&&0===g&&!y,T=(O||x||"click"===i)&&h>v;if(L=C(this),!M&&(!$||"click"!==i&&"keyup"!==i&&"focus"!==i)){if(x&&Z)return r.val(B),e.$apply(function(){a.$setViewValue("")}),void V(this,d);if("input"===i&&E&&!y&&s===f){for(;x&&h>v&&!D(h);)h--;for(;S&&b>h&&-1===A.indexOf(h);)h++;var j=A.indexOf(h);s=s.substring(0,j)+s.substring(j+1),s!==f&&(c=!0)}for(u=m(s),F=u,N=s,!c&&l.length>u.length&&(c=!0),r.val(u),c&&e.$apply(function(){a.$setViewValue(u)}),w&&v>=h&&(h=v+1),T&&h--,h=h>b?b:v>h?v:h;!D(h)&&h>v&&b>h;)h+=T?-1:1;(T&&b>h||w&&!D(d))&&h++,z=h,V(this,h)}}}function D(e){return A.indexOf(e)>-1}function P(e){if(!e)return 0;if(void 0!==e.selectionStart)return e.selectionStart;if(document.selection&&n(r[0])){e.focus();var t=document.selection.createRange();return t.moveStart("character",e.value?-e.value.length:0),t.text.length}return 0}function V(e,t){if(!e)return 0;if(0!==e.offsetWidth&&0!==e.offsetHeight)if(e.setSelectionRange)n(r[0])&&(e.focus(),e.setSelectionRange(t,t));else if(e.createTextRange){var i=e.createTextRange();i.collapse(!0),i.moveEnd("character",t),i.moveStart("character",t),i.select()}}function C(e){return e?void 0!==e.selectionStart?e.selectionEnd-e.selectionStart:document.selection?document.selection.createRange().text.length:0:0}var A,S,B,T,j,H,R,_,F,N,z,L,Z,q=!1,I=!1,K=i.placeholder,W=i.maxlength,G=a.$isEmpty;a.$isEmpty=function(e){return G(q?p(e||""):e)};var J=!1;i.$observe("modelViewValue",function(e){"true"===e&&(J=!0)});var Q={};i.uiOptions?(Q=e.$eval("["+i.uiOptions+"]"),Q=angular.isObject(Q[0])?function(e,n){for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&(void 0===n[t]?n[t]=angular.copy(e[t]):angular.isObject(n[t])&&!angular.isArray(n[t])&&(n[t]=angular.extend({},e[t],n[t])));return n}(t,Q[0]):t):Q=t,i.$observe("uiMask",u),angular.isDefined(i.uiMaskPlaceholder)?i.$observe("uiMaskPlaceholder",l):i.$observe("placeholder",l),angular.isDefined(i.uiMaskPlaceholderChar)&&i.$observe("uiMaskPlaceholderChar",o),a.$formatters.unshift(c),a.$parsers.unshift(s);var U=r.val();r.bind("mousedown mouseup",E),Array.prototype.indexOf||(Array.prototype.indexOf=function(e){if(null===this)throw new TypeError;var n=Object(this),t=n.length>>>0;if(0===t)return-1;var r=0;if(arguments.length>1&&(r=Number(arguments[1]),r!==r?r=0:0!==r&&r!==1/0&&r!==-(1/0)&&(r=(r>0||-1)*Math.floor(Math.abs(r)))),r>=t)return-1;for(var i=r>=0?r:Math.max(t-Math.abs(r),0);t>i;i++)if(i in n&&n[i]===e)return i;return-1})}}}}])}();
+/*!
+ * angular-ui-validate
+ * https://github.com/angular-ui/ui-validate
+ * Version: 1.2.2 - 2015-11-28T04:00:20.151Z
+ * License: MIT
  */
-angular.module('ui.indeterminate',[]).directive('uiIndeterminate', [
-  function () {
-    'use strict';
-
-    return {
-      compile: function(tElm, tAttrs) {
-        if (!tAttrs.type || tAttrs.type.toLowerCase() !== 'checkbox') {
-          return angular.noop;
-        }
-
-        return function ($scope, elm, attrs) {
-          $scope.$watch(attrs.uiIndeterminate, function(newVal) {
-            elm[0].indeterminate = !!newVal;
-          });
-        };
-      }
-    };
-  }]);
-
-/**
- * Converts variable-esque naming conventions to something presentational, capitalized words separated by space.
- * @param {String} value The value to be parsed and prettified.
- * @param {String} [inflector] The inflector to use. Default: humanize.
- * @return {String}
- * @example {{ 'Here Is my_phoneNumber' | inflector:'humanize' }} => Here Is My Phone Number
- *          {{ 'Here Is my_phoneNumber' | inflector:'underscore' }} => here_is_my_phone_number
- *          {{ 'Here Is my_phoneNumber' | inflector:'variable' }} => hereIsMyPhoneNumber
+!function(){"use strict";angular.module("ui.validate",[]).directive("uiValidate",["$$uiValidateApplyWatch","$$uiValidateApplyWatchCollection",function(a,i){return{restrict:"A",require:"ngModel",link:function(t,n,l,e){var u,c=t.$eval(l.uiValidate);c&&(angular.isString(c)&&(c={validator:c}),angular.forEach(c,function(a,i){u=function(n,l){var u=t.$eval(a,{$value:n,$modelValue:n,$viewValue:l,$name:e.$name});return angular.isObject(u)&&angular.isFunction(u.then)?(u.then(function(){e.$setValidity(i,!0)},function(){e.$setValidity(i,!1)}),!0):!!u},e.$validators[i]=u}),l.uiValidateWatch&&a(t,e,t.$eval(l.uiValidateWatch),l.uiValidateWatchObjectEquality),l.uiValidateWatchCollection&&i(t,e,t.$eval(l.uiValidateWatchCollection)))}}}]).directive("uiValidateAsync",["$$uiValidateApplyWatch","$$uiValidateApplyWatchCollection","$timeout","$q",function(a,i,t,n){return{restrict:"A",require:"ngModel",link:function(t,l,e,u){var c,r=t.$eval(e.uiValidateAsync);r&&(angular.isString(r)&&(r={validatorAsync:r}),angular.forEach(r,function(a,i){c=function(i,l){var e=t.$eval(a,{$value:i,$modelValue:i,$viewValue:l,$name:u.$name});return angular.isObject(e)&&angular.isFunction(e.then)?e:n(function(a,i){setTimeout(function(){e?a():i()},0)})},u.$asyncValidators[i]=c}),e.uiValidateWatch&&a(t,u,t.$eval(e.uiValidateWatch),e.uiValidateWatchObjectEquality),e.uiValidateWatchCollection&&i(t,u,t.$eval(e.uiValidateWatchCollection)))}}}]).service("$$uiValidateApplyWatch",function(){return function(a,i,t,n){var l=function(){i.$validate()};angular.isString(t)?a.$watch(t,l,n):angular.isArray(t)?angular.forEach(t,function(i){a.$watch(i,l,n)}):angular.isObject(t)&&angular.forEach(t,function(i){angular.isString(i)&&a.$watch(i,l,n),angular.isArray(i)&&angular.forEach(i,function(i){a.$watch(i,l,n)})})}}).service("$$uiValidateApplyWatchCollection",function(){return function(a,i,t){var n=function(){i.$validate()};angular.isString(t)?a.$watchCollection(t,n):angular.isArray(t)?angular.forEach(t,function(i){a.$watchCollection(i,n)}):angular.isObject(t)&&angular.forEach(t,function(i){angular.isString(i)&&a.$watchCollection(i,n),angular.isArray(i)&&angular.forEach(i,function(i){a.$watchCollection(i,n)})})}})}();
+/*!
+ * angular-ui-indeterminate
+ * https://github.com/angular-ui/ui-indeterminate
+ * Version: 1.0.0 - 2015-06-30T09:28:55.152Z
+ * License: MIT
  */
-angular.module('ui.inflector',[]).filter('inflector', function () {
-  'use strict';
-
-  function tokenize(text) {
-    text = text.replace(/([A-Z])|([\-|\_])/g, function(_, $1) { return ' ' + ($1 || ''); });
-    return text.replace(/\s\s+/g, ' ').trim().toLowerCase().split(' ');
-  }
-
-  function capitalizeTokens(tokens) {
-    var result = [];
-    angular.forEach(tokens, function(token) {
-      result.push(token.charAt(0).toUpperCase() + token.substr(1));
-    });
-    return result;
-  }
-
-  var inflectors = {
-    humanize: function (value) {
-      return capitalizeTokens(tokenize(value)).join(' ');
-    },
-    underscore: function (value) {
-      return tokenize(value).join('_');
-    },
-    variable: function (value) {
-      value = tokenize(value);
-      value = value[0] + capitalizeTokens(value.slice(1)).join('');
-      return value;
-    }
-  };
-
-  return function (text, inflector) {
-    if (inflector !== false && angular.isString(text)) {
-      inflector = inflector || 'humanize';
-      return inflectors[inflector](text);
-    } else {
-      return text;
-    }
-  };
-});
-
-/**
- * General-purpose jQuery wrapper. Simply pass the plugin name as the expression.
- *
- * It is possible to specify a default set of parameters for each jQuery plugin.
- * Under the jq key, namespace each plugin by that which will be passed to ui-jq.
- * Unfortunately, at this time you can only pre-define the first parameter.
- * @example { jq : { datepicker : { showOn:'click' } } }
- *
- * @param ui-jq {string} The $elm.[pluginName]() to call.
- * @param [ui-options] {mixed} Expression to be evaluated and passed as options to the function
- *     Multiple parameters can be separated by commas
- * @param [ui-refresh] {expression} Watch expression and refire plugin on changes
- *
- * @example <input ui-jq="datepicker" ui-options="{showOn:'click'},secondParameter,thirdParameter" ui-refresh="iChange">
+!function(){"use strict";angular.module("ui.indeterminate",[]).directive("uiIndeterminate",[function(){return{compile:function(e,n){return n.type&&"checkbox"===n.type.toLowerCase()?function(e,n,t){e.$watch(t.uiIndeterminate,function(e){n[0].indeterminate=!!e})}:angular.noop}}}])}();
+/*!
+ * angular-ui-uploader
+ * https://github.com/angular-ui/ui-uploader
+ * Version: 1.1.3 - 2015-12-01T00:54:49.732Z
+ * License: MIT
  */
-angular.module('ui.jq',[]).
-  value('uiJqConfig',{}).
-  directive('uiJq', ['uiJqConfig', '$timeout', function uiJqInjectingFunction(uiJqConfig, $timeout) {
-  'use strict';
-
-
-  return {
-    restrict: 'A',
-    compile: function uiJqCompilingFunction(tElm, tAttrs) {
-
-      if (!angular.isFunction(tElm[tAttrs.uiJq])) {
-        throw new Error('ui-jq: The "' + tAttrs.uiJq + '" function does not exist');
-      }
-      var options = uiJqConfig && uiJqConfig[tAttrs.uiJq];
-
-      return function uiJqLinkingFunction(scope, elm, attrs) {
-
-        // If change compatibility is enabled, the form input's "change" event will trigger an "input" event
-        if (attrs.ngModel && elm.is('select,input,textarea')) {
-          elm.bind('change', function() {
-            elm.trigger('input');
-          });
-        }
-
-        function createLinkOptions(){
-          var linkOptions = [];
-
-          // If ui-options are passed, merge (or override) them onto global defaults and pass to the jQuery method
-          if (attrs.uiOptions) {
-            linkOptions = scope.$eval('[' + attrs.uiOptions + ']');
-            if (angular.isObject(options) && angular.isObject(linkOptions[0])) {
-              linkOptions[0] = angular.extend({}, options, linkOptions[0]);
-            }
-          } else if (options) {
-            linkOptions = [options];
-          }
-          return linkOptions;
-        }
-
-        // Call jQuery method and pass relevant options
-        function callPlugin() {
-          $timeout(function() {
-            elm[attrs.uiJq].apply(elm, createLinkOptions());
-          }, 0, false);
-        }
-
-        // If ui-refresh is used, re-fire the the method upon every change
-        if (attrs.uiRefresh) {
-          scope.$watch(attrs.uiRefresh, function() {
-            callPlugin();
-          });
-        }
-        callPlugin();
-      };
-    }
-  };
-}]);
-
-angular.module('ui.keypress',[]).
-factory('keypressHelper', ['$parse', function keypress($parse){
-  'use strict';
-
-  var keysByCode = {
-    8: 'backspace',
-    9: 'tab',
-    13: 'enter',
-    27: 'esc',
-    32: 'space',
-    33: 'pageup',
-    34: 'pagedown',
-    35: 'end',
-    36: 'home',
-    37: 'left',
-    38: 'up',
-    39: 'right',
-    40: 'down',
-    45: 'insert',
-    46: 'delete'
-  };
-
-  var capitaliseFirstLetter = function (string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  };
-
-  return function(mode, scope, elm, attrs) {
-    var params, combinations = [];
-    params = scope.$eval(attrs['ui'+capitaliseFirstLetter(mode)]);
-
-    // Prepare combinations for simple checking
-    angular.forEach(params, function (v, k) {
-      var combination, expression;
-      expression = $parse(v);
-
-      angular.forEach(k.split(' '), function(variation) {
-        combination = {
-          expression: expression,
-          keys: {}
-        };
-        angular.forEach(variation.split('-'), function (value) {
-          combination.keys[value] = true;
-        });
-        combinations.push(combination);
-      });
-    });
-
-    // Check only matching of pressed keys one of the conditions
-    elm.bind(mode, function (event) {
-      // No need to do that inside the cycle
-      var metaPressed = !!(event.metaKey && !event.ctrlKey);
-      var altPressed = !!event.altKey;
-      var ctrlPressed = !!event.ctrlKey;
-      var shiftPressed = !!event.shiftKey;
-      var keyCode = event.keyCode;
-
-      // normalize keycodes
-      if (mode === 'keypress' && !shiftPressed && keyCode >= 97 && keyCode <= 122) {
-        keyCode = keyCode - 32;
-      }
-
-      // Iterate over prepared combinations
-      angular.forEach(combinations, function (combination) {
-
-        var mainKeyPressed = combination.keys[keysByCode[keyCode]] || combination.keys[keyCode.toString()];
-
-        var metaRequired = !!combination.keys.meta;
-        var altRequired = !!combination.keys.alt;
-        var ctrlRequired = !!combination.keys.ctrl;
-        var shiftRequired = !!combination.keys.shift;
-
-        if (
-          mainKeyPressed &&
-          ( metaRequired === metaPressed ) &&
-          ( altRequired === altPressed ) &&
-          ( ctrlRequired === ctrlPressed ) &&
-          ( shiftRequired === shiftPressed )
-        ) {
-          // Run the function
-          scope.$apply(function () {
-            combination.expression(scope, { '$event': event });
-          });
-        }
-      });
-    });
-  };
-}]);
-
-/**
- * Bind one or more handlers to particular keys or their combination
- * @param hash {mixed} keyBindings Can be an object or string where keybinding expression of keys or keys combinations and AngularJS Exspressions are set. Object syntax: "{ keys1: expression1 [, keys2: expression2 [ , ... ]]}". String syntax: ""expression1 on keys1 [ and expression2 on keys2 [ and ... ]]"". Expression is an AngularJS Expression, and key(s) are dash-separated combinations of keys and modifiers (one or many, if any. Order does not matter). Supported modifiers are 'ctrl', 'shift', 'alt' and key can be used either via its keyCode (13 for Return) or name. Named keys are 'backspace', 'tab', 'enter', 'esc', 'space', 'pageup', 'pagedown', 'end', 'home', 'left', 'up', 'right', 'down', 'insert', 'delete'.
- * @example <input ui-keypress="{enter:'x = 1', 'ctrl-shift-space':'foo()', 'shift-13':'bar()'}" /> <input ui-keypress="foo = 2 on ctrl-13 and bar('hello') on shift-esc" />
- **/
-angular.module('ui.keypress').directive('uiKeydown', ['keypressHelper', function(keypressHelper){
-  'use strict';
-
-  return {
-    link: function (scope, elm, attrs) {
-      keypressHelper('keydown', scope, elm, attrs);
-    }
-  };
-}]);
-
-angular.module('ui.keypress').directive('uiKeypress', ['keypressHelper', function(keypressHelper){
-  'use strict';
-
-  return {
-    link: function (scope, elm, attrs) {
-      keypressHelper('keypress', scope, elm, attrs);
-    }
-  };
-}]);
-
-angular.module('ui.keypress').directive('uiKeyup', ['keypressHelper', function(keypressHelper){
-  'use strict';
-
-  return {
-    link: function (scope, elm, attrs) {
-      keypressHelper('keyup', scope, elm, attrs);
-    }
-  };
-}]);
-
-/*
- Attaches input mask onto input element
- */
-angular.module('ui.mask', [])
-  .value('uiMaskConfig', {
-    'maskDefinitions': {
-      '9': /\d/,
-      'A': /[a-zA-Z]/,
-      '*': /[a-zA-Z0-9]/
-    },
-    'clearOnBlur': true
-  })
-  .directive('uiMask', ['uiMaskConfig', '$parse', function (maskConfig, $parse) {
-    'use strict';
-
-    return {
-      priority: 100,
-      require: 'ngModel',
-      restrict: 'A',
-      compile: function uiMaskCompilingFunction(){
-        var options = maskConfig;
-
-        return function uiMaskLinkingFunction(scope, iElement, iAttrs, controller){
-          var maskProcessed = false, eventsBound = false,
-            maskCaretMap, maskPatterns, maskPlaceholder, maskComponents,
-          // Minimum required length of the value to be considered valid
-            minRequiredLength,
-            value, valueMasked, isValid,
-          // Vars for initializing/uninitializing
-            originalPlaceholder = iAttrs.placeholder,
-            originalMaxlength = iAttrs.maxlength,
-          // Vars used exclusively in eventHandler()
-            oldValue, oldValueUnmasked, oldCaretPosition, oldSelectionLength;
-
-          function initialize(maskAttr){
-            if (!angular.isDefined(maskAttr)) {
-              return uninitialize();
-            }
-            processRawMask(maskAttr);
-            if (!maskProcessed) {
-              return uninitialize();
-            }
-            initializeElement();
-            bindEventListeners();
-            return true;
-          }
-
-          function initPlaceholder(placeholderAttr) {
-            if(! angular.isDefined(placeholderAttr)) {
-              return;
-            }
-
-            maskPlaceholder = placeholderAttr;
-
-            // If the mask is processed, then we need to update the value
-            if (maskProcessed) {
-              eventHandler();
-            }
-          }
-
-          function formatter(fromModelValue){
-            if (!maskProcessed) {
-              return fromModelValue;
-            }
-            value = unmaskValue(fromModelValue || '');
-            isValid = validateValue(value);
-            controller.$setValidity('mask', isValid);
-            return isValid && value.length ? maskValue(value) : undefined;
-          }
-
-          function parser(fromViewValue){
-            if (!maskProcessed) {
-              return fromViewValue;
-            }
-            value = unmaskValue(fromViewValue || '');
-            isValid = validateValue(value);
-            // We have to set viewValue manually as the reformatting of the input
-            // value performed by eventHandler() doesn't happen until after
-            // this parser is called, which causes what the user sees in the input
-            // to be out-of-sync with what the controller's $viewValue is set to.
-            controller.$viewValue = value.length ? maskValue(value) : '';
-            controller.$setValidity('mask', isValid);
-            if (value === '' && iAttrs.required) {
-                controller.$setValidity('required', !controller.$error.required);
-            }
-            return isValid ? value : undefined;
-          }
-
-          var linkOptions = {};
-
-          if (iAttrs.uiOptions) {
-            linkOptions = scope.$eval('[' + iAttrs.uiOptions + ']');
-            if (angular.isObject(linkOptions[0])) {
-              // we can't use angular.copy nor angular.extend, they lack the power to do a deep merge
-              linkOptions = (function(original, current){
-                for(var i in original) {
-                  if (Object.prototype.hasOwnProperty.call(original, i)) {
-                    if (current[i] === undefined) {
-                      current[i] = angular.copy(original[i]);
-                    } else {
-                      angular.extend(current[i], original[i]);
-                    }
-                  }
-                }
-                return current;
-              })(options, linkOptions[0]);
-            }
-          } else {
-            linkOptions = options;
-          }
-
-          iAttrs.$observe('uiMask', initialize);
-          iAttrs.$observe('placeholder', initPlaceholder);
-          var modelViewValue = false;
-          iAttrs.$observe('modelViewValue', function(val) {
-            if(val === 'true') {
-              modelViewValue = true;
-            }
-          });
-          scope.$watch(iAttrs.ngModel, function(val) {
-            if(modelViewValue && val) {
-              var model = $parse(iAttrs.ngModel);
-              model.assign(scope, controller.$viewValue);
-            }
-          });
-          controller.$formatters.push(formatter);
-          controller.$parsers.push(parser);
-
-          function uninitialize(){
-            maskProcessed = false;
-            unbindEventListeners();
-
-            if (angular.isDefined(originalPlaceholder)) {
-              iElement.attr('placeholder', originalPlaceholder);
-            } else {
-              iElement.removeAttr('placeholder');
-            }
-
-            if (angular.isDefined(originalMaxlength)) {
-              iElement.attr('maxlength', originalMaxlength);
-            } else {
-              iElement.removeAttr('maxlength');
-            }
-
-            iElement.val(controller.$modelValue);
-            controller.$viewValue = controller.$modelValue;
-            return false;
-          }
-
-          function initializeElement(){
-            value = oldValueUnmasked = unmaskValue(controller.$viewValue || '');
-            valueMasked = oldValue = maskValue(value);
-            isValid = validateValue(value);
-            var viewValue = isValid && value.length ? valueMasked : '';
-            if (iAttrs.maxlength) { // Double maxlength to allow pasting new val at end of mask
-              iElement.attr('maxlength', maskCaretMap[maskCaretMap.length - 1] * 2);
-            }
-            iElement.attr('placeholder', maskPlaceholder);
-            iElement.val(viewValue);
-            controller.$viewValue = viewValue;
-            // Not using $setViewValue so we don't clobber the model value and dirty the form
-            // without any kind of user interaction.
-          }
-
-          function bindEventListeners(){
-            if (eventsBound) {
-              return;
-            }
-            iElement.bind('blur', blurHandler);
-            iElement.bind('mousedown mouseup', mouseDownUpHandler);
-            iElement.bind('input keyup click focus', eventHandler);
-            eventsBound = true;
-          }
-
-          function unbindEventListeners(){
-            if (!eventsBound) {
-              return;
-            }
-            iElement.unbind('blur', blurHandler);
-            iElement.unbind('mousedown', mouseDownUpHandler);
-            iElement.unbind('mouseup', mouseDownUpHandler);
-            iElement.unbind('input', eventHandler);
-            iElement.unbind('keyup', eventHandler);
-            iElement.unbind('click', eventHandler);
-            iElement.unbind('focus', eventHandler);
-            eventsBound = false;
-          }
-
-          function validateValue(value){
-            // Zero-length value validity is ngRequired's determination
-            return value.length ? value.length >= minRequiredLength : true;
-          }
-
-          function unmaskValue(value){
-            var valueUnmasked = '',
-              maskPatternsCopy = maskPatterns.slice();
-            // Preprocess by stripping mask components from value
-            value = value.toString();
-            angular.forEach(maskComponents, function (component){
-              value = value.replace(component, '');
-            });
-            angular.forEach(value.split(''), function (chr){
-              if (maskPatternsCopy.length && maskPatternsCopy[0].test(chr)) {
-                valueUnmasked += chr;
-                maskPatternsCopy.shift();
-              }
-            });
-            return valueUnmasked;
-          }
-
-          function maskValue(unmaskedValue){
-            var valueMasked = '',
-                maskCaretMapCopy = maskCaretMap.slice();
-
-            angular.forEach(maskPlaceholder.split(''), function (chr, i){
-              if (unmaskedValue.length && i === maskCaretMapCopy[0]) {
-                valueMasked  += unmaskedValue.charAt(0) || '_';
-                unmaskedValue = unmaskedValue.substr(1);
-                maskCaretMapCopy.shift();
-              }
-              else {
-                valueMasked += chr;
-              }
-            });
-            return valueMasked;
-          }
-
-          function getPlaceholderChar(i) {
-            var placeholder = iAttrs.placeholder;
-
-            if (typeof placeholder !== 'undefined' && placeholder[i]) {
-              return placeholder[i];
-            } else {
-              return '_';
-            }
-          }
-
-          // Generate array of mask components that will be stripped from a masked value
-          // before processing to prevent mask components from being added to the unmasked value.
-          // E.g., a mask pattern of '+7 9999' won't have the 7 bleed into the unmasked value.
-          // If a maskable char is followed by a mask char and has a mask
-          // char behind it, we'll split it into it's own component so if
-          // a user is aggressively deleting in the input and a char ahead
-          // of the maskable char gets deleted, we'll still be able to strip
-          // it in the unmaskValue() preprocessing.
-          function getMaskComponents() {
-            return maskPlaceholder.replace(/[_]+/g, '_').replace(/([^_]+)([a-zA-Z0-9])([^_])/g, '$1$2_$3').split('_');
-          }
-
-          function processRawMask(mask){
-            var characterCount = 0;
-
-            maskCaretMap    = [];
-            maskPatterns    = [];
-            maskPlaceholder = '';
-
-            if (typeof mask === 'string') {
-              minRequiredLength = 0;
-
-              var isOptional = false,
-                  numberOfOptionalCharacters = 0,
-                  splitMask  = mask.split('');
-
-              angular.forEach(splitMask, function (chr, i){
-                if (linkOptions.maskDefinitions[chr]) {
-
-                  maskCaretMap.push(characterCount);
-
-                  maskPlaceholder += getPlaceholderChar(i - numberOfOptionalCharacters);
-                  maskPatterns.push(linkOptions.maskDefinitions[chr]);
-
-                  characterCount++;
-                  if (!isOptional) {
-                    minRequiredLength++;
-                  }
-                }
-                else if (chr === '?') {
-                  isOptional = true;
-                  numberOfOptionalCharacters++;
-                }
-                else {
-                  maskPlaceholder += chr;
-                  characterCount++;
-                }
-              });
-            }
-            // Caret position immediately following last position is valid.
-            maskCaretMap.push(maskCaretMap.slice().pop() + 1);
-
-            maskComponents = getMaskComponents();
-            maskProcessed  = maskCaretMap.length > 1 ? true : false;
-          }
-
-          function blurHandler(){
-            if (linkOptions.clearOnBlur) {
-              oldCaretPosition = 0;
-              oldSelectionLength = 0;
-              if (!isValid || value.length === 0) {
-                valueMasked = '';
-                iElement.val('');
-                scope.$apply(function () {
-                  controller.$setViewValue('');
-                });
-              }
-            }
-          }
-
-          function mouseDownUpHandler(e){
-            if (e.type === 'mousedown') {
-              iElement.bind('mouseout', mouseoutHandler);
-            } else {
-              iElement.unbind('mouseout', mouseoutHandler);
-            }
-          }
-
-          iElement.bind('mousedown mouseup', mouseDownUpHandler);
-
-          function mouseoutHandler(){
-            /*jshint validthis: true */
-            oldSelectionLength = getSelectionLength(this);
-            iElement.unbind('mouseout', mouseoutHandler);
-          }
-
-          function eventHandler(e){
-            /*jshint validthis: true */
-            e = e || {};
-            // Allows more efficient minification
-            var eventWhich = e.which,
-              eventType = e.type;
-
-            // Prevent shift and ctrl from mucking with old values
-            if (eventWhich === 16 || eventWhich === 91) { return;}
-
-            var val = iElement.val(),
-              valOld = oldValue,
-              valMasked,
-              valUnmasked = unmaskValue(val),
-              valUnmaskedOld = oldValueUnmasked,
-              valAltered = false,
-
-              caretPos = getCaretPosition(this) || 0,
-              caretPosOld = oldCaretPosition || 0,
-              caretPosDelta = caretPos - caretPosOld,
-              caretPosMin = maskCaretMap[0],
-              caretPosMax = maskCaretMap[valUnmasked.length] || maskCaretMap.slice().shift(),
-
-              selectionLenOld = oldSelectionLength || 0,
-              isSelected = getSelectionLength(this) > 0,
-              wasSelected = selectionLenOld > 0,
-
-            // Case: Typing a character to overwrite a selection
-              isAddition = (val.length > valOld.length) || (selectionLenOld && val.length > valOld.length - selectionLenOld),
-            // Case: Delete and backspace behave identically on a selection
-              isDeletion = (val.length < valOld.length) || (selectionLenOld && val.length === valOld.length - selectionLenOld),
-              isSelection = (eventWhich >= 37 && eventWhich <= 40) && e.shiftKey, // Arrow key codes
-
-              isKeyLeftArrow = eventWhich === 37,
-            // Necessary due to "input" event not providing a key code
-              isKeyBackspace = eventWhich === 8 || (eventType !== 'keyup' && isDeletion && (caretPosDelta === -1)),
-              isKeyDelete = eventWhich === 46 || (eventType !== 'keyup' && isDeletion && (caretPosDelta === 0 ) && !wasSelected),
-
-            // Handles cases where caret is moved and placed in front of invalid maskCaretMap position. Logic below
-            // ensures that, on click or leftward caret placement, caret is moved leftward until directly right of
-            // non-mask character. Also applied to click since users are (arguably) more likely to backspace
-            // a character when clicking within a filled input.
-              caretBumpBack = (isKeyLeftArrow || isKeyBackspace || eventType === 'click') && caretPos > caretPosMin;
-
-            oldSelectionLength = getSelectionLength(this);
-
-            // These events don't require any action
-            if (isSelection || (isSelected && (eventType === 'click' || eventType === 'keyup'))) {
-              return;
-            }
-
-            // Value Handling
-            // ==============
-
-            // User attempted to delete but raw value was unaffected--correct this grievous offense
-            if ((eventType === 'input') && isDeletion && !wasSelected && valUnmasked === valUnmaskedOld) {
-              while (isKeyBackspace && caretPos > caretPosMin && !isValidCaretPosition(caretPos)) {
-                caretPos--;
-              }
-              while (isKeyDelete && caretPos < caretPosMax && maskCaretMap.indexOf(caretPos) === -1) {
-                caretPos++;
-              }
-              var charIndex = maskCaretMap.indexOf(caretPos);
-              // Strip out non-mask character that user would have deleted if mask hadn't been in the way.
-              valUnmasked = valUnmasked.substring(0, charIndex) + valUnmasked.substring(charIndex + 1);
-              valAltered = true;
-            }
-
-            // Update values
-            valMasked = maskValue(valUnmasked);
-
-            oldValue = valMasked;
-            oldValueUnmasked = valUnmasked;
-            iElement.val(valMasked);
-            if (valAltered) {
-              // We've altered the raw value after it's been $digest'ed, we need to $apply the new value.
-              scope.$apply(function (){
-                controller.$setViewValue(valUnmasked);
-              });
-            }
-
-            // Caret Repositioning
-            // ===================
-
-            // Ensure that typing always places caret ahead of typed character in cases where the first char of
-            // the input is a mask char and the caret is placed at the 0 position.
-            if (isAddition && (caretPos <= caretPosMin)) {
-              caretPos = caretPosMin + 1;
-            }
-
-            if (caretBumpBack) {
-              caretPos--;
-            }
-
-            // Make sure caret is within min and max position limits
-            caretPos = caretPos > caretPosMax ? caretPosMax : caretPos < caretPosMin ? caretPosMin : caretPos;
-
-            // Scoot the caret back or forth until it's in a non-mask position and within min/max position limits
-            while (!isValidCaretPosition(caretPos) && caretPos > caretPosMin && caretPos < caretPosMax) {
-              caretPos += caretBumpBack ? -1 : 1;
-            }
-
-            if ((caretBumpBack && caretPos < caretPosMax) || (isAddition && !isValidCaretPosition(caretPosOld))) {
-              caretPos++;
-            }
-            oldCaretPosition = caretPos;
-            setCaretPosition(this, caretPos);
-          }
-
-          function isValidCaretPosition(pos){ return maskCaretMap.indexOf(pos) > -1; }
-
-          function getCaretPosition(input){
-            if (!input) return 0;
-            if (input.selectionStart !== undefined) {
-              return input.selectionStart;
-            } else if (document.selection) {
-              // Curse you IE
-              input.focus();
-              var selection = document.selection.createRange();
-              selection.moveStart('character', input.value ? -input.value.length : 0);
-              return selection.text.length;
-            }
-            return 0;
-          }
-
-          function setCaretPosition(input, pos){
-            if (!input) return 0;
-            if (input.offsetWidth === 0 || input.offsetHeight === 0) {
-              return; // Input's hidden
-            }
-            if (input.setSelectionRange) {
-              input.focus();
-              input.setSelectionRange(pos, pos);
-            }
-            else if (input.createTextRange) {
-              // Curse you IE
-              var range = input.createTextRange();
-              range.collapse(true);
-              range.moveEnd('character', pos);
-              range.moveStart('character', pos);
-              range.select();
-            }
-          }
-
-          function getSelectionLength(input){
-            if (!input) return 0;
-            if (input.selectionStart !== undefined) {
-              return (input.selectionEnd - input.selectionStart);
-            }
-            if (document.selection) {
-              return (document.selection.createRange().text.length);
-            }
-            return 0;
-          }
-
-          // https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Array/indexOf
-          if (!Array.prototype.indexOf) {
-            Array.prototype.indexOf = function (searchElement /*, fromIndex */){
-              if (this === null) {
-                throw new TypeError();
-              }
-              var t = Object(this);
-              var len = t.length >>> 0;
-              if (len === 0) {
-                return -1;
-              }
-              var n = 0;
-              if (arguments.length > 1) {
-                n = Number(arguments[1]);
-                if (n !== n) { // shortcut for verifying if it's NaN
-                  n = 0;
-                } else if (n !== 0 && n !== Infinity && n !== -Infinity) {
-                  n = (n > 0 || -1) * Math.floor(Math.abs(n));
-                }
-              }
-              if (n >= len) {
-                return -1;
-              }
-              var k = n >= 0 ? n : Math.max(len - Math.abs(n), 0);
-              for (; k < len; k++) {
-                if (k in t && t[k] === searchElement) {
-                  return k;
-                }
-              }
-              return -1;
-            };
-          }
-
-        };
-      }
-    };
-  }
-]);
-
-/**
- * Add a clear button to form inputs to reset their value
- */
-angular.module('ui.reset',[]).value('uiResetConfig',null).directive('uiReset', ['uiResetConfig', function (uiResetConfig) {
-  'use strict';
-
-  var resetValue = null;
-  if (uiResetConfig !== undefined){
-      resetValue = uiResetConfig;
-  }
-  return {
-    require: 'ngModel',
-    link: function (scope, elm, attrs, ctrl) {
-      var aElement;
-      aElement = angular.element('<a class="ui-reset" />');
-      elm.wrap('<span class="ui-resetwrap" />').after(aElement);
-      aElement.bind('click', function (e) {
-        e.preventDefault();
-        scope.$apply(function () {
-          if (attrs.uiReset){
-            ctrl.$setViewValue(scope.$eval(attrs.uiReset));
-          }else{
-            ctrl.$setViewValue(resetValue);
-          }
-          ctrl.$render();
-        });
-      });
-    }
-  };
-}]);
-
-/**
- * Set a $uiRoute boolean to see if the current route matches
- */
-angular.module('ui.route', []).directive('uiRoute', ['$location', '$parse', function ($location, $parse) {
-  'use strict';
-
-  return {
-    restrict: 'AC',
-    scope: true,
-    compile: function(tElement, tAttrs) {
-      var useProperty;
-      if (tAttrs.uiRoute) {
-        useProperty = 'uiRoute';
-      } else if (tAttrs.ngHref) {
-        useProperty = 'ngHref';
-      } else if (tAttrs.href) {
-        useProperty = 'href';
-      } else {
-        throw new Error('uiRoute missing a route or href property on ' + tElement[0]);
-      }
-      return function ($scope, elm, attrs) {
-        var modelSetter = $parse(attrs.ngModel || attrs.routeModel || '$uiRoute').assign;
-        var watcher = angular.noop;
-
-        // Used by href and ngHref
-        function staticWatcher(newVal) {
-          var hash = newVal.indexOf('#');
-          if (hash > -1){
-            newVal = newVal.substr(hash + 1);
-          }
-          watcher = function watchHref() {
-            modelSetter($scope, ($location.path().indexOf(newVal) > -1));
-          };
-          watcher();
-        }
-        // Used by uiRoute
-        function regexWatcher(newVal) {
-          var hash = newVal.indexOf('#');
-          if (hash > -1){
-            newVal = newVal.substr(hash + 1);
-          }
-          watcher = function watchRegex() {
-            var regexp = new RegExp('^' + newVal + '$', ['i']);
-            modelSetter($scope, regexp.test($location.path()));
-          };
-          watcher();
-        }
-
-        switch (useProperty) {
-          case 'uiRoute':
-            // if uiRoute={{}} this will be undefined, otherwise it will have a value and $observe() never gets triggered
-            if (attrs.uiRoute){
-              regexWatcher(attrs.uiRoute);
-            }else{
-              attrs.$observe('uiRoute', regexWatcher);
-            }
-            break;
-          case 'ngHref':
-            // Setup watcher() every time ngHref changes
-            if (attrs.ngHref){
-              staticWatcher(attrs.ngHref);
-            }else{
-              attrs.$observe('ngHref', staticWatcher);
-            }
-            break;
-          case 'href':
-            // Setup watcher()
-            staticWatcher(attrs.href);
-        }
-
-        $scope.$on('$routeChangeSuccess', function(){
-          watcher();
-        });
-
-        //Added for compatibility with ui-router
-        $scope.$on('$stateChangeSuccess', function(){
-          watcher();
-        });
-      };
-    }
-  };
-}]);
-
-angular.module('ui.scroll.jqlite', ['ui.scroll']).service('jqLiteExtras', [
-  '$log', '$window', function(console, window) {
-    'use strict';
-
-    return {
-      registerFor: function(element) {
-        var convertToPx, css, getMeasurements, getStyle, getWidthHeight, isWindow, scrollTo;
-        css = angular.element.prototype.css;
-        element.prototype.css = function(name, value) {
-          var elem, self;
-          self = this;
-          elem = self[0];
-          if (!(!elem || elem.nodeType === 3 || elem.nodeType === 8 || !elem.style)) {
-            return css.call(self, name, value);
-          }
-        };
-        isWindow = function(obj) {
-          return obj && obj.document && obj.location && obj.alert && obj.setInterval;
-        };
-        scrollTo = function(self, direction, value) {
-          var elem, method, preserve, prop, _ref;
-          elem = self[0];
-          _ref = {
-            top: ['scrollTop', 'pageYOffset', 'scrollLeft'],
-            left: ['scrollLeft', 'pageXOffset', 'scrollTop']
-          }[direction], method = _ref[0], prop = _ref[1], preserve = _ref[2];
-          if (isWindow(elem)) {
-            if (angular.isDefined(value)) {
-              return elem.scrollTo(self[preserve].call(self), value);
-            } else {
-              if (prop in elem) {
-                return elem[prop];
-              } else {
-                return elem.document.documentElement[method];
-              }
-            }
-          } else {
-            if (angular.isDefined(value)) {
-              return elem[method] = value;
-            } else {
-              return elem[method];
-            }
-          }
-        };
-        if (window.getComputedStyle) {
-          getStyle = function(elem) {
-            return window.getComputedStyle(elem, null);
-          };
-          convertToPx = function(elem, value) {
-            return parseFloat(value);
-          };
-        } else {
-          getStyle = function(elem) {
-            return elem.currentStyle;
-          };
-          convertToPx = function(elem, value) {
-            var core_pnum, left, result, rnumnonpx, rs, rsLeft, style;
-            core_pnum = /[+-]?(?:\d*\.|)\d+(?:[eE][+-]?\d+|)/.source;
-            rnumnonpx = new RegExp('^(' + core_pnum + ')(?!px)[a-z%]+$', 'i');
-            if (!rnumnonpx.test(value)) {
-              return parseFloat(value);
-            } else {
-              style = elem.style;
-              left = style.left;
-              rs = elem.runtimeStyle;
-              rsLeft = rs && rs.left;
-              if (rs) {
-                rs.left = style.left;
-              }
-              style.left = value;
-              result = style.pixelLeft;
-              style.left = left;
-              if (rsLeft) {
-                rs.left = rsLeft;
-              }
-              return result;
-            }
-          };
-        }
-        getMeasurements = function(elem, measure) {
-          var base, borderA, borderB, computedMarginA, computedMarginB, computedStyle, dirA, dirB, marginA, marginB, paddingA, paddingB, _ref;
-          if (isWindow(elem)) {
-            base = document.documentElement[{
-              height: 'clientHeight',
-              width: 'clientWidth'
-            }[measure]];
-            return {
-              base: base,
-              padding: 0,
-              border: 0,
-              margin: 0
-            };
-          }
-          _ref = {
-            width: [elem.offsetWidth, 'Left', 'Right'],
-            height: [elem.offsetHeight, 'Top', 'Bottom']
-          }[measure], base = _ref[0], dirA = _ref[1], dirB = _ref[2];
-          computedStyle = getStyle(elem);
-          paddingA = convertToPx(elem, computedStyle['padding' + dirA]) || 0;
-          paddingB = convertToPx(elem, computedStyle['padding' + dirB]) || 0;
-          borderA = convertToPx(elem, computedStyle['border' + dirA + 'Width']) || 0;
-          borderB = convertToPx(elem, computedStyle['border' + dirB + 'Width']) || 0;
-          computedMarginA = computedStyle['margin' + dirA];
-          computedMarginB = computedStyle['margin' + dirB];
-          marginA = convertToPx(elem, computedMarginA) || 0;
-          marginB = convertToPx(elem, computedMarginB) || 0;
-          return {
-            base: base,
-            padding: paddingA + paddingB,
-            border: borderA + borderB,
-            margin: marginA + marginB
-          };
-        };
-        getWidthHeight = function(elem, direction, measure) {
-          var computedStyle, measurements, result;
-          measurements = getMeasurements(elem, direction);
-          if (measurements.base > 0) {
-            return {
-              base: measurements.base - measurements.padding - measurements.border,
-              outer: measurements.base,
-              outerfull: measurements.base + measurements.margin
-            }[measure];
-          } else {
-            computedStyle = getStyle(elem);
-            result = computedStyle[direction];
-            if (result < 0 || result === null) {
-              result = elem.style[direction] || 0;
-            }
-            result = parseFloat(result) || 0;
-            return {
-              base: result - measurements.padding - measurements.border,
-              outer: result,
-              outerfull: result + measurements.padding + measurements.border + measurements.margin
-            }[measure];
-          }
-        };
-        return angular.forEach({
-          before: function(newElem) {
-            var children, elem, i, parent, self, _i, _ref;
-            self = this;
-            elem = self[0];
-            parent = self.parent();
-            children = parent.contents();
-            if (children[0] === elem) {
-              return parent.prepend(newElem);
-            } else {
-              for (i = _i = 1, _ref = children.length - 1; 1 <= _ref ? _i <= _ref : _i >= _ref; i = 1 <= _ref ? ++_i : --_i) {
-                if (children[i] === elem) {
-                  angular.element(children[i - 1]).after(newElem);
-                  return;
-                }
-              }
-              throw new Error('invalid DOM structure ' + elem.outerHTML);
-            }
-          },
-          height: function(value) {
-            var self;
-            self = this;
-            if (angular.isDefined(value)) {
-              if (angular.isNumber(value)) {
-                value = value + 'px';
-              }
-              return css.call(self, 'height', value);
-            } else {
-              return getWidthHeight(this[0], 'height', 'base');
-            }
-          },
-          outerHeight: function(option) {
-            return getWidthHeight(this[0], 'height', option ? 'outerfull' : 'outer');
-          },
-          /*
-          UIScroller no longer relies on jQuery method offset. The jQLite implementation of the method
-          is kept here just for the reference. Also the offset setter method was never implemented
-          */
-
-          offset: function(value) {
-            var box, doc, docElem, elem, self, win;
-            self = this;
-            if (arguments.length) {
-              if (value === void 0) {
-                return self;
-              } else {
-                throw new Error('offset setter method is not implemented');
-              }
-            }
-            box = {
-              top: 0,
-              left: 0
-            };
-            elem = self[0];
-            doc = elem && elem.ownerDocument;
-            if (!doc) {
-              return;
-            }
-            docElem = doc.documentElement;
-            if (elem.getBoundingClientRect != null) {
-              box = elem.getBoundingClientRect();
-            }
-            win = doc.defaultView || doc.parentWindow;
-            return {
-              top: box.top + (win.pageYOffset || docElem.scrollTop) - (docElem.clientTop || 0),
-              left: box.left + (win.pageXOffset || docElem.scrollLeft) - (docElem.clientLeft || 0)
-            };
-          },
-          scrollTop: function(value) {
-            return scrollTo(this, 'top', value);
-          },
-          scrollLeft: function(value) {
-            return scrollTo(this, 'left', value);
-          }
-        }, function(value, key) {
-          if (!element.prototype[key]) {
-            return element.prototype[key] = value;
-          }
-        });
-      }
-    };
-  }
-]).run([
-  '$log', '$window', 'jqLiteExtras', function(console, window, jqLiteExtras) {
-    'use strict';
-
-    if (!window.jQuery) {
-      return jqLiteExtras.registerFor(angular.element);
-    }
-  }
-]);
-
-/*
-//# sourceURL=src/scripts/ui-scroll-jqlite.js
-*/
-
-
-/*
- globals: angular, window
-
- List of used element methods available in JQuery but not in JQuery Lite
-
- element.before(elem)
- element.height()
- element.outerHeight(true)
- element.height(value) = only for Top/Bottom padding elements
- element.scrollTop()
- element.scrollTop(value)
- */
-
-angular.module('ui.scroll', []).directive('uiScrollViewport', [
-  '$log', function() {
-    'use strict';
-
-    return {
-      controller: [
-        '$scope', '$element', function(scope, element) {
-          this.viewport = element;
-          return this;
-        }
-      ]
-    };
-  }
-]).directive('uiScroll', [
-  '$log', '$injector', '$rootScope', '$timeout', function(console, $injector, $rootScope, $timeout) {
-    'use strict';
-
-    return {
-      require: ['?^uiScrollViewport'],
-      transclude: 'element',
-      priority: 1000,
-      terminal: true,
-      compile: function(elementTemplate, attr, linker) {
-        return function($scope, element, $attr, controllers) {
-          var adapter, adapterOnScope, adjustBuffer, adjustRowHeight, applyUpdate, bof, bottomVisiblePos, buffer, bufferPadding, bufferSize, builder, clipBottom, clipTop, datasource, datasourceName, doAdjustment, doDelete, doInsert, doUpdate, enqueueFetch, eof, eventListener, fetch, finalize, first, getValueChain, hideElementBeforeAppend, insert, isDatasourceValid, itemName, loading, log, match, next, pending, reload, removeFromBuffer, resizeAndScrollHandler, ridActual, scrollHeight, setValueChain, shouldLoadBottom, shouldLoadTop, showElementAfterRender, topVisible, topVisiblePos, viewport, viewportScope, wheelHandler;
-          log = console.debug || console.log;
-          match = $attr.uiScroll.match(/^\s*(\w+)\s+in\s+([\w\.]+)\s*$/);
-          if (!match) {
-            throw new Error('Expected uiScroll in form of \'_item_ in _datasource_\' but got \'' + $attr.uiScroll + '\'');
-          }
-          itemName = match[1];
-          datasourceName = match[2];
-          getValueChain = function(targetScope, target) {
-            var chain;
-            if (!targetScope) {
-              return;
-            }
-            chain = target.match(/^([\w]+)\.(.+)$/);
-            if (!chain || chain.length !== 3) {
-              return targetScope[target];
-            }
-            return getValueChain(targetScope[chain[1]], chain[2]);
-          };
-          setValueChain = function(targetScope, target, value, doNotSet) {
-            var chain;
-            if (!targetScope || !target) {
-              return;
-            }
-            if (!(chain = target.match(/^([\w]+)\.(.+)$/))) {
-              if (target.indexOf('.') !== -1) {
-                return;
-              }
-            }
-            if (!chain || chain.length !== 3) {
-              if (!angular.isObject(targetScope[target]) && !doNotSet) {
-                return targetScope[target] = value;
-              }
-              return targetScope[target] = value;
-            }
-            if (!angular.isObject(targetScope[chain[1]]) && !doNotSet) {
-              targetScope[chain[1]] = {};
-            }
-            return setValueChain(targetScope[chain[1]], chain[2], value, doNotSet);
-          };
-          datasource = getValueChain($scope, datasourceName);
-          isDatasourceValid = function() {
-            return angular.isObject(datasource) && typeof datasource.get === 'function';
-          };
-          if (!isDatasourceValid()) {
-            datasource = $injector.get(datasourceName);
-            if (!isDatasourceValid()) {
-              throw new Error('' + datasourceName + ' is not a valid datasource');
-            }
-          }
-          bufferSize = Math.max(3, +$attr.bufferSize || 10);
-          bufferPadding = function() {
-            return viewport.outerHeight() * Math.max(0.1, +$attr.padding || 0.1);
-          };
-          scrollHeight = function(elem) {
-            var _ref;
-            return (_ref = elem[0].scrollHeight) != null ? _ref : elem[0].document.documentElement.scrollHeight;
-          };
-          builder = null;
-          linker($scope.$new(), function(template) {
-            var bottomPadding, createPadding, padding, repeaterType, topPadding, viewport;
-            repeaterType = template[0].localName;
-            if (repeaterType === 'dl') {
-              throw new Error('ui-scroll directive does not support <' + template[0].localName + '> as a repeating tag: ' + template[0].outerHTML);
-            }
-            if (repeaterType !== 'li' && repeaterType !== 'tr') {
-              repeaterType = 'div';
-            }
-            viewport = controllers[0] && controllers[0].viewport ? controllers[0].viewport : angular.element(window);
-            viewport.css({
-              'overflow-y': 'auto',
-              'display': 'block'
-            });
-            padding = function(repeaterType) {
-              var div, result, table;
-              switch (repeaterType) {
-                case 'tr':
-                  table = angular.element('<table><tr><td><div></div></td></tr></table>');
-                  div = table.find('div');
-                  result = table.find('tr');
-                  result.paddingHeight = function() {
-                    return div.height.apply(div, arguments);
-                  };
-                  return result;
-                default:
-                  result = angular.element('<' + repeaterType + '></' + repeaterType + '>');
-                  result.paddingHeight = result.height;
-                  return result;
-              }
-            };
-            createPadding = function(padding, element, direction) {
-              element[{
-                top: 'before',
-                bottom: 'after'
-              }[direction]](padding);
-              return {
-                paddingHeight: function() {
-                  return padding.paddingHeight.apply(padding, arguments);
-                },
-                insert: function(element) {
-                  return padding[{
-                    top: 'after',
-                    bottom: 'before'
-                  }[direction]](element);
-                }
-              };
-            };
-            topPadding = createPadding(padding(repeaterType), element, 'top');
-            bottomPadding = createPadding(padding(repeaterType), element, 'bottom');
-            $scope.$on('$destroy', template.remove);
-            return builder = {
-              viewport: viewport,
-              topPadding: topPadding.paddingHeight,
-              bottomPadding: bottomPadding.paddingHeight,
-              append: bottomPadding.insert,
-              prepend: topPadding.insert,
-              bottomDataPos: function() {
-                return scrollHeight(viewport) - bottomPadding.paddingHeight();
-              },
-              topDataPos: function() {
-                return topPadding.paddingHeight();
-              }
-            };
-          });
-          viewport = builder.viewport;
-          viewportScope = viewport.scope() || $rootScope;
-          topVisible = function(item) {
-            adapter.topVisible = item.scope[itemName];
-            adapter.topVisibleElement = item.element;
-            adapter.topVisibleScope = item.scope;
-            if ($attr.topVisible) {
-              setValueChain(viewportScope, $attr.topVisible, adapter.topVisible);
-            }
-            if ($attr.topVisibleElement) {
-              setValueChain(viewportScope, $attr.topVisibleElement, adapter.topVisibleElement);
-            }
-            if ($attr.topVisibleScope) {
-              setValueChain(viewportScope, $attr.topVisibleScope, adapter.topVisibleScope);
-            }
-            if (typeof datasource.topVisible === 'function') {
-              return datasource.topVisible(item);
-            }
-          };
-          loading = function(value) {
-            adapter.isLoading = value;
-            if ($attr.isLoading) {
-              setValueChain($scope, $attr.isLoading, value);
-            }
-            if (typeof datasource.loading === 'function') {
-              return datasource.loading(value);
-            }
-          };
-          ridActual = 0;
-          first = 1;
-          next = 1;
-          buffer = [];
-          pending = [];
-          eof = false;
-          bof = false;
-          removeFromBuffer = function(start, stop) {
-            var i, _i;
-            for (i = _i = start; start <= stop ? _i < stop : _i > stop; i = start <= stop ? ++_i : --_i) {
-              buffer[i].scope.$destroy();
-              buffer[i].element.remove();
-            }
-            return buffer.splice(start, stop - start);
-          };
-          reload = function() {
-            ridActual++;
-            first = 1;
-            next = 1;
-            removeFromBuffer(0, buffer.length);
-            builder.topPadding(0);
-            builder.bottomPadding(0);
-            pending = [];
-            eof = false;
-            bof = false;
-            return adjustBuffer(ridActual);
-          };
-          bottomVisiblePos = function() {
-            return viewport.scrollTop() + viewport.outerHeight();
-          };
-          topVisiblePos = function() {
-            return viewport.scrollTop();
-          };
-          shouldLoadBottom = function() {
-            return !eof && builder.bottomDataPos() < bottomVisiblePos() + bufferPadding();
-          };
-          clipBottom = function() {
-            var bottomHeight, i, item, itemHeight, itemTop, newRow, overage, rowTop, _i, _ref;
-            bottomHeight = 0;
-            overage = 0;
-            for (i = _i = _ref = buffer.length - 1; _ref <= 0 ? _i <= 0 : _i >= 0; i = _ref <= 0 ? ++_i : --_i) {
-              item = buffer[i];
-              itemTop = item.element.offset().top;
-              newRow = rowTop !== itemTop;
-              rowTop = itemTop;
-              if (newRow) {
-                itemHeight = item.element.outerHeight(true);
-              }
-              if (builder.bottomDataPos() - bottomHeight - itemHeight > bottomVisiblePos() + bufferPadding()) {
-                if (newRow) {
-                  bottomHeight += itemHeight;
-                }
-                overage++;
-                eof = false;
-              } else {
-                if (newRow) {
-                  break;
-                }
-                overage++;
-              }
-            }
-            if (overage > 0) {
-              builder.bottomPadding(builder.bottomPadding() + bottomHeight);
-              removeFromBuffer(buffer.length - overage, buffer.length);
-              return next -= overage;
-            }
-          };
-          shouldLoadTop = function() {
-            return !bof && (builder.topDataPos() > topVisiblePos() - bufferPadding());
-          };
-          clipTop = function() {
-            var item, itemHeight, itemTop, newRow, overage, rowTop, topHeight, _i, _len;
-            topHeight = 0;
-            overage = 0;
-            for (_i = 0, _len = buffer.length; _i < _len; _i++) {
-              item = buffer[_i];
-              itemTop = item.element.offset().top;
-              newRow = rowTop !== itemTop;
-              rowTop = itemTop;
-              if (newRow) {
-                itemHeight = item.element.outerHeight(true);
-              }
-              if (builder.topDataPos() + topHeight + itemHeight < topVisiblePos() - bufferPadding()) {
-                if (newRow) {
-                  topHeight += itemHeight;
-                }
-                overage++;
-                bof = false;
-              } else {
-                if (newRow) {
-                  break;
-                }
-                overage++;
-              }
-            }
-            if (overage > 0) {
-              builder.topPadding(builder.topPadding() + topHeight);
-              removeFromBuffer(0, overage);
-              return first += overage;
-            }
-          };
-          enqueueFetch = function(rid, direction) {
-            if (!adapter.isLoading) {
-              loading(true);
-            }
-            if (pending.push(direction) === 1) {
-              return fetch(rid);
-            }
-          };
-          hideElementBeforeAppend = function(element) {
-            element.displayTemp = element.css('display');
-            return element.css('display', 'none');
-          };
-          showElementAfterRender = function(element) {
-            if (element.hasOwnProperty('displayTemp')) {
-              return element.css('display', element.displayTemp);
-            }
-          };
-          insert = function(index, item) {
-            var itemScope, toBeAppended, wrapper;
-            itemScope = $scope.$new();
-            itemScope[itemName] = item;
-            toBeAppended = index > first;
-            itemScope.$index = index;
-            if (toBeAppended) {
-              itemScope.$index--;
-            }
-            wrapper = {
-              scope: itemScope
-            };
-            linker(itemScope, function(clone) {
-              wrapper.element = clone;
-              if (toBeAppended) {
-                if (index === next) {
-                  hideElementBeforeAppend(clone);
-                  builder.append(clone);
-                  return buffer.push(wrapper);
-                } else {
-                  buffer[index - first].element.after(clone);
-                  return buffer.splice(index - first + 1, 0, wrapper);
-                }
-              } else {
-                hideElementBeforeAppend(clone);
-                builder.prepend(clone);
-                return buffer.unshift(wrapper);
-              }
-            });
-            return {
-              appended: toBeAppended,
-              wrapper: wrapper
-            };
-          };
-          adjustRowHeight = function(appended, wrapper) {
-            var newHeight;
-            if (appended) {
-              return builder.bottomPadding(Math.max(0, builder.bottomPadding() - wrapper.element.outerHeight(true)));
-            } else {
-              newHeight = builder.topPadding() - wrapper.element.outerHeight(true);
-              if (newHeight >= 0) {
-                return builder.topPadding(newHeight);
-              } else {
-                return viewport.scrollTop(viewport.scrollTop() + wrapper.element.outerHeight(true));
-              }
-            }
-          };
-          doAdjustment = function(rid, finalize) {
-            var item, itemHeight, itemTop, newRow, rowTop, topHeight, _i, _len, _results;
-            if (shouldLoadBottom()) {
-              enqueueFetch(rid, true);
-            } else {
-              if (shouldLoadTop()) {
-                enqueueFetch(rid, false);
-              }
-            }
-            if (finalize) {
-              finalize(rid);
-            }
-            if (pending.length === 0) {
-              topHeight = 0;
-              _results = [];
-              for (_i = 0, _len = buffer.length; _i < _len; _i++) {
-                item = buffer[_i];
-                itemTop = item.element.offset().top;
-                newRow = rowTop !== itemTop;
-                rowTop = itemTop;
-                if (newRow) {
-                  itemHeight = item.element.outerHeight(true);
-                }
-                if (newRow && (builder.topDataPos() + topHeight + itemHeight < topVisiblePos())) {
-                  _results.push(topHeight += itemHeight);
-                } else {
-                  if (newRow) {
-                    topVisible(item);
-                  }
-                  break;
-                }
-              }
-              return _results;
-            }
-          };
-          adjustBuffer = function(rid, newItems, finalize) {
-            if (newItems && newItems.length) {
-              return $timeout(function() {
-                var elt, itemTop, row, rowTop, rows, _i, _j, _len, _len1;
-                rows = [];
-                for (_i = 0, _len = newItems.length; _i < _len; _i++) {
-                  row = newItems[_i];
-                  elt = row.wrapper.element;
-                  showElementAfterRender(elt);
-                  itemTop = elt.offset().top;
-                  if (rowTop !== itemTop) {
-                    rows.push(row);
-                    rowTop = itemTop;
-                  }
-                }
-                for (_j = 0, _len1 = rows.length; _j < _len1; _j++) {
-                  row = rows[_j];
-                  adjustRowHeight(row.appended, row.wrapper);
-                }
-                return doAdjustment(rid, finalize);
-              });
-            } else {
-              return doAdjustment(rid, finalize);
-            }
-          };
-          finalize = function(rid, newItems) {
-            return adjustBuffer(rid, newItems, function() {
-              pending.shift();
-              if (pending.length === 0) {
-                return loading(false);
-              } else {
-                return fetch(rid);
-              }
-            });
-          };
-          fetch = function(rid) {
-            var direction;
-            direction = pending[0];
-            if (direction) {
-              if (buffer.length && !shouldLoadBottom()) {
-                return finalize(rid);
-              } else {
-                return datasource.get(next, bufferSize, function(result) {
-                  var item, newItems, _i, _len;
-                  if ((rid && rid !== ridActual) || $scope.$$destroyed) {
-                    return;
-                  }
-                  newItems = [];
-                  if (result.length < bufferSize) {
-                    eof = true;
-                    builder.bottomPadding(0);
-                  }
-                  if (result.length > 0) {
-                    clipTop();
-                    for (_i = 0, _len = result.length; _i < _len; _i++) {
-                      item = result[_i];
-                      newItems.push(insert(++next, item));
-                    }
-                  }
-                  return finalize(rid, newItems);
-                });
-              }
-            } else {
-              if (buffer.length && !shouldLoadTop()) {
-                return finalize(rid);
-              } else {
-                return datasource.get(first - bufferSize, bufferSize, function(result) {
-                  var i, newItems, _i, _ref;
-                  if ((rid && rid !== ridActual) || $scope.$$destroyed) {
-                    return;
-                  }
-                  newItems = [];
-                  if (result.length < bufferSize) {
-                    bof = true;
-                    builder.topPadding(0);
-                  }
-                  if (result.length > 0) {
-                    if (buffer.length) {
-                      clipBottom();
-                    }
-                    for (i = _i = _ref = result.length - 1; _ref <= 0 ? _i <= 0 : _i >= 0; i = _ref <= 0 ? ++_i : --_i) {
-                      newItems.unshift(insert(--first, result[i]));
-                    }
-                  }
-                  return finalize(rid, newItems);
-                });
-              }
-            }
-          };
-          resizeAndScrollHandler = function() {
-            if (!$rootScope.$$phase && !adapter.isLoading) {
-              adjustBuffer();
-              return $scope.$apply();
-            }
-          };
-          wheelHandler = function(event) {
-            var scrollTop, yMax;
-            scrollTop = viewport[0].scrollTop;
-            yMax = viewport[0].scrollHeight - viewport[0].clientHeight;
-            if ((scrollTop === 0 && !bof) || (scrollTop === yMax && !eof)) {
-              return event.preventDefault();
-            }
-          };
-          viewport.bind('resize', resizeAndScrollHandler);
-          viewport.bind('scroll', resizeAndScrollHandler);
-          viewport.bind('mousewheel', wheelHandler);
-          $scope.$watch(datasource.revision, reload);
-          if (datasource.scope) {
-            eventListener = datasource.scope.$new();
-          } else {
-            eventListener = $scope.$new();
-          }
-          $scope.$on('$destroy', function() {
-            var item, _i, _len;
-            for (_i = 0, _len = buffer.length; _i < _len; _i++) {
-              item = buffer[_i];
-              item.scope.$destroy();
-              item.element.remove();
-            }
-            viewport.unbind('resize', resizeAndScrollHandler);
-            viewport.unbind('scroll', resizeAndScrollHandler);
-            return viewport.unbind('mousewheel', wheelHandler);
-          });
-          adapter = {};
-          adapter.isLoading = false;
-          applyUpdate = function(wrapper, newItems) {
-            var i, inserted, item, ndx, newItem, oldItemNdx, _i, _j, _k, _len, _len1, _len2;
-            inserted = [];
-            if (angular.isArray(newItems)) {
-              if (newItems.length) {
-                if (newItems.length === 1 && newItems[0] === wrapper.scope[itemName]) {
-                  return inserted;
-                } else {
-                  ndx = wrapper.scope.$index;
-                  if (ndx > first) {
-                    oldItemNdx = ndx - first;
-                  } else {
-                    oldItemNdx = 1;
-                  }
-                  for (i = _i = 0, _len = newItems.length; _i < _len; i = ++_i) {
-                    newItem = newItems[i];
-                    inserted.push(insert(ndx + i, newItem));
-                  }
-                  removeFromBuffer(oldItemNdx, oldItemNdx + 1);
-                  for (i = _j = 0, _len1 = buffer.length; _j < _len1; i = ++_j) {
-                    item = buffer[i];
-                    item.scope.$index = first + i;
-                  }
-                }
-              } else {
-                removeFromBuffer(wrapper.scope.$index - first, wrapper.scope.$index - first + 1);
-                next--;
-                for (i = _k = 0, _len2 = buffer.length; _k < _len2; i = ++_k) {
-                  item = buffer[i];
-                  item.scope.$index = first + i;
-                }
-              }
-            }
-            return inserted;
-          };
-          adapter.applyUpdates = function(arg1, arg2) {
-            var inserted, wrapper, _i, _len, _ref, _ref1;
-            inserted = [];
-            ridActual++;
-            if (angular.isFunction(arg1)) {
-              _ref = buffer.slice(0);
-              for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-                wrapper = _ref[_i];
-                inserted.concat(inserted, applyUpdate(wrapper, arg1(wrapper.scope[itemName], wrapper.scope, wrapper.element)));
-              }
-            } else {
-              if (arg1 % 1 === 0) {
-                if ((0 <= (_ref1 = arg1 - first - 1) && _ref1 < buffer.length)) {
-                  inserted = applyUpdate(buffer[arg1 - first], arg2);
-                }
-              } else {
-                throw new Error('applyUpdates - ' + arg1 + ' is not a valid index or outside of range');
-              }
-            }
-            return adjustBuffer(ridActual, inserted);
-          };
-          if ($attr.adapter) {
-            adapterOnScope = getValueChain($scope, $attr.adapter);
-            if (!adapterOnScope) {
-              setValueChain($scope, $attr.adapter, {});
-              adapterOnScope = getValueChain($scope, $attr.adapter);
-            }
-            angular.extend(adapterOnScope, adapter);
-            adapter = adapterOnScope;
-          }
-          doUpdate = function(locator, newItem) {
-            var wrapper, _fn, _i, _len, _ref;
-            if (angular.isFunction(locator)) {
-              _fn = function(wrapper) {
-                return locator(wrapper.scope);
-              };
-              for (_i = 0, _len = buffer.length; _i < _len; _i++) {
-                wrapper = buffer[_i];
-                _fn(wrapper);
-              }
-            } else {
-              if ((0 <= (_ref = locator - first - 1) && _ref < buffer.length)) {
-                buffer[locator - first - 1].scope[itemName] = newItem;
-              }
-            }
-            return null;
-          };
-          doDelete = function(locator) {
-            var i, item, temp, wrapper, _fn, _i, _j, _k, _len, _len1, _len2, _ref;
-            if (angular.isFunction(locator)) {
-              temp = [];
-              for (_i = 0, _len = buffer.length; _i < _len; _i++) {
-                item = buffer[_i];
-                temp.unshift(item);
-              }
-              _fn = function(wrapper) {
-                if (locator(wrapper.scope)) {
-                  removeFromBuffer(temp.length - 1 - i, temp.length - i);
-                  return next--;
-                }
-              };
-              for (i = _j = 0, _len1 = temp.length; _j < _len1; i = ++_j) {
-                wrapper = temp[i];
-                _fn(wrapper);
-              }
-            } else {
-              if ((0 <= (_ref = locator - first - 1) && _ref < buffer.length)) {
-                removeFromBuffer(locator - first - 1, locator - first);
-                next--;
-              }
-            }
-            for (i = _k = 0, _len2 = buffer.length; _k < _len2; i = ++_k) {
-              item = buffer[i];
-              item.scope.$index = first + i;
-            }
-            return adjustBuffer();
-          };
-          doInsert = function(locator, item) {
-            var i, inserted, _i, _len, _ref;
-            inserted = [];
-            if (angular.isFunction(locator)) {
-              throw new Error('not implemented - Insert with locator function');
-            } else {
-              if ((0 <= (_ref = locator - first - 1) && _ref < buffer.length)) {
-                inserted.push(insert(locator, item));
-                next++;
-              }
-            }
-            for (i = _i = 0, _len = buffer.length; _i < _len; i = ++_i) {
-              item = buffer[i];
-              item.scope.$index = first + i;
-            }
-            return adjustBuffer(null, inserted);
-          };
-          eventListener.$on('insert.item', function(event, locator, item) {
-            return doInsert(locator, item);
-          });
-          eventListener.$on('update.items', function(event, locator, newItem) {
-            return doUpdate(locator, newItem);
-          });
-          return eventListener.$on('delete.items', function(event, locator) {
-            return doDelete(locator);
-          });
-        };
-      }
-    };
-  }
-]);
-
-/*
-//# sourceURL=src/scripts/ui-scroll.js
-*/
-
-
-/**
- * Adds a 'ui-scrollfix' class to the element when the page scrolls past it's position.
- * @param [offset] {int} optional Y-offset to override the detected offset.
- *   Takes 300 (absolute) or -300 or +300 (relative to detected)
- */
-angular.module('ui.scrollfix',[]).directive('uiScrollfix', ['$window', function ($window) {
-  'use strict';
-
-  function getWindowScrollTop() {
-    if (angular.isDefined($window.pageYOffset)) {
-      return $window.pageYOffset;
-    } else {
-      var iebody = (document.compatMode && document.compatMode !== 'BackCompat') ? document.documentElement : document.body;
-      return iebody.scrollTop;
-    }
-  }
-  return {
-    require: '^?uiScrollfixTarget',
-    link: function (scope, elm, attrs, uiScrollfixTarget) {
-      var absolute = true,
-          shift = 0,
-          fixLimit,
-          $target = uiScrollfixTarget && uiScrollfixTarget.$element || angular.element($window);
-
-      if (!attrs.uiScrollfix) {
-          absolute = false;
-      } else if (typeof(attrs.uiScrollfix) === 'string') {
-        // charAt is generally faster than indexOf: http://jsperf.com/indexof-vs-charat
-        if (attrs.uiScrollfix.charAt(0) === '-') {
-          absolute = false;
-          shift = - parseFloat(attrs.uiScrollfix.substr(1));
-        } else if (attrs.uiScrollfix.charAt(0) === '+') {
-          absolute = false;
-          shift = parseFloat(attrs.uiScrollfix.substr(1));
-        }
-      }
-
-      fixLimit = absolute ? attrs.uiScrollfix : elm[0].offsetTop + shift;
-
-      function onScroll() {
-
-        var limit = absolute ? attrs.uiScrollfix : elm[0].offsetTop + shift;
-
-        // if pageYOffset is defined use it, otherwise use other crap for IE
-        var offset = uiScrollfixTarget ? $target[0].scrollTop : getWindowScrollTop();
-        if (!elm.hasClass('ui-scrollfix') && offset > limit) {
-          elm.addClass('ui-scrollfix');
-          fixLimit = limit;
-        } else if (elm.hasClass('ui-scrollfix') && offset < fixLimit) {
-          elm.removeClass('ui-scrollfix');
-        }
-      }
-
-      $target.on('scroll', onScroll);
-
-      // Unbind scroll event handler when directive is removed
-      scope.$on('$destroy', function() {
-        $target.off('scroll', onScroll);
-      });
-    }
-  };
-}]).directive('uiScrollfixTarget', [function () {
-  'use strict';
-  return {
-    controller: ['$element', function($element) {
-      this.$element = $element;
-    }]
-  };
-}]);
-
-/**
- * uiShow Directive
- *
- * Adds a 'ui-show' class to the element instead of display:block
- * Created to allow tighter control  of CSS without bulkier directives
- *
- * @param expression {boolean} evaluated expression to determine if the class should be added
- */
-angular.module('ui.showhide',[])
-.directive('uiShow', [function () {
-  'use strict';
-
-  return function (scope, elm, attrs) {
-    scope.$watch(attrs.uiShow, function (newVal) {
-      if (newVal) {
-        elm.addClass('ui-show');
-      } else {
-        elm.removeClass('ui-show');
-      }
-    });
-  };
-}])
-
-/**
- * uiHide Directive
- *
- * Adds a 'ui-hide' class to the element instead of display:block
- * Created to allow tighter control  of CSS without bulkier directives
- *
- * @param expression {boolean} evaluated expression to determine if the class should be added
- */
-.directive('uiHide', [function () {
-  'use strict';
-
-  return function (scope, elm, attrs) {
-    scope.$watch(attrs.uiHide, function (newVal) {
-      if (newVal) {
-        elm.addClass('ui-hide');
-      } else {
-        elm.removeClass('ui-hide');
-      }
-    });
-  };
-}])
-
-/**
- * uiToggle Directive
- *
- * Adds a class 'ui-show' if true, and a 'ui-hide' if false to the element instead of display:block/display:none
- * Created to allow tighter control  of CSS without bulkier directives. This also allows you to override the
- * default visibility of the element using either class.
- *
- * @param expression {boolean} evaluated expression to determine if the class should be added
- */
-.directive('uiToggle', [function () {
-  'use strict';
-
-  return function (scope, elm, attrs) {
-    scope.$watch(attrs.uiToggle, function (newVal) {
-      if (newVal) {
-        elm.removeClass('ui-hide').addClass('ui-show');
-      } else {
-        elm.removeClass('ui-show').addClass('ui-hide');
-      }
-    });
-  };
-}]);
-
-/**
- * Filters out all duplicate items from an array by checking the specified key
- * @param [key] {string} the name of the attribute of each object to compare for uniqueness
- if the key is empty, the entire object will be compared
- if the key === false then no filtering will be performed
- * @return {array}
- */
-angular.module('ui.unique',[]).filter('unique', ['$parse', function ($parse) {
-  'use strict';
-
-  return function (items, filterOn) {
-
-    if (filterOn === false) {
-      return items;
-    }
-
-    if ((filterOn || angular.isUndefined(filterOn)) && angular.isArray(items)) {
-      var newItems = [],
-        get = angular.isString(filterOn) ? $parse(filterOn) : function (item) { return item; };
-
-      var extractValueToCompare = function (item) {
-        return angular.isObject(item) ? get(item) : item;
-      };
-
-      angular.forEach(items, function (item) {
-        var isDuplicate = false;
-
-        for (var i = 0; i < newItems.length; i++) {
-          if (angular.equals(extractValueToCompare(newItems[i]), extractValueToCompare(item))) {
-            isDuplicate = true;
-            break;
-          }
-        }
-        if (!isDuplicate) {
-          newItems.push(item);
-        }
-
-      });
-      items = newItems;
-    }
-    return items;
-  };
-}]);
-
-/*
- * Author: Remy Alain Ticona Carbajal http://realtica.org
- * Description: The main objective of ng-uploader is to have a user control,
- * clean, simple, customizable, and above all very easy to implement.
- * Licence: MIT
- */
-
-angular.module('ui.uploader', []).service('uiUploader', uiUploader);
-
-uiUploader.$inject = ['$log'];
-
-function uiUploader($log) {
-    'use strict';
-
-    /*jshint validthis: true */
-    var self = this;
-    self.files = [];
-    self.options = {};
-    self.activeUploads = 0;
-    $log.info('uiUploader loaded');
-    
-    function addFiles(files) {
-        for (var i = 0; i < files.length; i++) {
-            self.files.push(files[i]);
-        }
-    }
-
-    function getFiles() {
-        return self.files;
-    }
-
-    function startUpload(options) {
-        self.options = options;
-        for (var i = 0; i < self.files.length; i++) {
-            if (self.activeUploads == self.options.concurrency) {
-                break;
-            }
-            if (self.files[i].active)
-                continue;
-            ajaxUpload(self.files[i], self.options.url);
-        }
-    }
-    
-    function removeFile(file){
-        self.files.splice(self.files.indexOf(file),1);
-    }
-    
-    function removeAll(){
-        self.files.splice(0,self.files.length);
-    }
-    
-    return {
-        addFiles: addFiles,
-        getFiles: getFiles,
-        files: self.files,
-        startUpload: startUpload,
-        removeFile: removeFile,
-        removeAll:removeAll
-    };
-    
-    function getHumanSize(bytes) {
-        var sizes = ['n/a', 'bytes', 'KiB', 'MiB', 'GiB', 'TB', 'PB', 'EiB', 'ZiB', 'YiB'];
-        var i = +Math.floor(Math.log(bytes) / Math.log(1024));
-        return (bytes / Math.pow(1024, i)).toFixed(i ? 1 : 0) + ' ' + sizes[isNaN(bytes) ? 0 : i + 1];
-    }
-
-    function ajaxUpload(file, url) {
-        var xhr, formData, prop, data = '',
-            key = '' || 'file';
-        self.activeUploads += 1;
-        file.active = true;
-        xhr = new window.XMLHttpRequest();
-        formData = new window.FormData();
-        xhr.open('POST', url);
-
-        // Triggered when upload starts:
-        xhr.upload.onloadstart = function() {};
-
-        // Triggered many times during upload:
-        xhr.upload.onprogress = function(event) {
-            if (!event.lengthComputable) {
-                return;
-            }
-            // Update file size because it might be bigger than reported by
-            // the fileSize:
-            //$log.info("progres..");
-            //console.info(event.loaded);
-            file.loaded = event.loaded;
-            file.humanSize = getHumanSize(event.loaded);
-            self.options.onProgress(file);
-        };
-
-        // Triggered when upload is completed:
-        xhr.onload = function() {
-            self.activeUploads -= 1;
-            startUpload(self.options);
-            self.options.onCompleted(file, xhr.responseText);
-        };
-
-        // Triggered when upload fails:
-        xhr.onerror = function() {};
-
-        // Append additional data if provided:
-        if (data) {
-            for (prop in data) {
-                if (data.hasOwnProperty(prop)) {
-                    formData.append(prop, data[prop]);
-                }
-            }
-        }
-
-        // Append file data:
-        formData.append(key, file, file.name);
-
-        // Initiate upload:
-        xhr.send(formData);
-
-        return xhr;
-    }
-
-}
-
-/**
- * General-purpose validator for ngModel.
- * angular.js comes with several built-in validation mechanism for input fields (ngRequired, ngPattern etc.) but using
- * an arbitrary validation function requires creation of a custom formatters and / or parsers.
- * The ui-validate directive makes it easy to use any function(s) defined in scope as a validator function(s).
- * A validator function will trigger validation on both model and input changes.
- *
- * @example <input ui-validate=" 'myValidatorFunction($value)' ">
- * @example <input ui-validate="{ foo : '$value > anotherModel', bar : 'validateFoo($value)' }">
- * @example <input ui-validate="{ foo : '$value > anotherModel' }" ui-validate-watch=" 'anotherModel' ">
- * @example <input ui-validate="{ foo : '$value > anotherModel', bar : 'validateFoo($value)' }" ui-validate-watch=" { foo : 'anotherModel' } ">
- *
- * @param ui-validate {string|object literal} If strings is passed it should be a scope's function to be used as a validator.
- * If an object literal is passed a key denotes a validation error key while a value should be a validator function.
- * In both cases validator function should take a value to validate as its argument and should return true/false indicating a validation result.
- */
-angular.module('ui.validate',[]).directive('uiValidate', function () {
-  'use strict';
-
-  return {
-    restrict: 'A',
-    require: 'ngModel',
-    link: function (scope, elm, attrs, ctrl) {
-      var validateFn, validators = {},
-          validateExpr = scope.$eval(attrs.uiValidate);
-
-      if (!validateExpr){ return;}
-
-      if (angular.isString(validateExpr)) {
-        validateExpr = { validator: validateExpr };
-      }
-
-      angular.forEach(validateExpr, function (exprssn, key) {
-        validateFn = function (valueToValidate) {
-          var expression = scope.$eval(exprssn, { '$value' : valueToValidate });
-          if (angular.isObject(expression) && angular.isFunction(expression.then)) {
-            // expression is a promise
-            expression.then(function(){
-              ctrl.$setValidity(key, true);
-            }, function(){
-              ctrl.$setValidity(key, false);
-            });
-            return valueToValidate;
-          } else if (expression) {
-            // expression is true
-            ctrl.$setValidity(key, true);
-            return valueToValidate;
-          } else {
-            // expression is false
-            ctrl.$setValidity(key, false);
-            return valueToValidate;
-          }
-        };
-        validators[key] = validateFn;
-        ctrl.$formatters.push(validateFn);
-        ctrl.$parsers.push(validateFn);
-      });
-
-      function apply_watch(watch)
-      {
-          //string - update all validators on expression change
-          if (angular.isString(watch))
-          {
-              scope.$watch(watch, function(){
-                  angular.forEach(validators, function(validatorFn){
-                      validatorFn(ctrl.$modelValue);
-                  });
-              });
-              return;
-          }
-
-          //array - update all validators on change of any expression
-          if (angular.isArray(watch))
-          {
-              angular.forEach(watch, function(expression){
-                  scope.$watch(expression, function()
-                  {
-                      angular.forEach(validators, function(validatorFn){
-                          validatorFn(ctrl.$modelValue);
-                      });
-                  });
-              });
-              return;
-          }
-
-          //object - update appropriate validator
-          if (angular.isObject(watch))
-          {
-              angular.forEach(watch, function(expression, validatorKey)
-              {
-                  //value is string - look after one expression
-                  if (angular.isString(expression))
-                  {
-                      scope.$watch(expression, function(){
-                          validators[validatorKey](ctrl.$modelValue);
-                      });
-                  }
-
-                  //value is array - look after all expressions in array
-                  if (angular.isArray(expression))
-                  {
-                      angular.forEach(expression, function(intExpression)
-                      {
-                          scope.$watch(intExpression, function(){
-                              validators[validatorKey](ctrl.$modelValue);
-                          });
-                      });
-                  }
-              });
-          }
-      }
-      // Support for ui-validate-watch
-      if (attrs.uiValidateWatch){
-          apply_watch( scope.$eval(attrs.uiValidateWatch) );
-      }
-    }
-  };
-});
-
-angular.module('ui.utils',  [
-  'ui.event',
-  'ui.format',
-  'ui.highlight',
-  'ui.include',
-  'ui.indeterminate',
-  'ui.inflector',
-  'ui.jq',
-  'ui.keypress',
-  'ui.mask',
-  'ui.reset',
-  'ui.route',
-  'ui.scrollfix',
+!function(){"use strict";function o(o){function e(o){for(var e=0;e<o.length;e++)r.files.push(o[e])}function n(){return r.files}function i(o){r.options=o;for(var e=o.headers||{},n=0;n<r.files.length&&r.activeUploads!=r.options.concurrency;n++)r.files[n].active||a(r.files[n],r.options.url,r.options.data,e)}function t(o){r.files.splice(r.files.indexOf(o),1)}function l(){r.files.splice(0,r.files.length)}function s(o){var e=["n/a","bytes","KiB","MiB","GiB","TB","PB","EiB","ZiB","YiB"],n=0===o?0:+Math.floor(Math.log(o)/Math.log(1024));return(o/Math.pow(1024,n)).toFixed(n?1:0)+" "+e[isNaN(o)?0:n+1]}function a(o,e,n,t){var l,a,d,p="file";if(n=n||{},r.activeUploads+=1,o.active=!0,l=new window.XMLHttpRequest,n.withCredentials===!0&&(l.withCredentials=!0),a=new window.FormData,l.open("POST",e),t)for(var u in t)t.hasOwnProperty(u)&&l.setRequestHeader(u,t[u]);if(l.upload.onloadstart=function(){},l.upload.onprogress=function(e){e.lengthComputable&&(o.loaded=e.loaded,o.humanSize=s(e.loaded),angular.isFunction(r.options.onProgress)&&r.options.onProgress(o))},l.onload=function(){r.activeUploads-=1,r.uploadedFiles+=1,i(r.options),angular.isFunction(r.options.onCompleted)&&r.options.onCompleted(o,l.responseText,l.status),r.uploadedFiles===r.files.length&&(r.uploadedFiles=0,angular.isFunction(r.options.onCompletedAll)&&r.options.onCompletedAll(r.files))},l.onerror=function(o){angular.isFunction(r.options.onError)&&r.options.onError(o)},n)for(d in n)n.hasOwnProperty(d)&&a.append(d,n[d]);return a.append(p,o,o.name),l.send(a),l}var r=this;return r.files=[],r.options={},r.activeUploads=0,r.uploadedFiles=0,o.info("uiUploader loaded"),{addFiles:e,getFiles:n,files:r.files,startUpload:i,removeFile:t,removeAll:l}}angular.module("ui.uploader",[]).service("uiUploader",o),o.$inject=["$log"]}();
+angular.module('ui.utils', [
   'ui.scroll',
-  'ui.scroll.jqlite',
-  'ui.showhide',
-  'ui.unique',
-  'ui.validate'
+  'ui.scrollpoint',
+  'ui.event',
+  'ui.mask',
+  'ui.validate',
+  'ui.indeterminate',
+  'ui.uploader'
 ]);
 
 /**
@@ -73442,7 +74244,7 @@ angular
     function AppCtrl($scope, $http, $localStorage, $state, $timeout) {
 
         $scope.anonymousStates = ['auth.login', 'auth.register', 'auth.resetpassword', 'auth.reset', 'auth.lockscreen', 'auth.emailconfirm'];
-
+        /*
         $timeout(function() {
             if ($scope.anonymousStates.indexOf($state.current.name) == -1 && !angular.isDefined($localStorage.access_token)) {
                 $timeout(function() {
@@ -73451,7 +74253,7 @@ angular
                 });
             }
         }, 2000);
-
+        */
         $scope.mobileView = 767;
 
         $scope.app = {
@@ -73481,7 +74283,7 @@ angular
             fname: 'Sahbi',
             lname: 'KHALFALLAH',
             jobDesc: 'Senior Web Consultant',
-            avatar: 'images/avatar.jpg',
+            avatar: '/app/images/avatar.jpg',
         };
 
         if (angular.isDefined($localStorage.layout)) {
@@ -73499,6 +74301,130 @@ angular
         };
     }
 ]);
+
+'use strict';
+
+/**
+ * Config constant
+ */
+app.constant('APP_MEDIAQUERY', {
+    'desktopXL': 1200,
+    'desktop': 992,
+    'tablet': 768,
+    'mobile': 480
+});
+
+
+app.constant('JS_REQUIRES', {
+    //*** Scripts
+    scripts: {
+        //*** Javascript Plugins
+        'modernizr': ['/bower_components/components-modernizr/modernizr.js'],
+        'moment': ['/bower_components/moment/min/moment.min.js'],
+        'spin': '/bower_components/spin.js/spin.js',
+
+        //*** jQuery Plugins
+        'perfect-scrollbar-plugin': ['/bower_components/perfect-scrollbar/js/min/perfect-scrollbar.jquery.min.js', '/bower_components/perfect-scrollbar/css/perfect-scrollbar.min.css'],
+        'ladda': ['/bower_components/ladda/dist/ladda.min.js', '/bower_components/ladda/dist/ladda-themeless.min.css'],
+        'sweet-alert': ['/bower_components/sweetalert/dist/sweetalert.min.js', '/bower_components/sweetalert/dist/sweetalert.css'],
+        'chartjs': '/bower_components/chartjs/Chart.min.js',
+        'jquery-sparkline': '/bower_components/jquery.sparkline.build/dist/jquery.sparkline.min.js',
+        'ckeditor-plugin': ['/bower_components/ckeditor/ckeditor.js'],
+        'jquery-nestable-plugin': ['/bower_components/jquery-nestable/jquery.nestable.js'],
+        'touchspin-plugin': ['/bower_components/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js', '/bower_components/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css'],
+
+        //*** Controllers
+
+        //*** Filters
+        'htmlToPlaintext': '/app/scripts/filters/htmlToPlaintext.js'
+    },
+    //*** angularJS Modules
+    modules: [{
+        name: 'd3',
+        files: ['/bower_components/d3/d3.min.js']
+    }, {
+        name: 'rickshaw',
+        files: ['/bower_components/rickshaw/rickshaw.min.js']
+    }, {
+        name: 'angularMoment',
+        files: ['/bower_components/angular-moment/angular-moment.min.js']
+    }, {
+        name: 'flot',
+        files: [
+            '/bower_components/flot/jquery.flot.js',
+            '/bower_components/flot/jquery.flot.resize.js',
+            '/bower_components/flot/jquery.flot.pie.js',
+            '/bower_components/flot/jquery.flot.categories.js',
+            '/bower_components/angular-flot/angular-flot.js'
+        ]
+    }, {
+        name: 'toaster',
+        files: ['/bower_components/AngularJS-Toaster/toaster.js', '/bower_components/AngularJS-Toaster/toaster.css']
+    }, {
+        name: 'angularBootstrapNavTree',
+        files: ['/bower_components/angular-bootstrap-nav-tree/dist/abn_tree_directive.js', '/bower_components/angular-bootstrap-nav-tree/dist/abn_tree.css']
+    }, {
+        name: 'angular-ladda',
+        files: ['/bower_components/angular-ladda/dist/angular-ladda.min.js']
+    }, {
+        name: 'ngTable',
+        files: ['/bower_components/ng-table/dist/ng-table.min.js', '/bower_components/ng-table/dist/ng-table.min.css']
+    }, {
+        name: 'ui.select',
+        files: ['/bower_components/angular-ui-select/dist/select.min.js', '/bower_components/angular-ui-select/dist/select.min.css', '/bower_components/select2/dist/css/select2.min.css', '/bower_components/select2-bootstrap-css/select2-bootstrap.min.css', '/bower_components/selectize/dist/css/selectize.bootstrap3.css']
+    }, {
+        name: 'ngImgCrop',
+        files: ['/bower_components/ngImgCrop/compile/minified/ng-img-crop.js', '/bower_components/ngImgCrop/compile/minified/ng-img-crop.css']
+    }, {
+        name: 'angularFileUpload',
+        files: ['/bower_components/angular-file-upload/angular-file-upload.min.js']
+    }, {
+        name: 'ngAside',
+        files: ['/bower_components/angular-aside/dist/js/angular-aside.min.js', '/bower_components/angular-aside/dist/css/angular-aside.min.css']
+    }, {
+        name: 'truncate',
+        files: ['/bower_components/angular-truncate/src/truncate.js']
+    }, {
+        name: 'oitozero.ngSweetAlert',
+        files: ['/bower_components/angular-sweetalert-promised/SweetAlert.min.js']
+    }, {
+        name: 'monospaced.elastic',
+        files: ['/bower_components/angular-elastic/elastic.js']
+    }, {
+        name: 'ngMap',
+        files: ['/bower_components/ngmap/build/scripts/ng-map.min.js']
+    }, {
+        name: 'tc.chartjs',
+        files: ['/bower_components/tc-angular-chartjs/dist/tc-angular-chartjs.min.js']
+    }, {
+        name: 'flow',
+        files: ['/bower_components/ng-flow/dist/ng-flow-standalone.min.js']
+    }, {
+        name: 'uiSwitch',
+        files: ['/bower_components/angular-ui-switch/angular-ui-switch.min.js', '/bower_components/angular-ui-switch/angular-ui-switch.min.css']
+    }, {
+        name: 'ckeditor',
+        files: ['/bower_components/angular-ckeditor/angular-ckeditor.min.js']
+    }, {
+        name: 'mwl.calendar',
+        files: ['/bower_components/angular-bootstrap-calendar/dist/js/angular-bootstrap-calendar-tpls.js', '/bower_components/angular-bootstrap-calendar/dist/css/angular-bootstrap-calendar.min.css', '/assets/js/config/config-calendar.js']
+    }, {
+        name: 'ng-nestable',
+        files: ['/bower_components/ng-nestable/src/angular-nestable.js']
+    }, {
+        name: 'vAccordion',
+        files: ['/bower_components/v-accordion/dist/v-accordion.min.js', '/bower_components/v-accordion/dist/v-accordion.min.css']
+    }, {
+        name: 'xeditable',
+        files: ['/bower_components/angular-xeditable/dist/js/xeditable.min.js', '/bower_components/angular-xeditable/dist/css/xeditable.css', '/assets/js/config/config-xeditable.js']
+    }, {
+        name: 'checklist-model',
+        files: ['/bower_components/checklist-model/checklist-model.js']
+    }, {
+        name: 'angular-notification-icons',
+        files: ['/bower_components/angular-notification-icons/dist/angular-notification-icons.min.js', '/bower_components/angular-notification-icons/dist/angular-notification-icons.min.css']
+    }]
+});
 
 app.constant('APP_JS_REQUIRES', {
     //*** Scripts
@@ -73553,9 +74479,9 @@ app.constant('APP_JS_REQUIRES', {
         'NewsroomTemplatesCtrl': '/bundles/publipr/js/components/NewsroomTemplate/NewsroomTemplatesCtrl.js',
         'NewsroomTemplateFormCtrl': '/bundles/publipr/js/components/NewsroomTemplate/NewsroomTemplateFromCtrl.js',
         'NewsroomTemplateCtrl': '/bundles/publipr/js/components/NewsroomTemplate/NewsroomTemplateCtrl.js',
-        'NewsroomsUsersCtrl': '/bundles/publipr/js/components/NewsroomsUsers/NewsroomsUsersCtrl.js',
-        'NewsroomsUsersFormCtrl': '/bundles/publipr/js/components/NewsroomsUsers/NewsroomsUsersFromCtrl.js',
-        'NewsroomsUsersCtrl': '/bundles/publipr/js/components/NewsroomsUsers/NewsroomsUsersCtrl.js',
+        'UsersCtrl': '/bundles/publipr/js/components/User/UsersCtrl.js',
+        'UserFormCtrl': '/bundles/publipr/js/components/User/UserFromCtrl.js',
+        'UserCtrl': '/bundles/publipr/js/components/User/UserCtrl.js',
         'PaymentsCtrl': '/bundles/publipr/js/components/Payment/PaymentsCtrl.js',
         'PaymentFormCtrl': '/bundles/publipr/js/components/Payment/PaymentFromCtrl.js',
         'PaymentCtrl': '/bundles/publipr/js/components/Payment/PaymentCtrl.js',
@@ -73576,10 +74502,7 @@ app.constant('APP_JS_REQUIRES', {
         'TrackEmailCtrl': '/bundles/publipr/js/components/TrackEmail/TrackEmailCtrl.js',
         'TrackPressReleasesCtrl': '/bundles/publipr/js/components/TrackPressRelease/TrackPressReleasesCtrl.js',
         'TrackPressReleaseFormCtrl': '/bundles/publipr/js/components/TrackPressRelease/TrackPressReleaseFromCtrl.js',
-        'TrackPressReleaseCtrl': '/bundles/publipr/js/components/TrackPressRelease/TrackPressReleaseCtrl.js',
-        'UsersCtrl': '/bundles/publipr/js/components/User/UsersCtrl.js',
-        'UserFormCtrl': '/bundles/publipr/js/components/User/UserFromCtrl.js',
-        'UserCtrl': '/bundles/publipr/js/components/User/UserCtrl.js'
+        'TrackPressReleaseCtrl': '/bundles/publipr/js/components/TrackPressRelease/TrackPressReleaseCtrl.js'
     },
     modules: [{
         name: 'LoginService',
@@ -73636,8 +74559,8 @@ app.constant('APP_JS_REQUIRES', {
         name: 'newsroomTemplateService',
         files: ['/bundles/publipr/js/components/NewsroomTemplate/NewsroomTemplateService.js']
     },{
-        name: 'newsroomsUsersService',
-        files: ['/bundles/publipr/js/components/NewsroomsUsers/NewsroomsUsersService.js']
+        name: 'userService',
+        files: ['/bundles/publipr/js/components/User/UserService.js']
     },{
         name: 'paymentService',
         files: ['/bundles/publipr/js/components/Payment/PaymentService.js']
@@ -73659,9 +74582,6 @@ app.constant('APP_JS_REQUIRES', {
     },{
         name: 'trackPressReleaseService',
         files: ['/bundles/publipr/js/components/TrackPressRelease/TrackPressReleaseService.js']
-    },{
-        name: 'userService',
-        files: ['/bundles/publipr/js/components/User/UserService.js']
     }]
 });
 
@@ -73722,6 +74642,7 @@ angular
 
       // Application routes
       $stateProvider.state('app', {
+        url: '/app',
         templateUrl: '/app/views/common/layout.html',
         resolve: loadSequence('modernizr', 'moment', 'angularMoment', 'uiSwitch', 'perfect-scrollbar-plugin', 'toaster', 'ngAside', 'vAccordion', 'chartjs', 'tc.chartjs', 'sweet-alert', 'oitozero.ngSweetAlert', 'truncate', 'htmlToPlaintext', 'angular-notification-icons', 'd3', 'rickshaw', 'flot'),
         abstract: true
@@ -74827,132 +75748,6 @@ app.config(function($interpolateProvider) {
     $interpolateProvider.endSymbol(']]');
 });
 
-
-/**
- * Config constant
- */
-app.constant('APP_MEDIAQUERY', {
-    'desktopXL': 1200,
-    'desktop': 992,
-    'tablet': 768,
-    'mobile': 480
-});
-
-
-app.constant('JS_REQUIRES', {
-    //*** Scripts
-    scripts: {
-        //*** Javascript Plugins
-        'modernizr': ['/bower_components/components-modernizr/modernizr.js'],
-        'moment': ['/bower_components/moment/min/moment.min.js'],
-        'spin': '/bower_components/spin.js/spin.js',
-
-        //*** jQuery Plugins
-        'perfect-scrollbar-plugin': ['/bower_components/perfect-scrollbar/js/min/perfect-scrollbar.jquery.min.js', '/bower_components/perfect-scrollbar/css/perfect-scrollbar.min.css'],
-        'ladda': ['/bower_components/ladda/dist/ladda.min.js', '/bower_components/ladda/dist/ladda-themeless.min.css'],
-        'sweet-alert': ['/bower_components/sweetalert/dist/sweetalert.min.js', '/bower_components/sweetalert/dist/sweetalert.css'],
-        'chartjs': '/bower_components/chartjs/Chart.min.js',
-        'jquery-sparkline': '/bower_components/jquery.sparkline.build/dist/jquery.sparkline.min.js',
-        'ckeditor-plugin': ['/bower_components/ckeditor/ckeditor.js'],
-        'jquery-nestable-plugin': ['/bower_components/jquery-nestable/jquery.nestable.js'],
-        'touchspin-plugin': ['/bower_components/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js', '/bower_components/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css'],
-
-        //*** Controllers
-
-        //*** Filters
-        'htmlToPlaintext': '/app/scripts/filters/htmlToPlaintext.js'
-    },
-    //*** angularJS Modules
-    modules: [{
-        name: 'd3',
-        files: ['/bower_components/d3/d3.min.js']
-    }, {
-        name: 'rickshaw',
-        files: ['/bower_components/rickshaw/rickshaw.min.js']
-    }, {
-        name: 'angularMoment',
-        files: ['/bower_components/angular-moment/angular-moment.min.js']
-    }, {
-        name: 'flot',
-        files: [
-            '/bower_components/flot/jquery.flot.js',
-            '/bower_components/flot/jquery.flot.resize.js',
-            '/bower_components/flot/jquery.flot.pie.js',
-            '/bower_components/flot/jquery.flot.categories.js',
-            '/bower_components/angular-flot/angular-flot.js'
-        ]
-    }, {
-        name: 'toaster',
-        files: ['/bower_components/AngularJS-Toaster/toaster.js', '/bower_components/AngularJS-Toaster/toaster.css']
-    }, {
-        name: 'angularBootstrapNavTree',
-        files: ['/bower_components/angular-bootstrap-nav-tree/dist/abn_tree_directive.js', '/bower_components/angular-bootstrap-nav-tree/dist/abn_tree.css']
-    }, {
-        name: 'angular-ladda',
-        files: ['/bower_components/angular-ladda/dist/angular-ladda.min.js']
-    }, {
-        name: 'ngTable',
-        files: ['/bower_components/ng-table/dist/ng-table.min.js', '/bower_components/ng-table/dist/ng-table.min.css']
-    }, {
-        name: 'ui.select',
-        files: ['/bower_components/angular-ui-select/dist/select.min.js', '/bower_components/angular-ui-select/dist/select.min.css', '/bower_components/select2/dist/css/select2.min.css', '/bower_components/select2-bootstrap-css/select2-bootstrap.min.css', '/bower_components/selectize/dist/css/selectize.bootstrap3.css']
-    }, {
-        name: 'ui.mask',
-        files: ['/bower_components/angular-ui-utils/mask.min.js']
-    }, {
-        name: 'ngImgCrop',
-        files: ['/bower_components/ngImgCrop/compile/minified/ng-img-crop.js', '/bower_components/ngImgCrop/compile/minified/ng-img-crop.css']
-    }, {
-        name: 'angularFileUpload',
-        files: ['/bower_components/angular-file-upload/angular-file-upload.min.js']
-    }, {
-        name: 'ngAside',
-        files: ['/bower_components/angular-aside/dist/js/angular-aside.min.js', '/bower_components/angular-aside/dist/css/angular-aside.min.css']
-    }, {
-        name: 'truncate',
-        files: ['/bower_components/angular-truncate/src/truncate.js']
-    }, {
-        name: 'oitozero.ngSweetAlert',
-        files: ['/bower_components/angular-sweetalert-promised/SweetAlert.min.js']
-    }, {
-        name: 'monospaced.elastic',
-        files: ['/bower_components/angular-elastic/elastic.js']
-    }, {
-        name: 'ngMap',
-        files: ['/bower_components/ngmap/build/scripts/ng-map.min.js']
-    }, {
-        name: 'tc.chartjs',
-        files: ['/bower_components/tc-angular-chartjs/dist/tc-angular-chartjs.min.js']
-    }, {
-        name: 'flow',
-        files: ['/bower_components/ng-flow/dist/ng-flow-standalone.min.js']
-    }, {
-        name: 'uiSwitch',
-        files: ['/bower_components/angular-ui-switch/angular-ui-switch.min.js', '/bower_components/angular-ui-switch/angular-ui-switch.min.css']
-    }, {
-        name: 'ckeditor',
-        files: ['/bower_components/angular-ckeditor/angular-ckeditor.min.js']
-    }, {
-        name: 'mwl.calendar',
-        files: ['/bower_components/angular-bootstrap-calendar/dist/js/angular-bootstrap-calendar-tpls.js', '/bower_components/angular-bootstrap-calendar/dist/css/angular-bootstrap-calendar.min.css', '/assets/js/config/config-calendar.js']
-    }, {
-        name: 'ng-nestable',
-        files: ['/bower_components/ng-nestable/src/angular-nestable.js']
-    }, {
-        name: 'vAccordion',
-        files: ['/bower_components/v-accordion/dist/v-accordion.min.js', '/bower_components/v-accordion/dist/v-accordion.min.css']
-    }, {
-        name: 'xeditable',
-        files: ['/bower_components/angular-xeditable/dist/js/xeditable.min.js', '/bower_components/angular-xeditable/dist/css/xeditable.css', '/assets/js/config/config-xeditable.js']
-    }, {
-        name: 'checklist-model',
-        files: ['/bower_components/checklist-model/checklist-model.js']
-    }, {
-        name: 'angular-notification-icons',
-        files: ['/bower_components/angular-notification-icons/dist/angular-notification-icons.min.js', '/bower_components/angular-notification-icons/dist/angular-notification-icons.min.css']
-    }]
-});
-
 app.factory('httpRequestInterceptor', ['$q', '$localStorage', '$location', '$filter', '$timeout', 'toaster',
     function ($q, $localStorage, $location, $filter, $timeout, toaster) {
         return {
@@ -75163,7 +75958,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.NEWUSER'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'UserFormCtrl', 'userService', 'companyService', 'countryService', 'languageService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'UserFormCtrl', 'userService', 'companyService', 'countryService', 'languageService')
     }).state('app.access.usersedit', {
         url: '/users/edit/:id',
         templateUrl: '/bundles/publipr/js/components/User/user_form.html',
@@ -75171,7 +75966,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.EDITUSER'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'UserFormCtrl', 'userService', 'companyService', 'countryService', 'languageService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'UserFormCtrl', 'userService', 'companyService', 'countryService', 'languageService')
     }).state('app.access.usersdetails', {
         url: '/users/details/:id',
         templateUrl: '/bundles/publipr/js/components/User/user.html',
@@ -75179,68 +75974,6 @@ function ($stateProvider) {
             label: 'content.list.USERDETAILS'
         },
         resolve: loadSequence('UserCtrl', 'userService')
-    }).state('app.access.settings', {
-        url: '/settings',
-        templateUrl: '/bundles/publipr/js/components/Setting/settings.html',
-        title: 'content.list.SETTINGS',
-        ncyBreadcrumb: {
-            label: 'content.list.SETTINGS'
-        },
-        resolve: loadSequence('ngTable', 'SettingsCtrl', 'settingService', 'userService')
-    }).state('app.access.settingsnew', {
-        url: '/settings/new',
-        templateUrl: '/bundles/publipr/js/components/Setting/setting_form.html',
-        title: 'content.list.NEWSETTING',
-        ncyBreadcrumb: {
-            label: 'content.list.NEWSETTING'
-        },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'SettingFormCtrl', 'settingService', 'userService')
-    }).state('app.access.settingsedit', {
-        url: '/settings/edit/:id',
-        templateUrl: '/bundles/publipr/js/components/Setting/setting_form.html',
-        title: 'content.list.EDITSETTING',
-        ncyBreadcrumb: {
-            label: 'content.list.EDITSETTING'
-        },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'SettingFormCtrl', 'settingService', 'userService')
-    }).state('app.access.settingsdetails', {
-        url: '/settings/details/:id',
-        templateUrl: '/bundles/publipr/js/components/Setting/setting.html',
-        ncyBreadcrumb: {
-            label: 'content.list.SETTINGDETAILS'
-        },
-        resolve: loadSequence('SettingCtrl', 'settingService')
-    }).state('app.access.fonts', {
-        url: '/fonts',
-        templateUrl: '/bundles/publipr/js/components/Font/fonts.html',
-        title: 'content.list.FONTS',
-        ncyBreadcrumb: {
-            label: 'content.list.FONTS'
-        },
-        resolve: loadSequence('ngTable', 'FontsCtrl', 'fontService', 'userService')
-    }).state('app.access.fontsnew', {
-        url: '/fonts/new',
-        templateUrl: '/bundles/publipr/js/components/Font/font_form.html',
-        title: 'content.list.NEWFONT',
-        ncyBreadcrumb: {
-            label: 'content.list.NEWFONT'
-        },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'FontFormCtrl', 'fontService', 'userService')
-    }).state('app.access.fontsedit', {
-        url: '/fonts/edit/:id',
-        templateUrl: '/bundles/publipr/js/components/Font/font_form.html',
-        title: 'content.list.EDITFONT',
-        ncyBreadcrumb: {
-            label: 'content.list.EDITFONT'
-        },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'FontFormCtrl', 'fontService', 'userService')
-    }).state('app.access.fontsdetails', {
-        url: '/fonts/details/:id',
-        templateUrl: '/bundles/publipr/js/components/Font/font.html',
-        ncyBreadcrumb: {
-            label: 'content.list.FONTDETAILS'
-        },
-        resolve: loadSequence('FontCtrl', 'fontService')
     }).state('app.access.companies', {
         url: '/companies',
         templateUrl: '/bundles/publipr/js/components/Company/companies.html',
@@ -75256,7 +75989,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.NEWCOMPANY'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'CompanyFormCtrl', 'companyService', 'userService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'CompanyFormCtrl', 'companyService', 'userService')
     }).state('app.access.companiesedit', {
         url: '/companies/edit/:id',
         templateUrl: '/bundles/publipr/js/components/Company/company_form.html',
@@ -75264,7 +75997,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.EDITCOMPANY'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'CompanyFormCtrl', 'companyService', 'userService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'CompanyFormCtrl', 'companyService', 'userService')
     }).state('app.access.companiesdetails', {
         url: '/companies/details/:id',
         templateUrl: '/bundles/publipr/js/components/Company/company.html',
@@ -75272,6 +76005,68 @@ function ($stateProvider) {
             label: 'content.list.COMPANYDETAILS'
         },
         resolve: loadSequence('CompanyCtrl', 'companyService')
+    }).state('app.access.settings', {
+        url: '/settings',
+        templateUrl: '/bundles/publipr/js/components/Setting/settings.html',
+        title: 'content.list.SETTINGS',
+        ncyBreadcrumb: {
+            label: 'content.list.SETTINGS'
+        },
+        resolve: loadSequence('ngTable', 'SettingsCtrl', 'settingService', 'userService')
+    }).state('app.access.settingsnew', {
+        url: '/settings/new',
+        templateUrl: '/bundles/publipr/js/components/Setting/setting_form.html',
+        title: 'content.list.NEWSETTING',
+        ncyBreadcrumb: {
+            label: 'content.list.NEWSETTING'
+        },
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'SettingFormCtrl', 'settingService', 'userService')
+    }).state('app.access.settingsedit', {
+        url: '/settings/edit/:id',
+        templateUrl: '/bundles/publipr/js/components/Setting/setting_form.html',
+        title: 'content.list.EDITSETTING',
+        ncyBreadcrumb: {
+            label: 'content.list.EDITSETTING'
+        },
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'SettingFormCtrl', 'settingService', 'userService')
+    }).state('app.access.settingsdetails', {
+        url: '/settings/details/:id',
+        templateUrl: '/bundles/publipr/js/components/Setting/setting.html',
+        ncyBreadcrumb: {
+            label: 'content.list.SETTINGDETAILS'
+        },
+        resolve: loadSequence('SettingCtrl', 'settingService')
+    }).state('app.access.logs', {
+        url: '/logs',
+        templateUrl: '/bundles/publipr/js/components/Log/logs.html',
+        title: 'content.list.LOGS',
+        ncyBreadcrumb: {
+            label: 'content.list.LOGS'
+        },
+        resolve: loadSequence('ngTable', 'LogsCtrl', 'logService', 'sessionService', 'userService')
+    }).state('app.access.logsnew', {
+        url: '/logs/new',
+        templateUrl: '/bundles/publipr/js/components/Log/log_form.html',
+        title: 'content.list.NEWLOG',
+        ncyBreadcrumb: {
+            label: 'content.list.NEWLOG'
+        },
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'LogFormCtrl', 'logService', 'sessionService', 'userService')
+    }).state('app.access.logsedit', {
+        url: '/logs/edit/:id',
+        templateUrl: '/bundles/publipr/js/components/Log/log_form.html',
+        title: 'content.list.EDITLOG',
+        ncyBreadcrumb: {
+            label: 'content.list.EDITLOG'
+        },
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'LogFormCtrl', 'logService', 'sessionService', 'userService')
+    }).state('app.access.logsdetails', {
+        url: '/logs/details/:id',
+        templateUrl: '/bundles/publipr/js/components/Log/log.html',
+        ncyBreadcrumb: {
+            label: 'content.list.LOGDETAILS'
+        },
+        resolve: loadSequence('LogCtrl', 'logService')
     }).state('app.contactmanager', {
         url: '/contact-manager',
         template: '<div ui-view class="fade-in-up"></div>',
@@ -75294,7 +76089,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.NEWCONTACTGROUP'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'ContactGroupFormCtrl', 'contactGroupService', 'userService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'ContactGroupFormCtrl', 'contactGroupService', 'userService')
     }).state('app.contactmanager.contactgroupsedit', {
         url: '/contact-groups/edit/:id',
         templateUrl: '/bundles/publipr/js/components/ContactGroup/contact_group_form.html',
@@ -75302,7 +76097,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.EDITCONTACTGROUP'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'ContactGroupFormCtrl', 'contactGroupService', 'userService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'ContactGroupFormCtrl', 'contactGroupService', 'userService')
     }).state('app.contactmanager.contactgroupsdetails', {
         url: '/contact-groups/details/:id',
         templateUrl: '/bundles/publipr/js/components/ContactGroup/contact_group.html',
@@ -75325,7 +76120,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.NEWCONTACT'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'ContactFormCtrl', 'contactService', 'contactGroupService', 'userService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'ContactFormCtrl', 'contactService', 'contactGroupService', 'userService')
     }).state('app.contactmanager.contactsedit', {
         url: '/contacts/edit/:id',
         templateUrl: '/bundles/publipr/js/components/Contact/contact_form.html',
@@ -75333,7 +76128,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.EDITCONTACT'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'ContactFormCtrl', 'contactService', 'contactGroupService', 'userService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'ContactFormCtrl', 'contactService', 'contactGroupService', 'userService')
     }).state('app.contactmanager.contactsdetails', {
         url: '/contacts/details/:id',
         templateUrl: '/bundles/publipr/js/components/Contact/contact.html',
@@ -75363,7 +76158,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.NEWTEMPLATE'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'TemplateFormCtrl', 'templateService', 'userService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'TemplateFormCtrl', 'templateService', 'userService')
     }).state('app.templatemanager.templatesedit', {
         url: '/templates/edit/:id',
         templateUrl: '/bundles/publipr/js/components/Template/template_form.html',
@@ -75371,7 +76166,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.EDITTEMPLATE'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'TemplateFormCtrl', 'templateService', 'userService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'TemplateFormCtrl', 'templateService', 'userService')
     }).state('app.templatemanager.templatesdetails', {
         url: '/templates/details/:id',
         templateUrl: '/bundles/publipr/js/components/Template/template.html',
@@ -75394,7 +76189,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.NEWLAYOUT'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'LayoutFormCtrl', 'layoutService', 'userService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'LayoutFormCtrl', 'layoutService', 'userService')
     }).state('app.templatemanager.layoutsedit', {
         url: '/layouts/edit/:id',
         templateUrl: '/bundles/publipr/js/components/Layout/layout_form.html',
@@ -75402,7 +76197,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.EDITLAYOUT'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'LayoutFormCtrl', 'layoutService', 'userService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'LayoutFormCtrl', 'layoutService', 'userService')
     }).state('app.templatemanager.layoutsdetails', {
         url: '/layouts/details/:id',
         templateUrl: '/bundles/publipr/js/components/Layout/layout.html',
@@ -75410,37 +76205,6 @@ function ($stateProvider) {
             label: 'content.list.LAYOUTDETAILS'
         },
         resolve: loadSequence('LayoutCtrl', 'layoutService')
-    }).state('app.templatemanager.emailcampaigns', {
-        url: '/email-campaigns',
-        templateUrl: '/bundles/publipr/js/components/EmailCampaign/email_campaigns.html',
-        title: 'content.list.EMAILCAMPAIGNS',
-        ncyBreadcrumb: {
-            label: 'content.list.EMAILCAMPAIGNS'
-        },
-        resolve: loadSequence('ngTable', 'EmailCampaignsCtrl', 'emailCampaignService', 'pressReleaseService', 'userService')
-    }).state('app.templatemanager.emailcampaignsnew', {
-        url: '/email-campaigns/new',
-        templateUrl: '/bundles/publipr/js/components/EmailCampaign/email_campaign_form.html',
-        title: 'content.list.NEWEMAILCAMPAIGN',
-        ncyBreadcrumb: {
-            label: 'content.list.NEWEMAILCAMPAIGN'
-        },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'EmailCampaignFormCtrl', 'emailCampaignService', 'pressReleaseService', 'userService')
-    }).state('app.templatemanager.emailcampaignsedit', {
-        url: '/email-campaigns/edit/:id',
-        templateUrl: '/bundles/publipr/js/components/EmailCampaign/email_campaign_form.html',
-        title: 'content.list.EDITEMAILCAMPAIGN',
-        ncyBreadcrumb: {
-            label: 'content.list.EDITEMAILCAMPAIGN'
-        },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'EmailCampaignFormCtrl', 'emailCampaignService', 'pressReleaseService', 'userService')
-    }).state('app.templatemanager.emailcampaignsdetails', {
-        url: '/email-campaigns/details/:id',
-        templateUrl: '/bundles/publipr/js/components/EmailCampaign/email_campaign.html',
-        ncyBreadcrumb: {
-            label: 'content.list.EMAILCAMPAIGNDETAILS'
-        },
-        resolve: loadSequence('EmailCampaignCtrl', 'emailCampaignService')
     }).state('app.templatemanager.contentblocks', {
         url: '/content-blocks',
         templateUrl: '/bundles/publipr/js/components/ContentBlock/content_blocks.html',
@@ -75456,7 +76220,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.NEWCONTENTBLOCK'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'ContentBlockFormCtrl', 'contentBlockService', 'userService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'ContentBlockFormCtrl', 'contentBlockService', 'userService')
     }).state('app.templatemanager.contentblocksedit', {
         url: '/content-blocks/edit/:id',
         templateUrl: '/bundles/publipr/js/components/ContentBlock/content_block_form.html',
@@ -75464,7 +76228,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.EDITCONTENTBLOCK'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'ContentBlockFormCtrl', 'contentBlockService', 'userService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'ContentBlockFormCtrl', 'contentBlockService', 'userService')
     }).state('app.templatemanager.contentblocksdetails', {
         url: '/content-blocks/details/:id',
         templateUrl: '/bundles/publipr/js/components/ContentBlock/content_block.html',
@@ -75479,37 +76243,6 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'sidebar.nav.settings.MAIN'
         }
-    }).state('app.settings.newsrooms', {
-        url: '/newsrooms',
-        templateUrl: '/bundles/publipr/js/components/Newsroom/newsrooms.html',
-        title: 'content.list.NEWSROOMS',
-        ncyBreadcrumb: {
-            label: 'content.list.NEWSROOMS'
-        },
-        resolve: loadSequence('ngTable', 'NewsroomsCtrl', 'newsroomService', 'userService')
-    }).state('app.settings.newsroomsnew', {
-        url: '/newsrooms/new',
-        templateUrl: '/bundles/publipr/js/components/Newsroom/newsroom_form.html',
-        title: 'content.list.NEWNEWSROOM',
-        ncyBreadcrumb: {
-            label: 'content.list.NEWNEWSROOM'
-        },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'NewsroomFormCtrl', 'newsroomService', 'userService')
-    }).state('app.settings.newsroomsedit', {
-        url: '/newsrooms/edit/:id',
-        templateUrl: '/bundles/publipr/js/components/Newsroom/newsroom_form.html',
-        title: 'content.list.EDITNEWSROOM',
-        ncyBreadcrumb: {
-            label: 'content.list.EDITNEWSROOM'
-        },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'NewsroomFormCtrl', 'newsroomService', 'userService')
-    }).state('app.settings.newsroomsdetails', {
-        url: '/newsrooms/details/:id',
-        templateUrl: '/bundles/publipr/js/components/Newsroom/newsroom.html',
-        ncyBreadcrumb: {
-            label: 'content.list.NEWSROOMDETAILS'
-        },
-        resolve: loadSequence('NewsroomCtrl', 'newsroomService')
     }).state('app.settings.languages', {
         url: '/languages',
         templateUrl: '/bundles/publipr/js/components/Language/languages.html',
@@ -75525,7 +76258,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.NEWLANGUAGE'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'LanguageFormCtrl', 'languageService', 'userService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'LanguageFormCtrl', 'languageService', 'userService')
     }).state('app.settings.languagesedit', {
         url: '/languages/edit/:id',
         templateUrl: '/bundles/publipr/js/components/Language/language_form.html',
@@ -75533,7 +76266,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.EDITLANGUAGE'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'LanguageFormCtrl', 'languageService', 'userService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'LanguageFormCtrl', 'languageService', 'userService')
     }).state('app.settings.languagesdetails', {
         url: '/languages/details/:id',
         templateUrl: '/bundles/publipr/js/components/Language/language.html',
@@ -75556,7 +76289,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.NEWEMAILTEMPLATE'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'EmailTemplateFormCtrl', 'emailTemplateService', 'userService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'EmailTemplateFormCtrl', 'emailTemplateService', 'userService')
     }).state('app.settings.emailtemplatesedit', {
         url: '/email-templates/edit/:id',
         templateUrl: '/bundles/publipr/js/components/EmailTemplate/email_template_form.html',
@@ -75564,7 +76297,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.EDITEMAILTEMPLATE'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'EmailTemplateFormCtrl', 'emailTemplateService', 'userService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'EmailTemplateFormCtrl', 'emailTemplateService', 'userService')
     }).state('app.settings.emailtemplatesdetails', {
         url: '/email-templates/details/:id',
         templateUrl: '/bundles/publipr/js/components/EmailTemplate/email_template.html',
@@ -75587,7 +76320,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.NEWNEWSROOMTEMPLATE'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'NewsroomTemplateFormCtrl', 'newsroomTemplateService', 'userService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'NewsroomTemplateFormCtrl', 'newsroomTemplateService', 'userService')
     }).state('app.settings.newsroomtemplatesedit', {
         url: '/newsroom-templates/edit/:id',
         templateUrl: '/bundles/publipr/js/components/NewsroomTemplate/newsroom_template_form.html',
@@ -75595,7 +76328,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.EDITNEWSROOMTEMPLATE'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'NewsroomTemplateFormCtrl', 'newsroomTemplateService', 'userService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'NewsroomTemplateFormCtrl', 'newsroomTemplateService', 'userService')
     }).state('app.settings.newsroomtemplatesdetails', {
         url: '/newsroom-templates/details/:id',
         templateUrl: '/bundles/publipr/js/components/NewsroomTemplate/newsroom_template.html',
@@ -75618,7 +76351,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.NEWCOUNTRY'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'CountryFormCtrl', 'countryService', 'userService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'CountryFormCtrl', 'countryService', 'userService')
     }).state('app.settings.countriesedit', {
         url: '/countries/edit/:id',
         templateUrl: '/bundles/publipr/js/components/Country/country_form.html',
@@ -75626,7 +76359,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.EDITCOUNTRY'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'CountryFormCtrl', 'countryService', 'userService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'CountryFormCtrl', 'countryService', 'userService')
     }).state('app.settings.countriesdetails', {
         url: '/countries/details/:id',
         templateUrl: '/bundles/publipr/js/components/Country/country.html',
@@ -75634,6 +76367,37 @@ function ($stateProvider) {
             label: 'content.list.COUNTRYDETAILS'
         },
         resolve: loadSequence('CountryCtrl', 'countryService')
+    }).state('app.settings.fonts', {
+        url: '/fonts',
+        templateUrl: '/bundles/publipr/js/components/Font/fonts.html',
+        title: 'content.list.FONTS',
+        ncyBreadcrumb: {
+            label: 'content.list.FONTS'
+        },
+        resolve: loadSequence('ngTable', 'FontsCtrl', 'fontService', 'userService')
+    }).state('app.settings.fontsnew', {
+        url: '/fonts/new',
+        templateUrl: '/bundles/publipr/js/components/Font/font_form.html',
+        title: 'content.list.NEWFONT',
+        ncyBreadcrumb: {
+            label: 'content.list.NEWFONT'
+        },
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'FontFormCtrl', 'fontService', 'userService')
+    }).state('app.settings.fontsedit', {
+        url: '/fonts/edit/:id',
+        templateUrl: '/bundles/publipr/js/components/Font/font_form.html',
+        title: 'content.list.EDITFONT',
+        ncyBreadcrumb: {
+            label: 'content.list.EDITFONT'
+        },
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'FontFormCtrl', 'fontService', 'userService')
+    }).state('app.settings.fontsdetails', {
+        url: '/fonts/details/:id',
+        templateUrl: '/bundles/publipr/js/components/Font/font.html',
+        ncyBreadcrumb: {
+            label: 'content.list.FONTDETAILS'
+        },
+        resolve: loadSequence('FontCtrl', 'fontService')
     }).state('app.distribution', {
         url: '/distribution',
         template: '<div ui-view class="fade-in-up"></div>',
@@ -75656,7 +76420,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.NEWEMAIL'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'EmailFormCtrl', 'emailService', 'pressReleaseService', 'contactService', 'userService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'EmailFormCtrl', 'emailService', 'pressReleaseService', 'contactService', 'userService')
     }).state('app.distribution.emailsedit', {
         url: '/emails/edit/:id',
         templateUrl: '/bundles/publipr/js/components/Email/email_form.html',
@@ -75664,7 +76428,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.EDITEMAIL'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'EmailFormCtrl', 'emailService', 'pressReleaseService', 'contactService', 'userService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'EmailFormCtrl', 'emailService', 'pressReleaseService', 'contactService', 'userService')
     }).state('app.distribution.emailsdetails', {
         url: '/emails/details/:id',
         templateUrl: '/bundles/publipr/js/components/Email/email.html',
@@ -75672,113 +76436,106 @@ function ($stateProvider) {
             label: 'content.list.EMAILDETAILS'
         },
         resolve: loadSequence('EmailCtrl', 'emailService')
-    }).state('app.accesscontrol', {
-        url: '/access-control',
+    }).state('app.distribution.emailcampaigns', {
+        url: '/email-campaigns',
+        templateUrl: '/bundles/publipr/js/components/EmailCampaign/email_campaigns.html',
+        title: 'content.list.EMAILCAMPAIGNS',
+        ncyBreadcrumb: {
+            label: 'content.list.EMAILCAMPAIGNS'
+        },
+        resolve: loadSequence('ngTable', 'EmailCampaignsCtrl', 'emailCampaignService', 'pressReleaseService', 'userService')
+    }).state('app.distribution.emailcampaignsnew', {
+        url: '/email-campaigns/new',
+        templateUrl: '/bundles/publipr/js/components/EmailCampaign/email_campaign_form.html',
+        title: 'content.list.NEWEMAILCAMPAIGN',
+        ncyBreadcrumb: {
+            label: 'content.list.NEWEMAILCAMPAIGN'
+        },
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'EmailCampaignFormCtrl', 'emailCampaignService', 'pressReleaseService', 'userService')
+    }).state('app.distribution.emailcampaignsedit', {
+        url: '/email-campaigns/edit/:id',
+        templateUrl: '/bundles/publipr/js/components/EmailCampaign/email_campaign_form.html',
+        title: 'content.list.EDITEMAILCAMPAIGN',
+        ncyBreadcrumb: {
+            label: 'content.list.EDITEMAILCAMPAIGN'
+        },
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'EmailCampaignFormCtrl', 'emailCampaignService', 'pressReleaseService', 'userService')
+    }).state('app.distribution.emailcampaignsdetails', {
+        url: '/email-campaigns/details/:id',
+        templateUrl: '/bundles/publipr/js/components/EmailCampaign/email_campaign.html',
+        ncyBreadcrumb: {
+            label: 'content.list.EMAILCAMPAIGNDETAILS'
+        },
+        resolve: loadSequence('EmailCampaignCtrl', 'emailCampaignService')
+    }).state('app.prmanager', {
+        url: '/p-r-manager',
         template: '<div ui-view class="fade-in-up"></div>',
-        title: 'sidebar.nav.accesscontrol.MAIN',
+        title: 'sidebar.nav.prmanager.MAIN',
         ncyBreadcrumb: {
-            label: 'sidebar.nav.accesscontrol.MAIN'
+            label: 'sidebar.nav.prmanager.MAIN'
         }
-    }).state('app.accesscontrol.sessions', {
-        url: '/sessions',
-        templateUrl: '/bundles/publipr/js/components/Session/sessions.html',
-        title: 'content.list.SESSIONS',
+    }).state('app.prmanager.newsrooms', {
+        url: '/newsrooms',
+        templateUrl: '/bundles/publipr/js/components/Newsroom/newsrooms.html',
+        title: 'content.list.NEWSROOMS',
         ncyBreadcrumb: {
-            label: 'content.list.SESSIONS'
+            label: 'content.list.NEWSROOMS'
         },
-        resolve: loadSequence('ngTable', 'SessionsCtrl', 'sessionService', 'userService')
-    }).state('app.accesscontrol.sessionsnew', {
-        url: '/sessions/new',
-        templateUrl: '/bundles/publipr/js/components/Session/session_form.html',
-        title: 'content.list.NEWSESSION',
+        resolve: loadSequence('ngTable', 'NewsroomsCtrl', 'newsroomService', 'userService', 'userService')
+    }).state('app.prmanager.newsroomsnew', {
+        url: '/newsrooms/new',
+        templateUrl: '/bundles/publipr/js/components/Newsroom/newsroom_form.html',
+        title: 'content.list.NEWNEWSROOM',
         ncyBreadcrumb: {
-            label: 'content.list.NEWSESSION'
+            label: 'content.list.NEWNEWSROOM'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'SessionFormCtrl', 'sessionService', 'userService')
-    }).state('app.accesscontrol.sessionsedit', {
-        url: '/sessions/edit/:id',
-        templateUrl: '/bundles/publipr/js/components/Session/session_form.html',
-        title: 'content.list.EDITSESSION',
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'NewsroomFormCtrl', 'newsroomService', 'userService', 'userService')
+    }).state('app.prmanager.newsroomsedit', {
+        url: '/newsrooms/edit/:id',
+        templateUrl: '/bundles/publipr/js/components/Newsroom/newsroom_form.html',
+        title: 'content.list.EDITNEWSROOM',
         ncyBreadcrumb: {
-            label: 'content.list.EDITSESSION'
+            label: 'content.list.EDITNEWSROOM'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'SessionFormCtrl', 'sessionService', 'userService')
-    }).state('app.accesscontrol.sessionsdetails', {
-        url: '/sessions/details/:id',
-        templateUrl: '/bundles/publipr/js/components/Session/session.html',
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'NewsroomFormCtrl', 'newsroomService', 'userService', 'userService')
+    }).state('app.prmanager.newsroomsdetails', {
+        url: '/newsrooms/details/:id',
+        templateUrl: '/bundles/publipr/js/components/Newsroom/newsroom.html',
         ncyBreadcrumb: {
-            label: 'content.list.SESSIONDETAILS'
+            label: 'content.list.NEWSROOMDETAILS'
         },
-        resolve: loadSequence('SessionCtrl', 'sessionService')
-    }).state('app.accesscontrol.logs', {
-        url: '/logs',
-        templateUrl: '/bundles/publipr/js/components/Log/logs.html',
-        title: 'content.list.LOGS',
+        resolve: loadSequence('NewsroomCtrl', 'newsroomService')
+    }).state('app.prmanager.pressreleases', {
+        url: '/press-releases',
+        templateUrl: '/bundles/publipr/js/components/PressRelease/press_releases.html',
+        title: 'content.list.PRESSRELEASES',
         ncyBreadcrumb: {
-            label: 'content.list.LOGS'
+            label: 'content.list.PRESSRELEASES'
         },
-        resolve: loadSequence('ngTable', 'LogsCtrl', 'logService', 'sessionService', 'userService')
-    }).state('app.accesscontrol.logsnew', {
-        url: '/logs/new',
-        templateUrl: '/bundles/publipr/js/components/Log/log_form.html',
-        title: 'content.list.NEWLOG',
+        resolve: loadSequence('ngTable', 'PressReleasesCtrl', 'pressReleaseService', 'newsroomService', 'userService')
+    }).state('app.prmanager.pressreleasesnew', {
+        url: '/press-releases/new',
+        templateUrl: '/bundles/publipr/js/components/PressRelease/press_release_form.html',
+        title: 'content.list.NEWPRESSRELEASE',
         ncyBreadcrumb: {
-            label: 'content.list.NEWLOG'
+            label: 'content.list.NEWPRESSRELEASE'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'LogFormCtrl', 'logService', 'sessionService', 'userService')
-    }).state('app.accesscontrol.logsedit', {
-        url: '/logs/edit/:id',
-        templateUrl: '/bundles/publipr/js/components/Log/log_form.html',
-        title: 'content.list.EDITLOG',
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'PressReleaseFormCtrl', 'pressReleaseService', 'newsroomService', 'userService')
+    }).state('app.prmanager.pressreleasesedit', {
+        url: '/press-releases/edit/:id',
+        templateUrl: '/bundles/publipr/js/components/PressRelease/press_release_form.html',
+        title: 'content.list.EDITPRESSRELEASE',
         ncyBreadcrumb: {
-            label: 'content.list.EDITLOG'
+            label: 'content.list.EDITPRESSRELEASE'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'LogFormCtrl', 'logService', 'sessionService', 'userService')
-    }).state('app.accesscontrol.logsdetails', {
-        url: '/logs/details/:id',
-        templateUrl: '/bundles/publipr/js/components/Log/log.html',
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'PressReleaseFormCtrl', 'pressReleaseService', 'newsroomService', 'userService')
+    }).state('app.prmanager.pressreleasesdetails', {
+        url: '/press-releases/details/:id',
+        templateUrl: '/bundles/publipr/js/components/PressRelease/press_release.html',
         ncyBreadcrumb: {
-            label: 'content.list.LOGDETAILS'
+            label: 'content.list.PRESSRELEASEDETAILS'
         },
-        resolve: loadSequence('LogCtrl', 'logService')
-    }).state('app.nogroup', {
-        url: '/no-group',
-        template: '<div ui-view class="fade-in-up"></div>',
-        title: 'sidebar.nav.nogroup.MAIN',
-        ncyBreadcrumb: {
-            label: 'sidebar.nav.nogroup.MAIN'
-        }
-    }).state('app.nogroup.newsroomsusers', {
-        url: '/newsrooms-users',
-        templateUrl: '/bundles/publipr/js/components/NewsroomsUsers/newsrooms_users.html',
-        title: 'content.list.NEWSROOMSUSERSS',
-        ncyBreadcrumb: {
-            label: 'content.list.NEWSROOMSUSERSS'
-        },
-        resolve: loadSequence('ngTable', 'NewsroomsUsersCtrl', 'newsroomsUsersService', 'userService')
-    }).state('app.nogroup.newsroomsusersnew', {
-        url: '/newsrooms-users/new',
-        templateUrl: '/bundles/publipr/js/components/NewsroomsUsers/newsrooms_users_form.html',
-        title: 'content.list.NEWNEWSROOMSUSERS',
-        ncyBreadcrumb: {
-            label: 'content.list.NEWNEWSROOMSUSERS'
-        },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'NewsroomsUsersFormCtrl', 'newsroomsUsersService', 'userService')
-    }).state('app.nogroup.newsroomsusersedit', {
-        url: '/newsrooms-users/edit/:id',
-        templateUrl: '/bundles/publipr/js/components/NewsroomsUsers/newsrooms_users_form.html',
-        title: 'content.list.EDITNEWSROOMSUSERS',
-        ncyBreadcrumb: {
-            label: 'content.list.EDITNEWSROOMSUSERS'
-        },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'NewsroomsUsersFormCtrl', 'newsroomsUsersService', 'userService')
-    }).state('app.nogroup.newsroomsusersdetails', {
-        url: '/newsrooms-users/details/:id',
-        templateUrl: '/bundles/publipr/js/components/NewsroomsUsers/newsrooms_users.html',
-        ncyBreadcrumb: {
-            label: 'content.list.NEWSROOMSUSERSDETAILS'
-        },
-        resolve: loadSequence('NewsroomsUsersCtrl', 'newsroomsUsersService')
+        resolve: loadSequence('PressReleaseCtrl', 'pressReleaseService')
     }).state('app.billing', {
         url: '/billing',
         template: '<div ui-view class="fade-in-up"></div>',
@@ -75801,7 +76558,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.NEWPAYMENT'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'PaymentFormCtrl', 'paymentService', 'userService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'PaymentFormCtrl', 'paymentService', 'userService')
     }).state('app.billing.paymentsedit', {
         url: '/payments/edit/:id',
         templateUrl: '/bundles/publipr/js/components/Payment/payment_form.html',
@@ -75809,7 +76566,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.EDITPAYMENT'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'PaymentFormCtrl', 'paymentService', 'userService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'PaymentFormCtrl', 'paymentService', 'userService')
     }).state('app.billing.paymentsdetails', {
         url: '/payments/details/:id',
         templateUrl: '/bundles/publipr/js/components/Payment/payment.html',
@@ -75817,44 +76574,44 @@ function ($stateProvider) {
             label: 'content.list.PAYMENTDETAILS'
         },
         resolve: loadSequence('PaymentCtrl', 'paymentService')
-    }).state('app.pressreleasemanager', {
-        url: '/press-release-manager',
+    }).state('app.accesscontrol', {
+        url: '/access-control',
         template: '<div ui-view class="fade-in-up"></div>',
-        title: 'sidebar.nav.pressreleasemanager.MAIN',
+        title: 'sidebar.nav.accesscontrol.MAIN',
         ncyBreadcrumb: {
-            label: 'sidebar.nav.pressreleasemanager.MAIN'
+            label: 'sidebar.nav.accesscontrol.MAIN'
         }
-    }).state('app.pressreleasemanager.pressreleases', {
-        url: '/press-releases',
-        templateUrl: '/bundles/publipr/js/components/PressRelease/press_releases.html',
-        title: 'content.list.PRESSRELEASES',
+    }).state('app.accesscontrol.sessions', {
+        url: '/sessions',
+        templateUrl: '/bundles/publipr/js/components/Session/sessions.html',
+        title: 'content.list.SESSIONS',
         ncyBreadcrumb: {
-            label: 'content.list.PRESSRELEASES'
+            label: 'content.list.SESSIONS'
         },
-        resolve: loadSequence('ngTable', 'PressReleasesCtrl', 'pressReleaseService', 'newsroomService', 'userService')
-    }).state('app.pressreleasemanager.pressreleasesnew', {
-        url: '/press-releases/new',
-        templateUrl: '/bundles/publipr/js/components/PressRelease/press_release_form.html',
-        title: 'content.list.NEWPRESSRELEASE',
+        resolve: loadSequence('ngTable', 'SessionsCtrl', 'sessionService', 'userService')
+    }).state('app.accesscontrol.sessionsnew', {
+        url: '/sessions/new',
+        templateUrl: '/bundles/publipr/js/components/Session/session_form.html',
+        title: 'content.list.NEWSESSION',
         ncyBreadcrumb: {
-            label: 'content.list.NEWPRESSRELEASE'
+            label: 'content.list.NEWSESSION'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'PressReleaseFormCtrl', 'pressReleaseService', 'newsroomService', 'userService')
-    }).state('app.pressreleasemanager.pressreleasesedit', {
-        url: '/press-releases/edit/:id',
-        templateUrl: '/bundles/publipr/js/components/PressRelease/press_release_form.html',
-        title: 'content.list.EDITPRESSRELEASE',
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'SessionFormCtrl', 'sessionService', 'userService')
+    }).state('app.accesscontrol.sessionsedit', {
+        url: '/sessions/edit/:id',
+        templateUrl: '/bundles/publipr/js/components/Session/session_form.html',
+        title: 'content.list.EDITSESSION',
         ncyBreadcrumb: {
-            label: 'content.list.EDITPRESSRELEASE'
+            label: 'content.list.EDITSESSION'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'PressReleaseFormCtrl', 'pressReleaseService', 'newsroomService', 'userService')
-    }).state('app.pressreleasemanager.pressreleasesdetails', {
-        url: '/press-releases/details/:id',
-        templateUrl: '/bundles/publipr/js/components/PressRelease/press_release.html',
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'SessionFormCtrl', 'sessionService', 'userService')
+    }).state('app.accesscontrol.sessionsdetails', {
+        url: '/sessions/details/:id',
+        templateUrl: '/bundles/publipr/js/components/Session/session.html',
         ncyBreadcrumb: {
-            label: 'content.list.PRESSRELEASEDETAILS'
+            label: 'content.list.SESSIONDETAILS'
         },
-        resolve: loadSequence('PressReleaseCtrl', 'pressReleaseService')
+        resolve: loadSequence('SessionCtrl', 'sessionService')
     }).state('app.statistics', {
         url: '/statistics',
         template: '<div ui-view class="fade-in-up"></div>',
@@ -75877,7 +76634,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.NEWTRACKPRESSRELEASE'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'TrackPressReleaseFormCtrl', 'trackPressReleaseService', 'pressReleaseService', 'userService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'TrackPressReleaseFormCtrl', 'trackPressReleaseService', 'pressReleaseService', 'userService')
     }).state('app.statistics.trackpressreleasesedit', {
         url: '/track-press-releases/edit/:id',
         templateUrl: '/bundles/publipr/js/components/TrackPressRelease/track_press_release_form.html',
@@ -75885,7 +76642,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.EDITTRACKPRESSRELEASE'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'TrackPressReleaseFormCtrl', 'trackPressReleaseService', 'pressReleaseService', 'userService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'TrackPressReleaseFormCtrl', 'trackPressReleaseService', 'pressReleaseService', 'userService')
     }).state('app.statistics.trackpressreleasesdetails', {
         url: '/track-press-releases/details/:id',
         templateUrl: '/bundles/publipr/js/components/TrackPressRelease/track_press_release.html',
@@ -75908,7 +76665,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.NEWTRACKEMAIL'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'TrackEmailFormCtrl', 'trackEmailService', 'emailService', 'userService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'TrackEmailFormCtrl', 'trackEmailService', 'emailService', 'userService')
     }).state('app.statistics.trackemailsedit', {
         url: '/track-emails/edit/:id',
         templateUrl: '/bundles/publipr/js/components/TrackEmail/track_email_form.html',
@@ -75916,7 +76673,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.EDITTRACKEMAIL'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'TrackEmailFormCtrl', 'trackEmailService', 'emailService', 'userService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'TrackEmailFormCtrl', 'trackEmailService', 'emailService', 'userService')
     }).state('app.statistics.trackemailsdetails', {
         url: '/track-emails/details/:id',
         templateUrl: '/bundles/publipr/js/components/TrackEmail/track_email.html',
@@ -76309,7 +77066,7 @@ function offscreen($rootScope, $timeout) {
     restrict: 'EA',
     replace: true,
     transclude: true,
-    templateUrl: 'views/directives/toggle-offscreen.html',
+    templateUrl: '/app/views/directives/toggle-offscreen.html',
     link: function (scope, element, attrs) {
       scope.offscreenDirection = attrs.move;
     },
@@ -78420,7 +79177,7 @@ function ($scope, $localStorage, $timeout, $uibModalInstance, field, value) {
             onlyMimes: ['image', 'video'],
             customHeaders: {
                 'Authorization': 'Bearer ' + $localStorage.access_token,
-                'BX-Application': 'BackOffice'
+                'PP-Application': 'BackOffice'
             },
             getFileCallback : function(file) {
                 var parser = document.createElement('a');

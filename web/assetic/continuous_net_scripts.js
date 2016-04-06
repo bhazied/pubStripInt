@@ -51,7 +51,7 @@ angular
     function AppCtrl($scope, $http, $localStorage, $state, $timeout) {
 
         $scope.anonymousStates = ['auth.login', 'auth.register', 'auth.resetpassword', 'auth.reset', 'auth.lockscreen', 'auth.emailconfirm'];
-
+        /*
         $timeout(function() {
             if ($scope.anonymousStates.indexOf($state.current.name) == -1 && !angular.isDefined($localStorage.access_token)) {
                 $timeout(function() {
@@ -60,7 +60,7 @@ angular
                 });
             }
         }, 2000);
-
+        */
         $scope.mobileView = 767;
 
         $scope.app = {
@@ -90,7 +90,7 @@ angular
             fname: 'Sahbi',
             lname: 'KHALFALLAH',
             jobDesc: 'Senior Web Consultant',
-            avatar: 'images/avatar.jpg',
+            avatar: '/app/images/avatar.jpg',
         };
 
         if (angular.isDefined($localStorage.layout)) {
@@ -108,6 +108,130 @@ angular
         };
     }
 ]);
+
+'use strict';
+
+/**
+ * Config constant
+ */
+app.constant('APP_MEDIAQUERY', {
+    'desktopXL': 1200,
+    'desktop': 992,
+    'tablet': 768,
+    'mobile': 480
+});
+
+
+app.constant('JS_REQUIRES', {
+    //*** Scripts
+    scripts: {
+        //*** Javascript Plugins
+        'modernizr': ['/bower_components/components-modernizr/modernizr.js'],
+        'moment': ['/bower_components/moment/min/moment.min.js'],
+        'spin': '/bower_components/spin.js/spin.js',
+
+        //*** jQuery Plugins
+        'perfect-scrollbar-plugin': ['/bower_components/perfect-scrollbar/js/min/perfect-scrollbar.jquery.min.js', '/bower_components/perfect-scrollbar/css/perfect-scrollbar.min.css'],
+        'ladda': ['/bower_components/ladda/dist/ladda.min.js', '/bower_components/ladda/dist/ladda-themeless.min.css'],
+        'sweet-alert': ['/bower_components/sweetalert/dist/sweetalert.min.js', '/bower_components/sweetalert/dist/sweetalert.css'],
+        'chartjs': '/bower_components/chartjs/Chart.min.js',
+        'jquery-sparkline': '/bower_components/jquery.sparkline.build/dist/jquery.sparkline.min.js',
+        'ckeditor-plugin': ['/bower_components/ckeditor/ckeditor.js'],
+        'jquery-nestable-plugin': ['/bower_components/jquery-nestable/jquery.nestable.js'],
+        'touchspin-plugin': ['/bower_components/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js', '/bower_components/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css'],
+
+        //*** Controllers
+
+        //*** Filters
+        'htmlToPlaintext': '/app/scripts/filters/htmlToPlaintext.js'
+    },
+    //*** angularJS Modules
+    modules: [{
+        name: 'd3',
+        files: ['/bower_components/d3/d3.min.js']
+    }, {
+        name: 'rickshaw',
+        files: ['/bower_components/rickshaw/rickshaw.min.js']
+    }, {
+        name: 'angularMoment',
+        files: ['/bower_components/angular-moment/angular-moment.min.js']
+    }, {
+        name: 'flot',
+        files: [
+            '/bower_components/flot/jquery.flot.js',
+            '/bower_components/flot/jquery.flot.resize.js',
+            '/bower_components/flot/jquery.flot.pie.js',
+            '/bower_components/flot/jquery.flot.categories.js',
+            '/bower_components/angular-flot/angular-flot.js'
+        ]
+    }, {
+        name: 'toaster',
+        files: ['/bower_components/AngularJS-Toaster/toaster.js', '/bower_components/AngularJS-Toaster/toaster.css']
+    }, {
+        name: 'angularBootstrapNavTree',
+        files: ['/bower_components/angular-bootstrap-nav-tree/dist/abn_tree_directive.js', '/bower_components/angular-bootstrap-nav-tree/dist/abn_tree.css']
+    }, {
+        name: 'angular-ladda',
+        files: ['/bower_components/angular-ladda/dist/angular-ladda.min.js']
+    }, {
+        name: 'ngTable',
+        files: ['/bower_components/ng-table/dist/ng-table.min.js', '/bower_components/ng-table/dist/ng-table.min.css']
+    }, {
+        name: 'ui.select',
+        files: ['/bower_components/angular-ui-select/dist/select.min.js', '/bower_components/angular-ui-select/dist/select.min.css', '/bower_components/select2/dist/css/select2.min.css', '/bower_components/select2-bootstrap-css/select2-bootstrap.min.css', '/bower_components/selectize/dist/css/selectize.bootstrap3.css']
+    }, {
+        name: 'ngImgCrop',
+        files: ['/bower_components/ngImgCrop/compile/minified/ng-img-crop.js', '/bower_components/ngImgCrop/compile/minified/ng-img-crop.css']
+    }, {
+        name: 'angularFileUpload',
+        files: ['/bower_components/angular-file-upload/angular-file-upload.min.js']
+    }, {
+        name: 'ngAside',
+        files: ['/bower_components/angular-aside/dist/js/angular-aside.min.js', '/bower_components/angular-aside/dist/css/angular-aside.min.css']
+    }, {
+        name: 'truncate',
+        files: ['/bower_components/angular-truncate/src/truncate.js']
+    }, {
+        name: 'oitozero.ngSweetAlert',
+        files: ['/bower_components/angular-sweetalert-promised/SweetAlert.min.js']
+    }, {
+        name: 'monospaced.elastic',
+        files: ['/bower_components/angular-elastic/elastic.js']
+    }, {
+        name: 'ngMap',
+        files: ['/bower_components/ngmap/build/scripts/ng-map.min.js']
+    }, {
+        name: 'tc.chartjs',
+        files: ['/bower_components/tc-angular-chartjs/dist/tc-angular-chartjs.min.js']
+    }, {
+        name: 'flow',
+        files: ['/bower_components/ng-flow/dist/ng-flow-standalone.min.js']
+    }, {
+        name: 'uiSwitch',
+        files: ['/bower_components/angular-ui-switch/angular-ui-switch.min.js', '/bower_components/angular-ui-switch/angular-ui-switch.min.css']
+    }, {
+        name: 'ckeditor',
+        files: ['/bower_components/angular-ckeditor/angular-ckeditor.min.js']
+    }, {
+        name: 'mwl.calendar',
+        files: ['/bower_components/angular-bootstrap-calendar/dist/js/angular-bootstrap-calendar-tpls.js', '/bower_components/angular-bootstrap-calendar/dist/css/angular-bootstrap-calendar.min.css', '/assets/js/config/config-calendar.js']
+    }, {
+        name: 'ng-nestable',
+        files: ['/bower_components/ng-nestable/src/angular-nestable.js']
+    }, {
+        name: 'vAccordion',
+        files: ['/bower_components/v-accordion/dist/v-accordion.min.js', '/bower_components/v-accordion/dist/v-accordion.min.css']
+    }, {
+        name: 'xeditable',
+        files: ['/bower_components/angular-xeditable/dist/js/xeditable.min.js', '/bower_components/angular-xeditable/dist/css/xeditable.css', '/assets/js/config/config-xeditable.js']
+    }, {
+        name: 'checklist-model',
+        files: ['/bower_components/checklist-model/checklist-model.js']
+    }, {
+        name: 'angular-notification-icons',
+        files: ['/bower_components/angular-notification-icons/dist/angular-notification-icons.min.js', '/bower_components/angular-notification-icons/dist/angular-notification-icons.min.css']
+    }]
+});
 
 app.constant('APP_JS_REQUIRES', {
     //*** Scripts
@@ -162,9 +286,9 @@ app.constant('APP_JS_REQUIRES', {
         'NewsroomTemplatesCtrl': '/bundles/publipr/js/components/NewsroomTemplate/NewsroomTemplatesCtrl.js',
         'NewsroomTemplateFormCtrl': '/bundles/publipr/js/components/NewsroomTemplate/NewsroomTemplateFromCtrl.js',
         'NewsroomTemplateCtrl': '/bundles/publipr/js/components/NewsroomTemplate/NewsroomTemplateCtrl.js',
-        'NewsroomsUsersCtrl': '/bundles/publipr/js/components/NewsroomsUsers/NewsroomsUsersCtrl.js',
-        'NewsroomsUsersFormCtrl': '/bundles/publipr/js/components/NewsroomsUsers/NewsroomsUsersFromCtrl.js',
-        'NewsroomsUsersCtrl': '/bundles/publipr/js/components/NewsroomsUsers/NewsroomsUsersCtrl.js',
+        'UsersCtrl': '/bundles/publipr/js/components/User/UsersCtrl.js',
+        'UserFormCtrl': '/bundles/publipr/js/components/User/UserFromCtrl.js',
+        'UserCtrl': '/bundles/publipr/js/components/User/UserCtrl.js',
         'PaymentsCtrl': '/bundles/publipr/js/components/Payment/PaymentsCtrl.js',
         'PaymentFormCtrl': '/bundles/publipr/js/components/Payment/PaymentFromCtrl.js',
         'PaymentCtrl': '/bundles/publipr/js/components/Payment/PaymentCtrl.js',
@@ -185,10 +309,7 @@ app.constant('APP_JS_REQUIRES', {
         'TrackEmailCtrl': '/bundles/publipr/js/components/TrackEmail/TrackEmailCtrl.js',
         'TrackPressReleasesCtrl': '/bundles/publipr/js/components/TrackPressRelease/TrackPressReleasesCtrl.js',
         'TrackPressReleaseFormCtrl': '/bundles/publipr/js/components/TrackPressRelease/TrackPressReleaseFromCtrl.js',
-        'TrackPressReleaseCtrl': '/bundles/publipr/js/components/TrackPressRelease/TrackPressReleaseCtrl.js',
-        'UsersCtrl': '/bundles/publipr/js/components/User/UsersCtrl.js',
-        'UserFormCtrl': '/bundles/publipr/js/components/User/UserFromCtrl.js',
-        'UserCtrl': '/bundles/publipr/js/components/User/UserCtrl.js'
+        'TrackPressReleaseCtrl': '/bundles/publipr/js/components/TrackPressRelease/TrackPressReleaseCtrl.js'
     },
     modules: [{
         name: 'LoginService',
@@ -245,8 +366,8 @@ app.constant('APP_JS_REQUIRES', {
         name: 'newsroomTemplateService',
         files: ['/bundles/publipr/js/components/NewsroomTemplate/NewsroomTemplateService.js']
     },{
-        name: 'newsroomsUsersService',
-        files: ['/bundles/publipr/js/components/NewsroomsUsers/NewsroomsUsersService.js']
+        name: 'userService',
+        files: ['/bundles/publipr/js/components/User/UserService.js']
     },{
         name: 'paymentService',
         files: ['/bundles/publipr/js/components/Payment/PaymentService.js']
@@ -268,9 +389,6 @@ app.constant('APP_JS_REQUIRES', {
     },{
         name: 'trackPressReleaseService',
         files: ['/bundles/publipr/js/components/TrackPressRelease/TrackPressReleaseService.js']
-    },{
-        name: 'userService',
-        files: ['/bundles/publipr/js/components/User/UserService.js']
     }]
 });
 
@@ -331,6 +449,7 @@ angular
 
       // Application routes
       $stateProvider.state('app', {
+        url: '/app',
         templateUrl: '/app/views/common/layout.html',
         resolve: loadSequence('modernizr', 'moment', 'angularMoment', 'uiSwitch', 'perfect-scrollbar-plugin', 'toaster', 'ngAside', 'vAccordion', 'chartjs', 'tc.chartjs', 'sweet-alert', 'oitozero.ngSweetAlert', 'truncate', 'htmlToPlaintext', 'angular-notification-icons', 'd3', 'rickshaw', 'flot'),
         abstract: true
@@ -1436,132 +1555,6 @@ app.config(function($interpolateProvider) {
     $interpolateProvider.endSymbol(']]');
 });
 
-
-/**
- * Config constant
- */
-app.constant('APP_MEDIAQUERY', {
-    'desktopXL': 1200,
-    'desktop': 992,
-    'tablet': 768,
-    'mobile': 480
-});
-
-
-app.constant('JS_REQUIRES', {
-    //*** Scripts
-    scripts: {
-        //*** Javascript Plugins
-        'modernizr': ['/bower_components/components-modernizr/modernizr.js'],
-        'moment': ['/bower_components/moment/min/moment.min.js'],
-        'spin': '/bower_components/spin.js/spin.js',
-
-        //*** jQuery Plugins
-        'perfect-scrollbar-plugin': ['/bower_components/perfect-scrollbar/js/min/perfect-scrollbar.jquery.min.js', '/bower_components/perfect-scrollbar/css/perfect-scrollbar.min.css'],
-        'ladda': ['/bower_components/ladda/dist/ladda.min.js', '/bower_components/ladda/dist/ladda-themeless.min.css'],
-        'sweet-alert': ['/bower_components/sweetalert/dist/sweetalert.min.js', '/bower_components/sweetalert/dist/sweetalert.css'],
-        'chartjs': '/bower_components/chartjs/Chart.min.js',
-        'jquery-sparkline': '/bower_components/jquery.sparkline.build/dist/jquery.sparkline.min.js',
-        'ckeditor-plugin': ['/bower_components/ckeditor/ckeditor.js'],
-        'jquery-nestable-plugin': ['/bower_components/jquery-nestable/jquery.nestable.js'],
-        'touchspin-plugin': ['/bower_components/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js', '/bower_components/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css'],
-
-        //*** Controllers
-
-        //*** Filters
-        'htmlToPlaintext': '/app/scripts/filters/htmlToPlaintext.js'
-    },
-    //*** angularJS Modules
-    modules: [{
-        name: 'd3',
-        files: ['/bower_components/d3/d3.min.js']
-    }, {
-        name: 'rickshaw',
-        files: ['/bower_components/rickshaw/rickshaw.min.js']
-    }, {
-        name: 'angularMoment',
-        files: ['/bower_components/angular-moment/angular-moment.min.js']
-    }, {
-        name: 'flot',
-        files: [
-            '/bower_components/flot/jquery.flot.js',
-            '/bower_components/flot/jquery.flot.resize.js',
-            '/bower_components/flot/jquery.flot.pie.js',
-            '/bower_components/flot/jquery.flot.categories.js',
-            '/bower_components/angular-flot/angular-flot.js'
-        ]
-    }, {
-        name: 'toaster',
-        files: ['/bower_components/AngularJS-Toaster/toaster.js', '/bower_components/AngularJS-Toaster/toaster.css']
-    }, {
-        name: 'angularBootstrapNavTree',
-        files: ['/bower_components/angular-bootstrap-nav-tree/dist/abn_tree_directive.js', '/bower_components/angular-bootstrap-nav-tree/dist/abn_tree.css']
-    }, {
-        name: 'angular-ladda',
-        files: ['/bower_components/angular-ladda/dist/angular-ladda.min.js']
-    }, {
-        name: 'ngTable',
-        files: ['/bower_components/ng-table/dist/ng-table.min.js', '/bower_components/ng-table/dist/ng-table.min.css']
-    }, {
-        name: 'ui.select',
-        files: ['/bower_components/angular-ui-select/dist/select.min.js', '/bower_components/angular-ui-select/dist/select.min.css', '/bower_components/select2/dist/css/select2.min.css', '/bower_components/select2-bootstrap-css/select2-bootstrap.min.css', '/bower_components/selectize/dist/css/selectize.bootstrap3.css']
-    }, {
-        name: 'ui.mask',
-        files: ['/bower_components/angular-ui-utils/mask.min.js']
-    }, {
-        name: 'ngImgCrop',
-        files: ['/bower_components/ngImgCrop/compile/minified/ng-img-crop.js', '/bower_components/ngImgCrop/compile/minified/ng-img-crop.css']
-    }, {
-        name: 'angularFileUpload',
-        files: ['/bower_components/angular-file-upload/angular-file-upload.min.js']
-    }, {
-        name: 'ngAside',
-        files: ['/bower_components/angular-aside/dist/js/angular-aside.min.js', '/bower_components/angular-aside/dist/css/angular-aside.min.css']
-    }, {
-        name: 'truncate',
-        files: ['/bower_components/angular-truncate/src/truncate.js']
-    }, {
-        name: 'oitozero.ngSweetAlert',
-        files: ['/bower_components/angular-sweetalert-promised/SweetAlert.min.js']
-    }, {
-        name: 'monospaced.elastic',
-        files: ['/bower_components/angular-elastic/elastic.js']
-    }, {
-        name: 'ngMap',
-        files: ['/bower_components/ngmap/build/scripts/ng-map.min.js']
-    }, {
-        name: 'tc.chartjs',
-        files: ['/bower_components/tc-angular-chartjs/dist/tc-angular-chartjs.min.js']
-    }, {
-        name: 'flow',
-        files: ['/bower_components/ng-flow/dist/ng-flow-standalone.min.js']
-    }, {
-        name: 'uiSwitch',
-        files: ['/bower_components/angular-ui-switch/angular-ui-switch.min.js', '/bower_components/angular-ui-switch/angular-ui-switch.min.css']
-    }, {
-        name: 'ckeditor',
-        files: ['/bower_components/angular-ckeditor/angular-ckeditor.min.js']
-    }, {
-        name: 'mwl.calendar',
-        files: ['/bower_components/angular-bootstrap-calendar/dist/js/angular-bootstrap-calendar-tpls.js', '/bower_components/angular-bootstrap-calendar/dist/css/angular-bootstrap-calendar.min.css', '/assets/js/config/config-calendar.js']
-    }, {
-        name: 'ng-nestable',
-        files: ['/bower_components/ng-nestable/src/angular-nestable.js']
-    }, {
-        name: 'vAccordion',
-        files: ['/bower_components/v-accordion/dist/v-accordion.min.js', '/bower_components/v-accordion/dist/v-accordion.min.css']
-    }, {
-        name: 'xeditable',
-        files: ['/bower_components/angular-xeditable/dist/js/xeditable.min.js', '/bower_components/angular-xeditable/dist/css/xeditable.css', '/assets/js/config/config-xeditable.js']
-    }, {
-        name: 'checklist-model',
-        files: ['/bower_components/checklist-model/checklist-model.js']
-    }, {
-        name: 'angular-notification-icons',
-        files: ['/bower_components/angular-notification-icons/dist/angular-notification-icons.min.js', '/bower_components/angular-notification-icons/dist/angular-notification-icons.min.css']
-    }]
-});
-
 app.factory('httpRequestInterceptor', ['$q', '$localStorage', '$location', '$filter', '$timeout', 'toaster',
     function ($q, $localStorage, $location, $filter, $timeout, toaster) {
         return {
@@ -1772,7 +1765,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.NEWUSER'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'UserFormCtrl', 'userService', 'companyService', 'countryService', 'languageService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'UserFormCtrl', 'userService', 'companyService', 'countryService', 'languageService')
     }).state('app.access.usersedit', {
         url: '/users/edit/:id',
         templateUrl: '/bundles/publipr/js/components/User/user_form.html',
@@ -1780,7 +1773,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.EDITUSER'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'UserFormCtrl', 'userService', 'companyService', 'countryService', 'languageService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'UserFormCtrl', 'userService', 'companyService', 'countryService', 'languageService')
     }).state('app.access.usersdetails', {
         url: '/users/details/:id',
         templateUrl: '/bundles/publipr/js/components/User/user.html',
@@ -1788,68 +1781,6 @@ function ($stateProvider) {
             label: 'content.list.USERDETAILS'
         },
         resolve: loadSequence('UserCtrl', 'userService')
-    }).state('app.access.settings', {
-        url: '/settings',
-        templateUrl: '/bundles/publipr/js/components/Setting/settings.html',
-        title: 'content.list.SETTINGS',
-        ncyBreadcrumb: {
-            label: 'content.list.SETTINGS'
-        },
-        resolve: loadSequence('ngTable', 'SettingsCtrl', 'settingService', 'userService')
-    }).state('app.access.settingsnew', {
-        url: '/settings/new',
-        templateUrl: '/bundles/publipr/js/components/Setting/setting_form.html',
-        title: 'content.list.NEWSETTING',
-        ncyBreadcrumb: {
-            label: 'content.list.NEWSETTING'
-        },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'SettingFormCtrl', 'settingService', 'userService')
-    }).state('app.access.settingsedit', {
-        url: '/settings/edit/:id',
-        templateUrl: '/bundles/publipr/js/components/Setting/setting_form.html',
-        title: 'content.list.EDITSETTING',
-        ncyBreadcrumb: {
-            label: 'content.list.EDITSETTING'
-        },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'SettingFormCtrl', 'settingService', 'userService')
-    }).state('app.access.settingsdetails', {
-        url: '/settings/details/:id',
-        templateUrl: '/bundles/publipr/js/components/Setting/setting.html',
-        ncyBreadcrumb: {
-            label: 'content.list.SETTINGDETAILS'
-        },
-        resolve: loadSequence('SettingCtrl', 'settingService')
-    }).state('app.access.fonts', {
-        url: '/fonts',
-        templateUrl: '/bundles/publipr/js/components/Font/fonts.html',
-        title: 'content.list.FONTS',
-        ncyBreadcrumb: {
-            label: 'content.list.FONTS'
-        },
-        resolve: loadSequence('ngTable', 'FontsCtrl', 'fontService', 'userService')
-    }).state('app.access.fontsnew', {
-        url: '/fonts/new',
-        templateUrl: '/bundles/publipr/js/components/Font/font_form.html',
-        title: 'content.list.NEWFONT',
-        ncyBreadcrumb: {
-            label: 'content.list.NEWFONT'
-        },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'FontFormCtrl', 'fontService', 'userService')
-    }).state('app.access.fontsedit', {
-        url: '/fonts/edit/:id',
-        templateUrl: '/bundles/publipr/js/components/Font/font_form.html',
-        title: 'content.list.EDITFONT',
-        ncyBreadcrumb: {
-            label: 'content.list.EDITFONT'
-        },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'FontFormCtrl', 'fontService', 'userService')
-    }).state('app.access.fontsdetails', {
-        url: '/fonts/details/:id',
-        templateUrl: '/bundles/publipr/js/components/Font/font.html',
-        ncyBreadcrumb: {
-            label: 'content.list.FONTDETAILS'
-        },
-        resolve: loadSequence('FontCtrl', 'fontService')
     }).state('app.access.companies', {
         url: '/companies',
         templateUrl: '/bundles/publipr/js/components/Company/companies.html',
@@ -1865,7 +1796,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.NEWCOMPANY'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'CompanyFormCtrl', 'companyService', 'userService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'CompanyFormCtrl', 'companyService', 'userService')
     }).state('app.access.companiesedit', {
         url: '/companies/edit/:id',
         templateUrl: '/bundles/publipr/js/components/Company/company_form.html',
@@ -1873,7 +1804,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.EDITCOMPANY'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'CompanyFormCtrl', 'companyService', 'userService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'CompanyFormCtrl', 'companyService', 'userService')
     }).state('app.access.companiesdetails', {
         url: '/companies/details/:id',
         templateUrl: '/bundles/publipr/js/components/Company/company.html',
@@ -1881,6 +1812,68 @@ function ($stateProvider) {
             label: 'content.list.COMPANYDETAILS'
         },
         resolve: loadSequence('CompanyCtrl', 'companyService')
+    }).state('app.access.settings', {
+        url: '/settings',
+        templateUrl: '/bundles/publipr/js/components/Setting/settings.html',
+        title: 'content.list.SETTINGS',
+        ncyBreadcrumb: {
+            label: 'content.list.SETTINGS'
+        },
+        resolve: loadSequence('ngTable', 'SettingsCtrl', 'settingService', 'userService')
+    }).state('app.access.settingsnew', {
+        url: '/settings/new',
+        templateUrl: '/bundles/publipr/js/components/Setting/setting_form.html',
+        title: 'content.list.NEWSETTING',
+        ncyBreadcrumb: {
+            label: 'content.list.NEWSETTING'
+        },
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'SettingFormCtrl', 'settingService', 'userService')
+    }).state('app.access.settingsedit', {
+        url: '/settings/edit/:id',
+        templateUrl: '/bundles/publipr/js/components/Setting/setting_form.html',
+        title: 'content.list.EDITSETTING',
+        ncyBreadcrumb: {
+            label: 'content.list.EDITSETTING'
+        },
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'SettingFormCtrl', 'settingService', 'userService')
+    }).state('app.access.settingsdetails', {
+        url: '/settings/details/:id',
+        templateUrl: '/bundles/publipr/js/components/Setting/setting.html',
+        ncyBreadcrumb: {
+            label: 'content.list.SETTINGDETAILS'
+        },
+        resolve: loadSequence('SettingCtrl', 'settingService')
+    }).state('app.access.logs', {
+        url: '/logs',
+        templateUrl: '/bundles/publipr/js/components/Log/logs.html',
+        title: 'content.list.LOGS',
+        ncyBreadcrumb: {
+            label: 'content.list.LOGS'
+        },
+        resolve: loadSequence('ngTable', 'LogsCtrl', 'logService', 'sessionService', 'userService')
+    }).state('app.access.logsnew', {
+        url: '/logs/new',
+        templateUrl: '/bundles/publipr/js/components/Log/log_form.html',
+        title: 'content.list.NEWLOG',
+        ncyBreadcrumb: {
+            label: 'content.list.NEWLOG'
+        },
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'LogFormCtrl', 'logService', 'sessionService', 'userService')
+    }).state('app.access.logsedit', {
+        url: '/logs/edit/:id',
+        templateUrl: '/bundles/publipr/js/components/Log/log_form.html',
+        title: 'content.list.EDITLOG',
+        ncyBreadcrumb: {
+            label: 'content.list.EDITLOG'
+        },
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'LogFormCtrl', 'logService', 'sessionService', 'userService')
+    }).state('app.access.logsdetails', {
+        url: '/logs/details/:id',
+        templateUrl: '/bundles/publipr/js/components/Log/log.html',
+        ncyBreadcrumb: {
+            label: 'content.list.LOGDETAILS'
+        },
+        resolve: loadSequence('LogCtrl', 'logService')
     }).state('app.contactmanager', {
         url: '/contact-manager',
         template: '<div ui-view class="fade-in-up"></div>',
@@ -1903,7 +1896,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.NEWCONTACTGROUP'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'ContactGroupFormCtrl', 'contactGroupService', 'userService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'ContactGroupFormCtrl', 'contactGroupService', 'userService')
     }).state('app.contactmanager.contactgroupsedit', {
         url: '/contact-groups/edit/:id',
         templateUrl: '/bundles/publipr/js/components/ContactGroup/contact_group_form.html',
@@ -1911,7 +1904,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.EDITCONTACTGROUP'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'ContactGroupFormCtrl', 'contactGroupService', 'userService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'ContactGroupFormCtrl', 'contactGroupService', 'userService')
     }).state('app.contactmanager.contactgroupsdetails', {
         url: '/contact-groups/details/:id',
         templateUrl: '/bundles/publipr/js/components/ContactGroup/contact_group.html',
@@ -1934,7 +1927,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.NEWCONTACT'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'ContactFormCtrl', 'contactService', 'contactGroupService', 'userService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'ContactFormCtrl', 'contactService', 'contactGroupService', 'userService')
     }).state('app.contactmanager.contactsedit', {
         url: '/contacts/edit/:id',
         templateUrl: '/bundles/publipr/js/components/Contact/contact_form.html',
@@ -1942,7 +1935,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.EDITCONTACT'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'ContactFormCtrl', 'contactService', 'contactGroupService', 'userService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'ContactFormCtrl', 'contactService', 'contactGroupService', 'userService')
     }).state('app.contactmanager.contactsdetails', {
         url: '/contacts/details/:id',
         templateUrl: '/bundles/publipr/js/components/Contact/contact.html',
@@ -1972,7 +1965,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.NEWTEMPLATE'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'TemplateFormCtrl', 'templateService', 'userService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'TemplateFormCtrl', 'templateService', 'userService')
     }).state('app.templatemanager.templatesedit', {
         url: '/templates/edit/:id',
         templateUrl: '/bundles/publipr/js/components/Template/template_form.html',
@@ -1980,7 +1973,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.EDITTEMPLATE'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'TemplateFormCtrl', 'templateService', 'userService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'TemplateFormCtrl', 'templateService', 'userService')
     }).state('app.templatemanager.templatesdetails', {
         url: '/templates/details/:id',
         templateUrl: '/bundles/publipr/js/components/Template/template.html',
@@ -2003,7 +1996,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.NEWLAYOUT'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'LayoutFormCtrl', 'layoutService', 'userService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'LayoutFormCtrl', 'layoutService', 'userService')
     }).state('app.templatemanager.layoutsedit', {
         url: '/layouts/edit/:id',
         templateUrl: '/bundles/publipr/js/components/Layout/layout_form.html',
@@ -2011,7 +2004,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.EDITLAYOUT'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'LayoutFormCtrl', 'layoutService', 'userService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'LayoutFormCtrl', 'layoutService', 'userService')
     }).state('app.templatemanager.layoutsdetails', {
         url: '/layouts/details/:id',
         templateUrl: '/bundles/publipr/js/components/Layout/layout.html',
@@ -2019,37 +2012,6 @@ function ($stateProvider) {
             label: 'content.list.LAYOUTDETAILS'
         },
         resolve: loadSequence('LayoutCtrl', 'layoutService')
-    }).state('app.templatemanager.emailcampaigns', {
-        url: '/email-campaigns',
-        templateUrl: '/bundles/publipr/js/components/EmailCampaign/email_campaigns.html',
-        title: 'content.list.EMAILCAMPAIGNS',
-        ncyBreadcrumb: {
-            label: 'content.list.EMAILCAMPAIGNS'
-        },
-        resolve: loadSequence('ngTable', 'EmailCampaignsCtrl', 'emailCampaignService', 'pressReleaseService', 'userService')
-    }).state('app.templatemanager.emailcampaignsnew', {
-        url: '/email-campaigns/new',
-        templateUrl: '/bundles/publipr/js/components/EmailCampaign/email_campaign_form.html',
-        title: 'content.list.NEWEMAILCAMPAIGN',
-        ncyBreadcrumb: {
-            label: 'content.list.NEWEMAILCAMPAIGN'
-        },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'EmailCampaignFormCtrl', 'emailCampaignService', 'pressReleaseService', 'userService')
-    }).state('app.templatemanager.emailcampaignsedit', {
-        url: '/email-campaigns/edit/:id',
-        templateUrl: '/bundles/publipr/js/components/EmailCampaign/email_campaign_form.html',
-        title: 'content.list.EDITEMAILCAMPAIGN',
-        ncyBreadcrumb: {
-            label: 'content.list.EDITEMAILCAMPAIGN'
-        },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'EmailCampaignFormCtrl', 'emailCampaignService', 'pressReleaseService', 'userService')
-    }).state('app.templatemanager.emailcampaignsdetails', {
-        url: '/email-campaigns/details/:id',
-        templateUrl: '/bundles/publipr/js/components/EmailCampaign/email_campaign.html',
-        ncyBreadcrumb: {
-            label: 'content.list.EMAILCAMPAIGNDETAILS'
-        },
-        resolve: loadSequence('EmailCampaignCtrl', 'emailCampaignService')
     }).state('app.templatemanager.contentblocks', {
         url: '/content-blocks',
         templateUrl: '/bundles/publipr/js/components/ContentBlock/content_blocks.html',
@@ -2065,7 +2027,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.NEWCONTENTBLOCK'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'ContentBlockFormCtrl', 'contentBlockService', 'userService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'ContentBlockFormCtrl', 'contentBlockService', 'userService')
     }).state('app.templatemanager.contentblocksedit', {
         url: '/content-blocks/edit/:id',
         templateUrl: '/bundles/publipr/js/components/ContentBlock/content_block_form.html',
@@ -2073,7 +2035,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.EDITCONTENTBLOCK'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'ContentBlockFormCtrl', 'contentBlockService', 'userService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'ContentBlockFormCtrl', 'contentBlockService', 'userService')
     }).state('app.templatemanager.contentblocksdetails', {
         url: '/content-blocks/details/:id',
         templateUrl: '/bundles/publipr/js/components/ContentBlock/content_block.html',
@@ -2088,37 +2050,6 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'sidebar.nav.settings.MAIN'
         }
-    }).state('app.settings.newsrooms', {
-        url: '/newsrooms',
-        templateUrl: '/bundles/publipr/js/components/Newsroom/newsrooms.html',
-        title: 'content.list.NEWSROOMS',
-        ncyBreadcrumb: {
-            label: 'content.list.NEWSROOMS'
-        },
-        resolve: loadSequence('ngTable', 'NewsroomsCtrl', 'newsroomService', 'userService')
-    }).state('app.settings.newsroomsnew', {
-        url: '/newsrooms/new',
-        templateUrl: '/bundles/publipr/js/components/Newsroom/newsroom_form.html',
-        title: 'content.list.NEWNEWSROOM',
-        ncyBreadcrumb: {
-            label: 'content.list.NEWNEWSROOM'
-        },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'NewsroomFormCtrl', 'newsroomService', 'userService')
-    }).state('app.settings.newsroomsedit', {
-        url: '/newsrooms/edit/:id',
-        templateUrl: '/bundles/publipr/js/components/Newsroom/newsroom_form.html',
-        title: 'content.list.EDITNEWSROOM',
-        ncyBreadcrumb: {
-            label: 'content.list.EDITNEWSROOM'
-        },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'NewsroomFormCtrl', 'newsroomService', 'userService')
-    }).state('app.settings.newsroomsdetails', {
-        url: '/newsrooms/details/:id',
-        templateUrl: '/bundles/publipr/js/components/Newsroom/newsroom.html',
-        ncyBreadcrumb: {
-            label: 'content.list.NEWSROOMDETAILS'
-        },
-        resolve: loadSequence('NewsroomCtrl', 'newsroomService')
     }).state('app.settings.languages', {
         url: '/languages',
         templateUrl: '/bundles/publipr/js/components/Language/languages.html',
@@ -2134,7 +2065,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.NEWLANGUAGE'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'LanguageFormCtrl', 'languageService', 'userService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'LanguageFormCtrl', 'languageService', 'userService')
     }).state('app.settings.languagesedit', {
         url: '/languages/edit/:id',
         templateUrl: '/bundles/publipr/js/components/Language/language_form.html',
@@ -2142,7 +2073,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.EDITLANGUAGE'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'LanguageFormCtrl', 'languageService', 'userService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'LanguageFormCtrl', 'languageService', 'userService')
     }).state('app.settings.languagesdetails', {
         url: '/languages/details/:id',
         templateUrl: '/bundles/publipr/js/components/Language/language.html',
@@ -2165,7 +2096,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.NEWEMAILTEMPLATE'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'EmailTemplateFormCtrl', 'emailTemplateService', 'userService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'EmailTemplateFormCtrl', 'emailTemplateService', 'userService')
     }).state('app.settings.emailtemplatesedit', {
         url: '/email-templates/edit/:id',
         templateUrl: '/bundles/publipr/js/components/EmailTemplate/email_template_form.html',
@@ -2173,7 +2104,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.EDITEMAILTEMPLATE'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'EmailTemplateFormCtrl', 'emailTemplateService', 'userService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'EmailTemplateFormCtrl', 'emailTemplateService', 'userService')
     }).state('app.settings.emailtemplatesdetails', {
         url: '/email-templates/details/:id',
         templateUrl: '/bundles/publipr/js/components/EmailTemplate/email_template.html',
@@ -2196,7 +2127,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.NEWNEWSROOMTEMPLATE'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'NewsroomTemplateFormCtrl', 'newsroomTemplateService', 'userService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'NewsroomTemplateFormCtrl', 'newsroomTemplateService', 'userService')
     }).state('app.settings.newsroomtemplatesedit', {
         url: '/newsroom-templates/edit/:id',
         templateUrl: '/bundles/publipr/js/components/NewsroomTemplate/newsroom_template_form.html',
@@ -2204,7 +2135,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.EDITNEWSROOMTEMPLATE'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'NewsroomTemplateFormCtrl', 'newsroomTemplateService', 'userService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'NewsroomTemplateFormCtrl', 'newsroomTemplateService', 'userService')
     }).state('app.settings.newsroomtemplatesdetails', {
         url: '/newsroom-templates/details/:id',
         templateUrl: '/bundles/publipr/js/components/NewsroomTemplate/newsroom_template.html',
@@ -2227,7 +2158,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.NEWCOUNTRY'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'CountryFormCtrl', 'countryService', 'userService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'CountryFormCtrl', 'countryService', 'userService')
     }).state('app.settings.countriesedit', {
         url: '/countries/edit/:id',
         templateUrl: '/bundles/publipr/js/components/Country/country_form.html',
@@ -2235,7 +2166,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.EDITCOUNTRY'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'CountryFormCtrl', 'countryService', 'userService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'CountryFormCtrl', 'countryService', 'userService')
     }).state('app.settings.countriesdetails', {
         url: '/countries/details/:id',
         templateUrl: '/bundles/publipr/js/components/Country/country.html',
@@ -2243,6 +2174,37 @@ function ($stateProvider) {
             label: 'content.list.COUNTRYDETAILS'
         },
         resolve: loadSequence('CountryCtrl', 'countryService')
+    }).state('app.settings.fonts', {
+        url: '/fonts',
+        templateUrl: '/bundles/publipr/js/components/Font/fonts.html',
+        title: 'content.list.FONTS',
+        ncyBreadcrumb: {
+            label: 'content.list.FONTS'
+        },
+        resolve: loadSequence('ngTable', 'FontsCtrl', 'fontService', 'userService')
+    }).state('app.settings.fontsnew', {
+        url: '/fonts/new',
+        templateUrl: '/bundles/publipr/js/components/Font/font_form.html',
+        title: 'content.list.NEWFONT',
+        ncyBreadcrumb: {
+            label: 'content.list.NEWFONT'
+        },
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'FontFormCtrl', 'fontService', 'userService')
+    }).state('app.settings.fontsedit', {
+        url: '/fonts/edit/:id',
+        templateUrl: '/bundles/publipr/js/components/Font/font_form.html',
+        title: 'content.list.EDITFONT',
+        ncyBreadcrumb: {
+            label: 'content.list.EDITFONT'
+        },
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'FontFormCtrl', 'fontService', 'userService')
+    }).state('app.settings.fontsdetails', {
+        url: '/fonts/details/:id',
+        templateUrl: '/bundles/publipr/js/components/Font/font.html',
+        ncyBreadcrumb: {
+            label: 'content.list.FONTDETAILS'
+        },
+        resolve: loadSequence('FontCtrl', 'fontService')
     }).state('app.distribution', {
         url: '/distribution',
         template: '<div ui-view class="fade-in-up"></div>',
@@ -2265,7 +2227,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.NEWEMAIL'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'EmailFormCtrl', 'emailService', 'pressReleaseService', 'contactService', 'userService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'EmailFormCtrl', 'emailService', 'pressReleaseService', 'contactService', 'userService')
     }).state('app.distribution.emailsedit', {
         url: '/emails/edit/:id',
         templateUrl: '/bundles/publipr/js/components/Email/email_form.html',
@@ -2273,7 +2235,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.EDITEMAIL'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'EmailFormCtrl', 'emailService', 'pressReleaseService', 'contactService', 'userService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'EmailFormCtrl', 'emailService', 'pressReleaseService', 'contactService', 'userService')
     }).state('app.distribution.emailsdetails', {
         url: '/emails/details/:id',
         templateUrl: '/bundles/publipr/js/components/Email/email.html',
@@ -2281,113 +2243,106 @@ function ($stateProvider) {
             label: 'content.list.EMAILDETAILS'
         },
         resolve: loadSequence('EmailCtrl', 'emailService')
-    }).state('app.accesscontrol', {
-        url: '/access-control',
+    }).state('app.distribution.emailcampaigns', {
+        url: '/email-campaigns',
+        templateUrl: '/bundles/publipr/js/components/EmailCampaign/email_campaigns.html',
+        title: 'content.list.EMAILCAMPAIGNS',
+        ncyBreadcrumb: {
+            label: 'content.list.EMAILCAMPAIGNS'
+        },
+        resolve: loadSequence('ngTable', 'EmailCampaignsCtrl', 'emailCampaignService', 'pressReleaseService', 'userService')
+    }).state('app.distribution.emailcampaignsnew', {
+        url: '/email-campaigns/new',
+        templateUrl: '/bundles/publipr/js/components/EmailCampaign/email_campaign_form.html',
+        title: 'content.list.NEWEMAILCAMPAIGN',
+        ncyBreadcrumb: {
+            label: 'content.list.NEWEMAILCAMPAIGN'
+        },
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'EmailCampaignFormCtrl', 'emailCampaignService', 'pressReleaseService', 'userService')
+    }).state('app.distribution.emailcampaignsedit', {
+        url: '/email-campaigns/edit/:id',
+        templateUrl: '/bundles/publipr/js/components/EmailCampaign/email_campaign_form.html',
+        title: 'content.list.EDITEMAILCAMPAIGN',
+        ncyBreadcrumb: {
+            label: 'content.list.EDITEMAILCAMPAIGN'
+        },
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'EmailCampaignFormCtrl', 'emailCampaignService', 'pressReleaseService', 'userService')
+    }).state('app.distribution.emailcampaignsdetails', {
+        url: '/email-campaigns/details/:id',
+        templateUrl: '/bundles/publipr/js/components/EmailCampaign/email_campaign.html',
+        ncyBreadcrumb: {
+            label: 'content.list.EMAILCAMPAIGNDETAILS'
+        },
+        resolve: loadSequence('EmailCampaignCtrl', 'emailCampaignService')
+    }).state('app.prmanager', {
+        url: '/p-r-manager',
         template: '<div ui-view class="fade-in-up"></div>',
-        title: 'sidebar.nav.accesscontrol.MAIN',
+        title: 'sidebar.nav.prmanager.MAIN',
         ncyBreadcrumb: {
-            label: 'sidebar.nav.accesscontrol.MAIN'
+            label: 'sidebar.nav.prmanager.MAIN'
         }
-    }).state('app.accesscontrol.sessions', {
-        url: '/sessions',
-        templateUrl: '/bundles/publipr/js/components/Session/sessions.html',
-        title: 'content.list.SESSIONS',
+    }).state('app.prmanager.newsrooms', {
+        url: '/newsrooms',
+        templateUrl: '/bundles/publipr/js/components/Newsroom/newsrooms.html',
+        title: 'content.list.NEWSROOMS',
         ncyBreadcrumb: {
-            label: 'content.list.SESSIONS'
+            label: 'content.list.NEWSROOMS'
         },
-        resolve: loadSequence('ngTable', 'SessionsCtrl', 'sessionService', 'userService')
-    }).state('app.accesscontrol.sessionsnew', {
-        url: '/sessions/new',
-        templateUrl: '/bundles/publipr/js/components/Session/session_form.html',
-        title: 'content.list.NEWSESSION',
+        resolve: loadSequence('ngTable', 'NewsroomsCtrl', 'newsroomService', 'userService', 'userService')
+    }).state('app.prmanager.newsroomsnew', {
+        url: '/newsrooms/new',
+        templateUrl: '/bundles/publipr/js/components/Newsroom/newsroom_form.html',
+        title: 'content.list.NEWNEWSROOM',
         ncyBreadcrumb: {
-            label: 'content.list.NEWSESSION'
+            label: 'content.list.NEWNEWSROOM'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'SessionFormCtrl', 'sessionService', 'userService')
-    }).state('app.accesscontrol.sessionsedit', {
-        url: '/sessions/edit/:id',
-        templateUrl: '/bundles/publipr/js/components/Session/session_form.html',
-        title: 'content.list.EDITSESSION',
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'NewsroomFormCtrl', 'newsroomService', 'userService', 'userService')
+    }).state('app.prmanager.newsroomsedit', {
+        url: '/newsrooms/edit/:id',
+        templateUrl: '/bundles/publipr/js/components/Newsroom/newsroom_form.html',
+        title: 'content.list.EDITNEWSROOM',
         ncyBreadcrumb: {
-            label: 'content.list.EDITSESSION'
+            label: 'content.list.EDITNEWSROOM'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'SessionFormCtrl', 'sessionService', 'userService')
-    }).state('app.accesscontrol.sessionsdetails', {
-        url: '/sessions/details/:id',
-        templateUrl: '/bundles/publipr/js/components/Session/session.html',
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'NewsroomFormCtrl', 'newsroomService', 'userService', 'userService')
+    }).state('app.prmanager.newsroomsdetails', {
+        url: '/newsrooms/details/:id',
+        templateUrl: '/bundles/publipr/js/components/Newsroom/newsroom.html',
         ncyBreadcrumb: {
-            label: 'content.list.SESSIONDETAILS'
+            label: 'content.list.NEWSROOMDETAILS'
         },
-        resolve: loadSequence('SessionCtrl', 'sessionService')
-    }).state('app.accesscontrol.logs', {
-        url: '/logs',
-        templateUrl: '/bundles/publipr/js/components/Log/logs.html',
-        title: 'content.list.LOGS',
+        resolve: loadSequence('NewsroomCtrl', 'newsroomService')
+    }).state('app.prmanager.pressreleases', {
+        url: '/press-releases',
+        templateUrl: '/bundles/publipr/js/components/PressRelease/press_releases.html',
+        title: 'content.list.PRESSRELEASES',
         ncyBreadcrumb: {
-            label: 'content.list.LOGS'
+            label: 'content.list.PRESSRELEASES'
         },
-        resolve: loadSequence('ngTable', 'LogsCtrl', 'logService', 'sessionService', 'userService')
-    }).state('app.accesscontrol.logsnew', {
-        url: '/logs/new',
-        templateUrl: '/bundles/publipr/js/components/Log/log_form.html',
-        title: 'content.list.NEWLOG',
+        resolve: loadSequence('ngTable', 'PressReleasesCtrl', 'pressReleaseService', 'newsroomService', 'userService')
+    }).state('app.prmanager.pressreleasesnew', {
+        url: '/press-releases/new',
+        templateUrl: '/bundles/publipr/js/components/PressRelease/press_release_form.html',
+        title: 'content.list.NEWPRESSRELEASE',
         ncyBreadcrumb: {
-            label: 'content.list.NEWLOG'
+            label: 'content.list.NEWPRESSRELEASE'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'LogFormCtrl', 'logService', 'sessionService', 'userService')
-    }).state('app.accesscontrol.logsedit', {
-        url: '/logs/edit/:id',
-        templateUrl: '/bundles/publipr/js/components/Log/log_form.html',
-        title: 'content.list.EDITLOG',
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'PressReleaseFormCtrl', 'pressReleaseService', 'newsroomService', 'userService')
+    }).state('app.prmanager.pressreleasesedit', {
+        url: '/press-releases/edit/:id',
+        templateUrl: '/bundles/publipr/js/components/PressRelease/press_release_form.html',
+        title: 'content.list.EDITPRESSRELEASE',
         ncyBreadcrumb: {
-            label: 'content.list.EDITLOG'
+            label: 'content.list.EDITPRESSRELEASE'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'LogFormCtrl', 'logService', 'sessionService', 'userService')
-    }).state('app.accesscontrol.logsdetails', {
-        url: '/logs/details/:id',
-        templateUrl: '/bundles/publipr/js/components/Log/log.html',
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'PressReleaseFormCtrl', 'pressReleaseService', 'newsroomService', 'userService')
+    }).state('app.prmanager.pressreleasesdetails', {
+        url: '/press-releases/details/:id',
+        templateUrl: '/bundles/publipr/js/components/PressRelease/press_release.html',
         ncyBreadcrumb: {
-            label: 'content.list.LOGDETAILS'
+            label: 'content.list.PRESSRELEASEDETAILS'
         },
-        resolve: loadSequence('LogCtrl', 'logService')
-    }).state('app.nogroup', {
-        url: '/no-group',
-        template: '<div ui-view class="fade-in-up"></div>',
-        title: 'sidebar.nav.nogroup.MAIN',
-        ncyBreadcrumb: {
-            label: 'sidebar.nav.nogroup.MAIN'
-        }
-    }).state('app.nogroup.newsroomsusers', {
-        url: '/newsrooms-users',
-        templateUrl: '/bundles/publipr/js/components/NewsroomsUsers/newsrooms_users.html',
-        title: 'content.list.NEWSROOMSUSERSS',
-        ncyBreadcrumb: {
-            label: 'content.list.NEWSROOMSUSERSS'
-        },
-        resolve: loadSequence('ngTable', 'NewsroomsUsersCtrl', 'newsroomsUsersService', 'userService')
-    }).state('app.nogroup.newsroomsusersnew', {
-        url: '/newsrooms-users/new',
-        templateUrl: '/bundles/publipr/js/components/NewsroomsUsers/newsrooms_users_form.html',
-        title: 'content.list.NEWNEWSROOMSUSERS',
-        ncyBreadcrumb: {
-            label: 'content.list.NEWNEWSROOMSUSERS'
-        },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'NewsroomsUsersFormCtrl', 'newsroomsUsersService', 'userService')
-    }).state('app.nogroup.newsroomsusersedit', {
-        url: '/newsrooms-users/edit/:id',
-        templateUrl: '/bundles/publipr/js/components/NewsroomsUsers/newsrooms_users_form.html',
-        title: 'content.list.EDITNEWSROOMSUSERS',
-        ncyBreadcrumb: {
-            label: 'content.list.EDITNEWSROOMSUSERS'
-        },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'NewsroomsUsersFormCtrl', 'newsroomsUsersService', 'userService')
-    }).state('app.nogroup.newsroomsusersdetails', {
-        url: '/newsrooms-users/details/:id',
-        templateUrl: '/bundles/publipr/js/components/NewsroomsUsers/newsrooms_users.html',
-        ncyBreadcrumb: {
-            label: 'content.list.NEWSROOMSUSERSDETAILS'
-        },
-        resolve: loadSequence('NewsroomsUsersCtrl', 'newsroomsUsersService')
+        resolve: loadSequence('PressReleaseCtrl', 'pressReleaseService')
     }).state('app.billing', {
         url: '/billing',
         template: '<div ui-view class="fade-in-up"></div>',
@@ -2410,7 +2365,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.NEWPAYMENT'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'PaymentFormCtrl', 'paymentService', 'userService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'PaymentFormCtrl', 'paymentService', 'userService')
     }).state('app.billing.paymentsedit', {
         url: '/payments/edit/:id',
         templateUrl: '/bundles/publipr/js/components/Payment/payment_form.html',
@@ -2418,7 +2373,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.EDITPAYMENT'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'PaymentFormCtrl', 'paymentService', 'userService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'PaymentFormCtrl', 'paymentService', 'userService')
     }).state('app.billing.paymentsdetails', {
         url: '/payments/details/:id',
         templateUrl: '/bundles/publipr/js/components/Payment/payment.html',
@@ -2426,44 +2381,44 @@ function ($stateProvider) {
             label: 'content.list.PAYMENTDETAILS'
         },
         resolve: loadSequence('PaymentCtrl', 'paymentService')
-    }).state('app.pressreleasemanager', {
-        url: '/press-release-manager',
+    }).state('app.accesscontrol', {
+        url: '/access-control',
         template: '<div ui-view class="fade-in-up"></div>',
-        title: 'sidebar.nav.pressreleasemanager.MAIN',
+        title: 'sidebar.nav.accesscontrol.MAIN',
         ncyBreadcrumb: {
-            label: 'sidebar.nav.pressreleasemanager.MAIN'
+            label: 'sidebar.nav.accesscontrol.MAIN'
         }
-    }).state('app.pressreleasemanager.pressreleases', {
-        url: '/press-releases',
-        templateUrl: '/bundles/publipr/js/components/PressRelease/press_releases.html',
-        title: 'content.list.PRESSRELEASES',
+    }).state('app.accesscontrol.sessions', {
+        url: '/sessions',
+        templateUrl: '/bundles/publipr/js/components/Session/sessions.html',
+        title: 'content.list.SESSIONS',
         ncyBreadcrumb: {
-            label: 'content.list.PRESSRELEASES'
+            label: 'content.list.SESSIONS'
         },
-        resolve: loadSequence('ngTable', 'PressReleasesCtrl', 'pressReleaseService', 'newsroomService', 'userService')
-    }).state('app.pressreleasemanager.pressreleasesnew', {
-        url: '/press-releases/new',
-        templateUrl: '/bundles/publipr/js/components/PressRelease/press_release_form.html',
-        title: 'content.list.NEWPRESSRELEASE',
+        resolve: loadSequence('ngTable', 'SessionsCtrl', 'sessionService', 'userService')
+    }).state('app.accesscontrol.sessionsnew', {
+        url: '/sessions/new',
+        templateUrl: '/bundles/publipr/js/components/Session/session_form.html',
+        title: 'content.list.NEWSESSION',
         ncyBreadcrumb: {
-            label: 'content.list.NEWPRESSRELEASE'
+            label: 'content.list.NEWSESSION'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'PressReleaseFormCtrl', 'pressReleaseService', 'newsroomService', 'userService')
-    }).state('app.pressreleasemanager.pressreleasesedit', {
-        url: '/press-releases/edit/:id',
-        templateUrl: '/bundles/publipr/js/components/PressRelease/press_release_form.html',
-        title: 'content.list.EDITPRESSRELEASE',
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'SessionFormCtrl', 'sessionService', 'userService')
+    }).state('app.accesscontrol.sessionsedit', {
+        url: '/sessions/edit/:id',
+        templateUrl: '/bundles/publipr/js/components/Session/session_form.html',
+        title: 'content.list.EDITSESSION',
         ncyBreadcrumb: {
-            label: 'content.list.EDITPRESSRELEASE'
+            label: 'content.list.EDITSESSION'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'PressReleaseFormCtrl', 'pressReleaseService', 'newsroomService', 'userService')
-    }).state('app.pressreleasemanager.pressreleasesdetails', {
-        url: '/press-releases/details/:id',
-        templateUrl: '/bundles/publipr/js/components/PressRelease/press_release.html',
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'SessionFormCtrl', 'sessionService', 'userService')
+    }).state('app.accesscontrol.sessionsdetails', {
+        url: '/sessions/details/:id',
+        templateUrl: '/bundles/publipr/js/components/Session/session.html',
         ncyBreadcrumb: {
-            label: 'content.list.PRESSRELEASEDETAILS'
+            label: 'content.list.SESSIONDETAILS'
         },
-        resolve: loadSequence('PressReleaseCtrl', 'pressReleaseService')
+        resolve: loadSequence('SessionCtrl', 'sessionService')
     }).state('app.statistics', {
         url: '/statistics',
         template: '<div ui-view class="fade-in-up"></div>',
@@ -2486,7 +2441,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.NEWTRACKPRESSRELEASE'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'TrackPressReleaseFormCtrl', 'trackPressReleaseService', 'pressReleaseService', 'userService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'TrackPressReleaseFormCtrl', 'trackPressReleaseService', 'pressReleaseService', 'userService')
     }).state('app.statistics.trackpressreleasesedit', {
         url: '/track-press-releases/edit/:id',
         templateUrl: '/bundles/publipr/js/components/TrackPressRelease/track_press_release_form.html',
@@ -2494,7 +2449,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.EDITTRACKPRESSRELEASE'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'TrackPressReleaseFormCtrl', 'trackPressReleaseService', 'pressReleaseService', 'userService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'TrackPressReleaseFormCtrl', 'trackPressReleaseService', 'pressReleaseService', 'userService')
     }).state('app.statistics.trackpressreleasesdetails', {
         url: '/track-press-releases/details/:id',
         templateUrl: '/bundles/publipr/js/components/TrackPressRelease/track_press_release.html',
@@ -2517,7 +2472,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.NEWTRACKEMAIL'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'TrackEmailFormCtrl', 'trackEmailService', 'emailService', 'userService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'TrackEmailFormCtrl', 'trackEmailService', 'emailService', 'userService')
     }).state('app.statistics.trackemailsedit', {
         url: '/track-emails/edit/:id',
         templateUrl: '/bundles/publipr/js/components/TrackEmail/track_email_form.html',
@@ -2525,7 +2480,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.EDITTRACKEMAIL'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'TrackEmailFormCtrl', 'trackEmailService', 'emailService', 'userService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'TrackEmailFormCtrl', 'trackEmailService', 'emailService', 'userService')
     }).state('app.statistics.trackemailsdetails', {
         url: '/track-emails/details/:id',
         templateUrl: '/bundles/publipr/js/components/TrackEmail/track_email.html',

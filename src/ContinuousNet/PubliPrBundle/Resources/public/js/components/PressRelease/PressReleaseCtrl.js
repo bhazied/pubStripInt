@@ -38,15 +38,15 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $q, $interpolate
     $scope.timeFormat = $filter('translate')('formats.TIME');
 
     $scope.list = function() {
-        $state.go('app.pressreleasemanager.pressreleases');
+        $state.go('app.prmanager.pressreleases');
     };
 
     $scope.add = function() {
-        $state.go('app.pressreleasemanager.pressreleasesnew');
+        $state.go('app.prmanager.pressreleasesnew');
     };
 
     $scope.edit = function(row) {
-        $state.go('app.pressreleasemanager.pressreleasesedit', {id: row.id});
+        $state.go('app.prmanager.pressreleasesedit', {id: row.id});
     };
 
     if (angular.isDefined($stateParams.id)) {

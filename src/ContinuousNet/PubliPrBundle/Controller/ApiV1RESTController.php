@@ -268,7 +268,7 @@ class ApiV1RESTController extends FOSRestController
 
             $postData['type'] = 'Manager';
 
-            $postData['roles'] = array('ROLE_API', 'ROLE_MANAGER');
+            $postData['roles'] = array('ROLE_API', 'ROLE_ACCOUNT_MANAGER');
 
             $request->request->set('app_user_registration', $postData);
 

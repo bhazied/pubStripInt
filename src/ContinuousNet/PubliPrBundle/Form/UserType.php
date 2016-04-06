@@ -45,7 +45,7 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('type', ChoiceType::class, array('choices' => array('Guest' => 'Guest', 'Manager' => 'Manager', 'Contributor' => 'Contributor', 'Administrator' => 'Administrator', ), 'expanded' => false, 'multiple' => false))
+            ->add('type', ChoiceType::class, array('choices' => array('Free' => 'Free', 'Manager' => 'Manager', 'Contributor' => 'Contributor', 'Administrator' => 'Administrator', ), 'expanded' => false, 'multiple' => false))
             ->add('username', TextType::class)
             ->add('password', PasswordType::class)
             ->add('salt', TextType::class)
@@ -74,7 +74,7 @@ class UserType extends AbstractType
             ->add('emailValidated', CheckboxType::class)
             ->add('emailValidationCode', TextType::class)
             ->add('authenticationMode', ChoiceType::class, array('choices' => array('Database' => 'Database', 'ActiveDirectory' => 'ActiveDirectory', 'Webservice' => 'Webservice', ), 'expanded' => false, 'multiple' => false))
-            ->add('roles', ChoiceType::class, array('choices' => array('ROLE_API' => 'ROLE_API', 'ROLE_MANAGER' => 'ROLE_MANAGER', 'ROLE_CONTRIBUTOR' => 'ROLE_CONTRIBUTOR', 'ROLE_SUPER_ADMIN' => 'ROLE_SUPER_ADMIN', ), 'expanded' => true, 'multiple' => true))
+            ->add('roles', ChoiceType::class, array('choices' => array('ROLE_API' => 'ROLE_API', 'FREE_ACCOUNT' => 'FREE_ACCOUNT', 'ROLE_ACCOUNT_MANAGER' => 'ROLE_ACCOUNT_MANAGER', 'ROLE_CONTRIBUTOR_ACCOUNT' => 'ROLE_CONTRIBUTOR_ACCOUNT', 'ROLE_SUPER_ADMIN' => 'ROLE_SUPER_ADMIN', ), 'expanded' => true, 'multiple' => true))
             ->add('enabled', CheckboxType::class)
             ->add('confirmationToken', TextType::class)
             ->add('passwordRequestedAt', DateTimeType::class, array('widget' => 'single_text', 'input' => 'datetime'))

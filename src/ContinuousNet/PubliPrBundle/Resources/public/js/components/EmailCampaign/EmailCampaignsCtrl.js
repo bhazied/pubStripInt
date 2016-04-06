@@ -137,7 +137,7 @@ function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q,
             { field: 'id', title: $filter('translate')('content.list.fields.ID'), sortable: 'emailCampaign.id', filter: { 'emailCampaign.id': 'number' }, show: $scope.getParamValue('id_show_filed', true), getValue: $scope.textValue },
             { field: 'name', title: $filter('translate')('content.list.fields.NAME'), sortable: 'emailCampaign.name', filter: { 'emailCampaign.name': 'text' }, show: $scope.getParamValue('name_show_filed', true), getValue: $scope.textValue },
             { field: 'description', title: $filter('translate')('content.list.fields.DESCRIPTION'), sortable: 'emailCampaign.description', filter: { 'emailCampaign.description': 'text' }, show: $scope.getParamValue('description_show_filed', false), getValue: $scope.textValue },
-            { field: 'press_release', title: $filter('translate')('content.list.fields.PRESSRELEASE'), sortable: 'press_release.title', filter: { 'emailCampaign.pressRelease': 'select' }, getValue: $scope.linkValue, filterData: $scope.getPressReleases(), show: $scope.getParamValue('press_release_id_show_filed', true), displayField: 'title', state: 'app.pressreleasemanager.pressreleasesdetails' },
+            { field: 'press_release', title: $filter('translate')('content.list.fields.PRESSRELEASE'), sortable: 'press_release.title', filter: { 'emailCampaign.pressRelease': 'select' }, getValue: $scope.linkValue, filterData: $scope.getPressReleases(), show: $scope.getParamValue('press_release_id_show_filed', true), displayField: 'title', state: 'app.prmanager.pressreleasesdetails' },
             { field: 'send_now', title: $filter('translate')('content.list.fields.SENDNOW'), sortable: 'emailCampaign.sendNow', filter: { 'emailCampaign.sendNow': 'select' }, show: $scope.getParamValue('send_now_show_filed', true), getValue: $scope.interpolatedValue, filterData : $scope.booleanOptions, interpolateExpr: $interpolate('<span my-boolean="[[ row.send_now ]]"></span>') },
             { field: 'sending_date_time', title: $filter('translate')('content.list.fields.SENDINGDATETIME'), sortable: 'emailCampaign.sendingDateTime', filter: { 'emailCampaign.sendingDateTime': 'text' }, show: $scope.getParamValue('sending_date_time_show_filed', true), getValue: $scope.evaluatedValue, valueFormatter: 'date:\''+$filter('translate')('formats.DATETIME')+'\''},
             { field: 'external_reference', title: $filter('translate')('content.list.fields.EXTERNALREFERENCE'), sortable: 'emailCampaign.externalReference', filter: { 'emailCampaign.externalReference': 'text' }, show: $scope.getParamValue('external_reference_show_filed', true), getValue: $scope.textValue },
@@ -235,15 +235,15 @@ function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q,
     };
 
     $scope.add = function() {
-        $state.go('app.templatemanager.emailcampaignsnew');
+        $state.go('app.distribution.emailcampaignsnew');
     };
 
     $scope.edit = function(row) {
-        $state.go('app.templatemanager.emailcampaignsedit', {id: row.id});
+        $state.go('app.distribution.emailcampaignsedit', {id: row.id});
     };
 
     $scope.details = function(row) {
-        $state.go('app.templatemanager.emailcampaignsdetails', {id: row.id});
+        $state.go('app.distribution.emailcampaignsdetails', {id: row.id});
     };
 
 }]);

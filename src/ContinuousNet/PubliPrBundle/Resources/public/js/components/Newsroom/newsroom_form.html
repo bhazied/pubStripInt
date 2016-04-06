@@ -101,7 +101,7 @@
                                     </label>
                                     <div class="input-group">
                                     <span class="input-icon">
-                                        <input ng-model="newsroom.logo_picture" type="email" name="logoPicture" id="newsroomLogoPicture" class="form-control" placeholder="[[ 'content.form.messages.ENTERLOGOPICTURE' | translate ]]" ng-required="true" />
+                                        <input ng-model="newsroom.logo_picture" type="text" name="logoPicture" id="newsroomLogoPicture" class="form-control" placeholder="[[ 'content.form.messages.ENTERLOGOPICTURE' | translate ]]" ng-required="true" />
                                         <i class="ti-image"></i>
                                     </span><!--/input-icon-->
                                         <span class="input-group-btn">
@@ -131,7 +131,7 @@
                                     </label>
                                     <div class="input-group">
                                     <span class="input-icon">
-                                        <input ng-model="newsroom.banner_picture" type="email" name="bannerPicture" id="newsroomBannerPicture" class="form-control" placeholder="[[ 'content.form.messages.ENTERBANNERPICTURE' | translate ]]" ng-required="true" />
+                                        <input ng-model="newsroom.banner_picture" type="text" name="bannerPicture" id="newsroomBannerPicture" class="form-control" placeholder="[[ 'content.form.messages.ENTERBANNERPICTURE' | translate ]]" ng-required="true" />
                                         <i class="ti-image"></i>
                                     </span><!--/input-icon-->
                                         <span class="input-group-btn">
@@ -212,6 +212,19 @@
                                     <label for="newsroomPublished" translate="content.list.fields.PUBLISHED">Published</label>
                                 </div><!--/checkbox clip-check check-primary-->
                             </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label for="newsroomUsers" class="control-label">
+                                    <span translate="content.list.fields.USERS">Users</span>
+                                </label>
+                            </div><!--/col-md-12-->
+                            <div class="col-md-3" ng-repeat="user in users" ng-if="user.id">
+                                <div class="checkbox clip-check check-primary">
+                                    <input checklist-model="newsroom.users" checklist-value="user.id" type="checkbox" name="user[]" id="newsroomUser[[user.id]]" />
+                                    <label for="newsroomUser[[user.id]]">[[ user.username ]]</label>
+                                </div><!--/checkbox-->
+                            </div><!--/col-md-3-->
                         </div><!--/row-->
                         <div class="row">
                             <div class="col-md-4">

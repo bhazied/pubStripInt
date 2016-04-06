@@ -24,8 +24,8 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
     };
 
     $scope.types = [{
-        id: 'Guest',
-        title: $filter('translate')('content.list.fields.types.GUEST'),
+        id: 'Free',
+        title: $filter('translate')('content.list.fields.types.FREE'),
         css: 'info'
     }, {
         id: 'Manager',
@@ -74,17 +74,21 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
         title: $filter('translate')('content.list.fields.rolesoptions.ROLE_API'),
         css: 'info'
     }, {
-        id: 'ROLE_MANAGER',
-        title: $filter('translate')('content.list.fields.rolesoptions.ROLE_MANAGER'),
+        id: 'FREE_ACCOUNT',
+        title: $filter('translate')('content.list.fields.rolesoptions.FREE_ACCOUNT'),
         css: 'success'
     }, {
-        id: 'ROLE_CONTRIBUTOR',
-        title: $filter('translate')('content.list.fields.rolesoptions.ROLE_CONTRIBUTOR'),
+        id: 'ROLE_ACCOUNT_MANAGER',
+        title: $filter('translate')('content.list.fields.rolesoptions.ROLE_ACCOUNT_MANAGER'),
         css: 'warning'
+    }, {
+        id: 'ROLE_CONTRIBUTOR_ACCOUNT',
+        title: $filter('translate')('content.list.fields.rolesoptions.ROLE_CONTRIBUTOR_ACCOUNT'),
+        css: 'inverse'
     }, {
         id: 'ROLE_SUPER_ADMIN',
         title: $filter('translate')('content.list.fields.rolesoptions.ROLE_SUPER_ADMIN'),
-        css: 'inverse'
+        css: 'danger'
     }];
 
     $scope.passwordRequestedAtOpened = false;
@@ -307,7 +311,7 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
             });
         });
     } else {
-        $scope.user = {id: 0, type: 'Guest', gender: 'Male', authentication_mode: 'Database'};
+        $scope.user = {id: 0, type: 'Free', gender: 'Male', authentication_mode: 'Database'};
 
     }
 

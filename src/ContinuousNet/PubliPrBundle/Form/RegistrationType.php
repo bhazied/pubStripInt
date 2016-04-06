@@ -28,7 +28,7 @@ class RegistrationType extends AbstractType
             //->add('username', TextType::class)
             //->add('password', TextType::class)
             //->add('password', TextType::class)
-            ->add('type', ChoiceType::class, array('choices' => array('Guest' => 'Guest', 'Manager' => 'Manager', 'Contributor' => 'Contributor', 'Administrator' => 'Administrator', ), 'expanded' => false, 'multiple' => false))
+            ->add('type', ChoiceType::class, array('choices' => array('Free' => 'Free', 'Manager' => 'Manager', 'Contributor' => 'Contributor', 'Administrator' => 'Administrator', ), 'expanded' => false, 'multiple' => false))
             //->add('phone', TextType::class)
             //->add('gender', ChoiceType::class, array('choices' => array('Male' => 'Male', 'Female' => 'Female', ), 'expanded' => false, 'multiple' => false))
             ->add('name', TextType::class)
@@ -42,7 +42,7 @@ class RegistrationType extends AbstractType
             //->add('country', EntityType::class, array('expanded' => false, 'multiple' => false, 'class' => 'PubliPrBundle:Country', 'choice_label' => 'name'))
             //->add('language', EntityType::class, array('expanded' => false, 'multiple' => false, 'class' => 'PubliPrBundle:Language', 'choice_label' => 'name'))
             //->add('profile', TextType::class)
-            ->add('roles', ChoiceType::class, array('choices' => array('ROLE_API' => 'ROLE_API', 'ROLE_MANAGER' => 'ROLE_MANAGER', 'ROLE_CONTRIBUTOR' => 'ROLE_CONTRIBUTOR', 'ROLE_SUPER_ADMIN' => 'ROLE_SUPER_ADMIN', ), 'expanded' => true, 'multiple' => true))
+            ->add('roles', ChoiceType::class, array('choices' => array('ROLE_API' => 'ROLE_API', 'FREE_ACCOUNT' => 'FREE_ACCOUNT', 'ROLE_ACCOUNT_MANAGER' => 'ROLE_ACCOUNT_MANAGER', 'ROLE_CONTRIBUTOR_ACCOUNT' => 'ROLE_CONTRIBUTOR_ACCOUNT', 'ROLE_SUPER_ADMIN' => 'ROLE_SUPER_ADMIN', ), 'expanded' => true, 'multiple' => true))
             ->add('recaptchaResponse', RecaptchaType::class, array(
                 'attr' => array(
                     'options' => array(

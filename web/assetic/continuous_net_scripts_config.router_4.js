@@ -55,6 +55,7 @@ angular
 
       // Application routes
       $stateProvider.state('app', {
+        url: '/app',
         templateUrl: '/app/views/common/layout.html',
         resolve: loadSequence('modernizr', 'moment', 'angularMoment', 'uiSwitch', 'perfect-scrollbar-plugin', 'toaster', 'ngAside', 'vAccordion', 'chartjs', 'tc.chartjs', 'sweet-alert', 'oitozero.ngSweetAlert', 'truncate', 'htmlToPlaintext', 'angular-notification-icons', 'd3', 'rickshaw', 'flot'),
         abstract: true

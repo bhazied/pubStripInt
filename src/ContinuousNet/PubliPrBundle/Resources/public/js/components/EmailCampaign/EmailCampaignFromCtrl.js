@@ -141,7 +141,7 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
     };
 
     $scope.list = function() {
-        $state.go('app.templatemanager.emailcampaigns');
+        $state.go('app.distribution.emailcampaigns');
     };
     
     if (angular.isDefined($stateParams.id)) {

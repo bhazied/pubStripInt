@@ -259,12 +259,33 @@ class Newsroom
     private $modifierUser;
 
     /**
+     * @var \Doctrine\Common\Collections\Collection
+     * @access private
+     *
+     * @ORM\ManyToMany(targetEntity="User", inversedBy="newsrooms")
+     * @ORM\JoinTable(name="newsrooms_users",
+     *     joinColumns={
+     *         @ORM\JoinColumn(name="newsroom_id", referencedColumnName="id")
+     *     },
+     *     inverseJoinColumns={
+     *         @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     *     }
+     * )
+     * 
+     * @Expose
+     * @MaxDepth(2)
+     * 
+     */
+    private $users;
+
+    /**
      * Constructor
      * 
      * @access public
      */
     public function __construct()
     {
+        $this->users = new DoctrineCollection();
     }
 
     /**
@@ -708,6 +729,62 @@ class Newsroom
     public function getModifierUser()
     {
         return $this->modifierUser;
+    }
+
+    /**
+     * Add user
+     *
+     * @access public
+     * @param User $user
+     * @return Newsroom
+     */
+    public function addUser(User $user)
+    {
+        if (!$this->users->contains($user))
+        {
+            $this->users->add($user);
+        }
+        return $this;
+    }
+
+    /**
+     * Remove user
+     *
+     * @access public
+     * @param User $user
+     * @return Newsroom
+     */
+    public function removeUser(User $user)
+    {
+        if ($this->users->contains($user))
+        {
+            $this->users->removeElement($user);
+        }
+        return $this;
+    }
+
+    /**
+     * Set user
+     *
+     * @access public
+     * @param \Doctrine\Common\Collections\Collection
+     * @return Newsroom
+     */
+    public function setUsers($users)
+    {
+        $this->users = $users;
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @access public
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getUsers()
+    {
+        return $this->users;
     }
 
     /**

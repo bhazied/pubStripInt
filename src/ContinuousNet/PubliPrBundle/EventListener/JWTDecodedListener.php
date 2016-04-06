@@ -67,7 +67,7 @@ class JWTDecodedListener
                     $log->setIpAddress($request->getClientIp());
                     $log->setMethod($request->getMethod());
                     $log->setUserAgent($request->headers->get('User-Agent'));
-                    $log->setApplication($request->headers->get('BH-Application'));
+                    $log->setApplication($request->headers->get('PP-Application'));
                     $log->setCreatorUser($user);
                     $log->setCreatedAt(new \DateTime('now'));
                     $this->em->persist($log);

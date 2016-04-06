@@ -7,7 +7,7 @@ app.controller('LoginCtrl', ['$scope', '$rootScope', '$localStorage', '$state', 
 function ($scope, $rootScope, $localStorage, $state, $timeout, $loginDataFactory) {
     
     if ($localStorage.access_token) {
-        delete $localStorage.access_token;
+        //delete $localStorage.access_token;
     }
             
     $scope.status = '';

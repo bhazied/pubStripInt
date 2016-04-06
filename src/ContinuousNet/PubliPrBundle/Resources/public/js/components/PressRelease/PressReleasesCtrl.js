@@ -161,11 +161,11 @@ function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q,
     $scope.setCols = function() {
         $scope.cols = [
             { field: 'id', title: $filter('translate')('content.list.fields.ID'), sortable: 'pressRelease.id', filter: { 'pressRelease.id': 'number' }, show: $scope.getParamValue('id_show_filed', true), getValue: $scope.textValue },
-            { field: 'newsroom', title: $filter('translate')('content.list.fields.NEWSROOM'), sortable: 'newsroom.name', filter: { 'pressRelease.newsroom': 'select' }, getValue: $scope.linkValue, filterData: $scope.getNewsrooms(), show: $scope.getParamValue('newsroom_id_show_filed', true), displayField: 'name', state: 'app.settings.newsroomsdetails' },
+            { field: 'newsroom', title: $filter('translate')('content.list.fields.NEWSROOM'), sortable: 'newsroom.name', filter: { 'pressRelease.newsroom': 'select' }, getValue: $scope.linkValue, filterData: $scope.getNewsrooms(), show: $scope.getParamValue('newsroom_id_show_filed', true), displayField: 'name', state: 'app.prmanager.newsroomsdetails' },
             { field: 'title', title: $filter('translate')('content.list.fields.TITLE'), sortable: 'pressRelease.title', filter: { 'pressRelease.title': 'text' }, show: $scope.getParamValue('title_show_filed', true), getValue: $scope.textValue },
             { field: 'slug', title: $filter('translate')('content.list.fields.SLUG'), sortable: 'pressRelease.slug', filter: { 'pressRelease.slug': 'text' }, show: $scope.getParamValue('slug_show_filed', false), getValue: $scope.textValue },
             { field: 'description', title: $filter('translate')('content.list.fields.DESCRIPTION'), sortable: 'pressRelease.description', filter: { 'pressRelease.description': 'text' }, show: $scope.getParamValue('description_show_filed', false), getValue: $scope.textValue },
-            { field: 'picture_preview', title: $filter('translate')('content.list.fields.PICTUREPREVIEW'), sortable: 'pressRelease.picturePreview', filter: { 'pressRelease.picturePreview': 'text' }, show: $scope.getParamValue('picture_preview_show_filed', true), getValue: $scope.interpolatedValue, interpolateExpr: $interpolate('<img ng-src="'+$rootScope.app.thumbURL+'[[ (row.picturePreview)?row.picturePreview:\'/assets/images/picturenotavailable.'+$scope.locale+'.png\' ]]" alt="" class="img-thumbnail" />') },
+            { field: 'picture_preview', title: $filter('translate')('content.list.fields.PICTUREPREVIEW'), sortable: 'pressRelease.picturePreview', filter: { 'pressRelease.picturePreview': 'text' }, show: $scope.getParamValue('picture_preview_show_filed', true), getValue: $scope.interpolatedValue, interpolateExpr: $interpolate('<img ng-src="'+$rootScope.app.thumbURL+'[[ (row.picture_preview)?row.picture_preview:\'/assets/images/picturenotavailable.'+$scope.locale+'.png\' ]]" alt="" class="img-thumbnail" />') },
             { field: 'content', title: $filter('translate')('content.list.fields.CONTENT'), sortable: 'pressRelease.content', filter: { 'pressRelease.content': 'text' }, show: $scope.getParamValue('content_show_filed', false), getValue: $scope.textValue },
             { field: 'is_headline', title: $filter('translate')('content.list.fields.ISHEADLINE'), sortable: 'pressRelease.isHeadline', filter: { 'pressRelease.isHeadline': 'select' }, show: $scope.getParamValue('is_headline_show_filed', false), getValue: $scope.interpolatedValue, filterData : $scope.booleanOptions, interpolateExpr: $interpolate('<span my-boolean="[[ row.is_headline ]]"></span>') },
             { field: 'auto_publishing', title: $filter('translate')('content.list.fields.AUTOPUBLISHING'), sortable: 'pressRelease.autoPublishing', filter: { 'pressRelease.autoPublishing': 'select' }, show: $scope.getParamValue('auto_publishing_show_filed', false), getValue: $scope.interpolatedValue, filterData : $scope.booleanOptions, interpolateExpr: $interpolate('<span my-boolean="[[ row.auto_publishing ]]"></span>') },
@@ -279,15 +279,15 @@ function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q,
     };
 
     $scope.add = function() {
-        $state.go('app.pressreleasemanager.pressreleasesnew');
+        $state.go('app.prmanager.pressreleasesnew');
     };
 
     $scope.edit = function(row) {
-        $state.go('app.pressreleasemanager.pressreleasesedit', {id: row.id});
+        $state.go('app.prmanager.pressreleasesedit', {id: row.id});
     };
 
     $scope.details = function(row) {
-        $state.go('app.pressreleasemanager.pressreleasesdetails', {id: row.id});
+        $state.go('app.prmanager.pressreleasesdetails', {id: row.id});
     };
 
 }]);

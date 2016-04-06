@@ -50,6 +50,27 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
     $scope.getUsers();
 
 
+    $scope.users = [];
+    $scope.usersLoaded = [];
+
+    $scope.getUsers = function() {
+        $timeout(function(){
+            if ($scope.users.length == 0) {
+                $scope.users.push({});
+                var def = $q.defer();
+                $usersDataFactory.query({offset: 0, limit: 10000, 'order_by[user.id]': 'desc'}).$promise.then(function(data) {
+                    $scope.users = data.results;
+                    def.resolve($scope.users);
+                });
+                return def;
+            } else {
+                return $scope.users;
+            }
+        });
+    };
+
+    $scope.getUsers();
+
 
     $scope.submitForm = function(form) {
         var firstError = null;
@@ -97,7 +118,7 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
     };
 
     $scope.list = function() {
-        $state.go('app.settings.newsrooms');
+        $state.go('app.prmanager.newsrooms');
     };
     
     if (angular.isDefined($stateParams.id)) {
@@ -108,7 +129,7 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
             });
         });
     } else {
-        $scope.newsroom = {id: 0};
+        $scope.newsroom = {id: 0, users: []};
 
     }
 

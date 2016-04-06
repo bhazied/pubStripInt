@@ -20,7 +20,7 @@ function ($scope, $localStorage, $timeout, $uibModalInstance, field, value) {
             onlyMimes: ['image', 'video'],
             customHeaders: {
                 'Authorization': 'Bearer ' + $localStorage.access_token,
-                'BX-Application': 'BackOffice'
+                'PP-Application': 'BackOffice'
             },
             getFileCallback : function(file) {
                 var parser = document.createElement('a');

@@ -94,8 +94,8 @@ publi_pr_newsroom_template_api:
     type:   rest
     prefix:   /api
 
-publi_pr_newsrooms_users_api:
-    resource: "@PubliPrBundle/Controller/NewsroomsUsersRESTController.php"
+publi_pr_user_api:
+    resource: "@PubliPrBundle/Controller/UserRESTController.php"
     type:   rest
     prefix:   /api
 
@@ -131,11 +131,6 @@ publi_pr_track_email_api:
 
 publi_pr_track_press_release_api:
     resource: "@PubliPrBundle/Controller/TrackPressReleaseRESTController.php"
-    type:   rest
-    prefix:   /api
-
-publi_pr_user_api:
-    resource: "@PubliPrBundle/Controller/UserRESTController.php"
     type:   rest
     prefix:   /api
 
@@ -195,9 +190,9 @@ publi_pr_newsroom_template:
     resource: "@PubliPrBundle/Resources/config/routing/newsroom_template.yml"
     prefix:   /newsroom-template
 
-publi_pr_newsrooms_users:
-    resource: "@PubliPrBundle/Resources/config/routing/newsrooms_users.yml"
-    prefix:   /newsrooms-users
+publi_pr_user:
+    resource: "@PubliPrBundle/Resources/config/routing/user.yml"
+    prefix:   /user
 
 publi_pr_payment:
     resource: "@PubliPrBundle/Resources/config/routing/payment.yml"
@@ -226,8 +221,4 @@ publi_pr_track_email:
 publi_pr_track_press_release:
     resource: "@PubliPrBundle/Resources/config/routing/track_press_release.yml"
     prefix:   /track-press-release
-
-publi_pr_user:
-    resource: "@PubliPrBundle/Resources/config/routing/user.yml"
-    prefix:   /user
 
