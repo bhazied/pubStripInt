@@ -11,18 +11,20 @@ app.controller('EmailConfirmCtrl', ['$scope', '$rootScope', '$localStorage', '$s
         $scope.authenticated = false;
 
         if (angular.isDefined($stateParams.token)) {
-            $registerDataFactory.emailConfirm({locale: $localStorage.language, token: $stateParams.token}).$promise.then(function(data) {
-                $timeout(function(){
-                    if (data.status) {
-                        $scope.status = 'success';
-                        $localStorage.access_token = data.token;
-                        $scope.user = $localStorage.user = $rootScope.user = data.user;
-                        $scope.authenticated = true;
-                    } else {
-                        $scope.status = 'error';
-                    }
-                }, 2000);
-            });
+            $timeout(function() {
+                $registerDataFactory.emailConfirm({locale: $localStorage.language, token: $stateParams.token}).$promise.then(function(data) {
+                    $timeout(function(){
+                        if (data.status) {
+                            $scope.status = 'success';
+                            $localStorage.access_token = data.token;
+                            $scope.user = $localStorage.user = $rootScope.user = data.user;
+                            $scope.authenticated = true;
+                        } else {
+                            $scope.status = 'error';
+                        }
+                    }, 2000);
+                });
+            }, 2000)
         } else {
             $scope.status = 'warning';
         }
