@@ -75,7 +75,6 @@ app.controller('RegisterCtrl', ['$scope', '$rootScope', '$localStorage', '$state
 
             if ($scope.user['g-recaptcha-response'] == null) {
                 $scope.captchaError = true;
-                return false;
             }
 
             if (signUpForm.$valid) {
@@ -95,7 +94,7 @@ app.controller('RegisterCtrl', ['$scope', '$rootScope', '$localStorage', '$state
                             text: $filter('translate')('register.EMAILSENT'),
                             type: 'success',
                             showCancelButton: false,
-                            confirmButtonText: $filter('translate')('form.messages.OK'),
+                            confirmButtonText: $filter('translate')('content.form.messages.OK'),
                             closeOnConfirm: true
                         }, function(){
                             $state.go('auth.login');

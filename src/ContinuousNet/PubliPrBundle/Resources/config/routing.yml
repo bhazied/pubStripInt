@@ -15,14 +15,14 @@ api_login_check:
 api_login_check_lang:
     path: /{_locale}/api/login_check
     requirements:
-        _locale: en|fr
+        _locale: en|fr|ar
 
 publi_pr_v1_api:
     resource: "@PubliPrBundle/Controller/ApiV1RESTController.php"
     type:   rest
     prefix:   /{_locale}/api/v1
     requirements:
-        _locale: en|fr
+        _locale: en|fr|ar
 
 publi_pr_company_api:
     resource: "@PubliPrBundle/Controller/CompanyRESTController.php"

@@ -8,6 +8,8 @@ app.constant('APP_JS_REQUIRES', {
         'EmailConfirmCtrl': '/bundles/publipr/js/components/Auth/EmailConfirmCtrl.js',
         'ResetPasswordCtrl': '/bundles/publipr/js/components/Auth/ResetPasswordCtrl.js',
         'ResetCtrl': '/bundles/publipr/js/components/Auth/ResetCtrl.js',
+        'ChangePasswordCtrl': '/bundles/publipr/js/components/Auth/ChangePasswordCtrl.js',
+        'ProfileCtrl': '/bundles/publipr/js/components/Auth/ProfileCtrl.js',
         'DashboardCtrl': '/bundles/publipr/js/components/Main/DashboardCtrl.js',
         'CompaniesCtrl': '/bundles/publipr/js/components/Company/CompaniesCtrl.js',
         'CompanyFormCtrl': '/bundles/publipr/js/components/Company/CompanyFromCtrl.js',
@@ -85,6 +87,9 @@ app.constant('APP_JS_REQUIRES', {
     },{
         name: 'ResetPasswordService',
         files: ['/bundles/publipr/js/components/Auth/ResetPasswordService.js']
+    },{
+        name: 'ProfileService',
+        files: ['/bundles/publipr/js/components/Auth/ProfileService.js']
     },{
         name: 'DashboardService',
         files: ['/bundles/publipr/js/components/Main/DashboardService.js']

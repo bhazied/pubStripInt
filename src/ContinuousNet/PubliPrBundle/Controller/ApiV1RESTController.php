@@ -802,65 +802,6 @@ class ApiV1RESTController extends FOSRestController
         return __DIR__ . DIRECTORY_SEPARATOR. '..' . DIRECTORY_SEPARATOR. '..' . DIRECTORY_SEPARATOR. '..' . DIRECTORY_SEPARATOR. '..' . DIRECTORY_SEPARATOR . 'web';
     }
 
-    /**
-     * @Post("/ad")
-     * @View(serializerEnableMaxDepthChecks=true)
-     */
-    public function adAction(Request $request) {
-
-
-        $data = array('status' => false, 'message' => null);
-
-        try {
-
-            $type = $request->request->get('type');
-            if (is_null($type) || empty($type)) {
-                $data['status'] = false;
-                $data['message'] = 'Missing type parameter';
-                return $data;
-            }
-            if ($type != 'Image' && $type != 'Video') {
-                $data['status'] = false;
-                $data['message'] = 'incorrect type parameter (Image, Video)';
-                return $data;
-            }
-
-            $em = $this->getDoctrine()->getManager();
-
-            $select = array('b_.id', 'b_.name', 'b_.broughtByText', 'b_.broughtByPicture', 'b_.text', 'b_.picture', 'b_.url');
-
-            $qb = $em->createQueryBuilder();
-            $qb->select($select);
-            $qb->from('PubliPrBundle:Banner', 'b_');
-            $qb->andWhere('b_.status = :status')->setParameter('status', 'Online');
-            $qb->andWhere('b_.type = :type')->setParameter('type', $type);
-            $qb->groupBy('b_.id');
-            $banners= $qb->getQuery()->getResult();
-            shuffle($banners);
-
-            if (isset($banners[0])) {
-
-                $data['status'] = true;
-                $data['message'] = 'Banner OK';
-
-                $banners[0]['broughtByPicture'] = $request->getUriForPath($banners[0]['broughtByPicture']);
-                $banners[0]['picture'] = $request->getUriForPath($banners[0]['picture']);
-                $data = array_merge($data, $banners[0]);
-
-            } else {
-
-                $data['status'] = false;
-                $data['message'] = 'No banner';
-
-            }
-
-            return $data;
-
-        } catch (\Exception $e) {
-            return FOSView::create($e->getMessage(), Codes::HTTP_INTERNAL_SERVER_ERROR);
-        }
-
-    }
 
 
 }

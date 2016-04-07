@@ -9,17 +9,22 @@
 						<img data-ng-src="/app/images/logo-dark.png" />
 					</div>
 
-					<p class="text-center mb30" translate="register.CREATEYOURACCOUNT"> Create your account.</p>
+					<h3 class="text-center mb30" translate="register.CREATEYOURACCOUNT">Create your account.</h3>
+
+					<p class="text-center mb30">
+						<span translate="register.ALREADYHAVEANACCOUNT">Already have an account?</span>
+						<a ui-sref="auth.login" translate="register.SIGNINHERE">Sign In here.</a>
+					</p>
 
 					<div class="form-inputs">
 
 						<div class="form-group" ng-class="{'has-error':signUpForm.name.$dirty && signUpForm.name.$invalid, 'has-success':signUpForm.name.$valid}">
-							<label class="control-label">
+							<!--label class="control-label">
 								<span translate="content.list.fields.NAME">Name</span>
 								<span class="symbol required"></span>
-							</label>
+							</label-->
 							<div class="input-group input-group-lg">
-								<input type="text" placeholder="[[ 'content.form.messages.ENTERNAME' | translate ]]" class="form-control input-lg" name="name" ng-model="user.name" ng-required="true"/>
+								<input type="text" placeholder="[[ 'register.NAME' | translate ]]" class="form-control input-lg" name="name" ng-model="user.name" ng-required="true"/>
 								<span class="input-group-addon">
 									<i class="ti-user"></i>
 								</span>
@@ -29,12 +34,12 @@
 						</div>
 
 						<div class="form-group" ng-class="{'has-error':signUpForm.email.$dirty && signUpForm.email.$invalid, 'has-success':signUpForm.email.$valid}">
-							<label class="control-label">
+							<!--label class="control-label">
 								<span translate="content.list.fields.EMAIL">Email</span>
 								<span class="symbol required"></span>
-							</label>
+							</label-->
 							<div class="input-group input-group-lg">
-								<input type="email" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" placeholder="[[ 'content.form.messages.ENTEREMAIL' | translate ]]" class="form-control input-lg" name="email" ng-model="user.email" email-validator ng-required="true">
+								<input type="email" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" placeholder="[[ 'register.EMAIL' | translate ]]" class="form-control input-lg" name="email" ng-model="user.email" email-validator ng-required="true">
 								<span class="input-group-addon">
 									<i ng-class="{'ti-email': !signUpForm.email.$pending, 'fa fa-spinner fa-spin': signUpForm.email.$pending} "></i>
 								</span>
@@ -46,12 +51,12 @@
 						</div>
 
 						<div class="form-group" ng-class="{'has-error':signUpForm.password.$dirty && signUpForm.password.$invalid, 'has-success':signUpForm.password.$valid}">
-							<label class="control-label">
+							<!--label class="control-label">
 								<span translate="content.list.fields.PASSWORD">Password</span>
 								<span class="symbol required"></span>
-							</label>
+							</label-->
 							<div class="input-group input-group-lg">
-								<input ng-minlength="6" ng-maxlength="20" autocomplete="off" type="password" placeholder="[[ 'content.form.messages.ENTERPASSWORD' | translate ]]" class="form-control input-lg" name="password" ng-model="user.password" ng-required="true"/>
+								<input ng-minlength="6" ng-maxlength="20" autocomplete="off" type="password" placeholder="[[ 'register.PASSWORD' | translate ]]" class="form-control input-lg" name="password" ng-model="user.password" ng-required="true"/>
 								<span class="input-group-addon">
 									<i class="ti-lock"></i>
 								</span>
@@ -63,10 +68,10 @@
 						</div>
 
 						<div class="form-group" ng-class="{'has-error':signUpForm.password2.$dirty && signUpForm.password2.$error.compareTo || signUpForm.password2.$dirty && signUpForm.password2.$invalid, 'has-success':signUpForm.password2.$valid}">
-							<label class="control-label">
+							<!--label class="control-label">
 								<span translate="content.list.fields.REPEATPASSWORD">Repeat Password</span>
 								<span class="symbol required"></span>
-							</label>
+							</label-->
 							<div class="input-group input-group-lg">
 								<input ng-minlength="6" ng-maxlength="20" type="password" placeholder="[[ 'content.form.messages.REENTERPASSWORD' | translate ]]" class="form-control input-lg" name="password2" ng-model="user.password2" compare-to="user.password" ng-required="true"/>
 								<span class="input-group-addon">
@@ -91,10 +96,10 @@
 								 on-expire="cbExpiration()"></div>
 						</div>
 
-						<div class="form-group">
-							<label class="cb-checkbo cb-md">
+						<div class="form-group" ui-jq="checkBo">
+							<label class="cb-checkbox cb-md">
 								<input type="checkbox" name="checked-checkbox-name" value="1" name="terms" id="terms" ng-required="true" />
-								<span class="text-left" translate="register.TERMS">You agree to our Terms of services & Policies.</span>
+								<span class="text-left" translate="register.TERMS">You agree to our Terms of services & Policies. <span class="symbol required"></span></span>
 							</label>
 						</div>
 
