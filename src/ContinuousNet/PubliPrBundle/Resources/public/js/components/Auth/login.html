@@ -20,23 +20,30 @@
 						<span translate="login.WELCOME" translate-values="{ user: user }">Welcome [[user.firstName]].</span>
 					</div>
 
-					<p class="text-center mb30" translate="login.SIGNIN">
+					<h3 class="text-center mb30" translate="login.SIGNIN">
 						Sign in to your account
-					</p>
+					</h3>
 
 					<div class="form-inputs">
-						<div class="input-group input-group-lg">
-							<input ng-model="email" type="text" class="form-control input-lg" name="email" placeholder="[[ 'login.EMAIL' | translate ]]">
-							<span class="input-group-addon">
-								<i class="ti-email"></i>
-							</span>
+
+						<div class="form-group">
+							<div class="input-group input-group-lg">
+								<input ng-model="email" type="text" class="form-control input-lg" name="email" placeholder="[[ 'login.EMAIL' | translate ]]">
+								<span class="input-group-addon">
+									<i class="ti-email"></i>
+								</span>
+							</div>
 						</div>
-						<div class="input-group input-group-lg">
-							<input ng-model="password" type="password" class="form-control input-lg" name="password" placeholder="[[ 'login.PASSWORD' | translate ]]">
-							<span class="input-group-addon">
-								<i class="ti-lock"></i>
-							</span>
+
+						<div class="form-group">
+							<div class="input-group input-group-lg">
+								<input ng-model="password" type="password" class="form-control input-lg" name="password" placeholder="[[ 'login.PASSWORD' | translate ]]">
+								<span class="input-group-addon">
+									<i class="ti-lock"></i>
+								</span>
+							</div>
 						</div>
+
 					</div>
 
 					<div class="form-group" ui-jq="checkBo">
