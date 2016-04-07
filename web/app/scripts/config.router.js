@@ -14,7 +14,8 @@ angular
                 name: 'PUBLI PR', // name of your project
                 author: 'Continuous Net', // author's name or company name
                 description: 'Press Release ', // brief description
-                version: '1.0', // current version
+                version: '1.0.0', // current version
+                reCaptchaKey: '6LdZbxwTAAAAAPMYxr2yVuTCSd3ceQxV9HfkOB8b',
                 year: ((new Date()).getFullYear()), // automatic current year (for copyright information)
                 isMobile: (function () {// true if the browser is a mobile device
                     var check = false;

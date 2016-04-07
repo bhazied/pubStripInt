@@ -78,12 +78,17 @@
 							<span class="success text-small block" ng-if="signUpForm.password2.$valid" translate="content.form.messages.PASSWORDSMATCH">Passwords match!</span>
 						</div>
 
-						<div class="form-group">
+						<div class="form-group" ng-class="{'has-error': captchaError}">
 							<label class="control-label">
 								<span translate="content.list.fields.CAPTCHA">CAPTCHA</span>
 								<span class="symbol required"></span>
 							</label>
-							<div ng-model="user['g-recaptcha-response']" vc-recaptcha key="'6LdZbxwTAAAAAPMYxr2yVuTCSd3ceQxV9HfkOB8b'"></div>
+							<div ng-model="user['g-recaptcha-response']" vc-recaptcha
+								 theme="'light'"
+								 key="app.reCaptchaKey"
+								 on-create="setWidgetId(widgetId)"
+								 on-success="setResponse(response)"
+								 on-expire="cbExpiration()"></div>
 						</div>
 
 						<div class="form-group">

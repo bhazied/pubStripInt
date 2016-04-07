@@ -112,6 +112,7 @@ fos_user:
             template:   emails/registration.email.html.twig
         form:
             type:               ContinuousNet\PubliPrBundle\Form\RegistrationType # or 'fos_user_registration' on Symfony < 2.8
+            handler:            publi_pr.form.handler.registration
             name:               app_user_registration
             validation_groups:  [Registration, Default]
     resetting:

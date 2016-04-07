@@ -51,7 +51,7 @@ angular
     function AppCtrl($scope, $http, $localStorage, $state, $timeout) {
 
         $scope.anonymousStates = ['auth.login', 'auth.register', 'auth.resetpassword', 'auth.reset', 'auth.lockscreen', 'auth.emailconfirm'];
-        /*
+
         $timeout(function() {
             if ($scope.anonymousStates.indexOf($state.current.name) == -1 && !angular.isDefined($localStorage.access_token)) {
                 $timeout(function() {
@@ -60,7 +60,7 @@ angular
                 });
             }
         }, 2000);
-        */
+
         $scope.mobileView = 767;
 
         $scope.app = {
@@ -68,6 +68,7 @@ angular
             author: 'Continuous Net',
             version: '1.0.0',
             year: (new Date()).getFullYear(),
+            reCaptchaKey: '6LdZbxwTAAAAAPMYxr2yVuTCSd3ceQxV9HfkOB8b',
             layout: {
                 isSmallSidebar: false,
                 isChatOpen: false,
@@ -411,7 +412,8 @@ angular
                 name: 'PUBLI PR', // name of your project
                 author: 'Continuous Net', // author's name or company name
                 description: 'Press Release ', // brief description
-                version: '1.0', // current version
+                version: '1.0.0', // current version
+                reCaptchaKey: '6LdZbxwTAAAAAPMYxr2yVuTCSd3ceQxV9HfkOB8b',
                 year: ((new Date()).getFullYear()), // automatic current year (for copyright information)
                 isMobile: (function () {// true if the browser is a mobile device
                     var check = false;

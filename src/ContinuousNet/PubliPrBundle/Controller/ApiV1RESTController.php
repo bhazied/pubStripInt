@@ -46,29 +46,12 @@ class ApiV1RESTController extends FOSRestController
     const SESSION_EMAIL = 'fos_user_send_resetting_email/email';
 
     private $locales = array(
-        'en' => 'en_US'
-    );
-
-    private $scoreTypes = array(
-        'GameWon' => 0,
-        'Register' => 5,
-        'Facebook' => 10,
-        'Twitter' => 10,
-        'Istagram' => 10,
-        'AppRating' => 10,
-        'Invitation' => 20,
-        'VideoAd' => 5
-    );
-
-    private $levels = array(
-        array('id' => 1, 'cols' => 3, 'rows' => 4, 'minBucks' => 0, 'maxTime' => 120, 'scoreBucks' => 5),
-        array('id' => 2, 'cols' => 4, 'rows' => 5, 'minBucks' => 500, 'maxTime' => 180, 'scoreBucks' => 10),
-        array('id' => 3, 'cols' => 5, 'rows' => 6, 'minBucks' => 1000, 'maxTime' => 300, 'scoreBucks' => 20),
-        array('id' => 4, 'cols' => 6, 'rows' => 7, 'minBucks' => 2000, 'maxTime' => 600, 'scoreBucks' => 40)
+        'en' => 'en_US',
+        'fr' => 'fr_FR'
     );
 
     private function getConfig($path) {
-        $config = $this->container->getParameter('bucks_hunter');
+        $config = $this->container->getParameter('publi_pr');
         $paths = explode('.', $path);
         foreach ($paths as $index) {
             $config = $config[$index];
@@ -276,7 +259,15 @@ class ApiV1RESTController extends FOSRestController
             $formHandler = $this->container->get('fos_user.registration.form.handler');
             $confirmationEnabled = $this->container->getParameter('fos_user.registration.confirmation.enabled');
 
-            $process = $formHandler->process($confirmationEnabled);
+            try {
+                $process = $formHandler->process($confirmationEnabled);
+            } catch (\Exception $e) {
+                if (json_decode($e->getMessage())) {
+                    return json_decode($e->getMessage());
+                } else {
+                    return $e->getMessage();
+                }
+            }
 
             if ($process) {
 
