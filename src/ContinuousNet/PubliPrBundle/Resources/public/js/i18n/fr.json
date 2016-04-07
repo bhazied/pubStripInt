@@ -43,8 +43,8 @@
     "resetpassword": {
         "FORGET": "Forget Password?",
         "ENTEREMAIL": "Enter your e-mail address below to reset your password.",
-        "LOGIN": "Log-In",
-        "SUBMIT": "Submit",
+        "LOGIN": "Return to Sign In",
+        "SUBMIT": "Reset password",
         "EMAILINCORRECT": "Email address incorrect.",
         "EMAILSENT": "Reset password link sent to your email address.",
         "INVALIDEMAIL": "Invalid email or email not exist!",
