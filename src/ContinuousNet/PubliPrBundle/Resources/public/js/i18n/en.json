@@ -7,10 +7,13 @@
     },
     "login": {
         "SIGNIN": "Sign in to your account",
+        "EMAIL": "Email",
+        "PASSWORD": "Password",
+        "KEEPMESIGNEDID": "Keep me signed in",
         "PLEASESIGNIN": "Please enter your email and password to log in.",
         "FORGOTPASSWORD": "I forgot my password",
         "KEEPMESIGNEDIN": "Keep me signed in",
-        "LOGIN": "Login",
+        "LOGIN": "Sign in",
         "DONTHAVEACCOUNT": "Don't have an account yet?",
         "CREATEACCOUNT": "Create an account",
         "ERROR": "Incorrect Email or Password.",
@@ -23,7 +26,13 @@
         "THANKS": "Thanks for Signing Up.",
         "EMAILSENT": "Please check your email, we've sent a confirmation email to. Click the link in the email to confirm this address.",
         "FAILED": "Sign up Failed!",
-        "TERMS": "You agree to our Terms of services & Policies."
+        "TERMS": "You agree to our Terms of services & Policies.",
+        "NAME": "Name (*)",
+        "EMAIL": "Email (*)",
+        "PASSWORD": "Password (*)",
+        "REENTERPASSWORD": "Re-enter password (*)",
+        "ALREADYHAVEANACCOUNT": "Already have an account?",
+        "SIGNINHERE": "Sign In here."
     },
     "emailconfirm": {
         "EMAILCONFIRMATIONINPROGRESS": "Email confirmation in progress...",

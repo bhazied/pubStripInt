@@ -41,3 +41,7 @@ span.input-help > input {
     right: 4px;
 }
 
+.usersession {
+    min-height: 100%!important;
+    height: auto!important;
+}

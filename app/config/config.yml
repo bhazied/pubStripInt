@@ -368,7 +368,8 @@ assetic:
                 - 'bower_components/angular-ui-validate/dist/validate.min.js'
                 - 'bower_components/angular-ui-indeterminate/dist/indeterminate.min.js'
                 - 'bower_components/angular-ui-uploader/dist/uploader.min.js'
-                - 'bower_components/angular-ui-utils/index.js' #.min
+                - 'bower_components/angular-ui-uploader/dist/uploader.min.js'
+                - 'bower_components/angular-ui-utils/ui-utils.js' #.min
                 - 'bower_components/angular-resource/angular-resource.js' #.min
                 - 'bower_components/angular-bind-html-compile/angular-bind-html-compile.js'
                 - 'bower_components/angular-slugify/angular-slugify.js'
