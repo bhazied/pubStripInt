@@ -104,7 +104,6 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
         $sessionsDataFactory.get({id: $stateParams.id}).$promise.then(function(data) {
             $timeout(function(){
                 $scope.session = savable(data);
-                //console.warn($scope.session);
             });
         });
     } else {

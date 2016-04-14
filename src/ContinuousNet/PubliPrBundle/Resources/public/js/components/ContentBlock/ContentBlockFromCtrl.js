@@ -26,64 +26,72 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
     $scope.blockTypes = [{
         id: 'Text',
         title: $filter('translate')('content.list.fields.blocktypes.TEXT'),
-        css: 'text'
+        css: 'primary'
     }, {
         id: 'BoxedText',
         title: $filter('translate')('content.list.fields.blocktypes.BOXEDTEXT'),
-        css: 'boxed-text'
+        css: 'success'
     }, {
         id: 'Divider',
         title: $filter('translate')('content.list.fields.blocktypes.DIVIDER'),
-        css: 'divider'
+        css: 'warning'
     }, {
         id: 'Image',
         title: $filter('translate')('content.list.fields.blocktypes.IMAGE'),
-        css: 'image'
+        css: 'danger'
     }, {
         id: 'ImageGroup',
         title: $filter('translate')('content.list.fields.blocktypes.IMAGEGROUP'),
-        css: 'image-group'
+        css: 'default'
     }, {
         id: 'ImageCard',
         title: $filter('translate')('content.list.fields.blocktypes.IMAGECARD'),
-        css: 'image-card'
+        css: 'info'
     }, {
         id: 'ImageWithCaption',
         title: $filter('translate')('content.list.fields.blocktypes.IMAGEWITHCAPTION'),
-        css: 'image-with-caption'
+        css: 'primary'
     }, {
         id: 'SocialShare',
         title: $filter('translate')('content.list.fields.blocktypes.SOCIALSHARE'),
-        css: 'social-share'
+        css: 'success'
     }, {
         id: 'SocialFollow',
         title: $filter('translate')('content.list.fields.blocktypes.SOCIALFOLLOW'),
-        css: 'social-follow'
+        css: 'warning'
     }, {
         id: 'Button',
         title: $filter('translate')('content.list.fields.blocktypes.BUTTON'),
-        css: 'button'
+        css: 'danger'
     }, {
         id: 'Footer',
         title: $filter('translate')('content.list.fields.blocktypes.FOOTER'),
-        css: 'footer'
+        css: 'default'
     }, {
-        id: 'RSSHeader',
+        id: 'Video',
+        title: $filter('translate')('content.list.fields.blocktypes.VIDEO'),
+        css: 'info'
+    }, {
+        id: 'RssHeader',
         title: $filter('translate')('content.list.fields.blocktypes.RSSHEADER'),
-        css: 'r-s-s-header'
+        css: 'primary'
     }, {
-        id: 'RSSItems',
+        id: 'RssItems',
         title: $filter('translate')('content.list.fields.blocktypes.RSSITEMS'),
-        css: 'r-s-s-items'
+        css: 'success'
     }, {
         id: 'Code',
         title: $filter('translate')('content.list.fields.blocktypes.CODE'),
-        css: 'code'
+        css: 'warning'
+    }, {
+        id: 'Zone',
+        title: $filter('translate')('content.list.fields.blocktypes.ZONE'),
+        css: 'danger'
     }];
     $scope.statuses = [{
         id: 'Draft',
         title: $filter('translate')('content.list.fields.statuses.DRAFT'),
-        css: 'info'
+        css: 'primary'
     }, {
         id: 'Online',
         title: $filter('translate')('content.list.fields.statuses.ONLINE'),
@@ -95,15 +103,15 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
     }, {
         id: 'Offline',
         title: $filter('translate')('content.list.fields.statuses.OFFLINE'),
-        css: 'inverse'
+        css: 'danger'
     }, {
         id: 'Deleted',
         title: $filter('translate')('content.list.fields.statuses.DELETED'),
-        css: 'danger'
+        css: 'default'
     }, {
         id: 'Archived',
         title: $filter('translate')('content.list.fields.statuses.ARCHIVED'),
-        css: 'primary'
+        css: 'info'
     }];
 
     $scope.users = [];
@@ -186,7 +194,6 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
         $contentBlocksDataFactory.get({id: $stateParams.id}).$promise.then(function(data) {
             $timeout(function(){
                 $scope.contentBlock = savable(data);
-                //console.warn($scope.contentBlock);
             });
         });
     } else {

@@ -191,15 +191,15 @@ function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q,
     };
 
     $scope.add = function() {
-        $state.go('app.access.settingsnew');
+        $state.go('app.configuration.settingsnew');
     };
 
     $scope.edit = function(row) {
-        $state.go('app.access.settingsedit', {id: row.id});
+        $state.go('app.configuration.settingsedit', {id: row.id});
     };
 
     $scope.details = function(row) {
-        $state.go('app.access.settingsdetails', {id: row.id});
+        $state.go('app.configuration.settingsdetails', {id: row.id});
     };
 
 }]);

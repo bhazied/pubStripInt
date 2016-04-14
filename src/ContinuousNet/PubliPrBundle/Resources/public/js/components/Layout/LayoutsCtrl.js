@@ -12,7 +12,7 @@ function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q,
     $scope.statuses = [{
         id: 'Draft',
         title: $filter('translate')('content.list.fields.statuses.DRAFT'),
-        css: 'info'
+        css: 'primary'
     }, {
         id: 'Online',
         title: $filter('translate')('content.list.fields.statuses.ONLINE'),
@@ -24,15 +24,15 @@ function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q,
     }, {
         id: 'Offline',
         title: $filter('translate')('content.list.fields.statuses.OFFLINE'),
-        css: 'inverse'
+        css: 'danger'
     }, {
         id: 'Deleted',
         title: $filter('translate')('content.list.fields.statuses.DELETED'),
-        css: 'danger'
+        css: 'default'
     }, {
         id: 'Archived',
         title: $filter('translate')('content.list.fields.statuses.ARCHIVED'),
-        css: 'primary'
+        css: 'info'
     }];
 
     $scope.locale = (angular.isDefined($localStorage.language))?$localStorage.language:'en';

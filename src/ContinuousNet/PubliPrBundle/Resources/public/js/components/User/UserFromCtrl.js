@@ -26,7 +26,7 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
     $scope.types = [{
         id: 'Free',
         title: $filter('translate')('content.list.fields.types.FREE'),
-        css: 'info'
+        css: 'primary'
     }, {
         id: 'Manager',
         title: $filter('translate')('content.list.fields.types.MANAGER'),
@@ -38,12 +38,12 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
     }, {
         id: 'Administrator',
         title: $filter('translate')('content.list.fields.types.ADMINISTRATOR'),
-        css: 'inverse'
+        css: 'danger'
     }];
     $scope.genders = [{
         id: 'Male',
         title: $filter('translate')('content.list.fields.genders.MALE'),
-        css: 'info'
+        css: 'primary'
     }, {
         id: 'Female',
         title: $filter('translate')('content.list.fields.genders.FEMALE'),
@@ -59,7 +59,7 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
     $scope.authenticationModes = [{
         id: 'Database',
         title: $filter('translate')('content.list.fields.authenticationmodes.DATABASE'),
-        css: 'info'
+        css: 'primary'
     }, {
         id: 'ActiveDirectory',
         title: $filter('translate')('content.list.fields.authenticationmodes.ACTIVEDIRECTORY'),
@@ -72,23 +72,27 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
     $scope.roles = [{
         id: 'ROLE_API',
         title: $filter('translate')('content.list.fields.rolesoptions.ROLE_API'),
-        css: 'info'
+        css: 'primary'
     }, {
         id: 'FREE_ACCOUNT',
         title: $filter('translate')('content.list.fields.rolesoptions.FREE_ACCOUNT'),
         css: 'success'
     }, {
-        id: 'ROLE_ACCOUNT_MANAGER',
-        title: $filter('translate')('content.list.fields.rolesoptions.ROLE_ACCOUNT_MANAGER'),
+        id: 'ROLE_ACCOUNT_USER',
+        title: $filter('translate')('content.list.fields.rolesoptions.ROLE_ACCOUNT_USER'),
         css: 'warning'
     }, {
-        id: 'ROLE_CONTRIBUTOR_ACCOUNT',
-        title: $filter('translate')('content.list.fields.rolesoptions.ROLE_CONTRIBUTOR_ACCOUNT'),
-        css: 'inverse'
+        id: 'ROLE_ACCOUNT_MANAGER',
+        title: $filter('translate')('content.list.fields.rolesoptions.ROLE_ACCOUNT_MANAGER'),
+        css: 'danger'
+    }, {
+        id: 'ROLE_ADMIN',
+        title: $filter('translate')('content.list.fields.rolesoptions.ROLE_ADMIN'),
+        css: 'default'
     }, {
         id: 'ROLE_SUPER_ADMIN',
         title: $filter('translate')('content.list.fields.rolesoptions.ROLE_SUPER_ADMIN'),
-        css: 'danger'
+        css: 'info'
     }];
 
     $scope.passwordRequestedAtOpened = false;
@@ -307,7 +311,24 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
         $usersDataFactory.get({id: $stateParams.id}).$promise.then(function(data) {
             $timeout(function(){
                 $scope.user = savable(data);
-                //console.warn($scope.user);
+                if ($scope.user.birth_date != null) {
+                    $scope.user.birth_date = new Date($scope.user.birth_date);
+                }
+                if ($scope.user.password_requested_at != null) {
+                    $scope.user.password_requested_at = new Date($scope.user.password_requested_at);
+                }
+                if ($scope.user.expires_at != null) {
+                    $scope.user.expires_at = new Date($scope.user.expires_at);
+                }
+                if ($scope.user.credentials_expire_at != null) {
+                    $scope.user.credentials_expire_at = new Date($scope.user.credentials_expire_at);
+                }
+                if ($scope.user.last_login != null) {
+                    $scope.user.last_login = new Date($scope.user.last_login);
+                }
+                if ($scope.user.last_failed_login != null) {
+                    $scope.user.last_failed_login = new Date($scope.user.last_failed_login);
+                }
             });
         });
     } else {

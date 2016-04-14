@@ -5,6 +5,7 @@ namespace ContinuousNet\PubliPrBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Events;
 use Doctrine\Common\Collections\ArrayCollection as DoctrineCollection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Exclude;
 use JMS\Serializer\Annotation\Expose;
@@ -24,7 +25,7 @@ use FOS\UserBundle\Model\GroupInterface;
  * @package    ContinuousNet\PubliPrBundle\Entity
  * @author     Sahbi KHALFALLAH <sahbi.khalfallah@continuousnet.com>
  * @copyright  2016 CONTINUOUS NET
- * @license    http://www.zend.com/license/3_0.txt PHP License 3.0
+ * @license	CONTINUOUS NET REGULAR LICENSE
  * @version    Release: 1.0
  * @link       http://publipr.continuousnet.com/ContinuousNet/PubliPrBundle/Entity
  * @see        User
@@ -34,6 +35,9 @@ use FOS\UserBundle\Model\GroupInterface;
  * 
  * @ORM\Table(name="`user`", indexes={@ORM\Index(name="company_id", columns={"company_id"}), @ORM\Index(name="country_id", columns={"country_id"}), @ORM\Index(name="language_id", columns={"language_id"}), @ORM\Index(name="creator_user_id", columns={"creator_user_id"}), @ORM\Index(name="modifier_user_id", columns={"modifier_user_id"})})
  * @ORM\Entity
+ * @UniqueEntity("username")
+ * @UniqueEntity("phone")
+ * @UniqueEntity("email")
  * @ORM\HasLifecycleCallbacks()
  * 
  * @ExclusionPolicy("none")
@@ -91,7 +95,7 @@ class User  extends BaseUser
      * @var string
      * @access protected
      *
-     * @ORM\Column(name="salt", type="string", length=1000, nullable=false, unique=false)
+     * @ORM\Column(name="salt", type="string", length=255, nullable=true, unique=false)
      * 
      * @Exclude
      * 
@@ -691,7 +695,7 @@ class User  extends BaseUser
      * @param string $salt
      * @return User
      */
-    public function setSalt($salt)
+    public function setSalt($salt = null)
     {
         $this->salt = $salt;
         return $this;

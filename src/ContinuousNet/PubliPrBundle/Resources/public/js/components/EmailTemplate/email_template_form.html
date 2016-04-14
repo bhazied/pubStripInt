@@ -122,7 +122,7 @@
                                         <span translate="content.list.fields.STATUS">Status</span>
                                         <span class="symbol required"></span>
                                     </label>
-                                    <div class="clip-radio radio-primary" ng-if="statuses.length < 10">
+                                    <div class="continuous-radio radio-primary" ng-if="statuses.length < 10">
                                         <input ng-disabled="false" ng-repeat-start="status in statuses" ng-model="emailTemplate.status" type="radio" id="status[[ status.id ]]" value="[[ status.id ]]" name="status" ng-required="true" />
                                         <label ng-repeat-end for="status[[ status.id ]]">
                                             [[ status.title ]]

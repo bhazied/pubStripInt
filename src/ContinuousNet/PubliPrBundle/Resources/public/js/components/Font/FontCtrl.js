@@ -13,15 +13,15 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $q, $interpolate
     $scope.timeFormat = $filter('translate')('formats.TIME');
 
     $scope.list = function() {
-        $state.go('app.settings.fonts');
+        $state.go('app.templatemanager.fonts');
     };
 
     $scope.add = function() {
-        $state.go('app.settings.fontsnew');
+        $state.go('app.templatemanager.fontsnew');
     };
 
     $scope.edit = function(row) {
-        $state.go('app.settings.fontsedit', {id: row.id});
+        $state.go('app.templatemanager.fontsedit', {id: row.id});
     };
 
     if (angular.isDefined($stateParams.id)) {

@@ -104,7 +104,6 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
         $newsroomTemplatesDataFactory.get({id: $stateParams.id}).$promise.then(function(data) {
             $timeout(function(){
                 $scope.newsroomTemplate = savable(data);
-                //console.warn($scope.newsroomTemplate);
             });
         });
     } else {

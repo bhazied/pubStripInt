@@ -97,14 +97,13 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
     };
 
     $scope.list = function() {
-        $state.go('app.settings.countries');
+        $state.go('app.configuration.countries');
     };
     
     if (angular.isDefined($stateParams.id)) {
         $countriesDataFactory.get({id: $stateParams.id}).$promise.then(function(data) {
             $timeout(function(){
                 $scope.country = savable(data);
-                //console.warn($scope.country);
             });
         });
     } else {

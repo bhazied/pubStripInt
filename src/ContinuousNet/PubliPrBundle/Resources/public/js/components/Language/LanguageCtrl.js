@@ -13,15 +13,15 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $q, $interpolate
     $scope.timeFormat = $filter('translate')('formats.TIME');
 
     $scope.list = function() {
-        $state.go('app.settings.languages');
+        $state.go('app.configuration.languages');
     };
 
     $scope.add = function() {
-        $state.go('app.settings.languagesnew');
+        $state.go('app.configuration.languagesnew');
     };
 
     $scope.edit = function(row) {
-        $state.go('app.settings.languagesedit', {id: row.id});
+        $state.go('app.configuration.languagesedit', {id: row.id});
     };
 
     if (angular.isDefined($stateParams.id)) {

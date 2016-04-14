@@ -47,7 +47,7 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
     $scope.statuses = [{
         id: 'Draft',
         title: $filter('translate')('content.list.fields.statuses.DRAFT'),
-        css: 'info'
+        css: 'primary'
     }, {
         id: 'Online',
         title: $filter('translate')('content.list.fields.statuses.ONLINE'),
@@ -59,15 +59,15 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
     }, {
         id: 'Offline',
         title: $filter('translate')('content.list.fields.statuses.OFFLINE'),
-        css: 'inverse'
+        css: 'danger'
     }, {
         id: 'Deleted',
         title: $filter('translate')('content.list.fields.statuses.DELETED'),
-        css: 'danger'
+        css: 'default'
     }, {
         id: 'Archived',
         title: $filter('translate')('content.list.fields.statuses.ARCHIVED'),
-        css: 'primary'
+        css: 'info'
     }];
 
     $scope.dateFormat = $filter('translate')('formats.DATE');
@@ -187,7 +187,15 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
         $pressReleasesDataFactory.get({id: $stateParams.id}).$promise.then(function(data) {
             $timeout(function(){
                 $scope.pressRelease = savable(data);
-                //console.warn($scope.pressRelease);
+                if ($scope.pressRelease.start_publishing != null) {
+                    $scope.pressRelease.start_publishing = new Date($scope.pressRelease.start_publishing);
+                }
+                if ($scope.pressRelease.end_publishing != null) {
+                    $scope.pressRelease.end_publishing = new Date($scope.pressRelease.end_publishing);
+                }
+                if ($scope.pressRelease.publish_date_time != null) {
+                    $scope.pressRelease.publish_date_time = new Date($scope.pressRelease.publish_date_time);
+                }
             });
         });
     } else {

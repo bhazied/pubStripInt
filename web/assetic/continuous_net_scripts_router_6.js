@@ -161,37 +161,6 @@ function ($stateProvider) {
             label: 'content.list.COMPANYDETAILS'
         },
         resolve: loadSequence('CompanyCtrl', 'companyService')
-    }).state('app.access.settings', {
-        url: '/settings',
-        templateUrl: '/bundles/publipr/js/components/Setting/settings.html',
-        title: 'content.list.SETTINGS',
-        ncyBreadcrumb: {
-            label: 'content.list.SETTINGS'
-        },
-        resolve: loadSequence('ngTable', 'SettingsCtrl', 'settingService', 'userService')
-    }).state('app.access.settingsnew', {
-        url: '/settings/new',
-        templateUrl: '/bundles/publipr/js/components/Setting/setting_form.html',
-        title: 'content.list.NEWSETTING',
-        ncyBreadcrumb: {
-            label: 'content.list.NEWSETTING'
-        },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'SettingFormCtrl', 'settingService', 'userService')
-    }).state('app.access.settingsedit', {
-        url: '/settings/edit/:id',
-        templateUrl: '/bundles/publipr/js/components/Setting/setting_form.html',
-        title: 'content.list.EDITSETTING',
-        ncyBreadcrumb: {
-            label: 'content.list.EDITSETTING'
-        },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'SettingFormCtrl', 'settingService', 'userService')
-    }).state('app.access.settingsdetails', {
-        url: '/settings/details/:id',
-        templateUrl: '/bundles/publipr/js/components/Setting/setting.html',
-        ncyBreadcrumb: {
-            label: 'content.list.SETTINGDETAILS'
-        },
-        resolve: loadSequence('SettingCtrl', 'settingService')
     }).state('app.access.logs', {
         url: '/logs',
         templateUrl: '/bundles/publipr/js/components/Log/logs.html',
@@ -392,138 +361,7 @@ function ($stateProvider) {
             label: 'content.list.CONTENTBLOCKDETAILS'
         },
         resolve: loadSequence('ContentBlockCtrl', 'contentBlockService')
-    }).state('app.settings', {
-        url: '/settings',
-        template: '<div ui-view class="fade-in-up"></div>',
-        title: 'sidebar.nav.settings.MAIN',
-        ncyBreadcrumb: {
-            label: 'sidebar.nav.settings.MAIN'
-        }
-    }).state('app.settings.languages', {
-        url: '/languages',
-        templateUrl: '/bundles/publipr/js/components/Language/languages.html',
-        title: 'content.list.LANGUAGES',
-        ncyBreadcrumb: {
-            label: 'content.list.LANGUAGES'
-        },
-        resolve: loadSequence('ngTable', 'LanguagesCtrl', 'languageService', 'userService')
-    }).state('app.settings.languagesnew', {
-        url: '/languages/new',
-        templateUrl: '/bundles/publipr/js/components/Language/language_form.html',
-        title: 'content.list.NEWLANGUAGE',
-        ncyBreadcrumb: {
-            label: 'content.list.NEWLANGUAGE'
-        },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'LanguageFormCtrl', 'languageService', 'userService')
-    }).state('app.settings.languagesedit', {
-        url: '/languages/edit/:id',
-        templateUrl: '/bundles/publipr/js/components/Language/language_form.html',
-        title: 'content.list.EDITLANGUAGE',
-        ncyBreadcrumb: {
-            label: 'content.list.EDITLANGUAGE'
-        },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'LanguageFormCtrl', 'languageService', 'userService')
-    }).state('app.settings.languagesdetails', {
-        url: '/languages/details/:id',
-        templateUrl: '/bundles/publipr/js/components/Language/language.html',
-        ncyBreadcrumb: {
-            label: 'content.list.LANGUAGEDETAILS'
-        },
-        resolve: loadSequence('LanguageCtrl', 'languageService')
-    }).state('app.settings.emailtemplates', {
-        url: '/email-templates',
-        templateUrl: '/bundles/publipr/js/components/EmailTemplate/email_templates.html',
-        title: 'content.list.EMAILTEMPLATES',
-        ncyBreadcrumb: {
-            label: 'content.list.EMAILTEMPLATES'
-        },
-        resolve: loadSequence('ngTable', 'EmailTemplatesCtrl', 'emailTemplateService', 'userService')
-    }).state('app.settings.emailtemplatesnew', {
-        url: '/email-templates/new',
-        templateUrl: '/bundles/publipr/js/components/EmailTemplate/email_template_form.html',
-        title: 'content.list.NEWEMAILTEMPLATE',
-        ncyBreadcrumb: {
-            label: 'content.list.NEWEMAILTEMPLATE'
-        },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'EmailTemplateFormCtrl', 'emailTemplateService', 'userService')
-    }).state('app.settings.emailtemplatesedit', {
-        url: '/email-templates/edit/:id',
-        templateUrl: '/bundles/publipr/js/components/EmailTemplate/email_template_form.html',
-        title: 'content.list.EDITEMAILTEMPLATE',
-        ncyBreadcrumb: {
-            label: 'content.list.EDITEMAILTEMPLATE'
-        },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'EmailTemplateFormCtrl', 'emailTemplateService', 'userService')
-    }).state('app.settings.emailtemplatesdetails', {
-        url: '/email-templates/details/:id',
-        templateUrl: '/bundles/publipr/js/components/EmailTemplate/email_template.html',
-        ncyBreadcrumb: {
-            label: 'content.list.EMAILTEMPLATEDETAILS'
-        },
-        resolve: loadSequence('EmailTemplateCtrl', 'emailTemplateService')
-    }).state('app.settings.newsroomtemplates', {
-        url: '/newsroom-templates',
-        templateUrl: '/bundles/publipr/js/components/NewsroomTemplate/newsroom_templates.html',
-        title: 'content.list.NEWSROOMTEMPLATES',
-        ncyBreadcrumb: {
-            label: 'content.list.NEWSROOMTEMPLATES'
-        },
-        resolve: loadSequence('ngTable', 'NewsroomTemplatesCtrl', 'newsroomTemplateService', 'userService')
-    }).state('app.settings.newsroomtemplatesnew', {
-        url: '/newsroom-templates/new',
-        templateUrl: '/bundles/publipr/js/components/NewsroomTemplate/newsroom_template_form.html',
-        title: 'content.list.NEWNEWSROOMTEMPLATE',
-        ncyBreadcrumb: {
-            label: 'content.list.NEWNEWSROOMTEMPLATE'
-        },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'NewsroomTemplateFormCtrl', 'newsroomTemplateService', 'userService')
-    }).state('app.settings.newsroomtemplatesedit', {
-        url: '/newsroom-templates/edit/:id',
-        templateUrl: '/bundles/publipr/js/components/NewsroomTemplate/newsroom_template_form.html',
-        title: 'content.list.EDITNEWSROOMTEMPLATE',
-        ncyBreadcrumb: {
-            label: 'content.list.EDITNEWSROOMTEMPLATE'
-        },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'NewsroomTemplateFormCtrl', 'newsroomTemplateService', 'userService')
-    }).state('app.settings.newsroomtemplatesdetails', {
-        url: '/newsroom-templates/details/:id',
-        templateUrl: '/bundles/publipr/js/components/NewsroomTemplate/newsroom_template.html',
-        ncyBreadcrumb: {
-            label: 'content.list.NEWSROOMTEMPLATEDETAILS'
-        },
-        resolve: loadSequence('NewsroomTemplateCtrl', 'newsroomTemplateService')
-    }).state('app.settings.countries', {
-        url: '/countries',
-        templateUrl: '/bundles/publipr/js/components/Country/countries.html',
-        title: 'content.list.COUNTRIES',
-        ncyBreadcrumb: {
-            label: 'content.list.COUNTRIES'
-        },
-        resolve: loadSequence('ngTable', 'CountriesCtrl', 'countryService', 'userService')
-    }).state('app.settings.countriesnew', {
-        url: '/countries/new',
-        templateUrl: '/bundles/publipr/js/components/Country/country_form.html',
-        title: 'content.list.NEWCOUNTRY',
-        ncyBreadcrumb: {
-            label: 'content.list.NEWCOUNTRY'
-        },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'CountryFormCtrl', 'countryService', 'userService')
-    }).state('app.settings.countriesedit', {
-        url: '/countries/edit/:id',
-        templateUrl: '/bundles/publipr/js/components/Country/country_form.html',
-        title: 'content.list.EDITCOUNTRY',
-        ncyBreadcrumb: {
-            label: 'content.list.EDITCOUNTRY'
-        },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'CountryFormCtrl', 'countryService', 'userService')
-    }).state('app.settings.countriesdetails', {
-        url: '/countries/details/:id',
-        templateUrl: '/bundles/publipr/js/components/Country/country.html',
-        ncyBreadcrumb: {
-            label: 'content.list.COUNTRYDETAILS'
-        },
-        resolve: loadSequence('CountryCtrl', 'countryService')
-    }).state('app.settings.fonts', {
+    }).state('app.templatemanager.fonts', {
         url: '/fonts',
         templateUrl: '/bundles/publipr/js/components/Font/fonts.html',
         title: 'content.list.FONTS',
@@ -531,7 +369,7 @@ function ($stateProvider) {
             label: 'content.list.FONTS'
         },
         resolve: loadSequence('ngTable', 'FontsCtrl', 'fontService', 'userService')
-    }).state('app.settings.fontsnew', {
+    }).state('app.templatemanager.fontsnew', {
         url: '/fonts/new',
         templateUrl: '/bundles/publipr/js/components/Font/font_form.html',
         title: 'content.list.NEWFONT',
@@ -539,7 +377,7 @@ function ($stateProvider) {
             label: 'content.list.NEWFONT'
         },
         resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'FontFormCtrl', 'fontService', 'userService')
-    }).state('app.settings.fontsedit', {
+    }).state('app.templatemanager.fontsedit', {
         url: '/fonts/edit/:id',
         templateUrl: '/bundles/publipr/js/components/Font/font_form.html',
         title: 'content.list.EDITFONT',
@@ -547,13 +385,144 @@ function ($stateProvider) {
             label: 'content.list.EDITFONT'
         },
         resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'FontFormCtrl', 'fontService', 'userService')
-    }).state('app.settings.fontsdetails', {
+    }).state('app.templatemanager.fontsdetails', {
         url: '/fonts/details/:id',
         templateUrl: '/bundles/publipr/js/components/Font/font.html',
         ncyBreadcrumb: {
             label: 'content.list.FONTDETAILS'
         },
         resolve: loadSequence('FontCtrl', 'fontService')
+    }).state('app.configuration', {
+        url: '/configuration',
+        template: '<div ui-view class="fade-in-up"></div>',
+        title: 'sidebar.nav.configuration.MAIN',
+        ncyBreadcrumb: {
+            label: 'sidebar.nav.configuration.MAIN'
+        }
+    }).state('app.configuration.languages', {
+        url: '/languages',
+        templateUrl: '/bundles/publipr/js/components/Language/languages.html',
+        title: 'content.list.LANGUAGES',
+        ncyBreadcrumb: {
+            label: 'content.list.LANGUAGES'
+        },
+        resolve: loadSequence('ngTable', 'LanguagesCtrl', 'languageService', 'userService')
+    }).state('app.configuration.languagesnew', {
+        url: '/languages/new',
+        templateUrl: '/bundles/publipr/js/components/Language/language_form.html',
+        title: 'content.list.NEWLANGUAGE',
+        ncyBreadcrumb: {
+            label: 'content.list.NEWLANGUAGE'
+        },
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'LanguageFormCtrl', 'languageService', 'userService')
+    }).state('app.configuration.languagesedit', {
+        url: '/languages/edit/:id',
+        templateUrl: '/bundles/publipr/js/components/Language/language_form.html',
+        title: 'content.list.EDITLANGUAGE',
+        ncyBreadcrumb: {
+            label: 'content.list.EDITLANGUAGE'
+        },
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'LanguageFormCtrl', 'languageService', 'userService')
+    }).state('app.configuration.languagesdetails', {
+        url: '/languages/details/:id',
+        templateUrl: '/bundles/publipr/js/components/Language/language.html',
+        ncyBreadcrumb: {
+            label: 'content.list.LANGUAGEDETAILS'
+        },
+        resolve: loadSequence('LanguageCtrl', 'languageService')
+    }).state('app.configuration.emailtemplates', {
+        url: '/email-templates',
+        templateUrl: '/bundles/publipr/js/components/EmailTemplate/email_templates.html',
+        title: 'content.list.EMAILTEMPLATES',
+        ncyBreadcrumb: {
+            label: 'content.list.EMAILTEMPLATES'
+        },
+        resolve: loadSequence('ngTable', 'EmailTemplatesCtrl', 'emailTemplateService', 'userService')
+    }).state('app.configuration.emailtemplatesnew', {
+        url: '/email-templates/new',
+        templateUrl: '/bundles/publipr/js/components/EmailTemplate/email_template_form.html',
+        title: 'content.list.NEWEMAILTEMPLATE',
+        ncyBreadcrumb: {
+            label: 'content.list.NEWEMAILTEMPLATE'
+        },
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'EmailTemplateFormCtrl', 'emailTemplateService', 'userService')
+    }).state('app.configuration.emailtemplatesedit', {
+        url: '/email-templates/edit/:id',
+        templateUrl: '/bundles/publipr/js/components/EmailTemplate/email_template_form.html',
+        title: 'content.list.EDITEMAILTEMPLATE',
+        ncyBreadcrumb: {
+            label: 'content.list.EDITEMAILTEMPLATE'
+        },
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'EmailTemplateFormCtrl', 'emailTemplateService', 'userService')
+    }).state('app.configuration.emailtemplatesdetails', {
+        url: '/email-templates/details/:id',
+        templateUrl: '/bundles/publipr/js/components/EmailTemplate/email_template.html',
+        ncyBreadcrumb: {
+            label: 'content.list.EMAILTEMPLATEDETAILS'
+        },
+        resolve: loadSequence('EmailTemplateCtrl', 'emailTemplateService')
+    }).state('app.configuration.countries', {
+        url: '/countries',
+        templateUrl: '/bundles/publipr/js/components/Country/countries.html',
+        title: 'content.list.COUNTRIES',
+        ncyBreadcrumb: {
+            label: 'content.list.COUNTRIES'
+        },
+        resolve: loadSequence('ngTable', 'CountriesCtrl', 'countryService', 'userService')
+    }).state('app.configuration.countriesnew', {
+        url: '/countries/new',
+        templateUrl: '/bundles/publipr/js/components/Country/country_form.html',
+        title: 'content.list.NEWCOUNTRY',
+        ncyBreadcrumb: {
+            label: 'content.list.NEWCOUNTRY'
+        },
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'CountryFormCtrl', 'countryService', 'userService')
+    }).state('app.configuration.countriesedit', {
+        url: '/countries/edit/:id',
+        templateUrl: '/bundles/publipr/js/components/Country/country_form.html',
+        title: 'content.list.EDITCOUNTRY',
+        ncyBreadcrumb: {
+            label: 'content.list.EDITCOUNTRY'
+        },
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'CountryFormCtrl', 'countryService', 'userService')
+    }).state('app.configuration.countriesdetails', {
+        url: '/countries/details/:id',
+        templateUrl: '/bundles/publipr/js/components/Country/country.html',
+        ncyBreadcrumb: {
+            label: 'content.list.COUNTRYDETAILS'
+        },
+        resolve: loadSequence('CountryCtrl', 'countryService')
+    }).state('app.configuration.settings', {
+        url: '/settings',
+        templateUrl: '/bundles/publipr/js/components/Setting/settings.html',
+        title: 'content.list.SETTINGS',
+        ncyBreadcrumb: {
+            label: 'content.list.SETTINGS'
+        },
+        resolve: loadSequence('ngTable', 'SettingsCtrl', 'settingService', 'userService')
+    }).state('app.configuration.settingsnew', {
+        url: '/settings/new',
+        templateUrl: '/bundles/publipr/js/components/Setting/setting_form.html',
+        title: 'content.list.NEWSETTING',
+        ncyBreadcrumb: {
+            label: 'content.list.NEWSETTING'
+        },
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'SettingFormCtrl', 'settingService', 'userService')
+    }).state('app.configuration.settingsedit', {
+        url: '/settings/edit/:id',
+        templateUrl: '/bundles/publipr/js/components/Setting/setting_form.html',
+        title: 'content.list.EDITSETTING',
+        ncyBreadcrumb: {
+            label: 'content.list.EDITSETTING'
+        },
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'SettingFormCtrl', 'settingService', 'userService')
+    }).state('app.configuration.settingsdetails', {
+        url: '/settings/details/:id',
+        templateUrl: '/bundles/publipr/js/components/Setting/setting.html',
+        ncyBreadcrumb: {
+            label: 'content.list.SETTINGDETAILS'
+        },
+        resolve: loadSequence('SettingCtrl', 'settingService')
     }).state('app.distribution', {
         url: '/distribution',
         template: '<div ui-view class="fade-in-up"></div>',
@@ -692,6 +661,44 @@ function ($stateProvider) {
             label: 'content.list.PRESSRELEASEDETAILS'
         },
         resolve: loadSequence('PressReleaseCtrl', 'pressReleaseService')
+    }).state('app.settings', {
+        url: '/settings',
+        template: '<div ui-view class="fade-in-up"></div>',
+        title: 'sidebar.nav.settings.MAIN',
+        ncyBreadcrumb: {
+            label: 'sidebar.nav.settings.MAIN'
+        }
+    }).state('app.settings.newsroomtemplates', {
+        url: '/newsroom-templates',
+        templateUrl: '/bundles/publipr/js/components/NewsroomTemplate/newsroom_templates.html',
+        title: 'content.list.NEWSROOMTEMPLATES',
+        ncyBreadcrumb: {
+            label: 'content.list.NEWSROOMTEMPLATES'
+        },
+        resolve: loadSequence('ngTable', 'NewsroomTemplatesCtrl', 'newsroomTemplateService', 'userService')
+    }).state('app.settings.newsroomtemplatesnew', {
+        url: '/newsroom-templates/new',
+        templateUrl: '/bundles/publipr/js/components/NewsroomTemplate/newsroom_template_form.html',
+        title: 'content.list.NEWNEWSROOMTEMPLATE',
+        ncyBreadcrumb: {
+            label: 'content.list.NEWNEWSROOMTEMPLATE'
+        },
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'NewsroomTemplateFormCtrl', 'newsroomTemplateService', 'userService')
+    }).state('app.settings.newsroomtemplatesedit', {
+        url: '/newsroom-templates/edit/:id',
+        templateUrl: '/bundles/publipr/js/components/NewsroomTemplate/newsroom_template_form.html',
+        title: 'content.list.EDITNEWSROOMTEMPLATE',
+        ncyBreadcrumb: {
+            label: 'content.list.EDITNEWSROOMTEMPLATE'
+        },
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'NewsroomTemplateFormCtrl', 'newsroomTemplateService', 'userService')
+    }).state('app.settings.newsroomtemplatesdetails', {
+        url: '/newsroom-templates/details/:id',
+        templateUrl: '/bundles/publipr/js/components/NewsroomTemplate/newsroom_template.html',
+        ncyBreadcrumb: {
+            label: 'content.list.NEWSROOMTEMPLATEDETAILS'
+        },
+        resolve: loadSequence('NewsroomTemplateCtrl', 'newsroomTemplateService')
     }).state('app.billing', {
         url: '/billing',
         template: '<div ui-view class="fade-in-up"></div>',

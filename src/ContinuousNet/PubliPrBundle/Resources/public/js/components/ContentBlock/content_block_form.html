@@ -76,7 +76,7 @@
                                         <span translate="content.list.fields.SETTINGS">Settings</span>
                                     </label>
                                     <div class="note-editor">
-                                        <textarea ng-model="contentBlock.settings" name="settings" id="contentBlockSettings" class="form-control" placeholder="[[ 'content.form.messages.ENTERSETTINGS' | translate ]]" class="form-control autosize area-animated msd-elastic: \n;"></textarea>
+                                        <textarea ng-model="contentBlock.settings" name="settings" id="contentBlockSettings" class="form-control" placeholder="[[ 'content.form.messages.ENTERSETTINGS' | translate ]]" class="form-control autosize area-animated msd-elastic: \n;" ng-required="false"></textarea>
                                     </div>
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
@@ -118,7 +118,7 @@
                                         <span translate="content.list.fields.BLOCKTYPE">Block Type</span>
                                         <span class="symbol required"></span>
                                     </label>
-                                    <div class="clip-radio radio-primary" ng-if="blockTypes.length < 10">
+                                    <div class="continuous-radio radio-primary" ng-if="blockTypes.length < 10">
                                         <input ng-disabled="false" ng-repeat-start="blockType in blockTypes" ng-model="contentBlock.block_type" type="radio" id="block_type[[ blockType.id ]]" value="[[ blockType.id ]]" name="blockType" ng-required="true" />
                                         <label ng-repeat-end for="block_type[[ blockType.id ]]">
                                             [[ blockType.title ]]
@@ -140,7 +140,7 @@
                                         <span translate="content.list.fields.STATUS">Status</span>
                                         <span class="symbol required"></span>
                                     </label>
-                                    <div class="clip-radio radio-primary" ng-if="statuses.length < 10">
+                                    <div class="continuous-radio radio-primary" ng-if="statuses.length < 10">
                                         <input ng-disabled="false" ng-repeat-start="status in statuses" ng-model="contentBlock.status" type="radio" id="status[[ status.id ]]" value="[[ status.id ]]" name="status" ng-required="true" />
                                         <label ng-repeat-end for="status[[ status.id ]]">
                                             [[ status.title ]]

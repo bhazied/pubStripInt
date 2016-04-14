@@ -26,7 +26,7 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
     $scope.actions = [{
         id: 'View',
         title: $filter('translate')('content.list.fields.actions.VIEW'),
-        css: 'info'
+        css: 'primary'
     }, {
         id: 'Click',
         title: $filter('translate')('content.list.fields.actions.CLICK'),
@@ -138,7 +138,6 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
         $trackPressReleasesDataFactory.get({id: $stateParams.id}).$promise.then(function(data) {
             $timeout(function(){
                 $scope.trackPressRelease = savable(data);
-                //console.warn($scope.trackPressRelease);
             });
         });
     } else {

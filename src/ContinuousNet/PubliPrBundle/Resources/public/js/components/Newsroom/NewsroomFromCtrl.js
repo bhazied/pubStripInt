@@ -125,7 +125,6 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
         $newsroomsDataFactory.get({id: $stateParams.id}).$promise.then(function(data) {
             $timeout(function(){
                 $scope.newsroom = savable(data);
-                //console.warn($scope.newsroom);
             });
         });
     } else {

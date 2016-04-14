@@ -10,7 +10,7 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $q, $interpolate
     $scope.types = [{
         id: 'Free',
         title: $filter('translate')('content.list.fields.types.FREE'),
-        css: 'info'
+        css: 'primary'
     }, {
         id: 'Manager',
         title: $filter('translate')('content.list.fields.types.MANAGER'),
@@ -22,12 +22,12 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $q, $interpolate
     }, {
         id: 'Administrator',
         title: $filter('translate')('content.list.fields.types.ADMINISTRATOR'),
-        css: 'inverse'
+        css: 'danger'
     }];
     $scope.genders = [{
         id: 'Male',
         title: $filter('translate')('content.list.fields.genders.MALE'),
-        css: 'info'
+        css: 'primary'
     }, {
         id: 'Female',
         title: $filter('translate')('content.list.fields.genders.FEMALE'),
@@ -36,7 +36,7 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $q, $interpolate
     $scope.authenticationModes = [{
         id: 'Database',
         title: $filter('translate')('content.list.fields.authenticationmodes.DATABASE'),
-        css: 'info'
+        css: 'primary'
     }, {
         id: 'ActiveDirectory',
         title: $filter('translate')('content.list.fields.authenticationmodes.ACTIVEDIRECTORY'),
@@ -49,23 +49,27 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $q, $interpolate
     $scope.roles = [{
         id: 'ROLE_API',
         title: $filter('translate')('content.list.fields.roles.ROLE_API'),
-        css: 'info'
+        css: 'primary'
     }, {
         id: 'FREE_ACCOUNT',
         title: $filter('translate')('content.list.fields.roles.FREE_ACCOUNT'),
         css: 'success'
     }, {
-        id: 'ROLE_ACCOUNT_MANAGER',
-        title: $filter('translate')('content.list.fields.roles.ROLE_ACCOUNT_MANAGER'),
+        id: 'ROLE_ACCOUNT_USER',
+        title: $filter('translate')('content.list.fields.roles.ROLE_ACCOUNT_USER'),
         css: 'warning'
     }, {
-        id: 'ROLE_CONTRIBUTOR_ACCOUNT',
-        title: $filter('translate')('content.list.fields.roles.ROLE_CONTRIBUTOR_ACCOUNT'),
-        css: 'inverse'
+        id: 'ROLE_ACCOUNT_MANAGER',
+        title: $filter('translate')('content.list.fields.roles.ROLE_ACCOUNT_MANAGER'),
+        css: 'danger'
+    }, {
+        id: 'ROLE_ADMIN',
+        title: $filter('translate')('content.list.fields.roles.ROLE_ADMIN'),
+        css: 'default'
     }, {
         id: 'ROLE_SUPER_ADMIN',
         title: $filter('translate')('content.list.fields.roles.ROLE_SUPER_ADMIN'),
-        css: 'danger'
+        css: 'info'
     }];
 
     $scope.dateFormat = $filter('translate')('formats.DATE');

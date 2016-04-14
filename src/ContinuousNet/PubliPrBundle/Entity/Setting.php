@@ -5,6 +5,7 @@ namespace ContinuousNet\PubliPrBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Events;
 use Doctrine\Common\Collections\ArrayCollection as DoctrineCollection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Exclude;
 use JMS\Serializer\Annotation\Expose;
@@ -22,7 +23,7 @@ use JMS\Serializer\Annotation\Groups;
  * @package    ContinuousNet\PubliPrBundle\Entity
  * @author     Sahbi KHALFALLAH <sahbi.khalfallah@continuousnet.com>
  * @copyright  2016 CONTINUOUS NET
- * @license    http://www.zend.com/license/3_0.txt PHP License 3.0
+ * @license	CONTINUOUS NET REGULAR LICENSE
  * @version    Release: 1.0
  * @link       http://publipr.continuousnet.com/ContinuousNet/PubliPrBundle/Entity
  * @see        Setting

@@ -1,3 +1,259 @@
+input[type="radio"], input[type="checkbox"] {
+    box-sizing: border-box;
+    cursor: pointer;
+    line-height: normal;
+}
+.continuous-check {
+    margin-bottom: 10px;
+    margin-top: 10px;
+    padding-left: 0;
+}
+.continuous-check label {
+    cursor: pointer;
+    display: inline-block;
+    font-size: 13px;
+    margin-right: 15px;
+    padding-left: 30px !important;
+    position: relative;
+    line-height: 23px;
+    transition: border 0.2s linear 0s, color 0.2s linear 0s;
+    white-space: nowrap;
+}
+.continuous-check label:before {
+    background-color: #ffffff;
+    border: 1px solid #c8c7cc;
+    content: "";
+    display: inline-block;
+    height: 20px;
+    left: 0;
+    margin-right: 10px;
+    position: absolute;
+    width: 20px;
+    border-radius: 0;
+    top: 1px;
+    transition: border 0.2s linear 0s, color 0.2s linear 0s;
+}
+.continuous-check label:after {
+    display: inline-block;
+    font-size: 11px;
+    height: 19px;
+    left: 4px;
+    position: absolute;
+    top: -1px;
+    transition: border 0.2s linear 0s, color 0.2s linear 0s;
+    width: 19px;
+}
+.continuous-check input[type="checkbox"] {
+    display: none;
+}
+.continuous-check input[type="checkbox"]:checked + label:before {
+    border-width: 10px;
+}
+.continuous-check input[type="checkbox"]:checked + label:after {
+    color: #fff;
+    content: "\f00c";
+    font-family: "FontAwesome";
+}
+.continuous-check input[type="checkbox"][disabled] + label {
+    opacity: 0.65;
+}
+.continuous-check input[type="checkbox"][disabled] + label:before {
+    background-color: #F8F8F8;
+}
+.continuous-check.check-sm label {
+    margin-right: 15px;
+    padding-left: 24px !important;
+    line-height: 22px;
+}
+.continuous-check.check-sm label:before {
+    height: 14px;
+    width: 14px;
+    top: 4px;
+}
+.continuous-check.check-sm label:after {
+    font-size: 11px;
+    height: 13px;
+    left: 2px;
+    width: 13px;
+}
+.continuous-check.check-sm input[type="checkbox"]:checked + label:before {
+    border-width: 7px;
+}
+.continuous-check.check-md label {
+    margin-right: 15px;
+    padding-left: 35px !important;
+    line-height: 28px;
+}
+.continuous-check.check-md label:before {
+    height: 25px;
+    width: 25px;
+}
+.continuous-check.check-md label:after {
+    font-size: 14px;
+    height: 24px;
+    left: 5px;
+    width: 24px;
+}
+.continuous-check.check-md input[type="checkbox"]:checked + label:before {
+    border-width: 12px;
+}
+.continuous-check.check-lg label {
+    margin-right: 15px;
+    padding-left: 40px !important;
+    line-height: 33px;
+}
+.continuous-check.check-lg label:before {
+    height: 30px;
+    width: 30px;
+}
+.continuous-check.check-lg label:after {
+    font-size: 17px;
+    height: 29px;
+    left: 6px;
+    width: 29px;
+}
+.continuous-check.check-lg input[type="checkbox"]:checked + label:before {
+    border-width: 15px;
+}
+
+.continuous-check.check-success input[type="checkbox"]:checked + label:before {
+    border-color: #5cb85c;
+}
+
+.continuous-check.check-primary input[type="checkbox"]:checked + label:before {
+    border-color: #007AFF;
+}
+
+.continuous-check.check-warning input[type="checkbox"]:checked + label:before {
+    border-color: #eea236;
+}
+
+.continuous-check.check-danger input[type="checkbox"]:checked + label:before {
+    border-color: #d43f3a;
+}
+
+.continuous-check.check-info input[type="checkbox"]:checked + label:before {
+    border-color: #46b8da;
+}
+
+.continuous-check.check-purple input[type="checkbox"]:checked + label:before {
+    border-color: #804C75;
+}
+
+.continuous-radio {
+    margin-bottom: 10px;
+    margin-top: 10px;
+    padding-left: 0;
+}
+.continuous-radio label {
+    cursor: pointer;
+    display: inline-block;
+    font-size: 13px;
+    margin-right: 15px;
+    padding-left: 25px !important;
+    position: relative;
+    margin-bottom: 6px;
+    line-height: 23px;
+}
+.continuous-radio label:before {
+    background-color: #ffffff;
+    border: 1px solid #d0d0d0;
+    content: "";
+    display: inline-block;
+    height: 20px;
+    left: 0;
+    margin-right: 10px;
+    position: absolute;
+    width: 20px;
+    border-radius: 99px;
+    bottom: 2px;
+    transition: all 0.3s cubic-bezier(0.455, 0.03, 0.215, 1.33) 0s;
+}
+.continuous-radio label:after {
+    border: 1px solid #c8c7cc;
+    content: "";
+    display: inline-block;
+    height: 20px;
+    left: 0;
+    margin-right: 10px;
+    position: absolute;
+    width: 20px;
+    border-radius: 99px;
+    bottom: 2px;
+    transition: all 0.3s cubic-bezier(0.455, 0.03, 0.215, 1.33) 0s;
+}
+.continuous-radio input[type="radio"] {
+    display: none;
+}
+.continuous-radio input[type="radio"]:checked + label:before {
+    border-width: 6px;
+    background: #F8F8F8;
+    border-color: #ffffff;
+}
+.continuous-radio input[type="radio"][disabled] + label {
+    opacity: 0.65;
+}
+.continuous-radio.radio-md label {
+    padding-left: 30px !important;
+    line-height: 28px;
+}
+.continuous-radio.radio-md label:before {
+    height: 25px;
+    width: 25px;
+}
+.continuous-radio.radio-md label:after {
+    height: 25px;
+    width: 25px;
+}
+.continuous-radio.radio-md input[type="radio"] {
+    display: none;
+}
+.continuous-radio.radio-md input[type="radio"]:checked + label:before {
+    border-width: 7px;
+}
+.continuous-radio.radio-lg label {
+    padding-left: 35px !important;
+    line-height: 33px;
+}
+.continuous-radio.radio-lg label:before {
+    height: 30px;
+    width: 30px;
+}
+.continuous-radio.radio-lg label:after {
+    height: 30px;
+    width: 30px;
+}
+.continuous-radio.radio-lg input[type="radio"] {
+    display: none;
+}
+.continuous-radio.radio-lg input[type="radio"]:checked + label:before {
+    border-width: 8px;
+}
+
+.continuous-radio.radio-success input[type="radio"]:checked + label:before {
+    background: #5cb85c;
+}
+
+.continuous-radio.radio-primary input[type="radio"]:checked + label:before {
+    background: #007AFF;
+}
+
+.continuous-radio.radio-info input[type="radio"]:checked + label:before {
+    background: #46b8da;
+}
+
+.continuous-radio.radio-warning input[type="radio"]:checked + label:before {
+    background: #eea236;
+}
+
+.continuous-radio.radio-danger input[type="radio"]:checked + label:before {
+    background: #d43f3a;
+}
+
+.continuous-radio.radio-purple input[type="radio"]:checked + label:before {
+    background: #804C75;
+}
+
 #page-title {display: none;}
 
 .list-toolbox .col-md-2 * {display: none;}

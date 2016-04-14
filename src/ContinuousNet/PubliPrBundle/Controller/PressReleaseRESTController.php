@@ -16,6 +16,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Finder\Finder;;
+use Symfony\Component\Finder\SplFileInfo;
 
 use Voryx\RESTGeneratorBundle\Controller\VoryxController;
 
@@ -145,23 +147,22 @@ class PressReleaseRESTController extends BaseRESTController
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $entity->setCreatorUser($this->getUser());
-            $authorized = false;
+            $authorizedChangeStatus = false;
             $roles = $this->getUser()->getRoles();
             if (!empty($roles)) {
                 foreach ($roles as $role) {
                     if (substr_count($role, 'ROLE_ADMIN_PUBLISHER') > 0) {
-                        $authorized = true;
+                        $authorizedChangeStatus = true;
                     }
                 }
             }
-            if (!$authorized) {
+            if (!$authorizedChangeStatus) {
                 $entity->setStatus('Draft');
             }
             $em->persist($entity);
             $em->flush();
             return $entity;
         }
-        return FOSView::create(array('errors' => $form->getErrors()), Codes::HTTP_INTERNAL_SERVER_ERROR);
     }
 
     /**
@@ -174,7 +175,7 @@ class PressReleaseRESTController extends BaseRESTController
      *
      * @return Response
      */
-    public function putAction(Request $request,  PressRelease  $entity)
+    public function putAction(Request $request, PressRelease $entity)
     {
         try {
             $em = $this->getDoctrine()->getManager();
@@ -184,16 +185,16 @@ class PressReleaseRESTController extends BaseRESTController
             $form->handleRequest($request);
             if ($form->isValid()) {
                 $entity->setModifierUser($this->getUser());
-                $authorized = false;
+                $authorizedChangeStatus = false;
                 $roles = $this->getUser()->getRoles();
                 if (!empty($roles)) {
                     foreach ($roles as $role) {
                         if (substr_count($role, 'ROLE_ADMIN_PUBLISHER') > 0) {
-                            $authorized = true;
+                            $authorizedChangeStatus = true;
                         }
                     }
                 }
-                if (!$authorized) {
+                if (!$authorizedChangeStatus) {
                     $entity->setStatus('Draft');
                 }
                 $em->flush();
@@ -215,7 +216,7 @@ class PressReleaseRESTController extends BaseRESTController
      *
      * @return Response
      */
-    public function patchAction(Request $request,  PressRelease  $entity)
+    public function patchAction(Request $request, PressRelease $entity)
     {
         return $this->putAction($request, $entity);
     }
@@ -230,7 +231,7 @@ class PressReleaseRESTController extends BaseRESTController
      *
      * @return Response
      */
-    public function deleteAction(Request $request,  PressRelease  $entity)
+    public function deleteAction(Request $request, PressRelease $entity)
     {
         try {
             $em = $this->getDoctrine()->getManager();

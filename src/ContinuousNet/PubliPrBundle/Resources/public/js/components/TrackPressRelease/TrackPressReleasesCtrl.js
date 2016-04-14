@@ -12,7 +12,7 @@ function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q,
     $scope.actions = [{
         id: 'View',
         title: $filter('translate')('content.list.fields.actions.VIEW'),
-        css: 'info'
+        css: 'primary'
     }, {
         id: 'Click',
         title: $filter('translate')('content.list.fields.actions.CLICK'),

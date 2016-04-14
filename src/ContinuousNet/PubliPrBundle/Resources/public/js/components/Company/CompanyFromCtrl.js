@@ -104,7 +104,6 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
         $companiesDataFactory.get({id: $stateParams.id}).$promise.then(function(data) {
             $timeout(function(){
                 $scope.company = savable(data);
-                //console.warn($scope.company);
             });
         });
     } else {

@@ -74,10 +74,10 @@
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
                             <div class="col-md-6">
-                                <div class="checkbox clip-check check-primary">
+                                <div class="checkbox continuous-check check-primary">
                                     <input ng-model="emailCampaign.send_now" type="checkbox" name="sendNow" id="emailCampaignSendNow" />
                                     <label for="emailCampaignSendNow" translate="content.list.fields.SENDNOW">Send Now</label>
-                                </div><!--/checkbox clip-check check-primary-->
+                                </div><!--/checkbox continuous-check check-primary-->
                             </div><!--/col-md-6-->
                         </div><!--/row-->
                         <div class="row">
@@ -88,7 +88,7 @@
                                     </label>
                                     <div class="input-group">
                                         <span class="input-icon">
-                                            <input ng-model="emailCampaign.sending_date_time" type="text" name="sendingDateTime" id="emailCampaignSendingDateTime" class="form-control" placeholder="[[ 'content.form.messages.SELECTSENDINGDATETIME' | translate ]]" is-open="sendingDateTimeOpened" uib-datepicker-popup="[[dateTimeFormat]]" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="[[ 'content.common.CLOSE' | translate ]]" current-text="[[ 'content.common.CURRENT' | translate ]]" clear-text="[[ 'content.common.CLEAR' | translate ]]" time-text="[[ 'content.common.TIME' | translate ]]" date-text="[[ 'content.common.DATE' | translate ]]" />
+                                            <input ng-model="emailCampaign.sending_date_time" type="text" name="sendingDateTime" id="emailCampaignSendingDateTime" class="form-control" placeholder="[[ 'content.form.messages.SELECTSENDINGDATETIME' | translate ]]" is-open="sendingDateTimeOpened" uib-datepicker-popup="[[dateTimeFormat]]" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="[[ 'content.common.CLOSE' | translate ]]" current-text="[[ 'content.common.CURRENT' | translate ]]" clear-text="[[ 'content.common.CLEAR' | translate ]]" time-text="[[ 'content.common.TIME' | translate ]]" date-text="[[ 'content.common.DATE' | translate ]]" ng-required="false" />
                                             <i class="ti-calendar"></i>
                                         </span><!--/input-icon-->
                                         <span class="input-group-btn">
@@ -105,7 +105,7 @@
                                         <span translate="content.list.fields.EXTERNALREFERENCE">External Reference</span>
                                     </label>
                                     <span class="input-icon">
-                                        <input ng-model="emailCampaign.external_reference" type="text" name="externalReference" id="emailCampaignExternalReference" class="form-control" placeholder="[[ 'content.form.messages.ENTEREXTERNALREFERENCE' | translate ]]" />
+                                        <input ng-model="emailCampaign.external_reference" type="text" name="externalReference" id="emailCampaignExternalReference" class="form-control" placeholder="[[ 'content.form.messages.ENTEREXTERNALREFERENCE' | translate ]]" ng-required="false" />
                                         <i class="ti-marker-alt"></i>
                                     </span><!--/input-icon-->
                                 </div><!--/form-group-->

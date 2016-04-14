@@ -97,14 +97,13 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
     };
 
     $scope.list = function() {
-        $state.go('app.settings.languages');
+        $state.go('app.configuration.languages');
     };
     
     if (angular.isDefined($stateParams.id)) {
         $languagesDataFactory.get({id: $stateParams.id}).$promise.then(function(data) {
             $timeout(function(){
                 $scope.language = savable(data);
-                //console.warn($scope.language);
             });
         });
     } else {

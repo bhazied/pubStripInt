@@ -71,6 +71,21 @@ app.controller('RegisterCtrl', ['$scope', '$rootScope', '$localStorage', '$state
             $scope.user['g-recaptcha-response'] = null;
         };
 
+        $timeout(function(){
+            var elements = document.getElementsByTagName('input');
+            for (var i = 0; i < elements.length; i++) {
+                elements[i].oninvalid = function(e) {
+                    console.log('oninvalid');
+                    if (!e.target.validity.valid) {
+                        e.target.setCustomValidity('');
+                    }
+                };
+                elements[i].oninput = function (e) {
+                    e.target.setCustomValidity('');
+                };
+            }
+        }, 1000);
+
         $scope.submit = function (signUpForm) {
 
             if ($scope.user['g-recaptcha-response'] == null) {

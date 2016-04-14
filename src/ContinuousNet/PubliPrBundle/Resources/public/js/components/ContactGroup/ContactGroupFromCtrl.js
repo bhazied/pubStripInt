@@ -104,7 +104,6 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
         $contactGroupsDataFactory.get({id: $stateParams.id}).$promise.then(function(data) {
             $timeout(function(){
                 $scope.contactGroup = savable(data);
-                //console.warn($scope.contactGroup);
             });
         });
     } else {

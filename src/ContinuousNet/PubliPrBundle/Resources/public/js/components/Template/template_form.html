@@ -93,7 +93,7 @@
                                         <span translate="content.list.fields.TYPE">Type</span>
                                         <span class="symbol required"></span>
                                     </label>
-                                    <div class="clip-radio radio-primary" ng-if="types.length < 10">
+                                    <div class="continuous-radio radio-primary" ng-if="types.length < 10">
                                         <input ng-disabled="false" ng-repeat-start="type in types" ng-model="template.type" type="radio" id="type[[ type.id ]]" value="[[ type.id ]]" name="type" ng-required="true" />
                                         <label ng-repeat-end for="type[[ type.id ]]">
                                             [[ type.title ]]
@@ -117,7 +117,7 @@
                                         <span translate="content.list.fields.BODY">Body</span>
                                     </label>
                                     <div class="note-editor">
-                                        <div ckeditor="editorOptions" ready="onReadyEditor()"ng-model="template.body" name="body" id="templateBody" class="form-control" placeholder="[[ 'content.form.messages.ENTERBODY' | translate ]]" class="form-control autosize area-animated msd-elastic: \n;"></div>
+                                        <div ckeditor="editorOptions" ready="onReadyEditor()"ng-model="template.body" name="body" id="templateBody" class="form-control" placeholder="[[ 'content.form.messages.ENTERBODY' | translate ]]" class="form-control autosize area-animated msd-elastic: \n;" ng-required="false"></div>
                                     </div>
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
@@ -129,7 +129,7 @@
                                         <span translate="content.list.fields.STATUS">Status</span>
                                         <span class="symbol required"></span>
                                     </label>
-                                    <div class="clip-radio radio-primary" ng-if="statuses.length < 10">
+                                    <div class="continuous-radio radio-primary" ng-if="statuses.length < 10">
                                         <input ng-disabled="false" ng-repeat-start="status in statuses" ng-model="template.status" type="radio" id="status[[ status.id ]]" value="[[ status.id ]]" name="status" ng-required="true" />
                                         <label ng-repeat-end for="status[[ status.id ]]">
                                             [[ status.title ]]

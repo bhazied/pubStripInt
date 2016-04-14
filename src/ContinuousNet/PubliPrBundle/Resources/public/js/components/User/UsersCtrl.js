@@ -12,7 +12,7 @@ function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q,
     $scope.types = [{
         id: 'Free',
         title: $filter('translate')('content.list.fields.types.FREE'),
-        css: 'info'
+        css: 'primary'
     }, {
         id: 'Manager',
         title: $filter('translate')('content.list.fields.types.MANAGER'),
@@ -24,12 +24,12 @@ function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q,
     }, {
         id: 'Administrator',
         title: $filter('translate')('content.list.fields.types.ADMINISTRATOR'),
-        css: 'inverse'
+        css: 'danger'
     }];
     $scope.genders = [{
         id: 'Male',
         title: $filter('translate')('content.list.fields.genders.MALE'),
-        css: 'info'
+        css: 'primary'
     }, {
         id: 'Female',
         title: $filter('translate')('content.list.fields.genders.FEMALE'),
@@ -38,7 +38,7 @@ function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q,
     $scope.authenticationModes = [{
         id: 'Database',
         title: $filter('translate')('content.list.fields.authenticationmodes.DATABASE'),
-        css: 'info'
+        css: 'primary'
     }, {
         id: 'ActiveDirectory',
         title: $filter('translate')('content.list.fields.authenticationmodes.ACTIVEDIRECTORY'),
@@ -51,23 +51,27 @@ function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q,
     $scope.roles = [{
         id: 'ROLE_API',
         title: $filter('translate')('content.list.fields.roles.ROLE_API'),
-        css: 'info'
+        css: 'primary'
     }, {
         id: 'FREE_ACCOUNT',
         title: $filter('translate')('content.list.fields.roles.FREE_ACCOUNT'),
         css: 'success'
     }, {
-        id: 'ROLE_ACCOUNT_MANAGER',
-        title: $filter('translate')('content.list.fields.roles.ROLE_ACCOUNT_MANAGER'),
+        id: 'ROLE_ACCOUNT_USER',
+        title: $filter('translate')('content.list.fields.roles.ROLE_ACCOUNT_USER'),
         css: 'warning'
     }, {
-        id: 'ROLE_CONTRIBUTOR_ACCOUNT',
-        title: $filter('translate')('content.list.fields.roles.ROLE_CONTRIBUTOR_ACCOUNT'),
-        css: 'inverse'
+        id: 'ROLE_ACCOUNT_MANAGER',
+        title: $filter('translate')('content.list.fields.roles.ROLE_ACCOUNT_MANAGER'),
+        css: 'danger'
+    }, {
+        id: 'ROLE_ADMIN',
+        title: $filter('translate')('content.list.fields.roles.ROLE_ADMIN'),
+        css: 'default'
     }, {
         id: 'ROLE_SUPER_ADMIN',
         title: $filter('translate')('content.list.fields.roles.ROLE_SUPER_ADMIN'),
-        css: 'danger'
+        css: 'info'
     }];
 
     $scope.booleanOptions = [{
@@ -276,9 +280,9 @@ function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q,
             { field: 'zip_code', title: $filter('translate')('content.list.fields.ZIPCODE'), sortable: 'user.zipCode', filter: { 'user.zipCode': 'text' }, show: $scope.getParamValue('zip_code_show_filed', false), getValue: $scope.textValue },
             { field: 'company', title: $filter('translate')('content.list.fields.COMPANY'), sortable: 'company.name', filter: { 'user.company': 'select' }, getValue: $scope.linkValue, filterData: $scope.getCompanies(), show: $scope.getParamValue('company_id_show_filed', false), displayField: 'name', state: 'app.access.companiesdetails' },
             { field: 'job', title: $filter('translate')('content.list.fields.JOB'), sortable: 'user.job', filter: { 'user.job': 'text' }, show: $scope.getParamValue('job_show_filed', false), getValue: $scope.textValue },
-            { field: 'country', title: $filter('translate')('content.list.fields.COUNTRY'), sortable: 'country.name', filter: { 'user.country': 'select' }, getValue: $scope.linkValue, filterData: $scope.getCountries(), show: $scope.getParamValue('country_id_show_filed', false), displayField: 'name', state: 'app.settings.countriesdetails' },
+            { field: 'country', title: $filter('translate')('content.list.fields.COUNTRY'), sortable: 'country.name', filter: { 'user.country': 'select' }, getValue: $scope.linkValue, filterData: $scope.getCountries(), show: $scope.getParamValue('country_id_show_filed', false), displayField: 'name', state: 'app.configuration.countriesdetails' },
             { field: 'city', title: $filter('translate')('content.list.fields.CITY'), sortable: 'user.city', filter: { 'user.city': 'text' }, show: $scope.getParamValue('city_show_filed', false), getValue: $scope.textValue },
-            { field: 'language', title: $filter('translate')('content.list.fields.LANGUAGE'), sortable: 'language.name', filter: { 'user.language': 'select' }, getValue: $scope.linkValue, filterData: $scope.getLanguages(), show: $scope.getParamValue('language_id_show_filed', false), displayField: 'name', state: 'app.settings.languagesdetails' },
+            { field: 'language', title: $filter('translate')('content.list.fields.LANGUAGE'), sortable: 'language.name', filter: { 'user.language': 'select' }, getValue: $scope.linkValue, filterData: $scope.getLanguages(), show: $scope.getParamValue('language_id_show_filed', false), displayField: 'name', state: 'app.configuration.languagesdetails' },
             { field: 'enable_oauth', title: $filter('translate')('content.list.fields.ENABLEOAUTH'), sortable: 'user.enableOauth', filter: { 'user.enableOauth': 'select' }, show: $scope.getParamValue('enable_oauth_show_filed', false), getValue: $scope.interpolatedValue, filterData : $scope.booleanOptions, interpolateExpr: $interpolate('<span my-boolean="[[ row.enable_oauth ]]"></span>') },
             { field: 'session_timeout', title: $filter('translate')('content.list.fields.SESSIONTIMEOUT'), sortable: 'user.sessionTimeout', filter: { 'user.sessionTimeout': 'number' }, show: $scope.getParamValue('session_timeout_show_filed', false), getValue: $scope.textValue },
             { field: 'multiple_session', title: $filter('translate')('content.list.fields.MULTIPLESESSION'), sortable: 'user.multipleSession', filter: { 'user.multipleSession': 'select' }, show: $scope.getParamValue('multiple_session_show_filed', false), getValue: $scope.interpolatedValue, filterData : $scope.booleanOptions, interpolateExpr: $interpolate('<span my-boolean="[[ row.multiple_session ]]"></span>') },

@@ -80,7 +80,7 @@
                                         <span translate="content.list.fields.DETAILSBEFORE">Details Before</span>
                                     </label>
                                     <div class="note-editor">
-                                        <div ckeditor="editorOptions" ready="onReadyEditor()"ng-model="log.details_before" name="detailsBefore" id="logDetailsBefore" class="form-control" placeholder="[[ 'content.form.messages.ENTERDETAILSBEFORE' | translate ]]" class="form-control autosize area-animated msd-elastic: \n;"></div>
+                                        <div ckeditor="editorOptions" ready="onReadyEditor()"ng-model="log.details_before" name="detailsBefore" id="logDetailsBefore" class="form-control" placeholder="[[ 'content.form.messages.ENTERDETAILSBEFORE' | translate ]]" class="form-control autosize area-animated msd-elastic: \n;" ng-required="false"></div>
                                     </div>
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
@@ -92,7 +92,7 @@
                                         <span translate="content.list.fields.DETAILSAFTER">Details After</span>
                                     </label>
                                     <div class="note-editor">
-                                        <div ckeditor="editorOptions" ready="onReadyEditor()"ng-model="log.details_after" name="detailsAfter" id="logDetailsAfter" class="form-control" placeholder="[[ 'content.form.messages.ENTERDETAILSAFTER' | translate ]]" class="form-control autosize area-animated msd-elastic: \n;"></div>
+                                        <div ckeditor="editorOptions" ready="onReadyEditor()"ng-model="log.details_after" name="detailsAfter" id="logDetailsAfter" class="form-control" placeholder="[[ 'content.form.messages.ENTERDETAILSAFTER' | translate ]]" class="form-control autosize area-animated msd-elastic: \n;" ng-required="false"></div>
                                     </div>
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
@@ -104,7 +104,7 @@
                                         <span translate="content.list.fields.NOTE">Note</span>
                                     </label>
                                     <div class="note-editor">
-                                        <textarea ng-model="log.note" name="note" id="logNote" class="form-control" placeholder="[[ 'content.form.messages.ENTERNOTE' | translate ]]" class="form-control autosize area-animated msd-elastic: \n;"></textarea>
+                                        <textarea ng-model="log.note" name="note" id="logNote" class="form-control" placeholder="[[ 'content.form.messages.ENTERNOTE' | translate ]]" class="form-control autosize area-animated msd-elastic: \n;" ng-required="false"></textarea>
                                     </div>
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->

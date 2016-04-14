@@ -129,7 +129,6 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
         $logsDataFactory.get({id: $stateParams.id}).$promise.then(function(data) {
             $timeout(function(){
                 $scope.log = savable(data);
-                //console.warn($scope.log);
             });
         });
     } else {
