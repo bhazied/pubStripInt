@@ -850,8 +850,8 @@
                 "ROLES": "Rôles",
                 "rolesoptions": {
                     "ROLE_API": "R O L E  A P I",
-                    "FREE_ACCOUNT": "F R E E  A C C O U N T",
                     "ROLE_ACCOUNT_USER": "R O L E  A C C O U N T  U S E R",
+                    "FREE_ACCOUNT": "F R E E  A C C O U N T",
                     "ROLE_ACCOUNT_MANAGER": "R O L E  A C C O U N T  M A N A G E R",
                     "ROLE_ADMIN": "R O L E  A D M I N",
                     "ROLE_SUPER_ADMIN": "R O L E  S U P E R  A D M I N"

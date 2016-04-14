@@ -161,6 +161,18 @@ class UserRESTController extends BaseRESTController
             if (!$authorizedChangeSalt) {
                 $entity->setSalt(null);
             }
+            $authorizedChangeRoles = false;
+            $roles = $this->getUser()->getRoles();
+            if (!empty($roles)) {
+                foreach ($roles as $role) {
+                    if (substr_count($role, 'ADM') > 0) {
+                        $authorizedChangeRoles = true;
+                    }
+                }
+            }
+            if (!$authorizedChangeRoles) {
+                $entity->setRoles('ROLE_API');
+            }
             $authorizedChangeEnabled = false;
             $roles = $this->getUser()->getRoles();
             if (!empty($roles)) {
@@ -320,6 +332,18 @@ class UserRESTController extends BaseRESTController
                 }
                 if (!$authorizedChangeSalt) {
                     $entity->setSalt(null);
+                }
+                $authorizedChangeRoles = false;
+                $roles = $this->getUser()->getRoles();
+                if (!empty($roles)) {
+                    foreach ($roles as $role) {
+                        if (substr_count($role, 'ADM') > 0) {
+                            $authorizedChangeRoles = true;
+                        }
+                    }
+                }
+                if (!$authorizedChangeRoles) {
+                    $entity->setRoles('ROLE_API');
                 }
                 $authorizedChangeEnabled = false;
                 $roles = $this->getUser()->getRoles();
@@ -492,6 +516,9 @@ class UserRESTController extends BaseRESTController
     {
         if (is_null($entity->getSalt()) || empty($entity->getSalt())) {
             $entity->setSalt(base_convert(sha1(uniqid(mt_rand(), true)), 16, 36));
+        }
+        if (is_null($entity->getRoles()) || empty($entity->getRoles())) {
+            $entity->setRoles(array('ROLE_API', 'ROLE_ACCOUNT_USER'));
         }
         $entity->setUsername($entity->getEmail());
         $entity->setUsernameCanonical(strtolower($entity->getEmail()));
