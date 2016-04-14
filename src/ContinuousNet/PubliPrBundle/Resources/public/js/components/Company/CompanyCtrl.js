@@ -13,15 +13,15 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $q, $interpolate
     $scope.timeFormat = $filter('translate')('formats.TIME');
 
     $scope.list = function() {
-        $state.go('app.access.companies');
+        $state.go('app.nogroup.companies');
     };
 
     $scope.add = function() {
-        $state.go('app.access.companiesnew');
+        $state.go('app.nogroup.companiesnew');
     };
 
     $scope.edit = function(row) {
-        $state.go('app.access.companiesedit', {id: row.id});
+        $state.go('app.nogroup.companiesedit', {id: row.id});
     };
 
     if (angular.isDefined($stateParams.id)) {

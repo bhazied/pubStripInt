@@ -86,7 +86,7 @@ class CompanyRESTController extends BaseRESTController
             $qb->from('PubliPrBundle:Company', 'c_');
             $qb->leftJoin('ContinuousNet\PubliPrBundle\Entity\User', 'creator_user', \Doctrine\ORM\Query\Expr\Join::WITH, 'c_.creatorUser = creator_user.id');
             $qb->leftJoin('ContinuousNet\PubliPrBundle\Entity\User', 'modifier_user', \Doctrine\ORM\Query\Expr\Join::WITH, 'c_.modifierUser = modifier_user.id');
-            $textFields = array('company.name', 'company.picture', 'company.website', 'company.email', 'company.phone', 'company.fax', 'company.siren', 'company.siret', 'company.rcs', 'company.ape', 'company.vat');
+            $textFields = array('company.name', 'company.picture', 'company.website', 'company.email', 'company.phone', 'company.fax', 'company.siren', 'company.siret', 'company.rcs', 'company.ape', 'company.vat', 'company.iban', 'company.cnil');
             foreach ($filters as $field => $value) {
                 $_field = str_replace('company.', 'c_.', $field);
                 $key = str_replace('.', '', $field);

@@ -116,6 +116,8 @@ function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q,
             { field: 'rcs', title: $filter('translate')('content.list.fields.RCS'), sortable: 'company.rcs', filter: { 'company.rcs': 'text' }, show: $scope.getParamValue('rcs_show_filed', false), getValue: $scope.textValue },
             { field: 'ape', title: $filter('translate')('content.list.fields.APE'), sortable: 'company.ape', filter: { 'company.ape': 'text' }, show: $scope.getParamValue('ape_show_filed', false), getValue: $scope.textValue },
             { field: 'vat', title: $filter('translate')('content.list.fields.VAT'), sortable: 'company.vat', filter: { 'company.vat': 'text' }, show: $scope.getParamValue('vat_show_filed', false), getValue: $scope.textValue },
+            { field: 'iban', title: $filter('translate')('content.list.fields.IBAN'), sortable: 'company.iban', filter: { 'company.iban': 'text' }, show: $scope.getParamValue('iban_show_filed', false), getValue: $scope.textValue },
+            { field: 'cnil', title: $filter('translate')('content.list.fields.CNIL'), sortable: 'company.cnil', filter: { 'company.cnil': 'text' }, show: $scope.getParamValue('cnil_show_filed', false), getValue: $scope.textValue },
             { field: 'is_active', title: $filter('translate')('content.list.fields.ISACTIVE'), sortable: 'company.isActive', filter: { 'company.isActive': 'select' }, show: $scope.getParamValue('is_active_show_filed', false), getValue: $scope.interpolatedValue, filterData : $scope.booleanOptions, interpolateExpr: $interpolate('<span my-boolean="[[ row.is_active ]]"></span>') },
             { field: 'created_at', title: $filter('translate')('content.list.fields.CREATEDAT'), sortable: 'company.createdAt', filter: { 'company.createdAt': 'text' }, show: $scope.getParamValue('created_at_show_filed', false), getValue: $scope.evaluatedValue, valueFormatter: 'date:\''+$filter('translate')('formats.DATETIME')+'\''},
             { field: 'creator_user', title: $filter('translate')('content.list.fields.CREATORUSER'), sortable: 'creator_user.username', filter: { 'company.creatorUser': 'select' }, getValue: $scope.linkValue, filterData: $scope.getUsers(), show: $scope.getParamValue('creator_user_id_show_filed', false), displayField: 'username', state: 'app.access.usersdetails' },
@@ -211,15 +213,15 @@ function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q,
     };
 
     $scope.add = function() {
-        $state.go('app.access.companiesnew');
+        $state.go('app.nogroup.companiesnew');
     };
 
     $scope.edit = function(row) {
-        $state.go('app.access.companiesedit', {id: row.id});
+        $state.go('app.nogroup.companiesedit', {id: row.id});
     };
 
     $scope.details = function(row) {
-        $state.go('app.access.companiesdetails', {id: row.id});
+        $state.go('app.nogroup.companiesdetails', {id: row.id});
     };
 
 }]);

@@ -97,7 +97,7 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
     };
 
     $scope.list = function() {
-        $state.go('app.access.companies');
+        $state.go('app.nogroup.companies');
     };
     
     if (angular.isDefined($stateParams.id)) {

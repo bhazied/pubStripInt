@@ -124,7 +124,7 @@ class Company
      * @var string
      * @access private
      *
-     * @ORM\Column(name="siren", type="string", length=25, nullable=false, unique=false)
+     * @ORM\Column(name="siren", type="string", length=25, nullable=true, unique=false)
      * 
      * @Expose
      * 
@@ -135,7 +135,7 @@ class Company
      * @var string
      * @access private
      *
-     * @ORM\Column(name="siret", type="string", length=25, nullable=false, unique=false)
+     * @ORM\Column(name="siret", type="string", length=25, nullable=true, unique=false)
      * 
      * @Expose
      * 
@@ -146,7 +146,7 @@ class Company
      * @var string
      * @access private
      *
-     * @ORM\Column(name="rcs", type="string", length=25, nullable=false, unique=false)
+     * @ORM\Column(name="rcs", type="string", length=25, nullable=true, unique=false)
      * 
      * @Expose
      * 
@@ -157,7 +157,7 @@ class Company
      * @var string
      * @access private
      *
-     * @ORM\Column(name="ape", type="string", length=25, nullable=false, unique=false)
+     * @ORM\Column(name="ape", type="string", length=25, nullable=true, unique=false)
      * 
      * @Expose
      * 
@@ -168,12 +168,34 @@ class Company
      * @var string
      * @access private
      *
-     * @ORM\Column(name="vat", type="string", length=25, nullable=false, unique=false)
+     * @ORM\Column(name="vat", type="string", length=25, nullable=true, unique=false)
      * 
      * @Expose
      * 
      */
     private $vat;
+
+    /**
+     * @var string
+     * @access private
+     *
+     * @ORM\Column(name="iban", type="string", length=34, nullable=true, unique=false)
+     * 
+     * @Expose
+     * 
+     */
+    private $iban;
+
+    /**
+     * @var string
+     * @access private
+     *
+     * @ORM\Column(name="cnil", type="string", length=50, nullable=true, unique=false)
+     * 
+     * @Expose
+     * 
+     */
+    private $cnil;
 
     /**
      * @var boolean
@@ -409,7 +431,7 @@ class Company
      * @param string $siren
      * @return Company
      */
-    public function setSiren($siren)
+    public function setSiren($siren = null)
     {
         $this->siren = $siren;
         return $this;
@@ -433,7 +455,7 @@ class Company
      * @param string $siret
      * @return Company
      */
-    public function setSiret($siret)
+    public function setSiret($siret = null)
     {
         $this->siret = $siret;
         return $this;
@@ -457,7 +479,7 @@ class Company
      * @param string $rcs
      * @return Company
      */
-    public function setRcs($rcs)
+    public function setRcs($rcs = null)
     {
         $this->rcs = $rcs;
         return $this;
@@ -481,7 +503,7 @@ class Company
      * @param string $ape
      * @return Company
      */
-    public function setApe($ape)
+    public function setApe($ape = null)
     {
         $this->ape = $ape;
         return $this;
@@ -505,7 +527,7 @@ class Company
      * @param string $vat
      * @return Company
      */
-    public function setVat($vat)
+    public function setVat($vat = null)
     {
         $this->vat = $vat;
         return $this;
@@ -520,6 +542,54 @@ class Company
     public function getVat()
     {
         return $this->vat;
+    }
+
+    /**
+     * Set iban
+     *
+     * @access public
+     * @param string $iban
+     * @return Company
+     */
+    public function setIban($iban = null)
+    {
+        $this->iban = $iban;
+        return $this;
+    }
+
+    /**
+     * Get iban
+     *
+     * @access public
+     * @return string 
+     */
+    public function getIban()
+    {
+        return $this->iban;
+    }
+
+    /**
+     * Set cnil
+     *
+     * @access public
+     * @param string $cnil
+     * @return Company
+     */
+    public function setCnil($cnil = null)
+    {
+        $this->cnil = $cnil;
+        return $this;
+    }
+
+    /**
+     * Get cnil
+     *
+     * @access public
+     * @return string 
+     */
+    public function getCnil()
+    {
+        return $this->cnil;
     }
 
     /**

@@ -117,8 +117,8 @@
         "logout": {
             "MAIN": "Lougout"
         },
-        "access": {
-            "MAIN": "Access"
+        "nogroup": {
+            "MAIN": "NoGroup"
         },
         "contactmanager": {
             "MAIN": "ContactManager"
@@ -131,6 +131,9 @@
         },
         "distribution": {
             "MAIN": "Distribution"
+        },
+        "access": {
+            "MAIN": "Access"
         },
         "prmanager": {
             "MAIN": "PRManager"
@@ -239,15 +242,12 @@
                 "ENTERPHONE": "Enter the Phone",
                 "ENTERFAX": "Enter the Fax",
                 "ENTERSIREN": "Enter the Siren",
-                "SIRENREQUIRED": "The Siren is required",
                 "ENTERSIRET": "Enter the Siret",
-                "SIRETREQUIRED": "The Siret is required",
                 "ENTERRCS": "Enter the Rcs",
-                "RCSREQUIRED": "The Rcs is required",
                 "ENTERAPE": "Enter the Ape",
-                "APEREQUIRED": "The Ape is required",
                 "ENTERVAT": "Enter the Vat",
-                "VATREQUIRED": "The Vat is required",
+                "ENTERIBAN": "Enter the Iban",
+                "ENTERCNIL": "Enter the Cnil",
                 "SELECTCONTACTGROUP": "Select Contact Group",
                 "CONTACTGROUPREQUIRED": "The Contact Group is required",
                 "ENTERFIRSTNAME": "Enter the First Name",
@@ -719,6 +719,8 @@
                 "RCS": "Rcs",
                 "APE": "Ape",
                 "VAT": "Vat",
+                "IBAN": "Iban",
+                "CNIL": "Cnil",
                 "ISACTIVE": "Is Active",
                 "CREATEDAT": "Created At",
                 "CREATORUSER": "Creator User",
