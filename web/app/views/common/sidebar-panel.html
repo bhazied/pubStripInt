@@ -22,28 +22,55 @@
 
   <ul class="nav">
 
-    <!-- dashboard -->
     <li ui-sref-active="active">
-      <a href="#/">
-        <i class="fa fa-flask"></i>
-        <span>Dashboard</span>
+      <a i-sref="app.dashboard">
+        <i class="ti-dashboard"></i>
+        <span translate="sidebar.nav.dashboard.MAIN">Dashboard</span>
       </a>
     </li>
-    <!-- /dashboard -->
 
-    <li ui-sref-active="active">
-      <a href="#/app/p-r-manager/newsrooms">
+    <!--li ng-if="user.roles.join('').indexOf('ADM') > -1" ng-class="{'active':$state.includes('app.templatemanager.templates')}">
+      <a ui-sref="app.templatemanager.templates">
         <i class="fa fa-newspaper-o"></i>
-        <span>Newsrooms</span>
+        <span class="title" translate="content.list.TEMPLATES">Templates</span>
+      </a>
+    </li-->
+
+    <li ng-if="user.roles.join('').indexOf('ADM') > -1" ng-class="{'active':$state.includes('app.templatemanager.contentblocks')}">
+      <a ui-sref="app.templatemanager.contentblocks">
+        <i class="ti-layout-tab-window"></i>
+        <span class="title" translate="content.list.CONTENTBLOCKS">Content Blocks</span>
       </a>
     </li>
 
-    <li ui-sref-active="active">
-      <a href="#/app/access/users">
-        <i class="fa fa-user-secret"></i>
-        <span>Users</span>
+    <li ng-if="user.roles.join('').indexOf('ADM') > -1" ng-class="{'active':$state.includes('app.templatemanager.layouts')}">
+      <a ui-sref="app.templatemanager.layouts">
+        <i class="ti-layout"></i>
+        <span class="title" translate="content.list.LAYOUTS">Layouts</span>
       </a>
     </li>
+
+    <li ng-if="user.roles.join('').indexOf('ADM') > -1" ng-class="{'active':$state.includes('app.templatemanager.fonts')}">
+      <a ui-sref="app.templatemanager.fonts">
+        <i class="fa fa-font"></i>
+        <span class="title" translate="content.list.FONTS">Fonts</span>
+      </a>
+    </li>
+
+    <li ui-sref-active="active" ng-if="user.roles.join('').indexOf('MAN') > -1" ng-class="{'active':$state.includes('app.prmanager.newsrooms')}">
+      <a  ui-sref="app.prmanager.newsrooms">
+        <i class="fa fa-newspaper-o"></i>
+        <span translate="content.list.NEWSROOMS">Newsrooms</span>
+      </a>
+    </li>
+
+    <li ui-sref-active="active" ng-if="user.roles.join('').indexOf('ADM') > -1 || user.roles.join('').indexOf('MAN') > -1" ng-class="{'active':$state.includes('app.access.users')}">
+      <a ui-sref="app.access.users">
+        <i class="fa fa-user-secret"></i>
+        <span translate="content.list.USERS">Users</span>
+      </a>
+    </li>
+
 
   </ul>
 </nav>

@@ -204,15 +204,15 @@ function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q,
     };
 
     $scope.add = function() {
-        $state.go('app.settings.fontsnew');
+        $state.go('app.templatemanager.fontsnew');
     };
 
     $scope.edit = function(row) {
-        $state.go('app.settings.fontsedit', {id: row.id});
+        $state.go('app.templatemanager.fontsedit', {id: row.id});
     };
 
     $scope.details = function(row) {
-        $state.go('app.settings.fontsdetails', {id: row.id});
+        $state.go('app.templatemanager.fontsdetails', {id: row.id});
     };
 
 }]);

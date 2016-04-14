@@ -52,6 +52,7 @@ class JWTResponseListener
             'phone' => $user->getPhone(),
             'country' => null,
             'picture' => $user->getPicture(),
+            'type' => $user->getType(),
             'roles' => $user->getRoles()
         );
 

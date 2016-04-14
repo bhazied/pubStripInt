@@ -26,7 +26,7 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
     $scope.sendingStatuses = [{
         id: 'Initialized',
         title: $filter('translate')('content.list.fields.sendingstatuses.INITIALIZED'),
-        css: 'info'
+        css: 'primary'
     }, {
         id: 'Sent',
         title: $filter('translate')('content.list.fields.sendingstatuses.SENT'),
@@ -167,7 +167,6 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
         $emailsDataFactory.get({id: $stateParams.id}).$promise.then(function(data) {
             $timeout(function(){
                 $scope.email = savable(data);
-                //console.warn($scope.email);
             });
         });
     } else {

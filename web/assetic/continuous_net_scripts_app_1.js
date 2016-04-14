@@ -20,6 +20,7 @@ var app = angular
     'ngTouch',
     'ngCookies',
     'ngResource',
+    'colorpicker.module',
     'cfp.loadingBar',
     'ncy-angular-breadcrumb',
     'duScroll',

@@ -104,7 +104,6 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
         $paymentsDataFactory.get({id: $stateParams.id}).$promise.then(function(data) {
             $timeout(function(){
                 $scope.payment = savable(data);
-                //console.warn($scope.payment);
             });
         });
     } else {

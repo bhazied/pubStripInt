@@ -50,7 +50,7 @@ class ContentBlockType extends AbstractType
             ->add('htmlTemplate', TextareaType::class)
             ->add('settings', TextareaType::class)
             ->add('picture', TextType::class)
-            ->add('blockType', ChoiceType::class, array('choices' => array('Text' => 'Text', 'BoxedText' => 'BoxedText', 'Divider' => 'Divider', 'Image' => 'Image', 'ImageGroup' => 'ImageGroup', 'ImageCard' => 'ImageCard', 'ImageWithCaption' => 'ImageWithCaption', 'SocialShare' => 'SocialShare', 'SocialFollow' => 'SocialFollow', 'Button' => 'Button', 'Footer' => 'Footer', 'RSSHeader' => 'RSSHeader', 'RSSItems' => 'RSSItems', 'Code' => 'Code', ), 'expanded' => false, 'multiple' => false))
+            ->add('blockType', ChoiceType::class, array('choices' => array('Text' => 'Text', 'BoxedText' => 'BoxedText', 'Divider' => 'Divider', 'Image' => 'Image', 'ImageGroup' => 'ImageGroup', 'ImageCard' => 'ImageCard', 'ImageWithCaption' => 'ImageWithCaption', 'SocialShare' => 'SocialShare', 'SocialFollow' => 'SocialFollow', 'Button' => 'Button', 'Footer' => 'Footer', 'Video' => 'Video', 'RssHeader' => 'RssHeader', 'RssItems' => 'RssItems', 'Code' => 'Code', 'Zone' => 'Zone', ), 'expanded' => false, 'multiple' => false))
             ->add('status', ChoiceType::class, array('choices' => array('Draft' => 'Draft', 'Online' => 'Online', 'Deactivated' => 'Deactivated', 'Offline' => 'Offline', 'Deleted' => 'Deleted', 'Archived' => 'Archived', ), 'expanded' => false, 'multiple' => false))
         ;
     }

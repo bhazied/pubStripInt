@@ -48,7 +48,7 @@
                                     </label>
                                     <div class="input-group">
                                     <span class="input-icon">
-                                        <input ng-model="company.picture" type="text" name="picture" id="companyPicture" class="form-control" placeholder="[[ 'content.form.messages.ENTERPICTURE' | translate ]]" />
+                                        <input ng-model="company.picture" type="text" name="picture" id="companyPicture" class="form-control" placeholder="[[ 'content.form.messages.ENTERPICTURE' | translate ]]" ng-required="false" />
                                         <i class="ti-image"></i>
                                     </span><!--/input-icon-->
                                         <span class="input-group-btn">
@@ -76,7 +76,7 @@
                                         <span translate="content.list.fields.WEBSITE">Website</span>
                                     </label>
                                     <span class="input-icon">
-                                        <input ng-model="company.website" type="text" name="website" id="companyWebsite" class="form-control" placeholder="[[ 'content.form.messages.ENTERWEBSITE' | translate ]]" />
+                                        <input ng-model="company.website" type="text" name="website" id="companyWebsite" class="form-control" placeholder="[[ 'content.form.messages.ENTERWEBSITE' | translate ]]" ng-required="false" />
                                         <i class="ti-world"></i>
                                     </span><!--/input-icon-->
                                 </div><!--/form-group-->
@@ -87,7 +87,7 @@
                                         <span translate="content.list.fields.EMAIL">Email</span>
                                     </label>
                                     <span class="input-icon">
-                                        <input ng-model="company.email" type="email" name="email" id="companyEmail" class="form-control" placeholder="[[ 'content.form.messages.ENTEREMAIL' | translate ]]" />
+                                        <input ng-model="company.email" type="email" name="email" id="companyEmail" class="form-control" placeholder="[[ 'content.form.messages.ENTEREMAIL' | translate ]]" ng-required="false" />
                                         <i class="ti-email"></i>
                                     </span><!--/input-icon-->
                                 </div><!--/form-group-->
@@ -100,7 +100,7 @@
                                         <span translate="content.list.fields.PHONE">Phone</span>
                                     </label>
                                     <span class="input-icon">
-                                        <input ng-model="company.phone" type="text" name="phone" id="companyPhone" class="form-control" placeholder="[[ 'content.form.messages.ENTERPHONE' | translate ]]" />
+                                        <input ng-model="company.phone" type="text" name="phone" id="companyPhone" class="form-control" placeholder="[[ 'content.form.messages.ENTERPHONE' | translate ]]" ng-required="false" />
                                         <i class="fa fa-phone"></i>
                                     </span><!--/input-icon-->
                                 </div><!--/form-group-->
@@ -111,7 +111,7 @@
                                         <span translate="content.list.fields.FAX">Fax</span>
                                     </label>
                                     <span class="input-icon">
-                                        <input ng-model="company.fax" type="text" name="fax" id="companyFax" class="form-control" placeholder="[[ 'content.form.messages.ENTERFAX' | translate ]]" />
+                                        <input ng-model="company.fax" type="text" name="fax" id="companyFax" class="form-control" placeholder="[[ 'content.form.messages.ENTERFAX' | translate ]]" ng-required="false" />
                                         <i class="ti-printer"></i>
                                     </span><!--/input-icon-->
                                 </div><!--/form-group-->
@@ -193,10 +193,10 @@
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
                             <div class="col-md-6">
-                                <div class="checkbox clip-check check-primary">
+                                <div class="checkbox continuous-check check-primary">
                                     <input ng-model="company.is_active" type="checkbox" name="isActive" id="companyIsActive" />
                                     <label for="companyIsActive" translate="content.list.fields.ISACTIVE">Is Active</label>
-                                </div><!--/checkbox clip-check check-primary-->
+                                </div><!--/checkbox continuous-check check-primary-->
                             </div><!--/col-md-6-->
                         </div><!--/row-->
                         <div class="row">

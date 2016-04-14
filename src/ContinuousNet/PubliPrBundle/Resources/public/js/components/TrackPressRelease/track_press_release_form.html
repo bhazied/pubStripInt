@@ -50,7 +50,7 @@
                                         <span translate="content.list.fields.SECTION">Section</span>
                                     </label>
                                     <span class="input-icon">
-                                        <input ng-model="trackPressRelease.section" type="text" name="section" id="trackPressReleaseSection" class="form-control" placeholder="[[ 'content.form.messages.ENTERSECTION' | translate ]]" />
+                                        <input ng-model="trackPressRelease.section" type="text" name="section" id="trackPressReleaseSection" class="form-control" placeholder="[[ 'content.form.messages.ENTERSECTION' | translate ]]" ng-required="false" />
                                         <i class="ti-marker-alt"></i>
                                     </span><!--/input-icon-->
                                 </div><!--/form-group-->
@@ -63,7 +63,7 @@
                                         <span translate="content.list.fields.SOURCE">Source</span>
                                     </label>
                                     <span class="input-icon">
-                                        <input ng-model="trackPressRelease.source" type="text" name="source" id="trackPressReleaseSource" class="form-control" placeholder="[[ 'content.form.messages.ENTERSOURCE' | translate ]]" />
+                                        <input ng-model="trackPressRelease.source" type="text" name="source" id="trackPressReleaseSource" class="form-control" placeholder="[[ 'content.form.messages.ENTERSOURCE' | translate ]]" ng-required="false" />
                                         <i class="ti-marker-alt"></i>
                                     </span><!--/input-icon-->
                                 </div><!--/form-group-->
@@ -74,7 +74,7 @@
                                         <span translate="content.list.fields.ACTION">Action</span>
                                         <span class="symbol required"></span>
                                     </label>
-                                    <div class="clip-radio radio-primary" ng-if="actions.length < 10">
+                                    <div class="continuous-radio radio-primary" ng-if="actions.length < 10">
                                         <input ng-disabled="false" ng-repeat-start="action in actions" ng-model="trackPressRelease.action" type="radio" id="action[[ action.id ]]" value="[[ action.id ]]" name="action" ng-required="true" />
                                         <label ng-repeat-end for="action[[ action.id ]]">
                                             [[ action.title ]]

@@ -12,7 +12,7 @@ function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q,
     $scope.sendingStatuses = [{
         id: 'Initialized',
         title: $filter('translate')('content.list.fields.sendingstatuses.INITIALIZED'),
-        css: 'info'
+        css: 'primary'
     }, {
         id: 'Sent',
         title: $filter('translate')('content.list.fields.sendingstatuses.SENT'),

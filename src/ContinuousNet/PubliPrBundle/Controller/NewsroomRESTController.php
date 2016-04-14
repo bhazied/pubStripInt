@@ -16,6 +16,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Finder\Finder;;
+use Symfony\Component\Finder\SplFileInfo;
 
 use Voryx\RESTGeneratorBundle\Controller\VoryxController;
 
@@ -148,7 +150,6 @@ class NewsroomRESTController extends BaseRESTController
             $em->flush();
             return $entity;
         }
-        return FOSView::create(array('errors' => $form->getErrors()), Codes::HTTP_INTERNAL_SERVER_ERROR);
     }
 
     /**
@@ -161,7 +162,7 @@ class NewsroomRESTController extends BaseRESTController
      *
      * @return Response
      */
-    public function putAction(Request $request,  Newsroom  $entity)
+    public function putAction(Request $request, Newsroom $entity)
     {
         try {
             $em = $this->getDoctrine()->getManager();
@@ -194,7 +195,7 @@ class NewsroomRESTController extends BaseRESTController
      *
      * @return Response
      */
-    public function patchAction(Request $request,  Newsroom  $entity)
+    public function patchAction(Request $request, Newsroom $entity)
     {
         return $this->putAction($request, $entity);
     }
@@ -209,7 +210,7 @@ class NewsroomRESTController extends BaseRESTController
      *
      * @return Response
      */
-    public function deleteAction(Request $request,  Newsroom  $entity)
+    public function deleteAction(Request $request, Newsroom $entity)
     {
         try {
             $em = $this->getDoctrine()->getManager();

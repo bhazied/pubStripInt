@@ -271,7 +271,7 @@ fm_elfinder:
             cors_support: true # allows cross domain responses handling (default false)
             editor: ckeditor # other options are tinymce, tinymce4, fm_tinymce,  form, simple, custom
             #editor_template: set custom template for your editor # default null
-            #path_prefix: / # for setting custom assets path prefix, useful for non vhost configurations, i.e. http://127.0.0.1/mysite/
+            path_prefix: '/components' # for setting custom assets path prefix, useful for non vhost configurations, i.e. http://127.0.0.1/mysite/
             #fullscreen: true|false # defaults true, applies to simple and ckeditor editors
             theme: 'base' # jquery theme, default is 'smoothness'
             include_assets: true # disable if you want to handle loading of the javascript and css assets yourself
@@ -283,6 +283,28 @@ fm_elfinder:
                         #show_hidden: true|false # defaults to false, hide files that
                         driver: LocalFileSystem
                         path: uploads
+                        upload_allow: ['image', 'video']
+                        upload_deny: ['all']
+                        upload_max_size: 2M
+                        #attributes: example of setting attributes permission
+                        #    - { pattern: '/(.*?)/', read: true, write: false, locked: true }
+        preditor:
+            locale: %locale% # defaults to current request locale
+            cors_support: true # allows cross domain responses handling (default false)
+            editor: ckeditor # other options are tinymce, tinymce4, fm_tinymce,  form, simple, custom
+            #editor_template: set custom template for your editor # default null
+            #path_prefix: / # for setting custom assets path prefix, useful for non vhost configurations, i.e. http://127.0.0.1/mysite/
+            #fullscreen: true|false # defaults true, applies to simple and ckeditor editors
+            theme: 'base' # jquery theme, default is 'smoothness'
+            include_assets: true # disable if you want to handle loading of the javascript and css assets yourself
+            visible_mime_types: ['image', 'video'] # only show these mime types, defaults to show all
+            connector:
+                #debug: true|false # defaults to false
+                roots:       # at least one root must be defined
+                    uploads:
+                        #show_hidden: true|false # defaults to false, hide files that
+                        driver: LocalFileSystem
+                        path: content
                         upload_allow: ['image', 'video']
                         upload_deny: ['all']
                         upload_max_size: 2M
@@ -321,14 +343,16 @@ assetic:
                 - 'bower_components/AngularJS-Toaster/toaster.css'
         jqueryui_css:
             inputs:
-                - 'components/jquery-ui/themes/base/jquery-ui.min.css'
+                - 'bower_components/jquery-ui/themes/base/jquery-ui.min.css'
+        bootstrap_colorpicker_css:
+            inputs:
+                - "bower_components/angular-bootstrap-colorpicker/css/colorpicker.css" #.min
         elfinder_css:
             inputs:
-                - 'components/elfinder/dist/css/elfinder.min.css'
-                - 'components/elfinder/dist/css/theme.css' #.min
+                - 'bower_components/elfinder/dist/css/elfinder.min.css'
+                - 'bower_components/elfinder/dist/css/theme.css' #.min
         continuous_net_css:
             inputs:
-                - 'bower_components/checkbo/src/0.1.4/css/checkBo.css' #.min
                 - 'styles/animate.css'
                 - 'styles/panel.css'
                 - 'styles/publipr.css'
@@ -339,11 +363,11 @@ assetic:
                 - 'bower_components/jquery/dist/jquery.js' #.min
         jqueryui:
             inputs:
-                - 'components/jquery-ui/jquery-ui.min.js'
+                - 'bower_components/jquery-ui/jquery-ui.min.js'
         elfinder:
             inputs:
-                - 'components/elfinder/dist/js/elfinder.min.js'
-                - 'components/elfinder/dist/js/i18n/elfinder.fr.js'
+                - 'bower_components/elfinder/dist/js/elfinder.min.js'
+                - 'bower_components/elfinder/dist/js/i18n/elfinder.fr.js'
         perfect_scrollbar:
             inputs:
                 - 'bower_components/perfect-scrollbar/js/perfect-scrollbar.jquery.js'
@@ -389,6 +413,9 @@ assetic:
         angular_scroll:
             inputs:
                 - 'bower_components/angular-scroll/angular-scroll.js' #.min
+        bootstrap_colorpicker:
+            inputs:
+                - "bower_components/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.js" #.min
         oclazyload:
             inputs:
                 - 'bower_components/oclazyload/dist/ocLazyLoad.js' #.min
@@ -403,7 +430,6 @@ assetic:
                 - 'bower_components/angular-loading-bar/build/loading-bar.js' #.min
         extentions:
               inputs:
-                - 'bower_components/checkbo/src/0.1.4/js/checkBo.js' #.min
                 - 'bower_components/flot/jquery.flot.js'
                 - 'app/scripts/extentions/modernizr.js'
                 - 'app/scripts/extentions/lib.js'

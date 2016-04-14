@@ -97,14 +97,13 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
     };
 
     $scope.list = function() {
-        $state.go('app.access.settings');
+        $state.go('app.configuration.settings');
     };
     
     if (angular.isDefined($stateParams.id)) {
         $settingsDataFactory.get({id: $stateParams.id}).$promise.then(function(data) {
             $timeout(function(){
                 $scope.setting = savable(data);
-                //console.warn($scope.setting);
             });
         });
     } else {

@@ -16,6 +16,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Finder\Finder;;
+use Symfony\Component\Finder\SplFileInfo;
 
 use Voryx\RESTGeneratorBundle\Controller\VoryxController;
 
@@ -142,7 +144,6 @@ class EmailRESTController extends BaseRESTController
             $em->flush();
             return $entity;
         }
-        return FOSView::create(array('errors' => $form->getErrors()), Codes::HTTP_INTERNAL_SERVER_ERROR);
     }
 
     /**
@@ -155,7 +156,7 @@ class EmailRESTController extends BaseRESTController
      *
      * @return Response
      */
-    public function putAction(Request $request,  Email  $entity)
+    public function putAction(Request $request, Email $entity)
     {
         try {
             $em = $this->getDoctrine()->getManager();
@@ -184,7 +185,7 @@ class EmailRESTController extends BaseRESTController
      *
      * @return Response
      */
-    public function patchAction(Request $request,  Email  $entity)
+    public function patchAction(Request $request, Email $entity)
     {
         return $this->putAction($request, $entity);
     }
@@ -199,7 +200,7 @@ class EmailRESTController extends BaseRESTController
      *
      * @return Response
      */
-    public function deleteAction(Request $request,  Email  $entity)
+    public function deleteAction(Request $request, Email $entity)
     {
         try {
             $em = $this->getDoctrine()->getManager();

@@ -58,42 +58,96 @@
         "PASSWORDCHANGED": "Password changed",
         "ENTERCURRENTPASSWORD": "Entrer your current password"
     },
+    "dashboard": {
+        "WELCOME": "Welcome to [[appName]]"
+    },
+    "topbar": {
+      "messages": {
+        "MAIN": "Messages",
+        "HEADER": "Unread messages",
+        "SEEALL": "See All"
+      },
+      "activities": {
+        "MAIN": "Activities",
+        "HEADER": "You have new notifications",
+        "SEEALL": "See All"
+      },
+      "user": {
+        "PROFILE": "My Profile",
+        "CALENDAR": "My Calendar",
+        "MESSAGES": "My Messages",
+        "LOCKSCREEN": "Lock Screen",
+        "LOGOUT": "Log Out"
+      }
+    },
+    "offsidebar": {
+        "chat": {
+          "ONLINE": "On-Line",
+          "OFFLINE": "Off-Line",
+          "BACK": "Back",
+          "SEND": "Send",
+          "PLACEHOLDER": "Message"
+      },
+      "favorites": {
+        "MAIN": "Favorites"
+      },
+      "settings": {
+        "MAIN": "General Settings",
+        "NOTIFICATIONS": "Enable Notifications",
+        "SHOWEMAIL": "Show your E-mail",
+        "SHOWUSERS": "Show Offline Users",
+        "EMAILALERT": "E-mail Alerts",
+        "SMSALERT": "SMS Alerts",
+        "SAVE": "Save Changes"
+      }
+    },
     "sidebar": {
-        "nav": {
-            "dashboard": {
-                "MAIN": "Dashboard"
-            },
-            "logout": {
-                "MAIN": "Lougout"
-            },
-            "access": {
-                "MAIN": "Access"
-            },
-            "contactmanager": {
-                "MAIN": "ContactManager"
-            },
-            "templatemanager": {
-                "MAIN": "TemplateManager"
-            },
-            "settings": {
-                "MAIN": "Settings"
-            },
-            "distribution": {
-                "MAIN": "Distribution"
-            },
-            "prmanager": {
-                "MAIN": "PRManager"
-            },
-            "billing": {
-                "MAIN": "Billing"
-            },
-            "accesscontrol": {
-                "MAIN": "AccessControl"
-            },
-            "statistics": {
-                "MAIN": "Statistics"
-            }
+      "heading": {
+        "NAVIGATION": "Main Navigation",
+        "FEATURES": "Core Features",
+        "DOCUMENTATION": "Documentation"
+      },
+      "search": {
+        "PLACEHOLDER": "Search..."
+      },
+      "nav": {
+        "dashboard": {
+            "MAIN": "Dashboard"
+        },
+        "logout": {
+            "MAIN": "Lougout"
+        },
+        "access": {
+            "MAIN": "Access"
+        },
+        "contactmanager": {
+            "MAIN": "ContactManager"
+        },
+        "templatemanager": {
+            "MAIN": "TemplateManager"
+        },
+        "configuration": {
+            "MAIN": "Configuration"
+        },
+        "distribution": {
+            "MAIN": "Distribution"
+        },
+        "prmanager": {
+            "MAIN": "PRManager"
+        },
+        "settings": {
+            "MAIN": "Settings"
+        },
+        "billing": {
+            "MAIN": "Billing"
+        },
+        "accesscontrol": {
+            "MAIN": "AccessControl"
+        },
+        "statistics": {
+            "MAIN": "Statistics"
         }
+      }
     },
     "formats": {
         "DATE": "MM/dd/yyyy",
@@ -102,6 +156,7 @@
     },
    "content": {
         "common": {
+            "ENABLEBATCHADD": "Enable batch add",
             "CLEARSORTING": "Clear sorting",
             "CLEARFILTER": "Clear filter",
             "SHOWFILTERROW": "Show filter row",
@@ -272,7 +327,6 @@
                 "REENTERPASSWORD": "Retaper Mot de passe",
                 "REPEATPASSWORDREQUIRED": "Le champs Répéter Mot de passe est obligatoire",
                 "ENTERSALT": "Entrer une valeur pour Grain de sel ",
-                "SALTREQUIRED": "Le champs Grain de sel  est obligatoire",
                 "ENTERUSERNAMECANONICAL": "Entrer une valeur pour Nonm d'utilisateur Canonical",
                 "ENTEREMAILCANONICAL": "Entrer une valeur pour Email canonique",
                 "ENTERGENDER": "Entrer une valeur pour Genre",
@@ -692,9 +746,11 @@
                     "SOCIALFOLLOW": "Social Follow",
                     "BUTTON": "Button",
                     "FOOTER": "Jambeer",
-                    "RSSHEADER": "R S S Têteer",
-                    "RSSITEMS": "R S S Items",
-                    "CODE": "Code"
+                    "VIDEO": "Vidéo",
+                    "RSSHEADER": "Rss Têteer",
+                    "RSSITEMS": "Rss Items",
+                    "CODE": "Code",
+                    "ZONE": "Zone"
                 },
                 "STATUS": "Statut",
                 "statuses": {
@@ -795,8 +851,9 @@
                 "rolesoptions": {
                     "ROLE_API": "R O L E  A P I",
                     "FREE_ACCOUNT": "F R E E  A C C O U N T",
+                    "ROLE_ACCOUNT_USER": "R O L E  A C C O U N T  U S E R",
                     "ROLE_ACCOUNT_MANAGER": "R O L E  A C C O U N T  M A N A G E R",
-                    "ROLE_CONTRIBUTOR_ACCOUNT": "R O L E  C O N T R I B U T O R  A C C O U N T",
+                    "ROLE_ADMIN": "R O L E  A D M I N",
                     "ROLE_SUPER_ADMIN": "R O L E  S U P E R  A D M I N"
                 },
                 "ENABLED": "Activé",

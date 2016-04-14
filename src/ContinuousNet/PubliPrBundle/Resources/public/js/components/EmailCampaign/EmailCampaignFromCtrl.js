@@ -148,7 +148,9 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
         $emailCampaignsDataFactory.get({id: $stateParams.id}).$promise.then(function(data) {
             $timeout(function(){
                 $scope.emailCampaign = savable(data);
-                //console.warn($scope.emailCampaign);
+                if ($scope.emailCampaign.sending_date_time != null) {
+                    $scope.emailCampaign.sending_date_time = new Date($scope.emailCampaign.sending_date_time);
+                }
             });
         });
     } else {

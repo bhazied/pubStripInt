@@ -12,7 +12,7 @@ function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q,
     $scope.statuses = [{
         id: 'Draft',
         title: $filter('translate')('content.list.fields.statuses.DRAFT'),
-        css: 'info'
+        css: 'primary'
     }, {
         id: 'Online',
         title: $filter('translate')('content.list.fields.statuses.ONLINE'),
@@ -24,15 +24,15 @@ function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q,
     }, {
         id: 'Offline',
         title: $filter('translate')('content.list.fields.statuses.OFFLINE'),
-        css: 'inverse'
+        css: 'danger'
     }, {
         id: 'Deleted',
         title: $filter('translate')('content.list.fields.statuses.DELETED'),
-        css: 'danger'
+        css: 'default'
     }, {
         id: 'Archived',
         title: $filter('translate')('content.list.fields.statuses.ARCHIVED'),
-        css: 'primary'
+        css: 'info'
     }];
 
     $scope.locale = (angular.isDefined($localStorage.language))?$localStorage.language:'en';
@@ -222,15 +222,15 @@ function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q,
     };
 
     $scope.add = function() {
-        $state.go('app.settings.emailtemplatesnew');
+        $state.go('app.configuration.emailtemplatesnew');
     };
 
     $scope.edit = function(row) {
-        $state.go('app.settings.emailtemplatesedit', {id: row.id});
+        $state.go('app.configuration.emailtemplatesedit', {id: row.id});
     };
 
     $scope.details = function(row) {
-        $state.go('app.settings.emailtemplatesdetails', {id: row.id});
+        $state.go('app.configuration.emailtemplatesdetails', {id: row.id});
     };
 
 }]);

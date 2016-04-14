@@ -33,8 +33,8 @@ angular
                 $rootScope.user = $localStorage.user;
             } else {
                 $rootScope.user = {
-                    firstName: 'User',
-                    job: 'Webmaster',
+                    name: 'Sahbi KHALFALLAH',
+                    job: 'Senior Web Consultant',
                     picture: '/app/images/avatar.jpg',
                     roles: []
                 };

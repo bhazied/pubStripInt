@@ -203,15 +203,15 @@ function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q,
     };
 
     $scope.add = function() {
-        $state.go('app.settings.languagesnew');
+        $state.go('app.configuration.languagesnew');
     };
 
     $scope.edit = function(row) {
-        $state.go('app.settings.languagesedit', {id: row.id});
+        $state.go('app.configuration.languagesedit', {id: row.id});
     };
 
     $scope.details = function(row) {
-        $state.go('app.settings.languagesdetails', {id: row.id});
+        $state.go('app.configuration.languagesdetails', {id: row.id});
     };
 
 }]);

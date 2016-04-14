@@ -97,14 +97,13 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
     };
 
     $scope.list = function() {
-        $state.go('app.settings.fonts');
+        $state.go('app.templatemanager.fonts');
     };
     
     if (angular.isDefined($stateParams.id)) {
         $fontsDataFactory.get({id: $stateParams.id}).$promise.then(function(data) {
             $timeout(function(){
                 $scope.font = savable(data);
-                //console.warn($scope.font);
             });
         });
     } else {

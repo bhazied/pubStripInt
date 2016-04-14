@@ -148,7 +148,9 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
         $contactsDataFactory.get({id: $stateParams.id}).$promise.then(function(data) {
             $timeout(function(){
                 $scope.contact = savable(data);
-                //console.warn($scope.contact);
+                if ($scope.contact.unsubscribed_at != null) {
+                    $scope.contact.unsubscribed_at = new Date($scope.contact.unsubscribed_at);
+                }
             });
         });
     } else {

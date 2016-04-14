@@ -194,15 +194,15 @@ function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q,
     };
 
     $scope.add = function() {
-        $state.go('app.settings.countriesnew');
+        $state.go('app.configuration.countriesnew');
     };
 
     $scope.edit = function(row) {
-        $state.go('app.settings.countriesedit', {id: row.id});
+        $state.go('app.configuration.countriesedit', {id: row.id});
     };
 
     $scope.details = function(row) {
-        $state.go('app.settings.countriesdetails', {id: row.id});
+        $state.go('app.configuration.countriesdetails', {id: row.id});
     };
 
 }]);

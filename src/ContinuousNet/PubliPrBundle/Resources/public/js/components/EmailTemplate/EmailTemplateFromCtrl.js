@@ -26,7 +26,7 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
     $scope.statuses = [{
         id: 'Draft',
         title: $filter('translate')('content.list.fields.statuses.DRAFT'),
-        css: 'info'
+        css: 'primary'
     }, {
         id: 'Online',
         title: $filter('translate')('content.list.fields.statuses.ONLINE'),
@@ -38,15 +38,15 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
     }, {
         id: 'Offline',
         title: $filter('translate')('content.list.fields.statuses.OFFLINE'),
-        css: 'inverse'
+        css: 'danger'
     }, {
         id: 'Deleted',
         title: $filter('translate')('content.list.fields.statuses.DELETED'),
-        css: 'danger'
+        css: 'default'
     }, {
         id: 'Archived',
         title: $filter('translate')('content.list.fields.statuses.ARCHIVED'),
-        css: 'primary'
+        css: 'info'
     }];
 
     $scope.users = [];
@@ -122,14 +122,13 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
     };
 
     $scope.list = function() {
-        $state.go('app.settings.emailtemplates');
+        $state.go('app.configuration.emailtemplates');
     };
     
     if (angular.isDefined($stateParams.id)) {
         $emailTemplatesDataFactory.get({id: $stateParams.id}).$promise.then(function(data) {
             $timeout(function(){
                 $scope.emailTemplate = savable(data);
-                //console.warn($scope.emailTemplate);
             });
         });
     } else {

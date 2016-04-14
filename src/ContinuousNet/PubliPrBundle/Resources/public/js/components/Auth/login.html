@@ -46,11 +46,11 @@
 
 					</div>
 
-					<div class="form-group" ui-jq="checkBo">
-						<label class="cb-checkbox cb-md">
-							<input type="checkbox" name="checked-checkbox-name" value="1" name="terms" id="rememberMe" />
-							<span class="text-left" translate="login.KEEPMESIGNEDIN">Keep me signed in</span>
-						</label>
+					<div class="form-group">
+						<div class="checkbox continuous-check check-primary">
+							<input type="checkbox" name="checked-checkbox-name" value="1" name="rememberMe" id="rememberMe" />
+							<label class="text-left" translate="login.KEEPMESIGNEDIN">Keep me signed in</label>
+						</div>
 					</div>
 
 					<button class="btn btn-success btn-block btn-lg mb15" type="submit" ng-click="submit()" ng-disabled="disableSubmit">

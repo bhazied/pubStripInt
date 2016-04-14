@@ -10,7 +10,7 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $q, $interpolate
     $scope.actions = [{
         id: 'View',
         title: $filter('translate')('content.list.fields.actions.VIEW'),
-        css: 'info'
+        css: 'primary'
     }, {
         id: 'Click',
         title: $filter('translate')('content.list.fields.actions.CLICK'),

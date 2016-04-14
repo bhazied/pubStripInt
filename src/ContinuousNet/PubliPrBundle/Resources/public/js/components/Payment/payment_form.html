@@ -89,7 +89,7 @@
                                         <span translate="content.list.fields.DISCOUNTCODE">Discount Code</span>
                                     </label>
                                     <span class="input-icon">
-                                        <input ng-model="payment.discount_code" type="text" name="discountCode" id="paymentDiscountCode" class="form-control" placeholder="[[ 'content.form.messages.ENTERDISCOUNTCODE' | translate ]]" />
+                                        <input ng-model="payment.discount_code" type="text" name="discountCode" id="paymentDiscountCode" class="form-control" placeholder="[[ 'content.form.messages.ENTERDISCOUNTCODE' | translate ]]" ng-required="false" />
                                         <i class="ti-shortcode"></i>
                                     </span><!--/input-icon-->
                                 </div><!--/form-group-->
@@ -100,7 +100,7 @@
                                         <span translate="content.list.fields.INVOICENUMBER">Invoice Number</span>
                                     </label>
                                     <span class="input-icon">
-                                        <input ng-model="payment.invoice_number" type="text" name="invoiceNumber" id="paymentInvoiceNumber" class="form-control" placeholder="[[ 'content.form.messages.ENTERINVOICENUMBER' | translate ]]" />
+                                        <input ng-model="payment.invoice_number" type="text" name="invoiceNumber" id="paymentInvoiceNumber" class="form-control" placeholder="[[ 'content.form.messages.ENTERINVOICENUMBER' | translate ]]" ng-required="false" />
                                         <i class="ti-marker-alt"></i>
                                     </span><!--/input-icon-->
                                 </div><!--/form-group-->
@@ -113,7 +113,7 @@
                                         <span translate="content.list.fields.DETAILS">Details</span>
                                     </label>
                                     <div class="note-editor">
-                                        <textarea ng-model="payment.details" name="details" id="paymentDetails" class="form-control" placeholder="[[ 'content.form.messages.ENTERDETAILS' | translate ]]" class="form-control autosize area-animated msd-elastic: \n;"></textarea>
+                                        <textarea ng-model="payment.details" name="details" id="paymentDetails" class="form-control" placeholder="[[ 'content.form.messages.ENTERDETAILS' | translate ]]" class="form-control autosize area-animated msd-elastic: \n;" ng-required="false"></textarea>
                                     </div>
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
@@ -123,7 +123,7 @@
                                         <span translate="content.list.fields.NOTE">Note</span>
                                     </label>
                                     <span class="input-icon">
-                                        <input ng-model="payment.note" type="text" name="note" id="paymentNote" class="form-control" placeholder="[[ 'content.form.messages.ENTERNOTE' | translate ]]" />
+                                        <input ng-model="payment.note" type="text" name="note" id="paymentNote" class="form-control" placeholder="[[ 'content.form.messages.ENTERNOTE' | translate ]]" ng-required="false" />
                                         <i class="ti-marker-alt"></i>
                                     </span><!--/input-icon-->
                                 </div><!--/form-group-->
@@ -131,10 +131,10 @@
                         </div><!--/row-->
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="checkbox clip-check check-primary">
+                                <div class="checkbox continuous-check check-primary">
                                     <input ng-model="payment.is_valid" type="checkbox" name="isValid" id="paymentIsValid" />
                                     <label for="paymentIsValid" translate="content.list.fields.ISVALID">Is Valid</label>
-                                </div><!--/checkbox clip-check check-primary-->
+                                </div><!--/checkbox continuous-check check-primary-->
                             </div><!--/col-md-6-->
                             <div class="col-md-6">
                                 <div class="form-group" ng-class="{'has-error':paymentForm.token.$dirty && paymentForm.token.$invalid, 'has-success':paymentForm.token.$valid}">

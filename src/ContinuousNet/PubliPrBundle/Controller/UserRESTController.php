@@ -16,6 +16,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Finder\Finder;;
+use Symfony\Component\Finder\SplFileInfo;
 
 use Voryx\RESTGeneratorBundle\Controller\VoryxController;
 
@@ -147,191 +149,143 @@ class UserRESTController extends BaseRESTController
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $entity->setCreatorUser($this->getUser());
-            $authorized = false;
+            $authorizedChangeSalt = false;
             $roles = $this->getUser()->getRoles();
             if (!empty($roles)) {
                 foreach ($roles as $role) {
                     if (substr_count($role, 'SYSTEM') > 0) {
-                        $authorized = true;
+                        $authorizedChangeSalt = true;
                     }
                 }
             }
-            if (!$authorized) {
-                $entity->setPassword(null);
-            }
-            $authorized = false;
-            $roles = $this->getUser()->getRoles();
-            if (!empty($roles)) {
-                foreach ($roles as $role) {
-                    if (substr_count($role, 'SYSTEM') > 0) {
-                        $authorized = true;
-                    }
-                }
-            }
-            if (!$authorized) {
+            if (!$authorizedChangeSalt) {
                 $entity->setSalt(null);
             }
-            $authorized = false;
+            $authorizedChangeEnabled = false;
             $roles = $this->getUser()->getRoles();
             if (!empty($roles)) {
                 foreach ($roles as $role) {
                     if (substr_count($role, 'ROLE_SUPER_ADMIN') > 0) {
-                        $authorized = true;
+                        $authorizedChangeEnabled = true;
                     }
                 }
             }
-            if (!$authorized) {
+            if (!$authorizedChangeEnabled) {
                 $entity->setEnabled(null);
             }
-            $authorized = false;
+            $authorizedChangeConfirmationToken = false;
             $roles = $this->getUser()->getRoles();
             if (!empty($roles)) {
                 foreach ($roles as $role) {
                     if (substr_count($role, 'SYSTEM') > 0) {
-                        $authorized = true;
+                        $authorizedChangeConfirmationToken = true;
                     }
                 }
             }
-            if (!$authorized) {
+            if (!$authorizedChangeConfirmationToken) {
                 $entity->setConfirmationToken(null);
             }
-            $authorized = false;
+            $authorizedChangePasswordRequestedAt = false;
             $roles = $this->getUser()->getRoles();
             if (!empty($roles)) {
                 foreach ($roles as $role) {
                     if (substr_count($role, 'SYSTEM') > 0) {
-                        $authorized = true;
+                        $authorizedChangePasswordRequestedAt = true;
                     }
                 }
             }
-            if (!$authorized) {
+            if (!$authorizedChangePasswordRequestedAt) {
                 $entity->setPasswordRequestedAt(null);
             }
-            $authorized = false;
+            $authorizedChangeExpiresAt = false;
             $roles = $this->getUser()->getRoles();
             if (!empty($roles)) {
                 foreach ($roles as $role) {
                     if (substr_count($role, 'SYSTEM') > 0) {
-                        $authorized = true;
+                        $authorizedChangeExpiresAt = true;
                     }
                 }
             }
-            if (!$authorized) {
-                $entity->setLocked(null);
-            }
-            $authorized = false;
-            $roles = $this->getUser()->getRoles();
-            if (!empty($roles)) {
-                foreach ($roles as $role) {
-                    if (substr_count($role, 'SYSTEM') > 0) {
-                        $authorized = true;
-                    }
-                }
-            }
-            if (!$authorized) {
-                $entity->setExpired(null);
-            }
-            $authorized = false;
-            $roles = $this->getUser()->getRoles();
-            if (!empty($roles)) {
-                foreach ($roles as $role) {
-                    if (substr_count($role, 'SYSTEM') > 0) {
-                        $authorized = true;
-                    }
-                }
-            }
-            if (!$authorized) {
+            if (!$authorizedChangeExpiresAt) {
                 $entity->setExpiresAt(null);
             }
-            $authorized = false;
+            $authorizedChangeCredentialsExpireAt = false;
             $roles = $this->getUser()->getRoles();
             if (!empty($roles)) {
                 foreach ($roles as $role) {
                     if (substr_count($role, 'SYSTEM') > 0) {
-                        $authorized = true;
+                        $authorizedChangeCredentialsExpireAt = true;
                     }
                 }
             }
-            if (!$authorized) {
-                $entity->setCredentialsExpired(null);
-            }
-            $authorized = false;
-            $roles = $this->getUser()->getRoles();
-            if (!empty($roles)) {
-                foreach ($roles as $role) {
-                    if (substr_count($role, 'SYSTEM') > 0) {
-                        $authorized = true;
-                    }
-                }
-            }
-            if (!$authorized) {
+            if (!$authorizedChangeCredentialsExpireAt) {
                 $entity->setCredentialsExpireAt(null);
             }
-            $authorized = false;
+            $authorizedChangeLastLogin = false;
             $roles = $this->getUser()->getRoles();
             if (!empty($roles)) {
                 foreach ($roles as $role) {
                     if (substr_count($role, 'SYSTEM') > 0) {
-                        $authorized = true;
+                        $authorizedChangeLastLogin = true;
                     }
                 }
             }
-            if (!$authorized) {
+            if (!$authorizedChangeLastLogin) {
                 $entity->setLastLogin(null);
             }
-            $authorized = false;
+            $authorizedChangeLastFailedLogin = false;
             $roles = $this->getUser()->getRoles();
             if (!empty($roles)) {
                 foreach ($roles as $role) {
                     if (substr_count($role, 'SYSTEM') > 0) {
-                        $authorized = true;
+                        $authorizedChangeLastFailedLogin = true;
                     }
                 }
             }
-            if (!$authorized) {
+            if (!$authorizedChangeLastFailedLogin) {
                 $entity->setLastFailedLogin(null);
             }
-            $authorized = false;
+            $authorizedChangeLoginCount = false;
             $roles = $this->getUser()->getRoles();
             if (!empty($roles)) {
                 foreach ($roles as $role) {
                     if (substr_count($role, 'SYSTEM') > 0) {
-                        $authorized = true;
+                        $authorizedChangeLoginCount = true;
                     }
                 }
             }
-            if (!$authorized) {
+            if (!$authorizedChangeLoginCount) {
                 $entity->setLoginCount(null);
             }
-            $authorized = false;
+            $authorizedChangeFailedLoginCount = false;
             $roles = $this->getUser()->getRoles();
             if (!empty($roles)) {
                 foreach ($roles as $role) {
                     if (substr_count($role, 'SYSTEM') > 0) {
-                        $authorized = true;
+                        $authorizedChangeFailedLoginCount = true;
                     }
                 }
             }
-            if (!$authorized) {
+            if (!$authorizedChangeFailedLoginCount) {
                 $entity->setFailedLoginCount(null);
             }
-            $authorized = false;
+            $authorizedChangeLastFailedLoginCount = false;
             $roles = $this->getUser()->getRoles();
             if (!empty($roles)) {
                 foreach ($roles as $role) {
                     if (substr_count($role, 'SYSTEM') > 0) {
-                        $authorized = true;
+                        $authorizedChangeLastFailedLoginCount = true;
                     }
                 }
             }
-            if (!$authorized) {
+            if (!$authorizedChangeLastFailedLoginCount) {
                 $entity->setLastFailedLoginCount(null);
             }
+            $entity = $this->process($entity, true);
             $em->persist($entity);
             $em->flush();
             return $entity;
         }
-        return FOSView::create(array('errors' => $form->getErrors()), Codes::HTTP_INTERNAL_SERVER_ERROR);
     }
 
     /**
@@ -344,7 +298,7 @@ class UserRESTController extends BaseRESTController
      *
      * @return Response
      */
-    public function putAction(Request $request,  User  $entity)
+    public function putAction(Request $request, User $entity)
     {
         try {
             $em = $this->getDoctrine()->getManager();
@@ -355,186 +309,139 @@ class UserRESTController extends BaseRESTController
             $form->handleRequest($request);
             if ($form->isValid()) {
                 $entity->setModifierUser($this->getUser());
-                $authorized = false;
+                $authorizedChangeSalt = false;
                 $roles = $this->getUser()->getRoles();
                 if (!empty($roles)) {
                     foreach ($roles as $role) {
                         if (substr_count($role, 'SYSTEM') > 0) {
-                            $authorized = true;
+                            $authorizedChangeSalt = true;
                         }
                     }
                 }
-                if (!$authorized) {
-                    $entity->setPassword(null);
-                }
-                $authorized = false;
-                $roles = $this->getUser()->getRoles();
-                if (!empty($roles)) {
-                    foreach ($roles as $role) {
-                        if (substr_count($role, 'SYSTEM') > 0) {
-                            $authorized = true;
-                        }
-                    }
-                }
-                if (!$authorized) {
+                if (!$authorizedChangeSalt) {
                     $entity->setSalt(null);
                 }
-                $authorized = false;
+                $authorizedChangeEnabled = false;
                 $roles = $this->getUser()->getRoles();
                 if (!empty($roles)) {
                     foreach ($roles as $role) {
                         if (substr_count($role, 'ROLE_SUPER_ADMIN') > 0) {
-                            $authorized = true;
+                            $authorizedChangeEnabled = true;
                         }
                     }
                 }
-                if (!$authorized) {
+                if (!$authorizedChangeEnabled) {
                     $entity->setEnabled(null);
                 }
-                $authorized = false;
+                $authorizedChangeConfirmationToken = false;
                 $roles = $this->getUser()->getRoles();
                 if (!empty($roles)) {
                     foreach ($roles as $role) {
                         if (substr_count($role, 'SYSTEM') > 0) {
-                            $authorized = true;
+                            $authorizedChangeConfirmationToken = true;
                         }
                     }
                 }
-                if (!$authorized) {
+                if (!$authorizedChangeConfirmationToken) {
                     $entity->setConfirmationToken(null);
                 }
-                $authorized = false;
+                $authorizedChangePasswordRequestedAt = false;
                 $roles = $this->getUser()->getRoles();
                 if (!empty($roles)) {
                     foreach ($roles as $role) {
                         if (substr_count($role, 'SYSTEM') > 0) {
-                            $authorized = true;
+                            $authorizedChangePasswordRequestedAt = true;
                         }
                     }
                 }
-                if (!$authorized) {
+                if (!$authorizedChangePasswordRequestedAt) {
                     $entity->setPasswordRequestedAt(null);
                 }
-                $authorized = false;
+                $authorizedChangeExpiresAt = false;
                 $roles = $this->getUser()->getRoles();
                 if (!empty($roles)) {
                     foreach ($roles as $role) {
                         if (substr_count($role, 'SYSTEM') > 0) {
-                            $authorized = true;
+                            $authorizedChangeExpiresAt = true;
                         }
                     }
                 }
-                if (!$authorized) {
-                    $entity->setLocked(null);
-                }
-                $authorized = false;
-                $roles = $this->getUser()->getRoles();
-                if (!empty($roles)) {
-                    foreach ($roles as $role) {
-                        if (substr_count($role, 'SYSTEM') > 0) {
-                            $authorized = true;
-                        }
-                    }
-                }
-                if (!$authorized) {
-                    $entity->setExpired(null);
-                }
-                $authorized = false;
-                $roles = $this->getUser()->getRoles();
-                if (!empty($roles)) {
-                    foreach ($roles as $role) {
-                        if (substr_count($role, 'SYSTEM') > 0) {
-                            $authorized = true;
-                        }
-                    }
-                }
-                if (!$authorized) {
+                if (!$authorizedChangeExpiresAt) {
                     $entity->setExpiresAt(null);
                 }
-                $authorized = false;
+                $authorizedChangeCredentialsExpireAt = false;
                 $roles = $this->getUser()->getRoles();
                 if (!empty($roles)) {
                     foreach ($roles as $role) {
                         if (substr_count($role, 'SYSTEM') > 0) {
-                            $authorized = true;
+                            $authorizedChangeCredentialsExpireAt = true;
                         }
                     }
                 }
-                if (!$authorized) {
-                    $entity->setCredentialsExpired(null);
-                }
-                $authorized = false;
-                $roles = $this->getUser()->getRoles();
-                if (!empty($roles)) {
-                    foreach ($roles as $role) {
-                        if (substr_count($role, 'SYSTEM') > 0) {
-                            $authorized = true;
-                        }
-                    }
-                }
-                if (!$authorized) {
+                if (!$authorizedChangeCredentialsExpireAt) {
                     $entity->setCredentialsExpireAt(null);
                 }
-                $authorized = false;
+                $authorizedChangeLastLogin = false;
                 $roles = $this->getUser()->getRoles();
                 if (!empty($roles)) {
                     foreach ($roles as $role) {
                         if (substr_count($role, 'SYSTEM') > 0) {
-                            $authorized = true;
+                            $authorizedChangeLastLogin = true;
                         }
                     }
                 }
-                if (!$authorized) {
+                if (!$authorizedChangeLastLogin) {
                     $entity->setLastLogin(null);
                 }
-                $authorized = false;
+                $authorizedChangeLastFailedLogin = false;
                 $roles = $this->getUser()->getRoles();
                 if (!empty($roles)) {
                     foreach ($roles as $role) {
                         if (substr_count($role, 'SYSTEM') > 0) {
-                            $authorized = true;
+                            $authorizedChangeLastFailedLogin = true;
                         }
                     }
                 }
-                if (!$authorized) {
+                if (!$authorizedChangeLastFailedLogin) {
                     $entity->setLastFailedLogin(null);
                 }
-                $authorized = false;
+                $authorizedChangeLoginCount = false;
                 $roles = $this->getUser()->getRoles();
                 if (!empty($roles)) {
                     foreach ($roles as $role) {
                         if (substr_count($role, 'SYSTEM') > 0) {
-                            $authorized = true;
+                            $authorizedChangeLoginCount = true;
                         }
                     }
                 }
-                if (!$authorized) {
+                if (!$authorizedChangeLoginCount) {
                     $entity->setLoginCount(null);
                 }
-                $authorized = false;
+                $authorizedChangeFailedLoginCount = false;
                 $roles = $this->getUser()->getRoles();
                 if (!empty($roles)) {
                     foreach ($roles as $role) {
                         if (substr_count($role, 'SYSTEM') > 0) {
-                            $authorized = true;
+                            $authorizedChangeFailedLoginCount = true;
                         }
                     }
                 }
-                if (!$authorized) {
+                if (!$authorizedChangeFailedLoginCount) {
                     $entity->setFailedLoginCount(null);
                 }
-                $authorized = false;
+                $authorizedChangeLastFailedLoginCount = false;
                 $roles = $this->getUser()->getRoles();
                 if (!empty($roles)) {
                     foreach ($roles as $role) {
                         if (substr_count($role, 'SYSTEM') > 0) {
-                            $authorized = true;
+                            $authorizedChangeLastFailedLoginCount = true;
                         }
                     }
                 }
-                if (!$authorized) {
+                if (!$authorizedChangeLastFailedLoginCount) {
                     $entity->setLastFailedLoginCount(null);
                 }
+            $entity = $this->process($entity, false);
                 $em->flush();
                 return $entity;
             }
@@ -554,7 +461,7 @@ class UserRESTController extends BaseRESTController
      *
      * @return Response
      */
-    public function patchAction(Request $request,  User  $entity)
+    public function patchAction(Request $request, User $entity)
     {
         return $this->putAction($request, $entity);
     }
@@ -569,7 +476,7 @@ class UserRESTController extends BaseRESTController
      *
      * @return Response
      */
-    public function deleteAction(Request $request,  User  $entity)
+    public function deleteAction(Request $request, User $entity)
     {
         try {
             $em = $this->getDoctrine()->getManager();
@@ -581,4 +488,18 @@ class UserRESTController extends BaseRESTController
         }
     }
     
+    private function process(User $entity, $isNew)
+    {
+        if (is_null($entity->getSalt()) || empty($entity->getSalt())) {
+            $entity->setSalt(base_convert(sha1(uniqid(mt_rand(), true)), 16, 36));
+        }
+        $entity->setUsername($entity->getEmail());
+        $entity->setUsernameCanonical(strtolower($entity->getEmail()));
+        $entity->setEmailCanonical(strtolower($entity->getEmail()));
+        if ($isNew || strlen($entity->getPassword()) != 88) {
+            $entity->setPlainPassword($entity->getPassword());
+        }
+        return $entity;
+    }
+
 }

@@ -10,7 +10,7 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $q, $interpolate
     $scope.sendingStatuses = [{
         id: 'Initialized',
         title: $filter('translate')('content.list.fields.sendingstatuses.INITIALIZED'),
-        css: 'info'
+        css: 'primary'
     }, {
         id: 'Sent',
         title: $filter('translate')('content.list.fields.sendingstatuses.SENT'),

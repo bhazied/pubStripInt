@@ -63,7 +63,7 @@
                                         <span translate="content.list.fields.DESCRIPTION">Description</span>
                                     </label>
                                     <div class="note-editor">
-                                        <div ckeditor="editorOptions" ready="onReadyEditor()"ng-model="newsroom.description" name="description" id="newsroomDescription" class="form-control" placeholder="[[ 'content.form.messages.ENTERDESCRIPTION' | translate ]]" class="form-control autosize area-animated msd-elastic: \n;"></div>
+                                        <div ckeditor="editorOptions" ready="onReadyEditor()"ng-model="newsroom.description" name="description" id="newsroomDescription" class="form-control" placeholder="[[ 'content.form.messages.ENTERDESCRIPTION' | translate ]]" class="form-control autosize area-animated msd-elastic: \n;" ng-required="false"></div>
                                     </div>
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
@@ -75,7 +75,7 @@
                                         <span translate="content.list.fields.URL">Url</span>
                                     </label>
                                     <span class="input-icon">
-                                        <input ng-model="newsroom.url" type="text" name="url" id="newsroomUrl" class="form-control" placeholder="[[ 'content.form.messages.ENTERURL' | translate ]]" />
+                                        <input ng-model="newsroom.url" type="text" name="url" id="newsroomUrl" class="form-control" placeholder="[[ 'content.form.messages.ENTERURL' | translate ]]" ng-required="false" />
                                         <i class="ti-link"></i>
                                     </span><!--/input-icon-->
                                 </div><!--/form-group-->
@@ -86,7 +86,7 @@
                                         <span translate="content.list.fields.EMAIL">Email</span>
                                     </label>
                                     <span class="input-icon">
-                                        <input ng-model="newsroom.email" type="email" name="email" id="newsroomEmail" class="form-control" placeholder="[[ 'content.form.messages.ENTEREMAIL' | translate ]]" />
+                                        <input ng-model="newsroom.email" type="email" name="email" id="newsroomEmail" class="form-control" placeholder="[[ 'content.form.messages.ENTEREMAIL' | translate ]]" ng-required="false" />
                                         <i class="ti-email"></i>
                                     </span><!--/input-icon-->
                                 </div><!--/form-group-->
@@ -161,7 +161,7 @@
                                         <span translate="content.list.fields.PRESSRELEASESPERPAGE">Press Releases Per Page</span>
                                     </label>
                                     <span class="input-icon">
-                                        <input ng-model="newsroom.press_releases_per_page" type="text" name="pressReleasesPerPage" id="newsroomPressReleasesPerPage" class="form-control" placeholder="[[ 'content.form.messages.ENTERPRESSRELEASESPERPAGE' | translate ]]" touchspin data-min="-10000000" data-max="10000000" data-verticalbuttons="true" data-verticalupclass="ti-angle-up" data-verticaldownclass="ti-angle-down" />
+                                        <input ng-model="newsroom.press_releases_per_page" type="text" name="pressReleasesPerPage" id="newsroomPressReleasesPerPage" class="form-control" placeholder="[[ 'content.form.messages.ENTERPRESSRELEASESPERPAGE' | translate ]]" touchspin data-min="-10000000" data-max="10000000" data-verticalbuttons="true" data-verticalupclass="ti-angle-up" data-verticaldownclass="ti-angle-down" ng-required="false" />
                                         <i class="ti-marker-alt"></i>
                                     </span><!--/input-icon-->
                                 </div><!--/form-group-->
@@ -172,45 +172,45 @@
                                         <span translate="content.list.fields.CSS">Css</span>
                                     </label>
                                     <div class="note-editor">
-                                        <div ckeditor="editorOptions" ready="onReadyEditor()"ng-model="newsroom.css" name="css" id="newsroomCss" class="form-control" placeholder="[[ 'content.form.messages.ENTERCSS' | translate ]]" class="form-control autosize area-animated msd-elastic: \n;"></div>
+                                        <div ckeditor="editorOptions" ready="onReadyEditor()"ng-model="newsroom.css" name="css" id="newsroomCss" class="form-control" placeholder="[[ 'content.form.messages.ENTERCSS' | translate ]]" class="form-control autosize area-animated msd-elastic: \n;" ng-required="false"></div>
                                     </div>
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
                         </div><!--/row-->
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="checkbox clip-check check-primary">
+                                <div class="checkbox continuous-check check-primary">
                                     <input ng-model="newsroom.enable_search" type="checkbox" name="enableSearch" id="newsroomEnableSearch" />
                                     <label for="newsroomEnableSearch" translate="content.list.fields.ENABLESEARCH">Enable Search</label>
-                                </div><!--/checkbox clip-check check-primary-->
+                                </div><!--/checkbox continuous-check check-primary-->
                             </div><!--/col-md-6-->
                             <div class="col-md-6">
-                                <div class="checkbox clip-check check-primary">
+                                <div class="checkbox continuous-check check-primary">
                                     <input ng-model="newsroom.enable_social_networks" type="checkbox" name="enableSocialNetworks" id="newsroomEnableSocialNetworks" />
                                     <label for="newsroomEnableSocialNetworks" translate="content.list.fields.ENABLESOCIALNETWORKS">Enable Social Networks</label>
-                                </div><!--/checkbox clip-check check-primary-->
+                                </div><!--/checkbox continuous-check check-primary-->
                             </div><!--/col-md-6-->
                         </div><!--/row-->
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="checkbox clip-check check-primary">
+                                <div class="checkbox continuous-check check-primary">
                                     <input ng-model="newsroom.enable_media" type="checkbox" name="enableMedia" id="newsroomEnableMedia" />
                                     <label for="newsroomEnableMedia" translate="content.list.fields.ENABLEMEDIA">Enable Media</label>
-                                </div><!--/checkbox clip-check check-primary-->
+                                </div><!--/checkbox continuous-check check-primary-->
                             </div><!--/col-md-6-->
                             <div class="col-md-6">
-                                <div class="checkbox clip-check check-primary">
+                                <div class="checkbox continuous-check check-primary">
                                     <input ng-model="newsroom.enable_date" type="checkbox" name="enableDate" id="newsroomEnableDate" />
                                     <label for="newsroomEnableDate" translate="content.list.fields.ENABLEDATE">Enable Date</label>
-                                </div><!--/checkbox clip-check check-primary-->
+                                </div><!--/checkbox continuous-check check-primary-->
                             </div><!--/col-md-6-->
                         </div><!--/row-->
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="checkbox clip-check check-primary">
+                                <div class="checkbox continuous-check check-primary">
                                     <input ng-model="newsroom.published" type="checkbox" name="published" id="newsroomPublished" />
                                     <label for="newsroomPublished" translate="content.list.fields.PUBLISHED">Published</label>
-                                </div><!--/checkbox clip-check check-primary-->
+                                </div><!--/checkbox continuous-check check-primary-->
                             </div><!--/col-md-6-->
                         </div><!--/row-->
                         <div class="row">
@@ -220,7 +220,7 @@
                                 </label>
                             </div><!--/col-md-12-->
                             <div class="col-md-3" ng-repeat="user in users" ng-if="user.id">
-                                <div class="checkbox clip-check check-primary">
+                                <div class="checkbox continuous-check check-primary">
                                     <input checklist-model="newsroom.users" checklist-value="user.id" type="checkbox" name="user[]" id="newsroomUser[[user.id]]" />
                                     <label for="newsroomUser[[user.id]]">[[ user.username ]]</label>
                                 </div><!--/checkbox-->

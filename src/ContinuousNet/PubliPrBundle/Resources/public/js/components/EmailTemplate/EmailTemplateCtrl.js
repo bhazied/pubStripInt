@@ -10,7 +10,7 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $q, $interpolate
     $scope.statuses = [{
         id: 'Draft',
         title: $filter('translate')('content.list.fields.statuses.DRAFT'),
-        css: 'info'
+        css: 'primary'
     }, {
         id: 'Online',
         title: $filter('translate')('content.list.fields.statuses.ONLINE'),
@@ -22,15 +22,15 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $q, $interpolate
     }, {
         id: 'Offline',
         title: $filter('translate')('content.list.fields.statuses.OFFLINE'),
-        css: 'inverse'
+        css: 'danger'
     }, {
         id: 'Deleted',
         title: $filter('translate')('content.list.fields.statuses.DELETED'),
-        css: 'danger'
+        css: 'default'
     }, {
         id: 'Archived',
         title: $filter('translate')('content.list.fields.statuses.ARCHIVED'),
-        css: 'primary'
+        css: 'info'
     }];
 
     $scope.dateFormat = $filter('translate')('formats.DATE');
@@ -38,15 +38,15 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $q, $interpolate
     $scope.timeFormat = $filter('translate')('formats.TIME');
 
     $scope.list = function() {
-        $state.go('app.settings.emailtemplates');
+        $state.go('app.configuration.emailtemplates');
     };
 
     $scope.add = function() {
-        $state.go('app.settings.emailtemplatesnew');
+        $state.go('app.configuration.emailtemplatesnew');
     };
 
     $scope.edit = function(row) {
-        $state.go('app.settings.emailtemplatesedit', {id: row.id});
+        $state.go('app.configuration.emailtemplatesedit', {id: row.id});
     };
 
     if (angular.isDefined($stateParams.id)) {

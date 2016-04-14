@@ -16,6 +16,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Finder\Finder;;
+use Symfony\Component\Finder\SplFileInfo;
 
 use Voryx\RESTGeneratorBundle\Controller\VoryxController;
 
@@ -140,7 +142,6 @@ class CountryRESTController extends BaseRESTController
             $em->flush();
             return $entity;
         }
-        return FOSView::create(array('errors' => $form->getErrors()), Codes::HTTP_INTERNAL_SERVER_ERROR);
     }
 
     /**
@@ -153,7 +154,7 @@ class CountryRESTController extends BaseRESTController
      *
      * @return Response
      */
-    public function putAction(Request $request,  Country  $entity)
+    public function putAction(Request $request, Country $entity)
     {
         try {
             $em = $this->getDoctrine()->getManager();
@@ -182,7 +183,7 @@ class CountryRESTController extends BaseRESTController
      *
      * @return Response
      */
-    public function patchAction(Request $request,  Country  $entity)
+    public function patchAction(Request $request, Country $entity)
     {
         return $this->putAction($request, $entity);
     }
@@ -197,7 +198,7 @@ class CountryRESTController extends BaseRESTController
      *
      * @return Response
      */
-    public function deleteAction(Request $request,  Country  $entity)
+    public function deleteAction(Request $request, Country $entity)
     {
         try {
             $em = $this->getDoctrine()->getManager();

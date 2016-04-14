@@ -2,8 +2,8 @@
 
 angular
 .module('publiPrApp')
-.controller('AppCtrl', ['$scope', '$http', '$localStorage', '$state', '$timeout',
-    function AppCtrl($scope, $http, $localStorage, $state, $timeout) {
+.controller('AppCtrl', ['$scope', '$rootScope', '$http', '$localStorage', '$state', '$timeout',
+    function AppCtrl($scope, $rootScope, $http, $localStorage, $state, $timeout) {
 
         $scope.anonymousStates = ['auth.login', 'auth.register', 'auth.resetpassword', 'auth.reset', 'auth.lockscreen', 'auth.emailconfirm'];
 
@@ -42,12 +42,16 @@ angular
             isConfigOpen: false
         };
 
-        $scope.user = {
-            fname: 'Sahbi',
-            lname: 'KHALFALLAH',
-            jobDesc: 'Senior Web Consultant',
-            avatar: '/app/images/avatar.jpg',
-        };
+        if (angular.isDefined($localStorage.user)) {
+            $rootScope.user = $localStorage.user;
+        } else {
+            $rootScope.user = {
+                name: 'Sahbi KHALFALLAH',
+                job: 'Senior Web Consultant',
+                picture: '/app/images/avatar.jpg',
+                roles: []
+            };
+        }
 
         if (angular.isDefined($localStorage.layout)) {
             $scope.app.layout = $localStorage.layout;
