@@ -149,18 +149,6 @@ class UserRESTController extends BaseRESTController
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $entity->setCreatorUser($this->getUser());
-            $authorizedChangeSalt = false;
-            $roles = $this->getUser()->getRoles();
-            if (!empty($roles)) {
-                foreach ($roles as $role) {
-                    if (substr_count($role, 'SYSTEM') > 0) {
-                        $authorizedChangeSalt = true;
-                    }
-                }
-            }
-            if (!$authorizedChangeSalt) {
-                $entity->setSalt(null);
-            }
             $authorizedChangeRoles = false;
             $roles = $this->getUser()->getRoles();
             if (!empty($roles)) {
@@ -321,18 +309,6 @@ class UserRESTController extends BaseRESTController
             $form->handleRequest($request);
             if ($form->isValid()) {
                 $entity->setModifierUser($this->getUser());
-                $authorizedChangeSalt = false;
-                $roles = $this->getUser()->getRoles();
-                if (!empty($roles)) {
-                    foreach ($roles as $role) {
-                        if (substr_count($role, 'SYSTEM') > 0) {
-                            $authorizedChangeSalt = true;
-                        }
-                    }
-                }
-                if (!$authorizedChangeSalt) {
-                    $entity->setSalt(null);
-                }
                 $authorizedChangeRoles = false;
                 $roles = $this->getUser()->getRoles();
                 if (!empty($roles)) {
