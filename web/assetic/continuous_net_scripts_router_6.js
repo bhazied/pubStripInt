@@ -84,6 +84,22 @@ function ($stateProvider) {
             contentClasses: 'full-height'
         },
         resolve: loadSequence('LockScreenCtrl', 'LoginService')
+    }).state('app.profile', {
+        url: '/profile',
+        templateUrl: '/bundles/publipr/js/components/Auth/profile.html',
+        title: 'topbar.user.PROFILE',
+        ncyBreadcrumb: {
+            label: 'topbar.user.PROFILE'
+        },
+        resolve: loadSequence('jquery-sparkline', 'ProfileCtrl', 'ProfileService')
+    }).state('app.changepassword', {
+        url: '/change-password',
+        templateUrl: '/bundles/publipr/js/components/Auth/change_password.html',
+        title: 'topbar.user.CHANGEPASSWORD',
+        ncyBreadcrumb: {
+            label: 'topbar.user.CHANGEPASSWORD'
+        },
+        resolve: loadSequence('jquery-sparkline', 'ChangePasswordCtrl', 'ProfileService')
     }).state('app.dashboard', {
         url: '/dashboard',
         templateUrl: '/bundles/publipr/js/components/Main/dashboard.html',
