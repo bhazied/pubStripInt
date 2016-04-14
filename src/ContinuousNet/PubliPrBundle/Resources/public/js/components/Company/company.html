@@ -117,6 +117,18 @@
                                 </td>
                             </tr>
                             <tr>
+                                <td><span translate="content.list.fields.IBAN">Iban</span></td>
+                                <td>
+                                    <div ng-bind-html="company.iban"></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span translate="content.list.fields.CNIL">Cnil</span></td>
+                                <td>
+                                    <div ng-bind-html="company.cnil"></div>
+                                </td>
+                            </tr>
+                            <tr>
                                 <td><span translate="content.list.fields.ISACTIVE">Is Active</span></td>
                                 <td>
                                     <span my-boolean="[[ company.is_active ]]"></span>

@@ -119,77 +119,86 @@
                         </div><!--/row-->
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="form-group" ng-class="{'has-error':companyForm.siren.$dirty && companyForm.siren.$invalid, 'has-success':companyForm.siren.$valid}">
+                                <div class="form-group">
                                     <label for="companySiren" class="control-label">
                                         <span translate="content.list.fields.SIREN">Siren</span>
-                                        <span class="symbol required"></span>
                                     </label>
                                     <span class="input-icon">
-                                        <input ng-model="company.siren" type="text" name="siren" id="companySiren" class="form-control" placeholder="[[ 'content.form.messages.ENTERSIREN' | translate ]]" ng-required="true" />
+                                        <input ng-model="company.siren" type="text" name="siren" id="companySiren" class="form-control" placeholder="[[ 'content.form.messages.ENTERSIREN' | translate ]]" ng-required="false" />
                                         <i class="ti-marker-alt"></i>
                                     </span><!--/input-icon-->
-                                    <span class="error text-small block" ng-if="companyForm.siren.$dirty && companyForm.siren.$error.required" translate="content.form.messages.SIRENREQUIRED">Siren is required.</span>
-                                    <span class="success text-small block" ng-if="companyForm.siren.$valid" translate="content.form.messages.OK">Ok!</span>
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
                             <div class="col-md-6">
-                                <div class="form-group" ng-class="{'has-error':companyForm.siret.$dirty && companyForm.siret.$invalid, 'has-success':companyForm.siret.$valid}">
+                                <div class="form-group">
                                     <label for="companySiret" class="control-label">
                                         <span translate="content.list.fields.SIRET">Siret</span>
-                                        <span class="symbol required"></span>
                                     </label>
                                     <span class="input-icon">
-                                        <input ng-model="company.siret" type="text" name="siret" id="companySiret" class="form-control" placeholder="[[ 'content.form.messages.ENTERSIRET' | translate ]]" ng-required="true" />
+                                        <input ng-model="company.siret" type="text" name="siret" id="companySiret" class="form-control" placeholder="[[ 'content.form.messages.ENTERSIRET' | translate ]]" ng-required="false" />
                                         <i class="ti-marker-alt"></i>
                                     </span><!--/input-icon-->
-                                    <span class="error text-small block" ng-if="companyForm.siret.$dirty && companyForm.siret.$error.required" translate="content.form.messages.SIRETREQUIRED">Siret is required.</span>
-                                    <span class="success text-small block" ng-if="companyForm.siret.$valid" translate="content.form.messages.OK">Ok!</span>
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
                         </div><!--/row-->
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="form-group" ng-class="{'has-error':companyForm.rcs.$dirty && companyForm.rcs.$invalid, 'has-success':companyForm.rcs.$valid}">
+                                <div class="form-group">
                                     <label for="companyRcs" class="control-label">
                                         <span translate="content.list.fields.RCS">Rcs</span>
-                                        <span class="symbol required"></span>
                                     </label>
                                     <span class="input-icon">
-                                        <input ng-model="company.rcs" type="text" name="rcs" id="companyRcs" class="form-control" placeholder="[[ 'content.form.messages.ENTERRCS' | translate ]]" ng-required="true" />
+                                        <input ng-model="company.rcs" type="text" name="rcs" id="companyRcs" class="form-control" placeholder="[[ 'content.form.messages.ENTERRCS' | translate ]]" ng-required="false" />
                                         <i class="ti-marker-alt"></i>
                                     </span><!--/input-icon-->
-                                    <span class="error text-small block" ng-if="companyForm.rcs.$dirty && companyForm.rcs.$error.required" translate="content.form.messages.RCSREQUIRED">Rcs is required.</span>
-                                    <span class="success text-small block" ng-if="companyForm.rcs.$valid" translate="content.form.messages.OK">Ok!</span>
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
                             <div class="col-md-6">
-                                <div class="form-group" ng-class="{'has-error':companyForm.ape.$dirty && companyForm.ape.$invalid, 'has-success':companyForm.ape.$valid}">
+                                <div class="form-group">
                                     <label for="companyApe" class="control-label">
                                         <span translate="content.list.fields.APE">Ape</span>
-                                        <span class="symbol required"></span>
                                     </label>
                                     <span class="input-icon">
-                                        <input ng-model="company.ape" type="text" name="ape" id="companyApe" class="form-control" placeholder="[[ 'content.form.messages.ENTERAPE' | translate ]]" ng-required="true" />
+                                        <input ng-model="company.ape" type="text" name="ape" id="companyApe" class="form-control" placeholder="[[ 'content.form.messages.ENTERAPE' | translate ]]" ng-required="false" />
                                         <i class="ti-marker-alt"></i>
                                     </span><!--/input-icon-->
-                                    <span class="error text-small block" ng-if="companyForm.ape.$dirty && companyForm.ape.$error.required" translate="content.form.messages.APEREQUIRED">Ape is required.</span>
-                                    <span class="success text-small block" ng-if="companyForm.ape.$valid" translate="content.form.messages.OK">Ok!</span>
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
                         </div><!--/row-->
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="form-group" ng-class="{'has-error':companyForm.vat.$dirty && companyForm.vat.$invalid, 'has-success':companyForm.vat.$valid}">
+                                <div class="form-group">
                                     <label for="companyVat" class="control-label">
                                         <span translate="content.list.fields.VAT">Vat</span>
-                                        <span class="symbol required"></span>
                                     </label>
                                     <span class="input-icon">
-                                        <input ng-model="company.vat" type="text" name="vat" id="companyVat" class="form-control" placeholder="[[ 'content.form.messages.ENTERVAT' | translate ]]" ng-required="true" />
+                                        <input ng-model="company.vat" type="text" name="vat" id="companyVat" class="form-control" placeholder="[[ 'content.form.messages.ENTERVAT' | translate ]]" ng-required="false" />
                                         <i class="ti-marker-alt"></i>
                                     </span><!--/input-icon-->
-                                    <span class="error text-small block" ng-if="companyForm.vat.$dirty && companyForm.vat.$error.required" translate="content.form.messages.VATREQUIRED">Vat is required.</span>
-                                    <span class="success text-small block" ng-if="companyForm.vat.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="companyIban" class="control-label">
+                                        <span translate="content.list.fields.IBAN">Iban</span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="company.iban" type="text" name="iban" id="companyIban" class="form-control" placeholder="[[ 'content.form.messages.ENTERIBAN' | translate ]]" ng-required="false" />
+                                        <i class="ti-marker-alt"></i>
+                                    </span><!--/input-icon-->
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="companyCnil" class="control-label">
+                                        <span translate="content.list.fields.CNIL">Cnil</span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="company.cnil" type="text" name="cnil" id="companyCnil" class="form-control" placeholder="[[ 'content.form.messages.ENTERCNIL' | translate ]]" ng-required="false" />
+                                        <i class="ti-marker-alt"></i>
+                                    </span><!--/input-icon-->
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
                             <div class="col-md-6">

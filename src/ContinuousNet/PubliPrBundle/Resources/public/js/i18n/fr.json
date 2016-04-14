@@ -117,8 +117,8 @@
         "logout": {
             "MAIN": "Lougout"
         },
-        "access": {
-            "MAIN": "Access"
+        "nogroup": {
+            "MAIN": "NoGroup"
         },
         "contactmanager": {
             "MAIN": "ContactManager"
@@ -131,6 +131,9 @@
         },
         "distribution": {
             "MAIN": "Distribution"
+        },
+        "access": {
+            "MAIN": "Access"
         },
         "prmanager": {
             "MAIN": "PRManager"
@@ -239,15 +242,12 @@
                 "ENTERPHONE": "Entrer une valeur pour Téléphone",
                 "ENTERFAX": "Entrer une valeur pour Fax",
                 "ENTERSIREN": "Entrer une valeur pour Siren",
-                "SIRENREQUIRED": "Le champs Siren est obligatoire",
                 "ENTERSIRET": "Entrer une valeur pour Siret",
-                "SIRETREQUIRED": "Le champs Siret est obligatoire",
                 "ENTERRCS": "Entrer une valeur pour Rcs",
-                "RCSREQUIRED": "Le champs Rcs est obligatoire",
                 "ENTERAPE": "Entrer une valeur pour Ape",
-                "APEREQUIRED": "Le champs Ape est obligatoire",
                 "ENTERVAT": "Entrer une valeur pour Vat",
-                "VATREQUIRED": "Le champs Vat est obligatoire",
+                "ENTERIBAN": "Entrer une valeur pour Iban",
+                "ENTERCNIL": "Entrer une valeur pour Cnil",
                 "SELECTCONTACTGROUP": "Sélectionner une valeur pour Contact Groupe",
                 "CONTACTGROUPREQUIRED": "Le champs Contact Groupe est obligatoire",
                 "ENTERFIRSTNAME": "Entrer une valeur pour Prénom",
@@ -719,6 +719,8 @@
                 "RCS": "Rcs",
                 "APE": "Ape",
                 "VAT": "Vat",
+                "IBAN": "Iban",
+                "CNIL": "Cnil",
                 "ISACTIVE": "C'est actif",
                 "CREATEDAT": "Créé le",
                 "CREATORUSER": "Créé par",

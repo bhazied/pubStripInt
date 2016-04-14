@@ -56,6 +56,8 @@ class CompanyType extends AbstractType
             ->add('rcs', TextType::class)
             ->add('ape', TextType::class)
             ->add('vat', TextType::class)
+            ->add('iban', TextType::class)
+            ->add('cnil', TextType::class)
             ->add('isActive', CheckboxType::class)
         ;
     }
