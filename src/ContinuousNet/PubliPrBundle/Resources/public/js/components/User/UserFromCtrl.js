@@ -74,12 +74,12 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
         title: $filter('translate')('content.list.fields.rolesoptions.ROLE_API'),
         css: 'primary'
     }, {
-        id: 'FREE_ACCOUNT',
-        title: $filter('translate')('content.list.fields.rolesoptions.FREE_ACCOUNT'),
-        css: 'success'
-    }, {
         id: 'ROLE_ACCOUNT_USER',
         title: $filter('translate')('content.list.fields.rolesoptions.ROLE_ACCOUNT_USER'),
+        css: 'success'
+    }, {
+        id: 'FREE_ACCOUNT',
+        title: $filter('translate')('content.list.fields.rolesoptions.FREE_ACCOUNT'),
         css: 'warning'
     }, {
         id: 'ROLE_ACCOUNT_MANAGER',

@@ -284,19 +284,39 @@
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
                             <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':userForm.roles.$dirty && userForm.roles.$invalid, 'has-success':userForm.roles.$valid}">
+                                    <label for="userRoles" class="control-label">
+                                        <span translate="content.list.fields.ROLES">Roles</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <div class="row">
+                                        <div class="col-md-6" ng-repeat="roles_ in roles">
+                                            <div class="checkbox continuous-check check-primary">
+                                                <input checklist-model="user.roles" checklist-value="roles_.id" type="checkbox" name="roles[]" id="userRoles[[roles_.id]]" />
+                                                <label for="userRoles[[roles_.id]]">[[ roles_.title ]]</label>
+                                            </div><!--/checkbox-->
+                                        </div><!--/col-md-6-->
+                                    </div>
+                                    <span class="error text-small block" ng-if="userForm.roles.$dirty && userForm.roles.$error.required" translate="content.form.messages.ROLESREQUIRED">Roles is required.</span>
+                                    <span class="success text-small block" ng-if="userForm.roles.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
                                 <div class="checkbox continuous-check check-primary">
                                     <input ng-model="user.locked" type="checkbox" name="locked" id="userLocked" />
                                     <label for="userLocked" translate="content.list.fields.LOCKED">Locked</label>
                                 </div><!--/checkbox continuous-check check-primary-->
                             </div><!--/col-md-6-->
-                        </div><!--/row-->
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="checkbox continuous-check check-primary">
                                     <input ng-model="user.expired" type="checkbox" name="expired" id="userExpired" />
                                     <label for="userExpired" translate="content.list.fields.EXPIRED">Expired</label>
                                 </div><!--/checkbox continuous-check check-primary-->
                             </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="checkbox continuous-check check-primary">
                                     <input ng-model="user.credentials_expired" type="checkbox" name="credentialsExpired" id="userCredentialsExpired" />

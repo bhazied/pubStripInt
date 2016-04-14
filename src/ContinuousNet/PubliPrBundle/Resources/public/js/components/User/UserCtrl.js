@@ -51,12 +51,12 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $q, $interpolate
         title: $filter('translate')('content.list.fields.roles.ROLE_API'),
         css: 'primary'
     }, {
-        id: 'FREE_ACCOUNT',
-        title: $filter('translate')('content.list.fields.roles.FREE_ACCOUNT'),
-        css: 'success'
-    }, {
         id: 'ROLE_ACCOUNT_USER',
         title: $filter('translate')('content.list.fields.roles.ROLE_ACCOUNT_USER'),
+        css: 'success'
+    }, {
+        id: 'FREE_ACCOUNT',
+        title: $filter('translate')('content.list.fields.roles.FREE_ACCOUNT'),
         css: 'warning'
     }, {
         id: 'ROLE_ACCOUNT_MANAGER',
