@@ -64,6 +64,13 @@
       </a>
     </li>
 
+    <li ui-sref-active="active" ng-if="user.roles.join('').indexOf('ACC') > -1" ng-class="{'active':$state.includes('app.contactmanager.contacts')}">
+      <a ui-sref="app.contactmanager.contacts">
+        <i class="fa ti-id-badge"></i>
+        <span class="title" translate="content.list.CONTACTS">Contacts</span>
+      </a>
+    </li>
+
     <li ui-sref-active="active" ng-if="user.roles.join('').indexOf('MAN') > -1" ng-class="{'active':$state.includes('app.prmanager.newsrooms')}">
       <a  ui-sref="app.prmanager.newsrooms">
         <i class="fa fa-newspaper-o"></i>
@@ -73,15 +80,15 @@
 
     <li ui-sref-active="active" ng-if="user.roles.join('').indexOf('ACC') > -1" ng-class="{'active':$state.includes('app.contactmanager.contactgroups')}">
       <a ui-sref="app.contactmanager.contactgroups">
-        <i class="fa fa-group"></i>
+        <i class="fa ti-agenda"></i>
         <span class="title" translate="content.list.CONTACTGROUPS">Contact Groups</span>
       </a>
     </li>
 
-    <li ui-sref-active="active" ng-if="user.roles.join('').indexOf('ACC') > -1" ng-class="{'active':$state.includes('app.contactmanager.contacts')}">
-      <a ui-sref="app.contactmanager.contacts">
-        <i class="fa ti-id-badge"></i>
-        <span class="title" translate="content.list.CONTACTS">Contacts</span>
+    <li ng-if="user.roles.join('').indexOf('ADM') > -1" ng-class="{'active':$state.includes('app.configuration.emailtemplates')}">
+      <a ui-sref="app.configuration.emailtemplates">
+        <i class="fa ti-comment-alt"></i>
+        <span class="title" translate="content.list.EMAILTEMPLATES">Email Templates</span>
       </a>
     </li>
 
