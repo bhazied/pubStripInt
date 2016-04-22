@@ -55,7 +55,10 @@
                                         <span class="symbol required"></span>
                                     </label>
                                     <div class="note-editor">
-                                        <textarea ng-model="session.user_agent" name="userAgent" id="sessionUserAgent" class="form-control" placeholder="[[ 'content.form.messages.ENTERUSERAGENT' | translate ]]" class="form-control autosize area-animated msd-elastic: \n;" ng-required="true"></textarea>
+                                        <span class="input-icon">
+                                            <textarea ng-model="session.user_agent" name="userAgent" id="sessionUserAgent" class="form-control" placeholder="[[ 'content.form.messages.ENTERUSERAGENT' | translate ]]" class="form-control autosize area-animated msd-elastic: \n;" ng-required="true"></textarea>
+                                            <i class="ti-marker-alt"></i>
+                                        </span>
                                     </div>
                                     <span class="error text-small block" ng-if="sessionForm.userAgent.$dirty && sessionForm.userAgent.$error.required" translate="content.form.messages.USERAGENTREQUIRED">User Agent is required.</span>
                                     <span class="success text-small block" ng-if="sessionForm.userAgent.$valid" translate="content.form.messages.OK">Ok!</span>
@@ -77,6 +80,8 @@
                             </div>
                         </div>
                     </form>
+                    <div class="table-responsive" ng-if="sessions.length > 0">
+                    </div>
                 </fieldset>
             </div>
         </div><!--/col-md-12-->

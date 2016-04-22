@@ -306,6 +306,7 @@ app.constant('APP_JS_REQUIRES', {
         'PressReleasesCtrl': '/bundles/publipr/js/components/PressRelease/PressReleasesCtrl.js',
         'PressReleaseFormCtrl': '/bundles/publipr/js/components/PressRelease/PressReleaseFromCtrl.js',
         'PressReleaseCtrl': '/bundles/publipr/js/components/PressRelease/PressReleaseCtrl.js',
+        'PressReleaseEditorCtrl': '/bundles/publipr/js/components/PressRelease/PressReleaseEditorCtrl.js',
         'SessionsCtrl': '/bundles/publipr/js/components/Session/SessionsCtrl.js',
         'SessionFormCtrl': '/bundles/publipr/js/components/Session/SessionFromCtrl.js',
         'SessionCtrl': '/bundles/publipr/js/components/Session/SessionCtrl.js',
@@ -388,6 +389,9 @@ app.constant('APP_JS_REQUIRES', {
     },{
         name: 'pressReleaseService',
         files: ['/bundles/publipr/js/components/PressRelease/PressReleaseService.js']
+    },{
+        name: 'PressReleaseEditorService',
+        files: ['/bundles/publipr/js/components/PressRelease/PressReleaseEditorService.js']
     },{
         name: 'sessionService',
         files: ['/bundles/publipr/js/components/Session/SessionService.js']
@@ -2350,6 +2354,17 @@ function ($stateProvider) {
             label: 'content.list.PRESSRELEASEDETAILS'
         },
         resolve: loadSequence('PressReleaseCtrl', 'pressReleaseService')
+    }).state('app.prmanager.pressreleaseseditor', {
+        url: '/press-releases/editor/:id',
+        templateUrl: '/bundles/publipr/js/components/PressRelease/press_release_editor.html',
+        ncyBreadcrumb: {
+            label: 'content.list.PRESSRELEASEEDITOR'
+        },
+        data: {
+            appClasses: 'bg-white usersession',
+            contentClasses: 'full-height'
+        },
+        resolve: loadSequence('PressReleaseEditorCtrl', 'contentBlockService', 'layoutService', 'newsroomService', 'templateService', 'pressReleaseService', 'PressReleaseEditorService')
     }).state('app.settings', {
         url: '/settings',
         template: '<div ui-view class="fade-in-up"></div>',

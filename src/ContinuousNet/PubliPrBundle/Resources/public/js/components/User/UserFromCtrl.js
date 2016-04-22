@@ -151,7 +151,7 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
             if ($scope.companies.length == 0) {
                 $scope.companies.push({});
                 var def = $q.defer();
-                $companiesDataFactory.query({offset: 0, limit: 10000, 'order_by[company.id]': 'desc'}).$promise.then(function(data) {
+                $companiesDataFactory.query({offset: 0, limit: 10000, 'order_by[company.name]': 'asc'}).$promise.then(function(data) {
                     for (var i in data.results) {
                         data.results[i].hidden = false;
                     }
@@ -176,7 +176,7 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
             if ($scope.countries.length == 0) {
                 $scope.countries.push({});
                 var def = $q.defer();
-                $countriesDataFactory.query({offset: 0, limit: 10000, 'order_by[country.id]': 'desc'}).$promise.then(function(data) {
+                $countriesDataFactory.query({offset: 0, limit: 10000, 'order_by[country.name]': 'asc'}).$promise.then(function(data) {
                     for (var i in data.results) {
                         data.results[i].hidden = false;
                     }
@@ -215,7 +215,7 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
             if ($scope.languages.length == 0) {
                 $scope.languages.push({});
                 var def = $q.defer();
-                $languagesDataFactory.query({offset: 0, limit: 10000, 'order_by[language.id]': 'desc'}).$promise.then(function(data) {
+                $languagesDataFactory.query({offset: 0, limit: 10000, 'order_by[language.name]': 'asc'}).$promise.then(function(data) {
                     for (var i in data.results) {
                         data.results[i].hidden = false;
                     }
@@ -240,7 +240,7 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
             if ($scope.users.length == 0) {
                 $scope.users.push({});
                 var def = $q.defer();
-                $usersDataFactory.query({offset: 0, limit: 10000, 'order_by[user.id]': 'desc'}).$promise.then(function(data) {
+                $usersDataFactory.query({offset: 0, limit: 10000, 'order_by[user.username]': 'asc'}).$promise.then(function(data) {
                     for (var i in data.results) {
                         data.results[i].hidden = false;
                     }

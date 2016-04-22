@@ -76,7 +76,10 @@
                                         <span translate="content.list.fields.SETTINGS">Settings</span>
                                     </label>
                                     <div class="note-editor">
-                                        <textarea ng-model="contentBlock.settings" name="settings" id="contentBlockSettings" class="form-control" placeholder="[[ 'content.form.messages.ENTERSETTINGS' | translate ]]" class="form-control autosize area-animated msd-elastic: \n;" ng-required="false"></textarea>
+                                        <span class="input-icon">
+                                            <textarea ng-model="contentBlock.settings" name="settings" id="contentBlockSettings" class="form-control" placeholder="[[ 'content.form.messages.ENTERSETTINGS' | translate ]]" class="form-control autosize area-animated msd-elastic: \n;" ng-required="false"></textarea>
+                                            <i class="ti-marker-alt"></i>
+                                        </span>
                                     </div>
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
@@ -172,6 +175,8 @@
                             </div>
                         </div>
                     </form>
+                    <div class="table-responsive" ng-if="contentBlocks.length > 0">
+                    </div>
                 </fieldset>
             </div>
         </div><!--/col-md-12-->

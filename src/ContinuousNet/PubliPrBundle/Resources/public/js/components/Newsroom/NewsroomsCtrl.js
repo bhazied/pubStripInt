@@ -79,13 +79,15 @@ function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q,
         return $scope.$eval('row.' + this.field);
     };
 
+    $scope.trusted = {};
+
     $scope.linkValue = function($scope, row) {
         var value = row[this.field];
         if (value == null || typeof value == 'undefined') {
             return '';
         }
         var html = '<a ui-sref="'+this.state+'({id: ' + row.id + '})">' + value[this.displayField] + '</a>';
-        return $sce.trustAsHtml(html);
+        return $scope.trusted[html] || ($scope.trusted[html] = $sce.trustAsHtml(html));
     };
 
     $scope.linksValue = function($scope, row) {
@@ -93,11 +95,12 @@ function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q,
         if (values.length == 0) {
             return '';
         }
-        var html = [];
+        var links = [];
         for (var i in values) {
-            html.push('<a ui-sref="'+this.state+'({id: ' + values[i].id + '})">' + values[i][this.displayField] + '</a>');
+            links.push('<a ui-sref="'+this.state+'({id: ' + values[i].id + '})">' + values[i][this.displayField] + '</a>');
         }
-        return $sce.trustAsHtml(html.join(', '));
+        var html = links.join(', ');
+        return $scope.trusted[html] || ($scope.trusted[html] = $sce.trustAsHtml(html));
     };
 
     $scope.evaluatedValue = function($scope, row) {
