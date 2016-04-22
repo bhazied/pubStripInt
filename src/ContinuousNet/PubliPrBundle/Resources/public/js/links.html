@@ -18,7 +18,7 @@
             </li>
         </ul>
     </li>
-    <li ng-if="user.roles.join('').indexOf('ADM') > -1 || user.roles.join('').indexOf('ACC') > -1" ng-class="{'active open':$state.includes('app.contactmanager')}">
+    <li ng-if="user.roles.join('').indexOf('ACC') > -1" ng-class="{'active open':$state.includes('app.contactmanager')}">
         <a href="javascript:void(0)">
             <div class="item-content">
                 <div class="item-media">
@@ -35,7 +35,7 @@
                     <span class="title" translate="content.list.CONTACTGROUPS">Contact Groups</span>
                 </a>
             </li>
-            <li ng-if="user.roles.join('').indexOf('ADM') > -1" ng-class="{'active':$state.includes('app.contactmanager.contacts')}">
+            <li ng-if="user.roles.join('').indexOf('ACC') > -1" ng-class="{'active':$state.includes('app.contactmanager.contacts')}">
                 <a ui-sref="app.contactmanager.contacts">
                     <span class="title" translate="content.list.CONTACTS">Contacts</span>
                 </a>
