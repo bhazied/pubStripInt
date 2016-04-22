@@ -1,0 +1,31 @@
+<div id="toolbox">
+    <div class="logo"></div>
+    <ul>
+        <li translate="editor.ADDELEMENT" ng-click="addContentBlock()" class="addContentBlock">Add Content Block</li>
+        <li translate="editor.SETTINGS" ng-click="settings()" class="settings_">Settings</li>
+        <li translate="editor.PREVIEW" ng-click="preview()" class="preview_">Preview</li>
+        <li translate="editor.PUBLISH" ng-click="publish()" class="publish_">Publish</li>
+        <li translate="editor.HELP" ng-click="help()" class="help_">Help</li>
+        <li translate="editor.CLOSE" ng-click="close()" class="close_">Close</li>
+    </ul>
+    <div class="user">
+        <img ng-src="[[ user.picture ]]" />
+        <span>[[ user.name ]]</span>
+    </div>
+</div>
+
+<div class="blockContents">
+    <ul>
+        <li ng-repeat="blockContent in blockContents">
+            <img src="[[ blockContent.picture ]]" />
+            <span>[[ blockContent.picture ]]</span>
+        </li>
+    </ul>
+</div>
+
+<div id="editorPreview">
+
+
+
+</div>
+

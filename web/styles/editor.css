@@ -1,0 +1,90 @@
+#toolbox {
+    background: #263238;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.5);
+    font-family: Arial;
+    height: 96px;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 99999999;
+    padding: 0;
+}
+
+#toolbox .logo {
+    background-image: url('/app/images/logo.png');
+    background-position: center center;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    height: 96px;
+    width: 117px;
+    margin-left: 60px;
+    cursor: pointer;
+    display: inline-block;
+}
+
+#editorPreview {
+    background-color: red;
+    padding-top: 96px;
+    height: 100vh;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 10000;
+    overflow: auto;
+}
+
+#toolbox ul {
+    width: 600px;
+    height: 96px;
+    float: right;
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+}
+#toolbox ul li {
+    width: 100px;
+    float: left;
+    list-style: none;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+    color: white;
+    line-height: 96px;
+    text-align: center;
+    display: inline-block;
+    cursor: pointer;
+}
+#toolbox ul li.publish_ {
+    background-color: #E53F5A;
+}
+#toolbox ul li:hover {
+}
+
+.blockContents {
+
+}
+
+#toolbox .user {
+    float: right;
+    height: 96px;
+    width: 150px;
+    line-height: 96px;
+    text-align: center;
+    display: inline-block;
+}
+
+#toolbox .user img {
+    vertical-align: baseline;
+}
+
+#toolbox .user span {
+    color: white;
+    white-space: nowrap;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+

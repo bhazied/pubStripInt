@@ -80,6 +80,21 @@
         "LOGOUT": "Log Out"
       }
     },
+    "setting": {
+        "MAIN": "Style Selector",
+        "FIXEDHEADER": "Fixed header",
+        "FIXEDSIDEBAR": "Fixed sidebar",
+        "CLOSEDSIDEBAR": "Closed sidebar",
+        "FIXEDFOOTER": "Fixed footer"
+    },
+    "editor": {
+        "ADDELEMENT": "Add Element",
+        "HELP": "Help",
+        "SETTINGS": "Settings",
+        "PREVIEW": "Preview",
+        "PUBLISH": "Publish",
+        "CLOSE": "Close"
+    },
     "offsidebar": {
         "chat": {
           "ONLINE": "On-Line",
@@ -193,6 +208,7 @@
             "PREVIOUS": "Previous",
             "BACK": "Back",
             "CONVERT": "Convert",
+            "EDITOR": "Editor",
             "ENCOCEVIDEO": "Encode Video",
             "GENERATETHUMB": "Generate Thumbnail",
             "REMOVESEGMENTS": "Remove segments",

@@ -212,13 +212,15 @@ function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q,
         return $scope.$eval('row.' + this.field);
     };
 
+    $scope.trusted = {};
+
     $scope.linkValue = function($scope, row) {
         var value = row[this.field];
         if (value == null || typeof value == 'undefined') {
             return '';
         }
         var html = '<a ui-sref="'+this.state+'({id: ' + row.id + '})">' + value[this.displayField] + '</a>';
-        return $sce.trustAsHtml(html);
+        return $scope.trusted[html] || ($scope.trusted[html] = $sce.trustAsHtml(html));
     };
 
     $scope.evaluatedValue = function($scope, row) {

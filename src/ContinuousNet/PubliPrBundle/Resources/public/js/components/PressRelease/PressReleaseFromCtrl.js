@@ -91,7 +91,7 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
             if ($scope.newsrooms.length == 0) {
                 $scope.newsrooms.push({});
                 var def = $q.defer();
-                $newsroomsDataFactory.query({offset: 0, limit: 10000, 'order_by[newsroom.id]': 'desc'}).$promise.then(function(data) {
+                $newsroomsDataFactory.query({offset: 0, limit: 10000, 'order_by[newsroom.name]': 'asc'}).$promise.then(function(data) {
                     for (var i in data.results) {
                         data.results[i].hidden = false;
                     }
@@ -116,7 +116,7 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
             if ($scope.users.length == 0) {
                 $scope.users.push({});
                 var def = $q.defer();
-                $usersDataFactory.query({offset: 0, limit: 10000, 'order_by[user.id]': 'desc'}).$promise.then(function(data) {
+                $usersDataFactory.query({offset: 0, limit: 10000, 'order_by[user.username]': 'asc'}).$promise.then(function(data) {
                     for (var i in data.results) {
                         data.results[i].hidden = false;
                     }
@@ -199,7 +199,7 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
             });
         });
     } else {
-        $scope.pressRelease = {id: 0, status: 'Draft'};
+        $scope.pressRelease = {id: 0, publish_date_time: new Date(), status: 'Draft'};
 
     }
 

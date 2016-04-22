@@ -21453,3 +21453,23 @@ span.input-help > input {
 th.header {
     width: auto!important;
 }
+
+table .img-thumbnail {
+    max-width: 150px;
+}
+
+.input-icon input {
+    padding-left: 30px !important;
+}
+
+.input-icon > textarea {
+    padding-left: 30px !important;
+}
+
+.input-icon > select {
+    padding-left: 30px !important;
+}
+
+.input-icon > select > option {
+    padding-left: 30px !important;
+}

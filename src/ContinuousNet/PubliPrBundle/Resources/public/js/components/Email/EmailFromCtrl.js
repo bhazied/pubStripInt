@@ -46,7 +46,7 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
             if ($scope.pressReleases.length == 0) {
                 $scope.pressReleases.push({});
                 var def = $q.defer();
-                $pressReleasesDataFactory.query({offset: 0, limit: 10000, 'order_by[pressRelease.id]': 'desc'}).$promise.then(function(data) {
+                $pressReleasesDataFactory.query({offset: 0, limit: 10000, 'order_by[pressRelease.title]': 'asc'}).$promise.then(function(data) {
                     for (var i in data.results) {
                         data.results[i].hidden = false;
                     }
@@ -71,7 +71,7 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
             if ($scope.contacts.length == 0) {
                 $scope.contacts.push({});
                 var def = $q.defer();
-                $contactsDataFactory.query({offset: 0, limit: 10000, 'order_by[contact.id]': 'desc'}).$promise.then(function(data) {
+                $contactsDataFactory.query({offset: 0, limit: 10000, 'order_by[contact.firstName]': 'asc'}).$promise.then(function(data) {
                     for (var i in data.results) {
                         data.results[i].hidden = false;
                     }
@@ -96,7 +96,7 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
             if ($scope.users.length == 0) {
                 $scope.users.push({});
                 var def = $q.defer();
-                $usersDataFactory.query({offset: 0, limit: 10000, 'order_by[user.id]': 'desc'}).$promise.then(function(data) {
+                $usersDataFactory.query({offset: 0, limit: 10000, 'order_by[user.username]': 'asc'}).$promise.then(function(data) {
                     for (var i in data.results) {
                         data.results[i].hidden = false;
                     }

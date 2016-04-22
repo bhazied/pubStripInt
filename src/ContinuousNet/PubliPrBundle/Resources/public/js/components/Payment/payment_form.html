@@ -113,7 +113,10 @@
                                         <span translate="content.list.fields.DETAILS">Details</span>
                                     </label>
                                     <div class="note-editor">
-                                        <textarea ng-model="payment.details" name="details" id="paymentDetails" class="form-control" placeholder="[[ 'content.form.messages.ENTERDETAILS' | translate ]]" class="form-control autosize area-animated msd-elastic: \n;" ng-required="false"></textarea>
+                                        <span class="input-icon">
+                                            <textarea ng-model="payment.details" name="details" id="paymentDetails" class="form-control" placeholder="[[ 'content.form.messages.ENTERDETAILS' | translate ]]" class="form-control autosize area-animated msd-elastic: \n;" ng-required="false"></textarea>
+                                            <i class="ti-marker-alt"></i>
+                                        </span>
                                     </div>
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
@@ -143,7 +146,10 @@
                                         <span class="symbol required"></span>
                                     </label>
                                     <div class="note-editor">
-                                        <textarea ng-model="payment.token" name="token" id="paymentToken" class="form-control" placeholder="[[ 'content.form.messages.ENTERTOKEN' | translate ]]" class="form-control autosize area-animated msd-elastic: \n;" ng-required="true"></textarea>
+                                        <span class="input-icon">
+                                            <textarea ng-model="payment.token" name="token" id="paymentToken" class="form-control" placeholder="[[ 'content.form.messages.ENTERTOKEN' | translate ]]" class="form-control autosize area-animated msd-elastic: \n;" ng-required="true"></textarea>
+                                            <i class="ti-marker-alt"></i>
+                                        </span>
                                     </div>
                                     <span class="error text-small block" ng-if="paymentForm.token.$dirty && paymentForm.token.$error.required" translate="content.form.messages.TOKENREQUIRED">Token is required.</span>
                                     <span class="success text-small block" ng-if="paymentForm.token.$valid" translate="content.form.messages.OK">Ok!</span>
@@ -165,6 +171,8 @@
                             </div>
                         </div>
                     </form>
+                    <div class="table-responsive" ng-if="payments.length > 0">
+                    </div>
                 </fieldset>
             </div>
         </div><!--/col-md-12-->
