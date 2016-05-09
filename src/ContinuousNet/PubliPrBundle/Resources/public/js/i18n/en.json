@@ -132,8 +132,8 @@
         "logout": {
             "MAIN": "Lougout"
         },
-        "nogroup": {
-            "MAIN": "NoGroup"
+        "access": {
+            "MAIN": "Access"
         },
         "contactmanager": {
             "MAIN": "ContactManager"
@@ -146,9 +146,6 @@
         },
         "distribution": {
             "MAIN": "Distribution"
-        },
-        "access": {
-            "MAIN": "Access"
         },
         "prmanager": {
             "MAIN": "PRManager"
@@ -208,6 +205,7 @@
             "PREVIOUS": "Previous",
             "BACK": "Back",
             "CONVERT": "Convert",
+            "IMPORT": "Import",
             "EDITOR": "Editor",
             "ENCOCEVIDEO": "Encode Video",
             "GENERATETHUMB": "Generate Thumbnail",
@@ -274,9 +272,9 @@
                 "ENTERHTMLTEMPLATE": "Enter the Html Template",
                 "HTMLTEMPLATEREQUIRED": "The Html Template is required",
                 "ENTERSETTINGS": "Enter the Settings",
-                "ENTERBLOCKTYPE": "Enter the Block Type",
+                "SELECTBLOCKTYPE": "Select Block Type",
                 "BLOCKTYPEREQUIRED": "The Block Type is required",
-                "ENTERSTATUS": "Enter the Status",
+                "SELECTSTATUS": "Select Status",
                 "STATUSREQUIRED": "The Status is required",
                 "ENTERCODE": "Enter the Code",
                 "CODEREQUIRED": "The Code is required",
@@ -289,7 +287,7 @@
                 "CONTACTREQUIRED": "The Contact is required",
                 "ENTERSECTION": "Enter the Section",
                 "SECTIONREQUIRED": "The Section is required",
-                "ENTERSENDINGSTATUS": "Enter the Sending Status",
+                "SELECTSENDINGSTATUS": "Select Sending Status",
                 "SENDINGSTATUSREQUIRED": "The Sending Status is required",
                 "SELECTSENDINGDATETIME": "Select Sending Date Time",
                 "ENTEREXTERNALREFERENCE": "Enter the External Reference",
@@ -334,7 +332,7 @@
                 "ENTERCSS": "Enter the Css",
                 "ENTERHTMLFILE": "Enter the Html File",
                 "ENTERCSSFILE": "Enter the Css File",
-                "ENTERTYPE": "Enter the Type",
+                "SELECTTYPE": "Select Type",
                 "ENTERUSERNAME": "Enter the Username",
                 "USERNAMEREQUIRED": "The Username is required",
                 "USERNAMEALREADYINUSE": "This Username is already in use. Please choose another one.",
@@ -345,7 +343,7 @@
                 "ENTERSALT": "Enter the Salt",
                 "ENTERUSERNAMECANONICAL": "Enter the Username Canonical",
                 "ENTEREMAILCANONICAL": "Enter the Email Canonical",
-                "ENTERGENDER": "Enter the Gender",
+                "SELECTGENDER": "Select Gender",
                 "SELECTBIRTHDATE": "Select Birth Date",
                 "ENTERADDRESS": "Enter the Address",
                 "ENTERZIPCODE": "Enter the Zip Code",
@@ -357,8 +355,8 @@
                 "ENTERSESSIONTIMEOUT": "Enter the Session Timeout",
                 "ENTERPHONEVALIDATIONCODE": "Enter the Phone Validation Code",
                 "ENTEREMAILVALIDATIONCODE": "Enter the Email Validation Code",
-                "ENTERAUTHENTICATIONMODE": "Enter the Authentication Mode",
-                "ENTERROLES": "Enter the Roles",
+                "SELECTAUTHENTICATIONMODE": "Select Authentication Mode",
+                "SELECTROLES": "Select Roles",
                 "ROLESREQUIRED": "The Roles is required",
                 "ENTERCONFIRMATIONTOKEN": "Enter the Confirmation Token",
                 "SELECTPASSWORDREQUESTEDAT": "Select Password Requested At",
@@ -407,12 +405,13 @@
                 "KEYREQUIRED": "The Key is required",
                 "ENTERVALUE": "Enter the Value",
                 "VALUEREQUIRED": "The Value is required",
-                "ENTERACTION": "Enter the Action",
+                "SELECTACTION": "Select Action",
                 "ACTIONREQUIRED": "The Action is required",
                 "ENTERSOURCE": "Enter the Source"
             }
         },
         "list": {
+            "DASHBOARD": "Dashboard",
             "COMPANIES": "Companies",
             "COMPANY": "Company",
             "ADDCOMPANY": "Add New Company",
@@ -432,6 +431,7 @@
             "ADDCONTACT": "Add New Contact",
             "NEWCONTACT": "New Contact",
             "CONTACTDETAILS": "Contact Details",
+            "IMPORTCONTACTS": "Import Contacts",
             "EDITCONTACT": "Edit Contact",
             "CONTACTUPDATED": "Contact Updated",
             "CONTACTNOTUPDATED": "Contact Not Updated",
@@ -642,6 +642,7 @@
             "ADDPRESSRELEASE": "Add New Press Release",
             "NEWPRESSRELEASE": "New Press Release",
             "PRESSRELEASEDETAILS": "Press Release Details",
+            "PRESSRELEASEEDITOR": "Press Release Editor",
             "EDITPRESSRELEASE": "Edit Press Release",
             "PRESSRELEASEUPDATED": "Press Release Updated",
             "PRESSRELEASENOTUPDATED": "Press Release Not Updated",
@@ -752,33 +753,7 @@
                 "HTMLTEMPLATE": "Html Template",
                 "SETTINGS": "Settings",
                 "BLOCKTYPE": "Block Type",
-                "blocktypes": {
-                    "TEXT": "Text",
-                    "BOXEDTEXT": "Boxed Text",
-                    "DIVIDER": "Divider",
-                    "IMAGE": "Image",
-                    "IMAGEGROUP": "Image Group",
-                    "IMAGECARD": "Image Card",
-                    "IMAGEWITHCAPTION": "Image With Caption",
-                    "SOCIALSHARE": "Social Share",
-                    "SOCIALFOLLOW": "Social Follow",
-                    "BUTTON": "Button",
-                    "FOOTER": "Footer",
-                    "VIDEO": "Video",
-                    "RSSHEADER": "Rss Header",
-                    "RSSITEMS": "Rss Items",
-                    "CODE": "Code",
-                    "ZONE": "Zone"
-                },
                 "STATUS": "Status",
-                "statuses": {
-                    "DRAFT": "Draft",
-                    "ONLINE": "Online",
-                    "DEACTIVATED": "Deactivated",
-                    "OFFLINE": "Offline",
-                    "DELETED": "Deleted",
-                    "ARCHIVED": "Archived"
-                },
                 "CODE": "Code",
                 "LONGCODE": "Long Code",
                 "PREFIX": "Prefix",
@@ -786,11 +761,6 @@
                 "CONTACT": "Contact",
                 "SECTION": "Section",
                 "SENDINGSTATUS": "Sending Status",
-                "sendingstatuses": {
-                    "INITIALIZED": "Initialized",
-                    "SENT": "Sent",
-                    "ERROR": "Error"
-                },
                 "SENDNOW": "Send Now",
                 "SENDINGDATETIME": "Sending Date Time",
                 "EXTERNALREFERENCE": "External Reference",
@@ -827,12 +797,6 @@
                 "HTMLFILE": "Html File",
                 "CSSFILE": "Css File",
                 "TYPE": "Type",
-                "types": {
-                    "FREE": "Free",
-                    "MANAGER": "Manager",
-                    "CONTRIBUTOR": "Contributor",
-                    "ADMINISTRATOR": "Administrator"
-                },
                 "USERNAME": "Username",
                 "PASSWORD": "Password",
                 "REPEATPASSWORD": "Repeat Password",
@@ -840,10 +804,6 @@
                 "USERNAMECANONICAL": "Username Canonical",
                 "EMAILCANONICAL": "Email Canonical",
                 "GENDER": "Gender",
-                "genders": {
-                    "MALE": "Male",
-                    "FEMALE": "Female"
-                },
                 "BIRTHDATE": "Birth Date",
                 "ADDRESS": "Address",
                 "ZIPCODE": "Zip Code",
@@ -860,20 +820,7 @@
                 "EMAILVALIDATED": "Email Validated",
                 "EMAILVALIDATIONCODE": "Email Validation Code",
                 "AUTHENTICATIONMODE": "Authentication Mode",
-                "authenticationmodes": {
-                    "DATABASE": "Database",
-                    "ACTIVEDIRECTORY": "Active Directory",
-                    "WEBSERVICE": "Webservice"
-                },
                 "ROLES": "Roles",
-                "rolesoptions": {
-                    "ROLE_API": "R O L E  A P I",
-                    "ROLE_ACCOUNT_USER": "R O L E  A C C O U N T  U S E R",
-                    "FREE_ACCOUNT": "F R E E  A C C O U N T",
-                    "ROLE_ACCOUNT_MANAGER": "R O L E  A C C O U N T  M A N A G E R",
-                    "ROLE_ADMIN": "R O L E  A D M I N",
-                    "ROLE_SUPER_ADMIN": "R O L E  S U P E R  A D M I N"
-                },
                 "ENABLED": "Enabled",
                 "CONFIRMATIONTOKEN": "Confirmation Token",
                 "PASSWORDREQUESTEDAT": "Password Requested At",
@@ -919,11 +866,68 @@
                 "KEY": "Key",
                 "VALUE": "Value",
                 "ACTION": "Action",
+                "SOURCE": "Source",
+                "blocktypes": {
+                    "TEXT": "Text",
+                    "BOXEDTEXT": "Boxedtext",
+                    "DIVIDER": "Divider",
+                    "IMAGE": "Image",
+                    "IMAGEGROUP": "Imagegroup",
+                    "IMAGECARD": "Imagecard",
+                    "IMAGEWITHCAPTION": "Imagewithcaption",
+                    "SOCIALSHARE": "Socialshare",
+                    "SOCIALFOLLOW": "Socialfollow",
+                    "BUTTON": "Button",
+                    "FOOTER": "Footer",
+                    "VIDEO": "Video",
+                    "RSSHEADER": "Rssheader",
+                    "RSSITEMS": "Rssitems",
+                    "CODE": "Code",
+                    "ZONE": "Zone"
+                },
+                "statuses": {
+                    "DRAFT": "Draft",
+                    "ONLINE": "Online",
+                    "DEACTIVATED": "Deactivated",
+                    "OFFLINE": "Offline",
+                    "DELETED": "Deleted",
+                    "ARCHIVED": "Archived"
+                },
+                "sendingstatuses": {
+                    "INITIALIZED": "Initialized",
+                    "SENT": "Sent",
+                    "ERROR": "Error"
+                },
+                "types": {
+                    "FREE": "Free",
+                    "MANAGER": "Manager",
+                    "CONTRIBUTOR": "Contributor",
+                    "ADMINISTRATOR": "Administrator",
+                    "BASIC": "Basic",
+                    "THEME": "Theme",
+                    "CUSTOM": "Custom"
+                },
+                "genders": {
+                    "MALE": "Male",
+                    "FEMALE": "Female"
+                },
+                "authenticationmodes": {
+                    "DATABASE": "Database",
+                    "ACTIVEDIRECTORY": "Activedirectory",
+                    "WEBSERVICE": "Webservice"
+                },
+                "rolesoptions": {
+                    "ROLEAPI": "Role Api",
+                    "ROLEACCOUNTUSER": "Role Account User",
+                    "FREEACCOUNT": "Free Account",
+                    "ROLEACCOUNTMANAGER": "Role Account Manager",
+                    "ROLEADMIN": "Role Admin",
+                    "ROLESUPERADMIN": "Role Super Admin"
+                },
                 "actions": {
                     "VIEW": "View",
                     "CLICK": "Click"
-                },
-                "SOURCE": "Source"
+                }
             }
         }
     }
