@@ -485,3 +485,20 @@ assetic:
         continuous_net_tools:
             inputs:
                 - 'app/scripts/tools/toQueryString.js'
+
+hip_mandrill:
+    api_key: DfetkxjatL5oAC8_-lWVoA
+    disable_delivery: false # useful for dev/test environment. Default value is 'false'
+    # debug: passed to \Mandrill causing it to output curl requests. Useful to see output
+    # from CLI script. Default value is 'false'
+    debug: true
+    default:
+        sender: info@continuousnet.com
+        sender_name: Conti Nuous # Optionally define a sender name (from name)
+        #subaccount: publiPr # Optionally define a subaccount to use
+    #proxy:
+     #   use: true # when you are behing a proxy. Default value is 'false'
+     #   host: example.com
+     #   port: 80
+     #   user: john
+     #   password: doe123
