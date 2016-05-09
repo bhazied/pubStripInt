@@ -37,7 +37,8 @@
         "liip/imagine-bundle": "^1.5",
         "richsage/rms-push-notifications-bundle": "^0.1.9",
         "lexik/jwt-authentication-bundle": "^1.4",
-        "excelwebzone/recaptcha-bundle": "^1.4"
+        "excelwebzone/recaptcha-bundle": "^1.4",
+        "liuggio/excelbundle": "^2.0"
     },
     "require-dev": {
         "symfony/phpunit-bridge": "~2.7"
@@ -62,7 +63,8 @@
     },
     "config": {
         "bin-dir": "bin",
-        "component-dir": "web/bower_components"
+        "component-dir": "web/bower_components",
+        "secure-http": false
     },
     "extra": {
         "symfony-app-dir": "app",
