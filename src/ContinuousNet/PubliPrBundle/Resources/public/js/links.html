@@ -52,7 +52,7 @@
             </li>
         </ul>
     </li>
-    <li ng-if="user.roles.join('').indexOf('ADM') > -1" ng-class="{'active open':$state.includes('app.templatemanager')}">
+    <li ng-if="user.roles.join('').indexOf('ADM') > -1 || user.roles.join('').indexOf('MAN') > -1" ng-class="{'active open':$state.includes('app.templatemanager')}">
         <a href="javascript:void(0)">
             <div class="item-content">
                 <div class="item-media">
@@ -79,7 +79,7 @@
                     <span class="title" translate="content.list.LAYOUTS">Layouts</span>
                 </a>
             </li>
-            <li ng-if="user.roles.join('').indexOf('ADM') > -1" ng-class="{'active':$state.includes('app.templatemanager.fonts')}">
+            <li ng-if="user.roles.join('').indexOf('ADM') > -1 || user.roles.join('').indexOf('MAN') > -1" ng-class="{'active':$state.includes('app.templatemanager.fonts')}">
                 <a ui-sref="app.templatemanager.fonts">
                     <span class="title" translate="content.list.FONTS">Fonts</span>
                 </a>

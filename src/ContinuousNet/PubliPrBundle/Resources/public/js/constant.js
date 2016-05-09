@@ -17,6 +17,8 @@ app.constant('APP_JS_REQUIRES', {
         'ContactsCtrl': '/bundles/publipr/js/components/Contact/ContactsCtrl.js',
         'ContactFormCtrl': '/bundles/publipr/js/components/Contact/ContactFormCtrl.js',
         'ContactCtrl': '/bundles/publipr/js/components/Contact/ContactCtrl.js',
+        'ContactImportCtrl': '/bundles/publipr/js/components/Contact/ContactImportCtrl.js',
+        'ContactExportCtrl': '/bundles/publipr/js/components/Contact/ContactExportCtrl.js',
         'ContactGroupsCtrl': '/bundles/publipr/js/components/ContactGroup/ContactGroupsCtrl.js',
         'ContactGroupFormCtrl': '/bundles/publipr/js/components/ContactGroup/ContactGroupFormCtrl.js',
         'ContactGroupCtrl': '/bundles/publipr/js/components/ContactGroup/ContactGroupCtrl.js',
@@ -63,6 +65,7 @@ app.constant('APP_JS_REQUIRES', {
         'PressReleaseFormCtrl': '/bundles/publipr/js/components/PressRelease/PressReleaseFormCtrl.js',
         'PressReleaseCtrl': '/bundles/publipr/js/components/PressRelease/PressReleaseCtrl.js',
         'PressReleaseEditorCtrl': '/bundles/publipr/js/components/PressRelease/PressReleaseEditorCtrl.js',
+        'PressReleaseEditorCtrl': '/bundles/publipr/js/components/PressRelease/PressReleaseEditorCtrl.js',
         'SessionsCtrl': '/bundles/publipr/js/components/Session/SessionsCtrl.js',
         'SessionFormCtrl': '/bundles/publipr/js/components/Session/SessionFormCtrl.js',
         'SessionCtrl': '/bundles/publipr/js/components/Session/SessionCtrl.js',
@@ -103,6 +106,9 @@ app.constant('APP_JS_REQUIRES', {
     },{
         name: 'ContactImportService',
         files: ['/bundles/publipr/js/components/Contact/ContactImportService.js']
+    },{
+        name: 'ContactExportService',
+        files: ['/bundles/publipr/js/components/Contact/ContactExportService.js']
     },{
         name: 'contactGroupService',
         files: ['/bundles/publipr/js/components/ContactGroup/ContactGroupService.js']

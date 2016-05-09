@@ -77341,6 +77341,8 @@ app.constant('APP_JS_REQUIRES', {
         'ContactsCtrl': '/bundles/publipr/js/components/Contact/ContactsCtrl.js',
         'ContactFormCtrl': '/bundles/publipr/js/components/Contact/ContactFormCtrl.js',
         'ContactCtrl': '/bundles/publipr/js/components/Contact/ContactCtrl.js',
+        'ContactImportCtrl': '/bundles/publipr/js/components/Contact/ContactImportCtrl.js',
+        'ContactExportCtrl': '/bundles/publipr/js/components/Contact/ContactExportCtrl.js',
         'ContactGroupsCtrl': '/bundles/publipr/js/components/ContactGroup/ContactGroupsCtrl.js',
         'ContactGroupFormCtrl': '/bundles/publipr/js/components/ContactGroup/ContactGroupFormCtrl.js',
         'ContactGroupCtrl': '/bundles/publipr/js/components/ContactGroup/ContactGroupCtrl.js',
@@ -77387,6 +77389,7 @@ app.constant('APP_JS_REQUIRES', {
         'PressReleaseFormCtrl': '/bundles/publipr/js/components/PressRelease/PressReleaseFormCtrl.js',
         'PressReleaseCtrl': '/bundles/publipr/js/components/PressRelease/PressReleaseCtrl.js',
         'PressReleaseEditorCtrl': '/bundles/publipr/js/components/PressRelease/PressReleaseEditorCtrl.js',
+        'PressReleaseEditorCtrl': '/bundles/publipr/js/components/PressRelease/PressReleaseEditorCtrl.js',
         'SessionsCtrl': '/bundles/publipr/js/components/Session/SessionsCtrl.js',
         'SessionFormCtrl': '/bundles/publipr/js/components/Session/SessionFormCtrl.js',
         'SessionCtrl': '/bundles/publipr/js/components/Session/SessionCtrl.js',
@@ -77427,6 +77430,9 @@ app.constant('APP_JS_REQUIRES', {
     },{
         name: 'ContactImportService',
         files: ['/bundles/publipr/js/components/Contact/ContactImportService.js']
+    },{
+        name: 'ContactExportService',
+        files: ['/bundles/publipr/js/components/Contact/ContactExportService.js']
     },{
         name: 'contactGroupService',
         files: ['/bundles/publipr/js/components/ContactGroup/ContactGroupService.js']
@@ -79037,6 +79043,13 @@ function ($stateProvider) {
             label: 'content.list.IMPORTCONTACTS'
         },
         resolve: loadSequence('ContactImportCtrl', 'ContactImportService', 'contactService')
+    }).state('app.contactmanager.contactsexport', {
+        url: '/contacts/export',
+        templateUrl: '/bundles/publipr/js/components/Contact/contact_export.html',
+        ncyBreadcrumb: {
+            label: 'content.list.IMPORTCONTACTS'
+        },
+        resolve: loadSequence('ContactExportCtrl', 'ContactExportService', 'contactService')
     }).state('app.templatemanager', {
         url: '/template-manager',
         template: '<div ui-view class="fade-in-up"></div>',
@@ -79382,7 +79395,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.NEWSROOMS'
         },
-        resolve: loadSequence('ngTable', 'NewsroomsCtrl', 'newsroomService', 'userService', 'userService')
+        resolve: loadSequence('ngTable', 'NewsroomsCtrl', 'newsroomService', 'fontService', 'userService', 'userService')
     }).state('app.prmanager.newsroomsnew', {
         url: '/newsrooms/new',
         templateUrl: '/bundles/publipr/js/components/Newsroom/newsroom_form.html',
@@ -79390,7 +79403,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.NEWNEWSROOM'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'NewsroomFormCtrl', 'newsroomService', 'userService', 'userService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'NewsroomFormCtrl', 'newsroomService', 'fontService', 'userService', 'userService')
     }).state('app.prmanager.newsroomsedit', {
         url: '/newsrooms/edit/:id',
         templateUrl: '/bundles/publipr/js/components/Newsroom/newsroom_form.html',
@@ -79398,7 +79411,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.EDITNEWSROOM'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'NewsroomFormCtrl', 'newsroomService', 'userService', 'userService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'NewsroomFormCtrl', 'newsroomService', 'fontService', 'userService', 'userService')
     }).state('app.prmanager.newsroomsdetails', {
         url: '/newsrooms/details/:id',
         templateUrl: '/bundles/publipr/js/components/Newsroom/newsroom.html',

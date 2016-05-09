@@ -31,7 +31,7 @@ use JMS\Serializer\Annotation\Groups;
  * @deprecated Nothing
  * @access     public
  * 
- * @ORM\Table(name="`newsroom`", indexes={@ORM\Index(name="creator_user_id", columns={"creator_user_id"}), @ORM\Index(name="modifier_user_id", columns={"modifier_user_id"})})
+ * @ORM\Table(name="`newsroom`", indexes={@ORM\Index(name="title_font_id", columns={"title_font_id"}), @ORM\Index(name="text_font_id", columns={"text_font_id"}), @ORM\Index(name="creator_user_id", columns={"creator_user_id"}), @ORM\Index(name="modifier_user_id", columns={"modifier_user_id"})})
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks()
  * 
@@ -145,6 +145,127 @@ class Newsroom
      * @var string
      * @access private
      *
+     * @ORM\Column(name="background_color", type="string", length=7, nullable=true, unique=false)
+     * 
+     * @Expose
+     * 
+     */
+    private $backgroundColor;
+
+    /**
+     * @var string
+     * @access private
+     *
+     * @ORM\Column(name="title_color", type="string", length=7, nullable=true, unique=false)
+     * 
+     * @Expose
+     * 
+     */
+    private $titleColor;
+
+    /**
+     * @var string
+     * @access private
+     *
+     * @ORM\Column(name="text_color", type="string", length=7, nullable=true, unique=false)
+     * 
+     * @Expose
+     * 
+     */
+    private $textColor;
+
+    /**
+     * @var string
+     * @access private
+     *
+     * @ORM\Column(name="facebook_link", type="string", length=320, nullable=true, unique=false)
+     * 
+     * @Expose
+     * 
+     */
+    private $facebookLink;
+
+    /**
+     * @var string
+     * @access private
+     *
+     * @ORM\Column(name="twitter_link", type="string", length=320, nullable=true, unique=false)
+     * 
+     * @Expose
+     * 
+     */
+    private $twitterLink;
+
+    /**
+     * @var string
+     * @access private
+     *
+     * @ORM\Column(name="google_plus_link", type="string", length=320, nullable=true, unique=false)
+     * 
+     * @Expose
+     * 
+     */
+    private $googlePlusLink;
+
+    /**
+     * @var string
+     * @access private
+     *
+     * @ORM\Column(name="pinterest_link", type="string", length=320, nullable=true, unique=false)
+     * 
+     * @Expose
+     * 
+     */
+    private $pinterestLink;
+
+    /**
+     * @var string
+     * @access private
+     *
+     * @ORM\Column(name="instagram_link", type="string", length=320, nullable=true, unique=false)
+     * 
+     * @Expose
+     * 
+     */
+    private $instagramLink;
+
+    /**
+     * @var string
+     * @access private
+     *
+     * @ORM\Column(name="youtube_link", type="string", length=320, nullable=true, unique=false)
+     * 
+     * @Expose
+     * 
+     */
+    private $youtubeLink;
+
+    /**
+     * @var string
+     * @access private
+     *
+     * @ORM\Column(name="linkedin_link", type="string", length=320, nullable=true, unique=false)
+     * 
+     * @Expose
+     * 
+     */
+    private $linkedinLink;
+
+    /**
+     * @var string
+     * @access private
+     *
+     * @ORM\Column(name="viadeo_link", type="string", length=320, nullable=true, unique=false)
+     * 
+     * @Expose
+     * 
+     */
+    private $viadeoLink;
+
+    /**
+     * @var string
+     * @access private
+     *
      * @ORM\Column(name="css", type="text", nullable=true, unique=false)
      * 
      * @Expose
@@ -228,6 +349,36 @@ class Newsroom
      * 
      */
     private $modifiedAt;
+
+    /**
+     * @var \ContinuousNet\PubliPrBundle\Entity\Font
+     * @access private
+     *
+     * @ORM\ManyToOne(targetEntity="Font")
+     * @ORM\JoinColumns({
+     *        @ORM\JoinColumn(name="title_font_id", referencedColumnName="id")
+     * })
+     * 
+     * @Expose
+     * @MaxDepth(1)
+     * 
+     */
+    private $titleFont;
+
+    /**
+     * @var \ContinuousNet\PubliPrBundle\Entity\Font
+     * @access private
+     *
+     * @ORM\ManyToOne(targetEntity="Font")
+     * @ORM\JoinColumns({
+     *        @ORM\JoinColumn(name="text_font_id", referencedColumnName="id")
+     * })
+     * 
+     * @Expose
+     * @MaxDepth(1)
+     * 
+     */
+    private $textFont;
 
     /**
      * @var \ContinuousNet\PubliPrBundle\Entity\User
@@ -493,6 +644,270 @@ class Newsroom
     }
 
     /**
+     * Set backgroundColor
+     *
+     * @access public
+     * @param string $backgroundColor
+     * @return Newsroom
+     */
+    public function setBackgroundColor($backgroundColor = null)
+    {
+        $this->backgroundColor = $backgroundColor;
+        return $this;
+    }
+
+    /**
+     * Get backgroundColor
+     *
+     * @access public
+     * @return string 
+     */
+    public function getBackgroundColor()
+    {
+        return $this->backgroundColor;
+    }
+
+    /**
+     * Set titleColor
+     *
+     * @access public
+     * @param string $titleColor
+     * @return Newsroom
+     */
+    public function setTitleColor($titleColor = null)
+    {
+        $this->titleColor = $titleColor;
+        return $this;
+    }
+
+    /**
+     * Get titleColor
+     *
+     * @access public
+     * @return string 
+     */
+    public function getTitleColor()
+    {
+        return $this->titleColor;
+    }
+
+    /**
+     * Set textColor
+     *
+     * @access public
+     * @param string $textColor
+     * @return Newsroom
+     */
+    public function setTextColor($textColor = null)
+    {
+        $this->textColor = $textColor;
+        return $this;
+    }
+
+    /**
+     * Get textColor
+     *
+     * @access public
+     * @return string 
+     */
+    public function getTextColor()
+    {
+        return $this->textColor;
+    }
+
+    /**
+     * Set facebookLink
+     *
+     * @access public
+     * @param string $facebookLink
+     * @return Newsroom
+     */
+    public function setFacebookLink($facebookLink = null)
+    {
+        $this->facebookLink = $facebookLink;
+        return $this;
+    }
+
+    /**
+     * Get facebookLink
+     *
+     * @access public
+     * @return string 
+     */
+    public function getFacebookLink()
+    {
+        return $this->facebookLink;
+    }
+
+    /**
+     * Set twitterLink
+     *
+     * @access public
+     * @param string $twitterLink
+     * @return Newsroom
+     */
+    public function setTwitterLink($twitterLink = null)
+    {
+        $this->twitterLink = $twitterLink;
+        return $this;
+    }
+
+    /**
+     * Get twitterLink
+     *
+     * @access public
+     * @return string 
+     */
+    public function getTwitterLink()
+    {
+        return $this->twitterLink;
+    }
+
+    /**
+     * Set googlePlusLink
+     *
+     * @access public
+     * @param string $googlePlusLink
+     * @return Newsroom
+     */
+    public function setGooglePlusLink($googlePlusLink = null)
+    {
+        $this->googlePlusLink = $googlePlusLink;
+        return $this;
+    }
+
+    /**
+     * Get googlePlusLink
+     *
+     * @access public
+     * @return string 
+     */
+    public function getGooglePlusLink()
+    {
+        return $this->googlePlusLink;
+    }
+
+    /**
+     * Set pinterestLink
+     *
+     * @access public
+     * @param string $pinterestLink
+     * @return Newsroom
+     */
+    public function setPinterestLink($pinterestLink = null)
+    {
+        $this->pinterestLink = $pinterestLink;
+        return $this;
+    }
+
+    /**
+     * Get pinterestLink
+     *
+     * @access public
+     * @return string 
+     */
+    public function getPinterestLink()
+    {
+        return $this->pinterestLink;
+    }
+
+    /**
+     * Set instagramLink
+     *
+     * @access public
+     * @param string $instagramLink
+     * @return Newsroom
+     */
+    public function setInstagramLink($instagramLink = null)
+    {
+        $this->instagramLink = $instagramLink;
+        return $this;
+    }
+
+    /**
+     * Get instagramLink
+     *
+     * @access public
+     * @return string 
+     */
+    public function getInstagramLink()
+    {
+        return $this->instagramLink;
+    }
+
+    /**
+     * Set youtubeLink
+     *
+     * @access public
+     * @param string $youtubeLink
+     * @return Newsroom
+     */
+    public function setYoutubeLink($youtubeLink = null)
+    {
+        $this->youtubeLink = $youtubeLink;
+        return $this;
+    }
+
+    /**
+     * Get youtubeLink
+     *
+     * @access public
+     * @return string 
+     */
+    public function getYoutubeLink()
+    {
+        return $this->youtubeLink;
+    }
+
+    /**
+     * Set linkedinLink
+     *
+     * @access public
+     * @param string $linkedinLink
+     * @return Newsroom
+     */
+    public function setLinkedinLink($linkedinLink = null)
+    {
+        $this->linkedinLink = $linkedinLink;
+        return $this;
+    }
+
+    /**
+     * Get linkedinLink
+     *
+     * @access public
+     * @return string 
+     */
+    public function getLinkedinLink()
+    {
+        return $this->linkedinLink;
+    }
+
+    /**
+     * Set viadeoLink
+     *
+     * @access public
+     * @param string $viadeoLink
+     * @return Newsroom
+     */
+    public function setViadeoLink($viadeoLink = null)
+    {
+        $this->viadeoLink = $viadeoLink;
+        return $this;
+    }
+
+    /**
+     * Get viadeoLink
+     *
+     * @access public
+     * @return string 
+     */
+    public function getViadeoLink()
+    {
+        return $this->viadeoLink;
+    }
+
+    /**
      * Set css
      *
      * @access public
@@ -682,6 +1097,54 @@ class Newsroom
     public function getModifiedAt()
     {
         return $this->modifiedAt;
+    }
+
+    /**
+     * Set titleFont
+     *
+     * @access public
+     * @param \ContinuousNet\PubliPrBundle\Entity\Font $titleFont
+     * @return Newsroom
+     */
+    public function setTitleFont(Font $titleFont = null)
+    {
+        $this->titleFont = $titleFont;
+        return $this;
+    }
+
+    /**
+     * Get titleFont
+     *
+     * @access public
+     * @return \ContinuousNet\PubliPrBundle\Entity\Font 
+     */
+    public function getTitleFont()
+    {
+        return $this->titleFont;
+    }
+
+    /**
+     * Set textFont
+     *
+     * @access public
+     * @param \ContinuousNet\PubliPrBundle\Entity\Font $textFont
+     * @return Newsroom
+     */
+    public function setTextFont(Font $textFont = null)
+    {
+        $this->textFont = $textFont;
+        return $this;
+    }
+
+    /**
+     * Get textFont
+     *
+     * @access public
+     * @return \ContinuousNet\PubliPrBundle\Entity\Font 
+     */
+    public function getTextFont()
+    {
+        return $this->textFont;
     }
 
     /**

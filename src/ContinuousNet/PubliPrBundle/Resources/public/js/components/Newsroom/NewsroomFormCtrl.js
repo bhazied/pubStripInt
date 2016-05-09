@@ -4,8 +4,8 @@
  * Controller for Newsroom Form
  */
 
-app.controller('NewsroomFormCtrl', ['$scope', '$state', '$stateParams', '$sce', '$timeout', '$filter', '$uibModal', '$q', '$interpolate', '$localStorage', 'toaster', 'SweetAlert', 'savable', '$usersDataFactory', '$newsroomsDataFactory',
-function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $interpolate, $localStorage, toaster, SweetAlert, savable, $usersDataFactory, $newsroomsDataFactory) {
+app.controller('NewsroomFormCtrl', ['$scope', '$state', '$stateParams', '$sce', '$timeout', '$filter', '$uibModal', '$q', '$interpolate', '$localStorage', 'toaster', 'SweetAlert', 'savable', '$fontsDataFactory', '$usersDataFactory', '$newsroomsDataFactory',
+function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $interpolate, $localStorage, toaster, SweetAlert, savable, $fontsDataFactory, $usersDataFactory, $newsroomsDataFactory) {
 
     $scope.locale = (angular.isDefined($localStorage.language))?$localStorage.language:'en';
 
@@ -23,6 +23,31 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
         
     };
 
+
+    $scope.fonts = [];
+    $scope.fontsLoaded = false;
+
+    $scope.getFonts = function() {
+        $timeout(function(){
+            $scope.fontsLoaded = true;
+            if ($scope.fonts.length == 0) {
+                $scope.fonts.push({});
+                var def = $q.defer();
+                $fontsDataFactory.query({offset: 0, limit: 10000, 'order_by[font.name]': 'asc'}).$promise.then(function(data) {
+                    for (var i in data.results) {
+                        data.results[i].hidden = false;
+                    }
+                    $scope.fonts = data.results;
+                    def.resolve($scope.fonts);
+                });
+                return def;
+            } else {
+                return $scope.fonts;
+            }
+        });
+    };
+
+    $scope.getFonts();
 
     $scope.users = [];
     $scope.usersLoaded = false;
