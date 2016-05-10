@@ -494,7 +494,7 @@ hip_mandrill:
     debug: true
     default:
         sender: info@continuousnet.com
-        sender_name: Conti Nuous # Optionally define a sender name (from name)
+        sender_name: Continuous Net # Optionally define a sender name (from name)
         #subaccount: publiPr # Optionally define a subaccount to use
     #proxy:
      #   use: true # when you are behing a proxy. Default value is 'false'
