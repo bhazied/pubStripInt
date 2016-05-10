@@ -215,6 +215,12 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
                 },
                 value: function() {
                     return $scope.pressRelease[field];
+                },
+                instance: function() {
+                    return 'default';
+                },
+                folder: function() {
+                    return 'pressReleases';
                 }
             }
         });

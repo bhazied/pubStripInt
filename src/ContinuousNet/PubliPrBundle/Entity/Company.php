@@ -28,12 +28,10 @@ use JMS\Serializer\Annotation\Groups;
  * @link       http://publipr.continuousnet.com/ContinuousNet/PubliPrBundle/Entity
  * @see        Company
  * @since      Class available since Release 1.0
- * @deprecated Nothing
  * @access     public
  * 
  * @ORM\Table(name="`company`", indexes={@ORM\Index(name="creator_user_id", columns={"creator_user_id"}), @ORM\Index(name="modifier_user_id", columns={"modifier_user_id"})})
  * @ORM\Entity
- * @UniqueEntity("name")
  * @ORM\HasLifecycleCallbacks()
  * 
  * @ExclusionPolicy("none")
@@ -58,7 +56,7 @@ class Company
      * @var string
      * @access private
      *
-     * @ORM\Column(name="name", type="string", length=320, nullable=false, unique=true)
+     * @ORM\Column(name="name", type="string", length=320, nullable=false, unique=false)
      * 
      * @Expose
      * 

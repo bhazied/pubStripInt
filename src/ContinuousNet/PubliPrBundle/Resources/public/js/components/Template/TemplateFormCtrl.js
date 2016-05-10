@@ -1,11 +1,11 @@
 'use strict';
 
 /**
- * Controller for Layout Form
+ * Controller for Template Form
  */
 
-app.controller('LayoutFormCtrl', ['$scope', '$state', '$stateParams', '$sce', '$timeout', '$filter', '$uibModal', '$q', '$interpolate', '$localStorage', 'toaster', 'SweetAlert', 'savable', '$usersDataFactory', '$layoutsDataFactory',
-function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $interpolate, $localStorage, toaster, SweetAlert, savable, $usersDataFactory, $layoutsDataFactory) {
+app.controller('TemplateFormCtrl', ['$scope', '$state', '$stateParams', '$sce', '$timeout', '$filter', '$uibModal', '$q', '$interpolate', '$localStorage', 'toaster', 'SweetAlert', 'savable', '$usersDataFactory', '$templatesDataFactory',
+function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $interpolate, $localStorage, toaster, SweetAlert, savable, $usersDataFactory, $templatesDataFactory) {
 
     $scope.locale = (angular.isDefined($localStorage.language))?$localStorage.language:'en';
 
@@ -23,6 +23,19 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
         
     };
 
+    $scope.types = [{
+        id: 'Basic',
+        title: $filter('translate')('content.list.fields.types.BASIC'),
+        css: 'primary'
+    }, {
+        id: 'Theme',
+        title: $filter('translate')('content.list.fields.types.THEME'),
+        css: 'success'
+    }, {
+        id: 'Custom',
+        title: $filter('translate')('content.list.fields.types.CUSTOM'),
+        css: 'warning'
+    }];
     $scope.statuses = [{
         id: 'Draft',
         title: $filter('translate')('content.list.fields.statuses.DRAFT'),
@@ -94,26 +107,26 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
             SweetAlert.swal($filter('translate')('content.form.messages.FORMCANNOTBESUBMITTED'), $filter('translate')('content.form.messages.ERRORSAREMARKED'), "error");
             return false;
         } else {
-            if ($scope.layout.id > 0) {
+            if ($scope.template.id > 0) {
                 $scope.disableSubmit = true;
-                $layoutsDataFactory.update($scope.layout).$promise.then(function(data) {
+                $templatesDataFactory.update($scope.template).$promise.then(function(data) {
                     $scope.disableSubmit = false;
-                    toaster.pop('success', $filter('translate')('content.common.NOTIFICATION'), $filter('translate')('content.list.LAYOUTUPDATED'));
+                    toaster.pop('success', $filter('translate')('content.common.NOTIFICATION'), $filter('translate')('content.list.TEMPLATEUPDATED'));
                     $scope.list();
                 }, function(error) {
                     $scope.disableSubmit = false;
-                    toaster.pop('error', $filter('translate')('content.common.ERROR'), $filter('translate')('content.list.LAYOUTNOTUPDATED'));
+                    toaster.pop('error', $filter('translate')('content.common.ERROR'), $filter('translate')('content.list.TEMPLATENOTUPDATED'));
                     console.warn(error);
                 });
             } else {
                 $scope.disableSubmit = true;
-                $layoutsDataFactory.create($scope.layout).$promise.then(function(data) {
+                $templatesDataFactory.create($scope.template).$promise.then(function(data) {
                     $scope.disableSubmit = false;
-                    toaster.pop('success', $filter('translate')('content.common.NOTIFICATION'), $filter('translate')('content.list.LAYOUTCREATED'));
+                    toaster.pop('success', $filter('translate')('content.common.NOTIFICATION'), $filter('translate')('content.list.TEMPLATECREATED'));
                     $scope.list();
                 }, function(error) {
                     $scope.disableSubmit = false;
-                    toaster.pop('error', $filter('translate')('content.common.ERROR'), $filter('translate')('content.list.LAYOUTNOTCREATED'));
+                    toaster.pop('error', $filter('translate')('content.common.ERROR'), $filter('translate')('content.list.TEMPLATENOTCREATED'));
                     console.warn(error);
                 });
             }
@@ -122,17 +135,17 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
     };
 
     $scope.list = function() {
-        $state.go('app.templatemanager.layouts');
+        $state.go('app.templatemanager.templates');
     };
     
     if (angular.isDefined($stateParams.id)) {
-        $layoutsDataFactory.get({id: $stateParams.id}).$promise.then(function(data) {
+        $templatesDataFactory.get({id: $stateParams.id}).$promise.then(function(data) {
             $timeout(function(){
-                $scope.layout = savable(data);
+                $scope.template = savable(data);
             });
         });
     } else {
-        $scope.layout = {id: 0, status: 'Draft'};
+        $scope.template = {id: 0, type: 'Basic', status: 'Draft'};
 
     }
 
@@ -147,13 +160,19 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
                     return field;
                 },
                 value: function() {
-                    return $scope.layout[field];
+                    return $scope.template[field];
+                },
+                instance: function() {
+                    return 'default';
+                },
+                folder: function() {
+                    return 'templates';
                 }
             }
         });
 
         modalInstance.result.then(function (url) {
-            $scope.layout[field] = url;
+            $scope.template[field] = url;
         }, function () {
             
         });

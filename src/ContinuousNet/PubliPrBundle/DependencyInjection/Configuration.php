@@ -20,9 +20,49 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('publi_pr');
 
-        // Here you should define the parameters that are allowed to
-        // configure your bundle. See the documentation linked above for
-        // more information on that topic.
+
+        $rootNode
+            ->children()
+
+                ->arrayNode('settings')
+                    ->children()
+                        ->scalarNode('default_currency')
+                            ->defaultValue('EUR')
+                            ->isRequired()
+                            ->cannotBeEmpty()
+                        ->end()
+                        ->integerNode('default_price')
+                            ->defaultValue(30)
+                            ->isRequired()
+                            ->cannotBeEmpty()
+                        ->end()
+                    ->end()
+                ->end()
+                ->arrayNode('url_public_path')
+                    ->children()
+                        ->scalarNode('free')
+                            ->defaultValue('free')
+                            ->isRequired()
+                            ->cannotBeEmpty()
+                        ->end()
+                        ->scalarNode('paied')
+                            ->defaultValue('client')
+                            ->isRequired()
+                            ->cannotBeEmpty()
+                        ->end()
+                    ->end()
+                ->end()
+                ->arrayNode('uplopad')
+                    ->children()
+                        ->scalarNode('main_dir')
+                            ->defaultValue('/var/www/publipr/web/')
+                            ->isRequired()
+                            ->cannotBeEmpty()
+                        ->end()
+                    ->end()
+                ->end()
+            ->end()
+        ;
 
         return $treeBuilder;
     }

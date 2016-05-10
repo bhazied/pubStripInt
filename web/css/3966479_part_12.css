@@ -17226,8 +17226,13 @@ input[type="radio"], input[type="checkbox"] {
     left: 6px;
     width: 29px;
 }
+
 .continuous-check.check-lg input[type="checkbox"]:checked + label:before {
     border-width: 15px;
+}
+
+.continuous-check.check-brand input[type="checkbox"]:checked + label:before {
+    border-color: #E53F5A;
 }
 
 .continuous-check.check-success input[type="checkbox"]:checked + label:before {
@@ -17343,6 +17348,10 @@ input[type="radio"], input[type="checkbox"] {
 .continuous-radio.radio-lg input[type="radio"]:checked + label:before {
     border-width: 8px;
 }
+
+ .continuous-radio.radio-brand input[type="radio"]:checked + label:before {
+     background: #E53F5A;
+ }
 
 .continuous-radio.radio-success input[type="radio"]:checked + label:before {
     background: #5cb85c;

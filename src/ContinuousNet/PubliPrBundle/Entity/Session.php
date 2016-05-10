@@ -28,7 +28,6 @@ use JMS\Serializer\Annotation\Groups;
  * @link       http://publipr.continuousnet.com/ContinuousNet/PubliPrBundle/Entity
  * @see        Session
  * @since      Class available since Release 1.0
- * @deprecated Nothing
  * @access     public
  * 
  * @ORM\Table(name="`session`", indexes={@ORM\Index(name="creator_user_id", columns={"creator_user_id"}), @ORM\Index(name="modifier_user_id", columns={"modifier_user_id"})})

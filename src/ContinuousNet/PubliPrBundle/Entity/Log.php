@@ -28,7 +28,6 @@ use JMS\Serializer\Annotation\Groups;
  * @link       http://publipr.continuousnet.com/ContinuousNet/PubliPrBundle/Entity
  * @see        Log
  * @since      Class available since Release 1.0
- * @deprecated Nothing
  * @access     public
  * 
  * @ORM\Table(name="`log`", indexes={@ORM\Index(name="session_id", columns={"session_id"}), @ORM\Index(name="creator_user_id", columns={"creator_user_id"})})

@@ -98,6 +98,14 @@ class CompanyRESTController extends BaseRESTController
                    }
                 }
             }
+            $roles = $this->getUser()->getRoles();
+            if (!empty($roles)) {
+                foreach ($roles as $role) {
+                   if (substr_count($role, 'MAN') > 0) {
+                       $qb->andWhere('c_.creatorUser = :user')->setParameter('user', $this->getUser()->getId());
+                   }
+                }
+            }
             $qbList = clone $qb;
             $qb->select('count(c_.id)');
             $data['inlineCount'] = $qb->getQuery()->getSingleScalarResult();
@@ -210,4 +218,13 @@ class CompanyRESTController extends BaseRESTController
         }
     }
     
+    private function getConfig($path) {
+        $config = $this->container->getParameter('publi_pr');
+        $paths = explode('.', $path);
+        foreach ($paths as $index) {
+            $config = $config[$index];
+        }
+        return $config;
+    }
+
 }

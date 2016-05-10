@@ -143,8 +143,6 @@ function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q,
             { field: 'email', title: $filter('translate')('content.list.fields.EMAIL'), sortable: 'contact.email', filter: { 'contact.email': 'text' }, show: $scope.getParamValue('email_show_filed', true), getValue: $scope.textValue },
             { field: 'phone', title: $filter('translate')('content.list.fields.PHONE'), sortable: 'contact.phone', filter: { 'contact.phone': 'text' }, show: $scope.getParamValue('phone_show_filed', true), getValue: $scope.textValue },
             { field: 'active', title: $filter('translate')('content.list.fields.ACTIVE'), sortable: 'contact.active', filter: { 'contact.active': 'select' }, show: $scope.getParamValue('active_show_filed', true), getValue: $scope.interpolatedValue, filterData : $scope.booleanOptions, interpolateExpr: $interpolate('<span my-boolean="[[ row.active ]]"></span>') },
-            { field: 'unsubscribed', title: $filter('translate')('content.list.fields.UNSUBSCRIBED'), sortable: 'contact.unsubscribed', filter: { 'contact.unsubscribed': 'select' }, show: $scope.getParamValue('unsubscribed_show_filed', false), getValue: $scope.interpolatedValue, filterData : $scope.booleanOptions, interpolateExpr: $interpolate('<span my-boolean="[[ row.unsubscribed ]]"></span>') },
-            { field: 'unsubscribed_at', title: $filter('translate')('content.list.fields.UNSUBSCRIBEDAT'), sortable: 'contact.unsubscribedAt', filter: { 'contact.unsubscribedAt': 'text' }, show: $scope.getParamValue('unsubscribed_at_show_filed', false), getValue: $scope.evaluatedValue, valueFormatter: 'date:\''+$filter('translate')('formats.DATETIME')+'\''},
             { field: 'creator_user', title: $filter('translate')('content.list.fields.CREATORUSER'), sortable: 'creator_user.username', filter: { 'contact.creatorUser': 'select' }, getValue: $scope.linkValue, filterData: $scope.getUsers(), show: $scope.getParamValue('creator_user_id_show_filed', false), displayField: 'username', state: 'app.access.usersdetails' },
             { field: 'created_at', title: $filter('translate')('content.list.fields.CREATEDAT'), sortable: 'contact.createdAt', filter: { 'contact.createdAt': 'text' }, show: $scope.getParamValue('created_at_show_filed', false), getValue: $scope.evaluatedValue, valueFormatter: 'date:\''+$filter('translate')('formats.DATETIME')+'\''},
             { field: 'modifier_user', title: $filter('translate')('content.list.fields.MODIFIERUSER'), sortable: 'modifier_user.username', filter: { 'contact.modifierUser': 'select' }, getValue: $scope.linkValue, filterData: $scope.getUsers(), show: $scope.getParamValue('modifier_user_id_show_filed', false), displayField: 'username', state: 'app.access.usersdetails' },
@@ -248,6 +246,14 @@ function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q,
 
     $scope.details = function(row) {
         $state.go('app.contactmanager.contactsdetails', {id: row.id});
+    };
+
+    $scope.import = function() {
+        $state.go('app.contactmanager.contactsimport');
+    };
+
+    $scope.export = function() {
+        $state.go('app.contactmanager.contactsexport');
     };
 
 }]);

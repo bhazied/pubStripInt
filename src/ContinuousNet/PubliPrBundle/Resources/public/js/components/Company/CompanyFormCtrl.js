@@ -1,11 +1,11 @@
 'use strict';
 
 /**
- * Controller for Country Form
+ * Controller for Company Form
  */
 
-app.controller('CountryFormCtrl', ['$scope', '$state', '$stateParams', '$sce', '$timeout', '$filter', '$uibModal', '$q', '$interpolate', '$localStorage', 'toaster', 'SweetAlert', 'savable', '$usersDataFactory', '$countriesDataFactory',
-function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $interpolate, $localStorage, toaster, SweetAlert, savable, $usersDataFactory, $countriesDataFactory) {
+app.controller('CompanyFormCtrl', ['$scope', '$state', '$stateParams', '$sce', '$timeout', '$filter', '$uibModal', '$q', '$interpolate', '$localStorage', 'toaster', 'SweetAlert', 'savable', '$usersDataFactory', '$companiesDataFactory',
+function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $interpolate, $localStorage, toaster, SweetAlert, savable, $usersDataFactory, $companiesDataFactory) {
 
     $scope.locale = (angular.isDefined($localStorage.language))?$localStorage.language:'en';
 
@@ -69,26 +69,26 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
             SweetAlert.swal($filter('translate')('content.form.messages.FORMCANNOTBESUBMITTED'), $filter('translate')('content.form.messages.ERRORSAREMARKED'), "error");
             return false;
         } else {
-            if ($scope.country.id > 0) {
+            if ($scope.company.id > 0) {
                 $scope.disableSubmit = true;
-                $countriesDataFactory.update($scope.country).$promise.then(function(data) {
+                $companiesDataFactory.update($scope.company).$promise.then(function(data) {
                     $scope.disableSubmit = false;
-                    toaster.pop('success', $filter('translate')('content.common.NOTIFICATION'), $filter('translate')('content.list.COUNTRYUPDATED'));
+                    toaster.pop('success', $filter('translate')('content.common.NOTIFICATION'), $filter('translate')('content.list.COMPANYUPDATED'));
                     $scope.list();
                 }, function(error) {
                     $scope.disableSubmit = false;
-                    toaster.pop('error', $filter('translate')('content.common.ERROR'), $filter('translate')('content.list.COUNTRYNOTUPDATED'));
+                    toaster.pop('error', $filter('translate')('content.common.ERROR'), $filter('translate')('content.list.COMPANYNOTUPDATED'));
                     console.warn(error);
                 });
             } else {
                 $scope.disableSubmit = true;
-                $countriesDataFactory.create($scope.country).$promise.then(function(data) {
+                $companiesDataFactory.create($scope.company).$promise.then(function(data) {
                     $scope.disableSubmit = false;
-                    toaster.pop('success', $filter('translate')('content.common.NOTIFICATION'), $filter('translate')('content.list.COUNTRYCREATED'));
+                    toaster.pop('success', $filter('translate')('content.common.NOTIFICATION'), $filter('translate')('content.list.COMPANYCREATED'));
                     $scope.list();
                 }, function(error) {
                     $scope.disableSubmit = false;
-                    toaster.pop('error', $filter('translate')('content.common.ERROR'), $filter('translate')('content.list.COUNTRYNOTCREATED'));
+                    toaster.pop('error', $filter('translate')('content.common.ERROR'), $filter('translate')('content.list.COMPANYNOTCREATED'));
                     console.warn(error);
                 });
             }
@@ -97,17 +97,17 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
     };
 
     $scope.list = function() {
-        $state.go('app.configuration.countries');
+        $state.go('app.access.companies');
     };
     
     if (angular.isDefined($stateParams.id)) {
-        $countriesDataFactory.get({id: $stateParams.id}).$promise.then(function(data) {
+        $companiesDataFactory.get({id: $stateParams.id}).$promise.then(function(data) {
             $timeout(function(){
-                $scope.country = savable(data);
+                $scope.company = savable(data);
             });
         });
     } else {
-        $scope.country = {id: 0};
+        $scope.company = {id: 0};
 
     }
 
@@ -122,13 +122,19 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
                     return field;
                 },
                 value: function() {
-                    return $scope.country[field];
+                    return $scope.company[field];
+                },
+                instance: function() {
+                    return 'default';
+                },
+                folder: function() {
+                    return 'companies';
                 }
             }
         });
 
         modalInstance.result.then(function (url) {
-            $scope.country[field] = url;
+            $scope.company[field] = url;
         }, function () {
             
         });

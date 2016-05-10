@@ -209,4 +209,13 @@ class LogRESTController extends BaseRESTController
         }
     }
     
+    private function getConfig($path) {
+        $config = $this->container->getParameter('publi_pr');
+        $paths = explode('.', $path);
+        foreach ($paths as $index) {
+            $config = $config[$index];
+        }
+        return $config;
+    }
+
 }

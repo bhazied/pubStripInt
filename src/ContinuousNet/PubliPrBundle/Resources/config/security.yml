@@ -1,7 +1,7 @@
 
 security:
     access_control:
-        - { path: ^/api/companies,      roles: [], methods: [GET, POST, PUT, PATCH, DELETE] }
+        - { path: ^/api/companies,      roles: [ROLE_ACCOUNT_MANAGER, ROLE_ADMIN, ROLE_SUPER_ADMIN], methods: [GET, POST, PUT, PATCH, DELETE] }
         - { path: ^/api/contacts,      roles: [ROLE_ACCOUNT_USER, FREE_ACCOUNT, ROLE_ACCOUNT_MANAGER], methods: [GET, POST, PUT, PATCH, DELETE] }
         - { path: ^/api/contactgroups,      roles: [ROLE_ACCOUNT_USER, FREE_ACCOUNT, ROLE_ACCOUNT_MANAGER], methods: [GET, POST, PUT, PATCH, DELETE] }
         - { path: ^/api/contentblocks,      roles: [ROLE_ADMIN, ROLE_SUPER_ADMIN], methods: [GET, POST, PUT, PATCH, DELETE] }
@@ -9,7 +9,7 @@ security:
         - { path: ^/api/emails,      roles: [ROLE_ADMIN, ROLE_SUPER_ADMIN], methods: [GET, POST, PUT, PATCH, DELETE] }
         - { path: ^/api/emailcampaigns,      roles: [ROLE_ADMIN, ROLE_SUPER_ADMIN], methods: [GET, POST, PUT, PATCH, DELETE] }
         - { path: ^/api/emailtemplates,      roles: [ROLE_ADMIN, ROLE_SUPER_ADMIN], methods: [GET, POST, PUT, PATCH, DELETE] }
-        - { path: ^/api/fonts,      roles: [ROLE_ADMIN, ROLE_SUPER_ADMIN], methods: [GET, POST, PUT, PATCH, DELETE] }
+        - { path: ^/api/fonts,      roles: [ROLE_ACCOUNT_MANAGER, ROLE_ADMIN, ROLE_SUPER_ADMIN], methods: [GET, POST, PUT, PATCH, DELETE] }
         - { path: ^/api/languages,      roles: [ROLE_ACCOUNT_MANAGER, ROLE_ADMIN, ROLE_SUPER_ADMIN], methods: [GET, POST, PUT, PATCH, DELETE] }
         - { path: ^/api/layouts,      roles: [ROLE_ADMIN, ROLE_SUPER_ADMIN], methods: [GET, POST, PUT, PATCH, DELETE] }
         - { path: ^/api/logs,      roles: [ROLE_ADMIN, ROLE_SUPER_ADMIN], methods: [GET, POST, PUT, PATCH, DELETE] }

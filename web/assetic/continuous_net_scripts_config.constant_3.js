@@ -32,7 +32,8 @@ app.constant('JS_REQUIRES', {
         //*** Controllers
 
         //*** Filters
-        'htmlToPlaintext': '/app/scripts/filters/htmlToPlaintext.js'
+        'htmlToPlaintext': '/app/scripts/filters/htmlToPlaintext.js',
+        FileUploader: ['/bower_components/angular-file-upload/angular-file-upload.min.js']
     },
     //*** angularJS Modules
     modules: [{

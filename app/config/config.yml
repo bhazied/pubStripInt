@@ -22,6 +22,17 @@ lexik_jwt_authentication:
     encoder_service:     lexik_jwt_authentication.jwt_encoder    # token encoder / decoder service - defaults to the jwt encoder (based on the namshi/jose library)
     user_identity_field: email
 
+publi_pr:
+    settings:
+        default_currency: 'EUR'
+        default_price: 30
+    url_public_path:
+        free: 'free'
+        paied: 'client'
+    uplopad:
+        main_dir: '/var/www/publipr/web/'
+
+
 framework:
     #esi:             ~
     translator:

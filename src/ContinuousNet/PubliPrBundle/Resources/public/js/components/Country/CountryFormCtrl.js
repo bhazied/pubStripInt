@@ -1,11 +1,11 @@
 'use strict';
 
 /**
- * Controller for Template Form
+ * Controller for Country Form
  */
 
-app.controller('TemplateFormCtrl', ['$scope', '$state', '$stateParams', '$sce', '$timeout', '$filter', '$uibModal', '$q', '$interpolate', '$localStorage', 'toaster', 'SweetAlert', 'savable', '$usersDataFactory', '$templatesDataFactory',
-function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $interpolate, $localStorage, toaster, SweetAlert, savable, $usersDataFactory, $templatesDataFactory) {
+app.controller('CountryFormCtrl', ['$scope', '$state', '$stateParams', '$sce', '$timeout', '$filter', '$uibModal', '$q', '$interpolate', '$localStorage', 'toaster', 'SweetAlert', 'savable', '$usersDataFactory', '$countriesDataFactory',
+function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $interpolate, $localStorage, toaster, SweetAlert, savable, $usersDataFactory, $countriesDataFactory) {
 
     $scope.locale = (angular.isDefined($localStorage.language))?$localStorage.language:'en';
 
@@ -23,44 +23,6 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
         
     };
 
-    $scope.types = [{
-        id: 'Basic',
-        title: $filter('translate')('content.list.fields.types.BASIC'),
-        css: 'primary'
-    }, {
-        id: 'Theme',
-        title: $filter('translate')('content.list.fields.types.THEME'),
-        css: 'success'
-    }, {
-        id: 'Custom',
-        title: $filter('translate')('content.list.fields.types.CUSTOM'),
-        css: 'warning'
-    }];
-    $scope.statuses = [{
-        id: 'Draft',
-        title: $filter('translate')('content.list.fields.statuses.DRAFT'),
-        css: 'primary'
-    }, {
-        id: 'Online',
-        title: $filter('translate')('content.list.fields.statuses.ONLINE'),
-        css: 'success'
-    }, {
-        id: 'Deactivated',
-        title: $filter('translate')('content.list.fields.statuses.DEACTIVATED'),
-        css: 'warning'
-    }, {
-        id: 'Offline',
-        title: $filter('translate')('content.list.fields.statuses.OFFLINE'),
-        css: 'danger'
-    }, {
-        id: 'Deleted',
-        title: $filter('translate')('content.list.fields.statuses.DELETED'),
-        css: 'default'
-    }, {
-        id: 'Archived',
-        title: $filter('translate')('content.list.fields.statuses.ARCHIVED'),
-        css: 'info'
-    }];
 
     $scope.users = [];
     $scope.usersLoaded = false;
@@ -107,26 +69,26 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
             SweetAlert.swal($filter('translate')('content.form.messages.FORMCANNOTBESUBMITTED'), $filter('translate')('content.form.messages.ERRORSAREMARKED'), "error");
             return false;
         } else {
-            if ($scope.template.id > 0) {
+            if ($scope.country.id > 0) {
                 $scope.disableSubmit = true;
-                $templatesDataFactory.update($scope.template).$promise.then(function(data) {
+                $countriesDataFactory.update($scope.country).$promise.then(function(data) {
                     $scope.disableSubmit = false;
-                    toaster.pop('success', $filter('translate')('content.common.NOTIFICATION'), $filter('translate')('content.list.TEMPLATEUPDATED'));
+                    toaster.pop('success', $filter('translate')('content.common.NOTIFICATION'), $filter('translate')('content.list.COUNTRYUPDATED'));
                     $scope.list();
                 }, function(error) {
                     $scope.disableSubmit = false;
-                    toaster.pop('error', $filter('translate')('content.common.ERROR'), $filter('translate')('content.list.TEMPLATENOTUPDATED'));
+                    toaster.pop('error', $filter('translate')('content.common.ERROR'), $filter('translate')('content.list.COUNTRYNOTUPDATED'));
                     console.warn(error);
                 });
             } else {
                 $scope.disableSubmit = true;
-                $templatesDataFactory.create($scope.template).$promise.then(function(data) {
+                $countriesDataFactory.create($scope.country).$promise.then(function(data) {
                     $scope.disableSubmit = false;
-                    toaster.pop('success', $filter('translate')('content.common.NOTIFICATION'), $filter('translate')('content.list.TEMPLATECREATED'));
+                    toaster.pop('success', $filter('translate')('content.common.NOTIFICATION'), $filter('translate')('content.list.COUNTRYCREATED'));
                     $scope.list();
                 }, function(error) {
                     $scope.disableSubmit = false;
-                    toaster.pop('error', $filter('translate')('content.common.ERROR'), $filter('translate')('content.list.TEMPLATENOTCREATED'));
+                    toaster.pop('error', $filter('translate')('content.common.ERROR'), $filter('translate')('content.list.COUNTRYNOTCREATED'));
                     console.warn(error);
                 });
             }
@@ -135,17 +97,17 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
     };
 
     $scope.list = function() {
-        $state.go('app.templatemanager.templates');
+        $state.go('app.configuration.countries');
     };
     
     if (angular.isDefined($stateParams.id)) {
-        $templatesDataFactory.get({id: $stateParams.id}).$promise.then(function(data) {
+        $countriesDataFactory.get({id: $stateParams.id}).$promise.then(function(data) {
             $timeout(function(){
-                $scope.template = savable(data);
+                $scope.country = savable(data);
             });
         });
     } else {
-        $scope.template = {id: 0, type: 'Basic', status: 'Draft'};
+        $scope.country = {id: 0};
 
     }
 
@@ -160,13 +122,19 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
                     return field;
                 },
                 value: function() {
-                    return $scope.template[field];
+                    return $scope.country[field];
+                },
+                instance: function() {
+                    return 'default';
+                },
+                folder: function() {
+                    return 'countries';
                 }
             }
         });
 
         modalInstance.result.then(function (url) {
-            $scope.template[field] = url;
+            $scope.country[field] = url;
         }, function () {
             
         });

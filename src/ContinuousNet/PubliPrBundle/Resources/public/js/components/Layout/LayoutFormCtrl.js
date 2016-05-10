@@ -1,11 +1,11 @@
 'use strict';
 
 /**
- * Controller for Company Form
+ * Controller for Layout Form
  */
 
-app.controller('CompanyFormCtrl', ['$scope', '$state', '$stateParams', '$sce', '$timeout', '$filter', '$uibModal', '$q', '$interpolate', '$localStorage', 'toaster', 'SweetAlert', 'savable', '$usersDataFactory', '$companiesDataFactory',
-function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $interpolate, $localStorage, toaster, SweetAlert, savable, $usersDataFactory, $companiesDataFactory) {
+app.controller('LayoutFormCtrl', ['$scope', '$state', '$stateParams', '$sce', '$timeout', '$filter', '$uibModal', '$q', '$interpolate', '$localStorage', 'toaster', 'SweetAlert', 'savable', '$usersDataFactory', '$layoutsDataFactory',
+function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $interpolate, $localStorage, toaster, SweetAlert, savable, $usersDataFactory, $layoutsDataFactory) {
 
     $scope.locale = (angular.isDefined($localStorage.language))?$localStorage.language:'en';
 
@@ -23,6 +23,31 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
         
     };
 
+    $scope.statuses = [{
+        id: 'Draft',
+        title: $filter('translate')('content.list.fields.statuses.DRAFT'),
+        css: 'primary'
+    }, {
+        id: 'Online',
+        title: $filter('translate')('content.list.fields.statuses.ONLINE'),
+        css: 'success'
+    }, {
+        id: 'Deactivated',
+        title: $filter('translate')('content.list.fields.statuses.DEACTIVATED'),
+        css: 'warning'
+    }, {
+        id: 'Offline',
+        title: $filter('translate')('content.list.fields.statuses.OFFLINE'),
+        css: 'danger'
+    }, {
+        id: 'Deleted',
+        title: $filter('translate')('content.list.fields.statuses.DELETED'),
+        css: 'default'
+    }, {
+        id: 'Archived',
+        title: $filter('translate')('content.list.fields.statuses.ARCHIVED'),
+        css: 'info'
+    }];
 
     $scope.users = [];
     $scope.usersLoaded = false;
@@ -69,26 +94,26 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
             SweetAlert.swal($filter('translate')('content.form.messages.FORMCANNOTBESUBMITTED'), $filter('translate')('content.form.messages.ERRORSAREMARKED'), "error");
             return false;
         } else {
-            if ($scope.company.id > 0) {
+            if ($scope.layout.id > 0) {
                 $scope.disableSubmit = true;
-                $companiesDataFactory.update($scope.company).$promise.then(function(data) {
+                $layoutsDataFactory.update($scope.layout).$promise.then(function(data) {
                     $scope.disableSubmit = false;
-                    toaster.pop('success', $filter('translate')('content.common.NOTIFICATION'), $filter('translate')('content.list.COMPANYUPDATED'));
+                    toaster.pop('success', $filter('translate')('content.common.NOTIFICATION'), $filter('translate')('content.list.LAYOUTUPDATED'));
                     $scope.list();
                 }, function(error) {
                     $scope.disableSubmit = false;
-                    toaster.pop('error', $filter('translate')('content.common.ERROR'), $filter('translate')('content.list.COMPANYNOTUPDATED'));
+                    toaster.pop('error', $filter('translate')('content.common.ERROR'), $filter('translate')('content.list.LAYOUTNOTUPDATED'));
                     console.warn(error);
                 });
             } else {
                 $scope.disableSubmit = true;
-                $companiesDataFactory.create($scope.company).$promise.then(function(data) {
+                $layoutsDataFactory.create($scope.layout).$promise.then(function(data) {
                     $scope.disableSubmit = false;
-                    toaster.pop('success', $filter('translate')('content.common.NOTIFICATION'), $filter('translate')('content.list.COMPANYCREATED'));
+                    toaster.pop('success', $filter('translate')('content.common.NOTIFICATION'), $filter('translate')('content.list.LAYOUTCREATED'));
                     $scope.list();
                 }, function(error) {
                     $scope.disableSubmit = false;
-                    toaster.pop('error', $filter('translate')('content.common.ERROR'), $filter('translate')('content.list.COMPANYNOTCREATED'));
+                    toaster.pop('error', $filter('translate')('content.common.ERROR'), $filter('translate')('content.list.LAYOUTNOTCREATED'));
                     console.warn(error);
                 });
             }
@@ -97,17 +122,17 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
     };
 
     $scope.list = function() {
-        $state.go('app.nogroup.companies');
+        $state.go('app.templatemanager.layouts');
     };
     
     if (angular.isDefined($stateParams.id)) {
-        $companiesDataFactory.get({id: $stateParams.id}).$promise.then(function(data) {
+        $layoutsDataFactory.get({id: $stateParams.id}).$promise.then(function(data) {
             $timeout(function(){
-                $scope.company = savable(data);
+                $scope.layout = savable(data);
             });
         });
     } else {
-        $scope.company = {id: 0};
+        $scope.layout = {id: 0, status: 'Draft'};
 
     }
 
@@ -122,13 +147,19 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
                     return field;
                 },
                 value: function() {
-                    return $scope.company[field];
+                    return $scope.layout[field];
+                },
+                instance: function() {
+                    return 'default';
+                },
+                folder: function() {
+                    return 'layouts';
                 }
             }
         });
 
         modalInstance.result.then(function (url) {
-            $scope.company[field] = url;
+            $scope.layout[field] = url;
         }, function () {
             
         });

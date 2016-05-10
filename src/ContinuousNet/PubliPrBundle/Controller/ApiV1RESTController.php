@@ -18,8 +18,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use FOS\RestBundle\Controller\FOSRestController;
 use ContinuousNet\PubliPrBundle\Entity\PushDevice;
-use ContinuousNet\PubliPrBundle\Entity\Game;
-use ContinuousNet\PubliPrBundle\Entity\Score;
+use ContinuousNet\PubliPrBundle\Entity\Company;
 
 /**
  * Public Api V1 REST Controller
@@ -272,6 +271,18 @@ class ApiV1RESTController extends FOSRestController
             if ($process) {
 
                 $user = $form->getData();
+
+                list($username, $domaine) = explode('@', $user->getEmail());
+                list($companyName, $extension) = explode('.', $domaine);
+                $company = new Company();
+                $company->setIsActive(true);
+                $company->setName($user->getEmail());
+                $company->setCreatorUser($user);
+                $em->persist($company);
+                $em->flush();
+
+                $user->setCompany($company);
+                $em->flush();
 
                 if ($confirmationEnabled) {
                     $this->container->get('session')->set('fos_user_send_confirmation_email/email', $user->getEmail());

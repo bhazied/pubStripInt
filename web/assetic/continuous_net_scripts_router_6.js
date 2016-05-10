@@ -108,14 +108,45 @@ function ($stateProvider) {
             label: 'content.list.DASHBOARD'
         },
         resolve: loadSequence('jquery-sparkline', 'DashboardCtrl', 'DashboardService')
-    }).state('app.nogroup', {
-        url: '/no-group',
+    }).state('app.access', {
+        url: '/access',
         template: '<div ui-view class="fade-in-up"></div>',
-        title: 'sidebar.nav.nogroup.MAIN',
+        title: 'sidebar.nav.access.MAIN',
         ncyBreadcrumb: {
-            label: 'sidebar.nav.nogroup.MAIN'
+            label: 'sidebar.nav.access.MAIN'
         }
-    }).state('app.nogroup.companies', {
+    }).state('app.access.users', {
+        url: '/users',
+        templateUrl: '/bundles/publipr/js/components/User/users.html',
+        title: 'content.list.USERS',
+        ncyBreadcrumb: {
+            label: 'content.list.USERS'
+        },
+        resolve: loadSequence('ngTable', 'UsersCtrl', 'userService', 'companyService', 'countryService', 'languageService')
+    }).state('app.access.usersnew', {
+        url: '/users/new',
+        templateUrl: '/bundles/publipr/js/components/User/user_form.html',
+        title: 'content.list.NEWUSER',
+        ncyBreadcrumb: {
+            label: 'content.list.NEWUSER'
+        },
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'UserFormCtrl', 'userService', 'companyService', 'countryService', 'languageService')
+    }).state('app.access.usersedit', {
+        url: '/users/edit/:id',
+        templateUrl: '/bundles/publipr/js/components/User/user_form.html',
+        title: 'content.list.EDITUSER',
+        ncyBreadcrumb: {
+            label: 'content.list.EDITUSER'
+        },
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'UserFormCtrl', 'userService', 'companyService', 'countryService', 'languageService')
+    }).state('app.access.usersdetails', {
+        url: '/users/details/:id',
+        templateUrl: '/bundles/publipr/js/components/User/user.html',
+        ncyBreadcrumb: {
+            label: 'content.list.USERDETAILS'
+        },
+        resolve: loadSequence('UserCtrl', 'userService')
+    }).state('app.access.companies', {
         url: '/companies',
         templateUrl: '/bundles/publipr/js/components/Company/companies.html',
         title: 'content.list.COMPANIES',
@@ -123,7 +154,7 @@ function ($stateProvider) {
             label: 'content.list.COMPANIES'
         },
         resolve: loadSequence('ngTable', 'CompaniesCtrl', 'companyService', 'userService')
-    }).state('app.nogroup.companiesnew', {
+    }).state('app.access.companiesnew', {
         url: '/companies/new',
         templateUrl: '/bundles/publipr/js/components/Company/company_form.html',
         title: 'content.list.NEWCOMPANY',
@@ -131,7 +162,7 @@ function ($stateProvider) {
             label: 'content.list.NEWCOMPANY'
         },
         resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'CompanyFormCtrl', 'companyService', 'userService')
-    }).state('app.nogroup.companiesedit', {
+    }).state('app.access.companiesedit', {
         url: '/companies/edit/:id',
         templateUrl: '/bundles/publipr/js/components/Company/company_form.html',
         title: 'content.list.EDITCOMPANY',
@@ -139,13 +170,44 @@ function ($stateProvider) {
             label: 'content.list.EDITCOMPANY'
         },
         resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'CompanyFormCtrl', 'companyService', 'userService')
-    }).state('app.nogroup.companiesdetails', {
+    }).state('app.access.companiesdetails', {
         url: '/companies/details/:id',
         templateUrl: '/bundles/publipr/js/components/Company/company.html',
         ncyBreadcrumb: {
             label: 'content.list.COMPANYDETAILS'
         },
         resolve: loadSequence('CompanyCtrl', 'companyService')
+    }).state('app.access.logs', {
+        url: '/logs',
+        templateUrl: '/bundles/publipr/js/components/Log/logs.html',
+        title: 'content.list.LOGS',
+        ncyBreadcrumb: {
+            label: 'content.list.LOGS'
+        },
+        resolve: loadSequence('ngTable', 'LogsCtrl', 'logService', 'sessionService', 'userService')
+    }).state('app.access.logsnew', {
+        url: '/logs/new',
+        templateUrl: '/bundles/publipr/js/components/Log/log_form.html',
+        title: 'content.list.NEWLOG',
+        ncyBreadcrumb: {
+            label: 'content.list.NEWLOG'
+        },
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'LogFormCtrl', 'logService', 'sessionService', 'userService')
+    }).state('app.access.logsedit', {
+        url: '/logs/edit/:id',
+        templateUrl: '/bundles/publipr/js/components/Log/log_form.html',
+        title: 'content.list.EDITLOG',
+        ncyBreadcrumb: {
+            label: 'content.list.EDITLOG'
+        },
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'LogFormCtrl', 'logService', 'sessionService', 'userService')
+    }).state('app.access.logsdetails', {
+        url: '/logs/details/:id',
+        templateUrl: '/bundles/publipr/js/components/Log/log.html',
+        ncyBreadcrumb: {
+            label: 'content.list.LOGDETAILS'
+        },
+        resolve: loadSequence('LogCtrl', 'logService')
     }).state('app.contactmanager', {
         url: '/contact-manager',
         template: '<div ui-view class="fade-in-up"></div>',
@@ -215,6 +277,20 @@ function ($stateProvider) {
             label: 'content.list.CONTACTDETAILS'
         },
         resolve: loadSequence('ContactCtrl', 'contactService')
+    }).state('app.contactmanager.contactsimport', {
+        url: '/contacts/import',
+        templateUrl: '/bundles/publipr/js/components/Contact/contact_import.html',
+        ncyBreadcrumb: {
+            label: 'content.list.IMPORTCONTACTS'
+        },
+        resolve: loadSequence('ContactImportCtrl', 'contactGroupService', 'ContactImportService', 'contactService', 'FileUploader')
+    }).state('app.contactmanager.contactsexport', {
+        url: '/contacts/export',
+        templateUrl: '/bundles/publipr/js/components/Contact/contact_export.html',
+        ncyBreadcrumb: {
+            label: 'content.list.IMPORTCONTACTS'
+        },
+        resolve: loadSequence('ContactExportCtrl', 'ContactExportService', 'contactService')
     }).state('app.templatemanager', {
         url: '/template-manager',
         template: '<div ui-view class="fade-in-up"></div>',
@@ -546,75 +622,6 @@ function ($stateProvider) {
             label: 'content.list.EMAILCAMPAIGNDETAILS'
         },
         resolve: loadSequence('EmailCampaignCtrl', 'emailCampaignService')
-    }).state('app.access', {
-        url: '/access',
-        template: '<div ui-view class="fade-in-up"></div>',
-        title: 'sidebar.nav.access.MAIN',
-        ncyBreadcrumb: {
-            label: 'sidebar.nav.access.MAIN'
-        }
-    }).state('app.access.users', {
-        url: '/users',
-        templateUrl: '/bundles/publipr/js/components/User/users.html',
-        title: 'content.list.USERS',
-        ncyBreadcrumb: {
-            label: 'content.list.USERS'
-        },
-        resolve: loadSequence('ngTable', 'UsersCtrl', 'userService', 'companyService', 'countryService', 'languageService')
-    }).state('app.access.usersnew', {
-        url: '/users/new',
-        templateUrl: '/bundles/publipr/js/components/User/user_form.html',
-        title: 'content.list.NEWUSER',
-        ncyBreadcrumb: {
-            label: 'content.list.NEWUSER'
-        },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'UserFormCtrl', 'userService', 'companyService', 'countryService', 'languageService')
-    }).state('app.access.usersedit', {
-        url: '/users/edit/:id',
-        templateUrl: '/bundles/publipr/js/components/User/user_form.html',
-        title: 'content.list.EDITUSER',
-        ncyBreadcrumb: {
-            label: 'content.list.EDITUSER'
-        },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'UserFormCtrl', 'userService', 'companyService', 'countryService', 'languageService')
-    }).state('app.access.usersdetails', {
-        url: '/users/details/:id',
-        templateUrl: '/bundles/publipr/js/components/User/user.html',
-        ncyBreadcrumb: {
-            label: 'content.list.USERDETAILS'
-        },
-        resolve: loadSequence('UserCtrl', 'userService')
-    }).state('app.access.logs', {
-        url: '/logs',
-        templateUrl: '/bundles/publipr/js/components/Log/logs.html',
-        title: 'content.list.LOGS',
-        ncyBreadcrumb: {
-            label: 'content.list.LOGS'
-        },
-        resolve: loadSequence('ngTable', 'LogsCtrl', 'logService', 'sessionService', 'userService')
-    }).state('app.access.logsnew', {
-        url: '/logs/new',
-        templateUrl: '/bundles/publipr/js/components/Log/log_form.html',
-        title: 'content.list.NEWLOG',
-        ncyBreadcrumb: {
-            label: 'content.list.NEWLOG'
-        },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'LogFormCtrl', 'logService', 'sessionService', 'userService')
-    }).state('app.access.logsedit', {
-        url: '/logs/edit/:id',
-        templateUrl: '/bundles/publipr/js/components/Log/log_form.html',
-        title: 'content.list.EDITLOG',
-        ncyBreadcrumb: {
-            label: 'content.list.EDITLOG'
-        },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'LogFormCtrl', 'logService', 'sessionService', 'userService')
-    }).state('app.access.logsdetails', {
-        url: '/logs/details/:id',
-        templateUrl: '/bundles/publipr/js/components/Log/log.html',
-        ncyBreadcrumb: {
-            label: 'content.list.LOGDETAILS'
-        },
-        resolve: loadSequence('LogCtrl', 'logService')
     }).state('app.prmanager', {
         url: '/p-r-manager',
         template: '<div ui-view class="fade-in-up"></div>',
@@ -629,7 +636,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.NEWSROOMS'
         },
-        resolve: loadSequence('ngTable', 'NewsroomsCtrl', 'newsroomService', 'userService', 'userService')
+        resolve: loadSequence('ngTable', 'NewsroomsCtrl', 'newsroomService', 'fontService', 'userService', 'userService')
     }).state('app.prmanager.newsroomsnew', {
         url: '/newsrooms/new',
         templateUrl: '/bundles/publipr/js/components/Newsroom/newsroom_form.html',
@@ -637,7 +644,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.NEWNEWSROOM'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'NewsroomFormCtrl', 'newsroomService', 'userService', 'userService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'NewsroomFormCtrl', 'newsroomService', 'fontService', 'userService', 'userService')
     }).state('app.prmanager.newsroomsedit', {
         url: '/newsrooms/edit/:id',
         templateUrl: '/bundles/publipr/js/components/Newsroom/newsroom_form.html',
@@ -645,7 +652,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.EDITNEWSROOM'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'NewsroomFormCtrl', 'newsroomService', 'userService', 'userService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'NewsroomFormCtrl', 'newsroomService', 'fontService', 'userService', 'userService')
     }).state('app.prmanager.newsroomsdetails', {
         url: '/newsrooms/details/:id',
         templateUrl: '/bundles/publipr/js/components/Newsroom/newsroom.html',
@@ -695,6 +702,13 @@ function ($stateProvider) {
             contentClasses: 'full-height'
         },
         resolve: loadSequence('PressReleaseEditorCtrl', 'contentBlockService', 'layoutService', 'newsroomService', 'templateService', 'pressReleaseService', 'PressReleaseEditorService')
+    }).state('app.prmanager.pressreleasessend', {
+        url: '/press-releases/send/:id',
+        templateUrl: '/bundles/publipr/js/components/PressRelease/press_release_sender.html',
+        ncyBreadcrumb: {
+            label: 'content.list.SENDPRESSRELEASE'
+        },
+        resolve: loadSequence('PressReleaseSenderCtrl', 'PressReleaseSenderService', 'pressReleaseService')
     }).state('app.settings', {
         url: '/settings',
         template: '<div ui-view class="fade-in-up"></div>',
