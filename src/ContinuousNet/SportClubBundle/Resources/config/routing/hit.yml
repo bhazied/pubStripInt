@@ -1,0 +1,30 @@
+hit:
+    path:     /
+    defaults: { _controller: "SportClubBundle:Hit:index" }
+
+hit_details:
+    path:     /{id}/details
+    defaults: { _controller: "SportClubBundle:Hit:show" }
+
+hit_new:
+    path:     /new
+    defaults: { _controller: "SportClubBundle:Hit:new" }
+
+hit_create:
+    path:     /create
+    defaults: { _controller: "SportClubBundle:Hit:create" }
+    methods:  POST
+
+hit_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "SportClubBundle:Hit:edit" }
+
+hit_update:
+    path:     /{id}/update
+    defaults: { _controller: "SportClubBundle:Hit:update" }
+    methods:  [POST, PUT]
+
+hit_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "SportClubBundle:Hit:delete" }
+    methods:  [POST, DELETE]

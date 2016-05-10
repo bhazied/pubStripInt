@@ -296,5 +296,9 @@ function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q,
         $state.go('app.prmanager.pressreleaseseditor', {id: row.id});
     };
 
+    $scope.send = function(row) {
+        $state.go('app.prmanager.pressreleasessend', {id: row.id});
+    };
+
 }]);
 

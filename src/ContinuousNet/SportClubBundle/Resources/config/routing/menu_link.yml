@@ -1,0 +1,30 @@
+menulink:
+    path:     /
+    defaults: { _controller: "SportClubBundle:MenuLink:index" }
+
+menulink_details:
+    path:     /{id}/details
+    defaults: { _controller: "SportClubBundle:MenuLink:show" }
+
+menulink_new:
+    path:     /new
+    defaults: { _controller: "SportClubBundle:MenuLink:new" }
+
+menulink_create:
+    path:     /create
+    defaults: { _controller: "SportClubBundle:MenuLink:create" }
+    methods:  POST
+
+menulink_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "SportClubBundle:MenuLink:edit" }
+
+menulink_update:
+    path:     /{id}/update
+    defaults: { _controller: "SportClubBundle:MenuLink:update" }
+    methods:  [POST, PUT]
+
+menulink_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "SportClubBundle:MenuLink:delete" }
+    methods:  [POST, DELETE]
