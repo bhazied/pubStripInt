@@ -149,7 +149,8 @@ app.constant('JS_REQUIRES', {
         //*** Controllers
 
         //*** Filters
-        'htmlToPlaintext': '/app/scripts/filters/htmlToPlaintext.js'
+        'htmlToPlaintext': '/app/scripts/filters/htmlToPlaintext.js',
+        FileUploader: ['/bower_components/angular-file-upload/angular-file-upload.min.js']
     },
     //*** angularJS Modules
     modules: [{
@@ -308,6 +309,7 @@ app.constant('APP_JS_REQUIRES', {
         'PressReleasesCtrl': '/bundles/publipr/js/components/PressRelease/PressReleasesCtrl.js',
         'PressReleaseFormCtrl': '/bundles/publipr/js/components/PressRelease/PressReleaseFormCtrl.js',
         'PressReleaseCtrl': '/bundles/publipr/js/components/PressRelease/PressReleaseCtrl.js',
+        'PressReleaseSenderCtrl': '/bundles/publipr/js/components/PressRelease/PressReleaseSenderCtrl.js',
         'PressReleaseEditorCtrl': '/bundles/publipr/js/components/PressRelease/PressReleaseEditorCtrl.js',
         'PressReleaseEditorCtrl': '/bundles/publipr/js/components/PressRelease/PressReleaseEditorCtrl.js',
         'SessionsCtrl': '/bundles/publipr/js/components/Session/SessionsCtrl.js',
@@ -401,6 +403,9 @@ app.constant('APP_JS_REQUIRES', {
     },{
         name: 'PressReleaseEditorService',
         files: ['/bundles/publipr/js/components/PressRelease/PressReleaseEditorService.js']
+    },{
+        name: 'PressReleaseSenderService',
+        files: ['/bundles/publipr/js/components/PressRelease/PressReleaseSenderService.js']
     },{
         name: 'sessionService',
         files: ['/bundles/publipr/js/components/Session/SessionService.js']
@@ -1962,7 +1967,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.IMPORTCONTACTS'
         },
-        resolve: loadSequence('ContactImportCtrl', 'ContactImportService', 'contactService')
+        resolve: loadSequence('ContactImportCtrl', 'contactGroupService', 'ContactImportService', 'contactService', 'FileUploader')
     }).state('app.contactmanager.contactsexport', {
         url: '/contacts/export',
         templateUrl: '/bundles/publipr/js/components/Contact/contact_export.html',
@@ -2381,6 +2386,13 @@ function ($stateProvider) {
             contentClasses: 'full-height'
         },
         resolve: loadSequence('PressReleaseEditorCtrl', 'contentBlockService', 'layoutService', 'newsroomService', 'templateService', 'pressReleaseService', 'PressReleaseEditorService')
+    }).state('app.prmanager.pressreleasessend', {
+        url: '/press-releases/send/:id',
+        templateUrl: '/bundles/publipr/js/components/PressRelease/press_release_sender.html',
+        ncyBreadcrumb: {
+            label: 'content.list.SENDPRESSRELEASE'
+        },
+        resolve: loadSequence('PressReleaseSenderCtrl', 'PressReleaseSenderService', 'pressReleaseService')
     }).state('app.settings', {
         url: '/settings',
         template: '<div ui-view class="fade-in-up"></div>',

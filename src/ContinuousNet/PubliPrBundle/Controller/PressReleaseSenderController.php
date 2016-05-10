@@ -2,7 +2,7 @@
 
 namespace ContinuousNet\PubliPrBundle\Controller;
 
-use ContinuousNet\PubliPrBundle\Entity\Contact;
+use ContinuousNet\PubliPrBundle\Entity\PressRelease;
 
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
@@ -23,29 +23,9 @@ use Symfony\Component\HttpFoundation\Response;
 use FOS\RestBundle\Controller\FOSRestController;
 
 
-class ContactImporterController extends FOSRestController
+class PressReleaseSenderController extends FOSRestController
 {
 
-    /**
-     * @Post("/contactsImport")
-     *
-     * @param $request
-     *
-     * @View(serializerEnableMaxDepthChecks=true)
-     */
-    public function exportAction(Request $request) {
-        try {
 
-            $contactGroupId = $request->request->get('id');
-            $isActive = $request->request->get('isActive');
-            $count = 0;
-            $message = sprintf($this->get('translator')->trans('contacts.import_success'), $count);
-            $data = array('status' => true, 'message' => $message);
-            return $data;
-
-        } catch (\Exception $e) {
-            return FOSView::create($e->getMessage(), Codes::HTTP_INTERNAL_SERVER_ERROR);
-        }
-    }
 
 }

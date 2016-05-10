@@ -123,6 +123,12 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
                 },
                 value: function() {
                     return $scope.country[field];
+                },
+                instance: function() {
+                    return 'default';
+                },
+                folder: function() {
+                    return 'countries';
                 }
             }
         });

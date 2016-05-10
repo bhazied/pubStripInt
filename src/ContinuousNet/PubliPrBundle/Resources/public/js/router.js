@@ -283,7 +283,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.IMPORTCONTACTS'
         },
-        resolve: loadSequence('ContactImportCtrl', 'ContactImportService', 'contactService')
+        resolve: loadSequence('ContactImportCtrl', 'contactGroupService', 'ContactImportService', 'contactService', 'FileUploader')
     }).state('app.contactmanager.contactsexport', {
         url: '/contacts/export',
         templateUrl: '/bundles/publipr/js/components/Contact/contact_export.html',
@@ -702,6 +702,13 @@ function ($stateProvider) {
             contentClasses: 'full-height'
         },
         resolve: loadSequence('PressReleaseEditorCtrl', 'contentBlockService', 'layoutService', 'newsroomService', 'templateService', 'pressReleaseService', 'PressReleaseEditorService')
+    }).state('app.prmanager.pressreleasessend', {
+        url: '/press-releases/send/:id',
+        templateUrl: '/bundles/publipr/js/components/PressRelease/press_release_sender.html',
+        ncyBreadcrumb: {
+            label: 'content.list.SENDPRESSRELEASE'
+        },
+        resolve: loadSequence('PressReleaseSenderCtrl', 'PressReleaseSenderService', 'pressReleaseService')
     }).state('app.settings', {
         url: '/settings',
         template: '<div ui-view class="fade-in-up"></div>',

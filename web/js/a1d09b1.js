@@ -77229,7 +77229,8 @@ app.constant('JS_REQUIRES', {
         //*** Controllers
 
         //*** Filters
-        'htmlToPlaintext': '/app/scripts/filters/htmlToPlaintext.js'
+        'htmlToPlaintext': '/app/scripts/filters/htmlToPlaintext.js',
+        FileUploader: ['/bower_components/angular-file-upload/angular-file-upload.min.js']
     },
     //*** angularJS Modules
     modules: [{
@@ -77388,6 +77389,7 @@ app.constant('APP_JS_REQUIRES', {
         'PressReleasesCtrl': '/bundles/publipr/js/components/PressRelease/PressReleasesCtrl.js',
         'PressReleaseFormCtrl': '/bundles/publipr/js/components/PressRelease/PressReleaseFormCtrl.js',
         'PressReleaseCtrl': '/bundles/publipr/js/components/PressRelease/PressReleaseCtrl.js',
+        'PressReleaseSenderCtrl': '/bundles/publipr/js/components/PressRelease/PressReleaseSenderCtrl.js',
         'PressReleaseEditorCtrl': '/bundles/publipr/js/components/PressRelease/PressReleaseEditorCtrl.js',
         'PressReleaseEditorCtrl': '/bundles/publipr/js/components/PressRelease/PressReleaseEditorCtrl.js',
         'SessionsCtrl': '/bundles/publipr/js/components/Session/SessionsCtrl.js',
@@ -77481,6 +77483,9 @@ app.constant('APP_JS_REQUIRES', {
     },{
         name: 'PressReleaseEditorService',
         files: ['/bundles/publipr/js/components/PressRelease/PressReleaseEditorService.js']
+    },{
+        name: 'PressReleaseSenderService',
+        files: ['/bundles/publipr/js/components/PressRelease/PressReleaseSenderService.js']
     },{
         name: 'sessionService',
         files: ['/bundles/publipr/js/components/Session/SessionService.js']
@@ -79042,7 +79047,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.IMPORTCONTACTS'
         },
-        resolve: loadSequence('ContactImportCtrl', 'ContactImportService', 'contactService')
+        resolve: loadSequence('ContactImportCtrl', 'contactGroupService', 'ContactImportService', 'contactService', 'FileUploader')
     }).state('app.contactmanager.contactsexport', {
         url: '/contacts/export',
         templateUrl: '/bundles/publipr/js/components/Contact/contact_export.html',
@@ -79461,6 +79466,13 @@ function ($stateProvider) {
             contentClasses: 'full-height'
         },
         resolve: loadSequence('PressReleaseEditorCtrl', 'contentBlockService', 'layoutService', 'newsroomService', 'templateService', 'pressReleaseService', 'PressReleaseEditorService')
+    }).state('app.prmanager.pressreleasessend', {
+        url: '/press-releases/send/:id',
+        templateUrl: '/bundles/publipr/js/components/PressRelease/press_release_sender.html',
+        ncyBreadcrumb: {
+            label: 'content.list.SENDPRESSRELEASE'
+        },
+        resolve: loadSequence('PressReleaseSenderCtrl', 'PressReleaseSenderService', 'pressReleaseService')
     }).state('app.settings', {
         url: '/settings',
         template: '<div ui-view class="fade-in-up"></div>',
@@ -82124,41 +82136,49 @@ function($resource, $rootScope) {
  * File Manager Modal Controller
  */
 
-app.controller('FileManagerCtrl', ['$scope', '$localStorage', '$timeout', '$uibModalInstance', 'field', 'value',
-function ($scope, $localStorage, $timeout, $uibModalInstance, field, value) {
+app.controller('FileManagerCtrl', ['$scope', '$localStorage', '$timeout', '$uibModalInstance', 'field', 'value', 'instance', 'folder',
+    function ($scope, $localStorage, $timeout, $uibModalInstance, field, value, instance, folder) {
 
-    $scope.field = field;
-    $scope.value = value;
-    $scope.url = '';
-    $scope.mode = '';
+        $scope.field = field;
+        $scope.value = value;
+        $scope.instance = instance;
+        $scope.folder = folder;
+        $scope.url = '';
+        $scope.mode = '';
 
-    $timeout(function(){
-        var fileManager = $('#elfinder_'+$scope.field).elfinder({
-            url : '/efconnect'+'?mode='+$scope.mode,
-            lang : (angular.isDefined($localStorage.language))?$localStorage.language:'en',
-            useBrowserHistory: false,
-            onlyMimes: ['image', 'video'],
-            customHeaders: {
-                'Authorization': 'Bearer ' + $localStorage.access_token,
-                'PP-Application': 'BackOffice'
-            },
-            getFileCallback : function(file) {
-                var parser = document.createElement('a');
-                parser.href = file.url;
-                $scope.url = parser.pathname;
-            }
+        $timeout(function(){
+            var defaultOpen = elFinder.prototype.commands.open;
+            console.log(defaultOpen)
+            elFinder.prototype.commands.open = function (param) {
+                console.log(param)
+                // custom code
+            };
+            var fileManager = $('#elfinder_'+$scope.field).elfinder({
+                url : '/efconnect/'+$scope.instance+'/'+$scope.folder+'?mode='+$scope.mode,
+                lang : (angular.isDefined($localStorage.language))?$localStorage.language:'en',
+                useBrowserHistory: false,
+                onlyMimes: ['image', 'video'],
+                customHeaders: {
+                    'Authorization': 'Bearer ' + $localStorage.access_token,
+                    'PP-Application': 'BackOffice'
+                },
+                getFileCallback : function(file) {
+                    var parser = document.createElement('a');
+                    parser.href = file.url;
+                    $scope.url = parser.pathname;
+                }
+            });
         });
-    });
 
-    $scope.ok = function () {
-        $uibModalInstance.close($scope.url);
-    };
+        $scope.ok = function () {
+            $uibModalInstance.close($scope.url);
+        };
 
-    $scope.cancel = function () {
-        $uibModalInstance.dismiss('cancel');
-    };
+        $scope.cancel = function () {
+            $uibModalInstance.dismiss('cancel');
+        };
 
-}]);
+    }]);
 
 'use strict';
 /**
