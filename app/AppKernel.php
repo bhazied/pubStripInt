@@ -26,7 +26,9 @@ class AppKernel extends Kernel
             new EWZ\Bundle\RecaptchaBundle\EWZRecaptchaBundle(),
             new Liip\ImagineBundle\LiipImagineBundle(),
             new ContinuousNet\PubliPrBundle\PubliPrBundle(),
-            new Liuggio\ExcelBundle\LiuggioExcelBundle()
+            new Liuggio\ExcelBundle\LiuggioExcelBundle(),
+            new Hip\MandrillBundle\HipMandrillBundle()
+
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {
