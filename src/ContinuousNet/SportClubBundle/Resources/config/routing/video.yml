@@ -1,0 +1,30 @@
+video:
+    path:     /
+    defaults: { _controller: "SportClubBundle:Video:index" }
+
+video_details:
+    path:     /{id}/details
+    defaults: { _controller: "SportClubBundle:Video:show" }
+
+video_new:
+    path:     /new
+    defaults: { _controller: "SportClubBundle:Video:new" }
+
+video_create:
+    path:     /create
+    defaults: { _controller: "SportClubBundle:Video:create" }
+    methods:  POST
+
+video_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "SportClubBundle:Video:edit" }
+
+video_update:
+    path:     /{id}/update
+    defaults: { _controller: "SportClubBundle:Video:update" }
+    methods:  [POST, PUT]
+
+video_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "SportClubBundle:Video:delete" }
+    methods:  [POST, DELETE]

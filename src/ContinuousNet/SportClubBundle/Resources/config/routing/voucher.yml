@@ -1,0 +1,30 @@
+voucher:
+    path:     /
+    defaults: { _controller: "SportClubBundle:Voucher:index" }
+
+voucher_details:
+    path:     /{id}/details
+    defaults: { _controller: "SportClubBundle:Voucher:show" }
+
+voucher_new:
+    path:     /new
+    defaults: { _controller: "SportClubBundle:Voucher:new" }
+
+voucher_create:
+    path:     /create
+    defaults: { _controller: "SportClubBundle:Voucher:create" }
+    methods:  POST
+
+voucher_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "SportClubBundle:Voucher:edit" }
+
+voucher_update:
+    path:     /{id}/update
+    defaults: { _controller: "SportClubBundle:Voucher:update" }
+    methods:  [POST, PUT]
+
+voucher_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "SportClubBundle:Voucher:delete" }
+    methods:  [POST, DELETE]

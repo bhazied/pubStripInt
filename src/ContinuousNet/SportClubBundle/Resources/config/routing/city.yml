@@ -1,0 +1,30 @@
+city:
+    path:     /
+    defaults: { _controller: "SportClubBundle:City:index" }
+
+city_details:
+    path:     /{id}/details
+    defaults: { _controller: "SportClubBundle:City:show" }
+
+city_new:
+    path:     /new
+    defaults: { _controller: "SportClubBundle:City:new" }
+
+city_create:
+    path:     /create
+    defaults: { _controller: "SportClubBundle:City:create" }
+    methods:  POST
+
+city_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "SportClubBundle:City:edit" }
+
+city_update:
+    path:     /{id}/update
+    defaults: { _controller: "SportClubBundle:City:update" }
+    methods:  [POST, PUT]
+
+city_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "SportClubBundle:City:delete" }
+    methods:  [POST, DELETE]

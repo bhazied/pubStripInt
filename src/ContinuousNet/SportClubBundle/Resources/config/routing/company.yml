@@ -1,0 +1,30 @@
+company:
+    path:     /
+    defaults: { _controller: "SportClubBundle:Company:index" }
+
+company_details:
+    path:     /{id}/details
+    defaults: { _controller: "SportClubBundle:Company:show" }
+
+company_new:
+    path:     /new
+    defaults: { _controller: "SportClubBundle:Company:new" }
+
+company_create:
+    path:     /create
+    defaults: { _controller: "SportClubBundle:Company:create" }
+    methods:  POST
+
+company_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "SportClubBundle:Company:edit" }
+
+company_update:
+    path:     /{id}/update
+    defaults: { _controller: "SportClubBundle:Company:update" }
+    methods:  [POST, PUT]
+
+company_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "SportClubBundle:Company:delete" }
+    methods:  [POST, DELETE]

@@ -1,0 +1,30 @@
+prizewinner:
+    path:     /
+    defaults: { _controller: "SportClubBundle:PrizeWinner:index" }
+
+prizewinner_details:
+    path:     /{id}/details
+    defaults: { _controller: "SportClubBundle:PrizeWinner:show" }
+
+prizewinner_new:
+    path:     /new
+    defaults: { _controller: "SportClubBundle:PrizeWinner:new" }
+
+prizewinner_create:
+    path:     /create
+    defaults: { _controller: "SportClubBundle:PrizeWinner:create" }
+    methods:  POST
+
+prizewinner_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "SportClubBundle:PrizeWinner:edit" }
+
+prizewinner_update:
+    path:     /{id}/update
+    defaults: { _controller: "SportClubBundle:PrizeWinner:update" }
+    methods:  [POST, PUT]
+
+prizewinner_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "SportClubBundle:PrizeWinner:delete" }
+    methods:  [POST, DELETE]

@@ -1,76 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b7d77c83-7530-40a0-bb78-28ddc05200bf" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Controller/PressReleaseSenderController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/config.yml" afterPath="$PROJECT_DIR$/app/config/config.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Controller/ApiV1RESTController.php" afterPath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Controller/ApiV1RESTController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Controller/ContactExporterController.php" afterPath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Controller/ContactExporterController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Controller/ContactImpoterController.php" afterPath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Controller/ContactImpoterController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/DependencyInjection/Configuration.php" afterPath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/DependencyInjection/Configuration.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Entity/Company.php" afterPath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Entity/Company.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Entity/Contact.php" afterPath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Entity/Contact.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Entity/ContactGroup.php" afterPath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Entity/ContactGroup.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Entity/ContentBlock.php" afterPath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Entity/ContentBlock.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Entity/Country.php" afterPath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Entity/Country.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Entity/Email.php" afterPath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Entity/Email.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Entity/EmailCampaign.php" afterPath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Entity/EmailCampaign.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Entity/EmailTemplate.php" afterPath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Entity/EmailTemplate.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Entity/Font.php" afterPath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Entity/Font.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Entity/Language.php" afterPath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Entity/Language.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Entity/Layout.php" afterPath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Entity/Layout.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Entity/Log.php" afterPath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Entity/Log.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Entity/Newsroom.php" afterPath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Entity/Newsroom.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Entity/NewsroomTemplate.php" afterPath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Entity/NewsroomTemplate.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Entity/Payment.php" afterPath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Entity/Payment.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Entity/PressRelease.php" afterPath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Entity/PressRelease.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Entity/Session.php" afterPath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Entity/Session.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Entity/Setting.php" afterPath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Entity/Setting.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Entity/Template.php" afterPath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Entity/Template.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Entity/TrackEmail.php" afterPath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Entity/TrackEmail.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Entity/TrackPressRelease.php" afterPath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Entity/TrackPressRelease.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Entity/User.php" afterPath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Entity/User.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/config/routing.yml" afterPath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/config/routing.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/common/FileManager/FileManagerCtrl.js" afterPath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/common/FileManager/FileManagerCtrl.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/Auth/login.html" afterPath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/Auth/login.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/Auth/register.html" afterPath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/Auth/register.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/Company/CompanyFormCtrl.js" afterPath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/Company/CompanyFormCtrl.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/Company/company_form.html" afterPath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/Company/company_form.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/Contact/ContactExportCtrl.js" afterPath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/Contact/ContactExportCtrl.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/Contact/ContactExportService.js" afterPath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/Contact/ContactExportService.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/Contact/ContactImportCtrl.js" afterPath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/Contact/ContactImportCtrl.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/Contact/ContactImportService.js" afterPath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/Contact/ContactImportService.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/Contact/contact_import.html" afterPath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/Contact/contact_import.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/ContentBlock/ContentBlockFormCtrl.js" afterPath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/ContentBlock/ContentBlockFormCtrl.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/Country/CountryFormCtrl.js" afterPath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/Country/CountryFormCtrl.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/Layout/LayoutFormCtrl.js" afterPath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/Layout/LayoutFormCtrl.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/Newsroom/NewsroomFormCtrl.js" afterPath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/Newsroom/NewsroomFormCtrl.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/PressRelease/PressReleaseFormCtrl.js" afterPath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/PressRelease/PressReleaseFormCtrl.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/PressRelease/PressReleasesCtrl.js" afterPath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/PressRelease/PressReleasesCtrl.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/Template/TemplateFormCtrl.js" afterPath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/Template/TemplateFormCtrl.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/User/UserFormCtrl.js" afterPath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/User/UserFormCtrl.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/constant.js" afterPath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/constant.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/i18n/en.json" afterPath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/i18n/en.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/i18n/fr.json" afterPath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/i18n/fr.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/router.js" afterPath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/router.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/app/scripts/config.constant.js" afterPath="$PROJECT_DIR$/web/app/scripts/config.constant.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/app/views/common/sidebar-panel.html" afterPath="$PROJECT_DIR$/web/app/views/common/sidebar-panel.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/assetic/continuous_net_controllers.js" afterPath="$PROJECT_DIR$/web/assetic/continuous_net_controllers.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/assetic/continuous_net_controllers_FileManagerCtrl_1.js" afterPath="$PROJECT_DIR$/web/assetic/continuous_net_controllers_FileManagerCtrl_1.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/assetic/continuous_net_css.css" afterPath="$PROJECT_DIR$/web/assetic/continuous_net_css.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/assetic/continuous_net_css_custom_5.css" afterPath="$PROJECT_DIR$/web/assetic/continuous_net_css_custom_5.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/assetic/continuous_net_scripts.js" afterPath="$PROJECT_DIR$/web/assetic/continuous_net_scripts.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/assetic/continuous_net_scripts_config.constant_3.js" afterPath="$PROJECT_DIR$/web/assetic/continuous_net_scripts_config.constant_3.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/assetic/continuous_net_scripts_constant_4.js" afterPath="$PROJECT_DIR$/web/assetic/continuous_net_scripts_constant_4.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/assetic/continuous_net_scripts_router_6.js" afterPath="$PROJECT_DIR$/web/assetic/continuous_net_scripts_router_6.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/css/3966479.css" afterPath="$PROJECT_DIR$/web/css/3966479.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/css/3966479_part_12.css" afterPath="$PROJECT_DIR$/web/css/3966479_part_12.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/js/a1d09b1.js" afterPath="$PROJECT_DIR$/web/js/a1d09b1.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/js/a1d09b1_part_16.js" afterPath="$PROJECT_DIR$/web/js/a1d09b1_part_16.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/js/a1d09b1_part_19.js" afterPath="$PROJECT_DIR$/web/js/a1d09b1_part_19.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/styles/custom.css" afterPath="$PROJECT_DIR$/web/styles/custom.css" />
-    </list>
+    <list default="true" id="b7d77c83-7530-40a0-bb78-28ddc05200bf" name="Default" comment="" />
     <ignored path="publipr.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -156,7 +87,59 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="-4.516129">
               <caret line="112" column="41" selection-start-line="112" selection-start-column="41" selection-end-line="112" selection-end-column="73" />
-              <folding />
+              <folding>
+                <marker date="1462898460459" expanded="true" signature="1:116" placeholder="publi_pr:" />
+                <marker date="1462898460459" expanded="true" signature="117:227" placeholder="thumb:" />
+                <marker date="1462898460459" expanded="true" signature="228:272" placeholder="api_login_check:" />
+                <marker date="1462898460459" expanded="true" signature="273:376" placeholder="api_login_check_lang:" />
+                <marker date="1462898460459" expanded="true" signature="336:376" placeholder="requirements:" />
+                <marker date="1462898460459" expanded="true" signature="377:553" placeholder="publi_pr_v1_api:" />
+                <marker date="1462898460459" expanded="true" signature="513:553" placeholder="requirements:" />
+                <marker date="1462898460459" expanded="true" signature="554:680" placeholder="publi_pr_company_api:" />
+                <marker date="1462898460459" expanded="true" signature="681:807" placeholder="publi_pr_contact_api:" />
+                <marker date="1462898460459" expanded="true" signature="808:945" placeholder="publi_pr_contact_group_api:" />
+                <marker date="1462898460459" expanded="true" signature="946:1083" placeholder="publi_pr_content_block_api:" />
+                <marker date="1462898460459" expanded="true" signature="1084:1210" placeholder="publi_pr_country_api:" />
+                <marker date="1462898460459" expanded="true" signature="1211:1333" placeholder="publi_pr_email_api:" />
+                <marker date="1462898460459" expanded="true" signature="1334:1473" placeholder="publi_pr_email_campaign_api:" />
+                <marker date="1462898460459" expanded="true" signature="1474:1613" placeholder="publi_pr_email_template_api:" />
+                <marker date="1462898460459" expanded="true" signature="1614:1734" placeholder="publi_pr_font_api:" />
+                <marker date="1462898460459" expanded="true" signature="1735:1863" placeholder="publi_pr_language_api:" />
+                <marker date="1462898460459" expanded="true" signature="1864:1988" placeholder="publi_pr_layout_api:" />
+                <marker date="1462898460459" expanded="true" signature="1989:2107" placeholder="publi_pr_log_api:" />
+                <marker date="1462898460459" expanded="true" signature="2108:2236" placeholder="publi_pr_newsroom_api:" />
+                <marker date="1462898460459" expanded="true" signature="2237:2382" placeholder="publi_pr_newsroom_template_api:" />
+                <marker date="1462898460459" expanded="true" signature="2383:2503" placeholder="publi_pr_user_api:" />
+                <marker date="1462898460459" expanded="true" signature="2504:2630" placeholder="publi_pr_payment_api:" />
+                <marker date="1462898460459" expanded="true" signature="2631:2768" placeholder="publi_pr_press_release_api:" />
+                <marker date="1462898460459" expanded="true" signature="2769:3031" placeholder="publi_pr_session_api:" />
+                <marker date="1462898460459" expanded="true" signature="3032:3158" placeholder="publi_pr_setting_api:" />
+                <marker date="1462898460459" expanded="true" signature="3159:3287" placeholder="publi_pr_template_api:" />
+                <marker date="1462898460459" expanded="true" signature="3288:3421" placeholder="publi_pr_track_email_api:" />
+                <marker date="1462898460459" expanded="true" signature="3422:3570" placeholder="publi_pr_track_press_release_api:" />
+                <marker date="1462898460459" expanded="true" signature="3571:3680" placeholder="publi_pr_company:" />
+                <marker date="1462898460459" expanded="true" signature="3681:3790" placeholder="publi_pr_contact:" />
+                <marker date="1462898460459" expanded="true" signature="3791:3918" placeholder="publi_pr_contact_group:" />
+                <marker date="1462898460459" expanded="true" signature="3919:4046" placeholder="publi_pr_content_block:" />
+                <marker date="1462898460459" expanded="true" signature="4047:4156" placeholder="publi_pr_country:" />
+                <marker date="1462898460459" expanded="true" signature="4157:4260" placeholder="publi_pr_email:" />
+                <marker date="1462898460459" expanded="true" signature="4261:4391" placeholder="publi_pr_email_campaign:" />
+                <marker date="1462898460459" expanded="true" signature="4392:4522" placeholder="publi_pr_email_template:" />
+                <marker date="1462898460459" expanded="true" signature="4523:4623" placeholder="publi_pr_font:" />
+                <marker date="1462898460459" expanded="true" signature="4624:4736" placeholder="publi_pr_language:" />
+                <marker date="1462898460459" expanded="true" signature="4737:4843" placeholder="publi_pr_layout:" />
+                <marker date="1462898460459" expanded="true" signature="4844:4941" placeholder="publi_pr_log:" />
+                <marker date="1462898460459" expanded="true" signature="4942:5054" placeholder="publi_pr_newsroom:" />
+                <marker date="1462898460459" expanded="true" signature="5055:5194" placeholder="publi_pr_newsroom_template:" />
+                <marker date="1462898460459" expanded="true" signature="5195:5295" placeholder="publi_pr_user:" />
+                <marker date="1462898460459" expanded="true" signature="5296:5405" placeholder="publi_pr_payment:" />
+                <marker date="1462898460459" expanded="true" signature="5406:5533" placeholder="publi_pr_press_release:" />
+                <marker date="1462898460459" expanded="true" signature="5534:5643" placeholder="publi_pr_session:" />
+                <marker date="1462898460459" expanded="true" signature="5644:5753" placeholder="publi_pr_setting:" />
+                <marker date="1462898460459" expanded="true" signature="5754:5866" placeholder="publi_pr_template:" />
+                <marker date="1462898460459" expanded="true" signature="5867:5988" placeholder="publi_pr_track_email:" />
+                <marker date="1462898460459" expanded="true" signature="5989:6134" placeholder="publi_pr_track_press_release:" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -688,7 +671,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="-4" width="1301" height="772" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33820137" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1103,7 +1086,59 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-4.516129">
           <caret line="112" column="41" selection-start-line="112" selection-start-column="41" selection-end-line="112" selection-end-column="73" />
-          <folding />
+          <folding>
+            <marker date="1462898460459" expanded="true" signature="1:116" placeholder="publi_pr:" />
+            <marker date="1462898460459" expanded="true" signature="117:227" placeholder="thumb:" />
+            <marker date="1462898460459" expanded="true" signature="228:272" placeholder="api_login_check:" />
+            <marker date="1462898460459" expanded="true" signature="273:376" placeholder="api_login_check_lang:" />
+            <marker date="1462898460459" expanded="true" signature="336:376" placeholder="requirements:" />
+            <marker date="1462898460459" expanded="true" signature="377:553" placeholder="publi_pr_v1_api:" />
+            <marker date="1462898460459" expanded="true" signature="513:553" placeholder="requirements:" />
+            <marker date="1462898460459" expanded="true" signature="554:680" placeholder="publi_pr_company_api:" />
+            <marker date="1462898460459" expanded="true" signature="681:807" placeholder="publi_pr_contact_api:" />
+            <marker date="1462898460459" expanded="true" signature="808:945" placeholder="publi_pr_contact_group_api:" />
+            <marker date="1462898460459" expanded="true" signature="946:1083" placeholder="publi_pr_content_block_api:" />
+            <marker date="1462898460459" expanded="true" signature="1084:1210" placeholder="publi_pr_country_api:" />
+            <marker date="1462898460459" expanded="true" signature="1211:1333" placeholder="publi_pr_email_api:" />
+            <marker date="1462898460459" expanded="true" signature="1334:1473" placeholder="publi_pr_email_campaign_api:" />
+            <marker date="1462898460459" expanded="true" signature="1474:1613" placeholder="publi_pr_email_template_api:" />
+            <marker date="1462898460459" expanded="true" signature="1614:1734" placeholder="publi_pr_font_api:" />
+            <marker date="1462898460459" expanded="true" signature="1735:1863" placeholder="publi_pr_language_api:" />
+            <marker date="1462898460459" expanded="true" signature="1864:1988" placeholder="publi_pr_layout_api:" />
+            <marker date="1462898460459" expanded="true" signature="1989:2107" placeholder="publi_pr_log_api:" />
+            <marker date="1462898460459" expanded="true" signature="2108:2236" placeholder="publi_pr_newsroom_api:" />
+            <marker date="1462898460459" expanded="true" signature="2237:2382" placeholder="publi_pr_newsroom_template_api:" />
+            <marker date="1462898460459" expanded="true" signature="2383:2503" placeholder="publi_pr_user_api:" />
+            <marker date="1462898460459" expanded="true" signature="2504:2630" placeholder="publi_pr_payment_api:" />
+            <marker date="1462898460459" expanded="true" signature="2631:2768" placeholder="publi_pr_press_release_api:" />
+            <marker date="1462898460459" expanded="true" signature="2769:3031" placeholder="publi_pr_session_api:" />
+            <marker date="1462898460459" expanded="true" signature="3032:3158" placeholder="publi_pr_setting_api:" />
+            <marker date="1462898460459" expanded="true" signature="3159:3287" placeholder="publi_pr_template_api:" />
+            <marker date="1462898460459" expanded="true" signature="3288:3421" placeholder="publi_pr_track_email_api:" />
+            <marker date="1462898460459" expanded="true" signature="3422:3570" placeholder="publi_pr_track_press_release_api:" />
+            <marker date="1462898460459" expanded="true" signature="3571:3680" placeholder="publi_pr_company:" />
+            <marker date="1462898460459" expanded="true" signature="3681:3790" placeholder="publi_pr_contact:" />
+            <marker date="1462898460459" expanded="true" signature="3791:3918" placeholder="publi_pr_contact_group:" />
+            <marker date="1462898460459" expanded="true" signature="3919:4046" placeholder="publi_pr_content_block:" />
+            <marker date="1462898460459" expanded="true" signature="4047:4156" placeholder="publi_pr_country:" />
+            <marker date="1462898460459" expanded="true" signature="4157:4260" placeholder="publi_pr_email:" />
+            <marker date="1462898460459" expanded="true" signature="4261:4391" placeholder="publi_pr_email_campaign:" />
+            <marker date="1462898460459" expanded="true" signature="4392:4522" placeholder="publi_pr_email_template:" />
+            <marker date="1462898460459" expanded="true" signature="4523:4623" placeholder="publi_pr_font:" />
+            <marker date="1462898460459" expanded="true" signature="4624:4736" placeholder="publi_pr_language:" />
+            <marker date="1462898460459" expanded="true" signature="4737:4843" placeholder="publi_pr_layout:" />
+            <marker date="1462898460459" expanded="true" signature="4844:4941" placeholder="publi_pr_log:" />
+            <marker date="1462898460459" expanded="true" signature="4942:5054" placeholder="publi_pr_newsroom:" />
+            <marker date="1462898460459" expanded="true" signature="5055:5194" placeholder="publi_pr_newsroom_template:" />
+            <marker date="1462898460459" expanded="true" signature="5195:5295" placeholder="publi_pr_user:" />
+            <marker date="1462898460459" expanded="true" signature="5296:5405" placeholder="publi_pr_payment:" />
+            <marker date="1462898460459" expanded="true" signature="5406:5533" placeholder="publi_pr_press_release:" />
+            <marker date="1462898460459" expanded="true" signature="5534:5643" placeholder="publi_pr_session:" />
+            <marker date="1462898460459" expanded="true" signature="5644:5753" placeholder="publi_pr_setting:" />
+            <marker date="1462898460459" expanded="true" signature="5754:5866" placeholder="publi_pr_template:" />
+            <marker date="1462898460459" expanded="true" signature="5867:5988" placeholder="publi_pr_track_email:" />
+            <marker date="1462898460459" expanded="true" signature="5989:6134" placeholder="publi_pr_track_press_release:" />
+          </folding>
         </state>
       </provider>
     </entry>

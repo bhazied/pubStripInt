@@ -1,0 +1,30 @@
+like:
+    path:     /
+    defaults: { _controller: "SportClubBundle:Like:index" }
+
+like_details:
+    path:     /{id}/details
+    defaults: { _controller: "SportClubBundle:Like:show" }
+
+like_new:
+    path:     /new
+    defaults: { _controller: "SportClubBundle:Like:new" }
+
+like_create:
+    path:     /create
+    defaults: { _controller: "SportClubBundle:Like:create" }
+    methods:  POST
+
+like_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "SportClubBundle:Like:edit" }
+
+like_update:
+    path:     /{id}/update
+    defaults: { _controller: "SportClubBundle:Like:update" }
+    methods:  [POST, PUT]
+
+like_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "SportClubBundle:Like:delete" }
+    methods:  [POST, DELETE]

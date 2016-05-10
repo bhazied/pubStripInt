@@ -1,0 +1,30 @@
+audio:
+    path:     /
+    defaults: { _controller: "SportClubBundle:Audio:index" }
+
+audio_details:
+    path:     /{id}/details
+    defaults: { _controller: "SportClubBundle:Audio:show" }
+
+audio_new:
+    path:     /new
+    defaults: { _controller: "SportClubBundle:Audio:new" }
+
+audio_create:
+    path:     /create
+    defaults: { _controller: "SportClubBundle:Audio:create" }
+    methods:  POST
+
+audio_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "SportClubBundle:Audio:edit" }
+
+audio_update:
+    path:     /{id}/update
+    defaults: { _controller: "SportClubBundle:Audio:update" }
+    methods:  [POST, PUT]
+
+audio_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "SportClubBundle:Audio:delete" }
+    methods:  [POST, DELETE]

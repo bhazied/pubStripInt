@@ -1,0 +1,30 @@
+stadium:
+    path:     /
+    defaults: { _controller: "SportClubBundle:Stadium:index" }
+
+stadium_details:
+    path:     /{id}/details
+    defaults: { _controller: "SportClubBundle:Stadium:show" }
+
+stadium_new:
+    path:     /new
+    defaults: { _controller: "SportClubBundle:Stadium:new" }
+
+stadium_create:
+    path:     /create
+    defaults: { _controller: "SportClubBundle:Stadium:create" }
+    methods:  POST
+
+stadium_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "SportClubBundle:Stadium:edit" }
+
+stadium_update:
+    path:     /{id}/update
+    defaults: { _controller: "SportClubBundle:Stadium:update" }
+    methods:  [POST, PUT]
+
+stadium_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "SportClubBundle:Stadium:delete" }
+    methods:  [POST, DELETE]
