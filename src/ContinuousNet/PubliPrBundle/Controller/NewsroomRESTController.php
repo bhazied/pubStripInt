@@ -88,7 +88,7 @@ class NewsroomRESTController extends BaseRESTController
             $qb->leftJoin('ContinuousNet\PubliPrBundle\Entity\Font', 'text_font', \Doctrine\ORM\Query\Expr\Join::WITH, 'n_.textFont = text_font.id');
             $qb->leftJoin('ContinuousNet\PubliPrBundle\Entity\User', 'creator_user', \Doctrine\ORM\Query\Expr\Join::WITH, 'n_.creatorUser = creator_user.id');
             $qb->leftJoin('ContinuousNet\PubliPrBundle\Entity\User', 'modifier_user', \Doctrine\ORM\Query\Expr\Join::WITH, 'n_.modifierUser = modifier_user.id');
-            $textFields = array('newsroom.name', 'newsroom.slug', 'newsroom.description', 'newsroom.url', 'newsroom.email', 'newsroom.bannerPicture', 'newsroom.backgroundColor', 'newsroom.titleColor', 'newsroom.textColor', 'newsroom.facebookLink', 'newsroom.twitterLink', 'newsroom.googlePlusLink', 'newsroom.pinterestLink', 'newsroom.instagramLink', 'newsroom.youtubeLink', 'newsroom.linkedinLink', 'newsroom.viadeoLink', 'newsroom.css');
+            $textFields = array('newsroom.name', 'newsroom.slug', 'newsroom.description', 'newsroom.url', 'newsroom.email', 'newsroom.bannerPicture', 'newsroom.backgroundColor', 'newsroom.titleColor', 'newsroom.textColor', 'newsroom.facebookLink', 'newsroom.twitterLink', 'newsroom.googlePlusLink', 'newsroom.pinterestLink', 'newsroom.instagramLink', 'newsroom.youtubeLink', 'newsroom.linkedinLink', 'newsroom.vimeoLink', 'newsroom.flickrLink', 'newsroom.tumblrLink', 'newsroom.css');
             foreach ($filters as $field => $value) {
                 $_field = str_replace('newsroom.', 'n_.', $field);
                 $key = str_replace('.', '', $field);

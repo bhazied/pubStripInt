@@ -1967,14 +1967,14 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.IMPORTCONTACTS'
         },
-        resolve: loadSequence('ContactImportCtrl', 'contactGroupService', 'ContactImportService', 'contactService', 'FileUploader')
+        resolve: loadSequence('ContactImportCtrl', 'ContactImportService', 'contactService', 'touchspin-plugin', 'contactGroupService', 'userService')
     }).state('app.contactmanager.contactsexport', {
         url: '/contacts/export',
         templateUrl: '/bundles/publipr/js/components/Contact/contact_export.html',
         ncyBreadcrumb: {
             label: 'content.list.IMPORTCONTACTS'
         },
-        resolve: loadSequence('ContactExportCtrl', 'ContactExportService', 'contactService')
+        resolve: loadSequence('ContactExportCtrl', 'ContactExportService', 'contactService', 'contactGroupService', 'userService')
     }).state('app.templatemanager', {
         url: '/template-manager',
         template: '<div ui-view class="fade-in-up"></div>',

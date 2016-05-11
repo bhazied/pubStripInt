@@ -444,6 +444,7 @@ assetic:
                 - 'bower_components/flot/jquery.flot.js'
                 - 'app/scripts/extentions/modernizr.js'
                 - 'app/scripts/extentions/lib.js'
+                - 'bower_components/file-saver.js/FileSaver.js'
         continuous_net_scripts:
             inputs:
                 - 'app/scripts/app.js'
