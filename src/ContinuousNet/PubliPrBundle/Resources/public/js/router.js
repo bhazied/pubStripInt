@@ -708,7 +708,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.SENDPRESSRELEASE'
         },
-        resolve: loadSequence('PressReleaseSenderCtrl', 'PressReleaseSenderService', 'pressReleaseService')
+        resolve: loadSequence('PressReleaseSenderCtrl', 'PressReleaseSenderService', 'pressReleaseService', 'contactGroupService')
     }).state('app.settings', {
         url: '/settings',
         template: '<div ui-view class="fade-in-up"></div>',

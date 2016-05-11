@@ -1,0 +1,30 @@
+table:
+    path:     /
+    defaults: { _controller: "SportClubBundle:Table:index" }
+
+table_details:
+    path:     /{id}/details
+    defaults: { _controller: "SportClubBundle:Table:show" }
+
+table_new:
+    path:     /new
+    defaults: { _controller: "SportClubBundle:Table:new" }
+
+table_create:
+    path:     /create
+    defaults: { _controller: "SportClubBundle:Table:create" }
+    methods:  POST
+
+table_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "SportClubBundle:Table:edit" }
+
+table_update:
+    path:     /{id}/update
+    defaults: { _controller: "SportClubBundle:Table:update" }
+    methods:  [POST, PUT]
+
+table_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "SportClubBundle:Table:delete" }
+    methods:  [POST, DELETE]

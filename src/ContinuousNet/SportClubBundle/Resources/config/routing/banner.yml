@@ -1,0 +1,30 @@
+banner:
+    path:     /
+    defaults: { _controller: "SportClubBundle:Banner:index" }
+
+banner_details:
+    path:     /{id}/details
+    defaults: { _controller: "SportClubBundle:Banner:show" }
+
+banner_new:
+    path:     /new
+    defaults: { _controller: "SportClubBundle:Banner:new" }
+
+banner_create:
+    path:     /create
+    defaults: { _controller: "SportClubBundle:Banner:create" }
+    methods:  POST
+
+banner_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "SportClubBundle:Banner:edit" }
+
+banner_update:
+    path:     /{id}/update
+    defaults: { _controller: "SportClubBundle:Banner:update" }
+    methods:  [POST, PUT]
+
+banner_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "SportClubBundle:Banner:delete" }
+    methods:  [POST, DELETE]
