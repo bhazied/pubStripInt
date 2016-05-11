@@ -51,8 +51,10 @@ class TrackEmailRESTController extends BaseRESTController
      * @return Response
      *
      */
-    public function getAction( TrackEmail  $entity)
+    public function getAction(TrackEmail $entity)
     {
+        $entity->dir = $this->getSubDirectory($entity, false);
+        $this->createSubDirectory($entity);
         return $entity;
     }
 

@@ -51,8 +51,10 @@ class LanguageRESTController extends BaseRESTController
      * @return Response
      *
      */
-    public function getAction( Language  $entity)
+    public function getAction(Language $entity)
     {
+        $entity->dir = $this->getSubDirectory($entity, false);
+        $this->createSubDirectory($entity);
         return $entity;
     }
 

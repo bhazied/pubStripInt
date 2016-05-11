@@ -51,8 +51,10 @@ class FontRESTController extends BaseRESTController
      * @return Response
      *
      */
-    public function getAction( Font  $entity)
+    public function getAction(Font $entity)
     {
+        $entity->dir = $this->getSubDirectory($entity, false);
+        $this->createSubDirectory($entity);
         return $entity;
     }
 
