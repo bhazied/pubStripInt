@@ -1,0 +1,30 @@
+imagetype:
+    path:     /
+    defaults: { _controller: "SportClubBundle:ImageType:index" }
+
+imagetype_details:
+    path:     /{id}/details
+    defaults: { _controller: "SportClubBundle:ImageType:show" }
+
+imagetype_new:
+    path:     /new
+    defaults: { _controller: "SportClubBundle:ImageType:new" }
+
+imagetype_create:
+    path:     /create
+    defaults: { _controller: "SportClubBundle:ImageType:create" }
+    methods:  POST
+
+imagetype_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "SportClubBundle:ImageType:edit" }
+
+imagetype_update:
+    path:     /{id}/update
+    defaults: { _controller: "SportClubBundle:ImageType:update" }
+    methods:  [POST, PUT]
+
+imagetype_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "SportClubBundle:ImageType:delete" }
+    methods:  [POST, DELETE]

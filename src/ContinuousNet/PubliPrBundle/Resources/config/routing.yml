@@ -34,6 +34,16 @@ publi_pr_contact_api:
     type:   rest
     prefix:   /api
 
+contact_importer:
+    resource: "@PubliPrBundle/Controller/ContactImporterController.php"
+    type:     rest
+    prefix:   /api
+
+contact_exporter:
+    resource: "@PubliPrBundle/Controller/ContactExporterController.php"
+    type:     rest
+    prefix:   /api
+
 publi_pr_contact_group_api:
     resource: "@PubliPrBundle/Controller/ContactGroupRESTController.php"
     type:   rest
@@ -107,6 +117,11 @@ publi_pr_payment_api:
 publi_pr_press_release_api:
     resource: "@PubliPrBundle/Controller/PressReleaseRESTController.php"
     type:   rest
+    prefix:   /api
+
+press_release_sender:
+    resource: "@PubliPrBundle/Controller/PressReleaseSenderController.php"
+    type:     rest
     prefix:   /api
 
 publi_pr_session_api:

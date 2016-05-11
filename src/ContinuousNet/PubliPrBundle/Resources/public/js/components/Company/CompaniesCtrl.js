@@ -215,15 +215,15 @@ function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q,
     };
 
     $scope.add = function() {
-        $state.go('app.nogroup.companiesnew');
+        $state.go('app.access.companiesnew');
     };
 
     $scope.edit = function(row) {
-        $state.go('app.nogroup.companiesedit', {id: row.id});
+        $state.go('app.access.companiesedit', {id: row.id});
     };
 
     $scope.details = function(row) {
-        $state.go('app.nogroup.companiesdetails', {id: row.id});
+        $state.go('app.access.companiesdetails', {id: row.id});
     };
 
 }]);

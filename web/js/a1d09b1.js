@@ -17042,6 +17042,259 @@ function LightenDarkenColor(col, amt) {
 
 }
 
+/* FileSaver.js
+ * A saveAs() FileSaver implementation.
+ * 2015-05-07.2
+ *
+ * By Eli Grey, http://eligrey.com
+ * License: X11/MIT
+ *   See https://github.com/eligrey/FileSaver.js/blob/master/LICENSE.md
+ */
+
+/*global self */
+/*jslint bitwise: true, indent: 4, laxbreak: true, laxcomma: true, smarttabs: true, plusplus: true */
+
+/*! @source http://purl.eligrey.com/github/FileSaver.js/blob/master/FileSaver.js */
+
+var saveAs = saveAs || (function(view) {
+	"use strict";
+	// IE <10 is explicitly unsupported
+	if (typeof navigator !== "undefined" && /MSIE [1-9]\./.test(navigator.userAgent)) {
+		return;
+	}
+	var
+		  doc = view.document
+		  // only get URL when necessary in case Blob.js hasn't overridden it yet
+		, get_URL = function() {
+			return view.URL || view.webkitURL || view;
+		}
+		, save_link = doc.createElementNS("http://www.w3.org/1999/xhtml", "a")
+		, can_use_save_link = "download" in save_link
+		, click = function(node) {
+			var event = doc.createEvent("MouseEvents");
+			event.initMouseEvent(
+				"click", true, false, view, 0, 0, 0, 0, 0
+				, false, false, false, false, 0, null
+			);
+			node.dispatchEvent(event);
+		}
+		, webkit_req_fs = view.webkitRequestFileSystem
+		, req_fs = view.requestFileSystem || webkit_req_fs || view.mozRequestFileSystem
+		, throw_outside = function(ex) {
+			(view.setImmediate || view.setTimeout)(function() {
+				throw ex;
+			}, 0);
+		}
+		, force_saveable_type = "application/octet-stream"
+		, fs_min_size = 0
+		// See https://code.google.com/p/chromium/issues/detail?id=375297#c7 and
+		// https://github.com/eligrey/FileSaver.js/commit/485930a#commitcomment-8768047
+		// for the reasoning behind the timeout and revocation flow
+		, arbitrary_revoke_timeout = 500 // in ms
+		, revoke = function(file) {
+			var revoker = function() {
+				if (typeof file === "string") { // file is an object URL
+					get_URL().revokeObjectURL(file);
+				} else { // file is a File
+					file.remove();
+				}
+			};
+			if (view.chrome) {
+				revoker();
+			} else {
+				setTimeout(revoker, arbitrary_revoke_timeout);
+			}
+		}
+		, dispatch = function(filesaver, event_types, event) {
+			event_types = [].concat(event_types);
+			var i = event_types.length;
+			while (i--) {
+				var listener = filesaver["on" + event_types[i]];
+				if (typeof listener === "function") {
+					try {
+						listener.call(filesaver, event || filesaver);
+					} catch (ex) {
+						throw_outside(ex);
+					}
+				}
+			}
+		}
+		, auto_bom = function(blob) {
+			// prepend BOM for UTF-8 XML and text/* types (including HTML)
+			if (/^\s*(?:text\/\S*|application\/xml|\S*\/\S*\+xml)\s*;.*charset\s*=\s*utf-8/i.test(blob.type)) {
+				return new Blob(["\ufeff", blob], {type: blob.type});
+			}
+			return blob;
+		}
+		, FileSaver = function(blob, name) {
+			blob = auto_bom(blob);
+			// First try a.download, then web filesystem, then object URLs
+			var
+				  filesaver = this
+				, type = blob.type
+				, blob_changed = false
+				, object_url
+				, target_view
+				, dispatch_all = function() {
+					dispatch(filesaver, "writestart progress write writeend".split(" "));
+				}
+				// on any filesys errors revert to saving with object URLs
+				, fs_error = function() {
+					// don't create more object URLs than needed
+					if (blob_changed || !object_url) {
+						object_url = get_URL().createObjectURL(blob);
+					}
+					if (target_view) {
+						target_view.location.href = object_url;
+					} else {
+						var new_tab = view.open(object_url, "_blank");
+						if (new_tab == undefined && typeof safari !== "undefined") {
+							//Apple do not allow window.open, see http://bit.ly/1kZffRI
+							view.location.href = object_url
+						}
+					}
+					filesaver.readyState = filesaver.DONE;
+					dispatch_all();
+					revoke(object_url);
+				}
+				, abortable = function(func) {
+					return function() {
+						if (filesaver.readyState !== filesaver.DONE) {
+							return func.apply(this, arguments);
+						}
+					};
+				}
+				, create_if_not_found = {create: true, exclusive: false}
+				, slice
+			;
+			filesaver.readyState = filesaver.INIT;
+			if (!name) {
+				name = "download";
+			}
+			if (can_use_save_link) {
+				object_url = get_URL().createObjectURL(blob);
+				save_link.href = object_url;
+				save_link.download = name;
+				click(save_link);
+				filesaver.readyState = filesaver.DONE;
+				dispatch_all();
+				revoke(object_url);
+				return;
+			}
+			// Object and web filesystem URLs have a problem saving in Google Chrome when
+			// viewed in a tab, so I force save with application/octet-stream
+			// http://code.google.com/p/chromium/issues/detail?id=91158
+			// Update: Google errantly closed 91158, I submitted it again:
+			// https://code.google.com/p/chromium/issues/detail?id=389642
+			if (view.chrome && type && type !== force_saveable_type) {
+				slice = blob.slice || blob.webkitSlice;
+				blob = slice.call(blob, 0, blob.size, force_saveable_type);
+				blob_changed = true;
+			}
+			// Since I can't be sure that the guessed media type will trigger a download
+			// in WebKit, I append .download to the filename.
+			// https://bugs.webkit.org/show_bug.cgi?id=65440
+			if (webkit_req_fs && name !== "download") {
+				name += ".download";
+			}
+			if (type === force_saveable_type || webkit_req_fs) {
+				target_view = view;
+			}
+			if (!req_fs) {
+				fs_error();
+				return;
+			}
+			fs_min_size += blob.size;
+			req_fs(view.TEMPORARY, fs_min_size, abortable(function(fs) {
+				fs.root.getDirectory("saved", create_if_not_found, abortable(function(dir) {
+					var save = function() {
+						dir.getFile(name, create_if_not_found, abortable(function(file) {
+							file.createWriter(abortable(function(writer) {
+								writer.onwriteend = function(event) {
+									target_view.location.href = file.toURL();
+									filesaver.readyState = filesaver.DONE;
+									dispatch(filesaver, "writeend", event);
+									revoke(file);
+								};
+								writer.onerror = function() {
+									var error = writer.error;
+									if (error.code !== error.ABORT_ERR) {
+										fs_error();
+									}
+								};
+								"writestart progress write abort".split(" ").forEach(function(event) {
+									writer["on" + event] = filesaver["on" + event];
+								});
+								writer.write(blob);
+								filesaver.abort = function() {
+									writer.abort();
+									filesaver.readyState = filesaver.DONE;
+								};
+								filesaver.readyState = filesaver.WRITING;
+							}), fs_error);
+						}), fs_error);
+					};
+					dir.getFile(name, {create: false}, abortable(function(file) {
+						// delete file if it already exists
+						file.remove();
+						save();
+					}), abortable(function(ex) {
+						if (ex.code === ex.NOT_FOUND_ERR) {
+							save();
+						} else {
+							fs_error();
+						}
+					}));
+				}), fs_error);
+			}), fs_error);
+		}
+		, FS_proto = FileSaver.prototype
+		, saveAs = function(blob, name) {
+			return new FileSaver(blob, name);
+		}
+	;
+	// IE 10+ (native saveAs)
+	if (typeof navigator !== "undefined" && navigator.msSaveOrOpenBlob) {
+		return function(blob, name) {
+			return navigator.msSaveOrOpenBlob(auto_bom(blob), name);
+		};
+	}
+
+	FS_proto.abort = function() {
+		var filesaver = this;
+		filesaver.readyState = filesaver.DONE;
+		dispatch(filesaver, "abort");
+	};
+	FS_proto.readyState = FS_proto.INIT = 0;
+	FS_proto.WRITING = 1;
+	FS_proto.DONE = 2;
+
+	FS_proto.error =
+	FS_proto.onwritestart =
+	FS_proto.onprogress =
+	FS_proto.onwrite =
+	FS_proto.onabort =
+	FS_proto.onerror =
+	FS_proto.onwriteend =
+		null;
+
+	return saveAs;
+}(
+	   typeof self !== "undefined" && self
+	|| typeof window !== "undefined" && window
+	|| this.content
+));
+// `self` is undefined in Firefox for Android content script context
+// while `this` is nsIContentFrameMessageManager
+// with an attribute `content` that corresponds to the window
+
+if (typeof module !== "undefined" && module.exports) {
+  module.exports.saveAs = saveAs;
+} else if ((typeof define !== "undefined" && define !== null) && (define.amd != null)) {
+  define([], function() {
+    return saveAs;
+  });
+}
 /**
  * @license AngularJS v1.5.3
  * (c) 2010-2016 Google, Inc. http://angularjs.org
@@ -77229,7 +77482,8 @@ app.constant('JS_REQUIRES', {
         //*** Controllers
 
         //*** Filters
-        'htmlToPlaintext': '/app/scripts/filters/htmlToPlaintext.js'
+        'htmlToPlaintext': '/app/scripts/filters/htmlToPlaintext.js',
+        FileUploader: ['/bower_components/angular-file-upload/angular-file-upload.min.js']
     },
     //*** angularJS Modules
     modules: [{
@@ -77336,71 +77590,75 @@ app.constant('APP_JS_REQUIRES', {
         'ProfileCtrl': '/bundles/publipr/js/components/Auth/ProfileCtrl.js',
         'DashboardCtrl': '/bundles/publipr/js/components/Main/DashboardCtrl.js',
         'CompaniesCtrl': '/bundles/publipr/js/components/Company/CompaniesCtrl.js',
-        'CompanyFormCtrl': '/bundles/publipr/js/components/Company/CompanyFromCtrl.js',
+        'CompanyFormCtrl': '/bundles/publipr/js/components/Company/CompanyFormCtrl.js',
         'CompanyCtrl': '/bundles/publipr/js/components/Company/CompanyCtrl.js',
         'ContactsCtrl': '/bundles/publipr/js/components/Contact/ContactsCtrl.js',
-        'ContactFormCtrl': '/bundles/publipr/js/components/Contact/ContactFromCtrl.js',
+        'ContactFormCtrl': '/bundles/publipr/js/components/Contact/ContactFormCtrl.js',
         'ContactCtrl': '/bundles/publipr/js/components/Contact/ContactCtrl.js',
+        'ContactImportCtrl': '/bundles/publipr/js/components/Contact/ContactImportCtrl.js',
+        'ContactExportCtrl': '/bundles/publipr/js/components/Contact/ContactExportCtrl.js',
         'ContactGroupsCtrl': '/bundles/publipr/js/components/ContactGroup/ContactGroupsCtrl.js',
-        'ContactGroupFormCtrl': '/bundles/publipr/js/components/ContactGroup/ContactGroupFromCtrl.js',
+        'ContactGroupFormCtrl': '/bundles/publipr/js/components/ContactGroup/ContactGroupFormCtrl.js',
         'ContactGroupCtrl': '/bundles/publipr/js/components/ContactGroup/ContactGroupCtrl.js',
         'ContentBlocksCtrl': '/bundles/publipr/js/components/ContentBlock/ContentBlocksCtrl.js',
-        'ContentBlockFormCtrl': '/bundles/publipr/js/components/ContentBlock/ContentBlockFromCtrl.js',
+        'ContentBlockFormCtrl': '/bundles/publipr/js/components/ContentBlock/ContentBlockFormCtrl.js',
         'ContentBlockCtrl': '/bundles/publipr/js/components/ContentBlock/ContentBlockCtrl.js',
         'CountriesCtrl': '/bundles/publipr/js/components/Country/CountriesCtrl.js',
-        'CountryFormCtrl': '/bundles/publipr/js/components/Country/CountryFromCtrl.js',
+        'CountryFormCtrl': '/bundles/publipr/js/components/Country/CountryFormCtrl.js',
         'CountryCtrl': '/bundles/publipr/js/components/Country/CountryCtrl.js',
         'EmailsCtrl': '/bundles/publipr/js/components/Email/EmailsCtrl.js',
-        'EmailFormCtrl': '/bundles/publipr/js/components/Email/EmailFromCtrl.js',
+        'EmailFormCtrl': '/bundles/publipr/js/components/Email/EmailFormCtrl.js',
         'EmailCtrl': '/bundles/publipr/js/components/Email/EmailCtrl.js',
         'EmailCampaignsCtrl': '/bundles/publipr/js/components/EmailCampaign/EmailCampaignsCtrl.js',
-        'EmailCampaignFormCtrl': '/bundles/publipr/js/components/EmailCampaign/EmailCampaignFromCtrl.js',
+        'EmailCampaignFormCtrl': '/bundles/publipr/js/components/EmailCampaign/EmailCampaignFormCtrl.js',
         'EmailCampaignCtrl': '/bundles/publipr/js/components/EmailCampaign/EmailCampaignCtrl.js',
         'EmailTemplatesCtrl': '/bundles/publipr/js/components/EmailTemplate/EmailTemplatesCtrl.js',
-        'EmailTemplateFormCtrl': '/bundles/publipr/js/components/EmailTemplate/EmailTemplateFromCtrl.js',
+        'EmailTemplateFormCtrl': '/bundles/publipr/js/components/EmailTemplate/EmailTemplateFormCtrl.js',
         'EmailTemplateCtrl': '/bundles/publipr/js/components/EmailTemplate/EmailTemplateCtrl.js',
         'FontsCtrl': '/bundles/publipr/js/components/Font/FontsCtrl.js',
-        'FontFormCtrl': '/bundles/publipr/js/components/Font/FontFromCtrl.js',
+        'FontFormCtrl': '/bundles/publipr/js/components/Font/FontFormCtrl.js',
         'FontCtrl': '/bundles/publipr/js/components/Font/FontCtrl.js',
         'LanguagesCtrl': '/bundles/publipr/js/components/Language/LanguagesCtrl.js',
-        'LanguageFormCtrl': '/bundles/publipr/js/components/Language/LanguageFromCtrl.js',
+        'LanguageFormCtrl': '/bundles/publipr/js/components/Language/LanguageFormCtrl.js',
         'LanguageCtrl': '/bundles/publipr/js/components/Language/LanguageCtrl.js',
         'LayoutsCtrl': '/bundles/publipr/js/components/Layout/LayoutsCtrl.js',
-        'LayoutFormCtrl': '/bundles/publipr/js/components/Layout/LayoutFromCtrl.js',
+        'LayoutFormCtrl': '/bundles/publipr/js/components/Layout/LayoutFormCtrl.js',
         'LayoutCtrl': '/bundles/publipr/js/components/Layout/LayoutCtrl.js',
         'LogsCtrl': '/bundles/publipr/js/components/Log/LogsCtrl.js',
-        'LogFormCtrl': '/bundles/publipr/js/components/Log/LogFromCtrl.js',
+        'LogFormCtrl': '/bundles/publipr/js/components/Log/LogFormCtrl.js',
         'LogCtrl': '/bundles/publipr/js/components/Log/LogCtrl.js',
         'NewsroomsCtrl': '/bundles/publipr/js/components/Newsroom/NewsroomsCtrl.js',
-        'NewsroomFormCtrl': '/bundles/publipr/js/components/Newsroom/NewsroomFromCtrl.js',
+        'NewsroomFormCtrl': '/bundles/publipr/js/components/Newsroom/NewsroomFormCtrl.js',
         'NewsroomCtrl': '/bundles/publipr/js/components/Newsroom/NewsroomCtrl.js',
         'NewsroomTemplatesCtrl': '/bundles/publipr/js/components/NewsroomTemplate/NewsroomTemplatesCtrl.js',
-        'NewsroomTemplateFormCtrl': '/bundles/publipr/js/components/NewsroomTemplate/NewsroomTemplateFromCtrl.js',
+        'NewsroomTemplateFormCtrl': '/bundles/publipr/js/components/NewsroomTemplate/NewsroomTemplateFormCtrl.js',
         'NewsroomTemplateCtrl': '/bundles/publipr/js/components/NewsroomTemplate/NewsroomTemplateCtrl.js',
         'UsersCtrl': '/bundles/publipr/js/components/User/UsersCtrl.js',
-        'UserFormCtrl': '/bundles/publipr/js/components/User/UserFromCtrl.js',
+        'UserFormCtrl': '/bundles/publipr/js/components/User/UserFormCtrl.js',
         'UserCtrl': '/bundles/publipr/js/components/User/UserCtrl.js',
         'PaymentsCtrl': '/bundles/publipr/js/components/Payment/PaymentsCtrl.js',
-        'PaymentFormCtrl': '/bundles/publipr/js/components/Payment/PaymentFromCtrl.js',
+        'PaymentFormCtrl': '/bundles/publipr/js/components/Payment/PaymentFormCtrl.js',
         'PaymentCtrl': '/bundles/publipr/js/components/Payment/PaymentCtrl.js',
         'PressReleasesCtrl': '/bundles/publipr/js/components/PressRelease/PressReleasesCtrl.js',
-        'PressReleaseFormCtrl': '/bundles/publipr/js/components/PressRelease/PressReleaseFromCtrl.js',
+        'PressReleaseFormCtrl': '/bundles/publipr/js/components/PressRelease/PressReleaseFormCtrl.js',
         'PressReleaseCtrl': '/bundles/publipr/js/components/PressRelease/PressReleaseCtrl.js',
+        'PressReleaseSenderCtrl': '/bundles/publipr/js/components/PressRelease/PressReleaseSenderCtrl.js',
+        'PressReleaseEditorCtrl': '/bundles/publipr/js/components/PressRelease/PressReleaseEditorCtrl.js',
         'PressReleaseEditorCtrl': '/bundles/publipr/js/components/PressRelease/PressReleaseEditorCtrl.js',
         'SessionsCtrl': '/bundles/publipr/js/components/Session/SessionsCtrl.js',
-        'SessionFormCtrl': '/bundles/publipr/js/components/Session/SessionFromCtrl.js',
+        'SessionFormCtrl': '/bundles/publipr/js/components/Session/SessionFormCtrl.js',
         'SessionCtrl': '/bundles/publipr/js/components/Session/SessionCtrl.js',
         'SettingsCtrl': '/bundles/publipr/js/components/Setting/SettingsCtrl.js',
-        'SettingFormCtrl': '/bundles/publipr/js/components/Setting/SettingFromCtrl.js',
+        'SettingFormCtrl': '/bundles/publipr/js/components/Setting/SettingFormCtrl.js',
         'SettingCtrl': '/bundles/publipr/js/components/Setting/SettingCtrl.js',
         'TemplatesCtrl': '/bundles/publipr/js/components/Template/TemplatesCtrl.js',
-        'TemplateFormCtrl': '/bundles/publipr/js/components/Template/TemplateFromCtrl.js',
+        'TemplateFormCtrl': '/bundles/publipr/js/components/Template/TemplateFormCtrl.js',
         'TemplateCtrl': '/bundles/publipr/js/components/Template/TemplateCtrl.js',
         'TrackEmailsCtrl': '/bundles/publipr/js/components/TrackEmail/TrackEmailsCtrl.js',
-        'TrackEmailFormCtrl': '/bundles/publipr/js/components/TrackEmail/TrackEmailFromCtrl.js',
+        'TrackEmailFormCtrl': '/bundles/publipr/js/components/TrackEmail/TrackEmailFormCtrl.js',
         'TrackEmailCtrl': '/bundles/publipr/js/components/TrackEmail/TrackEmailCtrl.js',
         'TrackPressReleasesCtrl': '/bundles/publipr/js/components/TrackPressRelease/TrackPressReleasesCtrl.js',
-        'TrackPressReleaseFormCtrl': '/bundles/publipr/js/components/TrackPressRelease/TrackPressReleaseFromCtrl.js',
+        'TrackPressReleaseFormCtrl': '/bundles/publipr/js/components/TrackPressRelease/TrackPressReleaseFormCtrl.js',
         'TrackPressReleaseCtrl': '/bundles/publipr/js/components/TrackPressRelease/TrackPressReleaseCtrl.js'
     },
     modules: [{
@@ -77424,6 +77682,12 @@ app.constant('APP_JS_REQUIRES', {
     },{
         name: 'contactService',
         files: ['/bundles/publipr/js/components/Contact/ContactService.js']
+    },{
+        name: 'ContactImportService',
+        files: ['/bundles/publipr/js/components/Contact/ContactImportService.js']
+    },{
+        name: 'ContactExportService',
+        files: ['/bundles/publipr/js/components/Contact/ContactExportService.js']
     },{
         name: 'contactGroupService',
         files: ['/bundles/publipr/js/components/ContactGroup/ContactGroupService.js']
@@ -77472,6 +77736,9 @@ app.constant('APP_JS_REQUIRES', {
     },{
         name: 'PressReleaseEditorService',
         files: ['/bundles/publipr/js/components/PressRelease/PressReleaseEditorService.js']
+    },{
+        name: 'PressReleaseSenderService',
+        files: ['/bundles/publipr/js/components/PressRelease/PressReleaseSenderService.js']
     },{
         name: 'sessionService',
         files: ['/bundles/publipr/js/components/Session/SessionService.js']
@@ -78858,14 +79125,45 @@ function ($stateProvider) {
             label: 'content.list.DASHBOARD'
         },
         resolve: loadSequence('jquery-sparkline', 'DashboardCtrl', 'DashboardService')
-    }).state('app.nogroup', {
-        url: '/no-group',
+    }).state('app.access', {
+        url: '/access',
         template: '<div ui-view class="fade-in-up"></div>',
-        title: 'sidebar.nav.nogroup.MAIN',
+        title: 'sidebar.nav.access.MAIN',
         ncyBreadcrumb: {
-            label: 'sidebar.nav.nogroup.MAIN'
+            label: 'sidebar.nav.access.MAIN'
         }
-    }).state('app.nogroup.companies', {
+    }).state('app.access.users', {
+        url: '/users',
+        templateUrl: '/bundles/publipr/js/components/User/users.html',
+        title: 'content.list.USERS',
+        ncyBreadcrumb: {
+            label: 'content.list.USERS'
+        },
+        resolve: loadSequence('ngTable', 'UsersCtrl', 'userService', 'companyService', 'countryService', 'languageService')
+    }).state('app.access.usersnew', {
+        url: '/users/new',
+        templateUrl: '/bundles/publipr/js/components/User/user_form.html',
+        title: 'content.list.NEWUSER',
+        ncyBreadcrumb: {
+            label: 'content.list.NEWUSER'
+        },
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'UserFormCtrl', 'userService', 'companyService', 'countryService', 'languageService')
+    }).state('app.access.usersedit', {
+        url: '/users/edit/:id',
+        templateUrl: '/bundles/publipr/js/components/User/user_form.html',
+        title: 'content.list.EDITUSER',
+        ncyBreadcrumb: {
+            label: 'content.list.EDITUSER'
+        },
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'UserFormCtrl', 'userService', 'companyService', 'countryService', 'languageService')
+    }).state('app.access.usersdetails', {
+        url: '/users/details/:id',
+        templateUrl: '/bundles/publipr/js/components/User/user.html',
+        ncyBreadcrumb: {
+            label: 'content.list.USERDETAILS'
+        },
+        resolve: loadSequence('UserCtrl', 'userService')
+    }).state('app.access.companies', {
         url: '/companies',
         templateUrl: '/bundles/publipr/js/components/Company/companies.html',
         title: 'content.list.COMPANIES',
@@ -78873,7 +79171,7 @@ function ($stateProvider) {
             label: 'content.list.COMPANIES'
         },
         resolve: loadSequence('ngTable', 'CompaniesCtrl', 'companyService', 'userService')
-    }).state('app.nogroup.companiesnew', {
+    }).state('app.access.companiesnew', {
         url: '/companies/new',
         templateUrl: '/bundles/publipr/js/components/Company/company_form.html',
         title: 'content.list.NEWCOMPANY',
@@ -78881,7 +79179,7 @@ function ($stateProvider) {
             label: 'content.list.NEWCOMPANY'
         },
         resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'CompanyFormCtrl', 'companyService', 'userService')
-    }).state('app.nogroup.companiesedit', {
+    }).state('app.access.companiesedit', {
         url: '/companies/edit/:id',
         templateUrl: '/bundles/publipr/js/components/Company/company_form.html',
         title: 'content.list.EDITCOMPANY',
@@ -78889,13 +79187,44 @@ function ($stateProvider) {
             label: 'content.list.EDITCOMPANY'
         },
         resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'CompanyFormCtrl', 'companyService', 'userService')
-    }).state('app.nogroup.companiesdetails', {
+    }).state('app.access.companiesdetails', {
         url: '/companies/details/:id',
         templateUrl: '/bundles/publipr/js/components/Company/company.html',
         ncyBreadcrumb: {
             label: 'content.list.COMPANYDETAILS'
         },
         resolve: loadSequence('CompanyCtrl', 'companyService')
+    }).state('app.access.logs', {
+        url: '/logs',
+        templateUrl: '/bundles/publipr/js/components/Log/logs.html',
+        title: 'content.list.LOGS',
+        ncyBreadcrumb: {
+            label: 'content.list.LOGS'
+        },
+        resolve: loadSequence('ngTable', 'LogsCtrl', 'logService', 'sessionService', 'userService')
+    }).state('app.access.logsnew', {
+        url: '/logs/new',
+        templateUrl: '/bundles/publipr/js/components/Log/log_form.html',
+        title: 'content.list.NEWLOG',
+        ncyBreadcrumb: {
+            label: 'content.list.NEWLOG'
+        },
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'LogFormCtrl', 'logService', 'sessionService', 'userService')
+    }).state('app.access.logsedit', {
+        url: '/logs/edit/:id',
+        templateUrl: '/bundles/publipr/js/components/Log/log_form.html',
+        title: 'content.list.EDITLOG',
+        ncyBreadcrumb: {
+            label: 'content.list.EDITLOG'
+        },
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'LogFormCtrl', 'logService', 'sessionService', 'userService')
+    }).state('app.access.logsdetails', {
+        url: '/logs/details/:id',
+        templateUrl: '/bundles/publipr/js/components/Log/log.html',
+        ncyBreadcrumb: {
+            label: 'content.list.LOGDETAILS'
+        },
+        resolve: loadSequence('LogCtrl', 'logService')
     }).state('app.contactmanager', {
         url: '/contact-manager',
         template: '<div ui-view class="fade-in-up"></div>',
@@ -78965,6 +79294,20 @@ function ($stateProvider) {
             label: 'content.list.CONTACTDETAILS'
         },
         resolve: loadSequence('ContactCtrl', 'contactService')
+    }).state('app.contactmanager.contactsimport', {
+        url: '/contacts/import',
+        templateUrl: '/bundles/publipr/js/components/Contact/contact_import.html',
+        ncyBreadcrumb: {
+            label: 'content.list.IMPORTCONTACTS'
+        },
+        resolve: loadSequence('ContactImportCtrl', 'ContactImportService', 'contactService', 'touchspin-plugin', 'contactGroupService', 'userService')
+    }).state('app.contactmanager.contactsexport', {
+        url: '/contacts/export',
+        templateUrl: '/bundles/publipr/js/components/Contact/contact_export.html',
+        ncyBreadcrumb: {
+            label: 'content.list.IMPORTCONTACTS'
+        },
+        resolve: loadSequence('ContactExportCtrl', 'ContactExportService', 'contactService', 'contactGroupService', 'userService')
     }).state('app.templatemanager', {
         url: '/template-manager',
         template: '<div ui-view class="fade-in-up"></div>',
@@ -79296,75 +79639,6 @@ function ($stateProvider) {
             label: 'content.list.EMAILCAMPAIGNDETAILS'
         },
         resolve: loadSequence('EmailCampaignCtrl', 'emailCampaignService')
-    }).state('app.access', {
-        url: '/access',
-        template: '<div ui-view class="fade-in-up"></div>',
-        title: 'sidebar.nav.access.MAIN',
-        ncyBreadcrumb: {
-            label: 'sidebar.nav.access.MAIN'
-        }
-    }).state('app.access.users', {
-        url: '/users',
-        templateUrl: '/bundles/publipr/js/components/User/users.html',
-        title: 'content.list.USERS',
-        ncyBreadcrumb: {
-            label: 'content.list.USERS'
-        },
-        resolve: loadSequence('ngTable', 'UsersCtrl', 'userService', 'companyService', 'countryService', 'languageService')
-    }).state('app.access.usersnew', {
-        url: '/users/new',
-        templateUrl: '/bundles/publipr/js/components/User/user_form.html',
-        title: 'content.list.NEWUSER',
-        ncyBreadcrumb: {
-            label: 'content.list.NEWUSER'
-        },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'UserFormCtrl', 'userService', 'companyService', 'countryService', 'languageService')
-    }).state('app.access.usersedit', {
-        url: '/users/edit/:id',
-        templateUrl: '/bundles/publipr/js/components/User/user_form.html',
-        title: 'content.list.EDITUSER',
-        ncyBreadcrumb: {
-            label: 'content.list.EDITUSER'
-        },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'UserFormCtrl', 'userService', 'companyService', 'countryService', 'languageService')
-    }).state('app.access.usersdetails', {
-        url: '/users/details/:id',
-        templateUrl: '/bundles/publipr/js/components/User/user.html',
-        ncyBreadcrumb: {
-            label: 'content.list.USERDETAILS'
-        },
-        resolve: loadSequence('UserCtrl', 'userService')
-    }).state('app.access.logs', {
-        url: '/logs',
-        templateUrl: '/bundles/publipr/js/components/Log/logs.html',
-        title: 'content.list.LOGS',
-        ncyBreadcrumb: {
-            label: 'content.list.LOGS'
-        },
-        resolve: loadSequence('ngTable', 'LogsCtrl', 'logService', 'sessionService', 'userService')
-    }).state('app.access.logsnew', {
-        url: '/logs/new',
-        templateUrl: '/bundles/publipr/js/components/Log/log_form.html',
-        title: 'content.list.NEWLOG',
-        ncyBreadcrumb: {
-            label: 'content.list.NEWLOG'
-        },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'LogFormCtrl', 'logService', 'sessionService', 'userService')
-    }).state('app.access.logsedit', {
-        url: '/logs/edit/:id',
-        templateUrl: '/bundles/publipr/js/components/Log/log_form.html',
-        title: 'content.list.EDITLOG',
-        ncyBreadcrumb: {
-            label: 'content.list.EDITLOG'
-        },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'LogFormCtrl', 'logService', 'sessionService', 'userService')
-    }).state('app.access.logsdetails', {
-        url: '/logs/details/:id',
-        templateUrl: '/bundles/publipr/js/components/Log/log.html',
-        ncyBreadcrumb: {
-            label: 'content.list.LOGDETAILS'
-        },
-        resolve: loadSequence('LogCtrl', 'logService')
     }).state('app.prmanager', {
         url: '/p-r-manager',
         template: '<div ui-view class="fade-in-up"></div>',
@@ -79379,7 +79653,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.NEWSROOMS'
         },
-        resolve: loadSequence('ngTable', 'NewsroomsCtrl', 'newsroomService', 'userService', 'userService')
+        resolve: loadSequence('ngTable', 'NewsroomsCtrl', 'newsroomService', 'fontService', 'userService', 'userService')
     }).state('app.prmanager.newsroomsnew', {
         url: '/newsrooms/new',
         templateUrl: '/bundles/publipr/js/components/Newsroom/newsroom_form.html',
@@ -79387,7 +79661,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.NEWNEWSROOM'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'NewsroomFormCtrl', 'newsroomService', 'userService', 'userService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'NewsroomFormCtrl', 'newsroomService', 'fontService', 'userService', 'userService')
     }).state('app.prmanager.newsroomsedit', {
         url: '/newsrooms/edit/:id',
         templateUrl: '/bundles/publipr/js/components/Newsroom/newsroom_form.html',
@@ -79395,7 +79669,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.EDITNEWSROOM'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'NewsroomFormCtrl', 'newsroomService', 'userService', 'userService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'NewsroomFormCtrl', 'newsroomService', 'fontService', 'userService', 'userService')
     }).state('app.prmanager.newsroomsdetails', {
         url: '/newsrooms/details/:id',
         templateUrl: '/bundles/publipr/js/components/Newsroom/newsroom.html',
@@ -79445,6 +79719,13 @@ function ($stateProvider) {
             contentClasses: 'full-height'
         },
         resolve: loadSequence('PressReleaseEditorCtrl', 'contentBlockService', 'layoutService', 'newsroomService', 'templateService', 'pressReleaseService', 'PressReleaseEditorService')
+    }).state('app.prmanager.pressreleasessend', {
+        url: '/press-releases/send/:id',
+        templateUrl: '/bundles/publipr/js/components/PressRelease/press_release_sender.html',
+        ncyBreadcrumb: {
+            label: 'content.list.SENDPRESSRELEASE'
+        },
+        resolve: loadSequence('PressReleaseSenderCtrl', 'PressReleaseSenderService', 'pressReleaseService')
     }).state('app.settings', {
         url: '/settings',
         template: '<div ui-view class="fade-in-up"></div>',
@@ -82108,41 +82389,49 @@ function($resource, $rootScope) {
  * File Manager Modal Controller
  */
 
-app.controller('FileManagerCtrl', ['$scope', '$localStorage', '$timeout', '$uibModalInstance', 'field', 'value',
-function ($scope, $localStorage, $timeout, $uibModalInstance, field, value) {
+app.controller('FileManagerCtrl', ['$scope', '$localStorage', '$timeout', '$uibModalInstance', 'field', 'value', 'instance', 'folder',
+    function ($scope, $localStorage, $timeout, $uibModalInstance, field, value, instance, folder) {
 
-    $scope.field = field;
-    $scope.value = value;
-    $scope.url = '';
-    $scope.mode = '';
+        $scope.field = field;
+        $scope.value = value;
+        $scope.instance = instance;
+        $scope.folder = folder;
+        $scope.url = '';
+        $scope.mode = '';
 
-    $timeout(function(){
-        var fileManager = $('#elfinder_'+$scope.field).elfinder({
-            url : '/efconnect'+'?mode='+$scope.mode,
-            lang : (angular.isDefined($localStorage.language))?$localStorage.language:'en',
-            useBrowserHistory: false,
-            onlyMimes: ['image', 'video'],
-            customHeaders: {
-                'Authorization': 'Bearer ' + $localStorage.access_token,
-                'PP-Application': 'BackOffice'
-            },
-            getFileCallback : function(file) {
-                var parser = document.createElement('a');
-                parser.href = file.url;
-                $scope.url = parser.pathname;
-            }
+        $timeout(function(){
+            var defaultOpen = elFinder.prototype.commands.open;
+            console.log(defaultOpen)
+            elFinder.prototype.commands.open = function (param) {
+                console.log(param)
+                // custom code
+            };
+            var fileManager = $('#elfinder_'+$scope.field).elfinder({
+                url : '/efconnect/'+$scope.instance+'/'+$scope.folder+'?mode='+$scope.mode,
+                lang : (angular.isDefined($localStorage.language))?$localStorage.language:'en',
+                useBrowserHistory: false,
+                onlyMimes: ['image', 'video'],
+                customHeaders: {
+                    'Authorization': 'Bearer ' + $localStorage.access_token,
+                    'PP-Application': 'BackOffice'
+                },
+                getFileCallback : function(file) {
+                    var parser = document.createElement('a');
+                    parser.href = file.url;
+                    $scope.url = parser.pathname;
+                }
+            });
         });
-    });
 
-    $scope.ok = function () {
-        $uibModalInstance.close($scope.url);
-    };
+        $scope.ok = function () {
+            $uibModalInstance.close($scope.url);
+        };
 
-    $scope.cancel = function () {
-        $uibModalInstance.dismiss('cancel');
-    };
+        $scope.cancel = function () {
+            $uibModalInstance.dismiss('cancel');
+        };
 
-}]);
+    }]);
 
 'use strict';
 /**

@@ -1,0 +1,30 @@
+price:
+    path:     /
+    defaults: { _controller: "SportClubBundle:Price:index" }
+
+price_details:
+    path:     /{id}/details
+    defaults: { _controller: "SportClubBundle:Price:show" }
+
+price_new:
+    path:     /new
+    defaults: { _controller: "SportClubBundle:Price:new" }
+
+price_create:
+    path:     /create
+    defaults: { _controller: "SportClubBundle:Price:create" }
+    methods:  POST
+
+price_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "SportClubBundle:Price:edit" }
+
+price_update:
+    path:     /{id}/update
+    defaults: { _controller: "SportClubBundle:Price:update" }
+    methods:  [POST, PUT]
+
+price_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "SportClubBundle:Price:delete" }
+    methods:  [POST, DELETE]

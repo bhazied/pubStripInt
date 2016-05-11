@@ -1,0 +1,30 @@
+impression:
+    path:     /
+    defaults: { _controller: "SportClubBundle:Impression:index" }
+
+impression_details:
+    path:     /{id}/details
+    defaults: { _controller: "SportClubBundle:Impression:show" }
+
+impression_new:
+    path:     /new
+    defaults: { _controller: "SportClubBundle:Impression:new" }
+
+impression_create:
+    path:     /create
+    defaults: { _controller: "SportClubBundle:Impression:create" }
+    methods:  POST
+
+impression_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "SportClubBundle:Impression:edit" }
+
+impression_update:
+    path:     /{id}/update
+    defaults: { _controller: "SportClubBundle:Impression:update" }
+    methods:  [POST, PUT]
+
+impression_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "SportClubBundle:Impression:delete" }
+    methods:  [POST, DELETE]

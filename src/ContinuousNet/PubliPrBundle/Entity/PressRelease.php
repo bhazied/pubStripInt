@@ -28,7 +28,6 @@ use JMS\Serializer\Annotation\Groups;
  * @link       http://publipr.continuousnet.com/ContinuousNet/PubliPrBundle/Entity
  * @see        PressRelease
  * @since      Class available since Release 1.0
- * @deprecated Nothing
  * @access     public
  * 
  * @ORM\Table(name="`press_release`", indexes={@ORM\Index(name="newsroom_id", columns={"newsroom_id"}), @ORM\Index(name="creator_user_id", columns={"creator_user_id"}), @ORM\Index(name="modifier_user_id", columns={"modifier_user_id"})})

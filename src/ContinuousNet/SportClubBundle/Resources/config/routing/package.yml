@@ -1,0 +1,30 @@
+package:
+    path:     /
+    defaults: { _controller: "SportClubBundle:Package:index" }
+
+package_details:
+    path:     /{id}/details
+    defaults: { _controller: "SportClubBundle:Package:show" }
+
+package_new:
+    path:     /new
+    defaults: { _controller: "SportClubBundle:Package:new" }
+
+package_create:
+    path:     /create
+    defaults: { _controller: "SportClubBundle:Package:create" }
+    methods:  POST
+
+package_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "SportClubBundle:Package:edit" }
+
+package_update:
+    path:     /{id}/update
+    defaults: { _controller: "SportClubBundle:Package:update" }
+    methods:  [POST, PUT]
+
+package_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "SportClubBundle:Package:delete" }
+    methods:  [POST, DELETE]

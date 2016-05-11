@@ -1,0 +1,150 @@
+
+<!-- start: PAGE TITLE -->
+<section id="page-title">
+    <div class="row">
+        <div class="col-sm-8">
+            <h1 class="mainTitle" translate="content.list.CONTACTS">Contacts</h1>
+            <span class="mainDescription"></span>
+        </div>
+        <div ncy-breadcrumb></div>
+    </div>
+</section>
+<!-- end: PAGE TITLE -->
+
+<!-- start: FORM -->
+<div class="container-fluid container-fullw bg-white">
+    <div class="row">
+        <div class="col-md-12" ng-controller="ContactImportCtrl">
+            <div>
+                <fieldset>
+                    <legend translate="content.list.IMPORTCONTACTS">
+                        Import Contacts
+                    </legend>
+                    <form name="contactForm" id="contactForm" novalidate ng-submit="submitForm(contactForm)">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':contactForm.contactGroup.$dirty && contactForm.contactGroup.$invalid, 'has-success':contactForm.contactGroup.$valid}">
+                                    <label for="contactContactGroup" class="control-label">
+                                        <span translate="content.list.fields.CONTACTGROUP">Contact Group</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <div class="block" ng-if="contactGroupsLoaded">
+                                    <span class="input-icon">
+                                        <select ng-options="item.id as item.name for item in contactGroups | filter:{ hidden : false }" ng-model="contact.contact_group" name="contactGroup" id="contactContactGroup" class="form-control" ng-required="true">
+                                            <option translate="content.form.messages.SELECTCONTACTGROUP" value="">Select Contact Group</option>
+                                        </select>
+                                        <i class="ti-marker-alt"></i>
+                                    </span><!--/input-icon-->
+                                    </div>
+                                    <span class="error text-small block" ng-if="contactForm.contactGroup.$dirty && contactForm.contactGroup.$error.required" translate="content.form.messages.CONTACTGROUPREQUIRED">Contact Group is required.</span>
+                                    <span class="success text-small block" ng-if="contactForm.contactGroup.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="checkbox continuous-check check-primary">
+                                    <input ng-model="contact.active" type="checkbox" name="active" id="contactActive" />
+                                    <label for="contactActive" translate="content.list.fields.ACTIVE">Active</label>
+                                </div><!--/checkbox continuous-check check-primary-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group" ng-class="{'has-error':contactForm.file.$dirty && contactForm.file.$invalid, 'has-success':contactForm.contactGroup.$valid}">
+                                    <label for="file" class="control-label">
+                                        <span translate="content.common.FILE">File</span>
+                                        <span class="symbol required"></span>
+                                        (.xls, .xlsx)
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-required="true" name="file" id="file" type="file" file-model="file" />
+                                    </span><!--/input-icon-->
+                                    <span class="error text-small block" ng-if="contactForm.file.$dirty && contactForm.file.$error.required" translate="content.form.messages.FILEREQUIRED">File is required.</span>
+                                    <span class="success text-small block" ng-if="contactForm.file.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-12-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4 translate="content.common.COLUMNPOSITION">Column Position</h4>
+                            </div><!--/col-md-12-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':contactForm.firstName.$dirty && contactForm.firstName.$invalid, 'has-success':contactForm.firstName.$valid}">
+                                    <label for="contactFirstName" class="control-label">
+                                        <span translate="content.list.fields.FIRSTNAME">First Name</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="contact.first_name" type="text" name="firstName" id="contactFirstName" class="form-control"  touchspin data-min="1" data-max="10000000" data-verticalbuttons="true" data-verticalupclass="ti-angle-up" data-verticaldownclass="ti-angle-down" ng-required="true" />
+                                    </span><!--/input-icon-->
+                                    <span class="error text-small block" ng-if="contactForm.firstName.$dirty && contactForm.firstName.$error.required" translate="content.form.messages.FIRSTNAMEREQUIRED">First Name is required.</span>
+                                    <span class="success text-small block" ng-if="contactForm.firstName.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':contactForm.lastName.$dirty && contactForm.lastName.$invalid, 'has-success':contactForm.lastName.$valid}">
+                                    <label for="contactLastName" class="control-label">
+                                        <span translate="content.list.fields.LASTNAME">Last Name</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="contact.last_name" type="text" name="lastName" id="contactLastName" class="form-control" touchspin data-min="1" data-max="10000000" data-verticalbuttons="true" data-verticalupclass="ti-angle-up" data-verticaldownclass="ti-angle-down" ng-required="true" />
+                                    </span><!--/input-icon-->
+                                    <span class="error text-small block" ng-if="contactForm.lastName.$dirty && contactForm.lastName.$error.required" translate="content.form.messages.LASTNAMEREQUIRED">Last Name is required.</span>
+                                    <span class="success text-small block" ng-if="contactForm.lastName.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':contactForm.email.$dirty && contactForm.email.$invalid, 'has-success':contactForm.email.$valid}">
+                                    <label for="contactEmail" class="control-label">
+                                        <span translate="content.list.fields.EMAIL">Email</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="contact.email" type="text" name="email" id="contactEmail" class="form-control" placeholder="[[ 'content.form.messages.ENTEREMAIL' | translate ]]" touchspin data-min="1" data-max="10000000" data-verticalbuttons="true" data-verticalupclass="ti-angle-up" data-verticaldownclass="ti-angle-down" ng-required="true" />
+                                    </span><!--/input-icon-->
+                                    <span class="error text-small block" ng-if="contactForm.email.$dirty && contactForm.email.$error.required" translate="content.form.messages.EMAILREQUIRED">Email is required.</span>
+                                    <span class="success text-small block" ng-if="contactForm.email.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':contactForm.phone.$dirty && contactForm.phone.$invalid, 'has-success':contactForm.phone.$valid}">
+                                    <label for="contactPhone" class="control-label">
+                                        <span translate="content.list.fields.PHONE">Phone</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="contact.phone" type="text" name="phone" id="contactPhone" class="form-control"  touchspin data-min="1" data-max="10000000" data-verticalbuttons="true" data-verticalupclass="ti-angle-up" data-verticaldownclass="ti-angle-down" ng-required="true" />
+                                    </span><!--/input-icon-->
+                                    <span class="error text-small block" ng-if="contactForm.phone.$dirty && contactForm.phone.$error.required" translate="content.form.messages.PHONEREQUIRED">Phone is required.</span>
+                                    <span class="success text-small block" ng-if="contactForm.phone.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-4">
+                                <button ng-click="list()" class="btn btn-primary pull-left">
+                                    <i class="ti-layout-list-thumb"></i> <span translate="content.list.BACKCONTACTS">Back to Contacts list</span>
+                                </button>
+                            </div>
+                            <div class="col-md-4">
+                            </div>
+                            <div class="col-md-4">
+                                <button type="button" ng-click="submitForm(contactForm)" class="btn btn-primary pull-right" ng-disabled="disableSubmit"> <!--  ng-disabled="contactForm.$invalid" -->
+                                    <i class="fa fa-spinner fa-spin" ng-if="disableSubmit"></i><i class="ti-import" ng-if="!disableSubmit"></i> <span translate="content.common.IMPORT">Import</span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="table-responsive" ng-if="contacts.length > 0">
+                    </div>
+                </fieldset>
+            </div>
+        </div><!--/col-md-12-->
+    </div><!--/row-->
+</div><!--/container-fluid container-fullw-->
+<!-- end: FORM -->
+

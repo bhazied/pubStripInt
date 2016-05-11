@@ -132,8 +132,8 @@
         "logout": {
             "MAIN": "Lougout"
         },
-        "nogroup": {
-            "MAIN": "NoGroup"
+        "access": {
+            "MAIN": "Access"
         },
         "contactmanager": {
             "MAIN": "ContactManager"
@@ -146,9 +146,6 @@
         },
         "distribution": {
             "MAIN": "Distribution"
-        },
-        "access": {
-            "MAIN": "Access"
         },
         "prmanager": {
             "MAIN": "PRManager"
@@ -189,7 +186,11 @@
             "REMOVE": "Remove",
             "YES": "Yes",
             "NO": "No",
-            "SEND": "Send",
+            "ALL": "All",
+            "NONE": "None",
+            "EXPORTEDFIELDS": "Exported Fields",
+            "COLUMNPOSITION": "Column Position",
+            "E": "Send",
             "CONFIRMATION": "Confimation",
             "NOTIFICATION": "Notification",
             "ERROR": "Error",
@@ -203,23 +204,31 @@
             "DATE": "Date",
             "TIME": "Time",
             "CURRENT": "Today",
-            "FILEMANAGER": "Gestionnaire de fichiers",
+            "PROGRESS": "Progress",
+            "SIZE": "Size",
+            "FILE": "File",
+            "FILEMANAGER": "File Manager",
             "NEXT": "Next",
             "PREVIOUS": "Previous",
             "BACK": "Back",
             "CONVERT": "Convert",
+            "IMPORT": "Import",
+            "EXPORT": "Export",
             "EDITOR": "Editor",
+            "ENCOCEAUDIO": "Encode Audio",
+            "AUDIONOTENCODED": "Audio encoded",
+            "AUDIONOTNOTENCODED": "Audio not encoded",
             "ENCOCEVIDEO": "Encode Video",
-            "GENERATETHUMB": "Generate Thumbnail",
-            "REMOVESEGMENTS": "Remove segments",
-            "UPDATEDURATION": "Update duration",
-            "PLEASEPLAYVIDEOBEFORE": "Please play video before!",
-            "THUMBNAILGENERATED": "Thumbnail generated",
-            "THUMBNAILNOTGENERATED": "Thumbnail not generated",
-            "DURATIONUPDATED": "Duration updated",
-            "DURATIONNOTUPDATED": "Duration not updated",
             "VIDEONOTENCODED": "Video encoded",
             "VIDEONOTNOTENCODED": "Video not encoded",
+            "GENERATETHUMB": "Generate Thumbnail",
+            "THUMBNAILGENERATED": "Thumbnail generated",
+            "THUMBNAILNOTGENERATED": "Thumbnail not generated",
+            "UPDATEDURATION": "Update duration",
+            "DURATIONUPDATED": "Duration updated",
+            "DURATIONNOTUPDATED": "Duration not updated",
+            "PLEASEPLAYVIDEOBEFORE": "Please play video before!",
+            "REMOVESEGMENTS": "Remove segments",
             "SEGMENTSREMOVED": "Segments removed",
             "SEGMENTSNOTREMOVED": "Segments not removed",
             "COMINGSOON": "Coming Soon"
@@ -227,6 +236,13 @@
         "form": {
             "messages": {
                 "CHECKFROMFIELDS": "Check form fields",
+                "NODATATOEXPORT": "No data to export",
+                "DATAEXPORTED": "Data exported",
+                "DATANOTEXPORTED": "Data not exported",
+                "NODATATOIMPORT": "No data to import",
+                "DATAIMPORTED": "Data imported",
+                "DATANOTIMPORTED": "Data not imported",
+                "ALLOWEDFILEEXTENSIONS": "Allowed file extensions",
                 "FORMCANNOTBESUBMITTED": "The form cannot be submitted because it contains validation errors!",
                 "ERRORSAREMARKED": "Errors are marked with a red, dashed border!",
                 "OK": "Ok!",
@@ -251,7 +267,6 @@
                 "INVALIDEMAIL": "Please, enter a valid email address.",
                 "ENTERNAME": "Entrer une valeur pour Nom",
                 "NAMEREQUIRED": "Le champs Nom est obligatoire",
-                "NAMEALREADYINUSE": "Cette Nom est déjà utilisée. Chosissez une autre.",
                 "ENTERPICTURE": "Entrer une valeur pour Photo",
                 "ENTERWEBSITE": "Entrer une valeur pour Site Internet",
                 "ENTEREMAIL": "Entrer une valeur pour Email",
@@ -274,9 +289,9 @@
                 "ENTERHTMLTEMPLATE": "Entrer une valeur pour Html Modèle",
                 "HTMLTEMPLATEREQUIRED": "Le champs Html Modèle est obligatoire",
                 "ENTERSETTINGS": "Entrer une valeur pour Paramètres",
-                "ENTERBLOCKTYPE": "Entrer une valeur pour Block Type",
+                "SELECTBLOCKTYPE": "Sélectionner une valeur pour Block Type",
                 "BLOCKTYPEREQUIRED": "Le champs Block Type est obligatoire",
-                "ENTERSTATUS": "Entrer une valeur pour Statut",
+                "SELECTSTATUS": "Sélectionner une valeur pour Statut",
                 "STATUSREQUIRED": "Le champs Statut est obligatoire",
                 "ENTERCODE": "Entrer une valeur pour Code",
                 "CODEREQUIRED": "Le champs Code est obligatoire",
@@ -289,7 +304,7 @@
                 "CONTACTREQUIRED": "Le champs Contact est obligatoire",
                 "ENTERSECTION": "Entrer une valeur pour Section",
                 "SECTIONREQUIRED": "Le champs Section est obligatoire",
-                "ENTERSENDINGSTATUS": "Entrer une valeur pour Sending Statut",
+                "SELECTSENDINGSTATUS": "Sélectionner une valeur pour Sending Statut",
                 "SENDINGSTATUSREQUIRED": "Le champs Sending Statut est obligatoire",
                 "SELECTSENDINGDATETIME": "Sélectionner une valeur pour Sending Date et Heure",
                 "ENTEREXTERNALREFERENCE": "Entrer une valeur pour External Référence",
@@ -331,10 +346,25 @@
                 "ENTERBANNERPICTURE": "Entrer une valeur pour Bannière Photo",
                 "BANNERPICTUREREQUIRED": "Le champs Bannière Photo est obligatoire",
                 "ENTERPRESSRELEASESPERPAGE": "Entrer une valeur pour Press Releases Par Page",
+                "ENTERBACKGROUNDCOLOR": "Entrer une valeur pour Fond Couleur",
+                "ENTERTITLECOLOR": "Entrer une valeur pour Titre Couleur",
+                "SELECTTITLEFONT": "Sélectionner une valeur pour Titre Font",
+                "ENTERTEXTCOLOR": "Entrer une valeur pour Texte Couleur",
+                "SELECTTEXTFONT": "Sélectionner une valeur pour Texte Font",
+                "ENTERFACEBOOKLINK": "Entrer une valeur pour Facebook Lien",
+                "ENTERTWITTERLINK": "Entrer une valeur pour Twitter Lien",
+                "ENTERGOOGLEPLUSLINK": "Entrer une valeur pour Google Plus Lien",
+                "ENTERPINTERESTLINK": "Entrer une valeur pour Pinterest Lien",
+                "ENTERINSTAGRAMLINK": "Entrer une valeur pour Instagram Lien",
+                "ENTERYOUTUBELINK": "Entrer une valeur pour Youtube Lien",
+                "ENTERLINKEDINLINK": "Entrer une valeur pour Lienedin Lien",
+                "ENTERVIMEOLINK": "Entrer une valeur pour Vimeo Lien",
+                "ENTERFLICKRLINK": "Entrer une valeur pour Flickr Lien",
+                "ENTERTUMBLRLINK": "Entrer une valeur pour Tumblr Lien",
                 "ENTERCSS": "Entrer une valeur pour Css",
                 "ENTERHTMLFILE": "Entrer une valeur pour Html Fichier",
                 "ENTERCSSFILE": "Entrer une valeur pour Css Fichier",
-                "ENTERTYPE": "Entrer une valeur pour Type",
+                "SELECTTYPE": "Sélectionner une valeur pour Type",
                 "ENTERUSERNAME": "Entrer une valeur pour Nonm d'utilisateur",
                 "USERNAMEREQUIRED": "Le champs Nonm d'utilisateur est obligatoire",
                 "USERNAMEALREADYINUSE": "Cette Nonm d'utilisateur est déjà utilisée. Chosissez une autre.",
@@ -345,7 +375,7 @@
                 "ENTERSALT": "Entrer une valeur pour Grain de sel ",
                 "ENTERUSERNAMECANONICAL": "Entrer une valeur pour Nonm d'utilisateur Canonical",
                 "ENTEREMAILCANONICAL": "Entrer une valeur pour Email canonique",
-                "ENTERGENDER": "Entrer une valeur pour Genre",
+                "SELECTGENDER": "Sélectionner une valeur pour Genre",
                 "SELECTBIRTHDATE": "Sélectionner une valeur pour Date de naissance",
                 "ENTERADDRESS": "Entrer une valeur pour Adresse",
                 "ENTERZIPCODE": "Entrer une valeur pour Code postal",
@@ -357,8 +387,8 @@
                 "ENTERSESSIONTIMEOUT": "Entrer une valeur pour Expiration de la session",
                 "ENTERPHONEVALIDATIONCODE": "Entrer une valeur pour Téléphone Validation Code",
                 "ENTEREMAILVALIDATIONCODE": "Entrer une valeur pour Code de validation par email",
-                "ENTERAUTHENTICATIONMODE": "Entrer une valeur pour Mode d'authentification",
-                "ENTERROLES": "Entrer une valeur pour Rôles",
+                "SELECTAUTHENTICATIONMODE": "Sélectionner une valeur pour Mode d'authentification",
+                "SELECTROLES": "Sélectionner une valeur pour Rôles",
                 "ROLESREQUIRED": "Le champs Rôles est obligatoire",
                 "ENTERCONFIRMATIONTOKEN": "Entrer une valeur pour Confirmation Jeton",
                 "SELECTPASSWORDREQUESTEDAT": "Sélectionner une valeur pour Mot de passe Requêteed At",
@@ -407,12 +437,13 @@
                 "KEYREQUIRED": "Le champs Clé est obligatoire",
                 "ENTERVALUE": "Entrer une valeur pour Valeur",
                 "VALUEREQUIRED": "Le champs Valeur est obligatoire",
-                "ENTERACTION": "Entrer une valeur pour Action",
+                "SELECTACTION": "Sélectionner une valeur pour Action",
                 "ACTIONREQUIRED": "Le champs Action est obligatoire",
                 "ENTERSOURCE": "Entrer une valeur pour Source"
             }
         },
         "list": {
+            "DASHBOARD": "Dashboard",
             "COMPANIES": "Companies",
             "COMPANY": "Entreprise",
             "ADDCOMPANY": "Ajouter une nouvelle Entreprise",
@@ -432,6 +463,8 @@
             "ADDCONTACT": "Ajouter une nouvelle Contact",
             "NEWCONTACT": "Nonuvelle Contact",
             "CONTACTDETAILS": "Détails Contact",
+            "IMPORTCONTACTS": "Import Contacts",
+            "EXPORTCONTACTS": "Export Contacts",
             "EDITCONTACT": "Modifier cette Contact",
             "CONTACTUPDATED": "Contact mise à jour",
             "CONTACTNOTUPDATED": "Contact non mise à jour",
@@ -642,6 +675,8 @@
             "ADDPRESSRELEASE": "Ajouter une nouvelle Press Release",
             "NEWPRESSRELEASE": "Nonuvelle Press Release",
             "PRESSRELEASEDETAILS": "Détails Press Release",
+            "PRESSRELEASEEDITOR": "Press Release Editor",
+            "SENDPRESSRELEASE": "Send Press Release",
             "EDITPRESSRELEASE": "Modifier cette Press Release",
             "PRESSRELEASEUPDATED": "Press Release mise à jour",
             "PRESSRELEASENOTUPDATED": "Press Release non mise à jour",
@@ -752,33 +787,7 @@
                 "HTMLTEMPLATE": "Html Modèle",
                 "SETTINGS": "Paramètres",
                 "BLOCKTYPE": "Block Type",
-                "blocktypes": {
-                    "TEXT": "Texte",
-                    "BOXEDTEXT": "Boxed Texte",
-                    "DIVIDER": "Divider",
-                    "IMAGE": "Image",
-                    "IMAGEGROUP": "Image Groupe",
-                    "IMAGECARD": "Image Card",
-                    "IMAGEWITHCAPTION": "Image With Caption",
-                    "SOCIALSHARE": "Social Share",
-                    "SOCIALFOLLOW": "Social Follow",
-                    "BUTTON": "Button",
-                    "FOOTER": "Jambeer",
-                    "VIDEO": "Vidéo",
-                    "RSSHEADER": "Rss Têteer",
-                    "RSSITEMS": "Rss Items",
-                    "CODE": "Code",
-                    "ZONE": "Zone"
-                },
                 "STATUS": "Statut",
-                "statuses": {
-                    "DRAFT": "Brouillon",
-                    "ONLINE": "En ligne",
-                    "DEACTIVATED": "Désactivé",
-                    "OFFLINE": "Déconnecté",
-                    "DELETED": "Supprimé",
-                    "ARCHIVED": "Archivé"
-                },
                 "CODE": "Code",
                 "LONGCODE": "Code long",
                 "PREFIX": "Préfixe",
@@ -786,11 +795,6 @@
                 "CONTACT": "Contact",
                 "SECTION": "Section",
                 "SENDINGSTATUS": "Sending Statut",
-                "sendingstatuses": {
-                    "INITIALIZED": "Initialized",
-                    "SENT": "Sent",
-                    "ERROR": "Error"
-                },
                 "SENDNOW": "Send Nonw",
                 "SENDINGDATETIME": "Sending Date et Heure",
                 "EXTERNALREFERENCE": "External Référence",
@@ -818,6 +822,21 @@
                 "LOGOPICTURE": "Journalo Photo",
                 "BANNERPICTURE": "Bannière Photo",
                 "PRESSRELEASESPERPAGE": "Press Releases Par Page",
+                "BACKGROUNDCOLOR": "Fond Couleur",
+                "TITLECOLOR": "Titre Couleur",
+                "TITLEFONT": "Titre Font",
+                "TEXTCOLOR": "Texte Couleur",
+                "TEXTFONT": "Texte Font",
+                "FACEBOOKLINK": "Facebook Lien",
+                "TWITTERLINK": "Twitter Lien",
+                "GOOGLEPLUSLINK": "Google Plus Lien",
+                "PINTERESTLINK": "Pinterest Lien",
+                "INSTAGRAMLINK": "Instagram Lien",
+                "YOUTUBELINK": "Youtube Lien",
+                "LINKEDINLINK": "Lienedin Lien",
+                "VIMEOLINK": "Vimeo Lien",
+                "FLICKRLINK": "Flickr Lien",
+                "TUMBLRLINK": "Tumblr Lien",
                 "CSS": "Css",
                 "ENABLESEARCH": "Enable Search",
                 "ENABLESOCIALNETWORKS": "Enable Social Networks",
@@ -827,12 +846,6 @@
                 "HTMLFILE": "Html Fichier",
                 "CSSFILE": "Css Fichier",
                 "TYPE": "Type",
-                "types": {
-                    "FREE": "Free",
-                    "MANAGER": "Gestionnaire",
-                    "CONTRIBUTOR": "Contributor",
-                    "ADMINISTRATOR": "Administrateur"
-                },
                 "USERNAME": "Nonm d'utilisateur",
                 "PASSWORD": "Mot de passe",
                 "REPEATPASSWORD": "Répéter Mot de passe",
@@ -840,10 +853,6 @@
                 "USERNAMECANONICAL": "Nonm d'utilisateur Canonical",
                 "EMAILCANONICAL": "Email canonique",
                 "GENDER": "Genre",
-                "genders": {
-                    "MALE": "Mâle",
-                    "FEMALE": "Femelle"
-                },
                 "BIRTHDATE": "Date de naissance",
                 "ADDRESS": "Adresse",
                 "ZIPCODE": "Code postal",
@@ -860,20 +869,7 @@
                 "EMAILVALIDATED": "Email Validé",
                 "EMAILVALIDATIONCODE": "Code de validation par email",
                 "AUTHENTICATIONMODE": "Mode d'authentification",
-                "authenticationmodes": {
-                    "DATABASE": "Base de données",
-                    "ACTIVEDIRECTORY": "Active Directory",
-                    "WEBSERVICE": "Service Web"
-                },
                 "ROLES": "Rôles",
-                "rolesoptions": {
-                    "ROLE_API": "R O L E  A P I",
-                    "ROLE_ACCOUNT_USER": "R O L E  A C C O U N T  U S E R",
-                    "FREE_ACCOUNT": "F R E E  A C C O U N T",
-                    "ROLE_ACCOUNT_MANAGER": "R O L E  A C C O U N T  M A N A G E R",
-                    "ROLE_ADMIN": "R O L E  A D M I N",
-                    "ROLE_SUPER_ADMIN": "R O L E  S U P E R  A D M I N"
-                },
                 "ENABLED": "Activé",
                 "CONFIRMATIONTOKEN": "Confirmation Jeton",
                 "PASSWORDREQUESTEDAT": "Mot de passe Requêteed At",
@@ -919,11 +915,68 @@
                 "KEY": "Clé",
                 "VALUE": "Valeur",
                 "ACTION": "Action",
+                "SOURCE": "Source",
+                "blocktypes": {
+                    "TEXT": "Texte",
+                    "BOXEDTEXT": "Boxed Texte",
+                    "DIVIDER": "Divider",
+                    "IMAGE": "Image",
+                    "IMAGEGROUP": "Image Groupe",
+                    "IMAGECARD": "Image Card",
+                    "IMAGEWITHCAPTION": "Image With Caption",
+                    "SOCIALSHARE": "Social Share",
+                    "SOCIALFOLLOW": "Social Follow",
+                    "BUTTON": "Button",
+                    "FOOTER": "Jambeer",
+                    "VIDEO": "Vidéo",
+                    "RSSHEADER": "Rss Têteer",
+                    "RSSITEMS": "Rss Items",
+                    "CODE": "Code",
+                    "ZONE": "Zone"
+                },
+                "statuses": {
+                    "DRAFT": "Brouillon",
+                    "ONLINE": "En ligne",
+                    "DEACTIVATED": "Désactivé",
+                    "OFFLINE": "Déconnecté",
+                    "DELETED": "Supprimé",
+                    "ARCHIVED": "Archivé"
+                },
+                "sendingstatuses": {
+                    "INITIALIZED": "Initialized",
+                    "SENT": "Sent",
+                    "ERROR": "Error"
+                },
+                "types": {
+                    "FREE": "Free",
+                    "MANAGER": "Gestionnaire",
+                    "CONTRIBUTOR": "Contributor",
+                    "ADMINISTRATOR": "Administrateur",
+                    "BASIC": "Basic",
+                    "THEME": "Theme",
+                    "CUSTOM": "Custom"
+                },
+                "genders": {
+                    "MALE": "Mâle",
+                    "FEMALE": "Femelle"
+                },
+                "authenticationmodes": {
+                    "DATABASE": "Base de données",
+                    "ACTIVEDIRECTORY": "Active Directory",
+                    "WEBSERVICE": "Service Web"
+                },
+                "rolesoptions": {
+                    "ROLEAPI": "Role Api",
+                    "ROLEACCOUNTUSER": "Role Account Utilisateur",
+                    "FREEACCOUNT": "Free Account",
+                    "ROLEACCOUNTMANAGER": "Role Account Gestionnaire",
+                    "ROLEADMIN": "Role Admin",
+                    "ROLESUPERADMIN": "Role Super Admin"
+                },
                 "actions": {
                     "VIEW": "View",
                     "CLICK": "Clic"
-                },
-                "SOURCE": "Source"
+                }
             }
         }
     }

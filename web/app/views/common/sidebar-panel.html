@@ -64,17 +64,17 @@
       </a>
     </li>
 
-    <li ui-sref-active="active" ng-if="user.roles.join('').indexOf('ACC') > -1" ng-class="{'active':$state.includes('app.contactmanager.contacts')}">
-      <a ui-sref="app.contactmanager.contacts">
-        <i class="fa ti-id-badge"></i>
-        <span class="title" translate="content.list.CONTACTS">Contacts</span>
-      </a>
-    </li>
-
     <li ui-sref-active="active" ng-if="user.roles.join('').indexOf('MAN') > -1" ng-class="{'active':$state.includes('app.prmanager.newsrooms')}">
       <a  ui-sref="app.prmanager.newsrooms">
         <i class="fa fa-newspaper-o"></i>
         <span translate="content.list.NEWSROOMS">Newsrooms</span>
+      </a>
+    </li>
+
+    <li ui-sref-active="active" ng-if="user.roles.join('').indexOf('ACC') > -1" ng-class="{'active':$state.includes('app.contactmanager.contacts')}">
+      <a ui-sref="app.contactmanager.contacts">
+        <i class="fa ti-id-badge"></i>
+        <span class="title" translate="content.list.CONTACTS">Contacts</span>
       </a>
     </li>
 

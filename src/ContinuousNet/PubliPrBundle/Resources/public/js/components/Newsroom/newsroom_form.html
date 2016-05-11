@@ -105,9 +105,9 @@
                                         <i class="ti-image"></i>
                                     </span><!--/input-icon-->
                                         <span class="input-group-btn">
-                                            <button type="button" class="btn btn-primary" ng-click="showFileManager('logo_picture')">
+                                            <a type="button" class="btn btn-primary" ng-click="showFileManager('logo_picture')">
                                                 <i class="ti-cloud"></i>
-                                            </button>
+                                            </a>
                                         </span>
                                     </div>
                                     <div class="user-image margin-top-10" ng-if="newsroom.logo_picture != '' && newsroom.logo_picture != null">
@@ -135,9 +135,9 @@
                                         <i class="ti-image"></i>
                                     </span><!--/input-icon-->
                                         <span class="input-group-btn">
-                                            <button type="button" class="btn btn-primary" ng-click="showFileManager('banner_picture')">
+                                            <a type="button" class="btn btn-primary" ng-click="showFileManager('banner_picture')">
                                                 <i class="ti-cloud"></i>
-                                            </button>
+                                            </a>
                                         </span>
                                     </div>
                                     <div class="user-image margin-top-10" ng-if="newsroom.banner_picture != '' && newsroom.banner_picture != null">
@@ -162,10 +162,199 @@
                                     </label>
                                     <span class="input-icon">
                                         <input ng-model="newsroom.press_releases_per_page" type="text" name="pressReleasesPerPage" id="newsroomPressReleasesPerPage" class="form-control" placeholder="[[ 'content.form.messages.ENTERPRESSRELEASESPERPAGE' | translate ]]" touchspin data-min="-10000000" data-max="10000000" data-verticalbuttons="true" data-verticalupclass="ti-angle-up" data-verticaldownclass="ti-angle-down" ng-required="false" />
-                                        <i class="ti-marker-alt"></i>
+                                        <i class="ti-file"></i>
                                     </span><!--/input-icon-->
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="newsroomBackgroundColor" class="control-label">
+                                        <span translate="content.list.fields.BACKGROUNDCOLOR">Background Color</span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="newsroom.background_color" type="text" name="backgroundColor" id="newsroomBackgroundColor" class="form-control" placeholder="[[ 'content.form.messages.ENTERBACKGROUNDCOLOR' | translate ]]" ng-required="false" colorpicker="hex" />
+                                        <i class="ti-palette"></i>
+                                    </span><!--/input-icon-->
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="newsroomTitleColor" class="control-label">
+                                        <span translate="content.list.fields.TITLECOLOR">Title Color</span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="newsroom.title_color" type="text" name="titleColor" id="newsroomTitleColor" class="form-control" placeholder="[[ 'content.form.messages.ENTERTITLECOLOR' | translate ]]" ng-required="false" colorpicker="hex" />
+                                        <i class="ti-palette"></i>
+                                    </span><!--/input-icon-->
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="newsroomTitleFont" class="control-label">
+                                        <span translate="content.list.fields.TITLEFONT">Title Font</span>
+                                    </label>
+                                <div class="block" ng-if="fontsLoaded">
+                                    <span class="input-icon">
+                                        <select ng-options="item.id as item.name for item in fonts | filter:{ hidden : false }" ng-model="newsroom.title_font" name="titleFont" id="newsroomTitleFont" class="form-control" ng-required="false">
+                                            <option translate="content.form.messages.SELECTTITLEFONT" value="">Select Title Font</option>
+                                        </select>
+                                        <i class="fa fa-font"></i>
+                                    </span><!--/input-icon-->
+                                </div>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="newsroomTextColor" class="control-label">
+                                        <span translate="content.list.fields.TEXTCOLOR">Text Color</span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="newsroom.text_color" type="text" name="textColor" id="newsroomTextColor" class="form-control" placeholder="[[ 'content.form.messages.ENTERTEXTCOLOR' | translate ]]" ng-required="false" colorpicker="hex" />
+                                        <i class="ti-palette"></i>
+                                    </span><!--/input-icon-->
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="newsroomTextFont" class="control-label">
+                                        <span translate="content.list.fields.TEXTFONT">Text Font</span>
+                                    </label>
+                                <div class="block" ng-if="fontsLoaded">
+                                    <span class="input-icon">
+                                        <select ng-options="item.id as item.name for item in fonts | filter:{ hidden : false }" ng-model="newsroom.text_font" name="textFont" id="newsroomTextFont" class="form-control" ng-required="false">
+                                            <option translate="content.form.messages.SELECTTEXTFONT" value="">Select Text Font</option>
+                                        </select>
+                                        <i class="fa fa-font"></i>
+                                    </span><!--/input-icon-->
+                                </div>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="newsroomFacebookLink" class="control-label">
+                                        <span translate="content.list.fields.FACEBOOKLINK">Facebook Link</span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="newsroom.facebook_link" type="text" name="facebookLink" id="newsroomFacebookLink" class="form-control" placeholder="[[ 'content.form.messages.ENTERFACEBOOKLINK' | translate ]]" ng-required="false" />
+                                        <i class="ti-facebook"></i>
+                                    </span><!--/input-icon-->
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="newsroomTwitterLink" class="control-label">
+                                        <span translate="content.list.fields.TWITTERLINK">Twitter Link</span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="newsroom.twitter_link" type="text" name="twitterLink" id="newsroomTwitterLink" class="form-control" placeholder="[[ 'content.form.messages.ENTERTWITTERLINK' | translate ]]" ng-required="false" />
+                                        <i class="ti-twitter"></i>
+                                    </span><!--/input-icon-->
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="newsroomGooglePlusLink" class="control-label">
+                                        <span translate="content.list.fields.GOOGLEPLUSLINK">Google Plus Link</span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="newsroom.google_plus_link" type="text" name="googlePlusLink" id="newsroomGooglePlusLink" class="form-control" placeholder="[[ 'content.form.messages.ENTERGOOGLEPLUSLINK' | translate ]]" ng-required="false" />
+                                        <i class="ti-google"></i>
+                                    </span><!--/input-icon-->
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="newsroomPinterestLink" class="control-label">
+                                        <span translate="content.list.fields.PINTERESTLINK">Pinterest Link</span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="newsroom.pinterest_link" type="text" name="pinterestLink" id="newsroomPinterestLink" class="form-control" placeholder="[[ 'content.form.messages.ENTERPINTERESTLINK' | translate ]]" ng-required="false" />
+                                        <i class="ti-pinterest"></i>
+                                    </span><!--/input-icon-->
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="newsroomInstagramLink" class="control-label">
+                                        <span translate="content.list.fields.INSTAGRAMLINK">Instagram Link</span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="newsroom.instagram_link" type="text" name="instagramLink" id="newsroomInstagramLink" class="form-control" placeholder="[[ 'content.form.messages.ENTERINSTAGRAMLINK' | translate ]]" ng-required="false" />
+                                        <i class="ti-instagram"></i>
+                                    </span><!--/input-icon-->
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="newsroomYoutubeLink" class="control-label">
+                                        <span translate="content.list.fields.YOUTUBELINK">Youtube Link</span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="newsroom.youtube_link" type="text" name="youtubeLink" id="newsroomYoutubeLink" class="form-control" placeholder="[[ 'content.form.messages.ENTERYOUTUBELINK' | translate ]]" ng-required="false" />
+                                        <i class="ti-youtube"></i>
+                                    </span><!--/input-icon-->
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="newsroomLinkedinLink" class="control-label">
+                                        <span translate="content.list.fields.LINKEDINLINK">Linkedin Link</span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="newsroom.linkedin_link" type="text" name="linkedinLink" id="newsroomLinkedinLink" class="form-control" placeholder="[[ 'content.form.messages.ENTERLINKEDINLINK' | translate ]]" ng-required="false" />
+                                        <i class="ti-linkedin"></i>
+                                    </span><!--/input-icon-->
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="newsroomVimeoLink" class="control-label">
+                                        <span translate="content.list.fields.VIMEOLINK">Vimeo Link</span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="newsroom.vimeo_link" type="text" name="vimeoLink" id="newsroomVimeoLink" class="form-control" placeholder="[[ 'content.form.messages.ENTERVIMEOLINK' | translate ]]" ng-required="false" />
+                                        <i class="ti-vimeo"></i>
+                                    </span><!--/input-icon-->
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="newsroomFlickrLink" class="control-label">
+                                        <span translate="content.list.fields.FLICKRLINK">Flickr Link</span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="newsroom.flickr_link" type="text" name="flickrLink" id="newsroomFlickrLink" class="form-control" placeholder="[[ 'content.form.messages.ENTERFLICKRLINK' | translate ]]" ng-required="false" />
+                                        <i class="ti-flickr"></i>
+                                    </span><!--/input-icon-->
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="newsroomTumblrLink" class="control-label">
+                                        <span translate="content.list.fields.TUMBLRLINK">Tumblr Link</span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="newsroom.tumblr_link" type="text" name="tumblrLink" id="newsroomTumblrLink" class="form-control" placeholder="[[ 'content.form.messages.ENTERTUMBLRLINK' | translate ]]" ng-required="false" />
+                                        <i class="ti-tumblr"></i>
+                                    </span><!--/input-icon-->
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="newsroomCss" class="control-label">
@@ -228,9 +417,9 @@
                         </div><!--/row-->
                         <div class="row">
                             <div class="col-md-4">
-                                <button ng-click="list()" class="btn btn-primary pull-left">
+                                <a ng-click="list()" class="btn btn-primary pull-left">
                                     <i class="ti-layout-list-thumb"></i> <span translate="content.list.BACKNEWSROOMS">Back to Newsrooms list</span>
-                                </button>
+                                </a>
                             </div>
                             <div class="col-md-4">
                             </div>

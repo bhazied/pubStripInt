@@ -47,12 +47,6 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><span translate="content.list.fields.TYPE">Type</span></td>
-                                <td>
-                                    <span my-enum="[[ user.type ]]" my-enum-list="[[ types ]]"></span>
-                                </td>
-                            </tr>
-                            <tr>
                                 <td><span translate="content.list.fields.USERNAME">Username</span></td>
                                 <td>
                                     <div ng-bind-html="user.username"></div>
@@ -65,12 +59,6 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><span translate="content.list.fields.SALT">Salt</span></td>
-                                <td>
-                                    <div ng-bind-html="user.salt"></div>
-                                </td>
-                            </tr>
-                            <tr>
                                 <td><span translate="content.list.fields.PHONE">Phone</span></td>
                                 <td>
                                     <div ng-bind-html="user.phone"></div>
@@ -80,18 +68,6 @@
                                 <td><span translate="content.list.fields.EMAIL">Email</span></td>
                                 <td>
                                     <div ng-bind-html="user.email"></div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><span translate="content.list.fields.USERNAMECANONICAL">Username Canonical</span></td>
-                                <td>
-                                    <div ng-bind-html="user.username_canonical"></div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><span translate="content.list.fields.EMAILCANONICAL">Email Canonical</span></td>
-                                <td>
-                                    <div ng-bind-html="user.email_canonical"></div>
                                 </td>
                             </tr>
                             <tr>
@@ -148,7 +124,7 @@
                             </tr>
                             <tr>
                                 <td><span translate="content.list.fields.COMPANY">Company</span></td>
-                                <td><a ui-sref="app.nogroup.companiesdetails({id: user.company.id})">[[ user.company.name ]]</a></span></td>
+                                <td><a ui-sref="app.access.companiesdetails({id: user.company.id})">[[ user.company.name ]]</a></span></td>
                             </tr>
                             <tr>
                                 <td><span translate="content.list.fields.JOB">Job</span></td>
@@ -171,75 +147,9 @@
                                 <td><a ui-sref="app.configuration.languagesdetails({id: user.language.id})">[[ user.language.name ]]</a></span></td>
                             </tr>
                             <tr>
-                                <td><span translate="content.list.fields.ENABLEOAUTH">Enable Oauth</span></td>
-                                <td>
-                                    <span my-boolean="[[ user.enable_oauth ]]"></span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><span translate="content.list.fields.SESSIONTIMEOUT">Session Timeout</span></td>
-                                <td>
-                                    <div ng-bind-html="user.session_timeout"></div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><span translate="content.list.fields.MULTIPLESESSION">Multiple Session</span></td>
-                                <td>
-                                    <span my-boolean="[[ user.multiple_session ]]"></span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><span translate="content.list.fields.PHONEVALIDATED">Phone Validated</span></td>
-                                <td>
-                                    <span my-boolean="[[ user.phone_validated ]]"></span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><span translate="content.list.fields.PHONEVALIDATIONCODE">Phone Validation Code</span></td>
-                                <td>
-                                    <div ng-bind-html="user.phone_validation_code"></div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><span translate="content.list.fields.EMAILVALIDATED">Email Validated</span></td>
-                                <td>
-                                    <span my-boolean="[[ user.email_validated ]]"></span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><span translate="content.list.fields.EMAILVALIDATIONCODE">Email Validation Code</span></td>
-                                <td>
-                                    <div ng-bind-html="user.email_validation_code"></div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><span translate="content.list.fields.AUTHENTICATIONMODE">Authentication Mode</span></td>
-                                <td>
-                                    <span my-enum="[[ user.authentication_mode ]]" my-enum-list="[[ authenticationModes ]]"></span>
-                                </td>
-                            </tr>
-                            <tr>
                                 <td><span translate="content.list.fields.ROLES">Roles</span></td>
                                 <td>
                                     <div ng-bind-html="user.roles"></div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><span translate="content.list.fields.ENABLED">Enabled</span></td>
-                                <td>
-                                    <span my-boolean="[[ user.enabled ]]"></span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><span translate="content.list.fields.CONFIRMATIONTOKEN">Confirmation Token</span></td>
-                                <td>
-                                    <div ng-bind-html="user.confirmation_token"></div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><span translate="content.list.fields.PASSWORDREQUESTEDAT">Password Requested At</span></td>
-                                <td>
-                                    <span>[[ user.password_requested_at | date: datetimeFormat ]]</span>
                                 </td>
                             </tr>
                             <tr>
@@ -255,51 +165,9 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><span translate="content.list.fields.EXPIRESAT">Expires At</span></td>
-                                <td>
-                                    <span>[[ user.expires_at | date: datetimeFormat ]]</span>
-                                </td>
-                            </tr>
-                            <tr>
                                 <td><span translate="content.list.fields.CREDENTIALSEXPIRED">Credentials Expired</span></td>
                                 <td>
                                     <span my-boolean="[[ user.credentials_expired ]]"></span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><span translate="content.list.fields.CREDENTIALSEXPIREAT">Credentials Expire At</span></td>
-                                <td>
-                                    <span>[[ user.credentials_expire_at | date: datetimeFormat ]]</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><span translate="content.list.fields.LASTLOGIN">Last Login</span></td>
-                                <td>
-                                    <span>[[ user.last_login | date: datetimeFormat ]]</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><span translate="content.list.fields.LASTFAILEDLOGIN">Last Failed Login</span></td>
-                                <td>
-                                    <span>[[ user.last_failed_login | date: datetimeFormat ]]</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><span translate="content.list.fields.LOGINCOUNT">Login Count</span></td>
-                                <td>
-                                    <div ng-bind-html="user.login_count"></div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><span translate="content.list.fields.FAILEDLOGINCOUNT">Failed Login Count</span></td>
-                                <td>
-                                    <div ng-bind-html="user.failed_login_count"></div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><span translate="content.list.fields.LASTFAILEDLOGINCOUNT">Last Failed Login Count</span></td>
-                                <td>
-                                    <div ng-bind-html="user.last_failed_login_count"></div>
                                 </td>
                             </tr>
                             <tr>

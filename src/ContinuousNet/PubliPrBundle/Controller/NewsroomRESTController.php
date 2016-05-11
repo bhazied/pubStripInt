@@ -84,9 +84,11 @@ class NewsroomRESTController extends BaseRESTController
             $em = $this->getDoctrine()->getManager();
             $qb = $em->createQueryBuilder();
             $qb->from('PubliPrBundle:Newsroom', 'n_');
+            $qb->leftJoin('ContinuousNet\PubliPrBundle\Entity\Font', 'title_font', \Doctrine\ORM\Query\Expr\Join::WITH, 'n_.titleFont = title_font.id');
+            $qb->leftJoin('ContinuousNet\PubliPrBundle\Entity\Font', 'text_font', \Doctrine\ORM\Query\Expr\Join::WITH, 'n_.textFont = text_font.id');
             $qb->leftJoin('ContinuousNet\PubliPrBundle\Entity\User', 'creator_user', \Doctrine\ORM\Query\Expr\Join::WITH, 'n_.creatorUser = creator_user.id');
             $qb->leftJoin('ContinuousNet\PubliPrBundle\Entity\User', 'modifier_user', \Doctrine\ORM\Query\Expr\Join::WITH, 'n_.modifierUser = modifier_user.id');
-            $textFields = array('newsroom.name', 'newsroom.slug', 'newsroom.description', 'newsroom.url', 'newsroom.email', 'newsroom.bannerPicture', 'newsroom.css');
+            $textFields = array('newsroom.name', 'newsroom.slug', 'newsroom.description', 'newsroom.url', 'newsroom.email', 'newsroom.bannerPicture', 'newsroom.backgroundColor', 'newsroom.titleColor', 'newsroom.textColor', 'newsroom.facebookLink', 'newsroom.twitterLink', 'newsroom.googlePlusLink', 'newsroom.pinterestLink', 'newsroom.instagramLink', 'newsroom.youtubeLink', 'newsroom.linkedinLink', 'newsroom.vimeoLink', 'newsroom.flickrLink', 'newsroom.tumblrLink', 'newsroom.css');
             foreach ($filters as $field => $value) {
                 $_field = str_replace('newsroom.', 'n_.', $field);
                 $key = str_replace('.', '', $field);
@@ -222,4 +224,13 @@ class NewsroomRESTController extends BaseRESTController
         }
     }
     
+    private function getConfig($path) {
+        $config = $this->container->getParameter('publi_pr');
+        $paths = explode('.', $path);
+        foreach ($paths as $index) {
+            $config = $config[$index];
+        }
+        return $config;
+    }
+
 }

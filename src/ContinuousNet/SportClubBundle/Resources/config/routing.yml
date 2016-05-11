@@ -1,0 +1,599 @@
+
+sport_club:
+    resource: "@SportClubBundle/Controller/DefaultController.php"
+    type:     annotation
+    prefix:   /
+
+thumb:
+    resource: "@SportClubBundle/Controller/ThumbController.php"
+    type:     annotation
+    prefix:   /
+
+api_login_check:
+    path: /api/login_check
+
+api_login_check_lang:
+    path: /{_locale}/api/login_check
+    requirements:
+        _locale: en|fr|ar
+
+sport_club_v1_api:
+    resource: "@SportClubBundle/Controller/ApiV1RESTController.php"
+    type:   rest
+    prefix:   /{_locale}/api/v1
+    requirements:
+        _locale: en|fr|ar
+
+sport_club_album_api:
+    resource: "@SportClubBundle/Controller/AlbumRESTController.php"
+    type:   rest
+    prefix:   /api
+
+sport_club_audio_api:
+    resource: "@SportClubBundle/Controller/AudioRESTController.php"
+    type:   rest
+    prefix:   /api
+
+sport_club_audio_category_api:
+    resource: "@SportClubBundle/Controller/AudioCategoryRESTController.php"
+    type:   rest
+    prefix:   /api
+
+sport_club_audio_type_api:
+    resource: "@SportClubBundle/Controller/AudioTypeRESTController.php"
+    type:   rest
+    prefix:   /api
+
+sport_club_banner_api:
+    resource: "@SportClubBundle/Controller/BannerRESTController.php"
+    type:   rest
+    prefix:   /api
+
+sport_club_banner_type_api:
+    resource: "@SportClubBundle/Controller/BannerTypeRESTController.php"
+    type:   rest
+    prefix:   /api
+
+sport_club_city_api:
+    resource: "@SportClubBundle/Controller/CityRESTController.php"
+    type:   rest
+    prefix:   /api
+
+sport_club_click_api:
+    resource: "@SportClubBundle/Controller/ClickRESTController.php"
+    type:   rest
+    prefix:   /api
+
+sport_club_comment_api:
+    resource: "@SportClubBundle/Controller/CommentRESTController.php"
+    type:   rest
+    prefix:   /api
+
+sport_club_company_api:
+    resource: "@SportClubBundle/Controller/CompanyRESTController.php"
+    type:   rest
+    prefix:   /api
+
+sport_club_country_api:
+    resource: "@SportClubBundle/Controller/CountryRESTController.php"
+    type:   rest
+    prefix:   /api
+
+sport_club_day_api:
+    resource: "@SportClubBundle/Controller/DayRESTController.php"
+    type:   rest
+    prefix:   /api
+
+sport_club_gallery_api:
+    resource: "@SportClubBundle/Controller/GalleryRESTController.php"
+    type:   rest
+    prefix:   /api
+
+sport_club_group_api:
+    resource: "@SportClubBundle/Controller/GroupRESTController.php"
+    type:   rest
+    prefix:   /api
+
+sport_club_hit_api:
+    resource: "@SportClubBundle/Controller/HitRESTController.php"
+    type:   rest
+    prefix:   /api
+
+sport_club_image_api:
+    resource: "@SportClubBundle/Controller/ImageRESTController.php"
+    type:   rest
+    prefix:   /api
+
+sport_club_image_category_api:
+    resource: "@SportClubBundle/Controller/ImageCategoryRESTController.php"
+    type:   rest
+    prefix:   /api
+
+sport_club_image_type_api:
+    resource: "@SportClubBundle/Controller/ImageTypeRESTController.php"
+    type:   rest
+    prefix:   /api
+
+sport_club_impression_api:
+    resource: "@SportClubBundle/Controller/ImpressionRESTController.php"
+    type:   rest
+    prefix:   /api
+
+sport_club_language_api:
+    resource: "@SportClubBundle/Controller/LanguageRESTController.php"
+    type:   rest
+    prefix:   /api
+
+sport_club_like_api:
+    resource: "@SportClubBundle/Controller/LikeRESTController.php"
+    type:   rest
+    prefix:   /api
+
+sport_club_log_api:
+    resource: "@SportClubBundle/Controller/LogRESTController.php"
+    type:   rest
+    prefix:   /api
+
+sport_club_match_api:
+    resource: "@SportClubBundle/Controller/MatchRESTController.php"
+    type:   rest
+    prefix:   /api
+
+sport_club_match_card_api:
+    resource: "@SportClubBundle/Controller/MatchCardRESTController.php"
+    type:   rest
+    prefix:   /api
+
+sport_club_match_commentary_api:
+    resource: "@SportClubBundle/Controller/MatchCommentaryRESTController.php"
+    type:   rest
+    prefix:   /api
+
+sport_club_match_goal_api:
+    resource: "@SportClubBundle/Controller/MatchGoalRESTController.php"
+    type:   rest
+    prefix:   /api
+
+sport_club_match_line_up_api:
+    resource: "@SportClubBundle/Controller/MatchLineUpRESTController.php"
+    type:   rest
+    prefix:   /api
+
+sport_club_match_substitution_api:
+    resource: "@SportClubBundle/Controller/MatchSubstitutionRESTController.php"
+    type:   rest
+    prefix:   /api
+
+sport_club_menu_api:
+    resource: "@SportClubBundle/Controller/MenuRESTController.php"
+    type:   rest
+    prefix:   /api
+
+sport_club_menu_link_api:
+    resource: "@SportClubBundle/Controller/MenuLinkRESTController.php"
+    type:   rest
+    prefix:   /api
+
+sport_club_notification_api:
+    resource: "@SportClubBundle/Controller/NotificationRESTController.php"
+    type:   rest
+    prefix:   /api
+
+sport_club_package_api:
+    resource: "@SportClubBundle/Controller/PackageRESTController.php"
+    type:   rest
+    prefix:   /api
+
+sport_club_package_type_api:
+    resource: "@SportClubBundle/Controller/PackageTypeRESTController.php"
+    type:   rest
+    prefix:   /api
+
+sport_club_player_api:
+    resource: "@SportClubBundle/Controller/PlayerRESTController.php"
+    type:   rest
+    prefix:   /api
+
+sport_club_player_stat_api:
+    resource: "@SportClubBundle/Controller/PlayerStatRESTController.php"
+    type:   rest
+    prefix:   /api
+
+sport_club_post_api:
+    resource: "@SportClubBundle/Controller/PostRESTController.php"
+    type:   rest
+    prefix:   /api
+
+sport_club_post_category_api:
+    resource: "@SportClubBundle/Controller/PostCategoryRESTController.php"
+    type:   rest
+    prefix:   /api
+
+sport_club_post_type_api:
+    resource: "@SportClubBundle/Controller/PostTypeRESTController.php"
+    type:   rest
+    prefix:   /api
+
+sport_club_price_api:
+    resource: "@SportClubBundle/Controller/PriceRESTController.php"
+    type:   rest
+    prefix:   /api
+
+sport_club_prize_winner_api:
+    resource: "@SportClubBundle/Controller/PrizeWinnerRESTController.php"
+    type:   rest
+    prefix:   /api
+
+sport_club_push_device_api:
+    resource: "@SportClubBundle/Controller/PushDeviceRESTController.php"
+    type:   rest
+    prefix:   /api
+
+sport_club_push_message_api:
+    resource: "@SportClubBundle/Controller/PushMessageRESTController.php"
+    type:   rest
+    prefix:   /api
+
+sport_club_push_notification_api:
+    resource: "@SportClubBundle/Controller/PushNotificationRESTController.php"
+    type:   rest
+    prefix:   /api
+
+push_notification_sender:
+    resource: "@SportClubBundle/Controller/PushNotificationSenderController.php"
+    type:     rest
+    prefix:   /api
+
+sport_club_rating_api:
+    resource: "@SportClubBundle/Controller/RatingRESTController.php"
+    type:   rest
+    prefix:   /api
+
+sport_club_scorer_api:
+    resource: "@SportClubBundle/Controller/ScorerRESTController.php"
+    type:   rest
+    prefix:   /api
+
+sport_club_season_api:
+    resource: "@SportClubBundle/Controller/SeasonRESTController.php"
+    type:   rest
+    prefix:   /api
+
+sport_club_sharing_api:
+    resource: "@SportClubBundle/Controller/SharingRESTController.php"
+    type:   rest
+    prefix:   /api
+
+sport_club_show_api:
+    resource: "@SportClubBundle/Controller/ShowRESTController.php"
+    type:   rest
+    prefix:   /api
+
+sport_club_sport_api:
+    resource: "@SportClubBundle/Controller/SportRESTController.php"
+    type:   rest
+    prefix:   /api
+
+sport_club_sport_event_api:
+    resource: "@SportClubBundle/Controller/SportEventRESTController.php"
+    type:   rest
+    prefix:   /api
+
+sport_club_team_api:
+    resource: "@SportClubBundle/Controller/TeamRESTController.php"
+    type:   rest
+    prefix:   /api
+
+sport_club_stadium_api:
+    resource: "@SportClubBundle/Controller/StadiumRESTController.php"
+    type:   rest
+    prefix:   /api
+
+sport_club_stat_api:
+    resource: "@SportClubBundle/Controller/StatRESTController.php"
+    type:   rest
+    prefix:   /api
+
+sport_club_subscription_api:
+    resource: "@SportClubBundle/Controller/SubscriptionRESTController.php"
+    type:   rest
+    prefix:   /api
+
+sport_club_table_api:
+    resource: "@SportClubBundle/Controller/TableRESTController.php"
+    type:   rest
+    prefix:   /api
+
+table_stats:
+    resource: "@SportClubBundle/Controller/TableStatsController.php"
+    type:     rest
+    prefix:   /api
+
+sport_club_user_api:
+    resource: "@SportClubBundle/Controller/UserRESTController.php"
+    type:   rest
+    prefix:   /api
+
+sport_club_user_setting_api:
+    resource: "@SportClubBundle/Controller/UserSettingRESTController.php"
+    type:   rest
+    prefix:   /api
+
+sport_club_video_api:
+    resource: "@SportClubBundle/Controller/VideoRESTController.php"
+    type:   rest
+    prefix:   /api
+
+video_converter:
+    resource: "@SportClubBundle/Controller/VideoConverterController.php"
+    type:     rest
+    prefix:   /api
+
+sport_club_video_category_api:
+    resource: "@SportClubBundle/Controller/VideoCategoryRESTController.php"
+    type:   rest
+    prefix:   /api
+
+sport_club_video_type_api:
+    resource: "@SportClubBundle/Controller/VideoTypeRESTController.php"
+    type:   rest
+    prefix:   /api
+
+sport_club_visit_api:
+    resource: "@SportClubBundle/Controller/VisitRESTController.php"
+    type:   rest
+    prefix:   /api
+
+sport_club_voucher_api:
+    resource: "@SportClubBundle/Controller/VoucherRESTController.php"
+    type:   rest
+    prefix:   /api
+
+sport_club_album:
+    resource: "@SportClubBundle/Resources/config/routing/album.yml"
+    prefix:   /album
+
+sport_club_audio:
+    resource: "@SportClubBundle/Resources/config/routing/audio.yml"
+    prefix:   /audio
+
+sport_club_audio_category:
+    resource: "@SportClubBundle/Resources/config/routing/audio_category.yml"
+    prefix:   /audio-category
+
+sport_club_audio_type:
+    resource: "@SportClubBundle/Resources/config/routing/audio_type.yml"
+    prefix:   /audio-type
+
+sport_club_banner:
+    resource: "@SportClubBundle/Resources/config/routing/banner.yml"
+    prefix:   /banner
+
+sport_club_banner_type:
+    resource: "@SportClubBundle/Resources/config/routing/banner_type.yml"
+    prefix:   /banner-type
+
+sport_club_city:
+    resource: "@SportClubBundle/Resources/config/routing/city.yml"
+    prefix:   /city
+
+sport_club_click:
+    resource: "@SportClubBundle/Resources/config/routing/click.yml"
+    prefix:   /click
+
+sport_club_comment:
+    resource: "@SportClubBundle/Resources/config/routing/comment.yml"
+    prefix:   /comment
+
+sport_club_company:
+    resource: "@SportClubBundle/Resources/config/routing/company.yml"
+    prefix:   /company
+
+sport_club_country:
+    resource: "@SportClubBundle/Resources/config/routing/country.yml"
+    prefix:   /country
+
+sport_club_day:
+    resource: "@SportClubBundle/Resources/config/routing/day.yml"
+    prefix:   /day
+
+sport_club_gallery:
+    resource: "@SportClubBundle/Resources/config/routing/gallery.yml"
+    prefix:   /gallery
+
+sport_club_group:
+    resource: "@SportClubBundle/Resources/config/routing/group.yml"
+    prefix:   /group
+
+sport_club_hit:
+    resource: "@SportClubBundle/Resources/config/routing/hit.yml"
+    prefix:   /hit
+
+sport_club_image:
+    resource: "@SportClubBundle/Resources/config/routing/image.yml"
+    prefix:   /image
+
+sport_club_image_category:
+    resource: "@SportClubBundle/Resources/config/routing/image_category.yml"
+    prefix:   /image-category
+
+sport_club_image_type:
+    resource: "@SportClubBundle/Resources/config/routing/image_type.yml"
+    prefix:   /image-type
+
+sport_club_impression:
+    resource: "@SportClubBundle/Resources/config/routing/impression.yml"
+    prefix:   /impression
+
+sport_club_language:
+    resource: "@SportClubBundle/Resources/config/routing/language.yml"
+    prefix:   /language
+
+sport_club_like:
+    resource: "@SportClubBundle/Resources/config/routing/like.yml"
+    prefix:   /like
+
+sport_club_log:
+    resource: "@SportClubBundle/Resources/config/routing/log.yml"
+    prefix:   /log
+
+sport_club_match:
+    resource: "@SportClubBundle/Resources/config/routing/match.yml"
+    prefix:   /match
+
+sport_club_match_card:
+    resource: "@SportClubBundle/Resources/config/routing/match_card.yml"
+    prefix:   /match-card
+
+sport_club_match_commentary:
+    resource: "@SportClubBundle/Resources/config/routing/match_commentary.yml"
+    prefix:   /match-commentary
+
+sport_club_match_goal:
+    resource: "@SportClubBundle/Resources/config/routing/match_goal.yml"
+    prefix:   /match-goal
+
+sport_club_match_line_up:
+    resource: "@SportClubBundle/Resources/config/routing/match_line_up.yml"
+    prefix:   /match-line-up
+
+sport_club_match_substitution:
+    resource: "@SportClubBundle/Resources/config/routing/match_substitution.yml"
+    prefix:   /match-substitution
+
+sport_club_menu:
+    resource: "@SportClubBundle/Resources/config/routing/menu.yml"
+    prefix:   /menu
+
+sport_club_menu_link:
+    resource: "@SportClubBundle/Resources/config/routing/menu_link.yml"
+    prefix:   /menu-link
+
+sport_club_notification:
+    resource: "@SportClubBundle/Resources/config/routing/notification.yml"
+    prefix:   /notification
+
+sport_club_package:
+    resource: "@SportClubBundle/Resources/config/routing/package.yml"
+    prefix:   /package
+
+sport_club_package_type:
+    resource: "@SportClubBundle/Resources/config/routing/package_type.yml"
+    prefix:   /package-type
+
+sport_club_player:
+    resource: "@SportClubBundle/Resources/config/routing/player.yml"
+    prefix:   /player
+
+sport_club_player_stat:
+    resource: "@SportClubBundle/Resources/config/routing/player_stat.yml"
+    prefix:   /player-stat
+
+sport_club_post:
+    resource: "@SportClubBundle/Resources/config/routing/post.yml"
+    prefix:   /post
+
+sport_club_post_category:
+    resource: "@SportClubBundle/Resources/config/routing/post_category.yml"
+    prefix:   /post-category
+
+sport_club_post_type:
+    resource: "@SportClubBundle/Resources/config/routing/post_type.yml"
+    prefix:   /post-type
+
+sport_club_price:
+    resource: "@SportClubBundle/Resources/config/routing/price.yml"
+    prefix:   /price
+
+sport_club_prize_winner:
+    resource: "@SportClubBundle/Resources/config/routing/prize_winner.yml"
+    prefix:   /prize-winner
+
+sport_club_push_device:
+    resource: "@SportClubBundle/Resources/config/routing/push_device.yml"
+    prefix:   /push-device
+
+sport_club_push_message:
+    resource: "@SportClubBundle/Resources/config/routing/push_message.yml"
+    prefix:   /push-message
+
+sport_club_push_notification:
+    resource: "@SportClubBundle/Resources/config/routing/push_notification.yml"
+    prefix:   /push-notification
+
+sport_club_rating:
+    resource: "@SportClubBundle/Resources/config/routing/rating.yml"
+    prefix:   /rating
+
+sport_club_scorer:
+    resource: "@SportClubBundle/Resources/config/routing/scorer.yml"
+    prefix:   /scorer
+
+sport_club_season:
+    resource: "@SportClubBundle/Resources/config/routing/season.yml"
+    prefix:   /season
+
+sport_club_sharing:
+    resource: "@SportClubBundle/Resources/config/routing/sharing.yml"
+    prefix:   /sharing
+
+sport_club_show:
+    resource: "@SportClubBundle/Resources/config/routing/show.yml"
+    prefix:   /show
+
+sport_club_sport:
+    resource: "@SportClubBundle/Resources/config/routing/sport.yml"
+    prefix:   /sport
+
+sport_club_sport_event:
+    resource: "@SportClubBundle/Resources/config/routing/sport_event.yml"
+    prefix:   /sport-event
+
+sport_club_team:
+    resource: "@SportClubBundle/Resources/config/routing/team.yml"
+    prefix:   /team
+
+sport_club_stadium:
+    resource: "@SportClubBundle/Resources/config/routing/stadium.yml"
+    prefix:   /stadium
+
+sport_club_stat:
+    resource: "@SportClubBundle/Resources/config/routing/stat.yml"
+    prefix:   /stat
+
+sport_club_subscription:
+    resource: "@SportClubBundle/Resources/config/routing/subscription.yml"
+    prefix:   /subscription
+
+sport_club_table:
+    resource: "@SportClubBundle/Resources/config/routing/table.yml"
+    prefix:   /table
+
+sport_club_user:
+    resource: "@SportClubBundle/Resources/config/routing/user.yml"
+    prefix:   /user
+
+sport_club_user_setting:
+    resource: "@SportClubBundle/Resources/config/routing/user_setting.yml"
+    prefix:   /user-setting
+
+sport_club_video:
+    resource: "@SportClubBundle/Resources/config/routing/video.yml"
+    prefix:   /video
+
+sport_club_video_category:
+    resource: "@SportClubBundle/Resources/config/routing/video_category.yml"
+    prefix:   /video-category
+
+sport_club_video_type:
+    resource: "@SportClubBundle/Resources/config/routing/video_type.yml"
+    prefix:   /video-type
+
+sport_club_visit:
+    resource: "@SportClubBundle/Resources/config/routing/visit.yml"
+    prefix:   /visit
+
+sport_club_voucher:
+    resource: "@SportClubBundle/Resources/config/routing/voucher.yml"
+    prefix:   /voucher
+

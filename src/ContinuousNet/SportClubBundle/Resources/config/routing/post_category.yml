@@ -1,0 +1,30 @@
+postcategory:
+    path:     /
+    defaults: { _controller: "SportClubBundle:PostCategory:index" }
+
+postcategory_details:
+    path:     /{id}/details
+    defaults: { _controller: "SportClubBundle:PostCategory:show" }
+
+postcategory_new:
+    path:     /new
+    defaults: { _controller: "SportClubBundle:PostCategory:new" }
+
+postcategory_create:
+    path:     /create
+    defaults: { _controller: "SportClubBundle:PostCategory:create" }
+    methods:  POST
+
+postcategory_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "SportClubBundle:PostCategory:edit" }
+
+postcategory_update:
+    path:     /{id}/update
+    defaults: { _controller: "SportClubBundle:PostCategory:update" }
+    methods:  [POST, PUT]
+
+postcategory_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "SportClubBundle:PostCategory:delete" }
+    methods:  [POST, DELETE]

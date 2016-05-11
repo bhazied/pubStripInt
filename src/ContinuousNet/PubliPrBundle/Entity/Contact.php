@@ -28,13 +28,10 @@ use JMS\Serializer\Annotation\Groups;
  * @link       http://publipr.continuousnet.com/ContinuousNet/PubliPrBundle/Entity
  * @see        Contact
  * @since      Class available since Release 1.0
- * @deprecated Nothing
  * @access     public
  * 
  * @ORM\Table(name="`contact`", indexes={@ORM\Index(name="contact_group_id", columns={"contact_group_id"}), @ORM\Index(name="creator_user_id", columns={"creator_user_id"}), @ORM\Index(name="modifier_user_id", columns={"modifier_user_id"})})
  * @ORM\Entity
- * @UniqueEntity("email")
- * @UniqueEntity("phone")
  * @ORM\HasLifecycleCallbacks()
  * 
  * @ExclusionPolicy("none")
@@ -81,7 +78,7 @@ class Contact
      * @var string
      * @access private
      *
-     * @ORM\Column(name="email", type="string", length=320, nullable=false, unique=true)
+     * @ORM\Column(name="email", type="string", length=320, nullable=false, unique=false)
      * 
      * @Expose
      * 
@@ -92,7 +89,7 @@ class Contact
      * @var string
      * @access private
      *
-     * @ORM\Column(name="phone", type="string", length=20, nullable=true, unique=true)
+     * @ORM\Column(name="phone", type="string", length=20, nullable=true, unique=false)
      * 
      * @Expose
      * 

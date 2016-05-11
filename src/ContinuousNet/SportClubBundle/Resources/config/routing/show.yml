@@ -1,0 +1,30 @@
+show:
+    path:     /
+    defaults: { _controller: "SportClubBundle:Show:index" }
+
+show_details:
+    path:     /{id}/details
+    defaults: { _controller: "SportClubBundle:Show:show" }
+
+show_new:
+    path:     /new
+    defaults: { _controller: "SportClubBundle:Show:new" }
+
+show_create:
+    path:     /create
+    defaults: { _controller: "SportClubBundle:Show:create" }
+    methods:  POST
+
+show_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "SportClubBundle:Show:edit" }
+
+show_update:
+    path:     /{id}/update
+    defaults: { _controller: "SportClubBundle:Show:update" }
+    methods:  [POST, PUT]
+
+show_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "SportClubBundle:Show:delete" }
+    methods:  [POST, DELETE]

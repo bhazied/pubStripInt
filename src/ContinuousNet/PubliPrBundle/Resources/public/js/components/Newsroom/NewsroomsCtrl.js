@@ -4,8 +4,8 @@
  * Controller for Newsrooms List
  */
 
-app.controller('NewsroomsCtrl', ['$scope', '$rootScope', '$sce', '$timeout', '$filter', 'ngTableParams', '$state', '$q', '$interpolate', '$localStorage', 'toaster', 'SweetAlert', '$usersDataFactory', '$newsroomsDataFactory',
-function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q, $interpolate, $localStorage, toaster, SweetAlert, $usersDataFactory, $newsroomsDataFactory) {
+app.controller('NewsroomsCtrl', ['$scope', '$rootScope', '$sce', '$timeout', '$filter', 'ngTableParams', '$state', '$q', '$interpolate', '$localStorage', 'toaster', 'SweetAlert', '$fontsDataFactory', '$usersDataFactory', '$newsroomsDataFactory',
+function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q, $interpolate, $localStorage, toaster, SweetAlert, $fontsDataFactory, $usersDataFactory, $newsroomsDataFactory) {
 
     $scope.isFiltersVisible = false;
 
@@ -22,6 +22,36 @@ function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q,
 
     $scope.locale = (angular.isDefined($localStorage.language))?$localStorage.language:'en';
     $scope.showFieldsMenu = false;
+
+    $scope.fonts = [];
+    $scope.fontsLoaded = false;
+
+    $scope.getFonts = function() {
+        $scope.fontsLoaded = true;
+        if ($scope.fonts.length == 0) {
+            $scope.fonts.push({});
+            var def = $q.defer();
+            $fontsDataFactory.query({offset: 0, limit: 10000, 'order_by[font.id]': 'desc'}).$promise.then(function(data) {
+                $timeout(function(){
+                    if (data.results.length > 0) {
+                        $scope.fonts.length = 0;
+                        for (var i in data.results) {
+                            $scope.fonts.push({
+                                id: data.results[i].id,
+                                title: data.results[i].name
+                            });
+                        }
+                        def.resolve($scope.fonts);
+                    }
+                });
+            });
+            return def;
+        } else {
+            return $scope.fonts;
+        }
+    };
+
+    $scope.getFonts();
 
     $scope.users = [];
     $scope.usersLoaded = false;
@@ -149,6 +179,21 @@ function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q,
             { field: 'logo_picture', title: $filter('translate')('content.list.fields.LOGOPICTURE'), sortable: 'newsroom.logoPicture', filter: { 'newsroom.logoPicture': 'text' }, show: $scope.getParamValue('logo_picture_show_filed', true), getValue: $scope.interpolatedValue, interpolateExpr: $interpolate('<img ng-src="'+$rootScope.app.thumbURL+'[[ (row.logo_picture)?row.logo_picture:\'/assets/images/picturenotavailable.'+$scope.locale+'.png\' ]]" alt="" class="img-thumbnail" />') },
             { field: 'banner_picture', title: $filter('translate')('content.list.fields.BANNERPICTURE'), sortable: 'newsroom.bannerPicture', filter: { 'newsroom.bannerPicture': 'text' }, show: $scope.getParamValue('banner_picture_show_filed', false), getValue: $scope.interpolatedValue, interpolateExpr: $interpolate('<img ng-src="'+$rootScope.app.thumbURL+'[[ (row.banner_picture)?row.banner_picture:\'/assets/images/picturenotavailable.'+$scope.locale+'.png\' ]]" alt="" class="img-thumbnail" />') },
             { field: 'press_releases_per_page', title: $filter('translate')('content.list.fields.PRESSRELEASESPERPAGE'), sortable: 'newsroom.pressReleasesPerPage', filter: { 'newsroom.pressReleasesPerPage': 'number' }, show: $scope.getParamValue('press_releases_per_page_show_filed', false), getValue: $scope.textValue },
+            { field: 'background_color', title: $filter('translate')('content.list.fields.BACKGROUNDCOLOR'), sortable: 'newsroom.backgroundColor', filter: { 'newsroom.backgroundColor': 'text' }, show: $scope.getParamValue('background_color_show_filed', false), getValue: $scope.textValue },
+            { field: 'title_color', title: $filter('translate')('content.list.fields.TITLECOLOR'), sortable: 'newsroom.titleColor', filter: { 'newsroom.titleColor': 'text' }, show: $scope.getParamValue('title_color_show_filed', false), getValue: $scope.textValue },
+            { field: 'title_font', title: $filter('translate')('content.list.fields.TITLEFONT'), sortable: 'title_font.name', filter: { 'newsroom.titleFont': 'select' }, getValue: $scope.linkValue, filterData: $scope.getFonts(), show: $scope.getParamValue('title_font_id_show_filed', false), displayField: 'name', state: 'app.templatemanager.fontsdetails' },
+            { field: 'text_color', title: $filter('translate')('content.list.fields.TEXTCOLOR'), sortable: 'newsroom.textColor', filter: { 'newsroom.textColor': 'text' }, show: $scope.getParamValue('text_color_show_filed', false), getValue: $scope.textValue },
+            { field: 'text_font', title: $filter('translate')('content.list.fields.TEXTFONT'), sortable: 'text_font.name', filter: { 'newsroom.textFont': 'select' }, getValue: $scope.linkValue, filterData: $scope.getFonts(), show: $scope.getParamValue('text_font_id_show_filed', false), displayField: 'name', state: 'app.templatemanager.fontsdetails' },
+            { field: 'facebook_link', title: $filter('translate')('content.list.fields.FACEBOOKLINK'), sortable: 'newsroom.facebookLink', filter: { 'newsroom.facebookLink': 'text' }, show: $scope.getParamValue('facebook_link_show_filed', false), getValue: $scope.textValue },
+            { field: 'twitter_link', title: $filter('translate')('content.list.fields.TWITTERLINK'), sortable: 'newsroom.twitterLink', filter: { 'newsroom.twitterLink': 'text' }, show: $scope.getParamValue('twitter_link_show_filed', false), getValue: $scope.textValue },
+            { field: 'google_plus_link', title: $filter('translate')('content.list.fields.GOOGLEPLUSLINK'), sortable: 'newsroom.googlePlusLink', filter: { 'newsroom.googlePlusLink': 'text' }, show: $scope.getParamValue('google_plus_link_show_filed', false), getValue: $scope.textValue },
+            { field: 'pinterest_link', title: $filter('translate')('content.list.fields.PINTERESTLINK'), sortable: 'newsroom.pinterestLink', filter: { 'newsroom.pinterestLink': 'text' }, show: $scope.getParamValue('pinterest_link_show_filed', false), getValue: $scope.textValue },
+            { field: 'instagram_link', title: $filter('translate')('content.list.fields.INSTAGRAMLINK'), sortable: 'newsroom.instagramLink', filter: { 'newsroom.instagramLink': 'text' }, show: $scope.getParamValue('instagram_link_show_filed', false), getValue: $scope.textValue },
+            { field: 'youtube_link', title: $filter('translate')('content.list.fields.YOUTUBELINK'), sortable: 'newsroom.youtubeLink', filter: { 'newsroom.youtubeLink': 'text' }, show: $scope.getParamValue('youtube_link_show_filed', false), getValue: $scope.textValue },
+            { field: 'linkedin_link', title: $filter('translate')('content.list.fields.LINKEDINLINK'), sortable: 'newsroom.linkedinLink', filter: { 'newsroom.linkedinLink': 'text' }, show: $scope.getParamValue('linkedin_link_show_filed', false), getValue: $scope.textValue },
+            { field: 'vimeo_link', title: $filter('translate')('content.list.fields.VIMEOLINK'), sortable: 'newsroom.vimeoLink', filter: { 'newsroom.vimeoLink': 'text' }, show: $scope.getParamValue('vimeo_link_show_filed', false), getValue: $scope.textValue },
+            { field: 'flickr_link', title: $filter('translate')('content.list.fields.FLICKRLINK'), sortable: 'newsroom.flickrLink', filter: { 'newsroom.flickrLink': 'text' }, show: $scope.getParamValue('flickr_link_show_filed', false), getValue: $scope.textValue },
+            { field: 'tumblr_link', title: $filter('translate')('content.list.fields.TUMBLRLINK'), sortable: 'newsroom.tumblrLink', filter: { 'newsroom.tumblrLink': 'text' }, show: $scope.getParamValue('tumblr_link_show_filed', false), getValue: $scope.textValue },
             { field: 'css', title: $filter('translate')('content.list.fields.CSS'), sortable: 'newsroom.css', filter: { 'newsroom.css': 'text' }, show: $scope.getParamValue('css_show_filed', false), getValue: $scope.textValue },
             { field: 'enable_search', title: $filter('translate')('content.list.fields.ENABLESEARCH'), sortable: 'newsroom.enableSearch', filter: { 'newsroom.enableSearch': 'select' }, show: $scope.getParamValue('enable_search_show_filed', false), getValue: $scope.interpolatedValue, filterData : $scope.booleanOptions, interpolateExpr: $interpolate('<span my-boolean="[[ row.enable_search ]]"></span>') },
             { field: 'enable_social_networks', title: $filter('translate')('content.list.fields.ENABLESOCIALNETWORKS'), sortable: 'newsroom.enableSocialNetworks', filter: { 'newsroom.enableSocialNetworks': 'select' }, show: $scope.getParamValue('enable_social_networks_show_filed', false), getValue: $scope.interpolatedValue, filterData : $scope.booleanOptions, interpolateExpr: $interpolate('<span my-boolean="[[ row.enable_social_networks ]]"></span>') },
