@@ -52,15 +52,17 @@ class ContactImporterController extends FOSRestController
 
             $exist = 0;
             $imported = 0;
+            $fileIndex = 1;
 
-            foreach($request->files as $x => $uploadedFile) {
+            foreach($request->files as $uploadedFile) {
+                $fileIndex++;
                 $originalName = strtolower($uploadedFile->getClientOriginalName());
                 $info = new \SplFileInfo($originalName);
                 $extension = $info->getExtension();
                 if ($extension) {
                     if ($extension == 'xlsx' || $extension == 'xls') {
                         $directory = $this->get('kernel')->getRootDir() . '/../web/uploads/import/';
-                        $name = $this->getUser()->getId().'_'.time().'_'.$x.'.'.$extension;
+                        $name = $this->getUser()->getId().'_'.time().'_'.$fileIndex.'.'.$extension;
                         $file = $uploadedFile->move($directory, $name);
                         $filePath = $file->getRealPath();
                         $phpExcelObject = $this->get('phpexcel')->createPHPExcelObject($filePath);
@@ -109,6 +111,7 @@ class ContactImporterController extends FOSRestController
                                 }
                             }
                         }
+                        unlink($filePath);
                     } else {
                         $data = array('status' => true, 'message' => $this->get('translator')->trans('contacts.not_allowed_extension'));
                         return $data;
@@ -118,7 +121,7 @@ class ContactImporterController extends FOSRestController
             //$msg = $this->get('translator')->trans('contacts.import_success');
             $msg = '%d contacts imported, %d contacts already exist in this group';
             $message = sprintf($msg, $imported, $exist);
-            $data = array('status' => true, 'message' => $message);
+            $data = array('status' => true, 'message' => $message, 'imported' => $imported, 'exist' => $exist);
             return $data;
 
         } catch (\Exception $e) {
