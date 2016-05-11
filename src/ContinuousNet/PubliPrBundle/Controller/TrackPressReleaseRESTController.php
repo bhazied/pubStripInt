@@ -51,8 +51,10 @@ class TrackPressReleaseRESTController extends BaseRESTController
      * @return Response
      *
      */
-    public function getAction( TrackPressRelease  $entity)
+    public function getAction(TrackPressRelease $entity)
     {
+        $entity->dir = $this->getSubDirectory($entity, false);
+        $this->createSubDirectory($entity);
         return $entity;
     }
 

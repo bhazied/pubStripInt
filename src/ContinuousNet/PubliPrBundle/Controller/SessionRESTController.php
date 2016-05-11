@@ -51,8 +51,10 @@ class SessionRESTController extends BaseRESTController
      * @return Response
      *
      */
-    public function getAction( Session  $entity)
+    public function getAction(Session $entity)
     {
+        $entity->dir = $this->getSubDirectory($entity, false);
+        $this->createSubDirectory($entity);
         return $entity;
     }
 

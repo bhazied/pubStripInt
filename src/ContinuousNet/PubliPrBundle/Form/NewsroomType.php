@@ -33,7 +33,6 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
  * @link       http://publipr.continuousnet.com/ContinuousNet\PubliPrBundle/Form
  * @see        NewsroomType
  * @since      Class available since Release 1.0
- * @deprecated Nothing
  * @access     public
  */
 class NewsroomType extends AbstractType

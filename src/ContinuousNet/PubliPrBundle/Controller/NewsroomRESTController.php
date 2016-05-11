@@ -51,8 +51,10 @@ class NewsroomRESTController extends BaseRESTController
      * @return Response
      *
      */
-    public function getAction( Newsroom  $entity)
+    public function getAction(Newsroom $entity)
     {
+        $entity->dir = $this->getCompanySubDirectory($entity, false);
+        $this->createCompanySubDirectory($entity);
         return $entity;
     }
 
