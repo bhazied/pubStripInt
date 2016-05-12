@@ -111,7 +111,7 @@ class Newsroom
      * @var string
      * @access private
      *
-     * @ORM\Column(name="logo_picture", type="string", length=255, nullable=false, unique=false)
+     * @ORM\Column(name="logo_picture", type="string", length=255, nullable=true, unique=false)
      * 
      * @Expose
      * 
@@ -122,7 +122,7 @@ class Newsroom
      * @var string
      * @access private
      *
-     * @ORM\Column(name="banner_picture", type="string", length=255, nullable=false, unique=false)
+     * @ORM\Column(name="banner_picture", type="string", length=255, nullable=true, unique=false)
      * 
      * @Expose
      * 
@@ -599,7 +599,7 @@ class Newsroom
      * @param string $logoPicture
      * @return Newsroom
      */
-    public function setLogoPicture($logoPicture)
+    public function setLogoPicture($logoPicture = null)
     {
         $this->logoPicture = $logoPicture;
         return $this;
@@ -623,7 +623,7 @@ class Newsroom
      * @param string $bannerPicture
      * @return Newsroom
      */
-    public function setBannerPicture($bannerPicture)
+    public function setBannerPicture($bannerPicture = null)
     {
         $this->bannerPicture = $bannerPicture;
         return $this;
