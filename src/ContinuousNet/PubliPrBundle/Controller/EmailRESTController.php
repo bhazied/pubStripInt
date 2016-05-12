@@ -51,8 +51,10 @@ class EmailRESTController extends BaseRESTController
      * @return Response
      *
      */
-    public function getAction( Email  $entity)
+    public function getAction(Email $entity)
     {
+        $entity->dir = $this->getSubDirectory($entity, false);
+        $this->createSubDirectory($entity);
         return $entity;
     }
 

@@ -218,7 +218,7 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
                     return 'default';
                 },
                 folder: function() {
-                    return 'contentBlocks';
+                    return 'contentblocks';
                 }
             }
         });

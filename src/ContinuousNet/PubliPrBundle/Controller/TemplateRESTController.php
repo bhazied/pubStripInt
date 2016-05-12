@@ -51,8 +51,10 @@ class TemplateRESTController extends BaseRESTController
      * @return Response
      *
      */
-    public function getAction( Template  $entity)
+    public function getAction(Template $entity)
     {
+        $entity->dir = $this->getSubDirectory($entity, false);
+        $this->createSubDirectory($entity);
         return $entity;
     }
 

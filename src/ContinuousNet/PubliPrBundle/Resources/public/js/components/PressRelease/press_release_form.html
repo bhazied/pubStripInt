@@ -101,9 +101,9 @@
                                         <i class="ti-image"></i>
                                     </span><!--/input-icon-->
                                         <span class="input-group-btn">
-                                            <button type="button" class="btn btn-primary" ng-click="showFileManager('picture_preview')">
+                                            <a type="button" class="btn btn-primary" ng-click="showFileManager('picture_preview')">
                                                 <i class="ti-cloud"></i>
-                                            </button>
+                                            </a>
                                         </span>
                                     </div>
                                     <div class="user-image margin-top-10" ng-if="pressRelease.picture_preview != '' && pressRelease.picture_preview != null">
@@ -157,9 +157,9 @@
                                             <i class="ti-control-skip-forward"></i>
                                         </span><!--/input-icon-->
                                         <span class="input-group-btn">
-                                            <button type="button" class="btn btn-primary" ng-click="startPublishingToggle($event)">
+                                            <a type="button" class="btn btn-primary" ng-click="startPublishingToggle($event)">
                                             <i class="fa fa-calendar"></i>
-                                            </button>
+                                            </a>
                                         </span>
                                     </div>
                                 </div><!--/form-group-->
@@ -175,9 +175,9 @@
                                             <i class="ti-control-skip-backward"></i>
                                         </span><!--/input-icon-->
                                         <span class="input-group-btn">
-                                            <button type="button" class="btn btn-primary" ng-click="endPublishingToggle($event)">
+                                            <a type="button" class="btn btn-primary" ng-click="endPublishingToggle($event)">
                                             <i class="fa fa-calendar"></i>
-                                            </button>
+                                            </a>
                                         </span>
                                     </div>
                                 </div><!--/form-group-->
@@ -196,9 +196,9 @@
                                             <i class="ti-calendar"></i>
                                         </span><!--/input-icon-->
                                         <span class="input-group-btn">
-                                            <button type="button" class="btn btn-primary" ng-click="publishDateTimeToggle($event)">
+                                            <a type="button" class="btn btn-primary" ng-click="publishDateTimeToggle($event)">
                                             <i class="fa fa-calendar"></i>
-                                            </button>
+                                            </a>
                                         </span>
                                     </div>
                                     <span class="error text-small block" ng-if="pressReleaseForm.publishDateTime.$dirty && pressReleaseForm.publishDateTime.$error.required" translate="content.form.messages.PUBLISHDATETIMEREQUIRED">Publish Date Time is required.</span>
@@ -377,9 +377,9 @@
                         </div><!--/row-->
                         <div class="row">
                             <div class="col-md-4">
-                                <button ng-click="list()" class="btn btn-primary pull-left">
+                                <a ng-click="list()" class="btn btn-primary pull-left">
                                     <i class="ti-layout-list-thumb"></i> <span translate="content.list.BACKPRESSRELEASES">Back to Press Releases list</span>
-                                </button>
+                                </a>
                             </div>
                             <div class="col-md-4">
                             </div>

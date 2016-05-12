@@ -51,8 +51,10 @@ class UserRESTController extends BaseRESTController
      * @return Response
      *
      */
-    public function getAction( User  $entity)
+    public function getAction(User $entity)
     {
+        $entity->dir = $this->getCompanySubDirectory($entity, false);
+        $this->createCompanySubDirectory($entity);
         return $entity;
     }
 

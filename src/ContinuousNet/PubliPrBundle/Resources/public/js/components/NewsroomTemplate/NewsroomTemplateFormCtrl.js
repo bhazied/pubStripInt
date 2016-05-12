@@ -111,5 +111,35 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
 
     }
 
+    $scope.showFileManager = function(field) {
+    
+        var modalInstance = $uibModal.open({
+            templateUrl: '/bundles/publipr/js/common/FileManager/modal_content.html',
+            controller: 'FileManagerCtrl',
+            size: 'lg',
+            resolve: {
+                field: function() {
+                    return field;
+                },
+                value: function() {
+                    return $scope.newsroomTemplate[field];
+                },
+                instance: function() {
+                    return 'default';
+                },
+                folder: function() {
+                    return 'newsroomtemplates';
+                }
+            }
+        });
+
+        modalInstance.result.then(function (url) {
+            $scope.newsroomTemplate[field] = url;
+        }, function () {
+            
+        });
+    
+    };
+
 }]);
 

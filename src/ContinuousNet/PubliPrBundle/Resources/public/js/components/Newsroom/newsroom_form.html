@@ -94,20 +94,19 @@
                         </div><!--/row-->
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="form-group" ng-class="{'has-error':newsroomForm.logoPicture.$dirty && newsroomForm.logoPicture.$invalid, 'has-success':newsroomForm.logoPicture.$valid}">
+                                <div class="form-group">
                                     <label for="newsroomLogoPicture" class="control-label">
                                         <span translate="content.list.fields.LOGOPICTURE">Logo Picture</span>
-                                        <span class="symbol required"></span>
                                     </label>
                                     <div class="input-group">
                                     <span class="input-icon">
-                                        <input ng-model="newsroom.logo_picture" type="text" name="logoPicture" id="newsroomLogoPicture" class="form-control" placeholder="[[ 'content.form.messages.ENTERLOGOPICTURE' | translate ]]" ng-required="true" />
+                                        <input ng-model="newsroom.logo_picture" type="text" name="logoPicture" id="newsroomLogoPicture" class="form-control" placeholder="[[ 'content.form.messages.ENTERLOGOPICTURE' | translate ]]" ng-required="false" />
                                         <i class="ti-image"></i>
                                     </span><!--/input-icon-->
                                         <span class="input-group-btn">
-                                            <button type="button" class="btn btn-primary" ng-click="showFileManager('logo_picture')">
+                                            <a type="button" class="btn btn-primary" ng-click="showFileManager('logo_picture')">
                                                 <i class="ti-cloud"></i>
-                                            </button>
+                                            </a>
                                         </span>
                                     </div>
                                     <div class="user-image margin-top-10" ng-if="newsroom.logo_picture != '' && newsroom.logo_picture != null">
@@ -119,25 +118,22 @@
                                             <span class="btn btn-danger" ng-click="newsroom.logo_picture = ''"> <i class="fa fa-times"></i></span>
                                         </div>
                                     </div>
-                                    <span class="error text-small block" ng-if="newsroomForm.logoPicture.$dirty && newsroomForm.logoPicture.$error.required" translate="content.form.messages.LOGOPICTUREREQUIRED">Logo Picture is required.</span>
-                                    <span class="success text-small block" ng-if="newsroomForm.logoPicture.$valid" translate="content.form.messages.OK">Ok!</span>
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
                             <div class="col-md-6">
-                                <div class="form-group" ng-class="{'has-error':newsroomForm.bannerPicture.$dirty && newsroomForm.bannerPicture.$invalid, 'has-success':newsroomForm.bannerPicture.$valid}">
+                                <div class="form-group">
                                     <label for="newsroomBannerPicture" class="control-label">
                                         <span translate="content.list.fields.BANNERPICTURE">Banner Picture</span>
-                                        <span class="symbol required"></span>
                                     </label>
                                     <div class="input-group">
                                     <span class="input-icon">
-                                        <input ng-model="newsroom.banner_picture" type="text" name="bannerPicture" id="newsroomBannerPicture" class="form-control" placeholder="[[ 'content.form.messages.ENTERBANNERPICTURE' | translate ]]" ng-required="true" />
+                                        <input ng-model="newsroom.banner_picture" type="text" name="bannerPicture" id="newsroomBannerPicture" class="form-control" placeholder="[[ 'content.form.messages.ENTERBANNERPICTURE' | translate ]]" ng-required="false" />
                                         <i class="ti-image"></i>
                                     </span><!--/input-icon-->
                                         <span class="input-group-btn">
-                                            <button type="button" class="btn btn-primary" ng-click="showFileManager('banner_picture')">
+                                            <a type="button" class="btn btn-primary" ng-click="showFileManager('banner_picture')">
                                                 <i class="ti-cloud"></i>
-                                            </button>
+                                            </a>
                                         </span>
                                     </div>
                                     <div class="user-image margin-top-10" ng-if="newsroom.banner_picture != '' && newsroom.banner_picture != null">
@@ -149,8 +145,6 @@
                                             <span class="btn btn-danger" ng-click="newsroom.banner_picture = ''"> <i class="fa fa-times"></i></span>
                                         </div>
                                     </div>
-                                    <span class="error text-small block" ng-if="newsroomForm.bannerPicture.$dirty && newsroomForm.bannerPicture.$error.required" translate="content.form.messages.BANNERPICTUREREQUIRED">Banner Picture is required.</span>
-                                    <span class="success text-small block" ng-if="newsroomForm.bannerPicture.$valid" translate="content.form.messages.OK">Ok!</span>
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
                         </div><!--/row-->
@@ -162,7 +156,7 @@
                                     </label>
                                     <span class="input-icon">
                                         <input ng-model="newsroom.press_releases_per_page" type="text" name="pressReleasesPerPage" id="newsroomPressReleasesPerPage" class="form-control" placeholder="[[ 'content.form.messages.ENTERPRESSRELEASESPERPAGE' | translate ]]" touchspin data-min="-10000000" data-max="10000000" data-verticalbuttons="true" data-verticalupclass="ti-angle-up" data-verticaldownclass="ti-angle-down" ng-required="false" />
-                                        <i class="ti-marker-alt"></i>
+                                        <i class="ti-file"></i>
                                     </span><!--/input-icon-->
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
@@ -200,7 +194,7 @@
                                         <select ng-options="item.id as item.name for item in fonts | filter:{ hidden : false }" ng-model="newsroom.title_font" name="titleFont" id="newsroomTitleFont" class="form-control" ng-required="false">
                                             <option translate="content.form.messages.SELECTTITLEFONT" value="">Select Title Font</option>
                                         </select>
-                                        <i class="ti-marker-alt"></i>
+                                        <i class="fa fa-font"></i>
                                     </span><!--/input-icon-->
                                 </div>
                                 </div><!--/form-group-->
@@ -228,7 +222,7 @@
                                         <select ng-options="item.id as item.name for item in fonts | filter:{ hidden : false }" ng-model="newsroom.text_font" name="textFont" id="newsroomTextFont" class="form-control" ng-required="false">
                                             <option translate="content.form.messages.SELECTTEXTFONT" value="">Select Text Font</option>
                                         </select>
-                                        <i class="ti-marker-alt"></i>
+                                        <i class="fa fa-font"></i>
                                     </span><!--/input-icon-->
                                 </div>
                                 </div><!--/form-group-->
@@ -242,7 +236,7 @@
                                     </label>
                                     <span class="input-icon">
                                         <input ng-model="newsroom.facebook_link" type="text" name="facebookLink" id="newsroomFacebookLink" class="form-control" placeholder="[[ 'content.form.messages.ENTERFACEBOOKLINK' | translate ]]" ng-required="false" />
-                                        <i class="ti-link"></i>
+                                        <i class="ti-facebook"></i>
                                     </span><!--/input-icon-->
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
@@ -253,7 +247,7 @@
                                     </label>
                                     <span class="input-icon">
                                         <input ng-model="newsroom.twitter_link" type="text" name="twitterLink" id="newsroomTwitterLink" class="form-control" placeholder="[[ 'content.form.messages.ENTERTWITTERLINK' | translate ]]" ng-required="false" />
-                                        <i class="ti-link"></i>
+                                        <i class="ti-twitter"></i>
                                     </span><!--/input-icon-->
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
@@ -266,7 +260,7 @@
                                     </label>
                                     <span class="input-icon">
                                         <input ng-model="newsroom.google_plus_link" type="text" name="googlePlusLink" id="newsroomGooglePlusLink" class="form-control" placeholder="[[ 'content.form.messages.ENTERGOOGLEPLUSLINK' | translate ]]" ng-required="false" />
-                                        <i class="ti-link"></i>
+                                        <i class="ti-google"></i>
                                     </span><!--/input-icon-->
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
@@ -277,7 +271,7 @@
                                     </label>
                                     <span class="input-icon">
                                         <input ng-model="newsroom.pinterest_link" type="text" name="pinterestLink" id="newsroomPinterestLink" class="form-control" placeholder="[[ 'content.form.messages.ENTERPINTERESTLINK' | translate ]]" ng-required="false" />
-                                        <i class="ti-link"></i>
+                                        <i class="ti-pinterest"></i>
                                     </span><!--/input-icon-->
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
@@ -290,7 +284,7 @@
                                     </label>
                                     <span class="input-icon">
                                         <input ng-model="newsroom.instagram_link" type="text" name="instagramLink" id="newsroomInstagramLink" class="form-control" placeholder="[[ 'content.form.messages.ENTERINSTAGRAMLINK' | translate ]]" ng-required="false" />
-                                        <i class="ti-link"></i>
+                                        <i class="ti-instagram"></i>
                                     </span><!--/input-icon-->
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
@@ -301,7 +295,7 @@
                                     </label>
                                     <span class="input-icon">
                                         <input ng-model="newsroom.youtube_link" type="text" name="youtubeLink" id="newsroomYoutubeLink" class="form-control" placeholder="[[ 'content.form.messages.ENTERYOUTUBELINK' | translate ]]" ng-required="false" />
-                                        <i class="ti-link"></i>
+                                        <i class="ti-youtube"></i>
                                     </span><!--/input-icon-->
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
@@ -314,18 +308,42 @@
                                     </label>
                                     <span class="input-icon">
                                         <input ng-model="newsroom.linkedin_link" type="text" name="linkedinLink" id="newsroomLinkedinLink" class="form-control" placeholder="[[ 'content.form.messages.ENTERLINKEDINLINK' | translate ]]" ng-required="false" />
-                                        <i class="ti-link"></i>
+                                        <i class="ti-linkedin"></i>
                                     </span><!--/input-icon-->
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="newsroomViadeoLink" class="control-label">
-                                        <span translate="content.list.fields.VIADEOLINK">Viadeo Link</span>
+                                    <label for="newsroomVimeoLink" class="control-label">
+                                        <span translate="content.list.fields.VIMEOLINK">Vimeo Link</span>
                                     </label>
                                     <span class="input-icon">
-                                        <input ng-model="newsroom.viadeo_link" type="text" name="viadeoLink" id="newsroomViadeoLink" class="form-control" placeholder="[[ 'content.form.messages.ENTERVIADEOLINK' | translate ]]" ng-required="false" />
-                                        <i class="ti-link"></i>
+                                        <input ng-model="newsroom.vimeo_link" type="text" name="vimeoLink" id="newsroomVimeoLink" class="form-control" placeholder="[[ 'content.form.messages.ENTERVIMEOLINK' | translate ]]" ng-required="false" />
+                                        <i class="ti-vimeo"></i>
+                                    </span><!--/input-icon-->
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="newsroomFlickrLink" class="control-label">
+                                        <span translate="content.list.fields.FLICKRLINK">Flickr Link</span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="newsroom.flickr_link" type="text" name="flickrLink" id="newsroomFlickrLink" class="form-control" placeholder="[[ 'content.form.messages.ENTERFLICKRLINK' | translate ]]" ng-required="false" />
+                                        <i class="ti-flickr"></i>
+                                    </span><!--/input-icon-->
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="newsroomTumblrLink" class="control-label">
+                                        <span translate="content.list.fields.TUMBLRLINK">Tumblr Link</span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="newsroom.tumblr_link" type="text" name="tumblrLink" id="newsroomTumblrLink" class="form-control" placeholder="[[ 'content.form.messages.ENTERTUMBLRLINK' | translate ]]" ng-required="false" />
+                                        <i class="ti-tumblr"></i>
                                     </span><!--/input-icon-->
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
@@ -393,9 +411,9 @@
                         </div><!--/row-->
                         <div class="row">
                             <div class="col-md-4">
-                                <button ng-click="list()" class="btn btn-primary pull-left">
+                                <a ng-click="list()" class="btn btn-primary pull-left">
                                     <i class="ti-layout-list-thumb"></i> <span translate="content.list.BACKNEWSROOMS">Back to Newsrooms list</span>
-                                </button>
+                                </a>
                             </div>
                             <div class="col-md-4">
                             </div>

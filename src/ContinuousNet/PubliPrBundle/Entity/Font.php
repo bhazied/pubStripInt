@@ -67,7 +67,7 @@ class Font
      * @var string
      * @access private
      *
-     * @ORM\Column(name="file_name", type="text", nullable=false, unique=false)
+     * @ORM\Column(name="file_name", type="string", length=512, nullable=false, unique=false)
      * 
      * @Expose
      * 
@@ -78,7 +78,7 @@ class Font
      * @var string
      * @access private
      *
-     * @ORM\Column(name="css_name", type="text", nullable=false, unique=false)
+     * @ORM\Column(name="css_name", type="string", length=255, nullable=false, unique=false)
      * 
      * @Expose
      * 

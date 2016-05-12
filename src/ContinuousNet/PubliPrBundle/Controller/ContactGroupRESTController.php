@@ -51,8 +51,10 @@ class ContactGroupRESTController extends BaseRESTController
      * @return Response
      *
      */
-    public function getAction( ContactGroup  $entity)
+    public function getAction(ContactGroup $entity)
     {
+        $entity->dir = $this->getSubDirectory($entity, false);
+        $this->createSubDirectory($entity);
         return $entity;
     }
 

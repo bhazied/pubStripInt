@@ -33,7 +33,6 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
  * @link       http://publipr.continuousnet.com/ContinuousNet\PubliPrBundle/Form
  * @see        FontType
  * @since      Class available since Release 1.0
- * @deprecated Nothing
  * @access     public
  */
 class FontType extends AbstractType
@@ -46,8 +45,8 @@ class FontType extends AbstractType
     {
         $builder
             ->add('name', TextType::class)
-            ->add('fileName', TextareaType::class)
-            ->add('cssName', TextareaType::class)
+            ->add('fileName', TextType::class)
+            ->add('cssName', TextType::class)
             ->add('isIcon', CheckboxType::class)
             ->add('published', CheckboxType::class)
         ;
