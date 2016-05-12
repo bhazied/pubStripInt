@@ -51,8 +51,10 @@ class PressReleaseRESTController extends BaseRESTController
      * @return Response
      *
      */
-    public function getAction( PressRelease  $entity)
+    public function getAction(PressRelease $entity)
     {
+        $entity->dir = $this->getCompanySubDirectory($entity->getNewsroom(), false);
+        $this->createCompanySubDirectory($entity->getNewsroom());
         return $entity;
     }
 

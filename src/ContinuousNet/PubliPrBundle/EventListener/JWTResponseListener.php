@@ -56,6 +56,10 @@ class JWTResponseListener
             'roles' => $user->getRoles()
         );
 
+        if (!is_null($user->getCompany())) {
+            $data['user']['company'] = $user->getCompany()->getId();
+        }
+
         if (!is_null($user->getCountry())) {
             $data['user']['country'] = $user->getCountry()->getId();
         }

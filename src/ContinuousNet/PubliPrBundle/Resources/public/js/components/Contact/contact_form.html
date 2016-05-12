@@ -75,11 +75,10 @@
                                         <span class="symbol required"></span>
                                     </label>
                                     <span class="input-icon">
-                                        <input ng-model="contact.email" type="email" name="email" id="contactEmail" class="form-control" placeholder="[[ 'content.form.messages.ENTEREMAIL' | translate ]]" ng-required="true" my-unique-field="contact.email" my-resource-url="contacts" my-current-id="[[ contact.id ]]" />
+                                        <input ng-model="contact.email" type="email" name="email" id="contactEmail" class="form-control" placeholder="[[ 'content.form.messages.ENTEREMAIL' | translate ]]" ng-required="true" />
                                         <i class="ti-email"></i>
                                     </span><!--/input-icon-->
                                     <span class="error text-small block" ng-if="contactForm.email.$dirty && contactForm.email.$error.required" translate="content.form.messages.EMAILREQUIRED">Email is required.</span>
-                                    <span class="error text-small block" ng-if="contactForm.email.$dirty && contactForm.email.$error.myUniqueField" translate="content.form.messages.EMAILALREADYINUSE">This Email is already in use. Please choose another one.</span>
                                     <span class="success text-small block" ng-if="contactForm.email.$valid" translate="content.form.messages.OK">Ok!</span>
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
@@ -91,7 +90,7 @@
                                         <span translate="content.list.fields.PHONE">Phone</span>
                                     </label>
                                     <span class="input-icon">
-                                        <input ng-model="contact.phone" type="text" name="phone" id="contactPhone" class="form-control" placeholder="[[ 'content.form.messages.ENTERPHONE' | translate ]]" ng-required="false" my-unique-field="contact.phone" my-resource-url="contacts" my-current-id="[[ contact.id ]]" />
+                                        <input ng-model="contact.phone" type="text" name="phone" id="contactPhone" class="form-control" placeholder="[[ 'content.form.messages.ENTERPHONE' | translate ]]" ng-required="false" />
                                         <i class="fa fa-phone"></i>
                                     </span><!--/input-icon-->
                                 </div><!--/form-group-->
@@ -105,9 +104,9 @@
                         </div><!--/row-->
                         <div class="row">
                             <div class="col-md-4">
-                                <button ng-click="list()" class="btn btn-primary pull-left">
+                                <a ng-click="list()" class="btn btn-primary pull-left">
                                     <i class="ti-layout-list-thumb"></i> <span translate="content.list.BACKCONTACTS">Back to Contacts list</span>
-                                </button>
+                                </a>
                             </div>
                             <div class="col-md-4">
                             </div>

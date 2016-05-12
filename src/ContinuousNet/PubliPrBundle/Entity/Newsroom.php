@@ -111,7 +111,7 @@ class Newsroom
      * @var string
      * @access private
      *
-     * @ORM\Column(name="logo_picture", type="string", length=255, nullable=false, unique=false)
+     * @ORM\Column(name="logo_picture", type="string", length=255, nullable=true, unique=false)
      * 
      * @Expose
      * 
@@ -122,7 +122,7 @@ class Newsroom
      * @var string
      * @access private
      *
-     * @ORM\Column(name="banner_picture", type="string", length=255, nullable=false, unique=false)
+     * @ORM\Column(name="banner_picture", type="string", length=255, nullable=true, unique=false)
      * 
      * @Expose
      * 
@@ -254,12 +254,34 @@ class Newsroom
      * @var string
      * @access private
      *
-     * @ORM\Column(name="viadeo_link", type="string", length=320, nullable=true, unique=false)
+     * @ORM\Column(name="vimeo_link", type="string", length=320, nullable=true, unique=false)
      * 
      * @Expose
      * 
      */
-    private $viadeoLink;
+    private $vimeoLink;
+
+    /**
+     * @var string
+     * @access private
+     *
+     * @ORM\Column(name="flickr_link", type="string", length=320, nullable=true, unique=false)
+     * 
+     * @Expose
+     * 
+     */
+    private $flickrLink;
+
+    /**
+     * @var string
+     * @access private
+     *
+     * @ORM\Column(name="tumblr_link", type="string", length=320, nullable=true, unique=false)
+     * 
+     * @Expose
+     * 
+     */
+    private $tumblrLink;
 
     /**
      * @var string
@@ -577,7 +599,7 @@ class Newsroom
      * @param string $logoPicture
      * @return Newsroom
      */
-    public function setLogoPicture($logoPicture)
+    public function setLogoPicture($logoPicture = null)
     {
         $this->logoPicture = $logoPicture;
         return $this;
@@ -601,7 +623,7 @@ class Newsroom
      * @param string $bannerPicture
      * @return Newsroom
      */
-    public function setBannerPicture($bannerPicture)
+    public function setBannerPicture($bannerPicture = null)
     {
         $this->bannerPicture = $bannerPicture;
         return $this;
@@ -883,27 +905,75 @@ class Newsroom
     }
 
     /**
-     * Set viadeoLink
+     * Set vimeoLink
      *
      * @access public
-     * @param string $viadeoLink
+     * @param string $vimeoLink
      * @return Newsroom
      */
-    public function setViadeoLink($viadeoLink = null)
+    public function setVimeoLink($vimeoLink = null)
     {
-        $this->viadeoLink = $viadeoLink;
+        $this->vimeoLink = $vimeoLink;
         return $this;
     }
 
     /**
-     * Get viadeoLink
+     * Get vimeoLink
      *
      * @access public
      * @return string 
      */
-    public function getViadeoLink()
+    public function getVimeoLink()
     {
-        return $this->viadeoLink;
+        return $this->vimeoLink;
+    }
+
+    /**
+     * Set flickrLink
+     *
+     * @access public
+     * @param string $flickrLink
+     * @return Newsroom
+     */
+    public function setFlickrLink($flickrLink = null)
+    {
+        $this->flickrLink = $flickrLink;
+        return $this;
+    }
+
+    /**
+     * Get flickrLink
+     *
+     * @access public
+     * @return string 
+     */
+    public function getFlickrLink()
+    {
+        return $this->flickrLink;
+    }
+
+    /**
+     * Set tumblrLink
+     *
+     * @access public
+     * @param string $tumblrLink
+     * @return Newsroom
+     */
+    public function setTumblrLink($tumblrLink = null)
+    {
+        $this->tumblrLink = $tumblrLink;
+        return $this;
+    }
+
+    /**
+     * Get tumblrLink
+     *
+     * @access public
+     * @return string 
+     */
+    public function getTumblrLink()
+    {
+        return $this->tumblrLink;
     }
 
     /**

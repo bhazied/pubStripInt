@@ -51,8 +51,10 @@ class ContentBlockRESTController extends BaseRESTController
      * @return Response
      *
      */
-    public function getAction( ContentBlock  $entity)
+    public function getAction(ContentBlock $entity)
     {
+        $entity->dir = $this->getSubDirectory($entity, false);
+        $this->createSubDirectory($entity);
         return $entity;
     }
 

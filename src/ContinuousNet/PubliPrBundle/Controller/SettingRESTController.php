@@ -51,8 +51,10 @@ class SettingRESTController extends BaseRESTController
      * @return Response
      *
      */
-    public function getAction( Setting  $entity)
+    public function getAction(Setting $entity)
     {
+        $entity->dir = $this->getSubDirectory($entity, false);
+        $this->createSubDirectory($entity);
         return $entity;
     }
 

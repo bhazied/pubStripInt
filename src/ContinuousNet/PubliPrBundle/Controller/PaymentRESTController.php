@@ -51,8 +51,10 @@ class PaymentRESTController extends BaseRESTController
      * @return Response
      *
      */
-    public function getAction( Payment  $entity)
+    public function getAction(Payment $entity)
     {
+        $entity->dir = $this->getSubDirectory($entity, false);
+        $this->createSubDirectory($entity);
         return $entity;
     }
 

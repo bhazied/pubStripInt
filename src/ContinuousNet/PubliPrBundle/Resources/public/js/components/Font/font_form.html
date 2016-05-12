@@ -40,14 +40,31 @@
                                     <span class="success text-small block" ng-if="fontForm.name.$valid" translate="content.form.messages.OK">Ok!</span>
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <div class="form-group" ng-class="{'has-error':fontForm.fileName.$dirty && fontForm.fileName.$invalid, 'has-success':fontForm.fileName.$valid}">
                                     <label for="fontFileName" class="control-label">
                                         <span translate="content.list.fields.FILENAME">File Name</span>
                                         <span class="symbol required"></span>
                                     </label>
-                                    <div class="note-editor">
-                                        <div ckeditor="editorOptions" ready="onReadyEditor()"ng-model="font.file_name" name="fileName" id="fontFileName" class="form-control" placeholder="[[ 'content.form.messages.ENTERFILENAME' | translate ]]" class="form-control autosize area-animated msd-elastic: \n;" ng-required="true"></div>
+                                    <div class="input-group">
+                                    <span class="input-icon">
+                                        <input ng-model="font.file_name" type="text" name="fileName" id="fontFileName" class="form-control" placeholder="[[ 'content.form.messages.ENTERFILENAME' | translate ]]" ng-required="true" />
+                                        <i class="ti-folder"></i>
+                                    </span><!--/input-icon-->
+                                        <span class="input-group-btn">
+                                            <a type="button" class="btn btn-primary" ng-click="showFileManager('file_name')">
+                                                <i class="ti-cloud"></i>
+                                            </a>
+                                        </span>
+                                    </div>
+                                    <div class="user-image margin-top-10" ng-if="font.file_name != '' && font.file_name != null">
+                                        <div class="thumbnail">
+                                            <img ng-src="[[ thumbURL + font.file_name ]]" alt="" />
+                                        </div>
+                                        <div class="user-image-buttons">
+                                            <span class="btn btn-primary"  ng-click="showFileManager('file_name')"><i class="fa fa-pencil"></i></span>
+                                            <span class="btn btn-danger" ng-click="font.file_name = ''"> <i class="fa fa-times"></i></span>
+                                        </div>
                                     </div>
                                     <span class="error text-small block" ng-if="fontForm.fileName.$dirty && fontForm.fileName.$error.required" translate="content.form.messages.FILENAMEREQUIRED">File Name is required.</span>
                                     <span class="success text-small block" ng-if="fontForm.fileName.$valid" translate="content.form.messages.OK">Ok!</span>
@@ -55,27 +72,28 @@
                             </div><!--/col-md-6-->
                         </div><!--/row-->
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <div class="form-group" ng-class="{'has-error':fontForm.cssName.$dirty && fontForm.cssName.$invalid, 'has-success':fontForm.cssName.$valid}">
                                     <label for="fontCssName" class="control-label">
                                         <span translate="content.list.fields.CSSNAME">Css Name</span>
                                         <span class="symbol required"></span>
                                     </label>
-                                    <div class="note-editor">
-                                        <div ckeditor="editorOptions" ready="onReadyEditor()"ng-model="font.css_name" name="cssName" id="fontCssName" class="form-control" placeholder="[[ 'content.form.messages.ENTERCSSNAME' | translate ]]" class="form-control autosize area-animated msd-elastic: \n;" ng-required="true"></div>
-                                    </div>
+                                    <span class="input-icon">
+                                        <input ng-model="font.css_name" type="text" name="cssName" id="fontCssName" class="form-control" placeholder="[[ 'content.form.messages.ENTERCSSNAME' | translate ]]" ng-required="true" />
+                                        <i class="ti-css3"></i>
+                                    </span><!--/input-icon-->
                                     <span class="error text-small block" ng-if="fontForm.cssName.$dirty && fontForm.cssName.$error.required" translate="content.form.messages.CSSNAMEREQUIRED">Css Name is required.</span>
                                     <span class="success text-small block" ng-if="fontForm.cssName.$valid" translate="content.form.messages.OK">Ok!</span>
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
-                        </div><!--/row-->
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="checkbox continuous-check check-primary">
                                     <input ng-model="font.is_icon" type="checkbox" name="isIcon" id="fontIsIcon" />
                                     <label for="fontIsIcon" translate="content.list.fields.ISICON">Is Icon</label>
                                 </div><!--/checkbox continuous-check check-primary-->
                             </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="checkbox continuous-check check-primary">
                                     <input ng-model="font.published" type="checkbox" name="published" id="fontPublished" />
@@ -85,9 +103,9 @@
                         </div><!--/row-->
                         <div class="row">
                             <div class="col-md-4">
-                                <button ng-click="list()" class="btn btn-primary pull-left">
+                                <a ng-click="list()" class="btn btn-primary pull-left">
                                     <i class="ti-layout-list-thumb"></i> <span translate="content.list.BACKFONTS">Back to Fonts list</span>
-                                </button>
+                                </a>
                             </div>
                             <div class="col-md-4">
                             </div>

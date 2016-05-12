@@ -1,4 +1,6 @@
 /web/bundles/
+/web/js/*
+/web/css/*
 /app/bootstrap.php.cache
 /app/cache/*
 /app/config/parameters.yml
@@ -12,4 +14,5 @@
 #/web/uploads/*
 /web/media/cache/*
 /.idea/*
+.idea/workspace.xml
 /composer.phar

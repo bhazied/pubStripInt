@@ -7,7 +7,7 @@ app.factory('$ContactImporterService', ['$resource', '$rootScope',
     function($resource, $rootScope) {
 
         return $resource($rootScope.app.apiURL + 'contactsImport', {}, {
-            uplaod: { method: 'POST', isArray: false}
+            upload: { method: 'POST', isArray: false}
         });
 
     }]);

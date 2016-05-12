@@ -1,0 +1,130 @@
+
+<!-- start: PAGE TITLE -->
+<section id="page-title">
+    <div class="row">
+        <div class="col-sm-8">
+            <h1 class="mainTitle" translate="content.list.CONTACTS">Contacts</h1>
+            <span class="mainDescription"></span>
+        </div>
+        <div ncy-breadcrumb></div>
+    </div>
+</section>
+<!-- end: PAGE TITLE -->
+
+<!-- start: FORM -->
+<div class="container-fluid container-fullw bg-white">
+    <div class="row">
+        <div class="col-md-12" ng-controller="ContactImportCtrl">
+            <div>
+                <fieldset>
+                    <legend translate="content.list.EXPORTCONTACTS">
+                        Export Contacts
+                    </legend>
+                    <form name="contactForm" id="contactForm" novalidate ng-submit="submitForm(contactForm)">
+                        <div class="row">
+                            <input type="hidden" name="id" id="contactId" ng-model="contact.id" />
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="contactContactGroup" class="control-label">
+                                        <span translate="content.list.fields.CONTACTGROUP">Contact Group</span>
+                                    </label>
+                                    <div class="block" ng-if="contactGroupsLoaded">
+                                    <span class="input-icon">
+                                        <select ng-options="item.id as item.name for item in contactGroups | filter:{ hidden : false }" ng-model="contact.contact_group" name="contactGroup" id="contactContactGroup" class="form-control">
+                                            <option translate="content.form.messages.SELECTCONTACTGROUP" value="">Select Contact Group</option>
+                                        </select>
+                                        <i class="ti-marker-alt"></i>
+                                    </span><!--/input-icon-->
+                                    </div>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
+
+                                <label for="contactContactGroup" class="control-label">
+                                    <span translate="content.list.fields.ACTIVE">Active</span>
+                                </label>
+
+                                <div class="radio continuous-radio radio-primary">
+                                    <input ng-model="contact.active" type="radio" name="active" id="contactActive" value=""  />
+                                    <label for="contactActive" translate="content.common.ALL">All</label>
+                                </div><!--/radio continuous-radio radio-primary-->
+
+                                <div class="radio continuous-radio radio-primary">
+                                    <input ng-model="contact.active" type="radio" name="active" id="contactActiveYes" value="1"  />
+                                    <label for="contactActiveYes" translate="content.common.YES">Yes</label>
+                                </div><!--/radio continuous-radio radio-primary-->
+
+                                <div class="radio continuous-radio radio-primary">
+                                    <input ng-model="contact.active" type="radio" name="active" id="contactActiveNo" value="0"  />
+                                    <label for="contactActiveNo" translate="content.common.NO">No</label>
+                                </div><!--/radio continuous-radio radio-primary-->
+
+                            </div><!--/col-md-6-->
+
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4 translate="content.common.EXPORTEDFIELDS">Exported Fields</h4>
+                            </div><!--/col-md-12-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="checkbox continuous-check check-primary">
+                                        <input ng-model="contact.first_name" type="checkbox" name="firstName" id="contactFirstName" />
+                                        <label for="contactFirstName" translate="content.list.fields.FIRSTNAME">First Name</label>
+                                    </div>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="checkbox continuous-check check-primary">
+                                        <input ng-model="contact.last_name" type="checkbox" name="lastName" id="contactLastName" />
+                                        <label for="contactLastName" translate="content.list.fields.FIRSTNAME">First Name</label>
+                                    </div>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="checkbox continuous-check check-primary">
+                                        <input ng-model="contact.email" type="checkbox" name="email" id="contactEmail" />
+                                        <label for="contactEmail" translate="content.list.fields.EMAIL">Email</label>
+                                    </div>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="checkbox continuous-check check-primary">
+                                        <input ng-model="contact.phone" type="checkbox" name="phone" id="contactPhone" />
+                                        <label for="contactPhone" translate="content.list.fields.PHONE">Phone</label>
+                                    </div>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-4">
+                                <a ng-click="list()" class="btn btn-primary pull-left">
+                                    <i class="ti-layout-list-thumb"></i> <span translate="content.list.BACKCONTACTS">Back to Contacts list</span>
+                                </a>
+                            </div>
+                            <div class="col-md-4">
+                            </div>
+                            <div class="col-md-4">
+                                <button type="button" ng-click="submitForm(contactForm)" class="btn btn-primary pull-right" ng-disabled="disableSubmit"> <!--  ng-disabled="contactForm.$invalid" -->
+                                    <i class="fa fa-spinner fa-spin" ng-if="disableSubmit"></i><i class="ti-export" ng-if="!disableSubmit"></i> <span translate="content.common.EXPORT">Export</span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="table-responsive" ng-if="contacts.length > 0">
+                    </div>
+                </fieldset>
+            </div>
+        </div><!--/col-md-12-->
+    </div><!--/row-->
+</div><!--/container-fluid container-fullw-->
+<!-- end: FORM -->
+

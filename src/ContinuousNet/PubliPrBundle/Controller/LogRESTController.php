@@ -51,8 +51,10 @@ class LogRESTController extends BaseRESTController
      * @return Response
      *
      */
-    public function getAction( Log  $entity)
+    public function getAction(Log $entity)
     {
+        $entity->dir = $this->getSubDirectory($entity, false);
+        $this->createSubDirectory($entity);
         return $entity;
     }
 
