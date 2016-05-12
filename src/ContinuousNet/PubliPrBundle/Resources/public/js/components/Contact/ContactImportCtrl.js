@@ -117,6 +117,7 @@ app.controller('ContactImportCtrl', ['$scope', '$rootScope', '$state', '$statePa
                 } else {
                     toaster.pop('warning', $filter('translate')('content.common.ERROR'), $filter('translate')('content.form.messages.ALLOWEDFILEEXTENSIONS') + ' (' + $scope.allowedExtensions.join(', ') + ')');
                 }
+                return false;
 
             }
 
