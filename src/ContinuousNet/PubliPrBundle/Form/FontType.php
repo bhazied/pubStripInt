@@ -45,7 +45,7 @@ class FontType extends AbstractType
     {
         $builder
             ->add('name', TextType::class)
-            ->add('fileName', TextareaType::class)
+            ->add('fileName', TextType::class)
             ->add('cssName', TextareaType::class)
             ->add('isIcon', CheckboxType::class)
             ->add('published', CheckboxType::class)
