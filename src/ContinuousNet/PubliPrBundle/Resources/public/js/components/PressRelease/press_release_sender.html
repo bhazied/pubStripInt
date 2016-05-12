@@ -12,41 +12,238 @@
     <div class="row">
         <div class="col-md-12" ng-controller="PressReleaseSenderCtrl">
             <div>
-                <fieldset>
-                    <form name="pressReleaseSender" id="pressReleaseSender" novalidate ng-submit="submitForm(pressReleaseSender)">
-                        <div class="row">
-                            <div class="col-md-6">
-                                    <div class="block" ng-if="contactGroupsLoaded">
-                                    <span class="input-icon">
-                                        <select ng-options="item.id as item.name for item in contactGroups | filter:{ hidden : false }" ng-model="contactGroups.id" name="contactGroupSender" id="contactContactGroupSender" class="form-control" ng-required="true">
-                                            <option translate="content.form.messages.SELECTCONTACTGROUP" value="">Select Contact Group</option>
-                                        </select>
-                                        <i class="ti-marker-alt"></i>
-                                    </span><!--/input-icon-->
-                                    </div>
-                                    <span class="error text-small block" ng-if="pressReleaseSender.contactContactGroupSender.$dirty && pressReleaseSender.contactContactGroupSender.$error.required" translate="content.form.messages.CONTACTGROUPREQUIRED">Contact Group is required.</span>
-                                    <span class="success text-small block" ng-if="pressReleaseSender.contactContactGroupSender.$valid" translate="content.form.messages.OK">Ok!</span>
-                            </div><!--/col-md-6-->
-
-                        </div><!--/row-->
-                        <div class="row">
-                            <div class="col-md-4">
-                                <button ng-click="list()" class="btn btn-primary pull-left">
-                                    <i class="ti-layout-list-thumb"></i> <span translate="content.list.BACKPRESSRELEASES">Back to Contacts list</span>
-                                </button>
+                <div class="row margin-bottom-10">
+                    <fieldset>
+                        <form name="pressReleaseSender" id="pressReleaseSender" novalidate ng-submit="submitForm(pressReleaseSender)">
+                            <div class="row">
+                                <div class="col-md-6">
+                                        <div class="block" ng-if="contactGroupsLoaded">
+                                        <!--<span class="input-icon">
+                                            <select ng-options="item.id as item.name for item in contactGroups | filter:{ hidden : false }" ng-model="contactGroups.id" name="contactGroupSender" id="contactContactGroupSender" class="form-control" ng-required="true">
+                                                <option translate="content.form.messages.SELECTCONTACTGROUP" value="">Select Contact Group</option>
+                                            </select>
+                                            <i class="ti-marker-alt"></i>
+                                        </span><!--/input-icon-->
+                                            <div class="col-md-6">
+                                                <div data-ng-repeat="contact in contactGroups">
+                                                    <div class="checkbox continuous-check check-primary">
+                                                        <input type="checkbox" name="[contact.id]" id="[[contact.id]]" ng-checked="contactSelection.indexOf(contact.id) > -1" ng-click="toggleSelection(contact.id)"/>
+                                                        <label for="[[contact.id]]">[[contact.name]]</label>
+                                                    </div><!--/checkbox continuous-check check-primary-->
+                                                </div>
+                                            </div><!--/col-md-6-->
+                                        </div>
+                                        <span class="error text-small block" ng-if="pressReleaseSender.contactContactGroupSender.$dirty && pressReleaseSender.contactContactGroupSender.$error.required" translate="content.form.messages.CONTACTGROUPREQUIRED">Contact Group is required.</span>
+                                        <span class="success text-small block" ng-if="pressReleaseSender.contactContactGroupSender.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/col-md-6-->
+                                <div class="col-md-12">
+                                    <!--<div class="block" ng-if="pressRelease">-->
+                                        <input type="hidden" ng-model="pressRelease.id" name="presseReleaseId" id="pressReleaseId" value="[[pressRelease.id]]">
+                                   <!-- </div> -->
+                                </div>
+                            </div><!--/row-->
+                            <div class="table-responsive">
+                                <table class="table table-condensed table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th colspan="2" translate="content.list.PRESSRELEASEDETAILS">Press Release Details</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td><span translate="content.list.fields.ID">Id</span></td>
+                                        <td>
+                                            <div ng-bind-html="pressRelease.id"></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><span translate="content.list.fields.NEWSROOM">Newsroom</span></td>
+                                        <td><a ui-sref="app.prmanager.newsroomsdetails({id: pressRelease.newsroom.id})">[[ pressRelease.newsroom.name ]]</a></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span translate="content.list.fields.TITLE">Title</span></td>
+                                        <td>
+                                            <div ng-bind-html="pressRelease.title"></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><span translate="content.list.fields.SLUG">Slug</span></td>
+                                        <td>
+                                            <div ng-bind-html="pressRelease.slug"></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><span translate="content.list.fields.DESCRIPTION">Description</span></td>
+                                        <td>
+                                            <div ng-bind-html="pressRelease.description"></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><span translate="content.list.fields.PICTUREPREVIEW">Picture Preview</span></td>
+                                        <td>
+                                            <div class="user-image margin-top-10" ng-if="pressRelease.picture_preview != '' && pressRelease.picture_preview != null">
+                                                <div class="thumbnail">
+                                                    <img ng-src="[[ app.thumbURL + pressRelease.picture_preview ]]" alt="" />
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><span translate="content.list.fields.CONTENT">Content</span></td>
+                                        <td>
+                                            <div ng-bind-html="pressRelease.content"></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><span translate="content.list.fields.ISHEADLINE">Is Headline</span></td>
+                                        <td>
+                                            <span my-boolean="[[ pressRelease.is_headline ]]"></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><span translate="content.list.fields.AUTOPUBLISHING">Auto Publishing</span></td>
+                                        <td>
+                                            <span my-boolean="[[ pressRelease.auto_publishing ]]"></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><span translate="content.list.fields.STARTPUBLISHING">Start Publishing</span></td>
+                                        <td>
+                                            <span>[[ pressRelease.start_publishing | date: datetimeFormat ]]</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><span translate="content.list.fields.ENDPUBLISHING">End Publishing</span></td>
+                                        <td>
+                                            <span>[[ pressRelease.end_publishing | date: datetimeFormat ]]</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><span translate="content.list.fields.PUBLISHDATETIME">Publish Date Time</span></td>
+                                        <td>
+                                            <span>[[ pressRelease.publish_date_time | date: datetimeFormat ]]</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><span translate="content.list.fields.METATITLE">Meta Title</span></td>
+                                        <td>
+                                            <div ng-bind-html="pressRelease.meta_title"></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><span translate="content.list.fields.METADESCRIPTION">Meta Description</span></td>
+                                        <td>
+                                            <div ng-bind-html="pressRelease.meta_description"></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><span translate="content.list.fields.METAKEYWORDS">Meta Keywords</span></td>
+                                        <td>
+                                            <div ng-bind-html="pressRelease.meta_keywords"></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><span translate="content.list.fields.STATUS">Status</span></td>
+                                        <td>
+                                            <span my-enum="[[ pressRelease.status ]]" my-enum-list="[[ statuses ]]"></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><span translate="content.list.fields.TOTALPRINTS">Total Prints</span></td>
+                                        <td>
+                                            <div ng-bind-html="pressRelease.total_prints"></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><span translate="content.list.fields.TOTALHITS">Total Hits</span></td>
+                                        <td>
+                                            <div ng-bind-html="pressRelease.total_hits"></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><span translate="content.list.fields.TOTALCOMMENTS">Total Comments</span></td>
+                                        <td>
+                                            <div ng-bind-html="pressRelease.total_comments"></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><span translate="content.list.fields.TOTALRATINGS">Total Ratings</span></td>
+                                        <td>
+                                            <div ng-bind-html="pressRelease.total_ratings"></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><span translate="content.list.fields.AVERAGERATINGS">Average Ratings</span></td>
+                                        <td>
+                                            <div ng-bind-html="pressRelease.average_ratings"></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><span translate="content.list.fields.TOTALLIKES">Total Likes</span></td>
+                                        <td>
+                                            <div ng-bind-html="pressRelease.total_likes"></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><span translate="content.list.fields.TOTALDISLIKES">Total Dislikes</span></td>
+                                        <td>
+                                            <div ng-bind-html="pressRelease.total_dislikes"></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><span translate="content.list.fields.TOTALBOOKMARKS">Total Bookmarks</span></td>
+                                        <td>
+                                            <div ng-bind-html="pressRelease.total_bookmarks"></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><span translate="content.list.fields.TOTALSHARES">Total Shares</span></td>
+                                        <td>
+                                            <div ng-bind-html="pressRelease.total_shares"></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><span translate="content.list.fields.CREATEDAT">Created At</span></td>
+                                        <td>
+                                            <span>[[ pressRelease.created_at | date: datetimeFormat ]]</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><span translate="content.list.fields.CREATORUSER">Creator User</span></td>
+                                        <td><a ui-sref="app.access.usersdetails({id: pressRelease.creator_user.id})">[[ pressRelease.creator_user.username ]]</a></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span translate="content.list.fields.MODIFIEDAT">Modified At</span></td>
+                                        <td>
+                                            <span>[[ pressRelease.modified_at | date: datetimeFormat ]]</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><span translate="content.list.fields.MODIFIERUSER">Modifier User</span></td>
+                                        <td><a ui-sref="app.access.usersdetails({id: pressRelease.modifier_user.id})">[[ pressRelease.modifier_user.username ]]</a></span></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
                             </div>
-                            <div class="col-md-4">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <button ng-click="list()" class="btn btn-primary pull-left">
+                                        <i class="ti-layout-list-thumb"></i> <span translate="content.list.BACKPRESSRELEASES">Back to Contacts list</span>
+                                    </button>
+                                </div>
+                                <div class="col-md-4">
+                                </div>
+                                <div class="col-md-4">
+                                    <button type="button" ng-click="submitForm(pressReleaseSender)" class="btn btn-primary pull-right" ng-disabled="disableSubmit"> <!--  ng-disabled="contactForm.$invalid" -->
+                                        <i class="fa fa-spinner fa-spin" ng-if="disableSubmit"></i><i class="ti-save" ng-if="!disableSubmit"></i> <span translate="content.common.SAVE">Save</span>
+                                    </button>
+                                </div>
                             </div>
-                            <div class="col-md-4">
-                                <button type="button" ng-click="submitForm(pressReleaseSender)" class="btn btn-primary pull-right" ng-disabled="disableSubmit"> <!--  ng-disabled="contactForm.$invalid" -->
-                                    <i class="fa fa-spinner fa-spin" ng-if="disableSubmit"></i><i class="ti-save" ng-if="!disableSubmit"></i> <span translate="content.common.SAVE">Save</span>
-                                </button>
-                            </div>
+                        </form>
+                        <div class="table-responsive" ng-if="contacts.length > 0">
                         </div>
-                    </form>
-                    <div class="table-responsive" ng-if="contacts.length > 0">
-                    </div>
-                </fieldset>
+                    </fieldset>
+                </div>
             </div>
         </div><!--/col-md-12-->
     </div><!--/row-->

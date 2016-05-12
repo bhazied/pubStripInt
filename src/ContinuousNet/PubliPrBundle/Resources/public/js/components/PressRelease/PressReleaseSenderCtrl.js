@@ -2,16 +2,14 @@
 /**
  * Created by dev03 on 10/05/16.
  */
-app.controller('PressReleaseSenderCtrl', ['$rootScope','$scope', '$state', '$stateParams', '$sce', '$timeout', '$filter', '$q', '$interpolate', '$localStorage', '$pressReleasesDataFactory','$contactGroupsDataFactory','$PressReleaseSenderDataFactory',
-     function( $rootScope,$scope, $state, $stateParams, $sce, $timeout, $filter, $q, $interpolate, $localStorage, $pressReleasesDataFactory , $contactGroupsDataFactory, $PressReleaseSenderDataFactory){
+app.controller('PressReleaseSenderCtrl', ['$rootScope','$scope', '$state', '$stateParams', '$sce', '$timeout', '$filter','toaster','SweetAlert', '$q', '$interpolate', '$localStorage', '$pressReleasesDataFactory','$contactGroupsDataFactory','$PressReleaseSenderDataFactory',
+     function( $rootScope,$scope, $state, $stateParams, $sce, $timeout, $filter, toaster, SweetAlert, $q, $interpolate, $localStorage, $pressReleasesDataFactory , $contactGroupsDataFactory, $PressReleaseSenderDataFactory){
          $scope.contactGroups = [];
          $scope.contactGroupsLoaded = false;
-    $scope.title = 'press release sender';
          if(angular.isDefined($stateParams.id)){
              $pressReleasesDataFactory.get({id: $stateParams.id}).$promise.then(function(data){
                  $scope.pressRelease = data;
              });
-             console.log($scope.pressRelease);
          }
          $scope.getContactGroups = function(){
              $timeout(function () {
@@ -32,28 +30,48 @@ app.controller('PressReleaseSenderCtrl', ['$rootScope','$scope', '$state', '$sta
                 }
              });
          }
-
      $scope.getContactGroups();
-
+         $scope.contactSelection = [];
+         $scope.toggleSelection = function (contactId) {
+             var idx =$scope.contactSelection.indexOf(contactId);
+             if(idx > -1){
+                 $scope.contactSelection.splice(idx, 1);
+             }
+             else{
+                 $scope.contactSelection.push(contactId);
+             }
+         }
          $scope.submitForm = function(form){
              var firstError = null;
-             if(form.$invalid){
-                 var field = null;
-                 firstError = null;
-                 for(field in form){
-                     console.log(field);
+             if (form.$invalid) {
+                 var field = null, firstError = null;
+                 for (field in form) {
+                     if (field[0] != '$') {
+                         if (firstError === null && !form[field].$valid) {
+                             firstError = form[field].$name;
+                         }
+                         if (form[field].$pristine) {
+                             form[field].$dirty = true;
+                         }
+                     }
                  }
+                 angular.element('.ng-invalid[name=' + firstError + ']').focus();
+                 SweetAlert.swal($filter('translate')('content.form.messages.FORMCANNOTBESUBMITTED'), $filter('translate')('content.form.messages.ERRORSAREMARKED'), "error");
+                 return false;
              }
              else {
-                console.log($scope.contactGroups.id);
-                 var def = $q.defer();
-                $PressReleaseSenderDataFactory.send().$promise.then(function(data){
-                    console.log(data);
+                 $scope.disableSubmit = true;
+                $PressReleaseSenderDataFactory.send({prId : $scope.pressRelease.id, cgIds: $scope.contactSelection}).$promise.then(function(data){
+                    $scope.disableSubmit = false;
+                    toaster.pop('success', $filter('translate')('content.common.NOTIFICATION'), $filter('translate')('content.list.PRESSRELEASESNT'));
+                    $scope.list();
+                },function (error) {
+                    $scope.disableSubmit = false;
+                    toaster.pop('error', $filter('translate')('content.common.ERROR'), $filter('translate')('content.list.PRESSRELEASENOTCREATED'));
+                    console.warn(error);
                 });
-                 $scope.sent = true;
-                 return def.resolve($scope.sent)
              }
-
+             return false;
          }
 
          $scope.list = function(){

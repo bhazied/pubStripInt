@@ -678,6 +678,8 @@
             "EDITPRESSRELEASE": "Edit Press Release",
             "PRESSRELEASEUPDATED": "Press Release Updated",
             "PRESSRELEASENOTUPDATED": "Press Release Not Updated",
+            "PRESSRELEASEUPDATED": "Press Release sent",
+            "PRESSRELEASENOTUPDATED": "Press Release not sent",
             "PRESSRELEASECREATED": "Press Release Created",
             "PRESSRELEASENOTCREATED": "Press Release Not Created",
             "YOUWILLNOTBEABLETORECOVERPRESSRELEASE": "You will not be able to recover this Press Release!",
