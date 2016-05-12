@@ -35,7 +35,6 @@ use FOS\UserBundle\Model\GroupInterface;
  * @ORM\Table(name="`user`", indexes={@ORM\Index(name="company_id", columns={"company_id"}), @ORM\Index(name="country_id", columns={"country_id"}), @ORM\Index(name="language_id", columns={"language_id"}), @ORM\Index(name="creator_user_id", columns={"creator_user_id"}), @ORM\Index(name="modifier_user_id", columns={"modifier_user_id"})})
  * @ORM\Entity
  * @UniqueEntity("username")
- * @UniqueEntity("phone")
  * @UniqueEntity("email")
  * @ORM\HasLifecycleCallbacks()
  * 
@@ -83,6 +82,28 @@ class User  extends BaseUser
      * @var string
      * @access protected
      *
+     * @ORM\Column(name="name", type="string", length=100, nullable=false, unique=false)
+     * 
+     * @Expose
+     * 
+     */
+    protected $name;
+
+    /**
+     * @var string
+     * @access protected
+     *
+     * @ORM\Column(name="email", type="string", length=360, nullable=false, unique=true)
+     * 
+     * @Expose
+     * 
+     */
+    protected $email;
+
+    /**
+     * @var string
+     * @access protected
+     *
      * @ORM\Column(name="password", type="string", length=128, nullable=false, unique=false)
      * 
      * @Exclude
@@ -105,23 +126,12 @@ class User  extends BaseUser
      * @var string
      * @access protected
      *
-     * @ORM\Column(name="phone", type="string", length=20, nullable=true, unique=true)
+     * @ORM\Column(name="phone", type="string", length=20, nullable=true, unique=false)
      * 
      * @Expose
      * 
      */
     protected $phone;
-
-    /**
-     * @var string
-     * @access protected
-     *
-     * @ORM\Column(name="email", type="string", length=255, nullable=false, unique=true)
-     * 
-     * @Expose
-     * 
-     */
-    protected $email;
 
     /**
      * @var string
@@ -144,17 +154,6 @@ class User  extends BaseUser
      * 
      */
     protected $emailCanonical;
-
-    /**
-     * @var string
-     * @access protected
-     *
-     * @ORM\Column(name="name", type="string", length=100, nullable=true, unique=false)
-     * 
-     * @Expose
-     * 
-     */
-    protected $name;
 
     /**
      * @var string
@@ -664,6 +663,54 @@ class User  extends BaseUser
     }
 
     /**
+     * Set name
+     *
+     * @access public
+     * @param string $name
+     * @return User
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @access public
+     * @return string 
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set email
+     *
+     * @access public
+     * @param string $email
+     * @return User
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @access public
+     * @return string 
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
      * Set password
      *
      * @access public
@@ -736,30 +783,6 @@ class User  extends BaseUser
     }
 
     /**
-     * Set email
-     *
-     * @access public
-     * @param string $email
-     * @return User
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-        return $this;
-    }
-
-    /**
-     * Get email
-     *
-     * @access public
-     * @return string 
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    /**
      * Set usernameCanonical
      *
      * @access public
@@ -805,30 +828,6 @@ class User  extends BaseUser
     public function getEmailCanonical()
     {
         return $this->emailCanonical;
-    }
-
-    /**
-     * Set name
-     *
-     * @access public
-     * @param string $name
-     * @return User
-     */
-    public function setName($name = null)
-    {
-        $this->name = $name;
-        return $this;
-    }
-
-    /**
-     * Get name
-     *
-     * @access public
-     * @return string 
-     */
-    public function getName()
-    {
-        return $this->name;
     }
 
     /**

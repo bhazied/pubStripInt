@@ -43,7 +43,7 @@ angular
         };
 
         if (angular.isDefined($localStorage.user)) {
-            $rootScope.user = $localStorage.user;
+            $rootScope.user = $rootScope.currentUser = $localStorage.user;
         } else {
             $rootScope.user = {
                 name: 'Sahbi KHALFALLAH',
