@@ -72,27 +72,28 @@
                             </div><!--/col-md-6-->
                         </div><!--/row-->
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <div class="form-group" ng-class="{'has-error':fontForm.cssName.$dirty && fontForm.cssName.$invalid, 'has-success':fontForm.cssName.$valid}">
                                     <label for="fontCssName" class="control-label">
                                         <span translate="content.list.fields.CSSNAME">Css Name</span>
                                         <span class="symbol required"></span>
                                     </label>
-                                    <div class="note-editor">
-                                        <div ckeditor="editorOptions" ready="onReadyEditor()"ng-model="font.css_name" name="cssName" id="fontCssName" class="form-control" placeholder="[[ 'content.form.messages.ENTERCSSNAME' | translate ]]" class="form-control autosize area-animated msd-elastic: \n;" ng-required="true"></div>
-                                    </div>
+                                    <span class="input-icon">
+                                        <input ng-model="font.css_name" type="text" name="cssName" id="fontCssName" class="form-control" placeholder="[[ 'content.form.messages.ENTERCSSNAME' | translate ]]" ng-required="true" />
+                                        <i class="ti-css3"></i>
+                                    </span><!--/input-icon-->
                                     <span class="error text-small block" ng-if="fontForm.cssName.$dirty && fontForm.cssName.$error.required" translate="content.form.messages.CSSNAMEREQUIRED">Css Name is required.</span>
                                     <span class="success text-small block" ng-if="fontForm.cssName.$valid" translate="content.form.messages.OK">Ok!</span>
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
-                        </div><!--/row-->
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="checkbox continuous-check check-primary">
                                     <input ng-model="font.is_icon" type="checkbox" name="isIcon" id="fontIsIcon" />
                                     <label for="fontIsIcon" translate="content.list.fields.ISICON">Is Icon</label>
                                 </div><!--/checkbox continuous-check check-primary-->
                             </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="checkbox continuous-check check-primary">
                                     <input ng-model="font.published" type="checkbox" name="published" id="fontPublished" />
