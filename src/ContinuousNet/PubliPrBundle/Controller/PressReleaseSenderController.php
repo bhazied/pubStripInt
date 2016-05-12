@@ -11,6 +11,7 @@ use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Controller\Annotations\RouteResource;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\Put;
+use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use FOS\RestBundle\Util\Codes;
@@ -25,7 +26,16 @@ use FOS\RestBundle\Controller\FOSRestController;
 
 class PressReleaseSenderController extends FOSRestController
 {
-
-    
+    /**
+     * @Post("/PrSender")
+     * @param $request
+     * @View(serializerEnableMaxDepthChecks=true)
+     */
+    public function sendAction(Request $request)
+    {
+        //$pressReleaseId = $request->get('id');
+        $data = array('id' => '6');
+        return $data;
+    }
 
 }

@@ -2,8 +2,8 @@
 /**
  * Created by dev03 on 10/05/16.
  */
-app.controller('PressReleaseSenderCtrl', ['$rootScope','$scope', '$state', '$stateParams', '$sce', '$timeout', '$filter', '$q', '$interpolate', '$localStorage', '$pressReleasesDataFactory','$contactGroupsDataFactory',
-     function( $rootScope,$scope, $state, $stateParams, $sce, $timeout, $filter, $q, $interpolate, $localStorage, $pressReleasesDataFactory , $contactGroupsDataFactory){
+app.controller('PressReleaseSenderCtrl', ['$rootScope','$scope', '$state', '$stateParams', '$sce', '$timeout', '$filter', '$q', '$interpolate', '$localStorage', '$pressReleasesDataFactory','$contactGroupsDataFactory','$PressReleaseSenderDataFactory',
+     function( $rootScope,$scope, $state, $stateParams, $sce, $timeout, $filter, $q, $interpolate, $localStorage, $pressReleasesDataFactory , $contactGroupsDataFactory, $PressReleaseSenderDataFactory){
          $scope.contactGroups = [];
          $scope.contactGroupsLoaded = false;
     $scope.title = 'press release sender';
@@ -46,7 +46,12 @@ app.controller('PressReleaseSenderCtrl', ['$rootScope','$scope', '$state', '$sta
              }
              else {
                 console.log($scope.contactGroups.id);
-
+                 var def = $q.defer();
+                $PressReleaseSenderDataFactory.send().$promise.then(function(data){
+                    console.log(data);
+                });
+                 $scope.sent = true;
+                 return def.resolve($scope.sent)
              }
 
          }

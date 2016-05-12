@@ -2,9 +2,9 @@
 /**
  * Created by dev03 on 10/05/16.
  */
-app.factory('$pressReleaseSenderDataFactory', ['$resouce', '$rootScope', function($resource, $rootScope){
+app.factory('$PressReleaseSenderDataFactory', ['$resource', '$rootScope', function($resource, $rootScope){
 
-    return $resource($rootScope.app.apiUrl + '' , {id : '@id'}, {
+    return $resource($rootScope.app.apiURL + 'PrSender' , {}, {
         send: {method: 'POST', isArray: false}
     });
 }]);
