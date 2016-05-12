@@ -174,7 +174,11 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
                     return 'default';
                 },
                 folder: function() {
-                    return 'newsrooms';
+                    var company = '00000' + $localStorage.user.company;
+                    company = company.substr(company.length - 5);
+                    var newsroom = '00000' + $scope.newsroom.id;
+                    newsroom = newsroom.substr(newsroom.length - 5);
+                    return 'companies/company_'+company+'/newsroom_'+newsroom;
                 }
             }
         });
