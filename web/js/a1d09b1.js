@@ -82400,12 +82400,6 @@ app.controller('FileManagerCtrl', ['$scope', '$localStorage', '$timeout', '$uibM
         $scope.mode = '';
 
         $timeout(function(){
-            var defaultOpen = elFinder.prototype.commands.open;
-            console.log(defaultOpen)
-            elFinder.prototype.commands.open = function (param) {
-                console.log(param)
-                // custom code
-            };
             var fileManager = $('#elfinder_'+$scope.field).elfinder({
                 url : '/efconnect/'+$scope.instance+'/'+$scope.folder+'?mode='+$scope.mode,
                 lang : (angular.isDefined($localStorage.language))?$localStorage.language:'en',
@@ -82419,6 +82413,17 @@ app.controller('FileManagerCtrl', ['$scope', '$localStorage', '$timeout', '$uibM
                     var parser = document.createElement('a');
                     parser.href = file.url;
                     $scope.url = parser.pathname;
+                },
+                handlers: {
+                    select: function(event, elfinderInstance) {
+                        var selected = event.data.selected;
+                        if (selected.length > 0) {
+                            var path = elfinderInstance.path(selected[0]);
+                            var parser = document.createElement('a');
+                            parser.href = '/uploads/'+$scope.folder+'/../'+path;
+                            $scope.url = parser.pathname;
+                        }
+                    }
                 }
             });
         });

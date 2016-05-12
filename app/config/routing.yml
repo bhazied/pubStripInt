@@ -24,5 +24,14 @@ fos_user_change_password:
     resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
     prefix: /profile
 
+ef_connect:
+    path:  /efconnect/{instance}/{homeFolder}
+    defaults: { _controller: FMElfinderBundle:ElFinder:load, instance: default, homeFolder: '' }
+    requirements:
+        homeFolder: ".+"
+
 elfinder:
-     resource: "@FMElfinderBundle/Resources/config/routing.yml"
+    path: /elfinder/{instance}/{homeFolder}
+    defaults: { _controller: FMElfinderBundle:ElFinder:show, instance: default, homeFolder: '' }
+    requirements:
+        homeFolder: ".+"
