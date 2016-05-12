@@ -73,6 +73,7 @@ app.controller('ContactImportCtrl', ['$scope', '$rootScope', '$state', '$statePa
                 toaster.pop('error', $filter('translate')('content.common.ERROR'), $filter('translate')('content.form.messages.DATANOTEXPORTED'));
                 console.warn(error);
             });
+            return false;
 
         };
 
