@@ -36,7 +36,6 @@ use FOS\UserBundle\Model\GroupInterface;
  * @ORM\Entity
  * @UniqueEntity("username")
  * @UniqueEntity("email")
- * @UniqueEntity("phone")
  * @ORM\HasLifecycleCallbacks()
  * 
  * @ExclusionPolicy("none")
@@ -127,7 +126,7 @@ class User  extends BaseUser
      * @var string
      * @access protected
      *
-     * @ORM\Column(name="phone", type="string", length=20, nullable=true, unique=true)
+     * @ORM\Column(name="phone", type="string", length=20, nullable=true, unique=false)
      * 
      * @Expose
      * 

@@ -163,18 +163,6 @@ class UserRESTController extends BaseRESTController
             if (!$authorizedChangeRoles) {
                 $entity->setRoles(array('ROLE_API'));
             }
-            $authorizedChangeEnabled = false;
-            $roles = $this->getUser()->getRoles();
-            if (!empty($roles)) {
-                foreach ($roles as $role) {
-                    if (substr_count($role, 'ROLE_SUPER_ADMIN') > 0) {
-                        $authorizedChangeEnabled = true;
-                    }
-                }
-            }
-            if (!$authorizedChangeEnabled) {
-                $entity->setEnabled(false);
-            }
             $authorizedChangeConfirmationToken = false;
             $roles = $this->getUser()->getRoles();
             if (!empty($roles)) {
@@ -322,18 +310,6 @@ class UserRESTController extends BaseRESTController
                 }
                 if (!$authorizedChangeRoles) {
                     $entity->setRoles(array('ROLE_API'));
-                }
-                $authorizedChangeEnabled = false;
-                $roles = $this->getUser()->getRoles();
-                if (!empty($roles)) {
-                    foreach ($roles as $role) {
-                        if (substr_count($role, 'ROLE_SUPER_ADMIN') > 0) {
-                            $authorizedChangeEnabled = true;
-                        }
-                    }
-                }
-                if (!$authorizedChangeEnabled) {
-                    $entity->setEnabled(false);
                 }
                 $authorizedChangeConfirmationToken = false;
                 $roles = $this->getUser()->getRoles();
