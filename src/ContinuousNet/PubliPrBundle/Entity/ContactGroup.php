@@ -116,12 +116,33 @@ class ContactGroup
     private $modifierUser;
 
     /**
+     * @var \Doctrine\Common\Collections\Collection
+     * @access private
+     *
+     * @ORM\ManyToMany(targetEntity="EmailCampaign", inversedBy="contactGroups")
+     * @ORM\JoinTable(name="email_campaigns_contact_groups",
+     *     joinColumns={
+     *         @ORM\JoinColumn(name="contact_group_id", referencedColumnName="id")
+     *     },
+     *     inverseJoinColumns={
+     *         @ORM\JoinColumn(name="email_campaign_id", referencedColumnName="id")
+     *     }
+     * )
+     * 
+     * @Expose
+     * @MaxDepth(2)
+     * 
+     */
+    private $emailCampaigns;
+
+    /**
      * Constructor
      * 
      * @access public
      */
     public function __construct()
     {
+        $this->emailCampaigns = new DoctrineCollection();
     }
 
     /**
@@ -253,6 +274,62 @@ class ContactGroup
     public function getModifierUser()
     {
         return $this->modifierUser;
+    }
+
+    /**
+     * Add emailCampaign
+     *
+     * @access public
+     * @param EmailCampaign $emailCampaign
+     * @return ContactGroup
+     */
+    public function addEmailCampaign(EmailCampaign $emailCampaign)
+    {
+        if (!$this->emailCampaigns->contains($emailCampaign))
+        {
+            $this->emailCampaigns->add($emailCampaign);
+        }
+        return $this;
+    }
+
+    /**
+     * Remove emailCampaign
+     *
+     * @access public
+     * @param EmailCampaign $emailCampaign
+     * @return ContactGroup
+     */
+    public function removeEmailCampaign(EmailCampaign $emailCampaign)
+    {
+        if ($this->emailCampaigns->contains($emailCampaign))
+        {
+            $this->emailCampaigns->removeElement($emailCampaign);
+        }
+        return $this;
+    }
+
+    /**
+     * Set emailCampaign
+     *
+     * @access public
+     * @param \Doctrine\Common\Collections\Collection
+     * @return ContactGroup
+     */
+    public function setEmailCampaigns($emailCampaigns)
+    {
+        $this->emailCampaigns = $emailCampaigns;
+        return $this;
+    }
+
+    /**
+     * Get emailCampaign
+     *
+     * @access public
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getEmailCampaigns()
+    {
+        return $this->emailCampaigns;
     }
 
     /**

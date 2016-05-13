@@ -4,8 +4,8 @@
  * Controller for Email Campaign Form
  */
 
-app.controller('EmailCampaignFormCtrl', ['$scope', '$state', '$stateParams', '$sce', '$timeout', '$filter', '$uibModal', '$q', '$interpolate', '$localStorage', 'toaster', 'SweetAlert', 'savable', '$pressReleasesDataFactory', '$usersDataFactory', '$emailCampaignsDataFactory',
-function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $interpolate, $localStorage, toaster, SweetAlert, savable, $pressReleasesDataFactory, $usersDataFactory, $emailCampaignsDataFactory) {
+app.controller('EmailCampaignFormCtrl', ['$scope', '$state', '$stateParams', '$sce', '$timeout', '$filter', '$uibModal', '$q', '$interpolate', '$localStorage', 'toaster', 'SweetAlert', 'savable', '$pressReleasesDataFactory', '$usersDataFactory', '$contactGroupsDataFactory', '$emailCampaignsDataFactory',
+function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $interpolate, $localStorage, toaster, SweetAlert, savable, $pressReleasesDataFactory, $usersDataFactory, $contactGroupsDataFactory, $emailCampaignsDataFactory) {
 
     $scope.locale = (angular.isDefined($localStorage.language))?$localStorage.language:'en';
 
@@ -94,6 +94,27 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
     $scope.getUsers();
 
 
+    $scope.contactGroups = [];
+    $scope.contactGroupsLoaded = [];
+
+    $scope.getContactGroups = function() {
+        $timeout(function(){
+            if ($scope.contactGroups.length == 0) {
+                $scope.contactGroups.push({});
+                var def = $q.defer();
+                $contactGroupsDataFactory.query({offset: 0, limit: 10000, 'order_by[contactGroup.name]': 'asc'}).$promise.then(function(data) {
+                    $scope.contactGroups = data.results;
+                    def.resolve($scope.contactGroups);
+                });
+                return def;
+            } else {
+                return $scope.contactGroups;
+            }
+        });
+    };
+
+    $scope.getContactGroups();
+
 
     $scope.submitForm = function(form) {
         var firstError = null;
@@ -154,7 +175,7 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
             });
         });
     } else {
-        $scope.emailCampaign = {id: 0};
+        $scope.emailCampaign = {id: 0, contact_groups: []};
 
     }
 

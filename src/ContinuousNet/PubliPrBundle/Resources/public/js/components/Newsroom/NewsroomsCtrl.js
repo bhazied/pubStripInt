@@ -109,6 +109,12 @@ function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q,
         return $scope.$eval('row.' + this.field);
     };
 
+    $scope.colorValue = function($scope, row) {
+        var color = $scope.$eval('row.' + this.field);
+        var html = '<b style="color: white; background-color: ' + color + ';">' + color + '</b>';
+        return $scope.trusted[html] || ($scope.trusted[html] = $sce.trustAsHtml(html));
+    };
+
     $scope.trusted = {};
 
     $scope.linkValue = function($scope, row) {
@@ -179,10 +185,10 @@ function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q,
             { field: 'logo_picture', title: $filter('translate')('content.list.fields.LOGOPICTURE'), sortable: 'newsroom.logoPicture', filter: { 'newsroom.logoPicture': 'text' }, show: $scope.getParamValue('logo_picture_show_filed', true), getValue: $scope.interpolatedValue, interpolateExpr: $interpolate('<img ng-src="'+$rootScope.app.thumbURL+'[[ (row.logo_picture)?row.logo_picture:\'/assets/images/picturenotavailable.'+$scope.locale+'.png\' ]]" alt="" class="img-thumbnail" />') },
             { field: 'banner_picture', title: $filter('translate')('content.list.fields.BANNERPICTURE'), sortable: 'newsroom.bannerPicture', filter: { 'newsroom.bannerPicture': 'text' }, show: $scope.getParamValue('banner_picture_show_filed', false), getValue: $scope.interpolatedValue, interpolateExpr: $interpolate('<img ng-src="'+$rootScope.app.thumbURL+'[[ (row.banner_picture)?row.banner_picture:\'/assets/images/picturenotavailable.'+$scope.locale+'.png\' ]]" alt="" class="img-thumbnail" />') },
             { field: 'press_releases_per_page', title: $filter('translate')('content.list.fields.PRESSRELEASESPERPAGE'), sortable: 'newsroom.pressReleasesPerPage', filter: { 'newsroom.pressReleasesPerPage': 'number' }, show: $scope.getParamValue('press_releases_per_page_show_filed', false), getValue: $scope.textValue },
-            { field: 'background_color', title: $filter('translate')('content.list.fields.BACKGROUNDCOLOR'), sortable: 'newsroom.backgroundColor', filter: { 'newsroom.backgroundColor': 'text' }, show: $scope.getParamValue('background_color_show_filed', false), getValue: $scope.textValue },
-            { field: 'title_color', title: $filter('translate')('content.list.fields.TITLECOLOR'), sortable: 'newsroom.titleColor', filter: { 'newsroom.titleColor': 'text' }, show: $scope.getParamValue('title_color_show_filed', false), getValue: $scope.textValue },
+            { field: 'background_color', title: $filter('translate')('content.list.fields.BACKGROUNDCOLOR'), sortable: 'newsroom.backgroundColor', filter: { 'newsroom.backgroundColor': 'text' }, show: $scope.getParamValue('background_color_show_filed', false), getValue: $scope.colorValue },
+            { field: 'title_color', title: $filter('translate')('content.list.fields.TITLECOLOR'), sortable: 'newsroom.titleColor', filter: { 'newsroom.titleColor': 'text' }, show: $scope.getParamValue('title_color_show_filed', false), getValue: $scope.colorValue },
             { field: 'title_font', title: $filter('translate')('content.list.fields.TITLEFONT'), sortable: 'title_font.name', filter: { 'newsroom.titleFont': 'select' }, getValue: $scope.linkValue, filterData: $scope.getFonts(), show: $scope.getParamValue('title_font_id_show_filed', false), displayField: 'name', state: 'app.templatemanager.fontsdetails' },
-            { field: 'text_color', title: $filter('translate')('content.list.fields.TEXTCOLOR'), sortable: 'newsroom.textColor', filter: { 'newsroom.textColor': 'text' }, show: $scope.getParamValue('text_color_show_filed', false), getValue: $scope.textValue },
+            { field: 'text_color', title: $filter('translate')('content.list.fields.TEXTCOLOR'), sortable: 'newsroom.textColor', filter: { 'newsroom.textColor': 'text' }, show: $scope.getParamValue('text_color_show_filed', false), getValue: $scope.colorValue },
             { field: 'text_font', title: $filter('translate')('content.list.fields.TEXTFONT'), sortable: 'text_font.name', filter: { 'newsroom.textFont': 'select' }, getValue: $scope.linkValue, filterData: $scope.getFonts(), show: $scope.getParamValue('text_font_id_show_filed', false), displayField: 'name', state: 'app.templatemanager.fontsdetails' },
             { field: 'facebook_link', title: $filter('translate')('content.list.fields.FACEBOOKLINK'), sortable: 'newsroom.facebookLink', filter: { 'newsroom.facebookLink': 'text' }, show: $scope.getParamValue('facebook_link_show_filed', false), getValue: $scope.textValue },
             { field: 'twitter_link', title: $filter('translate')('content.list.fields.TWITTERLINK'), sortable: 'newsroom.twitterLink', filter: { 'newsroom.twitterLink': 'text' }, show: $scope.getParamValue('twitter_link_show_filed', false), getValue: $scope.textValue },
