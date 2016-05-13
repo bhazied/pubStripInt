@@ -13,6 +13,8 @@ parameters:
     jwt_token_ttl: 86400
     router.options.generator_class: "ContinuousNet\\PubliPrBundle\\Routing\\Generator\\UrlGenerator"
     router.options.generator_base_class: "ContinuousNet\\PubliPrBundle\\Routing\\Generator\\UrlGenerator"
+    emailTemplate.interpretor.startWith : '%'
+    emailTemplate.interpretor.endWith : '%'
 
 lexik_jwt_authentication:
     private_key_path: %jwt_private_key_path%
