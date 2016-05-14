@@ -26,7 +26,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
  * @link	   http://publipr.continuousnet.com/ContinuousNet/PubliPrBundle/Controller
  * @see		UserController
  * @since	  Class available since Release 1.0
- * @deprecated Nothing
  * @access	 public
  * @Route("/user")
  */

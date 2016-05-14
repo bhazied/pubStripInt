@@ -45,6 +45,7 @@ class ContactGroupType extends AbstractType
     {
         $builder
             ->add('name', TextType::class)
+            ->add('emailCampaigns', EntityType::class, array('expanded' => true, 'multiple' => true, 'class' => 'PubliPrBundle:EmailCampaign', 'choice_label' => 'name'))
         ;
     }
     

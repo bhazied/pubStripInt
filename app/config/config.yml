@@ -362,6 +362,25 @@ assetic:
             inputs:
                 - 'bower_components/elfinder/dist/css/elfinder.min.css'
                 - 'bower_components/elfinder/dist/css/theme.css' #.min
+        codemirror_css:
+            inputs:
+                - 'bower_components/codemirror/css/lib/codemirror.css'
+        froala_css:
+            inputs:
+                - 'bower_components/froala-wysiwyg-editor/css/froala_editor.min.css'
+                - 'bower_components/froala-wysiwyg-editor/css/froala_style.min.css'
+                - 'bower_components/froala-wysiwyg-editor/css/plugins/char_counter.css'
+                - 'bower_components/froala-wysiwyg-editor/css/plugins/code_view.css'
+                - 'bower_components/froala-wysiwyg-editor/css/plugins/colors.css'
+                - 'bower_components/froala-wysiwyg-editor/css/plugins/emoticons.css'
+                - 'bower_components/froala-wysiwyg-editor/css/plugins/file.css'
+                - 'bower_components/froala-wysiwyg-editor/css/plugins/fullscreen.css'
+                - 'bower_components/froala-wysiwyg-editor/css/plugins/image.css'
+                - 'bower_components/froala-wysiwyg-editor/css/plugins/image_manager.css'
+                - 'bower_components/froala-wysiwyg-editor/css/plugins/line_breaker.css'
+                - 'bower_components/froala-wysiwyg-editor/css/plugins/quick_insert.css'
+                - 'bower_components/froala-wysiwyg-editor/css/plugins/table.css'
+                - 'bower_components/froala-wysiwyg-editor/css/plugins/video.css'
         continuous_net_css:
             inputs:
                 - 'styles/animate.css'
@@ -410,7 +429,6 @@ assetic:
                 - 'bower_components/angular-slugify/angular-slugify.js'
                 - 'bower_components/angular-recaptcha/release/angular-recaptcha.js' #.min
                 - 'bower_components/AngularJS-Toaster/toaster.js'
-
         angular_storage:
             inputs:
                 - 'bower_components/ngstorage/ngStorage.js' #.min
@@ -445,6 +463,40 @@ assetic:
                 - 'app/scripts/extentions/modernizr.js'
                 - 'app/scripts/extentions/lib.js'
                 - 'bower_components/file-saver.js/FileSaver.js'
+        codemirror:
+            inputs:
+                - 'bower_components/codemirror/lib/codemirror.js'
+                - 'bower_components/codemirror/mode/xml/xml.js'
+        froala:
+            inputs:
+                - 'bower_components/froala-wysiwyg-editor/js/froala_editor.min.js'
+                - 'bower_components/froala-wysiwyg-editor/js/plugins/align.min.js'
+                - 'bower_components/froala-wysiwyg-editor/js/plugins/char_counter.min.js'
+                - 'bower_components/froala-wysiwyg-editor/js/plugins/code_beautifier.min.js'
+                - 'bower_components/froala-wysiwyg-editor/js/plugins/code_view.min.js'
+                - 'bower_components/froala-wysiwyg-editor/js/plugins/colors.min.js'
+                - 'bower_components/froala-wysiwyg-editor/js/plugins/emoticons.min.js'
+                - 'bower_components/froala-wysiwyg-editor/js/plugins/entities.min.js'
+                - 'bower_components/froala-wysiwyg-editor/js/plugins/file.min.js'
+                - 'bower_components/froala-wysiwyg-editor/js/plugins/font_family.min.js'
+                - 'bower_components/froala-wysiwyg-editor/js/plugins/font_size.min.js'
+                - 'bower_components/froala-wysiwyg-editor/js/plugins/fullscreen.min.js'
+                - 'bower_components/froala-wysiwyg-editor/js/plugins/image.min.js'
+                - 'bower_components/froala-wysiwyg-editor/js/plugins/image_manager.min.js'
+                - 'bower_components/froala-wysiwyg-editor/js/plugins/inline_style.min.js'
+                - 'bower_components/froala-wysiwyg-editor/js/plugins/line_breaker.min.js'
+                - 'bower_components/froala-wysiwyg-editor/js/plugins/link.min.js'
+                - 'bower_components/froala-wysiwyg-editor/js/plugins/lists.min.js'
+                - 'bower_components/froala-wysiwyg-editor/js/plugins/paragraph_format.min.js'
+                - 'bower_components/froala-wysiwyg-editor/js/plugins/paragraph_style.min.js'
+                - 'bower_components/froala-wysiwyg-editor/js/plugins/quick_insert.min.js'
+                - 'bower_components/froala-wysiwyg-editor/js/plugins/quote.min.js'
+                - 'bower_components/froala-wysiwyg-editor/js/plugins/table.min.js'
+                - 'bower_components/froala-wysiwyg-editor/js/plugins/save.min.js'
+                - 'bower_components/froala-wysiwyg-editor/js/plugins/url.min.js'
+                - 'bower_components/froala-wysiwyg-editor/js/plugins/video.min.js'
+                - 'bower_components/froala-wysiwyg-editor/js/languages/fr.js'
+
         continuous_net_scripts:
             inputs:
                 - 'app/scripts/app.js'
@@ -514,3 +566,4 @@ hip_mandrill:
      #   port: 80
      #   user: john
      #   password: doe123
+

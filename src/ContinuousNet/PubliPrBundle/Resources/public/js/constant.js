@@ -65,6 +65,7 @@ app.constant('APP_JS_REQUIRES', {
         'PressReleaseFormCtrl': '/bundles/publipr/js/components/PressRelease/PressReleaseFormCtrl.js',
         'PressReleaseCtrl': '/bundles/publipr/js/components/PressRelease/PressReleaseCtrl.js',
         'PressReleaseSenderCtrl': '/bundles/publipr/js/components/PressRelease/PressReleaseSenderCtrl.js',
+        'PressReleaseStatsCtrl': '/bundles/publipr/js/components/PressRelease/PressReleaseStatsCtrl.js',
         'PressReleaseEditorCtrl': '/bundles/publipr/js/components/PressRelease/PressReleaseEditorCtrl.js',
         'PressReleaseEditorCtrl': '/bundles/publipr/js/components/PressRelease/PressReleaseEditorCtrl.js',
         'SessionsCtrl': '/bundles/publipr/js/components/Session/SessionsCtrl.js',
@@ -161,6 +162,9 @@ app.constant('APP_JS_REQUIRES', {
     },{
         name: 'PressReleaseSenderService',
         files: ['/bundles/publipr/js/components/PressRelease/PressReleaseSenderService.js']
+    },{
+        name: 'PressReleaseStatsService',
+        files: ['/bundles/publipr/js/components/PressRelease/PressReleaseStatsService.js']
     },{
         name: 'sessionService',
         files: ['/bundles/publipr/js/components/Session/SessionService.js']

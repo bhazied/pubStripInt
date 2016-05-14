@@ -37,7 +37,6 @@ use Voryx\RESTGeneratorBundle\Controller\VoryxController;
  * @link    http://publipr.continuousnet.com/ContinuousNet/PubliPrBundle/Controller
  * @see      UserRESTController
  * @since      Class available since Release 1.0
- * @deprecated Nothing
  * @access    public
  * @RouteResource("User")
  */
@@ -91,7 +90,7 @@ class UserRESTController extends BaseRESTController
             $qb->leftJoin('ContinuousNet\PubliPrBundle\Entity\Language', 'language', \Doctrine\ORM\Query\Expr\Join::WITH, 'u_.language = language.id');
             $qb->leftJoin('ContinuousNet\PubliPrBundle\Entity\User', 'creator_user', \Doctrine\ORM\Query\Expr\Join::WITH, 'u_.creatorUser = creator_user.id');
             $qb->leftJoin('ContinuousNet\PubliPrBundle\Entity\User', 'modifier_user', \Doctrine\ORM\Query\Expr\Join::WITH, 'u_.modifierUser = modifier_user.id');
-            $textFields = array('user.username', 'user.phone', 'user.email', 'user.usernameCanonical', 'user.emailCanonical', 'user.name', 'user.firstName', 'user.lastName', 'user.picture', 'user.address', 'user.zipCode', 'user.job', 'user.city', 'user.phoneValidationCode', 'user.emailValidationCode', 'user.roles', 'user.confirmationToken');
+            $textFields = array('user.username', 'user.name', 'user.email', 'user.phone', 'user.usernameCanonical', 'user.emailCanonical', 'user.firstName', 'user.lastName', 'user.picture', 'user.address', 'user.zipCode', 'user.job', 'user.city', 'user.phoneValidationCode', 'user.emailValidationCode', 'user.roles', 'user.confirmationToken');
             foreach ($filters as $field => $value) {
                 $_field = str_replace('user.', 'u_.', $field);
                 $key = str_replace('.', '', $field);
@@ -161,19 +160,7 @@ class UserRESTController extends BaseRESTController
                 }
             }
             if (!$authorizedChangeRoles) {
-                $entity->setRoles('ROLE_API');
-            }
-            $authorizedChangeEnabled = false;
-            $roles = $this->getUser()->getRoles();
-            if (!empty($roles)) {
-                foreach ($roles as $role) {
-                    if (substr_count($role, 'ROLE_SUPER_ADMIN') > 0) {
-                        $authorizedChangeEnabled = true;
-                    }
-                }
-            }
-            if (!$authorizedChangeEnabled) {
-                $entity->setEnabled(null);
+                $entity->setRoles(array('ROLE_API'));
             }
             $authorizedChangeConfirmationToken = false;
             $roles = $this->getUser()->getRoles();
@@ -321,19 +308,7 @@ class UserRESTController extends BaseRESTController
                     }
                 }
                 if (!$authorizedChangeRoles) {
-                    $entity->setRoles('ROLE_API');
-                }
-                $authorizedChangeEnabled = false;
-                $roles = $this->getUser()->getRoles();
-                if (!empty($roles)) {
-                    foreach ($roles as $role) {
-                        if (substr_count($role, 'ROLE_SUPER_ADMIN') > 0) {
-                            $authorizedChangeEnabled = true;
-                        }
-                    }
-                }
-                if (!$authorizedChangeEnabled) {
-                    $entity->setEnabled(null);
+                    $entity->setRoles(array('ROLE_API'));
                 }
                 $authorizedChangeConfirmationToken = false;
                 $roles = $this->getUser()->getRoles();
@@ -492,6 +467,9 @@ class UserRESTController extends BaseRESTController
     
     private function process(User $entity, $isNew)
     {
+        if (is_null($entity->getCompany()) && !is_null($this->getUser()->getCompany())) {
+            $entity->setCompany($this->getUser()->getCompany());
+        }
         if (is_null($entity->getSalt()) || empty($entity->getSalt())) {
             $entity->setSalt(base_convert(sha1(uniqid(mt_rand(), true)), 16, 36));
         }

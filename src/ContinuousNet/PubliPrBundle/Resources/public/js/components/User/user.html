@@ -47,9 +47,15 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><span translate="content.list.fields.USERNAME">Username</span></td>
+                                <td><span translate="content.list.fields.NAME">Name</span></td>
                                 <td>
-                                    <div ng-bind-html="user.username"></div>
+                                    <div ng-bind-html="user.name"></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span translate="content.list.fields.EMAIL">Email</span></td>
+                                <td>
+                                    <div ng-bind-html="user.email"></div>
                                 </td>
                             </tr>
                             <tr>
@@ -62,18 +68,6 @@
                                 <td><span translate="content.list.fields.PHONE">Phone</span></td>
                                 <td>
                                     <div ng-bind-html="user.phone"></div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><span translate="content.list.fields.EMAIL">Email</span></td>
-                                <td>
-                                    <div ng-bind-html="user.email"></div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><span translate="content.list.fields.NAME">Name</span></td>
-                                <td>
-                                    <div ng-bind-html="user.name"></div>
                                 </td>
                             </tr>
                             <tr>
@@ -123,10 +117,6 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><span translate="content.list.fields.COMPANY">Company</span></td>
-                                <td><a ui-sref="app.access.companiesdetails({id: user.company.id})">[[ user.company.name ]]</a></span></td>
-                            </tr>
-                            <tr>
                                 <td><span translate="content.list.fields.JOB">Job</span></td>
                                 <td>
                                     <div ng-bind-html="user.job"></div>
@@ -153,21 +143,9 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><span translate="content.list.fields.LOCKED">Locked</span></td>
+                                <td><span translate="content.list.fields.ENABLED">Enabled</span></td>
                                 <td>
-                                    <span my-boolean="[[ user.locked ]]"></span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><span translate="content.list.fields.EXPIRED">Expired</span></td>
-                                <td>
-                                    <span my-boolean="[[ user.expired ]]"></span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><span translate="content.list.fields.CREDENTIALSEXPIRED">Credentials Expired</span></td>
-                                <td>
-                                    <span my-boolean="[[ user.credentials_expired ]]"></span>
+                                    <span my-boolean="[[ user.enabled ]]"></span>
                                 </td>
                             </tr>
                             <tr>

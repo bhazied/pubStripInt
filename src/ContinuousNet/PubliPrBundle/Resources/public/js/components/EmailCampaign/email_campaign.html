@@ -100,6 +100,12 @@
                                 <td><span translate="content.list.fields.MODIFIERUSER">Modifier User</span></td>
                                 <td><a ui-sref="app.access.usersdetails({id: emailCampaign.modifier_user.id})">[[ emailCampaign.modifier_user.username ]]</a></span></td>
                             </tr>
+                            <tr>
+                                <td><span translate="content.list.fields.CONTACTGROUPS">Contact Groups</span></td>
+                                <td>
+                                    <a ng-repeat="contactGroup in emailCampaign.contact_groups" ui-sref="app.contactmanager.contactgroupsdetails({id: contactGroup.id})">[[ contactGroup.name ]]</a>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>

@@ -50,6 +50,7 @@ class EmailCampaignType extends AbstractType
             ->add('sendNow', CheckboxType::class)
             ->add('sendingDateTime', DateTimeType::class, array('widget' => 'single_text', 'input' => 'datetime'))
             ->add('externalReference', TextType::class)
+            ->add('contactGroups', EntityType::class, array('expanded' => true, 'multiple' => true, 'class' => 'PubliPrBundle:ContactGroup', 'choice_label' => 'name'))
         ;
     }
     
