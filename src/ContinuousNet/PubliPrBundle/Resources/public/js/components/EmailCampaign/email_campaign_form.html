@@ -112,6 +112,19 @@
                             </div><!--/col-md-6-->
                         </div><!--/row-->
                         <div class="row">
+                            <div class="col-md-12">
+                                <label for="emailCampaignContactGroups" class="control-label">
+                                    <span translate="content.list.fields.CONTACTGROUPS">Contact Groups</span>
+                                </label>
+                            </div><!--/col-md-12-->
+                            <div class="col-md-3" ng-repeat="contactGroup in contactGroups" ng-if="contactGroup.id">
+                                <div class="checkbox continuous-check check-primary">
+                                    <input checklist-model="emailCampaign.contact_groups" checklist-value="contactGroup.id" type="checkbox" name="contactGroup[]" id="emailCampaignContactGroup[[contactGroup.id]]" />
+                                    <label for="emailCampaignContactGroup[[contactGroup.id]]">[[ contactGroup.name ]]</label>
+                                </div><!--/checkbox-->
+                            </div><!--/col-md-3-->
+                        </div><!--/row-->
+                        <div class="row">
                             <div class="col-md-4">
                                 <a ng-click="list()" class="btn btn-primary pull-left">
                                     <i class="ti-layout-list-thumb"></i> <span translate="content.list.BACKEMAILCAMPAIGNS">Back to Email Campaigns list</span>

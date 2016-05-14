@@ -1,7 +1,14 @@
 <div id="toolbox">
     <div class="logo"></div>
     <ul>
-        <li translate="editor.ADDELEMENT" ng-click="addContentBlock()" class="addContentBlock">Add Content Block</li>
+        <li translate="editor.ADDELEMENT" class="addContentBlock">
+            Add Content Block
+            <lu class="sub">
+                <li ng-repeat="blockContent in blockContents" ng-click="addContentBlock(blockContent);" style="background-imag: url();">
+                    <span>[[ blockContent.name ]]</span>
+                </li>
+            </lu>
+        </li>
         <li translate="editor.SETTINGS" ng-click="settings()" class="settings_">Settings</li>
         <li translate="editor.PREVIEW" ng-click="preview()" class="preview_">Preview</li>
         <li translate="editor.PUBLISH" ng-click="publish()" class="publish_">Publish</li>

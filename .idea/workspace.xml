@@ -24,8 +24,12 @@
 =======
 =======
     <list default="true" id="b7d77c83-7530-40a0-bb78-28ddc05200bf" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/Contact/ContactExportCtrl.js" afterPath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/Contact/ContactExportCtrl.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/Contact/ContactImportCtrl.js" afterPath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/Contact/ContactImportCtrl.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/config.yml" afterPath="$PROJECT_DIR$/app/config/config.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/PressRelease/PressReleaseEditorCtrl.js" afterPath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/PressRelease/PressReleaseEditorCtrl.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/PressRelease/press_release_editor.html" afterPath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/PressRelease/press_release_editor.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/views/base.html.twig" afterPath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/views/base.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/styles/editor.css" afterPath="$PROJECT_DIR$/web/styles/editor.css" />
     </list>
 >>>>>>> b1659c393f3a927bd816f0b0f1549f559dffe98e
 >>>>>>> master
@@ -51,11 +55,14 @@
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       <file leaf-file-name="config.yml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/config/config.yml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="7440">
 =======
+=======
+>>>>>>> master
 =======
 >>>>>>> master
 <<<<<<< HEAD
@@ -78,11 +85,19 @@
             <state vertical-scroll-proportion="0.0">
               <caret line="119" column="29" selection-start-line="119" selection-start-column="29" selection-end-line="119" selection-end-column="29" />
 >>>>>>> b1659c393f3a927bd816f0b0f1549f559dffe98e
+=======
+      <file leaf-file-name="editor.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/styles/editor.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-7.5416665">
+              <caret line="86" column="17" selection-start-line="86" selection-start-column="17" selection-end-line="86" selection-end-column="17" />
+>>>>>>> 3be125e5f063c0b1d4c99d6f339d41a8c64f6859
               <folding />
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
       <file leaf-file-name="ContactExportService.js" pinned="false" current-in-tab="false">
@@ -97,14 +112,22 @@
             <state vertical-scroll-proportion="0.0">
               <caret line="181" column="17" selection-start-line="181" selection-start-column="17" selection-end-line="181" selection-end-column="17" />
 >>>>>>> b1659c393f3a927bd816f0b0f1549f559dffe98e
+=======
+      <file leaf-file-name="config.yml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/config/config.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.33333334">
+              <caret line="480" column="73" selection-start-line="480" selection-start-column="69" selection-end-line="480" selection-end-column="73" />
+>>>>>>> 3be125e5f063c0b1d4c99d6f339d41a8c64f6859
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="contact_import.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/Contact/contact_import.html">
+      <file leaf-file-name="base.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/views/base.html.twig">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
 <<<<<<< HEAD
             <state relative-caret-position="195">
               <caret line="31" column="22" selection-start-line="31" selection-start-column="22" selection-end-line="31" selection-end-column="22" />
@@ -112,14 +135,19 @@
             <state vertical-scroll-proportion="-12.791667">
               <caret line="128" column="34" selection-start-line="128" selection-start-column="34" selection-end-line="128" selection-end-column="34" />
 >>>>>>> b1659c393f3a927bd816f0b0f1549f559dffe98e
+=======
+            <state vertical-scroll-proportion="-2.202381">
+              <caret line="18" column="18" selection-start-line="18" selection-start-column="14" selection-end-line="18" selection-end-column="18" />
+>>>>>>> 3be125e5f063c0b1d4c99d6f339d41a8c64f6859
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ContactFormCtrl.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/Contact/ContactFormCtrl.js">
+      <file leaf-file-name="PressReleaseEditorCtrl.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/PressRelease/PressReleaseEditorCtrl.js">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
 <<<<<<< HEAD
             <state relative-caret-position="195">
               <caret line="31" column="22" selection-start-line="0" selection-start-column="0" selection-end-line="50" selection-end-column="1" />
@@ -127,14 +155,19 @@
             <state vertical-scroll-proportion="0.0">
               <caret line="137" column="13" selection-start-line="137" selection-start-column="13" selection-end-line="138" selection-end-column="25" />
 >>>>>>> b1659c393f3a927bd816f0b0f1549f559dffe98e
+=======
+            <state vertical-scroll-proportion="-15.774194">
+              <caret line="260" column="19" selection-start-line="260" selection-start-column="19" selection-end-line="260" selection-end-column="19" />
+>>>>>>> 3be125e5f063c0b1d4c99d6f339d41a8c64f6859
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="routing.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/config/routing.yml">
+      <file leaf-file-name="press_release_editor.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/PressRelease/press_release_editor.html">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
 <<<<<<< HEAD
             <state relative-caret-position="330">
               <caret line="22" column="30" selection-start-line="22" selection-start-column="30" selection-end-line="22" selection-end-column="30" />
@@ -142,16 +175,19 @@
 =======
             <state vertical-scroll-proportion="0.0">
               <caret line="36" column="18" selection-start-line="36" selection-start-column="8" selection-end-line="36" selection-end-column="18" />
+=======
+            <state vertical-scroll-proportion="-2.9818182">
+              <caret line="13" column="66" selection-start-line="13" selection-start-column="66" selection-end-line="13" selection-end-column="66" />
+>>>>>>> 3be125e5f063c0b1d4c99d6f339d41a8c64f6859
               <folding>
-                <marker date="1463015158198" expanded="true" signature="867:906" placeholder="requirements:" />
-                <marker date="1463015158198" expanded="true" signature="907:1100" placeholder="elfinder:" />
-                <marker date="1463015158198" expanded="true" signature="1062:1100" placeholder="requirements:" />
+                <element signature="n#style#0;n#li#1;n#ul#0;n#div#0;n#!!top" expanded="true" />
               </folding>
 >>>>>>> b1659c393f3a927bd816f0b0f1549f559dffe98e
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file leaf-file-name="contact_form.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/Contact/contact_form.html">
           <provider selected="true" editor-type-id="text-editor">
@@ -380,6 +416,8 @@
           </provider>
         </entry>
       </file>
+=======
+>>>>>>> 3be125e5f063c0b1d4c99d6f339d41a8c64f6859
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -395,6 +433,7 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
@@ -436,12 +475,10 @@
         <option value="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Controller/UserRESTController.php" />
         <option value="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/PressRelease/press_release.html" />
         <option value="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/PressRelease/PressReleaseEditorService.js" />
+=======
+>>>>>>> 3be125e5f063c0b1d4c99d6f339d41a8c64f6859
         <option value="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/PressRelease/PressReleaseCtrl.js" />
-        <option value="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/views/base.html.twig" />
         <option value="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/PressRelease/PressReleasesCtrl.js" />
-        <option value="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/PressRelease/PressReleaseEditorCtrl.js" />
-        <option value="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/PressRelease/press_release_editor.html" />
-        <option value="$PROJECT_DIR$/web/styles/editor.css" />
         <option value="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Controller/ContactGroupRESTController.php" />
         <option value="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Controller/NewsroomRESTController.php" />
         <option value="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/config/security.yml" />
@@ -475,7 +512,6 @@
         <option value="$PROJECT_DIR$/web/styles/custom.css" />
         <option value="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/Contact/ContactExportService.js" />
         <option value="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Controller/ContactImpoterController.php" />
-        <option value="$PROJECT_DIR$/app/config/config.yml" />
         <option value="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/Contact/contact_form.html" />
         <option value="$PROJECT_DIR$/web/app/scripts/directives/my-unique-field.js" />
         <option value="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Controller/ContactExporterController.php" />
@@ -495,7 +531,21 @@
         <option value="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/Contact/contact_import.html" />
         <option value="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/Contact/ContactImportCtrl.js" />
         <option value="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/Contact/ContactExportCtrl.js" />
+<<<<<<< HEAD
 >>>>>>> b1659c393f3a927bd816f0b0f1549f559dffe98e
+=======
+        <option value="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/i18n/fr.json" />
+        <option value="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/Auth/LoginCtrl.js" />
+        <option value="$PROJECT_DIR$/web/app/scripts/app.main.js" />
+        <option value="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Controller/UserController.php" />
+        <option value="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Controller/UserRESTController.php" />
+        <option value="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/links.html" />
+        <option value="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/PressRelease/press_release_editor.html" />
+        <option value="$PROJECT_DIR$/web/styles/editor.css" />
+        <option value="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/views/base.html.twig" />
+        <option value="$PROJECT_DIR$/app/config/config.yml" />
+        <option value="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/PressRelease/PressReleaseEditorCtrl.js" />
+>>>>>>> 3be125e5f063c0b1d4c99d6f339d41a8c64f6859
       </list>
     </option>
   </component>
@@ -540,10 +590,13 @@
     </navigator>
     <panes>
 <<<<<<< HEAD
+<<<<<<< HEAD
       <pane id="Scope" />
 =======
 >>>>>>> master
       <pane id="Scratches" />
+=======
+>>>>>>> master
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -595,7 +648,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
+              <option name="myItemId" value="uploads" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -609,20 +662,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="vendor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="publipr" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="publipr" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
+<<<<<<< HEAD
               <option name="myItemId" value="vendor" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -699,10 +739,13 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="fm-elfinder-bundle" />
+=======
+              <option name="myItemId" value="web" />
+>>>>>>> 3be125e5f063c0b1d4c99d6f339d41a8c64f6859
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Resources" />
+              <option name="myItemId" value="styles" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -716,23 +759,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="vendor" />
+              <option name="myItemId" value="web" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="helios-ag" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fm-elfinder-bundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="config" />
+              <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
 >>>>>>> b1659c393f3a927bd816f0b0f1549f559dffe98e
             </PATH_ELEMENT>
@@ -821,13 +852,8 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
 >>>>>>> dev_zied
             </PATH_ELEMENT>
-          </PATH>
-          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="publipr" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
+<<<<<<< HEAD
               <option name="myItemId" value="publipr" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
@@ -858,6 +884,10 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="js" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+=======
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+>>>>>>> 3be125e5f063c0b1d4c99d6f339d41a8c64f6859
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -885,6 +915,7 @@
               <option name="myItemId" value="Resources" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
+<<<<<<< HEAD
             <PATH_ELEMENT>
               <option name="myItemId" value="public" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
@@ -905,6 +936,8 @@
               <option name="myItemId" value="components" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+=======
+>>>>>>> 3be125e5f063c0b1d4c99d6f339d41a8c64f6859
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -940,14 +973,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Newsroom" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -989,10 +1014,6 @@
               <option name="myItemId" value="components" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Font" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -1032,49 +1053,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Contact" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="publipr" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="publipr" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ContinuousNet" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="PubliPrBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="common" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FileManager" />
+              <option name="myItemId" value="PressRelease" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1118,6 +1097,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+<<<<<<< HEAD
               <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -1145,6 +1125,7 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+<<<<<<< HEAD
               <option name="myItemId" value="src" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
@@ -1171,6 +1152,10 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+=======
+=======
+>>>>>>> 3be125e5f063c0b1d4c99d6f339d41a8c64f6859
+>>>>>>> master
               <option name="myItemId" value="app" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
@@ -1203,6 +1188,10 @@
 <<<<<<< HEAD
 =======
       <pane id="Scope" />
+<<<<<<< HEAD
+>>>>>>> master
+=======
+      <pane id="Scratches" />
 >>>>>>> master
     </panes>
   </component>
@@ -1288,10 +1277,14 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="-4" width="1301" height="772" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
 <<<<<<< HEAD
+<<<<<<< HEAD
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33820137" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+=======
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2667179" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+>>>>>>> 3be125e5f063c0b1d4c99d6f339d41a8c64f6859
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
 <<<<<<< HEAD
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28017884" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -1367,7 +1360,10 @@
   <component name="editorHistoryManager">
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> master
 =======
 >>>>>>> master
 <<<<<<< HEAD
@@ -1605,6 +1601,8 @@
         </state>
       </provider>
     </entry>
+=======
+>>>>>>> 3be125e5f063c0b1d4c99d6f339d41a8c64f6859
     <entry file="file://$PROJECT_DIR$/web/app/views/ui-notifications.html">
       <provider selected="true" editor-type-id="text-editor">
 <<<<<<< HEAD
@@ -1617,6 +1615,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/web/app/scripts/app.js">
       <provider selected="true" editor-type-id="text-editor">
 <<<<<<< HEAD
@@ -1629,6 +1628,8 @@
         </state>
       </provider>
     </entry>
+=======
+>>>>>>> 3be125e5f063c0b1d4c99d6f339d41a8c64f6859
     <entry file="file://$PROJECT_DIR$/web/app/index.html">
       <provider selected="true" editor-type-id="text-editor">
 <<<<<<< HEAD
@@ -1641,6 +1642,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/views/base.html.twig">
       <provider selected="true" editor-type-id="text-editor">
 <<<<<<< HEAD
@@ -1653,6 +1655,8 @@
         </state>
       </provider>
     </entry>
+=======
+>>>>>>> 3be125e5f063c0b1d4c99d6f339d41a8c64f6859
     <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/views/Default/index.html.twig">
       <provider selected="true" editor-type-id="text-editor">
 <<<<<<< HEAD
@@ -1685,7 +1689,6 @@
         <state vertical-scroll-proportion="-3.7256494">
 >>>>>>> b1659c393f3a927bd816f0b0f1549f559dffe98e
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1701,8 +1704,14 @@
 =======
         <state vertical-scroll-proportion="0.53571427">
           <caret line="163" column="0" selection-start-line="163" selection-start-column="0" selection-end-line="163" selection-end-column="0" />
+<<<<<<< HEAD
           <folding />
 >>>>>>> b1659c393f3a927bd816f0b0f1549f559dffe98e
+<<<<<<< HEAD
+>>>>>>> master
+=======
+=======
+>>>>>>> 3be125e5f063c0b1d4c99d6f339d41a8c64f6859
 >>>>>>> master
         </state>
       </provider>
@@ -1715,8 +1724,11 @@
 =======
         <state vertical-scroll-proportion="-1.0454545">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+<<<<<<< HEAD
           <folding />
 >>>>>>> b1659c393f3a927bd816f0b0f1549f559dffe98e
+=======
+>>>>>>> 3be125e5f063c0b1d4c99d6f339d41a8c64f6859
         </state>
       </provider>
     </entry>
@@ -1728,8 +1740,11 @@
 =======
         <state vertical-scroll-proportion="0.33333334">
           <caret line="709" column="35" selection-start-line="709" selection-start-column="0" selection-end-line="710" selection-end-column="0" />
+<<<<<<< HEAD
           <folding />
 >>>>>>> b1659c393f3a927bd816f0b0f1549f559dffe98e
+=======
+>>>>>>> 3be125e5f063c0b1d4c99d6f339d41a8c64f6859
         </state>
       </provider>
     </entry>
@@ -1741,10 +1756,13 @@
 =======
         <state vertical-scroll-proportion="-9.416667">
           <caret line="63" column="0" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
+<<<<<<< HEAD
           <folding>
             <element signature="e#58#105#0#PHP" expanded="false" />
           </folding>
 >>>>>>> b1659c393f3a927bd816f0b0f1549f559dffe98e
+=======
+>>>>>>> 3be125e5f063c0b1d4c99d6f339d41a8c64f6859
         </state>
       </provider>
     </entry>
@@ -1756,8 +1774,11 @@
 =======
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+<<<<<<< HEAD
           <folding />
 >>>>>>> b1659c393f3a927bd816f0b0f1549f559dffe98e
+=======
+>>>>>>> 3be125e5f063c0b1d4c99d6f339d41a8c64f6859
         </state>
       </provider>
     </entry>
@@ -1769,8 +1790,11 @@
 =======
         <state vertical-scroll-proportion="-2.1185064">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+<<<<<<< HEAD
           <folding />
 >>>>>>> b1659c393f3a927bd816f0b0f1549f559dffe98e
+=======
+>>>>>>> 3be125e5f063c0b1d4c99d6f339d41a8c64f6859
         </state>
       </provider>
     </entry>
@@ -1783,7 +1807,7 @@
         <state vertical-scroll-proportion="0.16233766">
           <caret line="62" column="70" selection-start-line="62" selection-start-column="70" selection-end-line="63" selection-end-column="100" />
           <folding>
-            <element signature="e#58#105#0#PHP" expanded="true" />
+            <element signature="e#58#105#0#PHP" expanded="false" />
           </folding>
 >>>>>>> b1659c393f3a927bd816f0b0f1549f559dffe98e
         </state>
@@ -1797,8 +1821,11 @@
 =======
         <state vertical-scroll-proportion="1.4383117">
           <caret line="120" column="20" selection-start-line="120" selection-start-column="12" selection-end-line="120" selection-end-column="20" />
+<<<<<<< HEAD
           <folding />
 >>>>>>> b1659c393f3a927bd816f0b0f1549f559dffe98e
+=======
+>>>>>>> 3be125e5f063c0b1d4c99d6f339d41a8c64f6859
         </state>
       </provider>
     </entry>
@@ -1810,8 +1837,11 @@
 =======
         <state vertical-scroll-proportion="0.3457792">
           <caret line="38" column="6" selection-start-line="38" selection-start-column="6" selection-end-line="38" selection-end-column="6" />
+<<<<<<< HEAD
           <folding />
 >>>>>>> b1659c393f3a927bd816f0b0f1549f559dffe98e
+=======
+>>>>>>> 3be125e5f063c0b1d4c99d6f339d41a8c64f6859
         </state>
       </provider>
     </entry>
@@ -1823,8 +1853,11 @@
 =======
         <state vertical-scroll-proportion="0.58441556">
           <caret line="66" column="25" selection-start-line="64" selection-start-column="12" selection-end-line="66" selection-end-column="25" />
+<<<<<<< HEAD
           <folding />
 >>>>>>> b1659c393f3a927bd816f0b0f1549f559dffe98e
+=======
+>>>>>>> 3be125e5f063c0b1d4c99d6f339d41a8c64f6859
         </state>
       </provider>
     </entry>
@@ -1836,6 +1869,7 @@
 =======
         <state vertical-scroll-proportion="-0.4383117">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+<<<<<<< HEAD
           <folding />
 >>>>>>> b1659c393f3a927bd816f0b0f1549f559dffe98e
         </state>
@@ -1853,6 +1887,8 @@
             <element signature="e#58#105#0#PHP" expanded="false" />
           </folding>
 >>>>>>> b1659c393f3a927bd816f0b0f1549f559dffe98e
+=======
+>>>>>>> 3be125e5f063c0b1d4c99d6f339d41a8c64f6859
         </state>
       </provider>
     </entry>
@@ -1864,8 +1900,11 @@
 =======
         <state vertical-scroll-proportion="0.36525974">
           <caret line="55" column="19" selection-start-line="55" selection-start-column="19" selection-end-line="55" selection-end-column="19" />
+<<<<<<< HEAD
           <folding />
 >>>>>>> b1659c393f3a927bd816f0b0f1549f559dffe98e
+=======
+>>>>>>> 3be125e5f063c0b1d4c99d6f339d41a8c64f6859
         </state>
       </provider>
     </entry>
@@ -1877,8 +1916,11 @@
 =======
         <state vertical-scroll-proportion="0.53571427">
           <caret line="59" column="28" selection-start-line="59" selection-start-column="28" selection-end-line="59" selection-end-column="28" />
+<<<<<<< HEAD
           <folding />
 >>>>>>> b1659c393f3a927bd816f0b0f1549f559dffe98e
+=======
+>>>>>>> 3be125e5f063c0b1d4c99d6f339d41a8c64f6859
         </state>
       </provider>
     </entry>
@@ -1890,8 +1932,11 @@
 =======
         <state vertical-scroll-proportion="0.21915585">
           <caret line="12" column="6" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="6" />
+<<<<<<< HEAD
           <folding />
 >>>>>>> b1659c393f3a927bd816f0b0f1549f559dffe98e
+=======
+>>>>>>> 3be125e5f063c0b1d4c99d6f339d41a8c64f6859
         </state>
       </provider>
     </entry>
@@ -1903,8 +1948,11 @@
 =======
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+<<<<<<< HEAD
           <folding />
 >>>>>>> b1659c393f3a927bd816f0b0f1549f559dffe98e
+=======
+>>>>>>> 3be125e5f063c0b1d4c99d6f339d41a8c64f6859
         </state>
       </provider>
     </entry>
@@ -1916,6 +1964,7 @@
 =======
         <state vertical-scroll-proportion="-0.8766234">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+<<<<<<< HEAD
           <folding />
 >>>>>>> b1659c393f3a927bd816f0b0f1549f559dffe98e
         </state>
@@ -1931,6 +1980,11 @@
           <caret line="396" column="30" selection-start-line="396" selection-start-column="30" selection-end-line="396" selection-end-column="30" />
 >>>>>>> b1659c393f3a927bd816f0b0f1549f559dffe98e
           <folding />
+<<<<<<< HEAD
+>>>>>>> master
+=======
+=======
+>>>>>>> 3be125e5f063c0b1d4c99d6f339d41a8c64f6859
 >>>>>>> master
         </state>
       </provider>
@@ -1943,8 +1997,11 @@
 =======
         <state vertical-scroll-proportion="0.5600649">
           <caret line="24" column="38" selection-start-line="24" selection-start-column="38" selection-end-line="24" selection-end-column="38" />
+<<<<<<< HEAD
           <folding />
 >>>>>>> b1659c393f3a927bd816f0b0f1549f559dffe98e
+=======
+>>>>>>> 3be125e5f063c0b1d4c99d6f339d41a8c64f6859
         </state>
       </provider>
     </entry>
@@ -1956,8 +2013,11 @@
 =======
         <state vertical-scroll-proportion="-1.765625">
           <caret line="9" column="52" selection-start-line="9" selection-start-column="39" selection-end-line="9" selection-end-column="52" />
+<<<<<<< HEAD
           <folding />
 >>>>>>> b1659c393f3a927bd816f0b0f1549f559dffe98e
+=======
+>>>>>>> 3be125e5f063c0b1d4c99d6f339d41a8c64f6859
         </state>
       </provider>
     </entry>
@@ -2185,7 +2245,6 @@
         <state vertical-scroll-proportion="0.0">
 >>>>>>> b1659c393f3a927bd816f0b0f1549f559dffe98e
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2218,8 +2277,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="181" column="17" selection-start-line="181" selection-start-column="17" selection-end-line="181" selection-end-column="17" />
+<<<<<<< HEAD
 >>>>>>> b1659c393f3a927bd816f0b0f1549f559dffe98e
           <folding />
+=======
+>>>>>>> 3be125e5f063c0b1d4c99d6f339d41a8c64f6859
         </state>
       </provider>
     </entry>
@@ -2235,17 +2297,21 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="36" column="18" selection-start-line="36" selection-start-column="8" selection-end-line="36" selection-end-column="18" />
+<<<<<<< HEAD
           <folding>
             <marker date="1463015158198" expanded="true" signature="867:906" placeholder="requirements:" />
             <marker date="1463015158198" expanded="true" signature="907:1100" placeholder="elfinder:" />
             <marker date="1463015158198" expanded="true" signature="1062:1100" placeholder="requirements:" />
           </folding>
 >>>>>>> b1659c393f3a927bd816f0b0f1549f559dffe98e
+=======
+>>>>>>> 3be125e5f063c0b1d4c99d6f339d41a8c64f6859
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/common/FileManager/FileManagerCtrl.js">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
 <<<<<<< HEAD
         <state relative-caret-position="195">
           <caret line="31" column="22" selection-start-line="31" selection-start-column="22" selection-end-line="31" selection-end-column="22" />
@@ -2268,6 +2334,10 @@
           <caret line="35" column="74" selection-start-line="35" selection-start-column="74" selection-end-line="35" selection-end-column="74" />
 >>>>>>> b1659c393f3a927bd816f0b0f1549f559dffe98e
           <folding />
+=======
+        <state vertical-scroll-proportion="0.0">
+          <caret line="35" column="74" selection-start-line="35" selection-start-column="74" selection-end-line="35" selection-end-column="74" />
+>>>>>>> 3be125e5f063c0b1d4c99d6f339d41a8c64f6859
         </state>
       </provider>
     </entry>
@@ -2275,8 +2345,11 @@
       <provider selected="true" editor-type-id="text-editor">
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         <state relative-caret-position="7440">
 =======
+=======
+>>>>>>> master
 =======
 >>>>>>> master
 <<<<<<< HEAD
@@ -2292,6 +2365,10 @@
           <caret line="108" column="34" selection-start-line="108" selection-start-column="34" selection-end-line="108" selection-end-column="34" />
 >>>>>>> b1659c393f3a927bd816f0b0f1549f559dffe98e
           <folding />
+=======
+        <state vertical-scroll-proportion="2.6298702">
+          <caret line="108" column="34" selection-start-line="108" selection-start-column="34" selection-end-line="108" selection-end-column="34" />
+>>>>>>> 3be125e5f063c0b1d4c99d6f339d41a8c64f6859
         </state>
       </provider>
     </entry>
@@ -2313,10 +2390,13 @@
 =======
     <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/Contact/contact_import.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-12.791667">
+        <state vertical-scroll-proportion="0.0">
           <caret line="128" column="34" selection-start-line="128" selection-start-column="34" selection-end-line="128" selection-end-column="34" />
+<<<<<<< HEAD
 >>>>>>> b1659c393f3a927bd816f0b0f1549f559dffe98e
           <folding />
+=======
+>>>>>>> 3be125e5f063c0b1d4c99d6f339d41a8c64f6859
         </state>
       </provider>
     </entry>
@@ -2336,10 +2416,13 @@
 =======
     <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/Contact/contact_form.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.416667">
+        <state vertical-scroll-proportion="0.0">
           <caret line="109" column="34" selection-start-line="109" selection-start-column="34" selection-end-line="109" selection-end-column="34" />
+<<<<<<< HEAD
 >>>>>>> b1659c393f3a927bd816f0b0f1549f559dffe98e
           <folding />
+=======
+>>>>>>> 3be125e5f063c0b1d4c99d6f339d41a8c64f6859
         </state>
       </provider>
     </entry>
@@ -2431,7 +2514,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="137" column="13" selection-start-line="137" selection-start-column="13" selection-end-line="138" selection-end-column="25" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2439,8 +2521,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="119" column="29" selection-start-line="119" selection-start-column="29" selection-end-line="119" selection-end-column="29" />
+<<<<<<< HEAD
 >>>>>>> b1659c393f3a927bd816f0b0f1549f559dffe98e
           <folding />
+=======
+>>>>>>> 3be125e5f063c0b1d4c99d6f339d41a8c64f6859
         </state>
       </provider>
     </entry>
@@ -2479,7 +2564,147 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.9140625">
           <caret line="75" column="25" selection-start-line="75" selection-start-column="25" selection-end-line="75" selection-end-column="25" />
+<<<<<<< HEAD
 >>>>>>> b1659c393f3a927bd816f0b0f1549f559dffe98e
+=======
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/i18n/en.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.625">
+          <caret line="170" column="6" selection-start-line="170" selection-start-column="6" selection-end-line="170" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/i18n/fr.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="18.75">
+          <caret line="45" column="37" selection-start-line="45" selection-start-column="37" selection-end-line="45" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/User/user_form.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-13.363636">
+          <caret line="257" column="72" selection-start-line="257" selection-start-column="75" selection-end-line="257" selection-end-column="80" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/Auth/LoginCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.703125">
+          <caret line="33" column="65" selection-start-line="33" selection-start-column="65" selection-end-line="33" selection-end-column="90" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/Main/AppCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.548387">
+          <caret line="106" column="86" selection-start-line="106" selection-start-column="82" selection-end-line="106" selection-end-column="86" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/app/scripts/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.548387">
+          <caret line="18" column="9" selection-start-line="18" selection-start-column="7" selection-end-line="18" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/app/scripts/app.main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.032258">
+          <caret line="45" column="55" selection-start-line="45" selection-start-column="55" selection-end-line="45" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Controller/UserController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Controller/UserRESTController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="161" column="13" selection-start-line="161" selection-start-column="13" selection-end-line="161" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Controller/BaseRESTController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.21915585">
+          <caret line="22" column="36" selection-start-line="22" selection-start-column="36" selection-end-line="22" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/links.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.28246754">
+          <caret line="20" column="84" selection-start-line="20" selection-start-column="75" selection-end-line="20" selection-end-column="84" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/PressRelease/press_release.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.61538464">
+          <caret line="26" column="33" selection-start-line="26" selection-start-column="33" selection-end-line="26" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/styles/font-awesome.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/styles/editor.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.5416665">
+          <caret line="86" column="17" selection-start-line="86" selection-start-column="17" selection-end-line="86" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/PressRelease/press_release_editor.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.9818182">
+          <caret line="13" column="66" selection-start-line="13" selection-start-column="66" selection-end-line="13" selection-end-column="66" />
+          <folding>
+            <element signature="n#style#0;n#li#1;n#ul#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/PressRelease/PressReleaseEditorCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-15.774194">
+          <caret line="260" column="19" selection-start-line="260" selection-start-column="19" selection-end-line="260" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/views/base.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.202381">
+          <caret line="18" column="18" selection-start-line="18" selection-start-column="14" selection-end-line="18" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/config.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33333334">
+          <caret line="480" column="73" selection-start-line="480" selection-start-column="69" selection-end-line="480" selection-end-column="73" />
+>>>>>>> 3be125e5f063c0b1d4c99d6f339d41a8c64f6859
           <folding />
         </state>
       </provider>

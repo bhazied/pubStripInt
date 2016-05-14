@@ -249,19 +249,19 @@
                         </div><!--/row-->
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="form-group" ng-class="{'has-error':pressReleaseForm.status.$dirty && pressReleaseForm.status.$invalid, 'has-success':pressReleaseForm.status.$valid}">
+                                <div class="form-group" ng-if="currentUser.roles.join('').indexOf('ROLE_ADMIN_PUBLISHER') > -1"  ng-class="{'has-error':pressReleaseForm.status.$dirty && pressReleaseForm.status.$invalid, 'has-success':pressReleaseForm.status.$valid}">
                                     <label for="pressReleaseStatus" class="control-label">
                                         <span translate="content.list.fields.STATUS">Status</span>
                                         <span class="symbol required"></span>
                                     </label>
                                     <div class="continuous-radio radio-primary" ng-if="statuses.length < 10">
-                                        <input ng-disabled="(user.roles.join('').indexOf('ROLE_ADMIN_PUBLISHER') == -1)" ng-repeat-start="status in statuses" ng-model="pressRelease.status" type="radio" id="status[[ status.id ]]" value="[[ status.id ]]" name="status" ng-required="true" />
+                                        <input ng-disabled="(currentUser.roles.join('').indexOf('ROLE_ADMIN_PUBLISHER') == -1)" ng-repeat-start="status in statuses" ng-model="pressRelease.status" type="radio" id="status[[ status.id ]]" value="[[ status.id ]]" name="status" ng-required="true" />
                                         <label ng-repeat-end for="status[[ status.id ]]">
                                             [[ status.title ]]
                                         </label>
                                     </div>
                                     <div class="block" ng-if="statuses.length >= 10">
-                                        <select ng-disabled="(user.roles.join('').indexOf('ROLE_ADMIN_PUBLISHER') == -1)" ng-options="item.id as item.title for item in statuses" ng-model="pressRelease.status" name="status" id="pressReleaseStatus" class="form-control" ng-required="true">
+                                        <select ng-disabled="(currentUser.roles.join('').indexOf('ROLE_ADMIN_PUBLISHER') == -1)" ng-options="item.id as item.title for item in statuses" ng-model="pressRelease.status" name="status" id="pressReleaseStatus" class="form-control" ng-required="true">
                                             <option translate="content.form.messages.SELECTSTATUS" value="">Select Status</option>
                                         </select>
                                         <span my-enum="[[ pressRelease.status ]]" my-enum-list="[[ statuses ]]"></span>

@@ -89,7 +89,7 @@ angular
         };
 
         if (angular.isDefined($localStorage.user)) {
-            $rootScope.user = $localStorage.user;
+            $rootScope.user = $rootScope.currentUser = $localStorage.user;
         } else {
             $rootScope.user = {
                 name: 'Sahbi KHALFALLAH',
@@ -310,6 +310,7 @@ app.constant('APP_JS_REQUIRES', {
         'PressReleaseFormCtrl': '/bundles/publipr/js/components/PressRelease/PressReleaseFormCtrl.js',
         'PressReleaseCtrl': '/bundles/publipr/js/components/PressRelease/PressReleaseCtrl.js',
         'PressReleaseSenderCtrl': '/bundles/publipr/js/components/PressRelease/PressReleaseSenderCtrl.js',
+        'PressReleaseStatsCtrl': '/bundles/publipr/js/components/PressRelease/PressReleaseStatsCtrl.js',
         'PressReleaseEditorCtrl': '/bundles/publipr/js/components/PressRelease/PressReleaseEditorCtrl.js',
         'PressReleaseEditorCtrl': '/bundles/publipr/js/components/PressRelease/PressReleaseEditorCtrl.js',
         'SessionsCtrl': '/bundles/publipr/js/components/Session/SessionsCtrl.js',
@@ -406,6 +407,9 @@ app.constant('APP_JS_REQUIRES', {
     },{
         name: 'PressReleaseSenderService',
         files: ['/bundles/publipr/js/components/PressRelease/PressReleaseSenderService.js']
+    },{
+        name: 'PressReleaseStatsService',
+        files: ['/bundles/publipr/js/components/PressRelease/PressReleaseStatsService.js']
     },{
         name: 'sessionService',
         files: ['/bundles/publipr/js/components/Session/SessionService.js']
@@ -2282,7 +2286,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.EMAILCAMPAIGNS'
         },
-        resolve: loadSequence('ngTable', 'EmailCampaignsCtrl', 'emailCampaignService', 'pressReleaseService', 'userService')
+        resolve: loadSequence('ngTable', 'EmailCampaignsCtrl', 'emailCampaignService', 'pressReleaseService', 'userService', 'contactGroupService')
     }).state('app.distribution.emailcampaignsnew', {
         url: '/email-campaigns/new',
         templateUrl: '/bundles/publipr/js/components/EmailCampaign/email_campaign_form.html',
@@ -2290,7 +2294,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.NEWEMAILCAMPAIGN'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'EmailCampaignFormCtrl', 'emailCampaignService', 'pressReleaseService', 'userService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'EmailCampaignFormCtrl', 'emailCampaignService', 'pressReleaseService', 'userService', 'contactGroupService')
     }).state('app.distribution.emailcampaignsedit', {
         url: '/email-campaigns/edit/:id',
         templateUrl: '/bundles/publipr/js/components/EmailCampaign/email_campaign_form.html',
@@ -2298,7 +2302,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.EDITEMAILCAMPAIGN'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'EmailCampaignFormCtrl', 'emailCampaignService', 'pressReleaseService', 'userService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'EmailCampaignFormCtrl', 'emailCampaignService', 'pressReleaseService', 'userService', 'contactGroupService')
     }).state('app.distribution.emailcampaignsdetails', {
         url: '/email-campaigns/details/:id',
         templateUrl: '/bundles/publipr/js/components/EmailCampaign/email_campaign.html',
@@ -2393,7 +2397,18 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.SENDPRESSRELEASE'
         },
+<<<<<<< HEAD
         resolve: loadSequence('PressReleaseSenderCtrl', 'PressReleaseSenderService', 'pressReleaseService', 'contactGroupService')
+=======
+        resolve: loadSequence('PressReleaseSenderCtrl', 'PressReleaseSenderService', 'pressReleaseService')
+    }).state('app.prmanager.pressreleasesstats', {
+        url: '/press-releases/stats/:id',
+        templateUrl: '/bundles/publipr/js/components/PressRelease/press_release_stats.html',
+        ncyBreadcrumb: {
+            label: 'content.list.PRESSRELEASESTATS'
+        },
+        resolve: loadSequence('PressReleaseStatsCtrl', 'PressReleaseStatsService', 'pressReleaseService')
+>>>>>>> master
     }).state('app.settings', {
         url: '/settings',
         template: '<div ui-view class="fade-in-up"></div>',
