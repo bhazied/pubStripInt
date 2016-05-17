@@ -366,7 +366,7 @@ assetic:
                 - 'bower_components/elfinder/dist/css/theme.css' #.min
         codemirror_css:
             inputs:
-                - 'bower_components/codemirror/lib/css/codemirror.css'
+                #- 'bower_components/codemirror/lib/css/codemirror.css'
         froala_css:
             inputs:
                 - 'bower_components/froala-wysiwyg-editor/css/froala_editor.min.css'
@@ -431,6 +431,8 @@ assetic:
                 - 'bower_components/angular-slugify/angular-slugify.js'
                 - 'bower_components/angular-recaptcha/release/angular-recaptcha.js' #.min
                 - 'bower_components/AngularJS-Toaster/toaster.js'
+                - 'bower_components/highcharts/highcharts.js'
+                - 'bower_components/highcharts-ng/dist/highcharts-ng.min.js'
         angular_storage:
             inputs:
                 - 'bower_components/ngstorage/ngStorage.js' #.min

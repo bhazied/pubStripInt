@@ -686,6 +686,7 @@
             "PRESSRELEASEDELETED": "Press Release Deleted",
             "PRESSRELEASENOTDELETED": "Press Release Not Deleted",
             "BACKPRESSRELEASES": "Back To Press Releases List",
+            "PRESSRELEASESTATS" : "Statistics of the press release",
             "SESSIONS": "Sessions",
             "SESSION": "Session",
             "ADDSESSION": "Add New Session",

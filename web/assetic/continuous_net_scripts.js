@@ -28,7 +28,8 @@ var app = angular
     'angular-bind-html-compile',
     'slugifier',
     'vcRecaptcha',
-    'toaster'
+    'toaster',
+      'highcharts-ng'
   ])
   .constant('COLORS', {
     'default': '#e2e2e2',
@@ -410,6 +411,9 @@ app.constant('APP_JS_REQUIRES', {
     },{
         name: 'PressReleaseStatsService',
         files: ['/bundles/publipr/js/components/PressRelease/PressReleaseStatsService.js']
+    },{
+        name: 'PressReleaseEmailStatsService',
+        files: ['/bundles/publipr/js/components/PressRelease/PressReleaseEmailStatsService.js']
     },{
         name: 'sessionService',
         files: ['/bundles/publipr/js/components/Session/SessionService.js']
@@ -2397,18 +2401,15 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.SENDPRESSRELEASE'
         },
-<<<<<<< HEAD
         resolve: loadSequence('PressReleaseSenderCtrl', 'PressReleaseSenderService', 'pressReleaseService', 'contactGroupService')
-=======
-        resolve: loadSequence('PressReleaseSenderCtrl', 'PressReleaseSenderService', 'pressReleaseService')
     }).state('app.prmanager.pressreleasesstats', {
         url: '/press-releases/stats/:id',
         templateUrl: '/bundles/publipr/js/components/PressRelease/press_release_stats.html',
+        title: 'content.list.STATSPRESSRELEASE',
         ncyBreadcrumb: {
             label: 'content.list.PRESSRELEASESTATS'
         },
-        resolve: loadSequence('PressReleaseStatsCtrl', 'PressReleaseStatsService', 'pressReleaseService')
->>>>>>> master
+        resolve: loadSequence('PressReleaseStatsCtrl', 'PressReleaseStatsService', 'pressReleaseService', 'PressReleaseEmailStatsService', 'ngTable')
     }).state('app.settings', {
         url: '/settings',
         template: '<div ui-view class="fade-in-up"></div>',

@@ -682,6 +682,7 @@
             "PRESSRELEASENOTSNT" : "Press Release non envoyé",
             "PRESSRELEASECREATED": "Press Release crée",
             "PRESSRELEASENOTCREATED": "Press Release non crée",
+            "PRESSRELEASESTATS" : "statistique de la communiqué de presse",
             "YOUWILLNOTBEABLETORECOVERPRESSRELEASE": "Vous ne serez pas en mesure de récupérer cette Press Release!",
             "PRESSRELEASEDELETED": "Press Release supprimée",
             "PRESSRELEASENOTDELETED": "Press Release non supprimée",

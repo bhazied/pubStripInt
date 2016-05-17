@@ -32,9 +32,12 @@ use Doctrine\ORM\Query\Expr\Join;
 use Hip\MandrillBundle\Message;
 use Hip\MandrillBundle\Dispatcher;
 use Symfony\Component\Validator\Constraints\Date;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 class PressReleaseSenderController extends FOSRestController
 {
+
+    private $emailSendingStatus = array('rejected' => 'Error', 'sent' => 'Sent', 'initialized' => 'Initialized');
     /**
      * @Post("/PrSender")
      * @param $request
@@ -73,9 +76,12 @@ class PressReleaseSenderController extends FOSRestController
         $message->setFromEmail($one->getNewsroom()->getName())
             ->setFromEmail($one->getNewsroom()->getEmail())
             ->setSubject($emailTemplate->getSubject())
-            ->setHtml($this->parseEmailTemplate($emailTemplate->getBody(), $one->getNewsroom()))
+            ->setHtml($this->parseEmailTemplate($emailTemplate->getBody(), $one))
             ->setFromEmail($emailTemplate->getFromEmail())
-            ->setReplyTo($emailTemplate->getReplyToEmail());
+            ->setReplyTo($emailTemplate->getReplyToEmail())
+            ->setTrackClicks(true)
+            ->setTrackOpens(true)
+            ->addTag($one->getSlug());
         foreach ($contacts as $contact) {
             $message->addTo($contact->getEmail(), $contact->getFirstName() . ' ' . $contact->getLastName());
         }
@@ -85,19 +91,99 @@ class PressReleaseSenderController extends FOSRestController
             $keyResult = array_search($contact->getEmail(), array_column($result, 'email'));
             $this->saveEmailsContact($one, $contact, $result[$keyResult]['status'], $em);
         }
-        $this->saveEmailCampaign($one, $em);
+        $this->saveEmailCampaign($one, $request->request->get('cgIds'), $em);
         $em->flush();
         return true;
     }
 
     /**
-     * @Get("/PrStat")
+     * @POST("/PrStat")
      * @param $request
      * @View(serializerEnableMaxDepthChecks=true)
      */
     public function StatisticAction(Request $request)
     {
-        return null;
+        try {
+            $data = array(
+                'periode'=> array(),
+                'result' => array(),
+                'total_sent' => 0,
+                'total_opens' => 0,
+                'total_clicks' => 0,
+                'unique_opens' => 0,
+                'unique_clicks' => 0
+            );
+            $em = $this->getDoctrine()->getManager();
+            //$pressRelease = new PressRelease() ;
+            $pressRelease =  $em->getRepository('PubliPrBundle:PressRelease')->find($request->request->get('prId'));
+            $apiKey = $this->getParameter('hip_mandrill.api_key');
+            $mandrill = new \Mandrill($apiKey);
+            $result = $mandrill->tags->info($pressRelease->getSlug());
+            if($result){
+                $status = array('sent', 'rejects', 'opens');
+                $data['periode'] = array_keys($result['stats']);
+
+                $data['total_sent'] = $result['sent'];
+                $data['total_opens'] = $result['opens'];
+                $data['total_clicks'] = $result['clicks'];
+                $data['unique_opens'] = $result['unique_opens'];
+                $data['unique_clicks'] = $result['unique_clicks'];
+                foreach ($status as $stat){
+                    $tmp = array(
+                        'name' => $stat,
+                        'data' => array()
+                    );
+                    foreach ($data['periode'] as $periode){
+                        array_push($tmp['data'], $result['stats'][$periode][$stat]);
+                    }
+                   array_push($data['result'], $tmp);
+                }
+                $data['periode'] = array_map(function($str){
+                    return str_replace('_', ' ', $str);
+                }, $data['periode']);
+                return $data;
+            }
+
+        }catch (\Exception $e) {
+            return FOSView::create($e->getMessage(), Codes::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /**
+     * @POST("/PrStatEmail")
+     * @param $request
+     * @View(serializerEnableMaxDepthChecks=true)
+     */
+    public function statsByEmailAction(Request $request){
+
+        try{
+            $data = array(
+                'inlineCount' => 0,
+                'results' => array()
+            );
+            $currentDate = new \DateTime('now');
+            $em = $this->getDoctrine()->getManager();
+            $pressRelease = new PressRelease() ;
+            $pressRelease =  $em->getRepository('PubliPrBundle:PressRelease')->find($request->request->get('prId'));
+            $apiKey = $this->getParameter('hip_mandrill.api_key');
+            $mandrill = new \Mandrill($apiKey);
+            $query = 'email:continuousnet.com';
+            $start_date = (!is_null($request->request->get('start_date'))) ? $request->request->get('start_date') :$currentDate->sub(new \DateInterval('P1M'))->format('Y-m-d');
+            $end_date = (!is_null($request->request->get('end_date'))) ? $request->request->get('end_date') :  $currentDate->add(new \DateInterval('P1M'))->format('Y-m-d');
+            $tags = array(
+                $pressRelease->getSlug()
+            );
+            $senders = array('sahbi.khalfallah@continuousnet.com');
+            $api_keys = array($apiKey);
+            $limit = null;
+            $result = $mandrill->messages->search($query, $start_date, $end_date,$tags, $senders, $api_keys, $limit);
+            if($result){
+
+            }
+            return $data;
+        }catch (\Exception $e) {
+            return FOSView::create($e->getMessage(), Codes::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 
     private function saveEmailsContact( PressRelease $pressRelease,Contact $contact,$sendingStatus, EntityManager $em)
@@ -109,16 +195,20 @@ class PressReleaseSenderController extends FOSRestController
         $email->setCreatorUser($this->getUser());
         $email->setSection('section 1');
         $email->prePersist();
-        $email->setSendingStatus($sendingStatus);
+        $email->setSendingStatus($this->emailSendingStatus[$sendingStatus]);
         $em->persist($email);
         return $email;
         
     }
 
-    private function saveEmailCampaign(PressRelease $pressRelease, EntityManager $em)
+    private function saveEmailCampaign(PressRelease $pressRelease, $cgIds ,EntityManager $em)
     {
         $emailCampaign = new EmailCampaign();
         $emailCampaign->setPressRelease($pressRelease);
+        foreach ($cgIds as $cg)
+        {
+            $emailCampaign->addContactGroup($em->getRepository('PubliPrBundle:ContactGroup')->find($cg));
+        }
         $emailCampaign->setSendingDateTime(new \DateTime('now'));
         $emailCampaign->setSendNow(true);
         $emailCampaign->setName($pressRelease->getTitle());
@@ -134,29 +224,37 @@ class PressReleaseSenderController extends FOSRestController
         return (!is_null($emailTemplate)) ? $emailTemplate : false;
     }
 
-    private function prepareDataEmailTemplate(Newsroom $newsroom)
+    private function prepareDataEmailTemplate(PressRelease $pressRelease)
     {
+        $date = new \DateTime('now');
         $values = array(
-            'facebook_link'    => $newsroom->getFacebookLink(),
-            //'slug'             => $newsroom->getSlug(),
-            'twitter_link'     => $newsroom->getTwitterLink(),
-            'google_plus_link' => $newsroom->getGooglePlusLink(),
-            'pint_rest_link'   => $newsroom->getPinterestLink(),
-            'instagram_link'   => $newsroom->getInstagramLink(),
-            'youtube_link'     => $newsroom->getYoutubeLink(),
-            'linked_in_link'   => $newsroom->getLinkedinLink(),
-            'viameo_link'      => $newsroom->getVimeoLink(),
-            'flicker_link'      => $newsroom->getFlickrLink(),
-            'tumblr_link'      => $newsroom->getTumblrLink(),
+            'facebook_link'    => $pressRelease->getNewsroom()->getFacebookLink(),
+            'slug'             => $pressRelease->getNewsroom()->getSlug(),
+            'twitter_link'     => $pressRelease->getNewsroom()->getTwitterLink(),
+            'google_plus_link' => $pressRelease->getNewsroom()->getGooglePlusLink(),
+            'pint_rest_link'   => $pressRelease->getNewsroom()->getPinterestLink(),
+            'instagram_link'   => $pressRelease->getNewsroom()->getInstagramLink(),
+            'youtube_link'     => $pressRelease->getNewsroom()->getYoutubeLink(),
+            'linked_in_link'   => $pressRelease->getNewsroom()->getLinkedinLink(),
+            'viameo_link'      => $pressRelease->getNewsroom()->getVimeoLink(),
+            'flicker_link'     => $pressRelease->getNewsroom()->getFlickrLink(),
+            'tumblr_link'      => $pressRelease->getNewsroom()->getTumblrLink(),
+            'title'            => $pressRelease->getNewsroom()->getName(),
+            'description'      => $pressRelease->getNewsroom()->getDescription(),
+            'content'          => $pressRelease->getContent(),
+            'mailto'           => $pressRelease->getNewsroom()->getEmail(),
+            'footer'           => 'copyright &copy; '.$pressRelease->getNewsroom()->getName(). ' '. $date->format('Y'),
+            'picture_preview'  => $this->container->get('request_stack')->getCurrentRequest()->getSchemeAndHttpHost().$pressRelease->getPicturePreview(),
+            'pr_link'          => 'client.publipr.fr/'.$pressRelease->getNewsroom()->getSlug().'/'.$pressRelease->getSlug()
         );
 
         return $values;
     }
 
-    private function parseEmailTemplate($body, Newsroom $newsroom)
+    private function parseEmailTemplate($body, PressRelease $pressRelease)
     {
         $mappedBody = $body;
-        $mappedValues = $this->prepareDataEmailTemplate($newsroom);
+        $mappedValues = $this->prepareDataEmailTemplate($pressRelease);
         if(is_array($mappedValues)){
             foreach ($mappedValues as $key => $value){
                $mappedBody = str_replace($this->getParameter('emailTemplate.interpretor.startWith').$key.$this->getParameter('emailTemplate.interpretor.endWith'), $value, $mappedBody);

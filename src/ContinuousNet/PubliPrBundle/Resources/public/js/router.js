@@ -713,10 +713,11 @@ function ($stateProvider) {
     }).state('app.prmanager.pressreleasesstats', {
         url: '/press-releases/stats/:id',
         templateUrl: '/bundles/publipr/js/components/PressRelease/press_release_stats.html',
+        title: 'content.list.STATSPRESSRELEASE',
         ncyBreadcrumb: {
             label: 'content.list.PRESSRELEASESTATS'
         },
-        resolve: loadSequence('PressReleaseStatsCtrl', 'PressReleaseStatsService', 'pressReleaseService')
+        resolve: loadSequence('PressReleaseStatsCtrl', 'PressReleaseStatsService', 'pressReleaseService', 'PressReleaseEmailStatsService', 'ngTable')
     }).state('app.settings', {
         url: '/settings',
         template: '<div ui-view class="fade-in-up"></div>',
