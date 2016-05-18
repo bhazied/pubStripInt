@@ -231,7 +231,9 @@
             "REMOVESEGMENTS": "Remove segments",
             "SEGMENTSREMOVED": "Segments removed",
             "SEGMENTSNOTREMOVED": "Segments not removed",
-            "COMINGSOON": "Coming Soon"
+            "COMINGSOON": "Coming Soon",
+            "STATS" : "statistics",
+            "SEND" : "Send"
         },
         "form": {
             "messages": {
@@ -757,6 +759,13 @@
             "TRACKPRESSRELEASEDELETED": "Track Press Release Deleted",
             "TRACKPRESSRELEASENOTDELETED": "Track Press Release Not Deleted",
             "BACKTRACKPRESSRELEASES": "Back To Track Press Releases List",
+            "TOTALEMAILSENT" : "Total of emails sent",
+            "TOTALEMAILOPENS" : "Total of emails opened",
+            "TOTALEMAILCLICKS" : "Total of emails clicked",
+            "EMAILUNIQUEOPENS" : "single opening",
+            "EMAILUNIQUECLICKS" : "single Clicks",
+            "PRESSRELEASESEARSHSTATS": "history of press releases",
+            "EMAILSDETAILS" : "Emails details",
             "fields": {
                 "CAPTCHA": "Security check",
                 "ID": "Id",
@@ -919,6 +928,13 @@
                 "VALUE": "Value",
                 "ACTION": "Action",
                 "SOURCE": "Source",
+                "EMAIL" : "E-mail",
+                "SENTDATE" : "Sending date",
+                "OPENS": "Open",
+                "STATE" : "State",
+                "CLICKS": "clicked",
+                "ENDDATE" : "End date",
+                "STARTDATE" : "Start date",
                 "blocktypes": {
                     "TEXT": "Text",
                     "BOXEDTEXT": "Boxed Text",

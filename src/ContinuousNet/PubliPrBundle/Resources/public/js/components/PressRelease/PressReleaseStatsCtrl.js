@@ -64,6 +64,7 @@ app.controller('PressReleaseStatsCtrl', ['$rootScope','$scope', '$state', '$stat
         $scope.getStats();
         $scope.loadedSearchedData = false;
         $scope.searchStatData = [];
+        $scope.resetOn = false;
         $scope.submitForm = function(form){
             if(form.$invalid)
             {
@@ -84,32 +85,14 @@ app.controller('PressReleaseStatsCtrl', ['$rootScope','$scope', '$state', '$stat
                 return false;
             }
             else{
+                $scope.resetOn = true;
                 $scope.loadedSearchedData = true;
-                $scope.disabledSubmit = true;
-                $search = {
-                    start_date : $scope.start_date,
-                    end_date   : $scope.end_date,
-                    prId       : $scope.prId
-                };
-                var def = $q.defer();
-                $PressReleaseStatsDataFactory.stats($search).$promise.then(function(data){
-                    $scope.disabledSubmit = false;
-                    $scope.searchStatData = data;
-                    //def.resolve($scope.searchStatData);
-                    $scope.searchedChart(data);
-                },(function (error)
-                {
-                    $scope.disabledSubmit = false;
-                    toaster.pop('error', $filter('translate')('content.common.ERROR'), $filter('translate')('content.list.PRESSRELEASENOTUPDATED'));
-                    console.warn(error);
-                }));
-
+                $scope.disableSubmit = true;
+                //var def = $q.defer();
+                $scope.setEmailStats($scope.start_date, $scope.end_date);
+                //$scope.disableSubmit = false;
+                return false;
             }
-        }
-
-        $scope.searchedChart = function(data)
-        {
-
         }
 
         $scope.initChart = function(data){
@@ -170,21 +153,24 @@ app.controller('PressReleaseStatsCtrl', ['$rootScope','$scope', '$state', '$stat
             }
         }
         //$scope.seachChart();
-       /* $scope.test = function () {
-            $PressReleaseEmailStatsDataFactory.statsEmail({prId:$stateParams.id}).$promise.then(function (data) {
-                console.log(data);
-            });
-        }
-        $scope.test();*/
-
+        $scope.setCols = function(){
+            $scope.cols = [
+                {field: 'email', title:$filter('translate')('content.list.fields.EMAIL'), show:true },
+                {field: 'sent_date', title:$filter('translate')('content.list.fields.SENTDATE'), show:true},
+                {field: 'opens', title:$filter('translate')('content.list.fields.OPENS'), show:true},
+                {field: 'state', title:$filter('translate')('content.list.fields.STATE'), show:true},
+                {field: 'clicks', title:$filter('translate')('content.list.fields.CLICKS'), show:true}
+            ];
+        };
+        $scope.setCols();
         $scope.setEmailStats = function(start_date, end_date){
-
+            console.log(start_date, end_date);
             $scope.tableParams = new ngTableParams({
                 page:1,
-                count: 50,
+                count: 10,
             },
                 {
-                    getData: function (params) {
+                    getData: function ($defer, params) {
                         http_params = {
                             offset : (params.page()-1) * params.count(),
                             limit: params.count()
@@ -192,17 +178,34 @@ app.controller('PressReleaseStatsCtrl', ['$rootScope','$scope', '$state', '$stat
                         if(angular.isDefined(start_date)){
                             http_params.start_date = start_date;
                         }
+                        else{
+                            http_params.start_date = $filter('date')(new Date(moment().subtract(1, 'month')), $filter('translate')('formats.DATE'));
+                        }
                         if(angular.isDefined(end_date)){
                             http_params.end_date = end_date;
+                        }
+                        else{
+                            http_params.end_date = $filter('date')(new Date(), $filter('translate')('formats.DATE') );
                         }
                         if(angular.isDefined($stateParams.id) || angular.isDefined($scope.prId)){
                             http_params.prId = $scope.prId;
                         }
-                        return $PressReleaseEmailStatsDataFactory.statsEmail(http_params).$promise.then(function(){
-                            console.log(data);
+                        return $PressReleaseEmailStatsDataFactory.statsEmail(http_params).$promise.then(function(data){
+                           params.total(data.inlineCount);
+                             return data.results;
                         });
                     }
                 });
+            $scope.disableReset = false;
+            $scope.disableSubmit = false;
         }
+        $scope.resetSearch = function(){
+            if($scope.resetOn){
+                $scope.disableReset = true;
+                $scope.setEmailStats();
+            }
+            return false;
+        }
+
         $scope.setEmailStats();
     }]);

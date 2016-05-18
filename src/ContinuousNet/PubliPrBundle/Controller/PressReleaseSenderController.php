@@ -161,24 +161,42 @@ class PressReleaseSenderController extends FOSRestController
                 'inlineCount' => 0,
                 'results' => array()
             );
-            $currentDate = new \DateTime('now');
             $em = $this->getDoctrine()->getManager();
-            $pressRelease = new PressRelease() ;
             $pressRelease =  $em->getRepository('PubliPrBundle:PressRelease')->find($request->request->get('prId'));
             $apiKey = $this->getParameter('hip_mandrill.api_key');
             $mandrill = new \Mandrill($apiKey);
             $query = 'email:continuousnet.com';
-            $start_date = (!is_null($request->request->get('start_date'))) ? $request->request->get('start_date') :$currentDate->sub(new \DateInterval('P1M'))->format('Y-m-d');
-            $end_date = (!is_null($request->request->get('end_date'))) ? $request->request->get('end_date') :  $currentDate->add(new \DateInterval('P1M'))->format('Y-m-d');
+            $start_date = new \DateTime($request->request->get('startDate') );
+            $start_date = $start_date->format('Y-m-d');
+            $end_date = new \DateTime($request->request->get('endDate') );
+            $end_date = $end_date->format('Y-m-d');
             $tags = array(
-                $pressRelease->getSlug()
+                $pressRelease->getSlug()  // search by TAG mapped with pressRelease slug, we have addedthe tag in the send call!
             );
-            $senders = array('sahbi.khalfallah@continuousnet.com');
+            $senders = array(); // filter by sender emails [put them in array]
             $api_keys = array($apiKey);
-            $limit = null;
+            $limit = 100; // limit off search not used because we can't use the offset params!
             $result = $mandrill->messages->search($query, $start_date, $end_date,$tags, $senders, $api_keys, $limit);
             if($result){
+                $datetime = new \DateTime();
+                foreach($result as $email){
+                    if(array_search($email['email'], array_column($data['results'], 'email'))){
 
+                    }
+                    else{
+                        $data['results'][] = array(
+                            'email' => $email['email'],
+                            'sent_date' => $datetime->setTimestamp($email['ts'])->format('Y-m-d H:i:s'),
+                            'opens' => $email['opens'],
+                            'state' => $email['state'],
+                            'clicks' => $email['clicks']
+                        );
+                    }
+                }
+                $data['inlineCount'] = count($data['results']);
+                $offset = $request->request->get('offset');
+                $limit  = $request->request->get('limit');
+                $data['results'] = array_slice($data['results'],$offset, $limit);
             }
             return $data;
         }catch (\Exception $e) {
