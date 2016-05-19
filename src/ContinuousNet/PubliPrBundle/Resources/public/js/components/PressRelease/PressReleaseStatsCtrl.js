@@ -47,6 +47,7 @@ app.controller('PressReleaseStatsCtrl', ['$rootScope','$scope', '$state', '$stat
                         }).$promise.then(function(data){
                             $scope.sendStats = data;
                             $scope.initChart(data);
+                            $scope.pieChart(data);
                             def.resolve($scope.sendStats)
                         });
                         return def;
@@ -106,7 +107,6 @@ app.controller('PressReleaseStatsCtrl', ['$rootScope','$scope', '$state', '$stat
                     text: $filter('translate')('content.list.PRESSRELEASESEARSHSTATS')
                 },
                 xAxis: {
-                    //categories: ['semaine A', 'semaine B', 'semaine C', 'semaine D', 'semaine E']
                     categories: data.periode
                 },
                 yAxis: {
@@ -150,6 +150,52 @@ app.controller('PressReleaseStatsCtrl', ['$rootScope','$scope', '$state', '$stat
                     }
                 },
                 series : data.result
+            }
+        }
+
+        $scope.pieChart = function(pieData){
+            $scope.chartpie = {
+                options: {
+                    chart: {
+                        plotBackgroundColor: null,
+                        plotBorderWidth: null,
+                        plotShadow: false,
+                        type: 'pie',
+                        height : 350
+                    }
+                },
+                title: {
+                    text: $filter('translate')('content.list.PRESSRELEASEPIECHARTTITLE')
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true
+                        },
+                        showInLegend: true
+                    }
+                },
+                series:[{
+                    name: 'Emails',
+                    colorByPoint: true,
+                    data:[{
+                        name : $filter('translate')('content.list.fields.OPENS'),
+                        y: pieData.total_opens,
+                        sliced: true,
+                        selected: true
+                    },{
+                        name : $filter('translate')('content.list.fields.SENT'),
+                        y: pieData.total_sent
+                    },{
+                        name : $filter('translate')('content.list.fields.CLICKS'),
+                        y: pieData.total_clicks
+                    }]
+                }]
             }
         }
         //$scope.seachChart();

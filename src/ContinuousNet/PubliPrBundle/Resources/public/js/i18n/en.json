@@ -766,6 +766,7 @@
             "EMAILUNIQUECLICKS" : "single Clicks",
             "PRESSRELEASESEARSHSTATS": "history of press releases",
             "EMAILSDETAILS" : "Emails details",
+            "PRESSRELEASEPIECHARTTITLE" : "Press release details",
             "fields": {
                 "CAPTCHA": "Security check",
                 "ID": "Id",
@@ -935,6 +936,7 @@
                 "CLICKS": "clicked",
                 "ENDDATE" : "End date",
                 "STARTDATE" : "Start date",
+                "SENT" : "Sent",
                 "blocktypes": {
                     "TEXT": "Text",
                     "BOXEDTEXT": "Boxed Text",

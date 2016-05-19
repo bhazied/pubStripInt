@@ -123,11 +123,12 @@ class PressReleaseSenderController extends FOSRestController
                 $status = array('sent', 'rejects', 'opens');
                 $data['periode'] = array_keys($result['stats']);
 
-                $data['total_sent'] = $result['sent'];
-                $data['total_opens'] = $result['opens'];
-                $data['total_clicks'] = $result['clicks'];
-                $data['unique_opens'] = $result['unique_opens'];
-                $data['unique_clicks'] = $result['unique_clicks'];
+                $data['total_sent']     = $result['sent'];
+                $data['total_opens']    = $result['opens'];
+                $data['total_clicks']   = $result['clicks'];
+                $data['unique_opens']   = $result['unique_opens'];
+                $data['unique_clicks']  = $result['unique_clicks'];
+                $data['total_sent']     = $result['sent'];
                 foreach ($status as $stat){
                     $tmp = array(
                         'name' => $stat,
@@ -165,7 +166,7 @@ class PressReleaseSenderController extends FOSRestController
             $pressRelease =  $em->getRepository('PubliPrBundle:PressRelease')->find($request->request->get('prId'));
             $apiKey = $this->getParameter('hip_mandrill.api_key');
             $mandrill = new \Mandrill($apiKey);
-            $query = 'email:continuousnet.com';
+            $query = '*';
             $start_date = new \DateTime($request->request->get('startDate') );
             $start_date = $start_date->format('Y-m-d');
             $end_date = new \DateTime($request->request->get('endDate') );
