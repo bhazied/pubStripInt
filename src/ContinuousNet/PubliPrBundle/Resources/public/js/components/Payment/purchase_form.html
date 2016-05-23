@@ -1,0 +1,157 @@
+
+<!-- start: PAGE TITLE -->
+<section id="page-title">
+    <div class="row">
+        <div class="col-sm-8">
+            <h1 class="mainTitle" translate="content.list.PURCHASE">Purchase</h1>
+            <span class="mainDescription"></span>
+        </div>
+        <div ncy-breadcrumb></div>
+    </div>
+</section>
+<!-- end: PAGE TITLE -->
+
+<!-- start: FORM -->
+<div class="container-fluid container-fullw bg-white">
+    <div class="row">
+        <div class="col-md-12" ng-controller="PurchaseFormCtrl">
+            <div>
+                <fieldset>
+                    <legend translate="content.list.NEWPAYMENT" ng-if="purchase.id == 0">
+                        New Payment
+                    </legend>
+                    <legend translate="content.list.EDITPAYMENT" ng-if="purchase.id > 0">
+                        Edit Payment
+                    </legend>
+                    <form name="purchaseForm" id="purchaseForm" novalidate ng-submit="submitForm(purchaseForm)">
+                        <div class="row">
+                            <input type="hidden" name="id" id="purchaseId" ng-model="purchase.id" />
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':purchaseForm.currency.$dirty && purchaseForm.currency.$invalid, 'has-success':purchaseForm.currency.$valid}">
+                                    <label for="purchaseCurrency" class="control-label">
+                                        <span translate="content.list.fields.CURRENCY">Currency</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="purchase.currency" type="text" name="currency" id="purchaseCurrency" class="form-control" placeholder="[[ 'content.form.messages.ENTERCURRENCY' | translate ]]" ng-required="true" />
+                                        <i class="ti-marker-alt"></i>
+                                    </span><!--/input-icon-->
+                                    <span class="error text-small block" ng-if="purchaseForm.currency.$dirty && purchaseForm.currency.$error.required" translate="content.form.messages.CURRENCYREQUIRED">Currency is required.</span>
+                                    <span class="success text-small block" ng-if="purchaseForm.currency.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':purchaseForm.status.$dirty && purchaseForm.status.$invalid, 'has-success':purchaseForm.status.$valid}">
+                                    <label for="purchaseStatus" class="control-label">
+                                        <span translate="content.list.fields.STATUS">Status</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="purchase.status" type="text" name="status" id="purchaseStatus" class="form-control" placeholder="[[ 'content.form.messages.ENTERSTATUS' | translate ]]" ng-required="true" />
+                                        <i class="ti-marker-alt"></i>
+                                    </span><!--/input-icon-->
+                                    <span class="error text-small block" ng-if="purchaseForm.status.$dirty && purchaseForm.status.$error.required" translate="content.form.messages.STATUSREQUIRED">Status is required.</span>
+                                    <span class="success text-small block" ng-if="purchaseForm.status.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="purchaseDiscountCode" class="control-label">
+                                        <span translate="content.list.fields.DISCOUNTCODE">Discount Code</span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="purchase.discount_code" type="text" name="discountCode" id="purchaseDiscountCode" class="form-control" placeholder="[[ 'content.form.messages.ENTERDISCOUNTCODE' | translate ]]" ng-required="false" />
+                                        <i class="ti-shortcode"></i>
+                                    </span><!--/input-icon-->
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="purchaseInvoiceNumber" class="control-label">
+                                        <span translate="content.list.fields.INVOICENUMBER">Invoice Number</span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="purchase.invoice_number" type="text" name="invoiceNumber" id="purchaseInvoiceNumber" class="form-control" placeholder="[[ 'content.form.messages.ENTERINVOICENUMBER' | translate ]]" ng-required="false" />
+                                        <i class="ti-marker-alt"></i>
+                                    </span><!--/input-icon-->
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="purchaseDetails" class="control-label">
+                                        <span translate="content.list.fields.DETAILS">Details</span>
+                                    </label>
+                                    <div class="note-editor">
+                                        <span class="input-icon">
+                                            <textarea ng-model="purchase.details" name="details" id="purchaseDetails" class="form-control" placeholder="[[ 'content.form.messages.ENTERDETAILS' | translate ]]" class="form-control autosize area-animated msd-elastic: \n;" ng-required="false"></textarea>
+                                            <i class="ti-marker-alt"></i>
+                                        </span>
+                                    </div>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="purchaseNote" class="control-label">
+                                        <span translate="content.list.fields.NOTE">Note</span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="purchase.note" type="text" name="note" id="purchaseNote" class="form-control" placeholder="[[ 'content.form.messages.ENTERNOTE' | translate ]]" ng-required="false" />
+                                        <i class="ti-marker-alt"></i>
+                                    </span><!--/input-icon-->
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="checkbox continuous-check check-primary">
+                                    <input ng-model="purchase.is_valid" type="checkbox" name="isValid" id="purchaseIsValid" />
+                                    <label for="purchaseIsValid" translate="content.list.fields.ISVALID">Is Valid</label>
+                                </div><!--/checkbox continuous-check check-primary-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':purchaseForm.token.$dirty && purchaseForm.token.$invalid, 'has-success':purchaseForm.token.$valid}">
+                                    <label for="purchaseToken" class="control-label">
+                                        <span translate="content.list.fields.TOKEN">Token</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <div class="note-editor">
+                                        <span class="input-icon">
+                                            <textarea ng-model="purchase.token" name="token" id="purchaseToken" class="form-control" placeholder="[[ 'content.form.messages.ENTERTOKEN' | translate ]]" class="form-control autosize area-animated msd-elastic: \n;" ng-required="true"></textarea>
+                                            <i class="ti-marker-alt"></i>
+                                        </span>
+                                    </div>
+                                    <span class="error text-small block" ng-if="purchaseForm.token.$dirty && purchaseForm.token.$error.required" translate="content.form.messages.TOKENREQUIRED">Token is required.</span>
+                                    <span class="success text-small block" ng-if="purchaseForm.token.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-4">
+                                <a ng-click="list()" class="btn btn-primary pull-left">
+                                    <i class="ti-layout-list-thumb"></i> <span translate="content.list.BACKPAYMENTS">Back to Payments list</span>
+                                </a>
+                            </div>
+                            <div class="col-md-4">
+                            </div>
+                            <div class="col-md-4">
+                                <button type="button" ng-click="submitForm(purchaseForm)" class="btn btn-primary pull-right" ng-disabled="disableSubmit"> <!--  ng-disabled="purchaseForm.$invalid" -->
+                                    <i class="fa fa-spinner fa-spin" ng-if="disableSubmit"></i><i class="ti-save" ng-if="!disableSubmit"></i> <span translate="content.common.SAVE">Save</span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="table-responsive" ng-if="purchases.length > 0">
+                    </div>
+                </fieldset>
+            </div>
+        </div><!--/col-md-12-->
+    </div><!--/row-->
+</div><!--/container-fluid container-fullw-->
+<!-- end: FORM -->
+

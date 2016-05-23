@@ -23,6 +23,9 @@
                                 pursase for 3 monts
                             </p>
                         </div>
+                        <div class="panel-heading">
+                            <a ng-click="doPayment('3M')"  translate="3 Months" >3 Months</a>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -34,6 +37,9 @@
                             <p>
                                 pursase for one year
                             </p>
+                        </div>
+                        <div class="panel-heading">
+                            <a ng-click="doPayment('1Y')"   translate="One Year">One Year</a>
                         </div>
                     </div>
                 </div>
@@ -48,7 +54,7 @@
                             </p>
                         </div>
                         <div class="panel-heading">
-                            link to pay
+                            <a ng-click="doPayment('other')"   translate="Other">Other</a>
                         </div>
                     </div>
             </div>

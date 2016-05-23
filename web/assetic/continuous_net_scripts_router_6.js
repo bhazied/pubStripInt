@@ -778,7 +778,15 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label:'content.list.PURCHASE'
         },
-        resolve: loadSequence('PurchaseCtrl', 'paymentService')
+        resolve: loadSequence('PurchaseCtrl', 'paymentService', 'PurchaseService')
+    }).state('app.billing.purchasenew',{
+        url: '/purchase/new',
+        templateUrl: '/bundles/publipr/js/components/Payment/purchase_form.html',
+        title: 'content.list.PURCHASE',
+        ncyBreadcrumb: {
+            label:'content.list.PURCHASE'
+        },
+        resolve: loadSequence('PurchaseFormCtrl', 'paymentService', 'PurchaseService')
     }).state('app.billing.paymentsnew', {
         url: '/payments/new',
         templateUrl: '/bundles/publipr/js/components/Payment/payment_form.html',

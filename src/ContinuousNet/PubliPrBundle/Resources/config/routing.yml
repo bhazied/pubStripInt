@@ -124,6 +124,11 @@ press_release_sender:
     type:     rest
     prefix:   /api
 
+subscription:
+    resource: "@PubliPrBundle/Controller/SubscriptionApiController.php"
+    type:      rest
+    prefix:    /api
+
 publi_pr_session_api:
     resource: "@PubliPrBundle/Controller/SessionRESTController.php"
     type:   rest

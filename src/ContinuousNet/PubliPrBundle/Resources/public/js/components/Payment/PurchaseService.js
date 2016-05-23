@@ -1,13 +1,14 @@
 'use strict';
 
 /**
- * Payments Data Factory
+ * Purchase Data Factory
  */
-app.factory('$paymentsDataFactory', ['$resource', '$rootScope',
+app.factory('$purchaseDataFactory', ['$resource', '$rootScope',
     function($resource, $rootScope) {
 
-        return $resource($rootScope.app.apiURL + 'purchase', {
-            purchases: { method: 'GET'},
+        return $resource($rootScope.app.apiURL , {} ,{
+            checkPayment: { method: 'GET', url: $rootScope.app.apiURL+'CheckSubscription'},
+            getSettings: {method: 'GET', url: $rootScope.app.apiURL+'Settings'}
         });
 
     }]);

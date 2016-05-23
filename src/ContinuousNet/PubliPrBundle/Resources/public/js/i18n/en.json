@@ -169,6 +169,10 @@
         "TIME": "h:mma",
         "DATETIME": "MM/dd/yyyy h:mma"
     },
+    "payment":{
+        "warningTitle": "not yet paid",
+        "warningText": "choose and pay for the package that goes with you"
+    },
    "content": {
         "common": {
             "ENABLEBATCHADD": "Enable batch add",

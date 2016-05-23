@@ -19,7 +19,7 @@ class Settings {
     }
     public function getSetting($key){
         $em =  $this->entityManager->getRepository('PubliPrBundle:Setting');
-        return $em->findByKey($key);
-
+        $settings =  $em->findByKey($key);
+        return $settings[0];
     }
 }
