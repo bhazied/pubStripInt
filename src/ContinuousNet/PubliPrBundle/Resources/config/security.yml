@@ -16,7 +16,7 @@ security:
         - { path: ^/api/newsrooms,      roles: [ROLE_ACCOUNT_MANAGER], methods: [GET, POST, PUT, PATCH, DELETE] }
         - { path: ^/api/newsroomtemplates,      roles: [ROLE_ADMIN, ROLE_SUPER_ADMIN], methods: [GET, POST, PUT, PATCH, DELETE] }
         - { path: ^/api/users,      roles: [ROLE_ACCOUNT_MANAGER, ROLE_ADMIN, ROLE_SUPER_ADMIN], methods: [GET, POST, PUT, PATCH, DELETE] }
-        - { path: ^/api/payments,      roles: [ROLE_ADMIN, ROLE_SUPER_ADMIN], methods: [GET, POST, PUT, PATCH, DELETE] }
+        - { path: ^/api/payments,      roles: [ROLE_ADMIN, ROLE_SUPER_ADMIN, ROLE_ACCOUNT_MANAGER], methods: [GET, POST, PUT, PATCH, DELETE] }
         - { path: ^/api/pressreleases,      roles: [ROLE_ACCOUNT_USER, FREE_ACCOUNT, ROLE_ACCOUNT_MANAGER], methods: [GET, POST, PUT, PATCH, DELETE] }
         - { path: ^/api/sessions,      roles: [ROLE_ADMIN, ROLE_SUPER_ADMIN], methods: [GET, POST, PUT, PATCH, DELETE] }
         - { path: ^/api/settings,      roles: [ROLE_ADMIN, ROLE_SUPER_ADMIN], methods: [GET, POST, PUT, PATCH, DELETE] }

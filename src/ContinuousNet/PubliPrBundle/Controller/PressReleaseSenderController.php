@@ -33,6 +33,7 @@ use Hip\MandrillBundle\Message;
 use Hip\MandrillBundle\Dispatcher;
 use Symfony\Component\Validator\Constraints\Date;
 use Symfony\Component\Validator\Constraints\DateTime;
+use ContinuousNet\PubliPrBundle\Services\Settings;
 
 class PressReleaseSenderController extends FOSRestController
 {
