@@ -30,7 +30,7 @@ use JMS\Serializer\Annotation\Groups;
  * @since      Class available since Release 1.0
  * @access     public
  * 
- * @ORM\Table(name="`payment`", indexes={@ORM\Index(name="creator_user_id", columns={"creator_user_id"}), @ORM\Index(name="modifier_user_id", columns={"modifier_user_id"})})
+ * @ORM\Table(name="`payment`", indexes={@ORM\Index(name="product_id", columns={"product_id"}), @ORM\Index(name="creator_user_id", columns={"creator_user_id"}), @ORM\Index(name="modifier_user_id", columns={"modifier_user_id"})})
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks()
  * 
@@ -152,6 +152,28 @@ class Payment
     private $isValid;
 
     /**
+     * @var \DateTime
+     * @access private
+     *
+     * @ORM\Column(name="start_date", type="datetime", nullable=true, unique=false)
+     * 
+     * @Expose
+     * 
+     */
+    private $startDate;
+
+    /**
+     * @var \DateTime
+     * @access private
+     *
+     * @ORM\Column(name="end_date", type="datetime", nullable=true, unique=false)
+     * 
+     * @Expose
+     * 
+     */
+    private $endDate;
+
+    /**
      * @var string
      * @access private
      *
@@ -183,6 +205,21 @@ class Payment
      * 
      */
     private $modifiedAt;
+
+    /**
+     * @var \ContinuousNet\PubliPrBundle\Entity\Product
+     * @access private
+     *
+     * @ORM\ManyToOne(targetEntity="Product")
+     * @ORM\JoinColumns({
+     *        @ORM\JoinColumn(name="product_id", referencedColumnName="id")
+     * })
+     * 
+     * @Expose
+     * @MaxDepth(1)
+     * 
+     */
+    private $product;
 
     /**
      * @var \ContinuousNet\PubliPrBundle\Entity\User
@@ -451,6 +488,54 @@ class Payment
     }
 
     /**
+     * Set startDate
+     *
+     * @access public
+     * @param \DateTime $startDate
+     * @return Payment
+     */
+    public function setStartDate(\DateTime $startDate = null)
+    {
+        $this->startDate = $startDate;
+        return $this;
+    }
+
+    /**
+     * Get startDate
+     *
+     * @access public
+     * @return \DateTime 
+     */
+    public function getStartDate()
+    {
+        return $this->startDate;
+    }
+
+    /**
+     * Set endDate
+     *
+     * @access public
+     * @param \DateTime $endDate
+     * @return Payment
+     */
+    public function setEndDate(\DateTime $endDate = null)
+    {
+        $this->endDate = $endDate;
+        return $this;
+    }
+
+    /**
+     * Get endDate
+     *
+     * @access public
+     * @return \DateTime 
+     */
+    public function getEndDate()
+    {
+        return $this->endDate;
+    }
+
+    /**
      * Set token
      *
      * @access public
@@ -520,6 +605,30 @@ class Payment
     public function getModifiedAt()
     {
         return $this->modifiedAt;
+    }
+
+    /**
+     * Set product
+     *
+     * @access public
+     * @param \ContinuousNet\PubliPrBundle\Entity\Product $product
+     * @return Payment
+     */
+    public function setProduct(Product $product = null)
+    {
+        $this->product = $product;
+        return $this;
+    }
+
+    /**
+     * Get product
+     *
+     * @access public
+     * @return \ContinuousNet\PubliPrBundle\Entity\Product 
+     */
+    public function getProduct()
+    {
+        return $this->product;
     }
 
     /**
