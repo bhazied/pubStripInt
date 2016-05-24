@@ -171,7 +171,23 @@
     },
     "payment":{
         "warningTitle": "pas encore payé",
-        "warningText": "choisissez et payer le pack qui marche avec vous"
+        "warningText": "choisissez et payer le pack qui marche avec vous",
+        "MONTHS" :{
+            "SELECTMONTH": "Selectioner un mois",
+            "JANURAY": "Janvier",
+            "FEBRUARY": "Féveier",
+            "MARCH": "Mars",
+            "APRIL": "Avril",
+            "MAY": "Mai",
+            "JUNE": "Juin",
+            "JULY": "Juillet",
+            "AUGUST": "Août",
+            "SEPTEMBER": "Septembre",
+            "OCTOBER": "Octobre",
+            "NOVEMBER": "Novembre",
+            "DECEMBER": "Décembre"
+        },
+        "TOTALPRICE" : "total à payer"
     },
    "content": {
         "common": {
@@ -443,7 +459,11 @@
                 "VALUEREQUIRED": "Le champs Valeur est obligatoire",
                 "SELECTACTION": "Sélectionner une valeur pour Action",
                 "ACTIONREQUIRED": "Le champs Action est obligatoire",
-                "ENTERSOURCE": "Entrer une valeur pour Source"
+                "ENTERSOURCE": "Entrer une valeur pour Source",
+                "CARDNUMBER" : "Numéro de carte",
+                "CARDMONTHEXPR" : "mois d'expiration",
+                "CARDYEAREXPR" : "Année d'expiration",
+                "CARDCCV" : "CCV"
             }
         },
         "list": {
@@ -941,6 +961,10 @@
                 "ENDDATE" : "Date de fin",
                 "STARTDATE" : "Date de début",
                 "SENT" : "Envoyés",
+                "CARDMONTHEXPR" : "Mois d'expiration",
+                "CARDYEAREXPR" : "Annés d'expiration",
+                "CARDCcv" : "CCV",
+                "CARDNUMBER" : "Numéro de carte",
                 "blocktypes": {
                     "TEXT": "Texte",
                     "BOXEDTEXT": "Boxed Texte",

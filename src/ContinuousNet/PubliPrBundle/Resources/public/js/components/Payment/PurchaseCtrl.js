@@ -2,6 +2,9 @@
 app.controller('PurchaseCtrl',['$scope', '$rootScope', '$sce', '$timeout', '$filter', '$state', '$q', '$localStorage', 'toaster', 'SweetAlert', '$paymentsDataFactory','$purchaseDataFactory',
     function($scope, $rootScope, $sce, $timeout, $filter, $state, $q, $localStorage, toaster, SweetAlert, $paymentsDataFactory, $purchaseDataFactory){
 
+        $scope.products = [];
+        $scope.productLoaded = false;
+        $scope.totaleProducts = 0;
         $scope.payed = false;
         $scope.hasPayed = function(){
             $purchaseDataFactory.checkPayment().$promise.then(function(data){
@@ -20,11 +23,25 @@ app.controller('PurchaseCtrl',['$scope', '$rootScope', '$sce', '$timeout', '$fil
             });
             }
         }
+
         $scope.hasPayed();
 
-        $scope.doPayment = function(period){
-            if(angular.isDefined(period)){
-                $localStorage.purchasePayment = period;
+        $scope.loadProducts = function(){
+            $scope.productLoaded = true;
+                if($scope.products.length == 0){
+                    var def = $q.defer();
+                    $scope.products.push({});
+                    $purchaseDataFactory.getProducts().$promise.then(function (data) {
+                        $scope.products = data.results;
+                        def.resolve($scope.products);
+                    });
+                }
+        }
+
+        $scope.loadProducts();
+        $scope.doPayment = function(product){
+            if(angular.isDefined(product)){
+                $localStorage.purchaseProduct = product;
                 $state.go('app.billing.purchasenew');
             }
         }

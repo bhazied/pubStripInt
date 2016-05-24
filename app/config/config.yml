@@ -15,6 +15,7 @@ parameters:
     router.options.generator_base_class: "ContinuousNet\\PubliPrBundle\\Routing\\Generator\\UrlGenerator"
     emailTemplate.interpretor.startWith : '%'
     emailTemplate.interpretor.endWith : '%'
+    payment.strip.apiKey: 'sk_test_G1i3m8o5CxEtc3tqrc3MJYPe'
 
 lexik_jwt_authentication:
     private_key_path: %jwt_private_key_path%

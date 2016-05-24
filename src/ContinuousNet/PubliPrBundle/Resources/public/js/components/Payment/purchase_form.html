@@ -12,9 +12,16 @@
 <!-- end: PAGE TITLE -->
 
 <!-- start: FORM -->
-<div class="container-fluid container-fullw bg-white">
+<div class="container-fluid container-fullw bg-white" ng-controller="PurchaseFormCtrl">
     <div class="row">
-        <div class="col-md-12" ng-controller="PurchaseFormCtrl">
+        <div class="col-md-12">
+            <span translate="payment.TOTALPRICE"></span>
+            <span ng-bind-html="[[sku.priceFormatted]]"> __ </span>
+            <i class="fa fa-eur" aria-hidden="true"></i>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
             <div>
                 <fieldset>
                     <legend translate="content.list.NEWPAYMENT" ng-if="purchase.id == 0">
@@ -26,60 +33,63 @@
                     <form name="purchaseForm" id="purchaseForm" novalidate ng-submit="submitForm(purchaseForm)">
                         <div class="row">
                             <input type="hidden" name="id" id="purchaseId" ng-model="purchase.id" />
+                            <input type="hidden" name="currency" id="purchaseCurrency" ng-model="purchase.currency" value="[[purchase.currency]]">
                         </div><!--/row-->
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="form-group" ng-class="{'has-error':purchaseForm.currency.$dirty && purchaseForm.currency.$invalid, 'has-success':purchaseForm.currency.$valid}">
-                                    <label for="purchaseCurrency" class="control-label">
-                                        <span translate="content.list.fields.CURRENCY">Currency</span>
-                                        <span class="symbol required"></span>
+                                <div class="form-group" ng-class="{'has-error':purchaseForm.cardNumber.$dirty && purchaseForm.cardNumber.$invalid, 'has-success':purchaseForm.cardNumber.$valid}">
+                                    <label for="purchaseCardNumber" class="control-label">
+                                        <span translate="content.list.fields.CARDNUMBER">Card Number</span>
                                     </label>
                                     <span class="input-icon">
-                                        <input ng-model="purchase.currency" type="text" name="currency" id="purchaseCurrency" class="form-control" placeholder="[[ 'content.form.messages.ENTERCURRENCY' | translate ]]" ng-required="true" />
-                                        <i class="ti-marker-alt"></i>
+                                        <input ng-model="purchase.cardNumber" type="text" name="cardNumber" id="purchaseCardNumber" class="form-control" placeholder="[[ 'content.form.messages.CARDNUMBER' | translate ]]" ng-required="true" />
+                                        <i class="fa fa-credit-card"></i>
                                     </span><!--/input-icon-->
-                                    <span class="error text-small block" ng-if="purchaseForm.currency.$dirty && purchaseForm.currency.$error.required" translate="content.form.messages.CURRENCYREQUIRED">Currency is required.</span>
-                                    <span class="success text-small block" ng-if="purchaseForm.currency.$valid" translate="content.form.messages.OK">Ok!</span>
+                                    <span class="error text-small block" ng-if="purchaseForm.status.$dirty && purchaseForm.cardNumber.$error.required" translate="content.form.messages.CARDNUMBERREQUIRED">Card number is required.</span>
+                                    <span class="success text-small block" ng-if="purchaseForm.cardNumber.$valid" translate="content.form.messages.OK">Ok!</span>
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
-                            <div class="col-md-6">
-                                <div class="form-group" ng-class="{'has-error':purchaseForm.status.$dirty && purchaseForm.status.$invalid, 'has-success':purchaseForm.status.$valid}">
-                                    <label for="purchaseStatus" class="control-label">
-                                        <span translate="content.list.fields.STATUS">Status</span>
-                                        <span class="symbol required"></span>
+                            <div class="col-md-2">
+                                <div class="form-group" ng-class="{'has-error':purchaseForm.cardMonthExpr.$dirty && purchaseForm.cardMonthExpr.$invalid, 'has-success':purchaseForm.cardMonthExpr.$valid}">
+                                    <label for="purchaseCardMonthExpr" class="control-label">
+                                        <span translate="content.list.fields.CARDMONTHEXPR">Card Expr Month</span>
+                                        <span class="input-icon">
+                                            <select name="cardMonthExpr" id="purchaseCardMonthExpr" class="form-control" ng-model="purchase.cardMonthExpr" ng-required="true">
+                                                <option ng-repeat="option in CardMonthExpr" value="[[option.id]]">[[option.text]]</option>
+                                            </select>
+                                            <i class="fa fa-calendar"></i>
+                                        </span>
+                                        <span class="error text-small block" ng-if="purchaseForm.cardMonthExpr.$dirty && purchaseForm.cardMonthExpr.$error.required" translate="content.form.messages.CARDMONTHEXPRREQUIRED">Card Exper month is required.</span>
+                                        <span class="success text-small block" ng-if="purchaseForm.cardMonthExpr.$valid" translate="content.form.messages.OK">Ok!</span>
                                     </label>
-                                    <span class="input-icon">
-                                        <input ng-model="purchase.status" type="text" name="status" id="purchaseStatus" class="form-control" placeholder="[[ 'content.form.messages.ENTERSTATUS' | translate ]]" ng-required="true" />
-                                        <i class="ti-marker-alt"></i>
-                                    </span><!--/input-icon-->
-                                    <span class="error text-small block" ng-if="purchaseForm.status.$dirty && purchaseForm.status.$error.required" translate="content.form.messages.STATUSREQUIRED">Status is required.</span>
-                                    <span class="success text-small block" ng-if="purchaseForm.status.$valid" translate="content.form.messages.OK">Ok!</span>
-                                </div><!--/form-group-->
-                            </div><!--/col-md-6-->
-                        </div><!--/row-->
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="purchaseDiscountCode" class="control-label">
-                                        <span translate="content.list.fields.DISCOUNTCODE">Discount Code</span>
+                                </div><!-- /form-group-->
+                            </div><!-- /com-md-2 -->
+                            <div class="col-md-2">
+                                <div class="form-group"  ng-class="{'has-error':purchaseForm.cardYearExpr.$dirty && purchaseForm.cardYearExpr.$invalid, 'has-success':purchaseForm.cardYearExpr.$valid}">
+                                    <label for="purchaseCardYearExpr" class="control-label">
+                                        <span translate="content.list.fields.CARDYEAREXPR">Card Expr Year</span>
+                                        <span class="input-icon">
+                                            <div year-drop offset="0" range="5"></div>
+                                            <i class="fa fa-calendar"></i>
+                                        </span>
+                                        <span class="error text-small block" ng-if="purchaseForm.cardYEARExpr.$dirty && purchaseForm.cardMonthExpr.$error.required" translate="content.form.messages.CARDYEAREXPRREQUIRED">Card Expr Year is required.</span>
+                                        <span class="success text-small block" ng-if="purchaseForm.cardYearExpr.$valid" translate="content.form.messages.OK">Ok!</span>
                                     </label>
-                                    <span class="input-icon">
-                                        <input ng-model="purchase.discount_code" type="text" name="discountCode" id="purchaseDiscountCode" class="form-control" placeholder="[[ 'content.form.messages.ENTERDISCOUNTCODE' | translate ]]" ng-required="false" />
-                                        <i class="ti-shortcode"></i>
-                                    </span><!--/input-icon-->
-                                </div><!--/form-group-->
-                            </div><!--/col-md-6-->
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="purchaseInvoiceNumber" class="control-label">
-                                        <span translate="content.list.fields.INVOICENUMBER">Invoice Number</span>
+                                </div><!-- /form-group-->
+                            </div><!-- /com-md-2 -->
+                            <div class="col-md-2">
+                                <div class="form-group" ng-class="{'has-error':purchaseForm.cardCcv.$dirty && purchaseForm.cardCcv.$invalid, 'has-success':purchaseForm.cardCcv.$valid}">
+                                    <label for="purchaseCardCcv" class="control-label">
+                                        <span translate="content.list.fields.CARDCcv">Ccv</span>
+                                        <span class="input-icon">
+                                            <input ng-model="purchase.cardCcv" type="text" name="cardCcv" id="purchaseCardCcv" class="form-control" placeholder="[[ 'content.form.messages.CARDCCV' | translate ]]" ng-required="true" >
+                                            <i class="fa fa-cc-stripe"></i>
+                                        </span>
+                                        <span class="error text-small block" ng-if="purchaseForm.cardMonthExpr.$dirty && purchaseForm.cardCcv.$error.required" translate="content.form.messages.CARDCCVREQUIRED">Ccv is required.</span>
+                                        <span class="success text-small block" ng-if="purchaseForm.cardCcv.$valid" translate="content.form.messages.OK">Ok!</span>
                                     </label>
-                                    <span class="input-icon">
-                                        <input ng-model="purchase.invoice_number" type="text" name="invoiceNumber" id="purchaseInvoiceNumber" class="form-control" placeholder="[[ 'content.form.messages.ENTERINVOICENUMBER' | translate ]]" ng-required="false" />
-                                        <i class="ti-marker-alt"></i>
-                                    </span><!--/input-icon-->
-                                </div><!--/form-group-->
-                            </div><!--/col-md-6-->
+                                </div><!-- /form-group-->
+                            </div><!-- /com-md-2 -->
                         </div><!--/row-->
                         <div class="row">
                             <div class="col-md-6">
@@ -109,25 +119,14 @@
                         </div><!--/row-->
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="checkbox continuous-check check-primary">
-                                    <input ng-model="purchase.is_valid" type="checkbox" name="isValid" id="purchaseIsValid" />
-                                    <label for="purchaseIsValid" translate="content.list.fields.ISVALID">Is Valid</label>
-                                </div><!--/checkbox continuous-check check-primary-->
-                            </div><!--/col-md-6-->
-                            <div class="col-md-6">
-                                <div class="form-group" ng-class="{'has-error':purchaseForm.token.$dirty && purchaseForm.token.$invalid, 'has-success':purchaseForm.token.$valid}">
-                                    <label for="purchaseToken" class="control-label">
-                                        <span translate="content.list.fields.TOKEN">Token</span>
-                                        <span class="symbol required"></span>
+                                <div class="form-group">
+                                    <label for="purchaseDiscountCode" class="control-label">
+                                        <span translate="content.list.fields.DISCOUNTCODE">Discount Code</span>
                                     </label>
-                                    <div class="note-editor">
-                                        <span class="input-icon">
-                                            <textarea ng-model="purchase.token" name="token" id="purchaseToken" class="form-control" placeholder="[[ 'content.form.messages.ENTERTOKEN' | translate ]]" class="form-control autosize area-animated msd-elastic: \n;" ng-required="true"></textarea>
-                                            <i class="ti-marker-alt"></i>
-                                        </span>
-                                    </div>
-                                    <span class="error text-small block" ng-if="purchaseForm.token.$dirty && purchaseForm.token.$error.required" translate="content.form.messages.TOKENREQUIRED">Token is required.</span>
-                                    <span class="success text-small block" ng-if="purchaseForm.token.$valid" translate="content.form.messages.OK">Ok!</span>
+                                    <span class="input-icon">
+                                        <input ng-model="purchase.discount_code" type="text" name="discountCode" id="purchaseDiscountCode" class="form-control" placeholder="[[ 'content.form.messages.ENTERDISCOUNTCODE' | translate ]]" ng-required="false" />
+                                        <i class="ti-shortcode"></i>
+                                    </span><!--/input-icon-->
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
                         </div><!--/row-->

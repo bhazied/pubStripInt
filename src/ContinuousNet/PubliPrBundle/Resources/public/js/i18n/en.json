@@ -171,7 +171,23 @@
     },
     "payment":{
         "warningTitle": "not yet paid",
-        "warningText": "choose and pay for the package that goes with you"
+        "warningText": "choose and pay for the package that goes with you",
+        "MONTHS" :{
+            "SELECTMONTH": "Select a month",
+           "JANURAY": "January",
+            "FEBRUARY": "February",
+            "MARCH": "March",
+            "APRIL": "April",
+            "MAY": "May",
+            "JUNE": "June",
+            "JULY": "July",
+            "AUGUST": "August",
+            "SEPTEMBER": "September",
+            "OCTOBER": "October",
+            "NOVEMBER": "November",
+            "DECEMBER": "December"
+        },
+        "TOTALPRICE" : "total to pay"
     },
    "content": {
         "common": {
@@ -443,7 +459,11 @@
                 "VALUEREQUIRED": "The Value is required",
                 "SELECTACTION": "Select Action",
                 "ACTIONREQUIRED": "The Action is required",
-                "ENTERSOURCE": "Enter the Source"
+                "ENTERSOURCE": "Enter the Source",
+                "CARDNUMBER" : "Card Number",
+                "CARDMONTHEXPR" : "Expiration Month",
+                "CARDYEAREXPR" : "Expiration Year",
+                "CARDCCV" : "CCV"
             }
         },
         "list": {
@@ -941,6 +961,10 @@
                 "ENDDATE" : "End date",
                 "STARTDATE" : "Start date",
                 "SENT" : "Sent",
+                "CARDMONTHEXPR" : "Expiration month",
+                "CARDYEAREXPR" : "Expiration year",
+                "CARDCcv" : "CCV",
+                "CARDNUMBER" : "Card Number",
                 "blocktypes": {
                     "TEXT": "Text",
                     "BOXEDTEXT": "Boxed Text",
