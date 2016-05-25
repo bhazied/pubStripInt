@@ -4,8 +4,8 @@
  * Controller for Payment Form
  */
 
-app.controller('PaymentFormCtrl', ['$scope', '$state', '$stateParams', '$sce', '$timeout', '$filter', '$uibModal', '$q', '$interpolate', '$localStorage', 'toaster', 'SweetAlert', 'savable', '$usersDataFactory', '$paymentsDataFactory',
-function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $interpolate, $localStorage, toaster, SweetAlert, savable, $usersDataFactory, $paymentsDataFactory) {
+app.controller('PaymentFormCtrl', ['$scope', '$state', '$stateParams', '$sce', '$timeout', '$filter', '$uibModal', '$q', '$interpolate', '$localStorage', 'toaster', 'SweetAlert', 'savable', '$productsDataFactory', '$usersDataFactory', '$paymentsDataFactory',
+function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $interpolate, $localStorage, toaster, SweetAlert, savable, $productsDataFactory, $usersDataFactory, $paymentsDataFactory) {
 
     $scope.locale = (angular.isDefined($localStorage.language))?$localStorage.language:'en';
 
@@ -23,6 +23,57 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
         
     };
 
+
+    $scope.startDateOpened = false;
+    $scope.startDateToggle = function($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+        $scope.startDateOpened = !$scope.startDateOpened;
+    };
+
+    $scope.endDateOpened = false;
+    $scope.endDateToggle = function($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+        $scope.endDateOpened = !$scope.endDateOpened;
+    };
+
+    $scope.dateFormat = $filter('translate')('formats.DATE');
+    $scope.dateTimeFormat = $filter('translate')('formats.DATETIME');
+    $scope.timeFormat = $filter('translate')('formats.TIME');
+    $scope.minDate = new Date(2010, 0, 1);
+    $scope.maxDate = new Date(2050, 11, 31);
+    $scope.dateOptions = {
+        formatYear: 'yy',
+        startingDay: 1
+    };
+    $scope.disabled = function (date, mode) {
+        return (mode === 'day' && (date.getDay() === -1));
+    };
+    $scope.products = [];
+    $scope.productsLoaded = false;
+
+    $scope.getProducts = function() {
+        $timeout(function(){
+            $scope.productsLoaded = true;
+            if ($scope.products.length == 0) {
+                $scope.products.push({});
+                var def = $q.defer();
+                $productsDataFactory.query({offset: 0, limit: 10000, 'order_by[product.name]': 'asc'}).$promise.then(function(data) {
+                    for (var i in data.results) {
+                        data.results[i].hidden = false;
+                    }
+                    $scope.products = data.results;
+                    def.resolve($scope.products);
+                });
+                return def;
+            } else {
+                return $scope.products;
+            }
+        });
+    };
+
+    $scope.getProducts();
 
     $scope.users = [];
     $scope.usersLoaded = false;
@@ -104,6 +155,12 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
         $paymentsDataFactory.get({id: $stateParams.id}).$promise.then(function(data) {
             $timeout(function(){
                 $scope.payment = savable(data);
+                if ($scope.payment.start_date != null) {
+                    $scope.payment.start_date = new Date($scope.payment.start_date);
+                }
+                if ($scope.payment.end_date != null) {
+                    $scope.payment.end_date = new Date($scope.payment.end_date);
+                }
             });
         });
     } else {

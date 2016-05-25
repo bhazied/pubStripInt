@@ -761,6 +761,37 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'sidebar.nav.billing.MAIN'
         }
+    }).state('app.billing.products', {
+        url: '/products',
+        templateUrl: '/bundles/publipr/js/components/Product/products.html',
+        title: 'content.list.PRODUCTS',
+        ncyBreadcrumb: {
+            label: 'content.list.PRODUCTS'
+        },
+        resolve: loadSequence('ngTable', 'ProductsCtrl', 'productService', 'userService')
+    }).state('app.billing.productsnew', {
+        url: '/products/new',
+        templateUrl: '/bundles/publipr/js/components/Product/product_form.html',
+        title: 'content.list.NEWPRODUCT',
+        ncyBreadcrumb: {
+            label: 'content.list.NEWPRODUCT'
+        },
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'ProductFormCtrl', 'productService', 'userService')
+    }).state('app.billing.productsedit', {
+        url: '/products/edit/:id',
+        templateUrl: '/bundles/publipr/js/components/Product/product_form.html',
+        title: 'content.list.EDITPRODUCT',
+        ncyBreadcrumb: {
+            label: 'content.list.EDITPRODUCT'
+        },
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'ProductFormCtrl', 'productService', 'userService')
+    }).state('app.billing.productsdetails', {
+        url: '/products/details/:id',
+        templateUrl: '/bundles/publipr/js/components/Product/product.html',
+        ncyBreadcrumb: {
+            label: 'content.list.PRODUCTDETAILS'
+        },
+        resolve: loadSequence('ProductCtrl', 'productService')
     }).state('app.billing.payments', {
         url: '/payments',
         templateUrl: '/bundles/publipr/js/components/Payment/payments.html',
@@ -768,7 +799,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.PAYMENTS'
         },
-        resolve: loadSequence('ngTable', 'PaymentsCtrl', 'paymentService', 'userService')
+        resolve: loadSequence('ngTable', 'PaymentsCtrl', 'paymentService', 'productService', 'userService')
     }).state('app.billing.paymentsnew', {
         url: '/payments/new',
         templateUrl: '/bundles/publipr/js/components/Payment/payment_form.html',
@@ -776,7 +807,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.NEWPAYMENT'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'PaymentFormCtrl', 'paymentService', 'userService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'PaymentFormCtrl', 'paymentService', 'productService', 'userService')
     }).state('app.billing.paymentsedit', {
         url: '/payments/edit/:id',
         templateUrl: '/bundles/publipr/js/components/Payment/payment_form.html',
@@ -784,7 +815,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.EDITPAYMENT'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'PaymentFormCtrl', 'paymentService', 'userService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'PaymentFormCtrl', 'paymentService', 'productService', 'userService')
     }).state('app.billing.paymentsdetails', {
         url: '/payments/details/:id',
         templateUrl: '/bundles/publipr/js/components/Payment/payment.html',
