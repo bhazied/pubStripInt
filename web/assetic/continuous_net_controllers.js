@@ -33,10 +33,16 @@ app.controller('FileManagerCtrl', ['$scope', '$localStorage', '$timeout', '$uibM
                     select: function(event, elfinderInstance) {
                         var selected = event.data.selected;
                         if (selected.length > 0) {
+                            var file = elfinderInstance.file(selected[0]);
                             var path = elfinderInstance.path(selected[0]);
-                            var parser = document.createElement('a');
-                            parser.href = '/uploads/'+$scope.folder+'/../'+path;
-                            $scope.url = parser.pathname;
+                            if (file.mime=='directory') {
+                                //opens a folder
+                                elfinderInstance.request({data:{cmd: 'open', target: selected[0]},notify:{type:'open',target:selected[0]}, syncOnFail:true});
+                            } else {
+                                var parser = document.createElement('a');
+                                parser.href = '/uploads'+$scope.folder+'/../'+path;
+                                $scope.url = parser.pathname;
+                            }
                         }
                     }
                 }

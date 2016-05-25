@@ -1,0 +1,142 @@
+
+<!-- start: PAGE TITLE -->
+<section id="page-title">
+    <div class="row">
+        <div class="col-sm-8">
+            <h1 class="mainTitle" translate="content.list.PRODUCTS">Products</h1>
+            <span class="mainDescription"></span>
+        </div>
+        <div ncy-breadcrumb></div>
+    </div>
+</section>
+<!-- end: PAGE TITLE -->
+
+<!-- start: FORM -->
+<div class="container-fluid container-fullw bg-white">
+    <div class="row">
+        <div class="col-md-12" ng-controller="ProductFormCtrl">
+            <div>
+                <fieldset>
+                    <legend translate="content.list.NEWPRODUCT" ng-if="product.id == 0">
+                        New Product
+                    </legend>
+                    <legend translate="content.list.EDITPRODUCT" ng-if="product.id > 0">
+                        Edit Product
+                    </legend>
+                    <form name="productForm" id="productForm" novalidate ng-submit="submitForm(productForm)">
+                        <div class="row">
+                            <input type="hidden" name="id" id="productId" ng-model="product.id" />
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':productForm.name.$dirty && productForm.name.$invalid, 'has-success':productForm.name.$valid}">
+                                    <label for="productName" class="control-label">
+                                        <span translate="content.list.fields.NAME">Name</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="product.name" type="text" name="name" id="productName" class="form-control" placeholder="[[ 'content.form.messages.ENTERNAME' | translate ]]" ng-required="true" />
+                                        <i class="ti-tag"></i>
+                                    </span><!--/input-icon-->
+                                    <span class="error text-small block" ng-if="productForm.name.$dirty && productForm.name.$error.required" translate="content.form.messages.NAMEREQUIRED">Name is required.</span>
+                                    <span class="success text-small block" ng-if="productForm.name.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-12">
+                                <div class="form-group" ng-class="{'has-error':productForm.description.$dirty && productForm.description.$invalid, 'has-success':productForm.description.$valid}">
+                                    <label for="productDescription" class="control-label">
+                                        <span translate="content.list.fields.DESCRIPTION">Description</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <div class="note-editor">
+                                        <div ckeditor="editorOptions" ready="onReadyEditor()"ng-model="product.description" name="description" id="productDescription" class="form-control" placeholder="[[ 'content.form.messages.ENTERDESCRIPTION' | translate ]]" class="form-control autosize area-animated msd-elastic: \n;" ng-required="true"></div>
+                                    </div>
+                                    <span class="error text-small block" ng-if="productForm.description.$dirty && productForm.description.$error.required" translate="content.form.messages.DESCRIPTIONREQUIRED">Description is required.</span>
+                                    <span class="success text-small block" ng-if="productForm.description.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':productForm.price.$dirty && productForm.price.$invalid, 'has-success':productForm.price.$valid}">
+                                    <label for="productPrice" class="control-label">
+                                        <span translate="content.list.fields.PRICE">Price</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                        <input ng-model="product.price" type="text" name="price" id="productPrice" class="form-control" placeholder="[[ 'content.form.messages.ENTERPRICE' | translate ]]" touchspin data-min="0" data-max="10000000"  data-verticalbuttons="true" data-verticalupclass="ti-angle-up" data-verticaldownclass="ti-angle-down" ng-required="true" />
+                                    <span class="error text-small block" ng-if="productForm.price.$dirty && productForm.price.$error.required" translate="content.form.messages.PRICEREQUIRED">Price is required.</span>
+                                    <span class="success text-small block" ng-if="productForm.price.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':productForm.duration.$dirty && productForm.duration.$invalid, 'has-success':productForm.duration.$valid}">
+                                    <label for="productDuration" class="control-label">
+                                        <span translate="content.list.fields.DURATION">Duration</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="product.duration" type="text" name="duration" id="productDuration" class="form-control" placeholder="[[ 'content.form.messages.ENTERDURATION' | translate ]]" touchspin data-min="0" data-max="10000000" data-verticalbuttons="true" data-verticalupclass="ti-angle-up" data-verticaldownclass="ti-angle-down" ng-required="true" />
+                                        <i class="ti-timer"></i>
+                                    </span><!--/input-icon-->
+                                    <span class="error text-small block" ng-if="productForm.duration.$dirty && productForm.duration.$error.required" translate="content.form.messages.DURATIONREQUIRED">Duration is required.</span>
+                                    <span class="success text-small block" ng-if="productForm.duration.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="productStripeReference" class="control-label">
+                                        <span translate="content.list.fields.STRIPEREFERENCE">Stripe Reference</span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="product.stripe_reference" type="text" name="stripeReference" id="productStripeReference" class="form-control" placeholder="[[ 'content.form.messages.ENTERSTRIPEREFERENCE' | translate ]]" ng-required="false" />
+                                        <i class="ti-marker-alt"></i>
+                                    </span><!--/input-icon-->
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':productForm.status.$dirty && productForm.status.$invalid, 'has-success':productForm.status.$valid}">
+                                    <label for="productStatus" class="control-label">
+                                        <span translate="content.list.fields.STATUS">Status</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <div class="continuous-radio radio-primary" ng-if="statuses.length < 10">
+                                        <input ng-disabled="false" ng-repeat-start="status in statuses" ng-model="product.status" type="radio" id="status[[ status.id ]]" value="[[ status.id ]]" name="status" ng-required="true" />
+                                        <label ng-repeat-end for="status[[ status.id ]]">
+                                            [[ status.title ]]
+                                        </label>
+                                    </div>
+                                    <div class="block" ng-if="statuses.length >= 10">
+                                        <select ng-disabled="false" ng-options="item.id as item.title for item in statuses" ng-model="product.status" name="status" id="productStatus" class="form-control" ng-required="true">
+                                            <option translate="content.form.messages.SELECTSTATUS" value="">Select Status</option>
+                                        </select>
+                                        <span my-enum="[[ product.status ]]" my-enum-list="[[ statuses ]]"></span>
+                                    </div>
+                                    <span class="error text-small block" ng-if="productForm.status.$dirty && productForm.status.$error.required" translate="content.form.messages.STATUSREQUIRED">Status is required.</span>
+                                    <span class="success text-small block" ng-if="productForm.status.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-4">
+                                <a ng-click="list()" class="btn btn-primary pull-left">
+                                    <i class="ti-layout-list-thumb"></i> <span translate="content.list.BACKPRODUCTS">Back to Products list</span>
+                                </a>
+                            </div>
+                            <div class="col-md-4">
+                            </div>
+                            <div class="col-md-4">
+                                <button type="button" ng-click="submitForm(productForm)" class="btn btn-primary pull-right" ng-disabled="disableSubmit"> <!--  ng-disabled="productForm.$invalid" -->
+                                    <i class="fa fa-spinner fa-spin" ng-if="disableSubmit"></i><i class="ti-save" ng-if="!disableSubmit"></i> <span translate="content.common.SAVE">Save</span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="table-responsive" ng-if="products.length > 0">
+                    </div>
+                </fieldset>
+            </div>
+        </div><!--/col-md-12-->
+    </div><!--/row-->
+</div><!--/container-fluid container-fullw-->
+<!-- end: FORM -->
+

@@ -5,8 +5,10 @@ use ContinuousNet\PubliPrBundle\Entity\Contact;
 use ContinuousNet\PubliPrBundle\Entity\Email;
 use ContinuousNet\PubliPrBundle\Entity\EmailCampaign;
 use ContinuousNet\PubliPrBundle\Entity\Newsroom;
+use ContinuousNet\PubliPrBundle\Entity\Payment;
 use ContinuousNet\PubliPrBundle\Entity\PressRelease;
 
+use ContinuousNet\PubliPrBundle\Entity\Product;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query;
 use Symfony\Component\Config\Definition\Exception\Exception;
@@ -47,26 +49,47 @@ class SubscriptionApiController extends FOSRestController
         try{
             $data = array(
                 'validityPeriode' => '',
-                'validate' => false,
-                'stripToken' => ''            );
+                'validate' => false
+                );
             $currentDate = new \DateTime('now');
-            $currentDate = $currentDate->format('Y-m-d H:m:s');
+            //$currentDate = $currentDate->format('Y-m-d H:m:s');
             $em = $this->getDoctrine()->getManager();
             $qb = $em->createQueryBuilder();
-            $qb->from("PubliPrBundle:Subscription", "sub_");
-            $qb->leftJoin("\ContinuousNet\PubliPrBundle\Entity\User", "user", \Doctrine\ORM\Query\Expr\Join::WITH, "sub_.user=user.id");
-            $qb->andWhere("sub_.user=:user")->setParameter('user', $this->getUser()->getId());
-            $qb->andwhere(":currentDate BETWEEN sub_.startDate AND sub_.endDate")->setParameter('currentDate', $currentDate);
-            $qb->select('sub_');
+            $qb->from("PubliPrBundle:Payment", "pay_");
+            $qb->leftJoin("\ContinuousNet\PubliPrBundle\Entity\User", "user", \Doctrine\ORM\Query\Expr\Join::WITH, "pay_.creatorUser=user.id");
+            $qb->andWhere("pay_.creatorUser=:creatorUser")->setParameter('creatorUser', $this->getUser()->getId());
+            $qb->andWhere(":currentDate BETWEEN pay_.startDate AND pay_.endDate")->setParameter('currentDate', $currentDate);
+            $qb->andWhere("pay_.isValid = :valid")->setParameter('valid', true);
+            $qb->select('pay_');
             $result = $qb->getQuery()->getresult();
             if($result){
-                $end = new \DateTime($result->getEndDate());
-                $diff = $end->diff($currentDate)->days;
-                $data['validity_periode'] = $diff;
+                $end = $result[0]->getEndDate();
+                //$diff = $end->diff($currentDate)->days;
+                //$data['validityPeriode'] = $diff;
                 $data['validate'] = true;
             }
             return $data;
         }catch (\Exception $e) {
+            return FOSView::create($e->getMessage(), Codes::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+    /**
+     * @POST("/CheckUser")
+     * @param $request
+     * @View(serializerEnableMaxDepthChecks=true)
+     */
+    public function checkUserAction(Request $request)
+    {
+        try{
+            $data = array( 'checked' => ( $this->getUser()->getAddress() &&
+                     $this->getUser()->getName()    &&
+                     $this->getUser()->getCountry() &&
+                     $this->getUser()->getZipCode() &&
+                     $this->getUser()->getCity())
+            );
+            return $data;
+        }catch (\Exception $e)
+        {
             return FOSView::create($e->getMessage(), Codes::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
@@ -81,21 +104,22 @@ class SubscriptionApiController extends FOSRestController
         try{
             $data = array(
                 'results' => array(),
-                'inlineCount' => ''
+                'inlineCount' => 0
             );
-            Stripe\Stripe::setApiKey($this->getStripApiKey());
-            $products = Stripe\Product::all(array('active' => true));
+            $em = $this->getDoctrine()->getManager();
+            $products = $em->getRepository('PubliPrBundle:Product')->findByStatus('Online');
             if($products){
-                foreach ($products['data'] as $product){
+                foreach ($products as $product)
+                {
                     $data['results'][] = array(
-                        'name' => $product->name,
-                        'id' => $product->id,
-                        'description' => $product->description,
-                        'sku' => $product->skus['data']
+                        'name' => $product->getName(),
+                        'id' => $product->getStripeReference(),
+                        'description' => $product->getDescription(),
+                        'sku' => $product->getPrice(),
                     );
                 }
+                $data['inlineCount'] = count($products);
             }
-            $data['inlineCount'] = count($products['data']);
             return $data;
         }catch (\Exception $e) {
             return FOSView::create($e->getMessage(), Codes::HTTP_INTERNAL_SERVER_ERROR);
@@ -117,7 +141,7 @@ class SubscriptionApiController extends FOSRestController
             $settings = $this->get('publi_pr.settings');
             $data['defaultCurrency'] = $settings->getSetting('DEFAULT_CURRENCY')->getValue();
             //get price bt product passed in request
-            Stripe\Stripe::setApiKey($this->getStripApiKey());
+            Stripe\Stripe::setApiKey($this->getStripeApiKey());
             $skus = Stripe\SKU::all(array(
                 'active' => true,
                 'product' => $product,
@@ -150,30 +174,107 @@ class SubscriptionApiController extends FOSRestController
     {
         try{
             $data = array(
-                'error' => '',
+                'hasError' => '',
                 'message' => '',
-                'token' => ''
             );
-            $cardToken = $this->getCardToken(
-                $request->request->get('cardNumber'),
-                $request->request->get('cardMonthExpr'),
-                $request->request->get('cardYearExpr'),
-                $request->request->get('cardCcv')
+            $cardToken = $this->getCardToken($request->request->get('cardNumber'),$request->request->get('cardMonthExpr'),$request->request->get('cardYearExpr'), $request->request->get('cardCcv'));
+            if(!$cardToken){
+                $data['hasError'] = true;
+                $data['message'] = "No Token taken";
+                return $data;
+            }
+            //create Order througth Stripe Api
+            $params = array('skuId' => $request->request->get('skuId'),'currency' => $request->request->get('currency'), $request->request->get('discountCode'));
+            $order = $this->createStripeOrder($params);
+            if(!$order)
+            {
+                $data['hasError'] = true;
+                $data['message'] = "No Order created";
+                return $data;
+            }
+            //initiate payment in database
+            $data = array(
+                'amount' => $order->amount,
+                'currency' => $order->currency,
+                'details' => $request->request->get('details'),
+                'discountCode' => $request->request->get('discountCode'),
+                'productStripeId' => $request->request->get('productStripeId'),
+                'ip' => $request->getClientIp(),
+                'status' => $order->status,
+                'orderStripeId' => $order->id
             );
-            if($cardToken){
-                $data['error'] = false;
-                $data['message'] = $cardToken;
+            $payment = $this->initiPayment($data);
+            //order payment througth Stripe
+            $paymentOrder = $this->payOrder($order, $cardToken);
+            if($paymentOrder->status == 'paid'){
+                $data['hasError'] = false;
+                $data['message'] = "payment sucess";
+                $payment->setIsValid(true);
+                $this->updatePaymentWithStatus($payment, $paymentOrder);
+                return $data;
             }
             else
             {
-                $data['error'] = false;
+                $data['hasError'] = true;
+                $data['message'] = "payment failure";
+                $this->updatePaymentWithStatus($payment, $paymentOrder);
+                return $data;
             }
-            return $request->request->all();
+
         }catch(\Exception $e){
             return FOSView::create($e->getMessage(), Codes::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 
+
+    /**
+     * @param $data
+     * @return Payment
+     */
+    private function initiPayment($data)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $product = $em->getRepository("PubliPrBundle:Product")->findOneBy(array('stripeReference' => $data['productStripeId']));
+        $payment = new Payment();
+        $payment->setAmount($product->getPrice());
+        $payment->setCurrency($data['currency']);
+        $payment->setDetails(array($data['details']));
+        $payment->setStartDate(new \DateTime('now'));
+        $payment->setEndDate(new \DateTime('+'.$product->getDuration().' day'));
+        $payment->setCreatorUser($this->getUser());
+        $payment->setDiscountCode($data['discountCode']);
+        $payment->setProduct($product);
+        $payment->setCreatedAt(new \DateTime('now'));
+        $payment->setIp($data['ip']);
+        $payment->setStatus($data['status']);
+        $payment->setIsValid(false);
+        $payment->setToken($data['orderStripeId']);
+        $em->persist($payment);
+        $em->flush();
+        return $payment;
+    }
+
+    private function updatePaymentWithStatus(Payment $payment, $paymentOrder)
+    {
+        $payment->setStatus($paymentOrder->status);
+        $payment->setModifiedAt(new \DateTime('now'));
+        $payment->setModifierUser($this->getUser());
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($payment);
+        $em->flush();
+        return $payment;
+    }
+
+
+    private function payOrder(Stripe\Order $order, $cardToken)
+    {
+        try{
+            Stripe\Stripe::setApiKey($this->getStripeApiKey());
+            return $order->pay(array('source' => $cardToken));
+        }catch(\Exception $e){
+            return false;
+        }
+    }
 
     /**
      * @param $card_number
@@ -187,7 +288,7 @@ class SubscriptionApiController extends FOSRestController
     {
         try{
 
-            Stripe\Stripe::setApiKey($this->getStripApiKey());
+            Stripe\Stripe::setApiKey($this->getStripeApiKey());
            $result =  Stripe\Token::create(array(
                 "card" => array(
                     "number" => $card_number,
@@ -207,8 +308,50 @@ class SubscriptionApiController extends FOSRestController
         }
     }
 
-    private function getStripApiKey()
+    private function createStripeOrder($params)
+    {
+        try{
+            $user = $this->getUser();
+            Stripe\Stripe::setApiKey($this->getStripeApiKey());
+            $order = Stripe\Order::create(array(
+                'items' => array(array(
+                    'type' => 'sku',
+                    'parent' => $params['skuId']
+                )),
+                'currency' => $params['currency'],
+                //'coupon' => $params['discountCode'],
+                'shipping' => array(
+                    'name' => $user->getName(),
+                    'address' => array(
+                        'line1' => $user->getAddress(),
+                        'city' => $user->getCity(),
+                        'country' => $user->getCountry()->getCode(),
+                        'postal_code' => $user->getZipCode()
+                    )
+                ),
+                'email' => $user->getEmail()
+            ));
+            $orderObject = $order;
+            return $orderObject;
+            $order = json_encode($order);
+            if(json_last_error() === JSON_ERROR_NONE)
+            {
+                return $orderObject;
+            }
+            else
+            {
+                return false;
+            }
+        }catch (\Exception $ex)
+        {
+            return false;
+        }
+
+    }
+
+    private function getStripeApiKey()
     {
         return $this->getParameter('payment.strip.apiKey');
     }
+
 }

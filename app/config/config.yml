@@ -367,7 +367,7 @@ assetic:
                 - 'bower_components/elfinder/dist/css/theme.css' #.min
         codemirror_css:
             inputs:
-                #- 'bower_components/codemirror/lib/css/codemirror.css'
+                - 'bower_components/codemirror/lib/codemirror.css'
         froala_css:
             inputs:
                 - 'bower_components/froala-wysiwyg-editor/css/froala_editor.min.css'

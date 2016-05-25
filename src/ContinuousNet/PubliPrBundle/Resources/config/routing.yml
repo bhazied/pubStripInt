@@ -128,6 +128,10 @@ subscription:
     resource: "@PubliPrBundle/Controller/SubscriptionApiController.php"
     type:      rest
     prefix:    /api
+publi_pr_product_api:
+    resource: "@PubliPrBundle/Controller/ProductRESTController.php"
+    type:   rest
+    prefix:   /api
 
 publi_pr_session_api:
     resource: "@PubliPrBundle/Controller/SessionRESTController.php"
@@ -221,6 +225,10 @@ publi_pr_payment:
 publi_pr_press_release:
     resource: "@PubliPrBundle/Resources/config/routing/press_release.yml"
     prefix:   /press-release
+
+publi_pr_product:
+    resource: "@PubliPrBundle/Resources/config/routing/product.yml"
+    prefix:   /product
 
 publi_pr_session:
     resource: "@PubliPrBundle/Resources/config/routing/session.yml"

@@ -18,9 +18,9 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 /**
- * Payment Type
+ * Product Type
  * 
- * Render Payment Type 
+ * Render Product Type 
  * 
  * PHP version 5.4.4
  * 
@@ -31,11 +31,11 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
  * @license   AMINOGRAM REGULAR LICENSE
  * @version    Release: 1.0
  * @link       http://publipr.continuousnet.com/ContinuousNet\PubliPrBundle/Form
- * @see        PaymentType
+ * @see        ProductType
  * @since      Class available since Release 1.0
  * @access     public
  */
-class PaymentType extends AbstractType
+class ProductType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -44,19 +44,12 @@ class PaymentType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('ip', TextType::class)
-            ->add('amount', TextType::class)
-            ->add('currency', TextType::class)
-            ->add('status', TextType::class)
-            ->add('discountCode', TextType::class)
-            ->add('invoiceNumber', TextType::class)
-            ->add('details', TextareaType::class)
-            ->add('note', TextType::class)
-            ->add('isValid', CheckboxType::class)
-            ->add('product', EntityType::class, array('expanded' => false, 'multiple' => false, 'class' => 'PubliPrBundle:Product', 'choice_label' => 'name'))
-            ->add('startDate', DateTimeType::class, array('widget' => 'single_text', 'input' => 'datetime'))
-            ->add('endDate', DateTimeType::class, array('widget' => 'single_text', 'input' => 'datetime'))
-            ->add('token', TextareaType::class)
+            ->add('name', TextType::class)
+            ->add('description', TextareaType::class)
+            ->add('price', TextType::class)
+            ->add('duration', IntegerType::class)
+            ->add('stripeReference', TextType::class)
+            ->add('status', ChoiceType::class, array('choices' => array('Draft' => 'Draft', 'Online' => 'Online', 'Deactivated' => 'Deactivated', 'Offline' => 'Offline', 'Deleted' => 'Deleted', 'Archived' => 'Archived', ), 'expanded' => false, 'multiple' => false))
         ;
     }
     
@@ -66,7 +59,7 @@ class PaymentType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'ContinuousNet\PubliPrBundle\Entity\Payment'
+            'data_class' => 'ContinuousNet\PubliPrBundle\Entity\Product'
         ));
     }
 
@@ -75,6 +68,6 @@ class PaymentType extends AbstractType
      */
     public function getName()
     {
-        return 'PubliPrBundle_Payment';
+        return 'PubliPrBundle_Product';
     }
 }

@@ -2,8 +2,8 @@
 
 namespace ContinuousNet\PubliPrBundle\Controller;
 
-use ContinuousNet\PubliPrBundle\Entity\Payment;
-use ContinuousNet\PubliPrBundle\Form\PaymentType;
+use ContinuousNet\PubliPrBundle\Entity\Product;
+use ContinuousNet\PubliPrBundle\Form\ProductType;
 
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Controller\Annotations\RouteResource;
@@ -22,9 +22,9 @@ use Symfony\Component\Finder\SplFileInfo;
 use Voryx\RESTGeneratorBundle\Controller\VoryxController;
 
 /**
- * Payment REST Controller
+ * Product REST Controller
  * 
- * Manage Payments 
+ * Manage Products 
  * 
  * PHP version 5.4.4
  * 
@@ -35,22 +35,22 @@ use Voryx\RESTGeneratorBundle\Controller\VoryxController;
  * @license  CONTINUOUS NET REGULAR LICENSE
  * @version  Release: 1.0
  * @link    http://publipr.continuousnet.com/ContinuousNet/PubliPrBundle/Controller
- * @see      PaymentRESTController
+ * @see      ProductRESTController
  * @since      Class available since Release 1.0
  * @access    public
- * @RouteResource("Payment")
+ * @RouteResource("Product")
  */
-class PaymentRESTController extends BaseRESTController
+class ProductRESTController extends BaseRESTController
 {
     /**
-     * Get a Payment entity
+     * Get a Product entity
      *
      * @View(serializerEnableMaxDepthChecks=true)
      *
      * @return Response
      *
      */
-    public function getAction(Payment $entity)
+    public function getAction(Product $entity)
     {
         $entity->dir = $this->getSubDirectory($entity, false);
         $this->createSubDirectory($entity);
@@ -58,7 +58,7 @@ class PaymentRESTController extends BaseRESTController
     }
 
     /**
-     * Get all Payment entities.
+     * Get all Product entities.
      *
      * @View(serializerEnableMaxDepthChecks=true)
      *
@@ -84,13 +84,12 @@ class PaymentRESTController extends BaseRESTController
             );
             $em = $this->getDoctrine()->getManager();
             $qb = $em->createQueryBuilder();
-            $qb->from('PubliPrBundle:Payment', 'p_');
-            $qb->leftJoin('ContinuousNet\PubliPrBundle\Entity\Product', 'product', \Doctrine\ORM\Query\Expr\Join::WITH, 'p_.product = product.id');
+            $qb->from('PubliPrBundle:Product', 'p_');
             $qb->leftJoin('ContinuousNet\PubliPrBundle\Entity\User', 'creator_user', \Doctrine\ORM\Query\Expr\Join::WITH, 'p_.creatorUser = creator_user.id');
             $qb->leftJoin('ContinuousNet\PubliPrBundle\Entity\User', 'modifier_user', \Doctrine\ORM\Query\Expr\Join::WITH, 'p_.modifierUser = modifier_user.id');
-            $textFields = array('payment.ip', 'payment.currency', 'payment.status', 'payment.discountCode', 'payment.invoiceNumber', 'payment.details', 'payment.note', 'payment.token');
+            $textFields = array('product.name', 'product.description', 'product.stripeReference');
             foreach ($filters as $field => $value) {
-                $_field = str_replace('payment.', 'p_.', $field);
+                $_field = str_replace('product.', 'p_.', $field);
                 $key = str_replace('.', '', $field);
                 if (!empty($value)) {
                    if (in_array($field, $textFields)) {
@@ -104,7 +103,7 @@ class PaymentRESTController extends BaseRESTController
             $qb->select('count(p_.id)');
             $data['inlineCount'] = $qb->getQuery()->getSingleScalarResult();
             foreach ($order_by as $field => $direction) {
-                $field = str_replace('payment.', 'p_.', $field);
+                $field = str_replace('product.', 'p_.', $field);
                 $qbList->addOrderBy($field, $direction);
             }
             $qbList->select('p_');
@@ -122,7 +121,7 @@ class PaymentRESTController extends BaseRESTController
     }
 
     /**
-     * Create a Payment entity.
+     * Create a Product entity.
      *
      * @View(statusCode=201, serializerEnableMaxDepthChecks=true)
      *
@@ -133,8 +132,8 @@ class PaymentRESTController extends BaseRESTController
      */
     public function postAction(Request $request)
     {
-        $entity = new Payment();
-        $form = $this->createForm(new PaymentType(), $entity, array('method' => $request->getMethod()));
+        $entity = new Product();
+        $form = $this->createForm(new ProductType(), $entity, array('method' => $request->getMethod()));
         $this->removeExtraFields($request, $form);
         $form->handleRequest($request);
         if ($form->isValid()) {
@@ -147,7 +146,7 @@ class PaymentRESTController extends BaseRESTController
     }
 
     /**
-     * Update a Payment entity.
+     * Update a Product entity.
      *
      * @View(serializerEnableMaxDepthChecks=true)
      *
@@ -156,12 +155,12 @@ class PaymentRESTController extends BaseRESTController
      *
      * @return Response
      */
-    public function putAction(Request $request, Payment $entity)
+    public function putAction(Request $request, Product $entity)
     {
         try {
             $em = $this->getDoctrine()->getManager();
             $request->setMethod('PATCH'); //Treat all PUTs as PATCH
-            $form = $this->createForm(new PaymentType(), $entity, array('method' => $request->getMethod()));
+            $form = $this->createForm(new ProductType(), $entity, array('method' => $request->getMethod()));
             $this->removeExtraFields($request, $form);
             $form->handleRequest($request);
             if ($form->isValid()) {
@@ -176,7 +175,7 @@ class PaymentRESTController extends BaseRESTController
     }
 
     /**
-     * Partial Update to a Payment entity.
+     * Partial Update to a Product entity.
      *
      * @View(serializerEnableMaxDepthChecks=true)
      *
@@ -185,13 +184,13 @@ class PaymentRESTController extends BaseRESTController
      *
      * @return Response
      */
-    public function patchAction(Request $request, Payment $entity)
+    public function patchAction(Request $request, Product $entity)
     {
         return $this->putAction($request, $entity);
     }
 
     /**
-     * Delete a Payment entity.
+     * Delete a Product entity.
      *
      * @View(statusCode=204)
      *
@@ -200,7 +199,7 @@ class PaymentRESTController extends BaseRESTController
      *
      * @return Response
      */
-    public function deleteAction(Request $request, Payment $entity)
+    public function deleteAction(Request $request, Product $entity)
     {
         try {
             $em = $this->getDoctrine()->getManager();

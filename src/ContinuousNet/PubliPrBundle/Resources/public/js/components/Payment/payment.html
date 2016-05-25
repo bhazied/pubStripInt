@@ -101,6 +101,22 @@
                                 </td>
                             </tr>
                             <tr>
+                                <td><span translate="content.list.fields.PRODUCT">Product</span></td>
+                                <td><a ui-sref="app.billing.productsdetails({id: payment.product.id})">[[ payment.product.name ]]</a></span></td>
+                            </tr>
+                            <tr>
+                                <td><span translate="content.list.fields.STARTDATE">Start Date</span></td>
+                                <td>
+                                    <span>[[ payment.start_date | date: datetimeFormat ]]</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span translate="content.list.fields.ENDDATE">End Date</span></td>
+                                <td>
+                                    <span>[[ payment.end_date | date: datetimeFormat ]]</span>
+                                </td>
+                            </tr>
+                            <tr>
                                 <td><span translate="content.list.fields.TOKEN">Token</span></td>
                                 <td>
                                     <div ng-bind-html="payment.token"></div>

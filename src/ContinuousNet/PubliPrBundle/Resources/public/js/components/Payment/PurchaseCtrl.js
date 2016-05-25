@@ -9,19 +9,19 @@ app.controller('PurchaseCtrl',['$scope', '$rootScope', '$sce', '$timeout', '$fil
         $scope.hasPayed = function(){
             $purchaseDataFactory.checkPayment().$promise.then(function(data){
                 $scope.payed = data.validate;
+                if($scope.payed){
+                    $state.go('app.billing.payments');
+                }
+                else
+                {
+                    SweetAlert.swal({
+                        title: $filter('translate')('payment.warningTitle'),
+                        text: $filter('translate')('payment.warningText'),
+                        timer : 2000,
+                        type: "info"
+                    });
+                }
             });
-            if($scope.payed){
-                $state.go('app.billing.payments');
-            }
-            else
-            {
-                SweetAlert.swal({
-                    title: $filter('translate')('payment.warningTitle'),
-                    text: $filter('translate')('payment.warningText'),
-                    timer : 2000,
-                    type: "info"
-            });
-            }
         }
 
         $scope.hasPayed();

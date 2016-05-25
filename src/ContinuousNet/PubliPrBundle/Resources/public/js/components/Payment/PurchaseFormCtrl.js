@@ -3,6 +3,23 @@ app.controller('PurchaseFormCtrl',['$scope', '$rootScope', '$sce', '$timeout', '
     function($scope, $rootScope, $sce, $timeout, $filter, $state, $q, $localStorage, toaster, SweetAlert, $paymentsDataFactory, $purchaseDataFactory){
         $scope.purchase = {};
         $scope.settingsLoaded = false;
+        
+        $scope.checkUser = function () {
+            var def = $q.defer();
+            $purchaseDataFactory.checkUser().$promise.then(function (data) {
+                if(!data.checked){
+                    SweetAlert.swal({
+                        title: $filter('translate')('payment.PROFILENOTCOMPLETE'),
+                        text:  $filter('translate')('payment.PROFILENOTCOMPLETETEXT'),
+                        timer : 2000,
+                        type: "info"
+                    });
+                    $state.go("app.profile");
+                }
+            });
+        }
+        $scope.checkUser();
+
         $scope.initPurchase = function(){
             var def = $q.defer();
             $scope.purchase.currency = '';
@@ -12,6 +29,7 @@ app.controller('PurchaseFormCtrl',['$scope', '$rootScope', '$sce', '$timeout', '
                     $scope.purchase.currency = data.defaultCurrency;
                     $scope.purchase.price = data.sku.price;
                     $scope.purchase.skuId = data.sku.id;
+                    $scope.purchase.productStripeId = $localStorage.purchaseProduct;
                     $scope.sku = data.sku;
                 });
             }
@@ -58,7 +76,16 @@ app.controller('PurchaseFormCtrl',['$scope', '$rootScope', '$sce', '$timeout', '
                 console.log($scope.purchase);
                 var def = $q.defer();
                 $purchaseDataFactory.sendPurchase($scope.purchase).$promise.then(function (data) {
-                  console.log(data);
+                  if(!data.hasError){
+                      $state.go("app.payment.invoice");
+                  }
+                    else{
+                       SweetAlert.swal({
+                           title: 'ssssssssssssssss',
+                           text: 'hhhhhhhhhhhhhhhhhhh',
+                           type : 'error'
+                       });
+                  }
                 });
                 $scope.disableSubmit = false;
             }
