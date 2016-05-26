@@ -19,25 +19,4 @@ class DefaultController extends Controller
     {
     }
 
-    /**
-     * @Route("/testMail")
-     */
-    public function testMailAction()
-    {
-
-        $dispatsher = $this->get('hip_mandrill.dispatcher');
-        $message = new Message();
-        $message
-            ->setFromName('zied.benhadjamor@continuousnet.com')
-            ->setFromName('Zied Ben Hadj Amor')
-            ->addTo('mr.bha.zied@gmail.com', 'Zied gmail')
-            ->addTo('zied.benhadjamor@itipart.com', 'zied itipart')
-            ->addTo('zied.benhadjamor@dotit.com.tn', 'zied dotit')
-            ->setSubject('some subject')
-            ->setHtml('<html><body>Zied est là et il test encore</body></html>');
-
-        $result = $dispatsher->send($message);
-        dump($result);
-        return new Response('<pre>' . print_r($result, true) . '</pre>');
-    }
 }

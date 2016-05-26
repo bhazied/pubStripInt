@@ -31,8 +31,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use FOS\RestBundle\Controller\FOSRestController;
 use Doctrine\ORM\Query\Expr\Join;
-use Hip\MandrillBundle\Message;
-use Hip\MandrillBundle\Dispatcher;
 use Symfony\Component\Validator\Constraints\Date;
 use Symfony\Component\Validator\Constraints\DateTime;
 use ContinuousNet\PubliPrBundle\Services\Settings;
@@ -48,7 +46,8 @@ class SubscriptionApiController extends FOSRestController
     public function checkAction(Request $request){
         try{
             $data = array(
-                'validityPeriode' => '',
+                'startDate' => '',
+                'endDate' => '',
                 'validate' => false
                 );
             $currentDate = new \DateTime('now');
@@ -67,6 +66,8 @@ class SubscriptionApiController extends FOSRestController
                 //$diff = $end->diff($currentDate)->days;
                 //$data['validityPeriode'] = $diff;
                 $data['validate'] = true;
+                $data['startDate'] = "";
+                $data['startDate'] = "";
             }
             return $data;
         }catch (\Exception $e) {
@@ -209,6 +210,7 @@ class SubscriptionApiController extends FOSRestController
             if($paymentOrder->status == 'paid'){
                 $data['hasError'] = false;
                 $data['message'] = "payment sucess";
+                $data['paymentId'] = $payment->getId();
                 $payment->setIsValid(true);
                 $this->updatePaymentWithStatus($payment, $paymentOrder);
                 return $data;
@@ -222,7 +224,9 @@ class SubscriptionApiController extends FOSRestController
             }
 
         }catch(\Exception $e){
-            return FOSView::create($e->getMessage(), Codes::HTTP_INTERNAL_SERVER_ERROR);
+            $data['hasError'] = true;
+            $data['message'] = $e->getMessage();
+            return $data;
         }
     }
 

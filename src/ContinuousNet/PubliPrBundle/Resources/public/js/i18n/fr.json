@@ -189,7 +189,23 @@
             "NOVEMBER": "Novembre",
             "DECEMBER": "Décembre"
         },
-        "TOTALPRICE" : "total à payer"
+        "TOTALPRICE" : "total à payer",
+        "invoice" : {
+            "ORDERDATE": "Date de commande",
+            "DESCRIPTION" : "Description",
+            "UNUTPRICE" : "Prix unitaire",
+            "AMOUNT" : "Montant",
+            "SUBTOTAL" : "Sous-total",
+            "TOTAL": "Total",
+            "AMOUNTPAID": "Montant payé",
+            "AMOUNTDUE" : "Montant à payer",
+            "PAYMENTMETHOD": "Mode de paiement",
+            "SHIPPEDTO" : "Expédiés à",
+            "BILLEDTO": "Facturé à",
+            "INVOICENUMBER" : "Numéro de facture",
+            "EXPORTTOPDF": "Exporter au format PDF",
+            "QUANTITY": "Quantité"
+        }
     },
    "content": {
         "common": {
@@ -474,7 +490,11 @@
                 "CARDNUMBER" : "Numéro de carte",
                 "CARDMONTHEXPR" : "mois d'expiration",
                 "CARDYEAREXPR" : "Année d'expiration",
-                "CARDCCV" : "CCV"
+                "CARDCCV" : "CCV",
+                "CARDNUMBERREQUIRED" : "Numéro de la carte est obligatoire",
+                "CARDMONTHEXPRREQUIRED": "mois d'expiration est obligatoire",
+                "CARDYEAREXPRREQUIRED": "Année d'expiration est obligatoire",
+                "CARDCCVREQUIRED" : "Ccv est obligatoire"
             }
         },
         "list": {
@@ -816,6 +836,8 @@
             "PRESSRELEASESEARSHSTATS": "Historique de communiqués de presse",
             "EMAILSDETAILS" : "emails détails",
             "PRESSRELEASEPIECHARTTITLE" : "détail de la communiqué de presse",
+            "INVOICE" : "Facture",
+            "PURCHASE": "Achat d'un forfait",
             "fields": {
                 "CAPTCHA": "Security check",
                 "ID": "#",

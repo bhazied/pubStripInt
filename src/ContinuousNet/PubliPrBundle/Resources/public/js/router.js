@@ -818,6 +818,14 @@ function ($stateProvider) {
             label:'content.list.PURCHASE'
         },
         resolve: loadSequence('PurchaseFormCtrl', 'paymentService', 'PurchaseService', 'productService')
+    }).state('app.billing.invoice', {
+        url : '/invoice/:id',
+        templateUrl: '/bundles/publipr/js/components/Invoice/invoice.html',
+        title: 'content.list.INVOICE',
+        ncyBreadcrumb: {
+            label:'content.list.INVOICE'
+        },
+        resolve: loadSequence('InvoiceCtrl', 'paymentService')
     }).state('app.billing.paymentsnew', {
         url: '/payments/new',
         templateUrl: '/bundles/publipr/js/components/Payment/payment_form.html',

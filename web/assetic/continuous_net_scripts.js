@@ -333,7 +333,8 @@ app.constant('APP_JS_REQUIRES', {
         'TrackPressReleaseFormCtrl': '/bundles/publipr/js/components/TrackPressRelease/TrackPressReleaseFormCtrl.js',
         'TrackPressReleaseCtrl': '/bundles/publipr/js/components/TrackPressRelease/TrackPressReleaseCtrl.js',
         'PurchaseCtrl': '/bundles/publipr/js/components/Payment/PurchaseCtrl.js',
-        'PurchaseFormCtrl' : '/bundles/publipr/js/components/Payment/PurchaseFormCtrl.js'
+        'PurchaseFormCtrl' : '/bundles/publipr/js/components/Payment/PurchaseFormCtrl.js',
+        'InvoiceCtrl': '/bundles/publipr/js/components/Invoice/InvoiceCtrl.js'
     },
     modules: [{
         name: 'LoginService',
@@ -2521,6 +2522,14 @@ function ($stateProvider) {
             label:'content.list.PURCHASE'
         },
         resolve: loadSequence('PurchaseFormCtrl', 'paymentService', 'PurchaseService', 'productService')
+    }).state('app.billing.invoice', {
+        url : '/invoice/:id',
+        templateUrl: '/bundles/publipr/js/components/Invoice/invoice.html',
+        title: 'content.list.INVOICE',
+        ncyBreadcrumb: {
+            label:'content.list.INVOICE'
+        },
+        resolve: loadSequence('InvoiceCtrl', 'paymentService')
     }).state('app.billing.paymentsnew', {
         url: '/payments/new',
         templateUrl: '/bundles/publipr/js/components/Payment/payment_form.html',

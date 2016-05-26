@@ -31,6 +31,6 @@ ALTER TABLE `payment` ADD CONSTRAINT `payment_fk3` FOREIGN KEY ( `product_id` ) 
 ) ON DELETE RESTRICT ON UPDATE RESTRICT ;
 
 INSERT INTO `product` (`id`, `name`, `description`, `price`, `duration`, `stripe_reference`, `status`, `created_at`, `creator_user_id`, `modified_at`, `modifier_user_id`) VALUES
-(32, 'one year', 'subscription for one year \r\nthis is the best package for your business', 100, 365, ' 1Y', 'Online', '2016-05-25 00:00:00', 1, NULL, NULL),
+(32, 'one year', 'subscription for one year \r\nthis is the best package for your business', 100, 365, '1Y', 'Online', '2016-05-25 00:00:00', 1, NULL, NULL),
 (33, '\r\nthree months', '\r\nsubscription for thres months\r\nfor middle business', 45, 90, '3M', 'Online', '2016-05-25 00:00:00', 1, NULL, NULL),
-(34, '\r\none month', 'subscription for only one month \r\njuste for the small business', 30, 30, ' 1M', 'Online', '2016-05-25 00:00:00', 1, NULL, NULL);
+(34, '\r\none month', 'subscription for only one month \r\njuste for the small business', 30, 30, '1M', 'Online', '2016-05-25 00:00:00', 1, NULL, NULL);

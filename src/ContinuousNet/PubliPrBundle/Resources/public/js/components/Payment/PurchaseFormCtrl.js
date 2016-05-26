@@ -73,21 +73,22 @@ app.controller('PurchaseFormCtrl',['$scope', '$rootScope', '$sce', '$timeout', '
             }
             else {
                 $scope.disableSubmit = true;
-                console.log($scope.purchase);
                 var def = $q.defer();
                 $purchaseDataFactory.sendPurchase($scope.purchase).$promise.then(function (data) {
                   if(!data.hasError){
-                      $state.go("app.payment.invoice");
+                      $scope.disableSubmit = false;
+                      $state.go("app.billing.invoice", {id: data.paymentId});
                   }
                     else{
                        SweetAlert.swal({
-                           title: 'ssssssssssssssss',
-                           text: 'hhhhhhhhhhhhhhhhhhh',
+                           title: 'Error',
+                           text: data.message,
                            type : 'error'
                        });
+                      $scope.disableSubmit = false;
                   }
                 });
-                $scope.disableSubmit = false;
+                return false;
             }
         }
     }

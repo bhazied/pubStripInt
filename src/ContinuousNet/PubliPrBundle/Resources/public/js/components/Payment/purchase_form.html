@@ -48,7 +48,7 @@
                                         <input ng-model="purchase.cardNumber" type="text" name="cardNumber" id="purchaseCardNumber" class="form-control" placeholder="[[ 'content.form.messages.CARDNUMBER' | translate ]]" ng-required="true" />
                                         <i class="fa fa-credit-card"></i>
                                     </span><!--/input-icon-->
-                                    <span class="error text-small block" ng-if="purchaseForm.status.$dirty && purchaseForm.cardNumber.$error.required" translate="content.form.messages.CARDNUMBERREQUIRED">Card number is required.</span>
+                                    <span class="error text-small block" ng-if="purchaseForm.cardNumber.$dirty && purchaseForm.cardNumber.$error.required" translate="content.form.messages.CARDNUMBERREQUIRED">Card number is required</span>
                                     <span class="success text-small block" ng-if="purchaseForm.cardNumber.$valid" translate="content.form.messages.OK">Ok!</span>
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
@@ -62,7 +62,7 @@
                                             </select>
                                             <i class="fa fa-calendar"></i>
                                         </span>
-                                        <span class="error text-small block" ng-if="purchaseForm.cardMonthExpr.$dirty && purchaseForm.cardMonthExpr.$error.required" translate="content.form.messages.CARDMONTHEXPRREQUIRED">Card Exper month is required.</span>
+                                        <span class="error text-small block" ng-if="purchaseForm.cardMonthExpr.$dirty && purchaseForm.cardMonthExpr.$error.required" translate="content.form.messages.CARDMONTHEXPRREQUIRED">Card Exper month is required</span>
                                         <span class="success text-small block" ng-if="purchaseForm.cardMonthExpr.$valid" translate="content.form.messages.OK">Ok!</span>
                                     </label>
                                 </div><!-- /form-group-->
@@ -75,7 +75,7 @@
                                             <div year-drop offset="0" range="5"></div>
                                             <i class="fa fa-calendar"></i>
                                         </span>
-                                        <span class="error text-small block" ng-if="purchaseForm.cardYEARExpr.$dirty && purchaseForm.cardMonthExpr.$error.required" translate="content.form.messages.CARDYEAREXPRREQUIRED">Card Expr Year is required.</span>
+                                        <span class="error text-small block" ng-if="purchaseForm.cardYEARExpr.$dirty && purchaseForm.cardMonthExpr.$error.required" translate="content.form.messages.CARDYEAREXPRREQUIRED">Card Expr Year is required</span>
                                         <span class="success text-small block" ng-if="purchaseForm.cardYearExpr.$valid" translate="content.form.messages.OK">Ok!</span>
                                     </label>
                                 </div><!-- /form-group-->
@@ -88,7 +88,7 @@
                                             <input ng-model="purchase.cardCcv" type="text" name="cardCcv" id="purchaseCardCcv" class="form-control" placeholder="[[ 'content.form.messages.CARDCCV' | translate ]]" ng-required="true" >
                                             <i class="fa fa-cc-stripe"></i>
                                         </span>
-                                        <span class="error text-small block" ng-if="purchaseForm.cardMonthExpr.$dirty && purchaseForm.cardCcv.$error.required" translate="content.form.messages.CARDCCVREQUIRED">Ccv is required.</span>
+                                        <span class="error text-small block" ng-if="purchaseForm.cardCcv.$dirty && purchaseForm.cardCcv.$error.required" translate="content.form.messages.CARDCCVREQUIRED">Ccv is required</span>
                                         <span class="success text-small block" ng-if="purchaseForm.cardCcv.$valid" translate="content.form.messages.OK">Ok!</span>
                                     </label>
                                 </div><!-- /form-group-->
@@ -135,13 +135,8 @@
                         </div><!--/row-->
                         <div class="row">
                             <div class="col-md-4">
-                                <a ng-click="list()" class="btn btn-primary pull-left">
-                                    <i class="ti-layout-list-thumb"></i> <span translate="content.list.BACKPAYMENTS">Back to Payments list</span>
-                                </a>
                             </div>
-                            <div class="col-md-4">
-                            </div>
-                            <div class="col-md-4">
+                            <div class="col-md-8">
                                 <button type="button" ng-click="submitForm(purchaseForm)" class="btn btn-primary pull-right" ng-disabled="disableSubmit"> <!--  ng-disabled="purchaseForm.$invalid" -->
                                     <i class="fa fa-spinner fa-spin" ng-if="disableSubmit"></i><i class="ti-save" ng-if="!disableSubmit"></i> <span translate="content.common.SAVE">Save</span>
                                 </button>

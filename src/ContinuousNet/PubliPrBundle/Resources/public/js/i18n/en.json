@@ -189,7 +189,23 @@
             "NOVEMBER": "November",
             "DECEMBER": "December"
         },
-        "TOTALPRICE" : "total to pay"
+        "TOTALPRICE" : "total to pay",
+        "invoice" : {
+            "ORDERDATE": "Order date",
+            "DESCRIPTION" : "Description",
+            "UNUTPRICE" : "Unit price",
+            "AMOUNT" : "Amount",
+            "SUBTOTAL" : "Subtotal",
+            "TOTAL": "Total",
+            "AMOUNTPAID": "Amount paid",
+            "AMOUNTDUE" : "Amount due",
+            "PAYMENTMETHOD": "Payment Method",
+            "SHIPPEDTO" : "Shipped to",
+            "BILLEDTO": "Billed to",
+            "INVOICENUMBER" : "Invoice number",
+            "EXPORTTOPDF": "Export to PDF",
+            "QUANTITY": "Quantity"
+        }
     },
    "content": {
         "common": {
@@ -474,7 +490,11 @@
                 "CARDNUMBER" : "Card Number",
                 "CARDMONTHEXPR" : "Expiration Month",
                 "CARDYEAREXPR" : "Expiration Year",
-                "CARDCCV" : "CCV"
+                "CARDCCV" : "CCV",
+                "CARDNUMBERREQUIRED" : "Card number is required",
+                "CARDMONTHEXPRREQUIRED": "Expiry month is required",
+                "CARDYEAREXPRREQUIRED": "Expiry year is required",
+                "CARDCCVREQUIRED" : "Ccv is required"
             }
         },
         "list": {
@@ -816,6 +836,8 @@
             "PRESSRELEASESEARSHSTATS": "history of press releases",
             "EMAILSDETAILS" : "Emails details",
             "PRESSRELEASEPIECHARTTITLE" : "Press release details",
+            "INVOICE" : "Invoice",
+            "PURCHASE": "Purchase of a package",
             "fields": {
                 "CAPTCHA": "Security check",
                 "ID": "Id",

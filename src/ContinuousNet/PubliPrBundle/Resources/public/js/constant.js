@@ -87,7 +87,8 @@ app.constant('APP_JS_REQUIRES', {
         'TrackPressReleaseFormCtrl': '/bundles/publipr/js/components/TrackPressRelease/TrackPressReleaseFormCtrl.js',
         'TrackPressReleaseCtrl': '/bundles/publipr/js/components/TrackPressRelease/TrackPressReleaseCtrl.js',
         'PurchaseCtrl': '/bundles/publipr/js/components/Payment/PurchaseCtrl.js',
-        'PurchaseFormCtrl' : '/bundles/publipr/js/components/Payment/PurchaseFormCtrl.js'
+        'PurchaseFormCtrl' : '/bundles/publipr/js/components/Payment/PurchaseFormCtrl.js',
+        'InvoiceCtrl': '/bundles/publipr/js/components/Invoice/InvoiceCtrl.js'
     },
     modules: [{
         name: 'LoginService',
