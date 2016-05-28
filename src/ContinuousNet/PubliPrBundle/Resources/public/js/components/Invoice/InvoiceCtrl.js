@@ -2,11 +2,10 @@
  * Created by dev03 on 26/05/16.
  */
 'use strict';
-app.controller('InvoiceCtrl',['$scope', '$rootScope','$stateParams', '$sce', '$timeout', '$filter', '$state', '$q', '$localStorage', 'toaster', 'SweetAlert', '$paymentsDataFactory',
-    function($scope, $rootScope, $stateParams, $sce, $timeout, $filter, $state, $q, $localStorage, toaster, SweetAlert, $paymentsDataFactory) {
+app.controller('InvoiceCtrl',['$scope', '$rootScope','$stateParams', '$sce', '$timeout', '$filter', '$state', '$q', '$localStorage', 'toaster', '$paymentsDataFactory','$invoiceDownloadFactory',
+    function($scope, $rootScope, $stateParams, $sce, $timeout, $filter, $state, $q, $localStorage, toaster,  $paymentsDataFactory, $invoiceDownloadFactory) {
 
         $scope.invoice = {};
-        console.log($stateParams.id);
         if(angular.isDefined($stateParams.id)){
             var def = $q.defer();
             $paymentsDataFactory.get({id: $stateParams.id}).$promise.then(function (data) {
@@ -14,9 +13,19 @@ app.controller('InvoiceCtrl',['$scope', '$rootScope','$stateParams', '$sce', '$t
                 def.resolve($scope.invoice);
             })
         }
-        
-        $scope.printInvoice = function (id) {
-            
+
+        $scope.exportInvoice = function (paymentId) {
+            var deferred = $q.defer();
+            var url = $state.href("pdf", {}, {absolute: true});
+            console.log(url);
+            var params = {url : url, paymentId : paymentId};
+            $invoiceDownloadFactory.download(params).$promise.then(function(data){
+               //var blob = new Blob([data], {type: 'application/pdf'});
+                console.log(data);
+                //var defaultFileName = "test.pdf";
+                saveAs(data.blob, data.fileName);
+                deferred.resolve(data.fileName);
+            });
         }
     }
 ]);

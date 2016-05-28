@@ -129,7 +129,7 @@ subscription:
     type:      rest
     prefix:    /api
 
-subscription:
+invoice:
     resource: "@PubliPrBundle/Controller/InvoiceRestController.php"
     type:      rest
     prefix:    /api

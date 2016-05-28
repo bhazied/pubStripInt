@@ -39,7 +39,8 @@
         "lexik/jwt-authentication-bundle": "^1.4",
         "excelwebzone/recaptcha-bundle": "^1.4",
         "liuggio/ExcelBundle": "^2.0",
-        "stripe/stripe-php": "^3.13"
+        "stripe/stripe-php": "^3.13",
+        "mikehaertl/phpwkhtmltopdf": "^2.1"
     },
     "require-dev": {
         "symfony/phpunit-bridge": "~2.7"

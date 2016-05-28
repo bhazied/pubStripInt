@@ -5,7 +5,15 @@
 app.config(['$stateProvider',
 function ($stateProvider) {
 
-    $stateProvider.state('auth', {
+    $stateProvider.state('pdf', {
+        url : '/exportInvoice/:id',
+        templateUrl: '/bundles/publipr/js/components/Invoice/export_pdf_invoice.html',
+        title: 'content.list.INVOICE',
+        ncyBreadcrumb: {
+            label:'content.list.INVOICE'
+        },
+        resolve: loadSequence('InvoiceCtrl', 'paymentService', 'InvoiceDownloadService')
+    }).state('auth', {
         url: '/auth',
         template: '<div ui-view class="fade-in-right-big smooth"></div>',
         title: 'sidebar.nav.auth.MAIN',
@@ -825,7 +833,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label:'content.list.INVOICE'
         },
-        resolve: loadSequence('InvoiceCtrl', 'paymentService')
+        resolve: loadSequence('InvoiceCtrl', 'paymentService', 'InvoiceDownloadService')
     }).state('app.billing.paymentsnew', {
         url: '/payments/new',
         templateUrl: '/bundles/publipr/js/components/Payment/payment_form.html',

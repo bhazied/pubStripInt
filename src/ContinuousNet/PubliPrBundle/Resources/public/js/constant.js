@@ -195,5 +195,8 @@ app.constant('APP_JS_REQUIRES', {
     },{
         name: 'PurchaseService',
         files: ['/bundles/publipr/js/components/Payment/PurchaseService.js']
+    },{
+        name:"InvoiceDownloadService",
+        files: ['/bundles/publipr/js/components/Invoice/InvoiceDownloadService.js']
     }]
 });

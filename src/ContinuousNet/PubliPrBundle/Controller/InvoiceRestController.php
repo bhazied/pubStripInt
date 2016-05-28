@@ -34,29 +34,33 @@ use Hip\MandrillBundle\Message;
 use Hip\MandrillBundle\Dispatcher;
 use Symfony\Component\Validator\Constraints\Date;
 use Symfony\Component\Validator\Constraints\DateTime;
-use ContinuousNet\PubliPrBundle\Services\Settings;
-use Stripe;
+use mikehaertl\wkhtmlto\Pdf;
 
-class SubscriptionApiController extends FOSRestController
+class InvoiceRestController extends FOSRestController
 {
     /**
-     * @GET("/getInvoice/{paymentId}")
+     * @Post("/downloadInvoice")
      * @param $request
      * @View(serializerEnableMaxDepthChecks=true)
      */
-    public function getInvoiceAction($paymentId)
+    public function downloadInvoiceAction(Request $request)
     {
         try {
-            $data = array(
-                'status' => '',
-                'results' => ''
-            );
-            $em = $this->getDoctrine()->getManager();
-            $payment = $em->getRepository("PubliBundle:Payment")->find($paymentId);
-           return $payment;
+            $pdfUrl = $request->request->get('url') . $request->request->get('paymentId');
+            $pdfFile = new Pdf();
+            $pdfFile->binary = "xvfb-run wkhtmltopdf";
+            //$pdfFile->addPage('http://publipr/invoice.html');
+            $pdfFile->addPage('/var/www/html/publipr/web/invoice.html');
+            //$pdfFile->saveAs('test.pdf');
+             $pdfFile->send('test.pdf');
+            $response = new Response();
+            $response->setContent($pdfFile);
+            return $response;
+
         } catch (\Exception $e) {
             return FOSView::create($e->getMessage(), Codes::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
+
 }
 ?>
