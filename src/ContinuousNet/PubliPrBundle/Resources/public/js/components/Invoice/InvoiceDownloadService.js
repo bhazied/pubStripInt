@@ -10,7 +10,7 @@ app.factory('$invoiceDownloadFactory', ['$resource', '$rootScope',
             download: { method: 'POST',
                 url: $rootScope.app.apiURL + 'downloadInvoice',
                 headers: {
-                    accept: 'application/pdf' //or whatever you need
+                    accept: 'application/pdf'
                 },
                 responseType: 'arraybuffer',
                 transformResponse: function (data, headers) {
@@ -18,7 +18,14 @@ app.factory('$invoiceDownloadFactory', ['$resource', '$rootScope',
                         var pdf = null;
                         pdf = new Blob([data], {type:'application/pdf'});
                     }
-                    var fileName = "invoice.pdf";
+                    var fileName = 'Invoice.pdf';
+                    var disposition = headers('Content-Disposition');
+                    if (disposition) {
+                        var match = disposition.match(/.*filename=\"?([^;\"]+)\"?.*/);
+                        if (match[1])
+                            fileName = match[1];
+                    }
+                    var fileName = fileName.replace(/[<>:"\/\\|?*]+/g, '_');
                     var result = {
                         blob : pdf,
                         fileName : fileName

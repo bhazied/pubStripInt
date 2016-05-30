@@ -34,6 +34,10 @@ publi_pr:
         paied: 'client'
     uplopad:
         main_dir: '/var/www/publipr/web/'
+    contact:
+        address: 'PubliPr Inc FR'
+        email: 'distribution@publipr.continuousnet.com'
+
 
 
 framework:

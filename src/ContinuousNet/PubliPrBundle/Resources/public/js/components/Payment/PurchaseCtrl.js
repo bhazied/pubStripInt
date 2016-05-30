@@ -24,6 +24,7 @@ app.controller('PurchaseCtrl',['$scope', '$rootScope', '$sce', '$timeout', '$fil
             });
         }
 
+
         $scope.hasPayed();
 
         $scope.loadProducts = function(){
@@ -37,8 +38,10 @@ app.controller('PurchaseCtrl',['$scope', '$rootScope', '$sce', '$timeout', '$fil
                     });
                 }
         }
+        if(!$scope.payed){
+            $scope.loadProducts();
+        }
 
-        $scope.loadProducts();
         $scope.doPayment = function(product){
             if(angular.isDefined(product)){
                 $localStorage.purchaseProduct = product;

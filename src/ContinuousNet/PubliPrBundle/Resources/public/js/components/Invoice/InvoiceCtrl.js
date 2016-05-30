@@ -20,9 +20,6 @@ app.controller('InvoiceCtrl',['$scope', '$rootScope','$stateParams', '$sce', '$t
             console.log(url);
             var params = {url : url, paymentId : paymentId};
             $invoiceDownloadFactory.download(params).$promise.then(function(data){
-               //var blob = new Blob([data], {type: 'application/pdf'});
-                console.log(data);
-                //var defaultFileName = "test.pdf";
                 saveAs(data.blob, data.fileName);
                 deferred.resolve(data.fileName);
             });

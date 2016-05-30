@@ -32,6 +32,7 @@ use FOS\RestBundle\Controller\FOSRestController;
 use Doctrine\ORM\Query\Expr\Join;
 use Hip\MandrillBundle\Message;
 use Hip\MandrillBundle\Dispatcher;
+use Symfony\Component\Security\Acl\Domain\DoctrineAclCache;
 use Symfony\Component\Validator\Constraints\Date;
 use Symfony\Component\Validator\Constraints\DateTime;
 use mikehaertl\wkhtmlto\Pdf;
@@ -49,16 +50,52 @@ class InvoiceRestController extends FOSRestController
             $pdfUrl = $request->request->get('url') . $request->request->get('paymentId');
             $pdfFile = new Pdf();
             $pdfFile->binary = "xvfb-run wkhtmltopdf";
-            //$pdfFile->addPage('http://publipr/invoice.html');
-            $pdfFile->addPage('/var/www/html/publipr/web/invoice.html');
-            //$pdfFile->saveAs('test.pdf');
-             $pdfFile->send('test.pdf');
+            $fileContent = $this->persisteInvoice($request->request->get('paymentId'));
+            $pdfFile->addPage($fileContent);
+            $pdfFile->send('invoice_'.$this->getUser()->getFirstName().'_'.$this->getUser()->getLastName().'.pdf');
             $response = new Response();
             $response->setContent($pdfFile);
-            return $response;
-
         } catch (\Exception $e) {
             return FOSView::create($e->getMessage(), Codes::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    private function persisteInvoice($paymentId)
+    {
+        $fileContent = "";
+        try
+        {
+            $em = $this->getDoctrine()->getManager();
+            $qb = $em->createQueryBuilder();
+            $qb->from("PubliPrBundle:Payment", "pay_");
+            $qb->leftJoin("ContinuousNet\PubliPrBundle\Entity\User", 'creatorUser', \Doctrine\ORM\Query\Expr\Join::WITH, 'pay_.creatorUser = creatorUser.id');
+            $qb->leftJoin("ContinuousNet\PubliPrBundle\Entity\Country", "Country", \Doctrine\ORM\Query\Expr\Join::WITH, 'creatorUser.country = Country.id');
+            $qb->where("pay_.id = :id")->setParameter('id', $paymentId);
+            $qb->select('pay_');
+            $result = $qb->getQuery()->getSingleResult();
+            if(!$result){
+                return false;
+            }
+            $templateContent = file_get_contents('invoice.html');
+            $fileContent = str_replace('%product_name%', $result->getProduct()->getName(), $templateContent);
+            $fileContent = str_replace('%invoice_number%', $result->getInvoiceNumber(), $fileContent);
+            $fileContent = str_replace('%created_at%', $result->getCreatedAt()->format('F j, Y'), $fileContent);
+            $fileContent = str_replace('%due_at%', $result->getCreatedAt()->format('F j, Y'), $fileContent);
+            $fileContent = str_replace('%payment_method%', 'Stripe Api', $fileContent);
+            $fileContent = str_replace('%product_name%', $result->getProduct()->getName(), $fileContent);
+            $fileContent = str_replace('%description%', $result->getProduct()->getDescription(), $fileContent);
+            $fileContent = str_replace('%price%', $result->getProduct()->getPrice(), $fileContent);
+            $fileContent = str_replace('%total%', $result->getProduct()->getPrice(), $fileContent);
+            $fileContent = str_replace('%user_name%', $result->getCreatorUser()->getFirstName() . ' ' . $result->getCreatorUser()->getLastName(), $fileContent);
+            $fileContent = str_replace('%zip_code%', $result->getCreatorUser()->getZipCode(), $fileContent);
+            $fileContent = str_replace('%address%', $result->getCreatorUser()->getAddress(), $fileContent);
+            $fileContent = str_replace('%city%', $result->getCreatorUser()->getCity(), $fileContent);
+            $fileContent = str_replace('%stripe_reference%', $result->getToken(), $fileContent);
+            return $fileContent;
+        }
+        catch(\Exception $e)
+        {
+            return $e;
         }
     }
 

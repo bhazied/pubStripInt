@@ -60,7 +60,7 @@ class ContactImporterController extends FOSRestController
                 $info = new \SplFileInfo($originalName);
                 $extension = $info->getExtension();
                 if ($extension) {
-                    if ($extension == 'xlsx' || $extension == 'xls') {
+                    if ($extension == 'xls<fx' || $extension == 'xls') {
                         $directory = $this->get('kernel')->getRootDir() . '/../web/uploads/import/';
                         $name = $this->getUser()->getId().'_'.time().'_'.$fileIndex.'.'.$extension;
                         $file = $uploadedFile->move($directory, $name);

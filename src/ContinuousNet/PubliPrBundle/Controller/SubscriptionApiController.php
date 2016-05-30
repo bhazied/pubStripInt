@@ -74,6 +74,7 @@ class SubscriptionApiController extends FOSRestController
             return FOSView::create($e->getMessage(), Codes::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
+
     /**
      * @POST("/CheckUser")
      * @param $request
@@ -213,6 +214,8 @@ class SubscriptionApiController extends FOSRestController
                 $data['paymentId'] = $payment->getId();
                 $payment->setIsValid(true);
                 $this->updatePaymentWithStatus($payment, $paymentOrder);
+                //send Email
+                $sent = $this->sendConfirmationEmail($payment);
                 return $data;
             }
             else
@@ -263,6 +266,10 @@ class SubscriptionApiController extends FOSRestController
         $payment->setStatus($paymentOrder->status);
         $payment->setModifiedAt(new \DateTime('now'));
         $payment->setModifierUser($this->getUser());
+        if($paymentOrder->status == 'paid')
+        {
+            $payment->setInvoiceNumber($payment->getId(). $payment->getCreatorUser()->getId().'/'.$payment->getCreatedAt()->format('Y'));
+        }
         $em = $this->getDoctrine()->getManager();
         $em->persist($payment);
         $em->flush();
@@ -351,6 +358,39 @@ class SubscriptionApiController extends FOSRestController
             return false;
         }
 
+    }
+
+    private function sendConfirmationEmail($payment)
+    {
+        try
+        {
+            $message = \Swift_Message::newInstance()
+                ->setSubject('PubliPr Payment')
+                ->setFrom($this->container->getParameter('publipr.contact.email'))
+                ->setFrom("contact@continuousnet.com")
+                ->setTo($payment->getCreatorUser()->getEmail())
+                ->setBody(
+                    $this->renderView(
+                        'Emails/invoice.html.twig',
+                         array(
+                            'total' => $payment->getProduct()->getPrice(),
+                            'user_name' => $payment->getCreatorUser()->getFirstName() . ' ' . $payment->getCreatorUser()->getLastName(),
+                            'invoice_number' => $payment->getInvoiceNumber(),
+                            'created_at' => $payment->getCreatedAt()->format('F j, Y'),
+                            'product_name' => $payment->getProduct()->getName(),
+                            'product_price' => $payment->getProduct()->getPrice(),
+                            'url' => 'http://publipr',
+                            'publipr_contact' => $this->container->getParameter('publipr.contact.address')
+                        )
+                    ),
+                    'text/html'
+                );
+           return $this->get('mailer')->send($message);
+        }
+        catch(\Exception $e)
+        {
+           return false;
+        }
     }
 
     private function getStripeApiKey()
