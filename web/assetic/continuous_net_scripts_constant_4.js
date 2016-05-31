@@ -61,12 +61,13 @@ app.constant('APP_JS_REQUIRES', {
         'PaymentsCtrl': '/bundles/publipr/js/components/Payment/PaymentsCtrl.js',
         'PaymentFormCtrl': '/bundles/publipr/js/components/Payment/PaymentFormCtrl.js',
         'PaymentCtrl': '/bundles/publipr/js/components/Payment/PaymentCtrl.js',
+        'PurchaseCtrl': '/bundles/publipr/js/components/Payment/PurchaseCtrl.js',
+        'PurchaseFormCtrl': '/bundles/publipr/js/components/Payment/PurchaseFormCtrl.js',
         'PressReleasesCtrl': '/bundles/publipr/js/components/PressRelease/PressReleasesCtrl.js',
         'PressReleaseFormCtrl': '/bundles/publipr/js/components/PressRelease/PressReleaseFormCtrl.js',
         'PressReleaseCtrl': '/bundles/publipr/js/components/PressRelease/PressReleaseCtrl.js',
         'PressReleaseSenderCtrl': '/bundles/publipr/js/components/PressRelease/PressReleaseSenderCtrl.js',
         'PressReleaseStatsCtrl': '/bundles/publipr/js/components/PressRelease/PressReleaseStatsCtrl.js',
-        'PressReleaseEditorCtrl': '/bundles/publipr/js/components/PressRelease/PressReleaseEditorCtrl.js',
         'PressReleaseEditorCtrl': '/bundles/publipr/js/components/PressRelease/PressReleaseEditorCtrl.js',
         'ProductsCtrl': '/bundles/publipr/js/components/Product/ProductsCtrl.js',
         'ProductFormCtrl': '/bundles/publipr/js/components/Product/ProductFormCtrl.js',
@@ -156,6 +157,9 @@ app.constant('APP_JS_REQUIRES', {
     },{
         name: 'paymentService',
         files: ['/bundles/publipr/js/components/Payment/PaymentService.js']
+    },{
+        name: 'PaymentPurchaseService',
+        files: ['/bundles/publipr/js/components/Payment/PurchaseService.js']
     },{
         name: 'pressReleaseService',
         files: ['/bundles/publipr/js/components/PressRelease/PressReleaseService.js']
