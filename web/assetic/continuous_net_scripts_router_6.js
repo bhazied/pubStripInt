@@ -5,15 +5,7 @@
 app.config(['$stateProvider',
 function ($stateProvider) {
 
-    $stateProvider.state('pdf', {
-        url : '/exportInvoice/:id',
-        templateUrl: '/bundles/publipr/js/components/Invoice/export_pdf_invoice.html',
-        title: 'content.list.INVOICE',
-        ncyBreadcrumb: {
-            label:'content.list.INVOICE'
-        },
-        resolve: loadSequence('InvoiceCtrl', 'paymentService', 'InvoiceDownloadService')
-    }).state('auth', {
+    $stateProvider.state('auth', {
         url: '/auth',
         template: '<div ui-view class="fade-in-right-big smooth"></div>',
         title: 'sidebar.nav.auth.MAIN',
@@ -713,19 +705,17 @@ function ($stateProvider) {
     }).state('app.prmanager.pressreleasessend', {
         url: '/press-releases/send/:id',
         templateUrl: '/bundles/publipr/js/components/PressRelease/press_release_sender.html',
-        title: 'content.list.SENDPRESSRELEASE',
         ncyBreadcrumb: {
             label: 'content.list.SENDPRESSRELEASE'
         },
-        resolve: loadSequence('PressReleaseSenderCtrl', 'PressReleaseSenderService', 'pressReleaseService', 'contactGroupService')
+        resolve: loadSequence('PressReleaseSenderCtrl', 'PressReleaseSenderService', 'pressReleaseService')
     }).state('app.prmanager.pressreleasesstats', {
         url: '/press-releases/stats/:id',
         templateUrl: '/bundles/publipr/js/components/PressRelease/press_release_stats.html',
-        title: 'content.list.STATSPRESSRELEASE',
         ncyBreadcrumb: {
             label: 'content.list.PRESSRELEASESTATS'
         },
-        resolve: loadSequence('PressReleaseStatsCtrl', 'PressReleaseStatsService', 'pressReleaseService', 'PressReleaseEmailStatsService', 'ngTable')
+        resolve: loadSequence('PressReleaseStatsCtrl', 'PressReleaseStatsService', 'pressReleaseService')
     }).state('app.settings', {
         url: '/settings',
         template: '<div ui-view class="fade-in-up"></div>',
@@ -810,30 +800,6 @@ function ($stateProvider) {
             label: 'content.list.PAYMENTS'
         },
         resolve: loadSequence('ngTable', 'PaymentsCtrl', 'paymentService', 'productService', 'userService')
-    }).state('app.billing.check_payment',{
-        url: '/purchase',
-        templateUrl: '/bundles/publipr/js/components/Payment/purchase.html',
-        title: 'content.list.PURCHASE',
-        ncyBreadcrumb: {
-            label:'content.list.PURCHASE'
-        },
-        resolve: loadSequence('PurchaseCtrl', 'paymentService', 'PurchaseService')
-    }).state('app.billing.purchasenew',{
-        url: '/purchase/new',
-        templateUrl: '/bundles/publipr/js/components/Payment/purchase_form.html',
-        title: 'content.list.PURCHASE',
-        ncyBreadcrumb: {
-            label:'content.list.PURCHASE'
-        },
-        resolve: loadSequence('PurchaseFormCtrl', 'paymentService', 'PurchaseService', 'productService')
-    }).state('app.billing.invoice', {
-        url : '/invoice/:id',
-        templateUrl: '/bundles/publipr/js/components/Invoice/invoice.html',
-        title: 'content.list.INVOICE',
-        ncyBreadcrumb: {
-            label:'content.list.INVOICE'
-        },
-        resolve: loadSequence('InvoiceCtrl', 'paymentService', 'InvoiceDownloadService')
     }).state('app.billing.paymentsnew', {
         url: '/payments/new',
         templateUrl: '/bundles/publipr/js/components/Payment/payment_form.html',
