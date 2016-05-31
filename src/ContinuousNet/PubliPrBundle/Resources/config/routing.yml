@@ -115,7 +115,7 @@ publi_pr_payment_api:
     prefix:   /api
 
 subscription:
-    resource: "@PubliPrBundle/Controller/Subscription.php"
+    resource: "@PubliPrBundle/Controller/SubscriptionApiController.php"
     type:     rest
     prefix:   /api
 
