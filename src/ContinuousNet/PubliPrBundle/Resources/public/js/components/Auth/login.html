@@ -7,6 +7,10 @@
 						<img ng-src="/app/images/logo-dark.png" />
 					</div>
 
+					<h5 class="text-center mb30" translate="login.SIGNIN">
+						Sign in to your account
+					</h5>
+
 					<div class="alert alert-danger" ng-if="status == 'error'">
 						<button data-ct-dismiss="alert" class="close">
 							&times;
@@ -19,10 +23,6 @@
 						</button>
 						<span translate="login.WELCOME" translate-values="{ user: user }">Welcome [[user.firstName]].</span>
 					</div>
-
-					<h3 class="text-center mb30" translate="login.SIGNIN">
-						Sign in to your account
-					</h3>
 
 					<div class="form-inputs">
 
@@ -53,14 +53,21 @@
 						</div>
 					</div>
 
-					<button class="btn btn-success btn-block btn-lg mb15" type="submit" ng-click="submit()" ng-disabled="disableSubmit">
-						<i class="fa fa-spinner fa-spin" ng-if="disableSubmit"></i>
-						<span translate="login.LOGIN">Login</span>
-					</button>
+					<div class="row">
+
+						<div class="col-md-6">
+							<button class="btn btn-brand btn-block btn-sm" type="submit" ng-click="submit()" ng-disabled="disableSubmit">
+								<i class="fa fa-spinner fa-spin" ng-if="disableSubmit"></i>
+								<span translate="login.LOGIN">Login</span>
+							</button>
+						</div>
+
+						<div class="col-md-6">
+							<a class="btn btn-dark btn-block btn-sm" ui-sref="auth.register" translate="login.CREATEACCOUNT">Create an account</a>
+						</div>
+					</div>
 
 					<p>
-						<a ui-sref="auth.register" translate="login.CREATEACCOUNT">Create an account</a>
-						.
 						<a class="forgot" ui-sref="auth.resetpassword" translate="login.FORGOTPASSWORD">I forgot my password</a>
 					</p>
 				</form>
