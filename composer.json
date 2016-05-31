@@ -36,7 +36,7 @@
         "symfony/finder": "^3.0",
         "liip/imagine-bundle": "^1.5",
         "richsage/rms-push-notifications-bundle": "^0.1.9",
-        "lexik/jwt-authentication-bundle": "^1.4",
+        "lexik/jwt-authentication-bundle": "^1.5.1",
         "excelwebzone/recaptcha-bundle": "^1.4",
         "liuggio/ExcelBundle": "^2.0",
         "stripe/stripe-php": "^3.13",
