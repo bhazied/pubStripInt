@@ -309,6 +309,7 @@ app.constant('APP_JS_REQUIRES', {
         'PaymentCtrl': '/bundles/publipr/js/components/Payment/PaymentCtrl.js',
         'PurchaseCtrl': '/bundles/publipr/js/components/Payment/PurchaseCtrl.js',
         'PurchaseFormCtrl': '/bundles/publipr/js/components/Payment/PurchaseFormCtrl.js',
+        'InvoiceCtrl': '/bundles/publipr/js/components/Payment/InvoiceCtrl.js',
         'PressReleasesCtrl': '/bundles/publipr/js/components/PressRelease/PressReleasesCtrl.js',
         'PressReleaseFormCtrl': '/bundles/publipr/js/components/PressRelease/PressReleaseFormCtrl.js',
         'PressReleaseCtrl': '/bundles/publipr/js/components/PressRelease/PressReleaseCtrl.js',
@@ -404,8 +405,11 @@ app.constant('APP_JS_REQUIRES', {
         name: 'paymentService',
         files: ['/bundles/publipr/js/components/Payment/PaymentService.js']
     },{
-        name: 'PaymentPurchaseService',
+        name: 'PurchaseService',
         files: ['/bundles/publipr/js/components/Payment/PurchaseService.js']
+    },{
+        name: 'InvoiceDownloadService',
+        files: ['/bundles/publipr/js/components/Payment/InvoiceDownloadService.js']
     },{
         name: 'pressReleaseService',
         files: ['/bundles/publipr/js/components/PressRelease/PressReleaseService.js']
@@ -2522,7 +2526,7 @@ function ($stateProvider) {
             label: 'content.list.PAYMENTDETAILS'
         },
         resolve: loadSequence('PaymentCtrl', 'paymentService')
-    })    .state('app.billing.check_payment',{
+    }).state('app.billing.check_payment',{
         url: '/purchase',
         templateUrl: '/bundles/publipr/js/components/Payment/purchase.html',
         title: 'content.list.PURCHASE',

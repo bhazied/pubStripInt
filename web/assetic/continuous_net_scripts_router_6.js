@@ -823,7 +823,7 @@ function ($stateProvider) {
             label: 'content.list.PAYMENTDETAILS'
         },
         resolve: loadSequence('PaymentCtrl', 'paymentService')
-    })    .state('app.billing.check_payment',{
+    }).state('app.billing.check_payment',{
         url: '/purchase',
         templateUrl: '/bundles/publipr/js/components/Payment/purchase.html',
         title: 'content.list.PURCHASE',
