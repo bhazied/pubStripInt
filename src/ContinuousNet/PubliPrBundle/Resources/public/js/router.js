@@ -823,7 +823,32 @@ function ($stateProvider) {
             label: 'content.list.PAYMENTDETAILS'
         },
         resolve: loadSequence('PaymentCtrl', 'paymentService')
-    }).state('app.accesscontrol', {
+    }).state('app.billing.check_payment',{
+        url: '/purchase',
+        templateUrl: '/bundles/publipr/js/components/Payment/purchase.html',
+        title: 'content.list.PURCHASE',
+        ncyBreadcrumb: {
+            label:'content.list.PURCHASE'
+        },
+        resolve: loadSequence('PurchaseCtrl', 'paymentService', 'PurchaseService')
+    }).state('app.billing.purchasenew',{
+        url: '/purchase/new',
+        templateUrl: '/bundles/publipr/js/components/Payment/purchase_form.html',
+        title: 'content.list.PURCHASE',
+        ncyBreadcrumb: {
+            label:'content.list.PURCHASE'
+        },
+        resolve: loadSequence('PurchaseFormCtrl', 'paymentService', 'PurchaseService', 'productService')
+    }).state('app.billing.invoice', {
+        url : '/invoice/:id',
+        templateUrl: '/bundles/publipr/js/components/Invoice/invoice.html',
+        title: 'content.list.INVOICE',
+        ncyBreadcrumb: {
+            label:'content.list.INVOICE'
+        },
+        resolve: loadSequence('InvoiceCtrl', 'paymentService', 'InvoiceDownloadService')
+    })
+.state('app.accesscontrol', {
         url: '/access-control',
         template: '<div ui-view class="fade-in-up"></div>',
         title: 'sidebar.nav.accesscontrol.MAIN',
