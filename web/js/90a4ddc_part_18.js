@@ -307,12 +307,13 @@ app.constant('APP_JS_REQUIRES', {
         'PaymentsCtrl': '/bundles/publipr/js/components/Payment/PaymentsCtrl.js',
         'PaymentFormCtrl': '/bundles/publipr/js/components/Payment/PaymentFormCtrl.js',
         'PaymentCtrl': '/bundles/publipr/js/components/Payment/PaymentCtrl.js',
+        'PurchaseCtrl': '/bundles/publipr/js/components/Payment/PurchaseCtrl.js',
+        'PurchaseFormCtrl': '/bundles/publipr/js/components/Payment/PurchaseFormCtrl.js',
         'PressReleasesCtrl': '/bundles/publipr/js/components/PressRelease/PressReleasesCtrl.js',
         'PressReleaseFormCtrl': '/bundles/publipr/js/components/PressRelease/PressReleaseFormCtrl.js',
         'PressReleaseCtrl': '/bundles/publipr/js/components/PressRelease/PressReleaseCtrl.js',
         'PressReleaseSenderCtrl': '/bundles/publipr/js/components/PressRelease/PressReleaseSenderCtrl.js',
         'PressReleaseStatsCtrl': '/bundles/publipr/js/components/PressRelease/PressReleaseStatsCtrl.js',
-        'PressReleaseEditorCtrl': '/bundles/publipr/js/components/PressRelease/PressReleaseEditorCtrl.js',
         'PressReleaseEditorCtrl': '/bundles/publipr/js/components/PressRelease/PressReleaseEditorCtrl.js',
         'ProductsCtrl': '/bundles/publipr/js/components/Product/ProductsCtrl.js',
         'ProductFormCtrl': '/bundles/publipr/js/components/Product/ProductFormCtrl.js',
@@ -402,6 +403,9 @@ app.constant('APP_JS_REQUIRES', {
     },{
         name: 'paymentService',
         files: ['/bundles/publipr/js/components/Payment/PaymentService.js']
+    },{
+        name: 'PaymentPurchaseService',
+        files: ['/bundles/publipr/js/components/Payment/PurchaseService.js']
     },{
         name: 'pressReleaseService',
         files: ['/bundles/publipr/js/components/PressRelease/PressReleaseService.js']
@@ -2518,7 +2522,32 @@ function ($stateProvider) {
             label: 'content.list.PAYMENTDETAILS'
         },
         resolve: loadSequence('PaymentCtrl', 'paymentService')
-    }).state('app.accesscontrol', {
+    })    .state('app.billing.check_payment',{
+        url: '/purchase',
+        templateUrl: '/bundles/publipr/js/components/Payment/purchase.html',
+        title: 'content.list.PURCHASE',
+        ncyBreadcrumb: {
+            label:'content.list.PURCHASE'
+        },
+        resolve: loadSequence('PurchaseCtrl', 'paymentService', 'PurchaseService')
+    }).state('app.billing.purchasenew',{
+        url: '/purchase/new',
+        templateUrl: '/bundles/publipr/js/components/Payment/purchase_form.html',
+        title: 'content.list.PURCHASE',
+        ncyBreadcrumb: {
+            label:'content.list.PURCHASE'
+        },
+        resolve: loadSequence('PurchaseFormCtrl', 'paymentService', 'PurchaseService', 'productService')
+    }).state('app.billing.invoice', {
+        url : '/invoice/:id',
+        templateUrl: '/bundles/publipr/js/components/Invoice/invoice.html',
+        title: 'content.list.INVOICE',
+        ncyBreadcrumb: {
+            label:'content.list.INVOICE'
+        },
+        resolve: loadSequence('InvoiceCtrl', 'paymentService', 'InvoiceDownloadService')
+    })
+.state('app.accesscontrol', {
         url: '/access-control',
         template: '<div ui-view class="fade-in-up"></div>',
         title: 'sidebar.nav.accesscontrol.MAIN',
