@@ -62,23 +62,23 @@
         "WELCOME": "Welcome to [[appName]]"
     },
     "topbar": {
-      "messages": {
-        "MAIN": "Messages",
-        "HEADER": "Unread messages",
-        "SEEALL": "See All"
-      },
-      "activities": {
-        "MAIN": "Activities",
-        "HEADER": "You have new notifications",
-        "SEEALL": "See All"
-      },
-      "user": {
-        "PROFILE": "My Profile",
-        "CALENDAR": "My Calendar",
-        "MESSAGES": "My Messages",
-        "LOCKSCREEN": "Lock Screen",
-        "LOGOUT": "Log Out"
-      }
+        "messages": {
+            "MAIN": "Messages",
+            "HEADER": "Unread messages",
+            "SEEALL": "See All"
+        },
+        "activities": {
+            "MAIN": "Activities",
+            "HEADER": "You have new notifications",
+            "SEEALL": "See All"
+        },
+        "user": {
+            "PROFILE": "My Profile",
+            "CALENDAR": "My Calendar",
+            "MESSAGES": "My Messages",
+            "LOCKSCREEN": "Lock Screen",
+            "LOGOUT": "Log Out"
+        }
     },
     "setting": {
         "MAIN": "Style Selector",
@@ -97,72 +97,72 @@
     },
     "offsidebar": {
         "chat": {
-          "ONLINE": "On-Line",
-          "OFFLINE": "Off-Line",
-          "BACK": "Back",
-          "SEND": "Send",
-          "PLACEHOLDER": "Message"
-      },
-      "favorites": {
-        "MAIN": "Favorites"
-      },
-      "settings": {
-        "MAIN": "General Settings",
-        "NOTIFICATIONS": "Enable Notifications",
-        "SHOWEMAIL": "Show your E-mail",
-        "SHOWUSERS": "Show Offline Users",
-        "EMAILALERT": "E-mail Alerts",
-        "SMSALERT": "SMS Alerts",
-        "SAVE": "Save Changes"
-      }
-    },
-    "sidebar": {
-      "heading": {
-        "NAVIGATION": "Main Navigation",
-        "FEATURES": "Core Features",
-        "DOCUMENTATION": "Documentation"
-      },
-      "search": {
-        "PLACEHOLDER": "Search..."
-      },
-      "nav": {
-        "dashboard": {
-            "MAIN": "Dashboard"
+            "ONLINE": "On-Line",
+            "OFFLINE": "Off-Line",
+            "BACK": "Back",
+            "SEND": "Send",
+            "PLACEHOLDER": "Message"
         },
-        "logout": {
-            "MAIN": "Lougout"
-        },
-        "access": {
-            "MAIN": "Access"
-        },
-        "contactmanager": {
-            "MAIN": "ContactManager"
-        },
-        "templatemanager": {
-            "MAIN": "TemplateManager"
-        },
-        "configuration": {
-            "MAIN": "Configuration"
-        },
-        "distribution": {
-            "MAIN": "Distribution"
-        },
-        "prmanager": {
-            "MAIN": "PRManager"
+        "favorites": {
+            "MAIN": "Favorites"
         },
         "settings": {
-            "MAIN": "Settings"
-        },
-        "billing": {
-            "MAIN": "Billing"
-        },
-        "accesscontrol": {
-            "MAIN": "AccessControl"
-        },
-        "statistics": {
-            "MAIN": "Statistics"
+            "MAIN": "General Settings",
+            "NOTIFICATIONS": "Enable Notifications",
+            "SHOWEMAIL": "Show your E-mail",
+            "SHOWUSERS": "Show Offline Users",
+            "EMAILALERT": "E-mail Alerts",
+            "SMSALERT": "SMS Alerts",
+            "SAVE": "Save Changes"
         }
-      }
+    },
+    "sidebar": {
+        "heading": {
+            "NAVIGATION": "Main Navigation",
+            "FEATURES": "Core Features",
+            "DOCUMENTATION": "Documentation"
+        },
+        "search": {
+            "PLACEHOLDER": "Search..."
+        },
+        "nav": {
+            "dashboard": {
+                "MAIN": "Dashboard"
+            },
+            "logout": {
+                "MAIN": "Lougout"
+            },
+            "access": {
+                "MAIN": "Access"
+            },
+            "contactmanager": {
+                "MAIN": "ContactManager"
+            },
+            "templatemanager": {
+                "MAIN": "TemplateManager"
+            },
+            "configuration": {
+                "MAIN": "Configuration"
+            },
+            "distribution": {
+                "MAIN": "Distribution"
+            },
+            "prmanager": {
+                "MAIN": "PRManager"
+            },
+            "settings": {
+                "MAIN": "Settings"
+            },
+            "billing": {
+                "MAIN": "Billing"
+            },
+            "accesscontrol": {
+                "MAIN": "AccessControl"
+            },
+            "statistics": {
+                "MAIN": "Statistics"
+            }
+        }
     },
     "formats": {
         "DATE": "MM/dd/yyyy",
@@ -176,7 +176,7 @@
         "PROFILENOTCOMPLETETEXT" : "you must complete your profile (address, Zip code ..)",
         "MONTHS" :{
             "SELECTMONTH": "Select a month",
-           "JANURAY": "January",
+            "JANURAY": "January",
             "FEBRUARY": "February",
             "MARCH": "March",
             "APRIL": "April",
@@ -207,7 +207,7 @@
             "QUANTITY": "Quantity"
         }
     },
-   "content": {
+    "content": {
         "common": {
             "ENABLEBATCHADD": "Enable batch add",
             "CLEARSORTING": "Clear sorting",

@@ -301,8 +301,8 @@ function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q,
     };
 
     $scope.stats = function(row) {
-        console.log(row);
-        //$state.go('app.prmanager.pressreleasesstats', {id: row.id});
+        //console.log(row);
+        $state.go('app.prmanager.pressreleasesstats', {id: row.id});
     };
 
 }]);
