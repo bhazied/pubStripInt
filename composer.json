@@ -38,7 +38,10 @@
         "richsage/rms-push-notifications-bundle": "^0.1.9",
         "lexik/jwt-authentication-bundle": "^1.4",
         "excelwebzone/recaptcha-bundle": "^1.4",
-        "liuggio/excelbundle": "^2.0"
+        "liuggio/ExcelBundle": "^2.0",
+        "stripe/stripe-php": "^3.13",
+        "mikehaertl/phpwkhtmltopdf": "^2.1",
+        "hipaway-travel/mandrill-bundle": "dev-master"
     },
     "require-dev": {
         "symfony/phpunit-bridge": "~2.7"
@@ -63,8 +66,7 @@
     },
     "config": {
         "bin-dir": "bin",
-        "component-dir": "web/bower_components",
-        "secure-http": false
+        "component-dir": "web/bower_components"
     },
     "extra": {
         "symfony-app-dir": "app",

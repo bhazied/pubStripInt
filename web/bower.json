@@ -103,7 +103,9 @@
     "themify-icons": "~0.1.0",
     "bootstrap": "~3.3.2",
     "bootstrap-rtl": "~3.3.1",
-    "angular-recaptcha": "^3.0.0"
+    "angular-recaptcha": "^3.0.0",
+    "jspdf": "^1.2.61",
+    "html2canvas": "^0.5.0"
   },
   "appPath": "app",
   "moduleName": "urbanApp",

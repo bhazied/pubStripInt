@@ -28,7 +28,8 @@ var app = angular
     'angular-bind-html-compile',
     'slugifier',
     'vcRecaptcha',
-    'toaster'
+    'toaster',
+      'highcharts-ng'
   ])
   .constant('COLORS', {
     'default': '#e2e2e2',

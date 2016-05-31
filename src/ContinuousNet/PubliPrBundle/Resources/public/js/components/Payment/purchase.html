@@ -1,0 +1,34 @@
+
+<!-- start: PAGE TITLE -->
+<section id="page-title">
+    <div class="row">
+        <div class="col-sm-8">
+            <h1 class="mainTitle" translate="content.list.PURCHASE">Purchase</h1>
+            <span class="mainDescription"></span>
+        </div>
+        <div ncy-breadcrumb></div>
+    </div>
+</section>
+<div class="container-fluid container-fullw bg-white">
+    <div class="row">
+        <div class="col-md-12" ng-controller="PurchaseCtrl">
+            <div class="row" ng-if="!payed">
+                <div class="col-md-4" ng-repeat="product in products">
+                    <div class="panel panel-success">
+                        <div class="panel-heading">
+                            [[product.name]]
+                        </div>
+                        <div class="panel-body">
+                            <p>
+                                [[product.description]]
+                            </p>
+                        </div>
+                        <div class="panel-heading">
+                            <a ng-click="doPayment('[[product.id]]')"  translate="[[product.name]]" >[[product.name]]</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -24,5 +24,8 @@ class PubliPrExtension extends Extension
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
+
+        $container->setParameter('publipr.contact.address', $config['contact']['address']);
+        $container->setParameter('publipr.contact.email', $config['contact']['email']);
     }
 }

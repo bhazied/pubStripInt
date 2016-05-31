@@ -91,7 +91,12 @@
         <span class="title" translate="content.list.EMAILTEMPLATES">Email Templates</span>
       </a>
     </li>
-
+    <li ui-sref-active="active" ng-if="user.roles.join('').indexOf('ADM') > -1 || user.roles.join('').indexOf('MAN') > -1" ng-class="{'active':$state.includes('app.billing.check_payment')}">
+      <a ui-sref="app.billing.check_payment">
+        <i class="fa fa-money"></i>
+        <span translate="content.list.PAYMENTS">Payments</span>
+      </a>
+    </li>
     <li ui-sref-active="active" ng-if="user.roles.join('').indexOf('ADM') > -1 || user.roles.join('').indexOf('MAN') > -1" ng-class="{'active':$state.includes('app.access.users')}">
       <a ui-sref="app.access.users">
         <i class="fa fa-user-secret"></i>

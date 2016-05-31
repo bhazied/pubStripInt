@@ -4,8 +4,8 @@
  * Controller for Email Campaigns List
  */
 
-app.controller('EmailCampaignsCtrl', ['$scope', '$rootScope', '$sce', '$timeout', '$filter', 'ngTableParams', '$state', '$q', '$interpolate', '$localStorage', 'toaster', 'SweetAlert', '$pressReleasesDataFactory', '$usersDataFactory', '$emailCampaignsDataFactory',
-function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q, $interpolate, $localStorage, toaster, SweetAlert, $pressReleasesDataFactory, $usersDataFactory, $emailCampaignsDataFactory) {
+app.controller('EmailCampaignsCtrl', ['$scope', '$rootScope', '$sce', '$timeout', '$filter', 'ngTableParams', '$state', '$q', '$interpolate', '$localStorage', 'toaster', 'SweetAlert', '$pressReleasesDataFactory', '$usersDataFactory', '$contactGroupsDataFactory', '$emailCampaignsDataFactory',
+function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q, $interpolate, $localStorage, toaster, SweetAlert, $pressReleasesDataFactory, $usersDataFactory, $contactGroupsDataFactory, $emailCampaignsDataFactory) {
 
     $scope.isFiltersVisible = false;
 
@@ -84,6 +84,27 @@ function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q,
     $scope.getUsers();
 
 
+    $scope.contactGroups = [];
+    $scope.contactGroupsLoaded = [];
+
+    $scope.getContactGroups = function() {
+        $timeout(function(){
+            if ($scope.contactGroups.length == 0) {
+                $scope.contactGroups.push({});
+                var def = $q.defer();
+                $contactGroupsDataFactory.query({offset: 0, limit: 10000, 'order_by[contactGroup.id]': 'desc'}).$promise.then(function(data) {
+                    $scope.contactGroups = data.results;
+                    def.resolve($scope.contactGroups);
+                });
+                return def;
+            } else {
+                return $scope.contactGroups;
+            }
+        });
+    };
+
+    $scope.getContactGroups();
+
     $scope.textValue = function($scope, row) {
         return $scope.$eval('row.' + this.field);
     };
@@ -96,6 +117,19 @@ function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q,
             return '';
         }
         var html = '<a ui-sref="'+this.state+'({id: ' + row.id + '})">' + value[this.displayField] + '</a>';
+        return $scope.trusted[html] || ($scope.trusted[html] = $sce.trustAsHtml(html));
+    };
+
+    $scope.linksValue = function($scope, row) {
+        var values = row[this.field];
+        if (values.length == 0) {
+            return '';
+        }
+        var links = [];
+        for (var i in values) {
+            links.push('<a ui-sref="'+this.state+'({id: ' + values[i].id + '})">' + values[i][this.displayField] + '</a>');
+        }
+        var html = links.join(', ');
         return $scope.trusted[html] || ($scope.trusted[html] = $sce.trustAsHtml(html));
     };
 
@@ -147,7 +181,7 @@ function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q,
             { field: 'creator_user', title: $filter('translate')('content.list.fields.CREATORUSER'), sortable: 'creator_user.username', filter: { 'emailCampaign.creatorUser': 'select' }, getValue: $scope.linkValue, filterData: $scope.getUsers(), show: $scope.getParamValue('creator_user_id_show_filed', false), displayField: 'username', state: 'app.access.usersdetails' },
             { field: 'modified_at', title: $filter('translate')('content.list.fields.MODIFIEDAT'), sortable: 'emailCampaign.modifiedAt', filter: { 'emailCampaign.modifiedAt': 'text' }, show: $scope.getParamValue('modified_at_show_filed', false), getValue: $scope.evaluatedValue, valueFormatter: 'date:\''+$filter('translate')('formats.DATETIME')+'\''},
             { field: 'modifier_user', title: $filter('translate')('content.list.fields.MODIFIERUSER'), sortable: 'modifier_user.username', filter: { 'emailCampaign.modifierUser': 'select' }, getValue: $scope.linkValue, filterData: $scope.getUsers(), show: $scope.getParamValue('modifier_user_id_show_filed', false), displayField: 'username', state: 'app.access.usersdetails' },
-            { title: $filter('translate')('content.common.ACTIONS'), show: true, getValue: $scope.interpolatedValue, interpolateExpr: $interpolate('<div class="btn-group pull-right"><button type="button" class="btn btn-success" tooltip-placement="top" uib-tooltip="'+$filter('translate')('content.common.EDIT')+'" ng-click="edit(row)"><i class="ti-pencil-alt"></i></button><button type="button" class="btn btn-warning" tooltip-placement="top" uib-tooltip="'+$filter('translate')('content.common.SHOWDETAILS')+'" ng-click="details(row)"><i class="ti-clipboard"></i></button><button type="button" class="btn btn-danger" tooltip-placement="top" uib-tooltip="'+$filter('translate')('content.common.REMOVE')+'" ng-click="delete(row)"><i class="ti-trash"></i></button></div>') }
+            { field: 'contact_groups', title: $filter('translate')('content.list.fields.CONTACTGROUPS'), show: $scope.getParamValue('contact_groups_show_filed', false), getValue: $scope.linksValue, state: 'app.contactmanager.contactgroupsdetails', displayField: 'name' },            { title: $filter('translate')('content.common.ACTIONS'), show: true, getValue: $scope.interpolatedValue, interpolateExpr: $interpolate('<div class="btn-group pull-right"><button type="button" class="btn btn-success" tooltip-placement="top" uib-tooltip="'+$filter('translate')('content.common.EDIT')+'" ng-click="edit(row)"><i class="ti-pencil-alt"></i></button><button type="button" class="btn btn-warning" tooltip-placement="top" uib-tooltip="'+$filter('translate')('content.common.SHOWDETAILS')+'" ng-click="details(row)"><i class="ti-clipboard"></i></button><button type="button" class="btn btn-danger" tooltip-placement="top" uib-tooltip="'+$filter('translate')('content.common.REMOVE')+'" ng-click="delete(row)"><i class="ti-trash"></i></button></div>') }
         ];
     };
 

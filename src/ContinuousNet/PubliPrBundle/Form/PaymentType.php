@@ -53,6 +53,9 @@ class PaymentType extends AbstractType
             ->add('details', TextareaType::class)
             ->add('note', TextType::class)
             ->add('isValid', CheckboxType::class)
+            ->add('product', EntityType::class, array('expanded' => false, 'multiple' => false, 'class' => 'PubliPrBundle:Product', 'choice_label' => 'name'))
+            ->add('startDate', DateTimeType::class, array('widget' => 'single_text', 'input' => 'datetime'))
+            ->add('endDate', DateTimeType::class, array('widget' => 'single_text', 'input' => 'datetime'))
             ->add('token', TextareaType::class)
         ;
     }

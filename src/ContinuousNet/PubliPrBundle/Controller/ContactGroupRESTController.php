@@ -37,7 +37,6 @@ use Voryx\RESTGeneratorBundle\Controller\VoryxController;
  * @link    http://publipr.continuousnet.com/ContinuousNet/PubliPrBundle/Controller
  * @see      ContactGroupRESTController
  * @since      Class available since Release 1.0
- * @deprecated Nothing
  * @access    public
  * @RouteResource("ContactGroup")
  */
@@ -169,6 +168,10 @@ class ContactGroupRESTController extends BaseRESTController
         try {
             $em = $this->getDoctrine()->getManager();
             $request->setMethod('PATCH'); //Treat all PUTs as PATCH
+            $previousEmailCampaigns = $entity->getEmailCampaigns()->toArray();
+            foreach ($previousEmailCampaigns as $previousEmailCampaign) {
+                $entity->removeEmailCampaign($previousEmailCampaign);
+            }
             $form = $this->createForm(new ContactGroupType(), $entity, array('method' => $request->getMethod()));
             $this->removeExtraFields($request, $form);
             $form->handleRequest($request);

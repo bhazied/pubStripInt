@@ -37,7 +37,6 @@ use Voryx\RESTGeneratorBundle\Controller\VoryxController;
  * @link    http://publipr.continuousnet.com/ContinuousNet/PubliPrBundle/Controller
  * @see      PaymentRESTController
  * @since      Class available since Release 1.0
- * @deprecated Nothing
  * @access    public
  * @RouteResource("Payment")
  */
@@ -86,6 +85,7 @@ class PaymentRESTController extends BaseRESTController
             $em = $this->getDoctrine()->getManager();
             $qb = $em->createQueryBuilder();
             $qb->from('PubliPrBundle:Payment', 'p_');
+            $qb->leftJoin('ContinuousNet\PubliPrBundle\Entity\Product', 'product', \Doctrine\ORM\Query\Expr\Join::WITH, 'p_.product = product.id');
             $qb->leftJoin('ContinuousNet\PubliPrBundle\Entity\User', 'creator_user', \Doctrine\ORM\Query\Expr\Join::WITH, 'p_.creatorUser = creator_user.id');
             $qb->leftJoin('ContinuousNet\PubliPrBundle\Entity\User', 'modifier_user', \Doctrine\ORM\Query\Expr\Join::WITH, 'p_.modifierUser = modifier_user.id');
             $textFields = array('payment.ip', 'payment.currency', 'payment.status', 'payment.discountCode', 'payment.invoiceNumber', 'payment.details', 'payment.note', 'payment.token');

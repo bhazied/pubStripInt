@@ -4,8 +4,8 @@
  * Controller for Payments List
  */
 
-app.controller('PaymentsCtrl', ['$scope', '$rootScope', '$sce', '$timeout', '$filter', 'ngTableParams', '$state', '$q', '$interpolate', '$localStorage', 'toaster', 'SweetAlert', '$usersDataFactory', '$paymentsDataFactory',
-function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q, $interpolate, $localStorage, toaster, SweetAlert, $usersDataFactory, $paymentsDataFactory) {
+app.controller('PaymentsCtrl', ['$scope', '$rootScope', '$sce', '$timeout', '$filter', 'ngTableParams', '$state', '$q', '$interpolate', '$localStorage', 'toaster', 'SweetAlert', '$productsDataFactory', '$usersDataFactory', '$paymentsDataFactory',
+function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q, $interpolate, $localStorage, toaster, SweetAlert, $productsDataFactory, $usersDataFactory, $paymentsDataFactory) {
 
     $scope.isFiltersVisible = false;
 
@@ -22,6 +22,36 @@ function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q,
 
     $scope.locale = (angular.isDefined($localStorage.language))?$localStorage.language:'en';
     $scope.showFieldsMenu = false;
+
+    $scope.products = [];
+    $scope.productsLoaded = false;
+
+    $scope.getProducts = function() {
+        $scope.productsLoaded = true;
+        if ($scope.products.length == 0) {
+            $scope.products.push({});
+            var def = $q.defer();
+            $productsDataFactory.query({offset: 0, limit: 10000, 'order_by[product.id]': 'desc'}).$promise.then(function(data) {
+                $timeout(function(){
+                    if (data.results.length > 0) {
+                        $scope.products.length = 0;
+                        for (var i in data.results) {
+                            $scope.products.push({
+                                id: data.results[i].id,
+                                title: data.results[i].name
+                            });
+                        }
+                        def.resolve($scope.products);
+                    }
+                });
+            });
+            return def;
+        } else {
+            return $scope.products;
+        }
+    };
+
+    $scope.getProducts();
 
     $scope.users = [];
     $scope.usersLoaded = false;
@@ -116,6 +146,9 @@ function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q,
             { field: 'details', title: $filter('translate')('content.list.fields.DETAILS'), sortable: 'payment.details', filter: { 'payment.details': 'text' }, show: $scope.getParamValue('details_show_filed', false), getValue: $scope.textValue },
             { field: 'note', title: $filter('translate')('content.list.fields.NOTE'), sortable: 'payment.note', filter: { 'payment.note': 'text' }, show: $scope.getParamValue('note_show_filed', false), getValue: $scope.textValue },
             { field: 'is_valid', title: $filter('translate')('content.list.fields.ISVALID'), sortable: 'payment.isValid', filter: { 'payment.isValid': 'select' }, show: $scope.getParamValue('is_valid_show_filed', false), getValue: $scope.interpolatedValue, filterData : $scope.booleanOptions, interpolateExpr: $interpolate('<span my-boolean="[[ row.is_valid ]]"></span>') },
+            { field: 'product', title: $filter('translate')('content.list.fields.PRODUCT'), sortable: 'product.name', filter: { 'payment.product': 'select' }, getValue: $scope.linkValue, filterData: $scope.getProducts(), show: $scope.getParamValue('product_id_show_filed', false), displayField: 'name', state: 'app.billing.productsdetails' },
+            { field: 'start_date', title: $filter('translate')('content.list.fields.STARTDATE'), sortable: 'payment.startDate', filter: { 'payment.startDate': 'text' }, show: $scope.getParamValue('start_date_show_filed', false), getValue: $scope.evaluatedValue, valueFormatter: 'date:\''+$filter('translate')('formats.DATETIME')+'\''},
+            { field: 'end_date', title: $filter('translate')('content.list.fields.ENDDATE'), sortable: 'payment.endDate', filter: { 'payment.endDate': 'text' }, show: $scope.getParamValue('end_date_show_filed', false), getValue: $scope.evaluatedValue, valueFormatter: 'date:\''+$filter('translate')('formats.DATETIME')+'\''},
             { field: 'token', title: $filter('translate')('content.list.fields.TOKEN'), sortable: 'payment.token', filter: { 'payment.token': 'text' }, show: $scope.getParamValue('token_show_filed', false), getValue: $scope.textValue },
             { field: 'creator_user', title: $filter('translate')('content.list.fields.CREATORUSER'), sortable: 'creator_user.username', filter: { 'payment.creatorUser': 'select' }, getValue: $scope.linkValue, filterData: $scope.getUsers(), show: $scope.getParamValue('creator_user_id_show_filed', false), displayField: 'username', state: 'app.access.usersdetails' },
             { field: 'created_at', title: $filter('translate')('content.list.fields.CREATEDAT'), sortable: 'payment.createdAt', filter: { 'payment.createdAt': 'text' }, show: $scope.getParamValue('created_at_show_filed', false), getValue: $scope.evaluatedValue, valueFormatter: 'date:\''+$filter('translate')('formats.DATETIME')+'\''},

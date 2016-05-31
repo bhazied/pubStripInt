@@ -175,12 +175,33 @@ class EmailCampaign
     private $modifierUser;
 
     /**
+     * @var \Doctrine\Common\Collections\Collection
+     * @access private
+     *
+     * @ORM\ManyToMany(targetEntity="ContactGroup", inversedBy="emailCampaigns")
+     * @ORM\JoinTable(name="email_campaigns_contact_groups",
+     *     joinColumns={
+     *         @ORM\JoinColumn(name="email_campaign_id", referencedColumnName="id")
+     *     },
+     *     inverseJoinColumns={
+     *         @ORM\JoinColumn(name="contact_group_id", referencedColumnName="id")
+     *     }
+     * )
+     * 
+     * @Expose
+     * @MaxDepth(2)
+     * 
+     */
+    private $contactGroups;
+
+    /**
      * Constructor
      * 
      * @access public
      */
     public function __construct()
     {
+        $this->contactGroups = new DoctrineCollection();
     }
 
     /**
@@ -432,6 +453,62 @@ class EmailCampaign
     public function getModifierUser()
     {
         return $this->modifierUser;
+    }
+
+    /**
+     * Add contactGroup
+     *
+     * @access public
+     * @param ContactGroup $contactGroup
+     * @return EmailCampaign
+     */
+    public function addContactGroup(ContactGroup $contactGroup)
+    {
+        if (!$this->contactGroups->contains($contactGroup))
+        {
+            $this->contactGroups->add($contactGroup);
+        }
+        return $this;
+    }
+
+    /**
+     * Remove contactGroup
+     *
+     * @access public
+     * @param ContactGroup $contactGroup
+     * @return EmailCampaign
+     */
+    public function removeContactGroup(ContactGroup $contactGroup)
+    {
+        if ($this->contactGroups->contains($contactGroup))
+        {
+            $this->contactGroups->removeElement($contactGroup);
+        }
+        return $this;
+    }
+
+    /**
+     * Set contactGroup
+     *
+     * @access public
+     * @param \Doctrine\Common\Collections\Collection
+     * @return EmailCampaign
+     */
+    public function setContactGroups($contactGroups)
+    {
+        $this->contactGroups = $contactGroups;
+        return $this;
+    }
+
+    /**
+     * Get contactGroup
+     *
+     * @access public
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getContactGroups()
+    {
+        return $this->contactGroups;
     }
 
     /**

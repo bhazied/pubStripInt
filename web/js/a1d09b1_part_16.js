@@ -311,7 +311,7 @@ app.constant('APP_JS_REQUIRES', {
         'PressReleaseCtrl': '/bundles/publipr/js/components/PressRelease/PressReleaseCtrl.js',
         'PressReleaseSenderCtrl': '/bundles/publipr/js/components/PressRelease/PressReleaseSenderCtrl.js',
         'PressReleaseEditorCtrl': '/bundles/publipr/js/components/PressRelease/PressReleaseEditorCtrl.js',
-        'PressReleaseEditorCtrl': '/bundles/publipr/js/components/PressRelease/PressReleaseEditorCtrl.js',
+        //'PressReleaseEditorCtrl': '/bundles/publipr/js/components/PressRelease/PressReleaseEditorCtrl.js',
         'SessionsCtrl': '/bundles/publipr/js/components/Session/SessionsCtrl.js',
         'SessionFormCtrl': '/bundles/publipr/js/components/Session/SessionFormCtrl.js',
         'SessionCtrl': '/bundles/publipr/js/components/Session/SessionCtrl.js',
@@ -2389,10 +2389,11 @@ function ($stateProvider) {
     }).state('app.prmanager.pressreleasessend', {
         url: '/press-releases/send/:id',
         templateUrl: '/bundles/publipr/js/components/PressRelease/press_release_sender.html',
+        title: 'content.list.SENDPRESSRELEASE',
         ncyBreadcrumb: {
             label: 'content.list.SENDPRESSRELEASE'
         },
-        resolve: loadSequence('PressReleaseSenderCtrl', 'PressReleaseSenderService', 'pressReleaseService')
+        resolve: loadSequence('PressReleaseSenderCtrl', 'PressReleaseSenderService', 'pressReleaseService', 'contactGroupService')
     }).state('app.settings', {
         url: '/settings',
         template: '<div ui-view class="fade-in-up"></div>',

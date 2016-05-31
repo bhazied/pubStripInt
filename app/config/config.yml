@@ -13,6 +13,9 @@ parameters:
     jwt_token_ttl: 86400
     router.options.generator_class: "ContinuousNet\\PubliPrBundle\\Routing\\Generator\\UrlGenerator"
     router.options.generator_base_class: "ContinuousNet\\PubliPrBundle\\Routing\\Generator\\UrlGenerator"
+    emailTemplate.interpretor.startWith : '%'
+    emailTemplate.interpretor.endWith : '%'
+    payment.strip.apiKey: 'sk_test_G1i3m8o5CxEtc3tqrc3MJYPe'
 
 lexik_jwt_authentication:
     private_key_path: %jwt_private_key_path%
@@ -31,6 +34,10 @@ publi_pr:
         paied: 'client'
     uplopad:
         main_dir: '/var/www/publipr/web/'
+    contact:
+        address: 'PubliPr Inc FR'
+        email: 'distribution@publipr.continuousnet.com'
+
 
 
 framework:
@@ -362,6 +369,25 @@ assetic:
             inputs:
                 - 'bower_components/elfinder/dist/css/elfinder.min.css'
                 - 'bower_components/elfinder/dist/css/theme.css' #.min
+        codemirror_css:
+            inputs:
+                - 'bower_components/codemirror/lib/codemirror.css'
+        froala_css:
+            inputs:
+                - 'bower_components/froala-wysiwyg-editor/css/froala_editor.min.css'
+                - 'bower_components/froala-wysiwyg-editor/css/froala_style.min.css'
+                - 'bower_components/froala-wysiwyg-editor/css/plugins/char_counter.css'
+                - 'bower_components/froala-wysiwyg-editor/css/plugins/code_view.css'
+                - 'bower_components/froala-wysiwyg-editor/css/plugins/colors.css'
+                - 'bower_components/froala-wysiwyg-editor/css/plugins/emoticons.css'
+                - 'bower_components/froala-wysiwyg-editor/css/plugins/file.css'
+                - 'bower_components/froala-wysiwyg-editor/css/plugins/fullscreen.css'
+                - 'bower_components/froala-wysiwyg-editor/css/plugins/image.css'
+                - 'bower_components/froala-wysiwyg-editor/css/plugins/image_manager.css'
+                - 'bower_components/froala-wysiwyg-editor/css/plugins/line_breaker.css'
+                - 'bower_components/froala-wysiwyg-editor/css/plugins/quick_insert.css'
+                - 'bower_components/froala-wysiwyg-editor/css/plugins/table.css'
+                - 'bower_components/froala-wysiwyg-editor/css/plugins/video.css'
         continuous_net_css:
             inputs:
                 - 'styles/animate.css'
@@ -410,7 +436,8 @@ assetic:
                 - 'bower_components/angular-slugify/angular-slugify.js'
                 - 'bower_components/angular-recaptcha/release/angular-recaptcha.js' #.min
                 - 'bower_components/AngularJS-Toaster/toaster.js'
-
+                - 'bower_components/highcharts/highcharts.js'
+                - 'bower_components/highcharts-ng/dist/highcharts-ng.min.js'
         angular_storage:
             inputs:
                 - 'bower_components/ngstorage/ngStorage.js' #.min
@@ -445,6 +472,40 @@ assetic:
                 - 'app/scripts/extentions/modernizr.js'
                 - 'app/scripts/extentions/lib.js'
                 - 'bower_components/file-saver.js/FileSaver.js'
+        codemirror:
+            inputs:
+                - 'bower_components/codemirror/lib/codemirror.js'
+                - 'bower_components/codemirror/mode/xml/xml.js'
+        froala:
+            inputs:
+                - 'bower_components/froala-wysiwyg-editor/js/froala_editor.min.js'
+                - 'bower_components/froala-wysiwyg-editor/js/plugins/align.min.js'
+                - 'bower_components/froala-wysiwyg-editor/js/plugins/char_counter.min.js'
+                - 'bower_components/froala-wysiwyg-editor/js/plugins/code_beautifier.min.js'
+                - 'bower_components/froala-wysiwyg-editor/js/plugins/code_view.min.js'
+                - 'bower_components/froala-wysiwyg-editor/js/plugins/colors.min.js'
+                - 'bower_components/froala-wysiwyg-editor/js/plugins/emoticons.min.js'
+                - 'bower_components/froala-wysiwyg-editor/js/plugins/entities.min.js'
+                - 'bower_components/froala-wysiwyg-editor/js/plugins/file.min.js'
+                - 'bower_components/froala-wysiwyg-editor/js/plugins/font_family.min.js'
+                - 'bower_components/froala-wysiwyg-editor/js/plugins/font_size.min.js'
+                - 'bower_components/froala-wysiwyg-editor/js/plugins/fullscreen.min.js'
+                - 'bower_components/froala-wysiwyg-editor/js/plugins/image.min.js'
+                - 'bower_components/froala-wysiwyg-editor/js/plugins/image_manager.min.js'
+                - 'bower_components/froala-wysiwyg-editor/js/plugins/inline_style.min.js'
+                - 'bower_components/froala-wysiwyg-editor/js/plugins/line_breaker.min.js'
+                - 'bower_components/froala-wysiwyg-editor/js/plugins/link.min.js'
+                - 'bower_components/froala-wysiwyg-editor/js/plugins/lists.min.js'
+                - 'bower_components/froala-wysiwyg-editor/js/plugins/paragraph_format.min.js'
+                - 'bower_components/froala-wysiwyg-editor/js/plugins/paragraph_style.min.js'
+                - 'bower_components/froala-wysiwyg-editor/js/plugins/quick_insert.min.js'
+                - 'bower_components/froala-wysiwyg-editor/js/plugins/quote.min.js'
+                - 'bower_components/froala-wysiwyg-editor/js/plugins/table.min.js'
+                - 'bower_components/froala-wysiwyg-editor/js/plugins/save.min.js'
+                - 'bower_components/froala-wysiwyg-editor/js/plugins/url.min.js'
+                - 'bower_components/froala-wysiwyg-editor/js/plugins/video.min.js'
+                - 'bower_components/froala-wysiwyg-editor/js/languages/fr.js'
+
         continuous_net_scripts:
             inputs:
                 - 'app/scripts/app.js'
@@ -497,3 +558,21 @@ assetic:
         continuous_net_tools:
             inputs:
                 - 'app/scripts/tools/toQueryString.js'
+
+hip_mandrill:
+    api_key: DfetkxjatL5oAC8_-lWVoA
+    disable_delivery: false # useful for dev/test environment. Default value is 'false'
+    # debug: passed to \Mandrill causing it to output curl requests. Useful to see output
+    # from CLI script. Default value is 'false'
+    debug: true
+    default:
+        sender: info@continuousnet.com
+        sender_name: Continuous Net # Optionally define a sender name (from name)
+        #subaccount: publiPr # Optionally define a subaccount to use
+    #proxy:
+     #   use: true # when you are behing a proxy. Default value is 'false'
+     #   host: example.com
+     #   port: 80
+     #   user: john
+     #   password: doe123
+

@@ -1,0 +1,147 @@
+<!-- start: PAGE TITLE -->
+<section id="page-title">
+    <div class="row">
+        <div class="col-sm-8">
+            <h1 class="mainTitle" translate="content.list.PRESSRELEASESTATS">Statistics of the press release</h1>
+            <span class="mainDescription"></span>
+        </div>
+        <div ncy-breadcrumb></div>
+    </div>
+</section>
+<div class="container-fluid container-fullw bg-white">
+    <div class="row">
+        <div class="col-md-12" ng-controller="PressReleaseStatsCtrl">
+            <div class="row">
+            <legend translate="content.list.PRESSRELEASESTATS">
+                Statistics of the press release
+            </legend>
+
+            <div ng-if="statsLoaded">
+                <div class="col-md-6">
+                    <highchart id="chart1" config="chartinit"></highchart>
+                </div>
+                <div class="col-md-6 ">
+                <div class="table-responsive">
+                    <table class="table table-condensed table-bordered">
+                        <thead>
+                        <tr>
+                            <th colspan="2" translate="content.list.PRESSRELEASEDETAILS">Press Release Details</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td><span translate="content.list.TOTALEMAILSENT">Total email sent</span></td>
+                            <td>
+                                <div>[[sendStats.total_sent]]</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span translate="content.list.TOTALEMAILOPENS">Total email opens</span></td>
+                            <td>
+                                <div>[[sendStats.total_opens]]</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span translate="content.list.TOTALEMAILCLICKS">Total email clicks</span></td>
+                            <td>
+                                <div>[[sendStats.total_clicks]]</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span translate="content.list.EMAILUNIQUEOPENS">Unique opens</span></td>
+                            <td>
+                                <div>[[sendStats.unique_opens]]</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span translate="content.list.EMAILUNIQUECLICKS">Unique clicks</span></td>
+                            <td>
+                                <div>[[sendStats.unique_clicks]]</div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                    <highchart id="chart2" config="chartpie"></highchart>
+                </div>
+            </div>
+            </div>
+            <div class="row">
+                <legend translate="content.list.EMAILSDETAILS">
+                    Emails details
+                </legend>
+                <form name="pressReleaseStats" id="pressReleaseStats" ng-submit="submitForm(pressReleaseStats)">
+                    <input type="hidden" name="id" id="id" ng-model="prId" value="[[prId]]">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group" ng-class="{'has-error':startDate.$dirty && startDate.$invalid, 'has-success':startDate.$valid}">
+                                <label for="startDate" class="control-label">
+                                    <span translate="content.list.fields.STARTDATE">Start Date</span>
+                                </label>
+                                <div class="input-group">
+                                        <span class="input-icon">
+                                            <input ng-model="start_date" type="text" name="startDate" id="startDate" class="form-control" placeholder="[[ 'content.list.fields.STARTDATE' | translate ]]" is-open="startDateOpened" uib-datepicker-popup="[[dateFormat]]" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="[[ 'content.common.CLOSE' | translate ]]" current-text="[[ 'content.common.CURRENT' | translate ]]" clear-text="[[ 'content.common.CLEAR' | translate ]]" time-text="[[ 'content.common.TIME' | translate ]]" date-text="[[ 'content.common.DATE' | translate ]]" ng-required="true" />
+                                            <i class="ti-control-skip-forward"></i>
+                                        </span><!--/input-icon-->
+                                        <span class="input-group-btn">
+                                            <a type="button" class="btn btn-primary" ng-click="startDateToggle($event)">
+                                                <i class="fa fa-calendar"></i>
+                                            </a>
+                                        </span>
+                                </div>
+                            </div><!--/form-group-->
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group" ng-class="{'has-error':endDate.$dirty && endDate.$invalid, 'has-success':endDate.$valid}">
+                                <label for="endDate" class="control-label">
+                                    <span translate="content.list.fields.ENDDATE">End Date</span>
+                                </label>
+                                <div class="input-group">
+                                        <span class="input-icon">
+                                            <input ng-model="end_date" type="text" name="endDate" id="endDaye" class="form-control" placeholder="[[ 'content.list.fields.ENDDATE' | translate ]]" is-open="endDateOpened" uib-datepicker-popup="[[dateFormat]]" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="[[ 'content.common.CLOSE' | translate ]]" current-text="[[ 'content.common.CURRENT' | translate ]]" clear-text="[[ 'content.common.CLEAR' | translate ]]" time-text="[[ 'content.common.TIME' | translate ]]" date-text="[[ 'content.common.DATE' | translate ]]" ng-required="true" />
+                                            <i class="ti-control-skip-backward"></i>
+                                        </span><!--/input-icon-->
+                                        <span class="input-group-btn">
+                                            <a type="button" class="btn btn-primary" ng-click="endDateToggle($event)">
+                                                <i class="fa fa-calendar"></i>
+                                            </a>
+                                        </span>
+                                </div>
+                            </div><!--/form-group-->
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div ng-if="resetOn">
+                            <div class="col-md-4">
+                                <button type="button" ng-click="resetSearch()" class="btn btn-primary pull-left">
+                                   <i class="fa fa-refresh" ng-if="!disableReset"></i> <i class="fa fa-spinner fa-spin" ng-if="disableReset"></i> <span translate="content.list.RESETSEARCH">Reset search</span>
+                                    <!--<i class="fa fa-refresh" aria-hidden="true"></i>-->
+                                </button>
+                            </div>
+                        </div>
+                        <div  ng-class="{'col-md-8':resetOn , 'col-md-12':!resetOn}">
+                            <button type="button" ng-click="submitForm(pressReleaseStats)" class="btn btn-primary pull-right" ng-disabled="disableSubmit"> <!--  ng-disabled="pressReleaseForm.$invalid" -->
+                                <i class="fa fa-spinner fa-spin" ng-if="disableSubmit"></i><i class="ti-save" ng-if="!disableSubmit"></i> <span translate="content.common.SAVE">Save</span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                <p>
+                    <strong translate="content.common.PAGE">Page:</strong> [[tableParams.page()]] - <strong translate="content.common.TOTAL">Total:</strong> [[tableParams.total()]] - <strong translate="content.common.COUNTPERPAGE">Count per page:</strong> [[tableParams.count()]]
+                </p>
+                <div class="table-responsive">
+                    <div loading-container="tableParams.settings().$loading">
+                        <table ng-table-dynamic="tableParams with cols" class="table table-condensed table-bordered table-striped">
+                            <colgroup>
+                                <col ng-repeat="col in $columns" />
+                            </colgroup>
+                            <tr ng-repeat="row in $data">
+                                <!--<td ng-repeat="col in $columns" bind-html-compile="col.getValue(this, row)"></td>-->
+                                <td ng-repeat="col in $columns" bind-html-compile="row[col.field]"></td>
+                            </tr>
+                        </table>
+                </div>-
+            </div>
+        </div>
+    </div>
+</div>

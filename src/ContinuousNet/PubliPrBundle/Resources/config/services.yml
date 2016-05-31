@@ -3,6 +3,7 @@ parameters:
     publi_pr.event.jwt_created_listener.class: ContinuousNet\PubliPrBundle\EventListener\JWTCreatedListener
     publi_pr.event.jwt_decoded_listener.class: ContinuousNet\PubliPrBundle\EventListener\JWTDecodedListener
     publi_pr.form.handler.registration.class: ContinuousNet\PubliPrBundle\Form\Handler\RegistrationFormHandler
+    publi_pr.settings.class: ContinuousNet\PubliPrBundle\Services\Settings
 
 services:
     publi_pr.event.jwt_response_listener:
@@ -35,3 +36,7 @@ services:
           - @fos_user.util.token_generator
         scope: request
         public: false
+    publi_pr.settings:
+        class:  %publi_pr.settings.class%
+        arguments:
+          - @doctrine.orm.entity_manager

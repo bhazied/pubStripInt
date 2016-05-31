@@ -79722,10 +79722,11 @@ function ($stateProvider) {
     }).state('app.prmanager.pressreleasessend', {
         url: '/press-releases/send/:id',
         templateUrl: '/bundles/publipr/js/components/PressRelease/press_release_sender.html',
+        title: 'content.list.SENDPRESSRELEASE',
         ncyBreadcrumb: {
             label: 'content.list.SENDPRESSRELEASE'
         },
-        resolve: loadSequence('PressReleaseSenderCtrl', 'PressReleaseSenderService', 'pressReleaseService')
+        resolve: loadSequence('PressReleaseSenderCtrl', 'PressReleaseSenderService', 'pressReleaseService', 'contactGroupService')
     }).state('app.settings', {
         url: '/settings',
         template: '<div ui-view class="fade-in-up"></div>',

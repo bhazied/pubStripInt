@@ -37,7 +37,6 @@ use Voryx\RESTGeneratorBundle\Controller\VoryxController;
  * @link    http://publipr.continuousnet.com/ContinuousNet/PubliPrBundle/Controller
  * @see      FontRESTController
  * @since      Class available since Release 1.0
- * @deprecated Nothing
  * @access    public
  * @RouteResource("Font")
  */
