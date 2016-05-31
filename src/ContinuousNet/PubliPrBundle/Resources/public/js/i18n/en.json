@@ -271,7 +271,8 @@
             "SEGMENTSNOTREMOVED": "Segments not removed",
             "COMINGSOON": "Coming Soon",
             "STATS" : "statistics",
-            "SEND" : "Send"
+            "SEND" : "Send",
+            "INVOICE": "Invoice"
         },
         "form": {
             "messages": {

@@ -271,7 +271,8 @@
             "SEGMENTSNOTREMOVED": "Segments not removed",
             "COMINGSOON": "Coming Soon",
             "STATS" : "statistiques",
-            "SEND" : "Envoi"
+            "SEND" : "Envoi",
+            "INVOICE": "Facture"
         },
         "form": {
             "messages": {
