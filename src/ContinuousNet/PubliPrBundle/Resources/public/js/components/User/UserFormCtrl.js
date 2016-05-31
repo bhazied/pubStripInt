@@ -355,9 +355,9 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
                 folder: function() {
                     var company = '00000' + $localStorage.user.company;
                     company = company.substr(company.length - 5);
-                    var newsroom = '00000' + $scope.newsroom.id;
-                    newsroom = newsroom.substr(newsroom.length - 5);
-                    return 'companies/company_'+company+'/newsroom_'+newsroom;
+                    var user_ = '00000' + $scope.user.id;
+                    user_ = user_.substr(user_.length - 5);
+                    return 'users/company_'+company+'/user_'+user_;
                 }
             }
         });

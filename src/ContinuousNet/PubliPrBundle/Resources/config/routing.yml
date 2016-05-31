@@ -124,16 +124,6 @@ press_release_sender:
     type:     rest
     prefix:   /api
 
-subscription:
-    resource: "@PubliPrBundle/Controller/SubscriptionApiController.php"
-    type:      rest
-    prefix:    /api
-
-invoice:
-    resource: "@PubliPrBundle/Controller/InvoiceRestController.php"
-    type:      rest
-    prefix:    /api
-
 publi_pr_product_api:
     resource: "@PubliPrBundle/Controller/ProductRESTController.php"
     type:   rest
