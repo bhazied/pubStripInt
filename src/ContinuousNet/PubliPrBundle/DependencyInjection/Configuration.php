@@ -36,6 +36,11 @@ class Configuration implements ConfigurationInterface
                             ->isRequired()
                             ->cannotBeEmpty()
                         ->end()
+                        ->integerNode('default_tva')
+                        ->defaultValue(10)
+                        ->isRequired()
+                        ->cannotBeEmpty()
+                        ->end()
                     ->end()
                 ->end()
                 ->arrayNode('url_public_path')
@@ -74,6 +79,7 @@ class Configuration implements ConfigurationInterface
                             ->cannotBeEmpty()
                         ->end()
                     ->end()
+                ->end()
             ->end()
         ;
 

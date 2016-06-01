@@ -37,7 +37,7 @@
         }
 
         .invoice-box table tr.top table td.title{
-            font-size:45px;
+            font-size:35px;
             line-height:45px;
             color:#333;
         }
@@ -93,8 +93,9 @@
                 <table>
                     <tr>
                         <td class="title">
-                            <!--<img src="http://nextstepwebs.com/images/logo.png" style="width:100%; max-width:300px;">-->
-                            Publi Pr Invoice For %product_name%
+                            <!--<img src="http://publipr/app/images/logo-dark.png" style="width:100%; max-width:300px;">-->
+                            <img src="%logo%" style="width:100%; max-width:300px;">
+                            <!-- Publi Pr Invoice For %product_name% -->
                         </td>
 
                         <td>
@@ -117,13 +118,6 @@
                             %zip_code% %address%<br>
                             %city%
                         </td>
-
-                        <td>
-                            <b>shipped to</b><br>
-                            %user_name%.<br>
-                            %zip_code% %address%<br>
-                            %city%
-                        </td>
                     </tr>
                 </table>
             </td>
@@ -141,7 +135,7 @@
 
         <tr class="details">
             <td>
-                Stripe
+                Stripe Order Id
             </td>
 
             <td colspan="2">
@@ -163,7 +157,7 @@
             </td>
         </tr>
 
-        <tr class="item last">
+        <tr class="item">
             <td>
                 %product_name%
             </td>
@@ -174,6 +168,17 @@
 
             <td>
                 %price% €
+            </td>
+        </tr>
+        <tr class="item last">
+            <td>
+                TVA %
+            </td>
+            <td>
+                %tva% %
+            </td>
+            <td>
+                %price_tva% €
             </td>
         </tr>
 

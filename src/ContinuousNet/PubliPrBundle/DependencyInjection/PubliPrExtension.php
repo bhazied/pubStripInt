@@ -27,5 +27,7 @@ class PubliPrExtension extends Extension
 
         $container->setParameter('publipr.contact.address', $config['contact']['address']);
         $container->setParameter('publipr.contact.email', $config['contact']['email']);
+        $container->setParameter('publipr.settings.default_currency', $config['settings']['default_currency']);
+        $container->setParameter('publipr.settings.default_tva', $config['settings']['default_tva']);
     }
 }

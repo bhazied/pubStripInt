@@ -62,23 +62,23 @@
         "WELCOME": "Welcome to [[appName]]"
     },
     "topbar": {
-      "messages": {
-        "MAIN": "Messages",
-        "HEADER": "Unread messages",
-        "SEEALL": "See All"
-      },
-      "activities": {
-        "MAIN": "Activities",
-        "HEADER": "You have new notifications",
-        "SEEALL": "See All"
-      },
-      "user": {
-        "PROFILE": "My Profile",
-        "CALENDAR": "My Calendar",
-        "MESSAGES": "My Messages",
-        "LOCKSCREEN": "Lock Screen",
-        "LOGOUT": "Log Out"
-      }
+        "messages": {
+            "MAIN": "Messages",
+            "HEADER": "Unread messages",
+            "SEEALL": "See All"
+        },
+        "activities": {
+            "MAIN": "Activities",
+            "HEADER": "You have new notifications",
+            "SEEALL": "See All"
+        },
+        "user": {
+            "PROFILE": "My Profile",
+            "CALENDAR": "My Calendar",
+            "MESSAGES": "My Messages",
+            "LOCKSCREEN": "Lock Screen",
+            "LOGOUT": "Log Out"
+        }
     },
     "setting": {
         "MAIN": "Style Selector",
@@ -97,79 +97,119 @@
     },
     "offsidebar": {
         "chat": {
-          "ONLINE": "On-Line",
-          "OFFLINE": "Off-Line",
-          "BACK": "Back",
-          "SEND": "Send",
-          "PLACEHOLDER": "Message"
-      },
-      "favorites": {
-        "MAIN": "Favorites"
-      },
-      "settings": {
-        "MAIN": "General Settings",
-        "NOTIFICATIONS": "Enable Notifications",
-        "SHOWEMAIL": "Show your E-mail",
-        "SHOWUSERS": "Show Offline Users",
-        "EMAILALERT": "E-mail Alerts",
-        "SMSALERT": "SMS Alerts",
-        "SAVE": "Save Changes"
-      }
-    },
-    "sidebar": {
-      "heading": {
-        "NAVIGATION": "Main Navigation",
-        "FEATURES": "Core Features",
-        "DOCUMENTATION": "Documentation"
-      },
-      "search": {
-        "PLACEHOLDER": "Search..."
-      },
-      "nav": {
-        "dashboard": {
-            "MAIN": "Dashboard"
+            "ONLINE": "On-Line",
+            "OFFLINE": "Off-Line",
+            "BACK": "Back",
+            "SEND": "Send",
+            "PLACEHOLDER": "Message"
         },
-        "logout": {
-            "MAIN": "Lougout"
-        },
-        "access": {
-            "MAIN": "Access"
-        },
-        "contactmanager": {
-            "MAIN": "ContactManager"
-        },
-        "templatemanager": {
-            "MAIN": "TemplateManager"
-        },
-        "configuration": {
-            "MAIN": "Configuration"
-        },
-        "distribution": {
-            "MAIN": "Distribution"
-        },
-        "prmanager": {
-            "MAIN": "PRManager"
+        "favorites": {
+            "MAIN": "Favorites"
         },
         "settings": {
-            "MAIN": "Settings"
-        },
-        "billing": {
-            "MAIN": "Billing"
-        },
-        "accesscontrol": {
-            "MAIN": "AccessControl"
-        },
-        "statistics": {
-            "MAIN": "Statistics"
+            "MAIN": "General Settings",
+            "NOTIFICATIONS": "Enable Notifications",
+            "SHOWEMAIL": "Show your E-mail",
+            "SHOWUSERS": "Show Offline Users",
+            "EMAILALERT": "E-mail Alerts",
+            "SMSALERT": "SMS Alerts",
+            "SAVE": "Save Changes"
         }
-      }
+    },
+    "sidebar": {
+        "heading": {
+            "NAVIGATION": "Main Navigation",
+            "FEATURES": "Core Features",
+            "DOCUMENTATION": "Documentation"
+        },
+        "search": {
+            "PLACEHOLDER": "Search..."
+        },
+        "nav": {
+            "dashboard": {
+                "MAIN": "Dashboard"
+            },
+            "logout": {
+                "MAIN": "Lougout"
+            },
+            "access": {
+                "MAIN": "Access"
+            },
+            "contactmanager": {
+                "MAIN": "ContactManager"
+            },
+            "templatemanager": {
+                "MAIN": "TemplateManager"
+            },
+            "configuration": {
+                "MAIN": "Configuration"
+            },
+            "distribution": {
+                "MAIN": "Distribution"
+            },
+            "prmanager": {
+                "MAIN": "PRManager"
+            },
+            "settings": {
+                "MAIN": "Settings"
+            },
+            "billing": {
+                "MAIN": "Billing"
+            },
+            "accesscontrol": {
+                "MAIN": "AccessControl"
+            },
+            "statistics": {
+                "MAIN": "Statistics"
+            }
+        }
     },
     "formats": {
         "DATE": "MM/dd/yyyy",
         "TIME": "h:mma",
         "DATETIME": "MM/dd/yyyy h:mma"
     },
-   "content": {
+    "payment":{
+        "warningTitle": "not yet paid",
+        "warningText": "choose and pay for the package that goes with you",
+        "PROFILENOTCOMPLETE" : "Not complete profile",
+        "PROFILENOTCOMPLETETEXT" : "you must complete your profile (address, Zip code ..)",
+        "MONTHS" :{
+            "SELECTMONTH": "Select a month",
+            "JANURAY": "January",
+            "FEBRUARY": "February",
+            "MARCH": "March",
+            "APRIL": "April",
+            "MAY": "May",
+            "JUNE": "June",
+            "JULY": "July",
+            "AUGUST": "August",
+            "SEPTEMBER": "September",
+            "OCTOBER": "October",
+            "NOVEMBER": "November",
+            "DECEMBER": "December"
+        },
+        "TOTALPRICE" : "total to pay",
+        "invoice" : {
+            "ORDERDATE": "Order date",
+            "DESCRIPTION" : "Description",
+            "UNUTPRICE" : "Unit price",
+            "AMOUNT" : "Amount",
+            "TVA" : "TVA %",
+            "TVAVALUE": "TVA",
+            "AMOUNTPAID": "Amount paid",
+            "AMOUNTDUE" : "Amount due",
+            "PAYMENTMETHOD": "Payment Method",
+            "SHIPPEDTO" : "Shipped to",
+            "BILLEDTO": "Billed to",
+            "INVOICENUMBER" : "Invoice number",
+            "EXPORTTOPDF": "Export to PDF",
+            "QUANTITY": "Quantity",
+            "DOWNLOADERRORTITLE": "No Invoice",
+            "DOWNLOADERRORBODY": "No Invoice to download"
+        }
+    },
+    "content": {
         "common": {
             "ENABLEBATCHADD": "Enable batch add",
             "CLEARSORTING": "Clear sorting",
@@ -231,7 +271,10 @@
             "REMOVESEGMENTS": "Remove segments",
             "SEGMENTSREMOVED": "Segments removed",
             "SEGMENTSNOTREMOVED": "Segments not removed",
-            "COMINGSOON": "Coming Soon"
+            "COMINGSOON": "Coming Soon",
+            "STATS" : "statistics",
+            "SEND" : "Send",
+            "INVOICE": "Invoice"
         },
         "form": {
             "messages": {
@@ -454,7 +497,15 @@
                 "VALUEREQUIRED": "The Value is required",
                 "SELECTACTION": "Select Action",
                 "ACTIONREQUIRED": "The Action is required",
-                "ENTERSOURCE": "Enter the Source"
+                "ENTERSOURCE": "Enter the Source",
+                "CARDNUMBER" : "Card Number",
+                "CARDMONTHEXPR" : "Expiration Month",
+                "CARDYEAREXPR" : "Expiration Year",
+                "CARDCCV" : "CCV",
+                "CARDNUMBERREQUIRED" : "Card number is required",
+                "CARDMONTHEXPRREQUIRED": "Expiry month is required",
+                "CARDYEAREXPRREQUIRED": "Expiry year is required",
+                "CARDCCVREQUIRED" : "Ccv is required"
             }
         },
         "list": {
@@ -705,12 +756,15 @@
             "EDITPRESSRELEASE": "Edit Press Release",
             "PRESSRELEASEUPDATED": "Press Release Updated",
             "PRESSRELEASENOTUPDATED": "Press Release Not Updated",
+            "PRESSRELEASEUPDATED": "Press Release sent",
+            "PRESSRELEASENOTUPDATED": "Press Release not sent",
             "PRESSRELEASECREATED": "Press Release Created",
             "PRESSRELEASENOTCREATED": "Press Release Not Created",
             "YOUWILLNOTBEABLETORECOVERPRESSRELEASE": "You will not be able to recover this Press Release!",
             "PRESSRELEASEDELETED": "Press Release Deleted",
             "PRESSRELEASENOTDELETED": "Press Release Not Deleted",
             "BACKPRESSRELEASES": "Back To Press Releases List",
+            "PRESSRELEASESTATS" : "Statistics of the press release",
             "PRODUCTS": "Products",
             "PRODUCT": "Product",
             "ADDPRODUCT": "Add New Product",
@@ -795,6 +849,16 @@
             "TRACKPRESSRELEASEDELETED": "Track Press Release Deleted",
             "TRACKPRESSRELEASENOTDELETED": "Track Press Release Not Deleted",
             "BACKTRACKPRESSRELEASES": "Back To Track Press Releases List",
+            "TOTALEMAILSENT" : "Total of emails sent",
+            "TOTALEMAILOPENS" : "Total of emails opened",
+            "TOTALEMAILCLICKS" : "Total of emails clicked",
+            "EMAILUNIQUEOPENS" : "single opening",
+            "EMAILUNIQUECLICKS" : "single Clicks",
+            "PRESSRELEASESEARSHSTATS": "history of press releases",
+            "EMAILSDETAILS" : "Emails details",
+            "PRESSRELEASEPIECHARTTITLE" : "Press release details",
+            "INVOICE" : "Invoice",
+            "PURCHASE": "Purchase of a package",
             "fields": {
                 "CAPTCHA": "Security check",
                 "ID": "Id",
@@ -963,6 +1027,18 @@
                 "VALUE": "Value",
                 "ACTION": "Action",
                 "SOURCE": "Source",
+                "EMAIL" : "E-mail",
+                "SENTDATE" : "Sending date",
+                "OPENS": "Open",
+                "STATE" : "State",
+                "CLICKS": "clicked",
+                "ENDDATE" : "End date",
+                "STARTDATE" : "Start date",
+                "SENT" : "Sent",
+                "CARDMONTHEXPR" : "Expiration month",
+                "CARDYEAREXPR" : "Expiration year",
+                "CARDCcv" : "CCV",
+                "CARDNUMBER" : "Card Number",
                 "blocktypes": {
                     "TEXT": "Text",
                     "BOXEDTEXT": "Boxed Text",

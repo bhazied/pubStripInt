@@ -1,16 +1,19 @@
 <div class="main-content" ng-controller="InvoiceCtrl">
     <div class="mb15 clearfix">
         <div class="pull-right text-right">
-            <i class="fa fa-diamond fa-4x mb20"></i>
+            <!--<i class="fa fa-diamond fa-4x mb20"></i>-->
+            <img src="/app/images/logo-dark.png">
             <p>01 April 2015</p>
-            <h5 class="text-uppercase">[['payment.invoice.INVOICENUMBER' | translate]]  #0001</h5>
-            <small>Payment due by 01 May 2015</small>
+            <h5 class="text-uppercase">[['payment.invoice.INVOICENUMBER' | translate]]  #[[ invoice.invoice.invoice_number ]]</h5>
+            <!--<small>Payment due by 01 May 2015</small>-->
         </div>
         <div class="w150">
             <!--<button type="button" class="btn btn-danger btn-block text-left no-print mb15" onclick="window.print();">
                 <i class="ti-printer mr5"></i>Print
             </button> -->
-            <button type="button" class="btn btn-info btn-block text-left no-print"  ng-click="exportInvoice(invoice.id)" translate="payment.invoice.EXPORTTOPDF">Export to PDF</button>
+            <button type="button" class="btn btn-info btn-block text-left no-print"  ng-click="exportInvoice(invoice.invoice.id)">
+                <i class="fa fa-spinner fa-spin" ng-if="disableExport"></i><i class="ti-download" ng-if="!disableExport"></i> <span translate="payment.invoice.EXPORTTOPDF">Export to PDF</span>
+            </button>
         </div>
     </div>
     <div id="InvoiceExport">
@@ -20,20 +23,21 @@
                     <div class="col-xs-6">
                         <address class="no-margin">
                             <strong translate="payment.invoice.BILLEDTO">Billed To:</strong><br>
-                            [[ invoice.creator_user.first_name +'  '+ invoice.creator_user.last_name]]<br>
-                            [[ invoice.creator_user.zip_code +' '+  invoice.creator_user.address ]]<br>
-                            [[ invoice.creator_user.city ]]<br>
-                            [[ invoice.creator_user.country ]]
+                            [[ invoice.invoice.creator_user.first_name +'  '+ invoice.invoice.creator_user.last_name]]<br>
+                            [[ invoice.invoice.creator_user.zip_code +' '+  invoice.invoice.creator_user.address ]]<br>
+                            [[ invoice.invoice.creator_user.city ]]<br>
+                            [[ invoice.invoice.creator_user.country ]]<br>
+                            [[ invoice.invoice.creator_user.email ]]
                         </address>
                     </div>
                     <div class="col-xs-6 text-right">
-                        <address class="no-margin">
+                       <!-- <address class="no-margin">
                             <strong translate="payment.invoice.SHIPPEDTO">Shipped To:</strong><br>
-                            [[ invoice.creator_user.first_name +'  '+ invoice.creator_user.last_name]]<br>
-                            [[ invoice.creator_user.zip_code +' '+  invoice.creator_user.address ]]<br>
-                            [[ invoice.creator_user.city ]]<br>
-                            [[ invoice.creator_user.country ]]
-                        </address>
+                            [[ invoice.invoice.creator_user.first_name +'  '+ invoice.invoice.creator_user.last_name]]<br>
+                            [[ invoice.invoice.creator_user.zip_code +' '+  invoice.invoice.creator_user.address ]]<br>
+                            [[ invoice.invoice.creator_user.city ]]<br>
+                            [[ invoice.invoice.creator_user.country ]]
+                        </address> -->
                     </div>
                 </div>
             </div>
@@ -43,14 +47,14 @@
             <div class="col-xs-6">
                 <address>
                     <strong translate="payment.invoice.PAYMENTMETHOD">Payment Method:</strong><br>
-                    Stripe API<br>
-                    [[ invoice.creator_user.email ]]
+                    Stripe Order ID<br>
+                    [[ invoice.invoice.token ]]
                 </address>
             </div>
             <div class="col-xs-6 text-right">
                 <address>
                     <strong translate="payment.invoice.ORDERDATE">Order Date:</strong><br>
-                    [[ invoice.creator_user.created_at | date : translate:"formats.DATE"]]<br><br>
+                    [[ invoice.invoice.creator_user.created_at | date : translate:"formats.DATE"]]<br><br>
                 </address>
             </div>
         </div>
@@ -68,16 +72,16 @@
                 <tbody>
                 <tr>
                     <td>
-                        [[ invoice.product.description ]]
+                        [[ invoice.invoice.product.description ]]
                     </td>
                     <td>
-                        [[ invoice.product.price ]] <i class="fa fa-euro"></i>
+                        [[ invoice.invoice.amount ]] <i class="fa fa-euro"></i>
                     </td>
                     <td>
                         1
                     </td>
                     <td>
-                        [[ invoice.product.price ]] <i class="fa fa-euro"></i>
+                        [[ invoice.invoice.amount]] <i class="fa fa-euro"></i>
                     </td>
                 </tr>
                 </tbody>
@@ -86,21 +90,21 @@
 
         <div class="invoice-totals">
             <div class="invoice-totals-row">
-                <strong class="invoice-totals-title" translate="payment.invoice.SUBTOTAL">Subtotal</strong>
-                <span class="invoice-totals-value">[[ invoice.product.price ]] <i class="fa fa-euro"></i></span>
+                <strong class="invoice-totals-title" translate="payment.invoice.TVA">TVA % </strong>
+                <span class="invoice-totals-value">[[ invoice.tva ]] % </i></span>
             </div>
             <div class="invoice-totals-row">
-                <strong class="invoice-totals-title" translate="payment.invoice.TOTAL">Total</strong>
-                <span class="invoice-totals-value">[[ invoice.product.price ]] <i class="fa fa-euro"></i></span>
+                <strong class="invoice-totals-title" translate="payment.invoice.TVAVALUE">TVA <i class="fa fa-euro"></i> </strong>
+                <span class="invoice-totals-value">[[ invoice.price_tva ]] <i class="fa fa-euro"></i></span>
             </div>
             <div class="invoice-totals-row">
-                <strong class="invoice-totals-title" translate="payment.invoice.AMOUNTPAID">Amount Paid</strong>
-                <span class="invoice-totals-value">[[ invoice.product.price ]] <i class="fa fa-euro"></i></span>
+                <strong class="invoice-totals-title" translate="payment.invoice.AMOUNTPAID">Total</strong>
+                <span class="invoice-totals-value">[[ invoice.total ]] <i class="fa fa-euro"></i></span>
             </div>
-            <div class="invoice-totals-row">
+            <!--<div class="invoice-totals-row">
                 <strong class="invoice-totals-title" translate="payment.invoice.AMOUNTDUE">Amount Due</strong>
                 <span class="invoice-totals-value"> [[ invoice.product.price ]] <i class="fa fa-euro"></i></span>
-            </div>
+            </div>-->
         </div>
 
         <hr>
