@@ -1716,7 +1716,6 @@ app.config(['$stateProvider', '$httpProvider', '$urlRouterProvider', '$controlle
  */
 app.config(['$stateProvider',
     function ($stateProvider) {
-
         $stateProvider.state('pdf', {
             url : '/exportInvoice/:id',
             templateUrl: '/bundles/publipr/js/components/Invoice/export_pdf_invoice.html',
@@ -2677,5 +2676,4 @@ app.config(['$stateProvider',
             },
             resolve: loadSequence('TrackEmailCtrl', 'trackEmailService')
         });
-
     }]);

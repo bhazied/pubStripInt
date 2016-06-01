@@ -49,12 +49,12 @@ class InvoiceRestController extends FOSRestController
         try {
             $pdfUrl = $request->request->get('url') . $request->request->get('paymentId');
             $pdfFile = new Pdf();
-            $pdfFile->binary = "xvfb-run wkhtmltopdf";
+            $pdfFile->binary = $this->getParameter('wkpdftohtml_binary');
             $fileContent = $this->persisteInvoice($request->request->get('paymentId'));
             $pdfFile->addPage($fileContent);
             $pdfFile->send('invoice_'.$this->getUser()->getFirstName().'_'.$this->getUser()->getLastName().'.pdf');
-            $response = new Response();
-            $response->setContent($pdfFile);
+           // $response = new Response();
+            //$response->setContent($pdfFile);
         } catch (\Exception $e) {
             return FOSView::create($e->getMessage(), Codes::HTTP_INTERNAL_SERVER_ERROR);
         }
