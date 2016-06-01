@@ -256,5 +256,21 @@ function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q,
         $state.go('app.contactmanager.contactsexport');
     };
 
+    $scope.import = function() {
+        $state.go('app.contactmanager.contactsimport');
+    };
+
+    $scope.export = function() {
+        $state.go('app.contactmanager.contactsexport');
+    };
+
+    $scope.import = function() {
+        $state.go('app.contactmanager.contactsimport');
+    };
+
+    $scope.export = function() {
+        $state.go('app.contactmanager.contactsexport');
+    };
+
 }]);
 

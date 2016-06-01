@@ -831,7 +831,6 @@ class ApiV1RESTController extends FOSRestController
                 'phone' => $user->getPhone(),
                 'job' => $user->getJob(),
                 'zipCode' => $user->getZipCode(),
-                'cityName' => $user->getCityName(),
                 'type' => $user->getType(),
                 'gender' => $user->getGender(),
                 'address' => $user->getAddress(),

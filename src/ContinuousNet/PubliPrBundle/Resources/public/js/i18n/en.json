@@ -169,6 +169,44 @@
         "TIME": "h:mma",
         "DATETIME": "MM/dd/yyyy h:mma"
     },
+    "payment":{
+        "WARNINGTITLE": "not yet paid",
+        "WARNINGTEXT": "choose and pay for the package that goes with you",
+        "PROFILENOTCOMPLETE" : "Not complete profile",
+        "PROFILENOTCOMPLETETEXT" : "you must complete your profile (address, Zip code ..)",
+        "TOTALPRICE" : "total to pay",
+        "MONTHS" :{
+            "SELECTMONTH": "Select a month",
+           "JANURAY": "January",
+            "FEBRUARY": "February",
+            "MARCH": "March",
+            "APRIL": "April",
+            "MAY": "May",
+            "JUNE": "June",
+            "JULY": "July",
+            "AUGUST": "August",
+            "SEPTEMBER": "September",
+            "OCTOBER": "October",
+            "NOVEMBER": "November",
+            "DECEMBER": "December"
+        },
+        "invoice" : {
+            "ORDERDATE": "Order date",
+            "DESCRIPTION" : "Description",
+            "UNUTPRICE" : "Unit price",
+            "AMOUNT" : "Amount",
+            "SUBTOTAL" : "Subtotal",
+            "TOTAL": "Total",
+            "AMOUNTPAID": "Amount paid",
+            "AMOUNTDUE" : "Amount due",
+            "PAYMENTMETHOD": "Payment Method",
+            "SHIPPEDTO" : "Shipped to",
+            "BILLEDTO": "Billed to",
+            "INVOICENUMBER" : "Invoice number",
+            "EXPORTTOPDF": "Export to PDF",
+            "QUANTITY": "Quantity"
+        }
+    },
    "content": {
         "common": {
             "ENABLEBATCHADD": "Enable batch add",
@@ -215,6 +253,7 @@
             "IMPORT": "Import",
             "EXPORT": "Export",
             "EDITOR": "Editor",
+            "INVOICE": "Invoice",
             "ENCOCEAUDIO": "Encode Audio",
             "AUDIONOTENCODED": "Audio encoded",
             "AUDIONOTNOTENCODED": "Audio not encoded",

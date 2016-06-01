@@ -15,10 +15,10 @@ app.controller('PurchaseCtrl',['$scope', '$rootScope', '$sce', '$timeout', '$fil
                 else
                 {
                     SweetAlert.swal({
-                        title: $filter('translate')('payment.warningTitle'),
-                        text: $filter('translate')('payment.warningText'),
+                        title: $filter('translate')('payment.WARNINGTITLE'),
+                        text: $filter('translate')('payment.WARNINGTEXT'),
                         timer : 2000,
-                        type: "info"
+                        type: 'info'
                     });
                 }
             });
