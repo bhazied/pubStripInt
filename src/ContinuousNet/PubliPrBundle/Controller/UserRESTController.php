@@ -418,7 +418,7 @@ class UserRESTController extends BaseRESTController
                 if (!$authorizedChangeLastFailedLoginCount) {
                     $entity->setLastFailedLoginCount(null);
                 }
-            $entity = $this->process($entity, false);
+                $entity = $this->process($entity, false);
                 $em->flush();
                 return $entity;
             }
