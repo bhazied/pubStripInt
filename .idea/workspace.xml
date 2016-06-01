@@ -2,15 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2c4c1f13-d6a0-4a61-a4cb-bb3f6bc65668" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/config/routing.yml" afterPath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/config/routing.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/constant.js" afterPath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/constant.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/i18n/en.json" afterPath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/i18n/en.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/i18n/fr.json" afterPath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/i18n/fr.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/router.js" afterPath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/router.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/assetic/continuous_net_scripts.js" afterPath="$PROJECT_DIR$/web/assetic/continuous_net_scripts.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/assetic/continuous_net_scripts_constant_4.js" afterPath="$PROJECT_DIR$/web/assetic/continuous_net_scripts_constant_4.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/assetic/continuous_net_scripts_router_6.js" afterPath="$PROJECT_DIR$/web/assetic/continuous_net_scripts_router_6.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/js/90a4ddc.js" afterPath="$PROJECT_DIR$/web/js/90a4ddc.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/js/90a4ddc_part_18.js" afterPath="$PROJECT_DIR$/web/js/90a4ddc_part_18.js" />
     </list>
@@ -40,20 +33,20 @@
             <state relative-caret-position="413">
               <caret line="145" column="0" selection-start-line="145" selection-start-column="0" selection-end-line="145" selection-end-column="0" />
               <folding>
-                <marker date="1464718929774" expanded="true" signature="89:99" placeholder="..." />
-                <marker date="1464718929774" expanded="true" signature="200:210" placeholder="..." />
-                <marker date="1464718929774" expanded="true" signature="255:271" placeholder="..." />
-                <marker date="1464718929774" expanded="true" signature="305:331" placeholder="..." />
-                <marker date="1464718929774" expanded="true" signature="367:375" placeholder="..." />
-                <marker date="1464718929774" expanded="true" signature="472:476" placeholder="..." />
-                <marker date="1464718929774" expanded="true" signature="491:508" placeholder="..." />
-                <marker date="1464718929774" expanded="true" signature="544:552" placeholder="..." />
-                <marker date="1464718929774" expanded="true" signature="656:660" placeholder="..." />
-                <marker date="1464718929774" expanded="true" signature="783:787" placeholder="..." />
-                <marker date="1464718929774" expanded="true" signature="912:916" placeholder="..." />
-                <marker date="1464718929774" expanded="true" signature="1041:1045" placeholder="..." />
-                <marker date="1464718929774" expanded="true" signature="2737:2741" placeholder="..." />
-                <marker date="1464718929774" expanded="true" signature="2864:2868" placeholder="..." />
+                <marker date="1464771741296" expanded="true" signature="89:99" placeholder="..." />
+                <marker date="1464771741296" expanded="true" signature="200:210" placeholder="..." />
+                <marker date="1464771741296" expanded="true" signature="255:271" placeholder="..." />
+                <marker date="1464771741296" expanded="true" signature="305:331" placeholder="..." />
+                <marker date="1464771741296" expanded="true" signature="367:375" placeholder="..." />
+                <marker date="1464771741296" expanded="true" signature="472:476" placeholder="..." />
+                <marker date="1464771741296" expanded="true" signature="491:508" placeholder="..." />
+                <marker date="1464771741296" expanded="true" signature="544:552" placeholder="..." />
+                <marker date="1464771741296" expanded="true" signature="656:660" placeholder="..." />
+                <marker date="1464771741296" expanded="true" signature="783:787" placeholder="..." />
+                <marker date="1464771741296" expanded="true" signature="912:916" placeholder="..." />
+                <marker date="1464771741296" expanded="true" signature="1041:1045" placeholder="..." />
+                <marker date="1464771741296" expanded="true" signature="2737:2741" placeholder="..." />
+                <marker date="1464771741296" expanded="true" signature="2864:2868" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -62,24 +55,24 @@
       <file leaf-file-name="constant.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/constant.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="746">
-              <caret line="210" column="0" selection-start-line="210" selection-start-column="0" selection-end-line="210" selection-end-column="0" />
+            <state relative-caret-position="491">
+              <caret line="206" column="36" selection-start-line="206" selection-start-column="14" selection-end-line="206" selection-end-column="36" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="router.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="router.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/router.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+            <state relative-caret-position="263">
+              <caret line="829" column="19" selection-start-line="829" selection-start-column="19" selection-end-line="829" selection-end-column="31" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="security.yml" pinned="false" current-in-tab="true">
+      <file leaf-file-name="security.yml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/config/security.yml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="300">
@@ -105,7 +98,7 @@
             <state relative-caret-position="872">
               <caret line="1104" column="0" selection-start-line="1104" selection-start-column="0" selection-end-line="1104" selection-end-column="0" />
               <folding>
-                <marker date="1464718929770" expanded="true" signature="9670:11761" placeholder="{&quot;CHECKFROMFIELDS&quot;: &quot;Check form fields&quot;...}" />
+                <marker date="1464771741308" expanded="true" signature="9670:11761" placeholder="{&quot;CHECKFROMFIELDS&quot;: &quot;Check form fields&quot;...}" />
               </folding>
             </state>
           </provider>
@@ -155,6 +148,7 @@
         <option value="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Services/Settings.php" />
         <option value="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Controller/ApiV1RESTController.php" />
         <option value="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/router.js" />
+        <option value="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/config/security.yml" />
       </list>
     </option>
   </component>
@@ -443,7 +437,49 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="PressRelease" />
+              <option name="myItemId" value="Payment" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="publipr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="publipr" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ContinuousNet" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PubliPrBundle" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Resources" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="components" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Invoice" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -558,7 +594,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2162000" />
+    <option name="totallyTimeSpent" value="2951000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="-4" width="1301" height="772" extended-state="6" />
@@ -644,29 +680,21 @@
         <state relative-caret-position="413">
           <caret line="135" column="0" selection-start-line="135" selection-start-column="0" selection-end-line="135" selection-end-column="0" />
           <folding>
-            <marker date="1464718929774" expanded="true" signature="89:99" placeholder="..." />
-            <marker date="1464718929774" expanded="true" signature="200:210" placeholder="..." />
-            <marker date="1464718929774" expanded="true" signature="255:271" placeholder="..." />
-            <marker date="1464718929774" expanded="true" signature="305:331" placeholder="..." />
-            <marker date="1464718929774" expanded="true" signature="367:375" placeholder="..." />
-            <marker date="1464718929774" expanded="true" signature="472:476" placeholder="..." />
-            <marker date="1464718929774" expanded="true" signature="491:508" placeholder="..." />
-            <marker date="1464718929774" expanded="true" signature="544:552" placeholder="..." />
-            <marker date="1464718929774" expanded="true" signature="656:660" placeholder="..." />
-            <marker date="1464718929774" expanded="true" signature="783:787" placeholder="..." />
-            <marker date="1464718929774" expanded="true" signature="912:916" placeholder="..." />
-            <marker date="1464718929774" expanded="true" signature="1041:1045" placeholder="..." />
-            <marker date="1464718929774" expanded="true" signature="2737:2741" placeholder="..." />
-            <marker date="1464718929774" expanded="true" signature="2864:2868" placeholder="..." />
+            <marker date="1464771741296" expanded="true" signature="89:99" placeholder="..." />
+            <marker date="1464771741296" expanded="true" signature="200:210" placeholder="..." />
+            <marker date="1464771741296" expanded="true" signature="255:271" placeholder="..." />
+            <marker date="1464771741296" expanded="true" signature="305:331" placeholder="..." />
+            <marker date="1464771741296" expanded="true" signature="367:375" placeholder="..." />
+            <marker date="1464771741296" expanded="true" signature="472:476" placeholder="..." />
+            <marker date="1464771741296" expanded="true" signature="491:508" placeholder="..." />
+            <marker date="1464771741296" expanded="true" signature="544:552" placeholder="..." />
+            <marker date="1464771741296" expanded="true" signature="656:660" placeholder="..." />
+            <marker date="1464771741296" expanded="true" signature="783:787" placeholder="..." />
+            <marker date="1464771741296" expanded="true" signature="912:916" placeholder="..." />
+            <marker date="1464771741296" expanded="true" signature="1041:1045" placeholder="..." />
+            <marker date="1464771741296" expanded="true" signature="2737:2741" placeholder="..." />
+            <marker date="1464771741296" expanded="true" signature="2864:2868" placeholder="..." />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/constant.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="746">
-          <caret line="210" column="0" selection-start-line="210" selection-start-column="0" selection-end-line="210" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -683,7 +711,7 @@
         <state relative-caret-position="872">
           <caret line="1104" column="0" selection-start-line="1104" selection-start-column="0" selection-end-line="1104" selection-end-column="0" />
           <folding>
-            <marker date="1464718929770" expanded="true" signature="9670:11761" placeholder="{&quot;CHECKFROMFIELDS&quot;: &quot;Check form fields&quot;...}" />
+            <marker date="1464771741308" expanded="true" signature="9670:11761" placeholder="{&quot;CHECKFROMFIELDS&quot;: &quot;Check form fields&quot;...}" />
           </folding>
         </state>
       </provider>
@@ -714,6 +742,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="16" column="9" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="9" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -750,6 +779,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="16" column="9" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="9" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -771,6 +801,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="16" column="9" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="9" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -800,20 +831,20 @@
         <state relative-caret-position="413">
           <caret line="145" column="0" selection-start-line="145" selection-start-column="0" selection-end-line="145" selection-end-column="0" />
           <folding>
-            <marker date="1464718929774" expanded="true" signature="89:99" placeholder="..." />
-            <marker date="1464718929774" expanded="true" signature="200:210" placeholder="..." />
-            <marker date="1464718929774" expanded="true" signature="255:271" placeholder="..." />
-            <marker date="1464718929774" expanded="true" signature="305:331" placeholder="..." />
-            <marker date="1464718929774" expanded="true" signature="367:375" placeholder="..." />
-            <marker date="1464718929774" expanded="true" signature="472:476" placeholder="..." />
-            <marker date="1464718929774" expanded="true" signature="491:508" placeholder="..." />
-            <marker date="1464718929774" expanded="true" signature="544:552" placeholder="..." />
-            <marker date="1464718929774" expanded="true" signature="656:660" placeholder="..." />
-            <marker date="1464718929774" expanded="true" signature="783:787" placeholder="..." />
-            <marker date="1464718929774" expanded="true" signature="912:916" placeholder="..." />
-            <marker date="1464718929774" expanded="true" signature="1041:1045" placeholder="..." />
-            <marker date="1464718929774" expanded="true" signature="2737:2741" placeholder="..." />
-            <marker date="1464718929774" expanded="true" signature="2864:2868" placeholder="..." />
+            <marker date="1464771741296" expanded="true" signature="89:99" placeholder="..." />
+            <marker date="1464771741296" expanded="true" signature="200:210" placeholder="..." />
+            <marker date="1464771741296" expanded="true" signature="255:271" placeholder="..." />
+            <marker date="1464771741296" expanded="true" signature="305:331" placeholder="..." />
+            <marker date="1464771741296" expanded="true" signature="367:375" placeholder="..." />
+            <marker date="1464771741296" expanded="true" signature="472:476" placeholder="..." />
+            <marker date="1464771741296" expanded="true" signature="491:508" placeholder="..." />
+            <marker date="1464771741296" expanded="true" signature="544:552" placeholder="..." />
+            <marker date="1464771741296" expanded="true" signature="656:660" placeholder="..." />
+            <marker date="1464771741296" expanded="true" signature="783:787" placeholder="..." />
+            <marker date="1464771741296" expanded="true" signature="912:916" placeholder="..." />
+            <marker date="1464771741296" expanded="true" signature="1041:1045" placeholder="..." />
+            <marker date="1464771741296" expanded="true" signature="2737:2741" placeholder="..." />
+            <marker date="1464771741296" expanded="true" signature="2864:2868" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -913,18 +944,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/router.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/config/security.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
           <caret line="20" column="97" selection-start-line="20" selection-start-column="97" selection-end-line="20" selection-end-column="97" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/constant.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="491">
+          <caret line="206" column="36" selection-start-line="206" selection-start-column="14" selection-end-line="206" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/router.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="263">
+          <caret line="829" column="19" selection-start-line="829" selection-start-column="19" selection-end-line="829" selection-end-column="31" />
           <folding />
         </state>
       </provider>
