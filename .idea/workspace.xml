@@ -1,0 +1,1585 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="2c4c1f13-d6a0-4a61-a4cb-bb3f6bc65668" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/.name" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/frameworkRootSettings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/publipr.iml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/symfony2.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/AlbumController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/AlbumRESTController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/AudioCategoryController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/AudioCategoryRESTController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/AudioController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/AudioRESTController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/AudioTypeController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/AudioTypeRESTController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/BannerController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/BannerRESTController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/BannerTypeController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/BannerTypeRESTController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/CityController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/CityRESTController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/ClickController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/ClickRESTController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/CommentController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/CommentRESTController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/CompanyController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/CompanyRESTController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/CountryController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/CountryRESTController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/DayController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/DayRESTController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/GalleryController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/GalleryRESTController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/GroupController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/GroupRESTController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/HitController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/HitRESTController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/ImageCategoryController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/ImageCategoryRESTController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/ImageController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/ImageRESTController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/ImageTypeController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/ImageTypeRESTController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/ImpressionController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/ImpressionRESTController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/LanguageController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/LanguageRESTController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/LikeController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/LikeRESTController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/LogController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/LogRESTController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/MatchCardController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/MatchCardRESTController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/MatchCommentaryController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/MatchCommentaryRESTController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/MatchController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/MatchGoalController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/MatchGoalRESTController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/MatchLineUpController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/MatchLineUpRESTController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/MatchRESTController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/MatchSubstitutionController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/MatchSubstitutionRESTController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/MenuController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/MenuLinkController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/MenuLinkRESTController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/MenuRESTController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/NotificationController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/NotificationRESTController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/PackageController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/PackageRESTController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/PackageTypeController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/PackageTypeRESTController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/PlayerController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/PlayerRESTController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/PlayerStatController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/PlayerStatRESTController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/PostCategoryController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/PostCategoryRESTController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/PostController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/PostRESTController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/PostTypeController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/PostTypeRESTController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/PriceController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/PriceRESTController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/PrizeWinnerController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/PrizeWinnerRESTController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/PushDeviceController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/PushDeviceRESTController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/PushMessageController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/PushMessageRESTController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/PushNotificationController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/PushNotificationRESTController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/RatingController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/RatingRESTController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/ScorerController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/ScorerRESTController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/SeasonController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/SeasonRESTController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/SharingController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/SharingRESTController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/ShowController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/ShowRESTController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/SportController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/SportEventController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/SportEventRESTController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/SportRESTController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/StadiumController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/StadiumRESTController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/StatController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/StatRESTController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/SubscriptionController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/SubscriptionRESTController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/TableController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/TableRESTController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/TeamController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/TeamRESTController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/UserController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/UserRESTController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/UserSettingController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/UserSettingRESTController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/VideoCategoryController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/VideoCategoryRESTController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/VideoController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/VideoRESTController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/VideoTypeController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/VideoTypeRESTController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/VisitController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/VisitRESTController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/VoucherController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Controller/VoucherRESTController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Entity/Album.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Entity/Audio.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Entity/AudioCategory.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Entity/AudioType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Entity/Banner.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Entity/BannerType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Entity/City.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Entity/Click.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Entity/Comment.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Entity/Company.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Entity/Country.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Entity/Day.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Entity/Gallery.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Entity/Group.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Entity/Hit.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Entity/Image.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Entity/ImageCategory.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Entity/ImageType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Entity/Impression.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Entity/Language.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Entity/Like.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Entity/Log.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Entity/Match.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Entity/MatchCard.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Entity/MatchCommentary.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Entity/MatchGoal.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Entity/MatchLineUp.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Entity/MatchSubstitution.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Entity/Menu.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Entity/MenuLink.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Entity/Notification.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Entity/Package.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Entity/PackageType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Entity/Player.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Entity/PlayerStat.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Entity/Post.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Entity/PostCategory.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Entity/PostType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Entity/Price.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Entity/PrizeWinner.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Entity/PushDevice.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Entity/PushMessage.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Entity/PushNotification.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Entity/Rating.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Entity/Scorer.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Entity/Season.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Entity/Sharing.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Entity/Show.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Entity/Sport.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Entity/SportEvent.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Entity/Stadium.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Entity/Stat.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Entity/Subscription.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Entity/Table.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Entity/Team.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Entity/User.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Entity/UserSetting.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Entity/Video.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Entity/VideoCategory.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Entity/VideoType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Entity/Visit.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Entity/Voucher.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Form/AlbumType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Form/AudioCategoryType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Form/AudioType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Form/AudioTypeType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Form/BannerType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Form/BannerTypeType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Form/CityType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Form/ClickType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Form/CommentType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Form/CompanyType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Form/CountryType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Form/DayType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Form/GalleryType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Form/GroupType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Form/HitType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Form/ImageCategoryType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Form/ImageType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Form/ImageTypeType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Form/ImpressionType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Form/LanguageType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Form/LikeType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Form/LogType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Form/MatchCardType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Form/MatchCommentaryType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Form/MatchGoalType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Form/MatchLineUpType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Form/MatchSubstitutionType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Form/MatchType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Form/MenuLinkType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Form/MenuType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Form/NotificationType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Form/PackageType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Form/PackageTypeType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Form/PlayerStatType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Form/PlayerType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Form/PostCategoryType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Form/PostType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Form/PostTypeType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Form/PriceType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Form/PrizeWinnerType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Form/PushDeviceType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Form/PushMessageType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Form/PushNotificationType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Form/RatingType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Form/ScorerType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Form/SeasonType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Form/SharingType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Form/ShowType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Form/SportEventType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Form/SportType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Form/StadiumType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Form/StatType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Form/SubscriptionType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Form/TableType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Form/TeamType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Form/UserSettingType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Form/UserType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Form/VideoCategoryType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Form/VideoType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Form/VideoTypeType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Form/VisitType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Form/VoucherType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/config/routing.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/config/routing/album.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/config/routing/audio.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/config/routing/audio_category.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/config/routing/audio_type.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/config/routing/banner.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/config/routing/banner_type.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/config/routing/city.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/config/routing/click.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/config/routing/comment.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/config/routing/company.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/config/routing/country.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/config/routing/day.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/config/routing/gallery.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/config/routing/group.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/config/routing/hit.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/config/routing/image.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/config/routing/image_category.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/config/routing/image_type.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/config/routing/impression.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/config/routing/language.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/config/routing/like.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/config/routing/log.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/config/routing/match.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/config/routing/match_card.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/config/routing/match_commentary.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/config/routing/match_goal.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/config/routing/match_line_up.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/config/routing/match_substitution.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/config/routing/menu.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/config/routing/menu_link.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/config/routing/notification.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/config/routing/package.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/config/routing/package_type.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/config/routing/player.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/config/routing/player_stat.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/config/routing/post.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/config/routing/post_category.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/config/routing/post_type.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/config/routing/price.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/config/routing/prize_winner.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/config/routing/push_device.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/config/routing/push_message.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/config/routing/push_notification.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/config/routing/rating.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/config/routing/scorer.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/config/routing/season.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/config/routing/sharing.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/config/routing/show.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/config/routing/sport.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/config/routing/sport_event.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/config/routing/stadium.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/config/routing/stat.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/config/routing/subscription.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/config/routing/table.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/config/routing/team.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/config/routing/user.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/config/routing/user_setting.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/config/routing/video.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/config/routing/video_category.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/config/routing/video_type.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/config/routing/visit.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/config/routing/voucher.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/config/security.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/public/js/constant.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/public/js/i18n/en.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/public/js/links.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/public/js/router.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/views/Album/index.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/views/Audio/index.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/views/AudioCategory/index.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/views/AudioType/index.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/views/Banner/index.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/views/BannerType/index.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/views/City/index.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/views/Click/index.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/views/Comment/index.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/views/Company/index.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/views/Country/index.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/views/Day/index.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/views/Gallery/index.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/views/Group/index.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/views/Hit/index.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/views/Image/index.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/views/ImageCategory/index.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/views/ImageType/index.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/views/Impression/index.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/views/Language/index.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/views/Like/index.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/views/Log/index.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/views/Match/index.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/views/MatchCard/index.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/views/MatchCommentary/index.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/views/MatchGoal/index.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/views/MatchLineUp/index.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/views/MatchSubstitution/index.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/views/Menu/index.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/views/MenuLink/index.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/views/Notification/index.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/views/Package/index.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/views/PackageType/index.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/views/Player/index.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/views/PlayerStat/index.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/views/Post/index.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/views/PostCategory/index.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/views/PostType/index.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/views/Price/index.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/views/PrizeWinner/index.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/views/PushDevice/index.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/views/PushMessage/index.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/views/PushNotification/index.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/views/Rating/index.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/views/Scorer/index.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/views/Season/index.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/views/Sharing/index.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/views/Show/index.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/views/Sport/index.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/views/SportEvent/index.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/views/Stadium/index.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/views/Stat/index.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/views/Subscription/index.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/views/Table/index.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/views/Team/index.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/views/User/index.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/views/UserSetting/index.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/views/Video/index.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/views/VideoCategory/index.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/views/VideoType/index.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/views/Visit/index.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ContinuousNet/SportClubBundle/Resources/views/Voucher/index.html.twig" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+<<<<<<< HEAD
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Controller/InvoiceRestController.php" afterPath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Controller/InvoiceRestController.php" />
+=======
+<<<<<<< HEAD
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/config.yml" afterPath="$PROJECT_DIR$/app/config/config.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.json" afterPath="$PROJECT_DIR$/composer.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.lock" afterPath="$PROJECT_DIR$/composer.lock" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Controller/ApiV1RESTController.php" afterPath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Controller/ApiV1RESTController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/Auth/login.html" afterPath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/Auth/login.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/router.js" afterPath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/router.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/app/views/common/sidebar-panel.html" afterPath="$PROJECT_DIR$/web/app/views/common/sidebar-panel.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/assetic/continuous_net_css.css" afterPath="$PROJECT_DIR$/web/assetic/continuous_net_css.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/assetic/continuous_net_css_custom_5.css" afterPath="$PROJECT_DIR$/web/assetic/continuous_net_css_custom_5.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/assetic/continuous_net_scripts.js" afterPath="$PROJECT_DIR$/web/assetic/continuous_net_scripts.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/assetic/continuous_net_scripts_router_6.js" afterPath="$PROJECT_DIR$/web/assetic/continuous_net_scripts_router_6.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/css/376fb3a.css" afterPath="$PROJECT_DIR$/web/css/376fb3a.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/css/376fb3a_part_14.css" afterPath="$PROJECT_DIR$/web/css/376fb3a_part_14.css" />
+=======
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/Payment/PaymentsCtrl.js" afterPath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/Payment/PaymentsCtrl.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/constant.js" afterPath="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/constant.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/assetic/continuous_net_scripts.js" afterPath="$PROJECT_DIR$/web/assetic/continuous_net_scripts.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/assetic/continuous_net_scripts_constant_4.js" afterPath="$PROJECT_DIR$/web/assetic/continuous_net_scripts_constant_4.js" />
+>>>>>>> dev_zied
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/js/90a4ddc.js" afterPath="$PROJECT_DIR$/web/js/90a4ddc.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/js/90a4ddc_part_18.js" afterPath="$PROJECT_DIR$/web/js/90a4ddc_part_18.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/styles/custom.css" afterPath="$PROJECT_DIR$/web/styles/custom.css" />
+>>>>>>> master
+    </list>
+    <ignored path="publipr.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <ignored path=".idea/dataSources.local.xml" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="publipr" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="constant.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/constant.js">
+          <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+            <state relative-caret-position="311">
+              <caret line="191" column="32" selection-start-line="191" selection-start-column="32" selection-end-line="191" selection-end-column="32" />
+=======
+<<<<<<< HEAD
+            <state relative-caret-position="3090">
+              <caret line="206" column="36" selection-start-line="206" selection-start-column="14" selection-end-line="206" selection-end-column="36" />
+=======
+            <state relative-caret-position="475">
+              <caret line="204" column="81" selection-start-line="204" selection-start-column="56" selection-end-line="204" selection-end-column="81" />
+>>>>>>> dev_zied
+>>>>>>> master
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+<<<<<<< HEAD
+      <file leaf-file-name="InvoiceRestController.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Controller/InvoiceRestController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="105">
+              <caret line="51" column="72" selection-start-line="51" selection-start-column="31" selection-end-line="51" selection-end-column="72" />
+=======
+      <file leaf-file-name="router.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/router.js">
+          <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+            <state relative-caret-position="161">
+              <caret line="944" column="46" selection-start-line="944" selection-start-column="46" selection-end-line="944" selection-end-column="46" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="240">
+              <caret line="16" column="9" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="9" />
+=======
+            <state relative-caret-position="308">
+              <caret line="835" column="90" selection-start-line="835" selection-start-column="68" selection-end-line="835" selection-end-column="90" />
+>>>>>>> dev_zied
+>>>>>>> master
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="invoice.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/invoice.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-180">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="config.yml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/config/config.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="405">
+              <caret line="30" column="25" selection-start-line="30" selection-start-column="25" selection-end-line="30" selection-end-column="25" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="parameters.yml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/config/parameters.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="12" column="22" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="22" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="router.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/router.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="12525">
+              <caret line="835" column="90" selection-start-line="835" selection-start-column="68" selection-end-line="835" selection-end-column="90" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="security.yml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/config/security.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="300">
+              <caret line="20" column="97" selection-start-line="20" selection-start-column="97" selection-end-line="20" selection-end-column="97" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PaymentsCtrl.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/Payment/PaymentsCtrl.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3870">
+              <caret line="258" column="23" selection-start-line="258" selection-start-column="23" selection-end-line="258" selection-end-column="42" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="en.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/i18n/en.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="16560">
+              <caret line="1104" column="0" selection-start-line="1104" selection-start-column="0" selection-end-line="1104" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/composer.json" />
+        <option value="$PROJECT_DIR$/web/app/views/common/sidebar-panel.html" />
+        <option value="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Services/Settings.php" />
+        <option value="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Controller/ApiV1RESTController.php" />
+        <option value="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/config/security.yml" />
+        <option value="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/router.js" />
+        <option value="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/Payment/PaymentsCtrl.js" />
+        <option value="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/constant.js" />
+        <option value="$PROJECT_DIR$/app/config/parameters.yml" />
+        <option value="$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Controller/InvoiceRestController.php" />
+        <option value="$PROJECT_DIR$/app/config/config.yml" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" />
+  <component name="JsBuildToolPackageJson" detection-done="true" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="65" />
+    <option name="y" value="-4" />
+    <option name="width" value="1301" />
+    <option name="height" value="772" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+<<<<<<< HEAD
+=======
+      <pane id="Scope">
+        <subPane subId="Project Files" />
+      </pane>
+>>>>>>> master
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="publipr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+<<<<<<< HEAD
+=======
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="publipr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="publipr" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="publipr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="publipr" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="publipr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="publipr" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ContinuousNet" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="publipr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="publipr" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ContinuousNet" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PubliPrBundle" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="publipr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="publipr" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ContinuousNet" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PubliPrBundle" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Resources" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="publipr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="publipr" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ContinuousNet" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PubliPrBundle" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Resources" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="publipr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="publipr" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ContinuousNet" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PubliPrBundle" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Resources" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="i18n" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="publipr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="publipr" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ContinuousNet" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PubliPrBundle" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Resources" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="components" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="publipr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="publipr" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ContinuousNet" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PubliPrBundle" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Resources" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="components" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Payment" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="publipr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="publipr" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ContinuousNet" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PubliPrBundle" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Resources" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="config" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="publipr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="publipr" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ContinuousNet" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PubliPrBundle" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DependencyInjection" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+<<<<<<< HEAD
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="publipr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="publipr" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ContinuousNet" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PubliPrBundle" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Controller" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="publipr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="publipr" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="publipr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="publipr" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="config" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
+=======
+>>>>>>> dev_zied
+        </subPane>
+      </pane>
+      <pane id="Scratches" />
+>>>>>>> master
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="js-jscs-nodeInterpreter" value="/usr/bin/node" />
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+      <TestRunner />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpBehatConfigurationType" factoryName="Behat">
+      <BehatRunner />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpLocalRunConfigurationType" factoryName="PHP Console">
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.npm" factoryName="npm">
+      <command value="run-script" />
+      <scripts />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2c4c1f13-d6a0-4a61-a4cb-bb3f6bc65668" name="Default" comment="" />
+      <created>1464688353418</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1464688353418</updated>
+<<<<<<< HEAD
+      <workItem from="1464773342605" duration="273000" />
+=======
+      <workItem from="1464772308755" duration="528000" />
+<<<<<<< HEAD
+      <workItem from="1464776110247" duration="5272000" />
+=======
+>>>>>>> dev_zied
+>>>>>>> master
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+<<<<<<< HEAD
+    <option name="totallyTimeSpent" value="7962000" />
+=======
+<<<<<<< HEAD
+    <option name="totallyTimeSpent" value="3224000" />
+=======
+    <option name="totallyTimeSpent" value="2690000" />
+>>>>>>> dev_zied
+>>>>>>> master
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="65" y="-4" width="1301" height="772" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24596465" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+<<<<<<< HEAD
+=======
+    <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/config/routing.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2175">
+          <caret line="145" column="0" selection-start-line="145" selection-start-column="0" selection-end-line="145" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/constant.js">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="3090">
+          <caret line="206" column="36" selection-start-line="206" selection-start-column="14" selection-end-line="206" selection-end-column="36" />
+=======
+        <state relative-caret-position="3150">
+          <caret line="210" column="0" selection-start-line="210" selection-start-column="0" selection-end-line="210" selection-end-column="0" />
+>>>>>>> dev_zied
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/router.js">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+=======
+        <state relative-caret-position="90">
+          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+>>>>>>> dev_zied
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/config/security.yml">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="300">
+          <caret line="20" column="97" selection-start-line="20" selection-start-column="97" selection-end-line="20" selection-end-column="97" />
+=======
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+>>>>>>> dev_zied
+          <folding />
+        </state>
+      </provider>
+    </entry>
+>>>>>>> master
+    <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/i18n/en.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="16560">
+          <caret line="1104" column="0" selection-start-line="1104" selection-start-column="0" selection-end-line="1104" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/i18n/fr.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="16560">
+          <caret line="1104" column="0" selection-start-line="1104" selection-start-column="0" selection-end-line="1104" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/PressRelease/PressReleasesCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2760">
+          <caret line="184" column="295" selection-start-line="184" selection-start-column="295" selection-end-line="184" selection-end-column="295" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/config/services.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="615">
+          <caret line="41" column="35" selection-start-line="38" selection-start-column="4" selection-end-line="41" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/DependencyInjection/PubliPrExtension.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/Payment/PurchaseFormCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="24" column="42" selection-start-line="24" selection-start-column="42" selection-end-line="24" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Controller/SubscriptionApiController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="132" column="49" selection-start-line="132" selection-start-column="49" selection-end-line="132" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/Payment/PurchaseService.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="77" selection-start-line="10" selection-start-column="69" selection-end-line="10" selection-end-column="77" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/config/services.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="522">
+          <caret line="41" column="35" selection-start-line="38" selection-start-column="4" selection-end-line="41" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/DependencyInjection/Configuration.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-717">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/DependencyInjection/PubliPrExtension.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/config/routing.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="413">
+          <caret line="135" column="0" selection-start-line="135" selection-start-column="0" selection-end-line="135" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/router.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="812" column="43" selection-start-line="812" selection-start-column="18" selection-end-line="812" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/i18n/fr.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="16560">
+          <caret line="1104" column="0" selection-start-line="1104" selection-start-column="0" selection-end-line="1104" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/PressRelease/PressReleasesCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2760">
+          <caret line="184" column="295" selection-start-line="184" selection-start-column="295" selection-end-line="184" selection-end-column="295" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/parameters.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/config.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="16" column="9" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/composer.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="38" column="50" selection-start-line="38" selection-start-column="50" selection-end-line="38" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/router.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/parameters.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/config.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="16" column="9" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/composer.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="38" column="50" selection-start-line="38" selection-start-column="50" selection-end-line="38" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+=======
+    <entry file="file://$PROJECT_DIR$/app/config/parameters.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+>>>>>>> master
+    <entry file="file://$PROJECT_DIR$/composer.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="38" column="50" selection-start-line="38" selection-start-column="50" selection-end-line="38" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/alter_newsroom.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/product.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="5" column="25" selection-start-line="0" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/config/routing.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2175">
+          <caret line="145" column="0" selection-start-line="145" selection-start-column="0" selection-end-line="145" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/app/views/common/sidebar-panel.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="100" column="38" selection-start-line="100" selection-start-column="30" selection-end-line="100" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/DependencyInjection/PubliPrExtension.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Services/Settings.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="21" column="21" selection-start-line="21" selection-start-column="21" selection-end-line="21" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Controller/CompanyRESTController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="225" column="29" selection-start-line="225" selection-start-column="22" selection-end-line="225" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Controller/BaseController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Controller/BaseRESTController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Controller/SubscriptionApiController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="35" column="49" selection-start-line="35" selection-start-column="41" selection-end-line="35" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/routing.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="20" column="22" selection-start-line="20" selection-start-column="22" selection-end-line="20" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Controller/ApiV1RESTController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="781" column="5" selection-start-line="781" selection-start-column="5" selection-end-line="781" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/DependencyInjection/Configuration.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-703">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/config/services.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="615">
+          <caret line="41" column="35" selection-start-line="38" selection-start-column="4" selection-end-line="41" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/i18n/en.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="16560">
+          <caret line="1104" column="0" selection-start-line="1104" selection-start-column="0" selection-end-line="1104" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/config/security.yml">
+<<<<<<< HEAD
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="97" selection-start-line="20" selection-start-column="97" selection-end-line="20" selection-end-column="97" />
+=======
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="97" selection-start-line="20" selection-start-column="97" selection-end-line="20" selection-end-column="97" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/components/Payment/PaymentsCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3870">
+          <caret line="258" column="23" selection-start-line="258" selection-start-column="23" selection-end-line="258" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/router.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="12525">
+          <caret line="835" column="90" selection-start-line="835" selection-start-column="68" selection-end-line="835" selection-end-column="90" />
+>>>>>>> dev_zied
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/constant.js">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="311">
+          <caret line="191" column="32" selection-start-line="191" selection-start-column="32" selection-end-line="191" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/invoice.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-180">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/config_dev.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/config_prod.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+=======
+<<<<<<< HEAD
+        <state relative-caret-position="3090">
+          <caret line="206" column="36" selection-start-line="206" selection-start-column="14" selection-end-line="206" selection-end-column="36" />
+>>>>>>> master
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="90">
+          <caret line="6" column="11" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/parameters.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="22" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/config.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="30" column="25" selection-start-line="30" selection-start-column="25" selection-end-line="30" selection-end-column="25" />
+=======
+        <state relative-caret-position="240">
+          <caret line="16" column="9" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="9" />
+>>>>>>> master
+          <folding />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Controller/InvoiceRestController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="51" column="72" selection-start-line="51" selection-start-column="31" selection-end-line="51" selection-end-column="72" />
+=======
+    <entry file="file://$PROJECT_DIR$/src/ContinuousNet/PubliPrBundle/Resources/public/js/router.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="944" column="46" selection-start-line="944" selection-start-column="46" selection-end-line="944" selection-end-column="46" />
+=======
+        <state relative-caret-position="475">
+          <caret line="204" column="81" selection-start-line="204" selection-start-column="56" selection-end-line="204" selection-end-column="81" />
+>>>>>>> dev_zied
+>>>>>>> master
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
