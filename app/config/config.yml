@@ -29,6 +29,7 @@ publi_pr:
     settings:
         default_currency: 'EUR'
         default_price: 30
+        default_price: 30s
     url_public_path:
         free: 'free'
         paied: 'client'

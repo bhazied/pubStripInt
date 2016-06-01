@@ -13,6 +13,5 @@
 /bin/
 #/web/uploads/*
 /web/media/cache/*
-/.idea/*
-/.idea/workspace.xml
+/.idea/
 /composer.phar

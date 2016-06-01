@@ -814,5 +814,69 @@ class ApiV1RESTController extends FOSRestController
     }
 
 
+    /**
+     * @Get("/getProfile")
+     * @View(serializerEnableMaxDepthChecks=true)
+     */
+    public function getProfileAction() {
+        try {
+            $user = $this->getUser();
+
+            $data = array(
+                'id' => $user->getId(),
+                'email' => $user->getEmail(),
+                'username' => $user->getUsername(),
+                'firstName' => $user->getFirstName(),
+                'lastName' => $user->getLastName(),
+                'phone' => $user->getPhone(),
+                'job' => $user->getJob(),
+                'zipCode' => $user->getZipCode(),
+                'cityName' => $user->getCityName(),
+                'type' => $user->getType(),
+                'gender' => $user->getGender(),
+                'address' => $user->getAddress(),
+                'picture' => $user->getPicture(),
+                'lastLogin' => $user->getLastLogin()
+            );
+
+            return $data;
+        } catch (\Exception $e) {
+            return FOSView::create($e->getMessage(), Codes::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /**
+     * @Post("/changePassword")
+     * @View(serializerEnableMaxDepthChecks=true)
+     */
+    public function changePasswordAction(Request $request) {
+
+        $data = array('status' => false, 'message' => null);
+        try {
+            $user = $this->getUser();
+            $jsonData = json_decode($request->getContent(), true);
+
+            unset($jsonData['locale']);
+            $request->request->set('fos_user_change_password_form', $jsonData);
+
+            $form = $this->container->get('fos_user.change_password.form');
+            $formHandler = $this->container->get('fos_user.change_password.form.handler');
+            $process = $formHandler->process($user);
+
+            if ($process) {
+                $data['status'] = true;
+                $data['message'] = $this->get('translator')->trans('Password changed');
+            } else {
+                $data['status'] = false;
+                $data['message'] = $this->get('translator')->trans('Password not changed.');
+            }
+
+
+            return $data;
+        } catch (\Exception $e) {
+            return FOSView::create($e->getMessage(), Codes::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+
 
 }

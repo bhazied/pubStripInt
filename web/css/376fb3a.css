@@ -23279,3 +23279,13 @@ table .img-thumbnail {
 .row .col-md-6 .continuous-check {
     margin-top: 28px;
 }
+
+.btn-brand {
+    background: #d43f3a;
+    color: white!important;
+}
+
+.btn-dark {
+    background: #546E7A;
+    color: white!important;
+}
