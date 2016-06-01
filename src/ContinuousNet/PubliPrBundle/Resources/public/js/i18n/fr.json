@@ -195,8 +195,8 @@
             "DESCRIPTION" : "Description",
             "UNUTPRICE" : "Prix unitaire",
             "AMOUNT" : "Montant",
-            "SUBTOTAL" : "Sous-total",
-            "TOTAL": "Total",
+            "TVA" : "TVA %",
+            "TVAVALUE": "TVA",
             "AMOUNTPAID": "Montant payé",
             "AMOUNTDUE" : "Montant à payer",
             "PAYMENTMETHOD": "Mode de paiement",
@@ -204,7 +204,9 @@
             "BILLEDTO": "Facturé à",
             "INVOICENUMBER" : "Numéro de facture",
             "EXPORTTOPDF": "Exporter au format PDF",
-            "QUANTITY": "Quantité"
+            "QUANTITY": "Quantité",
+            "DOWNLOADERRORTITLE": "No Invoice",
+            "DOWNLOADERRORBODY": "No Invoice to download"
         }
     },
     "content": {

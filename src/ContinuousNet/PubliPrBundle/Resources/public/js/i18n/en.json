@@ -195,8 +195,8 @@
             "DESCRIPTION" : "Description",
             "UNUTPRICE" : "Unit price",
             "AMOUNT" : "Amount",
-            "SUBTOTAL" : "Subtotal",
-            "TOTAL": "Total",
+            "TVA" : "TVA %",
+            "TVAVALUE": "TVA",
             "AMOUNTPAID": "Amount paid",
             "AMOUNTDUE" : "Amount due",
             "PAYMENTMETHOD": "Payment Method",
@@ -204,7 +204,9 @@
             "BILLEDTO": "Billed to",
             "INVOICENUMBER" : "Invoice number",
             "EXPORTTOPDF": "Export to PDF",
-            "QUANTITY": "Quantity"
+            "QUANTITY": "Quantity",
+            "DOWNLOADERRORTITLE": "No Invoice",
+            "DOWNLOADERRORBODY": "No Invoice to download"
         }
     },
     "content": {
