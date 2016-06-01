@@ -33,7 +33,6 @@ use FOS\RestBundle\Controller\FOSRestController;
 use Doctrine\ORM\Query\Expr\Join;
 use Symfony\Component\Validator\Constraints\Date;
 use Symfony\Component\Validator\Constraints\DateTime;
-use ContinuousNet\PubliPrBundle\Services\Settings;
 use Stripe;
 
 class SubscriptionApiController extends FOSRestController
@@ -141,7 +140,8 @@ class SubscriptionApiController extends FOSRestController
                 'sku' => array()
             );
             $settings = $this->get('publi_pr.settings');
-            $data['defaultCurrency'] = $settings->getSetting('DEFAULT_CURRENCY')->getValue();
+            //$data['defaultCurrency'] = $settings->getSetting('DEFAULT_CURRENCY')->getValue();
+            $data['defaultCurrency'] = $this->container->getParameter('publipr.settings.default_currency');
             //get price bt product passed in request
             Stripe\Stripe::setApiKey($this->getStripeApiKey());
             $skus = Stripe\SKU::all(array(
