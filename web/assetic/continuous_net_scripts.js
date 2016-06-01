@@ -449,6 +449,9 @@ app.constant('APP_JS_REQUIRES', {
     },{
         name:"InvoiceDownloadService",
         files: ['/bundles/publipr/js/components/Invoice/InvoiceDownloadService.js']
+    },{
+        name: "InvoiceService",
+        files: ['/bundles/publipr/js/components/Invoice/InvoiceService.js']
     }]
 });
 
@@ -1716,7 +1719,6 @@ app.config(['$stateProvider', '$httpProvider', '$urlRouterProvider', '$controlle
  */
 app.config(['$stateProvider',
     function ($stateProvider) {
-
         $stateProvider.state('pdf', {
             url : '/exportInvoice/:id',
             templateUrl: '/bundles/publipr/js/components/Invoice/export_pdf_invoice.html',
@@ -2545,7 +2547,7 @@ app.config(['$stateProvider',
             ncyBreadcrumb: {
                 label:'content.list.INVOICE'
             },
-            resolve: loadSequence('InvoiceCtrl', 'paymentService', 'InvoiceDownloadService')
+            resolve: loadSequence('InvoiceCtrl', 'paymentService', 'InvoiceDownloadService', 'InvoiceService')
         }).state('app.billing.paymentsnew', {
             url: '/payments/new',
             templateUrl: '/bundles/publipr/js/components/Payment/payment_form.html',
@@ -2677,5 +2679,4 @@ app.config(['$stateProvider',
             },
             resolve: loadSequence('TrackEmailCtrl', 'trackEmailService')
         });
-
     }]);

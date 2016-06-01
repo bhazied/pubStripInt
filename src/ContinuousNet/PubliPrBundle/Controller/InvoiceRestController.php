@@ -47,14 +47,11 @@ class InvoiceRestController extends FOSRestController
     public function downloadInvoiceAction(Request $request)
     {
         try {
-            $pdfUrl = $request->request->get('url') . $request->request->get('paymentId');
             $pdfFile = new Pdf();
-            $pdfFile->binary = $this->getParameter('wkpdftohtml_binary');
+            $pdfFile->binary =  $this->getParameter('wkpdftohtml_binary');
             $fileContent = $this->persisteInvoice($request->request->get('paymentId'));
             $pdfFile->addPage($fileContent);
             $pdfFile->send('invoice_'.$this->getUser()->getFirstName().'_'.$this->getUser()->getLastName().'.pdf');
-           // $response = new Response();
-            //$response->setContent($pdfFile);
         } catch (\Exception $e) {
             return FOSView::create($e->getMessage(), Codes::HTTP_INTERNAL_SERVER_ERROR);
         }
@@ -65,6 +62,7 @@ class InvoiceRestController extends FOSRestController
         $fileContent = "";
         try
         {
+           // return "<html><body>test withount database</body></html>";
             $em = $this->getDoctrine()->getManager();
             $qb = $em->createQueryBuilder();
             $qb->from("PubliPrBundle:Payment", "pay_");
@@ -73,9 +71,8 @@ class InvoiceRestController extends FOSRestController
             $qb->where("pay_.id = :id")->setParameter('id', $paymentId);
             $qb->select('pay_');
             $result = $qb->getQuery()->getSingleResult();
-            if(!$result){
-                return false;
-            }
+            $price_tva = ($result->getProduct()->getPrice() * $this->container->getParameter('publipr.settings.default_tva')) / 100;
+            $price = $result->getProduct()->getPrice() - $price_tva;
             $templateContent = file_get_contents('invoice.html');
             $fileContent = str_replace('%product_name%', $result->getProduct()->getName(), $templateContent);
             $fileContent = str_replace('%invoice_number%', $result->getInvoiceNumber(), $fileContent);
@@ -84,13 +81,16 @@ class InvoiceRestController extends FOSRestController
             $fileContent = str_replace('%payment_method%', 'Stripe Api', $fileContent);
             $fileContent = str_replace('%product_name%', $result->getProduct()->getName(), $fileContent);
             $fileContent = str_replace('%description%', $result->getProduct()->getDescription(), $fileContent);
-            $fileContent = str_replace('%price%', $result->getProduct()->getPrice(), $fileContent);
+            $fileContent = str_replace('%price%', $price, $fileContent);
             $fileContent = str_replace('%total%', $result->getProduct()->getPrice(), $fileContent);
             $fileContent = str_replace('%user_name%', $result->getCreatorUser()->getFirstName() . ' ' . $result->getCreatorUser()->getLastName(), $fileContent);
             $fileContent = str_replace('%zip_code%', $result->getCreatorUser()->getZipCode(), $fileContent);
             $fileContent = str_replace('%address%', $result->getCreatorUser()->getAddress(), $fileContent);
             $fileContent = str_replace('%city%', $result->getCreatorUser()->getCity(), $fileContent);
             $fileContent = str_replace('%stripe_reference%', $result->getToken(), $fileContent);
+            $fileContent = str_replace('%tva%', $this->container->getParameter('publipr.settings.default_tva'), $fileContent);
+            $fileContent = str_replace('%price_tva%', $price_tva, $fileContent);
+            $fileContent = str_replace('%logo%', $this->container->get('request_stack')->getCurrentRequest()->getUriForPath('/app/images/logo-dark.png'), $fileContent);
             return $fileContent;
         }
         catch(\Exception $e)
@@ -98,6 +98,47 @@ class InvoiceRestController extends FOSRestController
             return $e;
         }
     }
+
+
+    /**
+     * @Get("/getInvoice/{paymentId}")
+     * @param $paymentId
+     * @View(serializerEnableMaxDepthChecks=true)
+     */
+    public function invoiceInfosAction($paymentId)
+    {
+        try
+        {
+            $data = array(
+                'invoice' => array(),
+                'total' => '',
+                'tva' => $this->container->getParameter('publipr.settings.default_tva'),
+                'price_tva' => ''
+            );
+            $em = $this->getDoctrine()->getManager();
+            $qb = $em->createQueryBuilder();
+            $qb->from("PubliPrBundle:Payment", "pay_");
+            $qb->leftJoin("ContinuousNet\PubliPrBundle\Entity\User", 'creatorUser', \Doctrine\ORM\Query\Expr\Join::WITH, 'pay_.creatorUser = creatorUser.id');
+            $qb->leftJoin("ContinuousNet\PubliPrBundle\Entity\Country", "Country", \Doctrine\ORM\Query\Expr\Join::WITH, 'creatorUser.country = Country.id');
+            $qb->where("pay_.id = :id")->setParameter('id', $paymentId);
+            $qb->select('pay_');
+            $result = $qb->getQuery()->getSingleResult();
+            if($result){
+                $price_tva = ($result->getProduct()->getPrice() * $this->container->getParameter('publipr.settings.default_tva')) / 100;
+                $price = $result->getProduct()->getPrice() - $price_tva;
+                $result->setAmount($price);
+                $data['invoice'] = $result;
+                $data['price_tva'] = $price_tva;
+                $data['total'] = $price + $price_tva;
+            }
+            return $data;
+
+        }
+        catch (\Exception $e) {
+            return FOSView::create($e->getMessage(), Codes::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+
 
 }
 ?>
