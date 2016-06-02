@@ -371,7 +371,7 @@ class SubscriptionApiController extends FOSRestController
                 ->setTo($payment->getCreatorUser()->getEmail())
                 ->setBody(
                     $this->renderView(
-                        'Emails/invoice.html.twig',
+                        'PubliPrBundle:Emails:invoice.html.twig',
                          array(
                             'total' => $payment->getProduct()->getPrice(),
                             'user_name' => $payment->getCreatorUser()->getFirstName() . ' ' . $payment->getCreatorUser()->getLastName(),
