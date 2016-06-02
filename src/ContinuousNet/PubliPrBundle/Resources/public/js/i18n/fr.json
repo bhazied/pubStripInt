@@ -834,6 +834,8 @@
             "TRACKPRESSRELEASEDELETED": "Track Press Release supprimée",
             "TRACKPRESSRELEASENOTDELETED": "Track Press Release non supprimée",
             "BACKTRACKPRESSRELEASES": "Retour à la liste des Track Press Releases",
+            "PRESSRELEASESNT": "Press releaqe envoyé avec success",
+            "PRESSRELEANOTSESNT" : "Press release non envoyé",
             "fields": {
                 "CARDNUMBER" : "Card Number",
                 "CARDMONTHEXPR" : "Expiration Month",

@@ -562,7 +562,7 @@ assetic:
 
 hip_mandrill:
     api_key: DfetkxjatL5oAC8_-lWVoA
-    disable_delivery: true # useful for dev/test environment. Default value is 'false'
+    disable_delivery: false # useful for dev/test environment. Default value is 'false'
     # debug: passed to \Mandrill causing it to output curl requests. Useful to see output
     # from CLI script. Default value is 'false'
     debug: true

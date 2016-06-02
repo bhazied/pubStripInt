@@ -46,7 +46,8 @@ class PressReleaseSenderController extends FOSRestController
      */
     public function sendAction(Request $request)
     {
-       $data = array('idgroup' => $request->request->get('cgIds'), 'id' => $request->request->get('prId'));
+       //$data = array('idgroup' => $request->request->get('cgIds'), 'id' => $request->request->get('prId'));
+        $data['sent'] = false;
         $em = $this->getDoctrine()->getManager();
         $qb =$em->createQueryBuilder();
         $qb->from('PubliPrBundle:PressRelease', 'pr_');
@@ -59,7 +60,7 @@ class PressReleaseSenderController extends FOSRestController
         $emailTemplate = $this->getEmailTemplate('pr_email', $em);
         if(!$emailTemplate)
         {
-            return false;
+            return $data;
         }
         //get list contact emails
         $contactQuery = $em->createQueryBuilder();
@@ -69,7 +70,7 @@ class PressReleaseSenderController extends FOSRestController
         $contacts = $contactQuery->getQuery()->getResult();
         //try to send press release to founded contact list
         if(is_null($contacts)) {
-            return false;
+            return $data;
         }
 
         $dispatcher = $this->get('hip_mandrill.dispatcher');
@@ -94,11 +95,13 @@ class PressReleaseSenderController extends FOSRestController
             }
             $this->saveEmailCampaign($one, $request->request->get('cgIds'), $em);
             $em->flush();
-            return true;
+            $data['sent'] = true;
+            return $data;
         }
         else
         {
-            return false;
+            $data['sent'] = false;
+            return $data;
         }
         
     }
