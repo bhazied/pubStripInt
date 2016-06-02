@@ -91,7 +91,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'topbar.user.PROFILE'
         },
-        resolve: loadSequence('jquery-sparkline', 'ProfileCtrl', 'ProfileService')
+        resolve: loadSequence('jquery-sparkline', 'ProfileCtrl', 'ProfileService', 'countryService')
     }).state('app.changepassword', {
         url: '/change-password',
         templateUrl: '/bundles/publipr/js/components/Auth/change_password.html',
@@ -708,14 +708,14 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.SENDPRESSRELEASE'
         },
-        resolve: loadSequence('PressReleaseSenderCtrl', 'PressReleaseSenderService', 'pressReleaseService', 'ContactGroupService')
+        resolve: loadSequence('PressReleaseSenderCtrl', 'PressReleaseSenderService', 'pressReleaseService', 'contactGroupService')
     }).state('app.prmanager.pressreleasesstats', {
         url: '/press-releases/stats/:id',
         templateUrl: '/bundles/publipr/js/components/PressRelease/press_release_stats.html',
         ncyBreadcrumb: {
             label: 'content.list.PRESSRELEASESTATS'
         },
-        resolve: loadSequence('PressReleaseStatsCtrl', 'PressReleaseStatsService', 'pressReleaseService', 'pressReleaseEmailStatsService')
+        resolve: loadSequence('ngTable', 'PressReleaseStatsCtrl', 'PressReleaseStatsService', 'pressReleaseService', 'PressReleaseEmailStatsService')
     }).state('app.settings', {
         url: '/settings',
         template: '<div ui-view class="fade-in-up"></div>',

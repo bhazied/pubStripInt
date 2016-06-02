@@ -15,321 +15,157 @@
         <div class="col-md-12">
             <!-- /// controller:  'UserCtrl' -  localtion: assets/js/controllers/userCtrl.js /// -->
             <div ng-controller="ProfileCtrl">
-                <!-- start: USER TABSET -->
-                <uib-tabset class="tabbable">
-                    <!-- start: TAB OVERVIEW -->
-                    <uib-tab heading="Overview">
+
+                <form name="userForm" id="userForm" novalidate ng-submit="submitForm(userForm)">
+                    <fieldset>
+                        <legend>
+                            Account Info
+                        </legend>
                         <div class="row">
-                            <div class="col-md-4">
-                                <div class="user-left">
-                                    <div class="center">
-                                        <h4>[[user.firstName]] [[user.lastName]]</h4>
-                                        <div class="user-image margin-top-10" ng-if="user.picture != '' && user.picture != null">
-                                            <div class="thumbnail">
-                                                <img ng-src="[[ user.picture ]]" alt="" />
-                                            </div>
-                                            <div class="user-image-buttons">
-                                                <span class="btn btn-primary"  ng-click="showFileManager('picture')"><i class="fa fa-pencil"></i></span>
-                                                <span class="btn btn-danger" ng-click="user.picture = ''"> <i class="fa fa-times"></i></span>
-                                            </div>
+                            <div class="col-md-6">
+
+                                <div class="form-group">
+                                    <label class="control-label ">
+                                        <span translate="content.list.fields.NAME">Name</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <input ng-required="true" type="text" placeholder="[[ 'content.form.messages.ENTERNAME' | translate ]]" class="form-control" name="name" ng-model="user.name">
+                                </div><!--/form-group-->
+
+                                <div class="form-group">
+                                    <label class="control-label ">
+                                        <span translate="content.list.fields.FIRSTNAME">First Name</span>
+                                    </label>
+                                    <input type="text" placeholder="[[ 'content.form.messages.ENTERFIRSTNAME' | translate ]]" class="form-control" name="firstname" ng-model="user.firstName">
+                                </div><!--/form-group-->
+
+                                <div class="form-group">
+                                    <label class="control-label">
+                                        <span translate="content.list.fields.PHONE">Phone:</span>
+                                    </label>
+                                    <input type="text" placeholder="[[ 'content.form.messages.ENTERPHONE' | translate ]]" class="form-control" name="phone" ng-model="user.phone">
+                                </div><!--/form-group-->
+
+                                <div class="form-group">
+                                    <label class="control-label">
+                                        <span translate="content.list.fields.JOB">Job</span>
+                                    </label>
+                                    <input type="text" placeholder="[[ 'content.form.messages.ENTERJOB' | translate ]]" class="form-control" name="url" ng-model="user.job">
+                                </div><!--/form-group-->
+
+                                <div class="form-group">
+                                    <label for="userAddress" class="control-label">
+                                        <span translate="content.list.fields.ADDRESS">Address</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <input ng-required="true" id="userAddress" type="text" placeholder="Enter address" class="form-control" name="address" ng-model="user.address">
+                                </div><!--/form-group-->
+
+                                <div class="form-group">
+                                    <label for="userCity" class="control-label">
+                                        <span translate="content.list.fields.CITY">City</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <input ng-required="true" ng-model="user.city" type="text" name="city" id="userCity" class="form-control" placeholder="[[ 'content.form.messages.ENTERCITY' | translate ]]" ng-required="false" />
+                                </div><!--/form-group-->
+
+                            </div><!--/col-md-6-->
+
+                            <div class="col-md-6">
+
+                                <div class="form-group">
+                                    <label class="control-label ">
+                                        <span translate="content.list.fields.EMAIL">Email</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <input ng-readonly="true" ng-required="true" type="text" placeholder="[[ 'content.form.messages.ENTEREMAIL' | translate ]]" class="form-control" name="name" ng-model="user.email">
+                                </div><!--/form-group-->
+
+                                <div class="form-group">
+                                    <label class="control-label">
+                                        <span translate="content.list.fields.LASTNAME">Last Name</span>
+                                    </label>
+                                    <input type="text" placeholder="[[ 'content.form.messages.ENTERLASTNAME' | translate ]]" class="form-control" name="lastname" ng-model="user.lastName">
+                                </div><!--/form-group-->
+
+                                <div class="form-group">
+                                    <label for="userGender" class="control-label">
+                                        <span translate="content.list.fields.GENDER">Gender</span>
+                                    </label>
+                                    <div class="clip-radio radio-primary" ng-if="genders.length < 10">
+                                        <input ng-disabled="false" ng-repeat-start="gender in genders" ng-model="user.gender" type="radio" id="gender[[ gender.id ]]" value="[[ gender.id ]]" name="gender" />
+                                        <label ng-repeat-end for="gender[[ gender.id ]]">
+                                            [[ gender.title ]]
+                                        </label>
+                                    </div>
+                                    <div class="block" ng-if="genders.length >= 10">
+                                        <select ng-disabled="false" ng-options="item.id as item.title for item in genders" ng-model="user.gender" name="gender" id="userGender" class="form-control">
+                                            <option translate="content.form.messages.SELECTGENDER" value="">Select Gender</option>
+                                        </select>
+                                        <span my-enum="[[ user.gender ]]" my-enum-list="[[ genders ]]"></span>
+                                    </div>
+
+                                </div><!--/form-group-->
+
+                                <div class="form-group">
+                                    <label for="userPicture" class="control-label">
+                                        <span translate="content.list.fields.PICTURE">Picture</span>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-icon">
+                                            <input ng-model="user.picture" type="text" name="picture" id="userPicture" class="form-control" placeholder="[[ 'content.form.messages.ENTERPICTURE' | translate ]]" />
+                                            <i class="ti-image"></i>
+                                        </span><!--/input-icon-->
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-primary" ng-click="showFileManager('picture')">
+                                                <i class="ti-cloud"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                    <div class="user-image margin-top-10" ng-if="user.picture != '' && user.picture != null">
+                                        <div class="thumbnail">
+                                            <img ng-src="[[ user.picture ]]" alt="" />
                                         </div>
-                                        <hr>
-
-                                    </div>
-                                    <table class="table table-condensed">
-                                        <thead>
-                                            <tr>
-                                                <th colspan="3">Contact Information</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-
-                                            <tr>
-                                                <td><span translate="content.list.fields.EMAIL">Email:</span></td>
-                                                <td>[[user.email]]</td>
-                                            </tr>
-                                            <tr>
-                                                <td><span translate="content.list.fields.PHONE">Phone:</span></td>
-                                                <td>[[user.phone]]</td>
-                                            </tr>
-
-                                        </tbody>
-                                    </table>
-                                    <table class="table table-condensed">
-                                        <thead>
-                                            <tr>
-                                                <th colspan="3">General information</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            
-                                            <tr>
-                                                <td> <span translate="content.list.fields.LASTLOGIN">Last Login</span></td>
-                                                <td>[[user.lastLogin]]</td>
-                                            </tr>
-                                            <tr>
-                                                <td> <span translate="content.list.fields.COMPANYNAME">Company Name</span></td>
-                                                <td>[[user.companyName]]</td>
-                                            </tr>
-                                            <tr>
-                                                <td> <span translate="content.list.fields.ADDRESS">Address</span></td>
-                                                <td>[[user.address]]</td>
-                                            </tr>
-                                            <tr>
-                                                <td><span translate="content.list.fields.JOB">Job</span></td>
-                                                <td><span class="label label-sm label-info">[[user.type]]</span></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <table class="table table-condensed">
-                                        <thead>
-                                            <tr>
-                                                <th colspan="3">Additional information</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Groups</td>
-                                                <td>New company web site development, HR Management</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <div class="text-right">
-                                        <a class="btn btn-primary btn-o btn-wide" href="#" ng-click="editActive = true">
-                                            <span translate="content.list.EDITUSER">Edit Account </span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-8">
-
-                                <div class="panel panel-white" id="activities">
-                                    <div class="panel-heading border-light">
-                                        <h4 class="panel-title text-primary">Recent Activities</h4>
-                                        <paneltool class="panel-tools" tool-collapse="tool-collapse" tool-refresh="load1" tool-dismiss="tool-dismiss"></paneltool>
-                                    </div>
-                                    <div uib-collapse="activities" ng-init="activities = false" class="panel-wrapper">
-                                        <div class="panel-body">
-                                            <ul class="timeline-xs">
-                                                <li class="timeline-item success">
-                                                    <div class="margin-left-15">
-                                                        <div class="text-muted text-small">
-                                                            2 minutes ago
-                                                        </div>
-                                                        <p>
-                                                            <a class="text-info" href>
-                                                                Steven
-                                                            </a>
-                                                            has completed his account.
-                                                        </p>
-                                                    </div>
-                                                </li>
-                                                <li class="timeline-item">
-                                                    <div class="margin-left-15">
-                                                        <div class="text-muted text-small">
-                                                            12:30
-                                                        </div>
-                                                        <p>
-                                                            Staff Meeting
-                                                        </p>
-                                                    </div>
-                                                </li>
-                                                <li class="timeline-item danger">
-                                                    <div class="margin-left-15">
-                                                        <div class="text-muted text-small">
-                                                            11:11
-                                                        </div>
-                                                        <p>
-                                                            Completed new layout.
-                                                        </p>
-                                                    </div>
-                                                </li>
-                                                <li class="timeline-item info">
-                                                    <div class="margin-left-15">
-                                                        <div class="text-muted text-small">
-                                                            Thu, 12 Jun
-                                                        </div>
-                                                        <p>
-                                                            Contacted
-                                                            <a class="text-info" href>
-                                                                Microsoft
-                                                            </a>
-                                                            for license upgrades.
-                                                        </p>
-                                                    </div>
-                                                </li>
-                                                <li class="timeline-item">
-                                                    <div class="margin-left-15">
-                                                        <div class="text-muted text-small">
-                                                            Tue, 10 Jun
-                                                        </div>
-                                                        <p>
-                                                            Started development new site
-                                                        </p>
-                                                    </div>
-                                                </li>
-                                                <li class="timeline-item">
-                                                    <div class="margin-left-15">
-                                                        <div class="text-muted text-small">
-                                                            Sun, 11 Apr
-                                                        </div>
-                                                        <p>
-                                                            Lunch with
-                                                            <a class="text-info" href>
-                                                                Nicole
-                                                            </a>
-                                                            .
-                                                        </p>
-                                                    </div>
-                                                </li>
-                                                <li class="timeline-item warning">
-                                                    <div class="margin-left-15">
-                                                        <div class="text-muted text-small">
-                                                            Wed, 25 Mar
-                                                        </div>
-                                                        <p>
-                                                            server Maintenance.
-                                                        </p>
-                                                    </div>
-                                                </li>
-                                                <li class="timeline-item">
-                                                    <div class="margin-left-15">
-                                                        <div class="text-muted text-small">
-                                                            Fri, 20 Mar
-                                                        </div>
-                                                        <p>
-                                                            New User Registration
-                                                            <a class="text-info" href>
-                                                                more details
-                                                            </a>
-                                                            .
-                                                        </p>
-                                                    </div>
-                                                </li>
-                                            </ul>
+                                        <div class="user-image-buttons">
+                                            <span class="btn btn-primary"  ng-click="showFileManager('picture')"><i class="fa fa-pencil"></i></span>
+                                            <span class="btn btn-danger" ng-click="user.picture = ''"> <i class="fa fa-times"></i></span>
                                         </div>
                                     </div>
-                                </div>
+                                </div><!--/form-group-->
 
-                            </div>
+                                <div class="form-group">
+                                    <label class="control-label">
+                                        <span translate="content.list.fields.ZIPCODE">Zip Code</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <input ng-required="true" class="form-control" placeholder="enter a zip code" type="text" name="zipcode" ng-model="user.zipCode">
+                                </div><!--/form-group-->
+
+                                <div class="form-group">
+                                    <label for="userCountry" class="control-label">
+                                        <span translate="content.list.fields.COUNTRY">Country</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <div class="block" ng-if="countriesLoaded">
+                                        <select ng-required="true" ng-options="item.id as item.title for item in countries" ng-model="user.country" name="country" id="userCountry" class="form-control" ng-required="false" ng-change="changeCountry()">
+                                            <option translate="content.form.messages.SELECTCOUNTRY" value="">Select Country</option>
+                                        </select>
+                                    </div>
+                                </div><!--/form-group-->
+
+                            </div><!--/col-md-6-->
+
                         </div>
-                    </uib-tab>
-                    <!-- end: TAB OVERVIEW -->
-                    <!-- start: TAB EDIT ACCOUNT -->
-                    <uib-tab heading="Edit Account" active="editActive">
-                        <form name="userForm" id="userForm" novalidate ng-submit="submitForm(userForm)">
-                            <fieldset>
-                                <legend>
-                                    Account Info
-                                </legend>
-                                <div class="row">
-                                    <div class="col-md-6">
+                        <div class="col-md-4 pull-right">
+                            <button type="button" ng-click="submit(userForm)" class="btn btn-primary pull-right" ng-click="submit()" ng-disabled="disableSubmit">
+                                <i class="fa fa-spinner fa-spin" ng-if="disableSubmit"></i>
+                                <i class="ti-save" ng-if="!disableSubmit"></i>
+                                <span translate="content.common.SAVE">Save</span>
+                            </button>
+                        </div>
+                    </fieldset>
 
-                                        <div class="form-group">
-                                            <label class="control-label ">
-                                                <span translate="content.list.fields.FIRSTNAME">First Name</span>
-                                            </label>
-                                            <input type="text" placeholder="[[ 'content.form.messages.ENTERFIRSTNAME' | translate ]]" class="form-control" name="firstname" ng-model="user.firstName">
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label">
-                                                <span translate="content.list.fields.LASTNAME">Last Name</span>
-                                            </label>
-                                            <input type="text" placeholder="[[ 'content.form.messages.ENTERLASTNAME' | translate ]]" class="form-control" name="lastname" ng-model="user.lastName">
-                                        </div>
-                                        
-                                        <div class="form-group">
-                                            <label class="control-label"><span translate="content.list.fields.PHONE">Phone:</span>
-                                                
-                                            </label>
-                                            <input type="text" placeholder="[[ 'content.form.messages.ENTERPHONE' | translate ]]" class="form-control" name="phone" ng-model="user.phone">
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label">
-                                                Adress
-                                            </label>
-                                            <input type="text" placeholder="Enter address" class="form-control" name="address" ng-model="user.address">
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label">
-                                                <span translate="content.list.fields.JOB">Job</span>
-                                            </label>
-                                            <input type="text" placeholder="[[ 'content.form.messages.ENTERJOB' | translate ]]" class="form-control" name="url" ng-model="user.job">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="userGender" class="control-label">
-                                                <span translate="content.list.fields.GENDER">Gender</span>
-                                            </label>
-                                            <div class="clip-radio radio-primary" ng-if="genders.length < 10">
-                                                <input ng-disabled="false" ng-repeat-start="gender in genders" ng-model="user.gender" type="radio" id="gender[[ gender.id ]]" value="[[ gender.id ]]" name="gender" />
-                                                <label ng-repeat-end for="gender[[ gender.id ]]">
-                                                    [[ gender.title ]]
-                                                </label>
-                                            </div>
-                                            <div class="block" ng-if="genders.length >= 10">
-                                                <select ng-disabled="false" ng-options="item.id as item.title for item in genders" ng-model="user.gender" name="gender" id="userGender" class="form-control">
-                                                    <option translate="content.form.messages.SELECTGENDER" value="">Select Gender</option>
-                                                </select>
-                                                <span my-enum="[[ user.gender ]]" my-enum-list="[[ genders ]]"></span>
-                                            </div>
-                                        </div><!--/form-group-->
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label class="control-label">
-                                                        <span translate="content.list.fields.ZIPCODE">Zip Code</span>
-                                                    </label>
-                                                    <input class="form-control" placeholder="enter a zip code" type="text" name="zipcode" ng-model="user.zipCode">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="userPicture" class="control-label">
-                                                    <span translate="content.list.fields.PICTURE">Picture</span>
-                                                </label>
-                                                <div class="input-group">
-                                                    <span class="input-icon">
-                                                        <input ng-model="user.picture" type="text" name="picture" id="userPicture" class="form-control" placeholder="[[ 'content.form.messages.ENTERPICTURE' | translate ]]" />
-                                                        <i class="ti-image"></i>
-                                                    </span><!--/input-icon-->
-                                                    <span class="input-group-btn">
-                                                        <button type="button" class="btn btn-primary" ng-click="showFileManager('picture')">
-                                                            <i class="ti-cloud"></i>
-                                                        </button>
-                                                    </span>
-                                                </div>
-                                                <div class="user-image margin-top-10" ng-if="user.picture != '' && user.picture != null">
-                                                    <div class="thumbnail">
-                                                        <img ng-src="[[ user.picture ]]" alt="" />
-                                                    </div>
-                                                    <div class="user-image-buttons">
-                                                        <span class="btn btn-primary"  ng-click="showFileManager('picture')"><i class="fa fa-pencil"></i></span>
-                                                        <span class="btn btn-danger" ng-click="user.picture = ''"> <i class="fa fa-times"></i></span>
-                                                    </div>
-                                                </div>
-                                            </div><!--/form-group-->
-                                        </div><!--/col-md-6-->
-                                    </div>
-                                </div>
-                                <div class="col-md-4 pull-right">
-                                    <button type="button" ng-click="submit(userForm)" class="btn btn-primary pull-right" ng-click="submit()" ng-disabled="disableSubmit">
-                                        <i class="fa fa-spinner fa-spin" ng-if="disableSubmit"></i>
-                                        <i class="ti-save" ng-if="!disableSubmit"></i>
-                                        <span translate="content.common.SAVE">Save</span>
-                                    </button>
-                                </div>
-                            </fieldset>
-
-                        </form>
-
-                    </uib-tab>
-                    <!-- end: TAB EDIT ACCOUNT -->
-
-                </uib-tabset>
-                <!-- end: USER TABSET -->
+                </form>
 
             </div>
         </div>

@@ -699,7 +699,7 @@ class ApiV1RESTController extends FOSRestController
     }
 
     /**
-     * @Post("/updateProfile")
+     * @Put("/updateProfile")
      * @View(serializerEnableMaxDepthChecks=true)
      */
     public function updateProfileAction(Request $request)
@@ -708,13 +708,22 @@ class ApiV1RESTController extends FOSRestController
             $data = array();
             $em = $this->getDoctrine()->getManager();
             $user = $em->getRepository('PubliPrBundle:User')->find($this->getUser()->getId());
+
             $fields = array(
-                'email', 'gender', 'name', 'country', 'city', 'phone'
+                'name', 'firstName', 'lastName', 'gender', 'country', 'city', 'phone', 'address', 'zipCode'
             );
+
             $email = $request->request->get('email');
             if (is_null($email) || empty($email)) {
                 $data['status'] = false;
                 $data['message'] = 'Missing email parameter';
+                return $data;
+            }
+
+            $name = $request->request->get('name');
+            if (is_null($email) || empty($email)) {
+                $data['status'] = false;
+                $data['message'] = 'Missing name parameter';
                 return $data;
             }
 
@@ -724,22 +733,39 @@ class ApiV1RESTController extends FOSRestController
             }
 
             $gender = $request->request->get('gender');
-            if (is_null($gender) || empty($gender)) {
+            if (!is_null($gender)) {
+                if ($gender != 'Male' && $gender != 'Female') {
+                    $data['status'] = false;
+                    $data['message'] = 'incorrect gender parameter (Male/Female)';
+                    return $data;
+                }
+            }
+
+            $address = $request->request->get('address');
+            if (is_null($address)) {
                 $data['status'] = false;
-                $data['message'] = 'Missing gender parameter';
+                $data['message'] = 'Missing address parameter';
                 return $data;
             }
 
-            if ($gender != 'Male' && $gender != 'Female') {
+            $zipCode = $request->request->get('zipCode');
+            if (is_null($zipCode)) {
                 $data['status'] = false;
-                $data['message'] = 'incorrect gender parameter (Male/Female)';
+                $data['message'] = 'Missing zip code parameter';
                 return $data;
             }
 
-            $name = $request->request->get('name');
-            if (is_null($name) || empty($name)) {
+            $city = $request->request->get('city');
+            if (is_null($city) || empty($city)) {
                 $data['status'] = false;
-                $data['message'] = 'Missing name parameter';
+                $data['message'] = 'Missing city parameter';
+                return $data;
+            }
+
+            $city = $request->request->get('city');
+            if (is_null($city) || empty($city)) {
+                $data['status'] = false;
+                $data['message'] = 'Missing city parameter';
                 return $data;
             }
 
@@ -755,13 +781,6 @@ class ApiV1RESTController extends FOSRestController
                 return $data;
             }
 
-            $city = $request->request->get('city');
-            if (is_null($city) || empty($city)) {
-                $data['status'] = false;
-                $data['message'] = 'Missing city parameter';
-                return $data;
-            }
-
             $address = $request->request->get('address');
             if (is_null($address) || empty($address)) {
                 $data['status'] = false;
@@ -770,15 +789,11 @@ class ApiV1RESTController extends FOSRestController
             }
 
             $phone = $request->request->get('phone');
-            if (is_null($phone) || empty($phone)) {
-                $data['status'] = false;
-                $data['message'] = 'Missing phone parameter';
-                return $data;
-            }
-
-            $phoneCheck = $this->checkPhoneAction($request);
-            if (!$phoneCheck['status']) {
-                return $phoneCheck;
+            if (!is_null($phone)) {
+                $phoneCheck = $this->checkPhoneAction($request);
+                if (!$phoneCheck['status']) {
+                    return $phoneCheck;
+                }
             }
 
             foreach ($fields as $field) {
