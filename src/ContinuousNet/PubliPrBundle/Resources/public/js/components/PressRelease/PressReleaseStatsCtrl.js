@@ -3,7 +3,7 @@
 app.controller('PressReleaseStatsCtrl', ['$rootScope','$scope', '$state', '$stateParams', '$sce', '$timeout', '$filter','toaster','SweetAlert', '$q', '$interpolate', '$localStorage', '$pressReleasesDataFactory','$PressReleaseStatsDataFactory', 'highchartsNG','$PressReleaseEmailStatsDataFactory','ngTableParams',
     function( $rootScope,$scope, $state, $stateParams, $sce, $timeout, $filter, toaster, SweetAlert, $q, $interpolate, $localStorage, $pressReleasesDataFactory , $PressReleaseStatsDataFactory, highchartsNG, $PressReleaseEmailStatsDataFactory, ngTableParams) {
 
-
+        $scope.hasStat = false;
         $scope.startDateOpened = false;
         $scope.startDateToggle = function($event){
             $event.preventDefault();
@@ -45,10 +45,14 @@ app.controller('PressReleaseStatsCtrl', ['$rootScope','$scope', '$state', '$stat
                         $PressReleaseStatsDataFactory.stats({
                             prId : $stateParams.id
                         }).$promise.then(function(data){
-                            $scope.sendStats = data;
-                            $scope.initChart(data);
-                            $scope.pieChart(data);
-                            def.resolve($scope.sendStats)
+                            if(data.hasSent){
+                                $scope.sendStats = data;
+                                $scope.initChart(data);
+                                $scope.pieChart(data);
+                                $scope.hasStat = true;
+                                def.resolve($scope.sendStats)
+                            }
+
                         });
                         return def;
                     }
@@ -61,8 +65,7 @@ app.controller('PressReleaseStatsCtrl', ['$rootScope','$scope', '$state', '$stat
                 return [];
             }
         }
-
-        $scope.getStats();
+            $scope.getStats();
         $scope.loadedSearchedData = false;
         $scope.searchStatData = [];
         $scope.resetOn = false;
@@ -198,7 +201,6 @@ app.controller('PressReleaseStatsCtrl', ['$rootScope','$scope', '$state', '$stat
                 }]
             }
         }
-        //$scope.seachChart();
         $scope.setCols = function(){
             $scope.cols = [
                 {field: 'email', title:$filter('translate')('content.list.fields.EMAIL'), show:true },
@@ -252,6 +254,7 @@ app.controller('PressReleaseStatsCtrl', ['$rootScope','$scope', '$state', '$stat
             }
             return false;
         }
-
-        $scope.setEmailStats();
+       // if($scope.hasStat){
+            $scope.setEmailStats();
+        //}
     }]);

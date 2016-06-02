@@ -173,6 +173,9 @@
         "TIME": "h:mma",
         "DATETIME": "MM/dd/yyyy h:mma"
     },
+    "pressRelease" :{
+        "WARNINGTEXT" : "ce communiqué de presse n'a était jamais envoyé, merci de procder à l'envoi à fin que vous pouvez consulter les statiqtique"
+    },
     "payment":{
         "SUCCESSTEXT": "You have an active subscription '[[ payment.productName ]]' from [[ payment.startDate ]] to [[ payment.endDate ]].",
         "WARNINGTEXT": "You do not have a subscription right now, please choose one of the offers and make the payment.",
@@ -835,7 +838,7 @@
             "TRACKPRESSRELEASENOTDELETED": "Track Press Release non supprimée",
             "BACKTRACKPRESSRELEASES": "Retour à la liste des Track Press Releases",
             "PRESSRELEASESNT": "Press releaqe envoyé avec success",
-            "PRESSRELEANOTSESNT" : "Press release non envoyé",
+            "PRESSRELEANOTSESNT" : "Press",
             "fields": {
                 "CARDNUMBER" : "Card Number",
                 "CARDMONTHEXPR" : "Expiration Month",

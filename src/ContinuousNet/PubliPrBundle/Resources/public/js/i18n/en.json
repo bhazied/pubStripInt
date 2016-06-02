@@ -173,6 +173,9 @@
         "TIME": "h:mma",
         "DATETIME": "MM/dd/yyyy h:mma"
     },
+    "pressRelease" :{
+        "WARNINGTEXT" : "This press release has was never sent, thank you procder the transmission to end you can see the statiqtique"
+    },
     "payment":{
         "SUCCESSTEXT": "You have an active subscription '[[ payment.productName ]]' from [[ payment.startDate ]] to [[ payment.endDate ]].",
         "WARNINGTEXT": "You do not have a subscription right now, please choose one of the offers and make the payment.",

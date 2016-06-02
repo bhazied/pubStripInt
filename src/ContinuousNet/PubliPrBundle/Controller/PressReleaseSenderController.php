@@ -121,11 +121,22 @@ class PressReleaseSenderController extends FOSRestController
                 'total_opens' => 0,
                 'total_clicks' => 0,
                 'unique_opens' => 0,
-                'unique_clicks' => 0
+                'unique_clicks' => 0,
+                'hasSent' => false
             );
             $em = $this->getDoctrine()->getManager();
             //$pressRelease = new PressRelease() ;
+            $qb = $em->createQueryBuilder();
+            $qb->from('PubliPrBundle:EmailCampaign', 'ec_');
+            $qb->leftJoin('\ContinuousNet\PubliPrBundle\Entity\PressRelease', 'pressRelease', \Doctrine\ORM\Query\Expr\Join::WITH, 'ec_.pressRelease = pressRelease.id');
+            $qb->select('count(ec_.id)');
+            $qb->where('ec_.pressRelease = :pressReleaseId')->setParameter('pressReleaseId', $request->request->get('prId'));
+            $emailCampaigns = $qb->getQuery()->getSingleScalarResult();
+            if($emailCampaigns == 0){
+                return $data;
+            }
             $pressRelease =  $em->getRepository('PubliPrBundle:PressRelease')->find($request->request->get('prId'));
+
             $apiKey = $this->getParameter('hip_mandrill.api_key');
             $mandrill = new \Mandrill($apiKey);
             $result = $mandrill->tags->info($pressRelease->getSlug());
@@ -139,6 +150,7 @@ class PressReleaseSenderController extends FOSRestController
                 $data['unique_opens']   = $result['unique_opens'];
                 $data['unique_clicks']  = $result['unique_clicks'];
                 $data['total_sent']     = $result['sent'];
+                $data['hasSent'] = true;
                 foreach ($status as $stat){
                     $tmp = array(
                         'name' => $stat,
