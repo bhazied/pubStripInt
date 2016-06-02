@@ -63,7 +63,13 @@ app.controller('PressReleaseSenderCtrl', ['$rootScope','$scope', '$state', '$sta
                  $scope.disableSubmit = true;
                 $PressReleaseSenderDataFactory.send({prId : $scope.pressRelease.id, cgIds: $scope.contactSelection}).$promise.then(function(data){
                     $scope.disableSubmit = false;
-                    toaster.pop('success', $filter('translate')('content.common.NOTIFICATION'), $filter('translate')('content.list.PRESSRELEASESNT'));
+                    console.log(data);
+                    if(data == true){
+                        toaster.pop('success', $filter('translate')('content.common.NOTIFICATION'), $filter('translate')('content.list.PRESSRELEASESNT'));
+                    }
+                    else {
+                        toaster.pop('error', $filter('translate')('content.common.NOTIFICATION'), $filter('translate')('content.list.PRESSRELEANOTSESNT'));
+                    }
                     $scope.list();
                 },function (error) {
                     $scope.disableSubmit = false;

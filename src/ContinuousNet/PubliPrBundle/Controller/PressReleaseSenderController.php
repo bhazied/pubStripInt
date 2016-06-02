@@ -56,7 +56,7 @@ class PressReleaseSenderController extends FOSRestController
         $qb->select('pr_');
         $pressRelease = $qb->getQuery()->getResult();
         $one = $pressRelease[0];
-        $emailTemplate = $this->getEmailTemplate($one->getSlug(), $em);
+        $emailTemplate = $this->getEmailTemplate('pr_email', $em);
         if(!$emailTemplate)
         {
             return false;
@@ -87,14 +87,20 @@ class PressReleaseSenderController extends FOSRestController
             $message->addTo($contact->getEmail(), $contact->getFirstName() . ' ' . $contact->getLastName());
         }
         $result = $dispatcher->send($message);
-        foreach($contacts as $contact)
-        {
-            $keyResult = array_search($contact->getEmail(), array_column($result, 'email'));
-            $this->saveEmailsContact($one, $contact, $result[$keyResult]['status'], $em);
+        if($result) {
+            foreach ($contacts as $contact) {
+                $keyResult = array_search($contact->getEmail(), array_column($result, 'email'));
+                $this->saveEmailsContact($one, $contact, $result[$keyResult]['status'], $em);
+            }
+            $this->saveEmailCampaign($one, $request->request->get('cgIds'), $em);
+            $em->flush();
+            return true;
         }
-        $this->saveEmailCampaign($one, $request->request->get('cgIds'), $em);
-        $em->flush();
-        return true;
+        else
+        {
+            return false;
+        }
+        
     }
 
     /**
