@@ -2414,7 +2414,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.SENDPRESSRELEASE'
         },
-        resolve: loadSequence('PressReleaseSenderCtrl', 'PressReleaseSenderService', 'pressReleaseService')
+        resolve: loadSequence('PressReleaseSenderCtrl', 'PressReleaseSenderService', 'pressReleaseService', 'ContactGroupService')
     }).state('app.prmanager.pressreleasesstats', {
         url: '/press-releases/stats/:id',
         templateUrl: '/bundles/publipr/js/components/PressRelease/press_release_stats.html',

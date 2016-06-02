@@ -203,11 +203,11 @@ function dashboardCtrl($scope, $interval, COLORS, $localStorage, $filter, toaste
     }];
 
     if ($localStorage.showWelcome) {
-        toaster.pop('success', $filter('translate')('content.common.NOTIFICATION'), $filter('translate')('login.WELCOME'));
-
+        toaster.pop('success', $filter('translate')('content.common.NOTIFICATION'), $filter('translate')('login.WELCOME')+' '+$localStorage.showWelcome.user.name);
+        delete $localStorage.showWelcome;
     }
 }
 
 angular
     .module('publiPrApp')
-    .controller('dashboardCtrl', ['$scope', '$interval', 'COLORS', $localStorage, $filter, toaster, dashboardCtrl]);
+    .controller('dashboardCtrl', ['$scope', '$interval', 'COLORS', '$localStorage', '$filter', 'toaster', dashboardCtrl]);
