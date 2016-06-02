@@ -839,6 +839,7 @@ class ApiV1RESTController extends FOSRestController
 
             $data = array(
                 'id' => $user->getId(),
+                'name' => $user->getName(),
                 'email' => $user->getEmail(),
                 'username' => $user->getUsername(),
                 'firstName' => $user->getFirstName(),
@@ -846,9 +847,11 @@ class ApiV1RESTController extends FOSRestController
                 'phone' => $user->getPhone(),
                 'job' => $user->getJob(),
                 'zipCode' => $user->getZipCode(),
+                'city' => $user->getCity(),
                 'type' => $user->getType(),
                 'gender' => $user->getGender(),
                 'address' => $user->getAddress(),
+                'country' => $user->getCountry(),
                 'picture' => $user->getPicture(),
                 'lastLogin' => $user->getLastLogin()
             );

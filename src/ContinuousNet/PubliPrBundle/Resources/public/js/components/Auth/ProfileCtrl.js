@@ -32,8 +32,11 @@ app.controller('ProfileCtrl', ['$scope', '$stateParams', '$timeout', '$filter', 
                             for (var i in data.results) {
                                 $scope.countries.push({
                                     id: data.results[i].id,
-                                    title: data.results[i].name
+                                    name: data.results[i].name
                                 });
+                                if ($scope.user.country.id == data.results[i].id) {
+                                    $scope.user.country = $scope.countries[i];
+                                }
                             }
                             def.resolve($scope.countries);
                         }

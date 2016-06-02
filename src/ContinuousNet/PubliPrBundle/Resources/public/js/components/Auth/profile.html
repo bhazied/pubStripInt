@@ -50,7 +50,7 @@
                                     <label class="control-label">
                                         <span translate="content.list.fields.JOB">Job</span>
                                     </label>
-                                    <input type="text" placeholder="[[ 'content.form.messages.ENTERJOB' | translate ]]" class="form-control" name="url" ng-model="user.job">
+                                    <input type="text" placeholder="[[ 'content.form.messages.ENTERJOB' | translate ]]" class="form-control" name="job" ng-model="user.job">
                                 </div><!--/form-group-->
 
                                 <div class="form-group">
@@ -66,7 +66,7 @@
                                         <span translate="content.list.fields.CITY">City</span>
                                         <span class="symbol required"></span>
                                     </label>
-                                    <input ng-required="true" ng-model="user.city" type="text" name="city" id="userCity" class="form-control" placeholder="[[ 'content.form.messages.ENTERCITY' | translate ]]" ng-required="false" />
+                                    <input ng-required="true" ng-model="user.city" type="text" name="city" id="userCity" class="form-control" placeholder="[[ 'content.form.messages.ENTERCITY' | translate ]]" />
                                 </div><!--/form-group-->
 
                             </div><!--/col-md-6-->
@@ -147,7 +147,7 @@
                                         <span class="symbol required"></span>
                                     </label>
                                     <div class="block" ng-if="countriesLoaded">
-                                        <select ng-required="true" ng-options="item.id as item.title for item in countries" ng-model="user.country" name="country" id="userCountry" class="form-control" ng-required="false" ng-change="changeCountry()">
+                                        <select ng-required="true" ng-options="item.id as item.name for item in countries" ng-model="user.country" name="country" id="userCountry" class="form-control" ng-required="false" ng-change="changeCountry()">
                                             <option translate="content.form.messages.SELECTCOUNTRY" value="">Select Country</option>
                                         </select>
                                     </div>
