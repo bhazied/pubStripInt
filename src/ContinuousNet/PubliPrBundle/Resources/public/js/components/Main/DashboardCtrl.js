@@ -203,7 +203,7 @@ function dashboardCtrl($scope, $interval, COLORS, $localStorage, $filter, toaste
     }];
 
     if ($localStorage.showWelcome) {
-        toaster.pop('success', $filter('translate')('content.common.NOTIFICATION'), $filter('translate')('login.WELCOME')+' '+$localStorage.showWelcome.user.name);
+        toaster.pop('success', $filter('translate')('content.common.NOTIFICATION'), $filter('translate')('login.WELCOME')+' '+$localStorage.user.name);
         delete $localStorage.showWelcome;
     }
 }

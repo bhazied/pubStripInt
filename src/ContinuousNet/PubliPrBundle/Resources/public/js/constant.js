@@ -174,6 +174,9 @@ app.constant('APP_JS_REQUIRES', {
         name: 'PressReleaseEditorService',
         files: ['/bundles/publipr/js/components/PressRelease/PressReleaseEditorService.js']
     },{
+        name: 'PressReleaseEmailStatsService',
+        files: ['/bundles/publipr/js/components/PressRelease/PressReleaseEmailStatsService.js']
+    },{
         name: 'PressReleaseSenderService',
         files: ['/bundles/publipr/js/components/PressRelease/PressReleaseSenderService.js']
     },{
