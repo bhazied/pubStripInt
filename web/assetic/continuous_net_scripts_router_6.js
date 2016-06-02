@@ -708,14 +708,14 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.SENDPRESSRELEASE'
         },
-        resolve: loadSequence('PressReleaseSenderCtrl', 'PressReleaseSenderService', 'pressReleaseService')
+        resolve: loadSequence('PressReleaseSenderCtrl', 'PressReleaseSenderService', 'pressReleaseService', 'ContactGroupService')
     }).state('app.prmanager.pressreleasesstats', {
         url: '/press-releases/stats/:id',
         templateUrl: '/bundles/publipr/js/components/PressRelease/press_release_stats.html',
         ncyBreadcrumb: {
             label: 'content.list.PRESSRELEASESTATS'
         },
-        resolve: loadSequence('PressReleaseStatsCtrl', 'PressReleaseStatsService', 'pressReleaseService')
+        resolve: loadSequence('PressReleaseStatsCtrl', 'PressReleaseStatsService', 'pressReleaseService', 'PressReleaseEmailStatsService')
     }).state('app.settings', {
         url: '/settings',
         template: '<div ui-view class="fade-in-up"></div>',
