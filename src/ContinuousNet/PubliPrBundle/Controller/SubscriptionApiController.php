@@ -369,6 +369,7 @@ class SubscriptionApiController extends FOSRestController
                 ->setFrom($this->container->getParameter('publipr.contact.email'))
                 ->setFrom("contact@continuousnet.com")
                 ->setTo($payment->getCreatorUser()->getEmail())
+                ->setContentType('text/html')
                 ->setBody(
                     $this->renderView(
                         'PubliPrBundle:Emails:invoice.html.twig',
