@@ -40,6 +40,10 @@
         "EMAILNOTCONFIRMED": "Invalid token or email already confirmed!",
         "NOTOKEN": "No token, please check url!"
     },
+    "profile": {
+        "PROFILEUPDATED": "Your profile has been updated.",
+        "PROFILENOTUPDATED": "Your profile not updated"
+    },
     "resetpassword": {
         "FORGET": "Forget Password?",
         "ENTEREMAIL": "Enter your e-mail address below to reset your password.",
@@ -62,23 +66,23 @@
         "WELCOME": "Welcome to [[appName]]"
     },
     "topbar": {
-        "messages": {
-            "MAIN": "Messages",
-            "HEADER": "Unread messages",
-            "SEEALL": "See All"
-        },
-        "activities": {
-            "MAIN": "Activities",
-            "HEADER": "You have new notifications",
-            "SEEALL": "See All"
-        },
-        "user": {
-            "PROFILE": "My Profile",
-            "CALENDAR": "My Calendar",
-            "MESSAGES": "My Messages",
-            "LOCKSCREEN": "Lock Screen",
-            "LOGOUT": "Log Out"
-        }
+      "messages": {
+        "MAIN": "Messages",
+        "HEADER": "Unread messages",
+        "SEEALL": "See All"
+      },
+      "activities": {
+        "MAIN": "Activities",
+        "HEADER": "You have new notifications",
+        "SEEALL": "See All"
+      },
+      "user": {
+        "PROFILE": "My Profile",
+        "CALENDAR": "My Calendar",
+        "MESSAGES": "My Messages",
+        "LOCKSCREEN": "Lock Screen",
+        "LOGOUT": "Log Out"
+      }
     },
     "setting": {
         "MAIN": "Style Selector",
@@ -97,72 +101,72 @@
     },
     "offsidebar": {
         "chat": {
-            "ONLINE": "On-Line",
-            "OFFLINE": "Off-Line",
-            "BACK": "Back",
-            "SEND": "Send",
-            "PLACEHOLDER": "Message"
-        },
-        "favorites": {
-            "MAIN": "Favorites"
-        },
-        "settings": {
-            "MAIN": "General Settings",
-            "NOTIFICATIONS": "Enable Notifications",
-            "SHOWEMAIL": "Show your E-mail",
-            "SHOWUSERS": "Show Offline Users",
-            "EMAILALERT": "E-mail Alerts",
-            "SMSALERT": "SMS Alerts",
-            "SAVE": "Save Changes"
-        }
+          "ONLINE": "On-Line",
+          "OFFLINE": "Off-Line",
+          "BACK": "Back",
+          "SEND": "Send",
+          "PLACEHOLDER": "Message"
+      },
+      "favorites": {
+        "MAIN": "Favorites"
+      },
+      "settings": {
+        "MAIN": "General Settings",
+        "NOTIFICATIONS": "Enable Notifications",
+        "SHOWEMAIL": "Show your E-mail",
+        "SHOWUSERS": "Show Offline Users",
+        "EMAILALERT": "E-mail Alerts",
+        "SMSALERT": "SMS Alerts",
+        "SAVE": "Save Changes"
+      }
     },
     "sidebar": {
-        "heading": {
-            "NAVIGATION": "Main Navigation",
-            "FEATURES": "Core Features",
-            "DOCUMENTATION": "Documentation"
+      "heading": {
+        "NAVIGATION": "Main Navigation",
+        "FEATURES": "Core Features",
+        "DOCUMENTATION": "Documentation"
+      },
+      "search": {
+        "PLACEHOLDER": "Search..."
+      },
+      "nav": {
+        "dashboard": {
+            "MAIN": "Dashboard"
         },
-        "search": {
-            "PLACEHOLDER": "Search..."
+        "logout": {
+            "MAIN": "Lougout"
         },
-        "nav": {
-            "dashboard": {
-                "MAIN": "Dashboard"
-            },
-            "logout": {
-                "MAIN": "Lougout"
-            },
-            "access": {
-                "MAIN": "Access"
-            },
-            "contactmanager": {
-                "MAIN": "ContactManager"
-            },
-            "templatemanager": {
-                "MAIN": "TemplateManager"
-            },
-            "configuration": {
-                "MAIN": "Configuration"
-            },
-            "distribution": {
-                "MAIN": "Distribution"
-            },
-            "prmanager": {
-                "MAIN": "PRManager"
-            },
-            "settings": {
-                "MAIN": "Settings"
-            },
-            "billing": {
-                "MAIN": "Billing"
-            },
-            "accesscontrol": {
-                "MAIN": "AccessControl"
-            },
-            "statistics": {
-                "MAIN": "Statistics"
-            }
+        "access": {
+            "MAIN": "Access"
+        },
+        "contactmanager": {
+            "MAIN": "ContactManager"
+        },
+        "templatemanager": {
+            "MAIN": "TemplateManager"
+        },
+        "configuration": {
+            "MAIN": "Configuration"
+        },
+        "distribution": {
+            "MAIN": "Distribution"
+        },
+        "prmanager": {
+            "MAIN": "PRManager"
+        },
+        "settings": {
+            "MAIN": "Settings"
+        },
+        "billing": {
+            "MAIN": "Billing"
+        },
+        "accesscontrol": {
+            "MAIN": "AccessControl"
+        },
+        "statistics": {
+            "MAIN": "Statistics"
         }
+      }
     },
     "formats": {
         "DATE": "MM/dd/yyyy",
@@ -170,13 +174,14 @@
         "DATETIME": "MM/dd/yyyy h:mma"
     },
     "payment":{
-        "warningTitle": "not yet paid",
-        "warningText": "choose and pay for the package that goes with you",
+        "SUCCESSTEXT": "You have an active subscription '[[ payment.productName ]]' from [[ payment.startDate ]] to [[ payment.endDate ]].",
+        "WARNINGTEXT": "You do not have a subscription right now, please choose one of the offers and make the payment.",
         "PROFILENOTCOMPLETE" : "Not complete profile",
-        "PROFILENOTCOMPLETETEXT" : "you must complete your profile (address, Zip code ..)",
+        "PROFILENOTCOMPLETETEXT" : "You must complete your profile (address, Zip code ..)",
+        "TOTALPRICE" : "total to pay",
         "MONTHS" :{
             "SELECTMONTH": "Select a month",
-            "JANURAY": "January",
+           "JANURAY": "January",
             "FEBRUARY": "February",
             "MARCH": "March",
             "APRIL": "April",
@@ -189,14 +194,15 @@
             "NOVEMBER": "November",
             "DECEMBER": "December"
         },
-        "TOTALPRICE" : "total to pay",
         "invoice" : {
             "ORDERDATE": "Order date",
             "DESCRIPTION" : "Description",
             "UNUTPRICE" : "Unit price",
             "AMOUNT" : "Amount",
-            "TVA" : "TVA %",
-            "TVAVALUE": "TVA",
+            "SUBTOTAL" : "Subtotal",
+            "TOTAL": "Total",
+            "VAT": "VAT",
+            "TVAVALUE": "VAT amount",
             "AMOUNTPAID": "Amount paid",
             "AMOUNTDUE" : "Amount due",
             "PAYMENTMETHOD": "Payment Method",
@@ -204,12 +210,10 @@
             "BILLEDTO": "Billed to",
             "INVOICENUMBER" : "Invoice number",
             "EXPORTTOPDF": "Export to PDF",
-            "QUANTITY": "Quantity",
-            "DOWNLOADERRORTITLE": "No Invoice",
-            "DOWNLOADERRORBODY": "No Invoice to download"
+            "QUANTITY": "Quantity"
         }
     },
-    "content": {
+   "content": {
         "common": {
             "ENABLEBATCHADD": "Enable batch add",
             "CLEARSORTING": "Clear sorting",
@@ -228,6 +232,8 @@
             "NO": "No",
             "ALL": "All",
             "NONE": "None",
+            "STATS": "Statistics",
+            "SEND": "Send",
             "EXPORTEDFIELDS": "Exported Fields",
             "COLUMNPOSITION": "Column Position",
             "E": "Send",
@@ -255,6 +261,7 @@
             "IMPORT": "Import",
             "EXPORT": "Export",
             "EDITOR": "Editor",
+            "INVOICE": "Invoice",
             "ENCOCEAUDIO": "Encode Audio",
             "AUDIONOTENCODED": "Audio encoded",
             "AUDIONOTNOTENCODED": "Audio not encoded",
@@ -271,10 +278,7 @@
             "REMOVESEGMENTS": "Remove segments",
             "SEGMENTSREMOVED": "Segments removed",
             "SEGMENTSNOTREMOVED": "Segments not removed",
-            "COMINGSOON": "Coming Soon",
-            "STATS" : "statistics",
-            "SEND" : "Send",
-            "INVOICE": "Invoice"
+            "COMINGSOON": "Coming Soon"
         },
         "form": {
             "messages": {
@@ -308,14 +312,6 @@
                 "EMAILALREADYINUSE": "Email already used by another user!",
                 "VALIDEMAIL": "It's a valid e-mail!",
                 "INVALIDEMAIL": "Please, enter a valid email address.",
-                "CARDNUMBER" : "Card Number",
-                "CARDMONTHEXPR" : "Expiration Month",
-                "CARDYEAREXPR" : "Expiration Year",
-                "CARDCCV" : "CCV",
-                "CARDNUMBERREQUIRED" : "Card number is required",
-                "CARDMONTHEXPRREQUIRED": "Expiry month is required",
-                "CARDYEAREXPRREQUIRED": "Expiry year is required",
-                "CARDCCVREQUIRED" : "Ccv is required",
                 "ENTERNAME": "Enter the Name",
                 "NAMEREQUIRED": "The Name is required",
                 "ENTERPICTURE": "Enter the Picture",
@@ -497,28 +493,10 @@
                 "VALUEREQUIRED": "The Value is required",
                 "SELECTACTION": "Select Action",
                 "ACTIONREQUIRED": "The Action is required",
-                "ENTERSOURCE": "Enter the Source",
-                "CARDNUMBER" : "Card Number",
-                "CARDMONTHEXPR" : "Expiration Month",
-                "CARDYEAREXPR" : "Expiration Year",
-                "CARDCCV" : "CCV",
-                "CARDNUMBERREQUIRED" : "Card number is required",
-                "CARDMONTHEXPRREQUIRED": "Expiry month is required",
-                "CARDYEAREXPRREQUIRED": "Expiry year is required",
-                "CARDCCVREQUIRED" : "Ccv is required"
+                "ENTERSOURCE": "Enter the Source"
             }
         },
         "list": {
-            "TOTALEMAILSENT" : "Total of emails sent",
-            "TOTALEMAILOPENS" : "Total of emails opened",
-            "TOTALEMAILCLICKS" : "Total of emails clicked",
-            "EMAILUNIQUEOPENS" : "single opening",
-            "EMAILUNIQUECLICKS" : "single Clicks",
-            "PRESSRELEASESEARSHSTATS": "history of press releases",
-            "EMAILSDETAILS" : "Emails details",
-            "PRESSRELEASEPIECHARTTITLE" : "Press release details",
-            "INVOICE" : "Invoice",
-            "PURCHASE": "Purchase of a package",
             "DASHBOARD": "Dashboard",
             "COMPANIES": "Companies",
             "COMPANY": "Company",
@@ -737,6 +715,8 @@
             "ADDPAYMENT": "Add New Payment",
             "NEWPAYMENT": "New Payment",
             "PAYMENTDETAILS": "Payment Details",
+            "INVOICE" : "Invoice",
+            "PURCHASE": "Purchase of a package",
             "EDITPAYMENT": "Edit Payment",
             "PAYMENTUPDATED": "Payment Updated",
             "PAYMENTNOTUPDATED": "Payment Not Updated",
@@ -751,20 +731,25 @@
             "ADDPRESSRELEASE": "Add New Press Release",
             "NEWPRESSRELEASE": "New Press Release",
             "PRESSRELEASEDETAILS": "Press Release Details",
+            "PRESSRELEASESENT" : "Press Release sent",
+            "TOTALEMAILSENT" : "Total of emails sent",
+            "TOTALEMAILOPENS" : "Total of emails opened",
+            "TOTALEMAILCLICKS" : "Total of emails clicked",
+            "EMAILUNIQUEOPENS" : "Single opening",
+            "EMAILUNIQUECLICKS" : "Single clicks",
+            "EMAILSDETAILS" : "Emails details",
             "PRESSRELEASEEDITOR": "Press Release Editor",
             "SENDPRESSRELEASE": "Send Press Release",
+            "PRESSRELEASESTATS": "Press Release Stats",
             "EDITPRESSRELEASE": "Edit Press Release",
             "PRESSRELEASEUPDATED": "Press Release Updated",
             "PRESSRELEASENOTUPDATED": "Press Release Not Updated",
-            "PRESSRELEASEUPDATED": "Press Release sent",
-            "PRESSRELEASENOTUPDATED": "Press Release not sent",
             "PRESSRELEASECREATED": "Press Release Created",
             "PRESSRELEASENOTCREATED": "Press Release Not Created",
             "YOUWILLNOTBEABLETORECOVERPRESSRELEASE": "You will not be able to recover this Press Release!",
             "PRESSRELEASEDELETED": "Press Release Deleted",
             "PRESSRELEASENOTDELETED": "Press Release Not Deleted",
             "BACKPRESSRELEASES": "Back To Press Releases List",
-            "PRESSRELEASESTATS" : "Statistics of the press release",
             "PRODUCTS": "Products",
             "PRODUCT": "Product",
             "ADDPRODUCT": "Add New Product",
@@ -849,17 +834,15 @@
             "TRACKPRESSRELEASEDELETED": "Track Press Release Deleted",
             "TRACKPRESSRELEASENOTDELETED": "Track Press Release Not Deleted",
             "BACKTRACKPRESSRELEASES": "Back To Track Press Releases List",
-            "TOTALEMAILSENT" : "Total of emails sent",
-            "TOTALEMAILOPENS" : "Total of emails opened",
-            "TOTALEMAILCLICKS" : "Total of emails clicked",
-            "EMAILUNIQUEOPENS" : "single opening",
-            "EMAILUNIQUECLICKS" : "single Clicks",
-            "PRESSRELEASESEARSHSTATS": "history of press releases",
-            "EMAILSDETAILS" : "Emails details",
-            "PRESSRELEASEPIECHARTTITLE" : "Press release details",
-            "INVOICE" : "Invoice",
-            "PURCHASE": "Purchase of a package",
             "fields": {
+                "CARDNUMBER" : "Card Number",
+                "CARDMONTHEXPR" : "Expiration Month",
+                "CARDYEAREXPR" : "Expiration Year",
+                "CARDCCV" : "CCV",
+                "CARDNUMBERREQUIRED" : "Card number is required",
+                "CARDMONTHEXPRREQUIRED": "Expiry month is required",
+                "CARDYEAREXPRREQUIRED": "Expiry year is required",
+                "CARDCCVREQUIRED" : "Ccv is required",
                 "CAPTCHA": "Security check",
                 "ID": "Id",
                 "NAME": "Name",
@@ -1027,18 +1010,6 @@
                 "VALUE": "Value",
                 "ACTION": "Action",
                 "SOURCE": "Source",
-                "EMAIL" : "E-mail",
-                "SENTDATE" : "Sending date",
-                "OPENS": "Open",
-                "STATE" : "State",
-                "CLICKS": "clicked",
-                "ENDDATE" : "End date",
-                "STARTDATE" : "Start date",
-                "SENT" : "Sent",
-                "CARDMONTHEXPR" : "Expiration month",
-                "CARDYEAREXPR" : "Expiration year",
-                "CARDCcv" : "CCV",
-                "CARDNUMBER" : "Card Number",
                 "blocktypes": {
                     "TEXT": "Text",
                     "BOXEDTEXT": "Boxed Text",

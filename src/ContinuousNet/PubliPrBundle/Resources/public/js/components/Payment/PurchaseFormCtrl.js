@@ -11,10 +11,10 @@ app.controller('PurchaseFormCtrl',['$scope', '$rootScope', '$sce', '$timeout', '
                     SweetAlert.swal({
                         title: $filter('translate')('payment.PROFILENOTCOMPLETE'),
                         text:  $filter('translate')('payment.PROFILENOTCOMPLETETEXT'),
-                        timer : 2000,
-                        type: "info"
+                        //timer : 2000,
+                        type: 'warning'
                     });
-                    $state.go("app.profile");
+                    $state.go('app.profile');
                 }
             });
         }
