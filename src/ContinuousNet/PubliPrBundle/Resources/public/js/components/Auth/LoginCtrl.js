@@ -29,7 +29,7 @@ function ($scope, $rootScope, $localStorage, $state, $timeout, $loginDataFactory
                 $localStorage.rememberMe = false;
             }
             $scope.disableSubmit = false;
-            $scope.status = 'welcome';
+            $localStorage.showWelcome = true;
             $localStorage.access_token = data.token;
             $scope.user = $localStorage.user = $rootScope.user = $rootScope.currentUser = data.user;
             //$timeout(function() {

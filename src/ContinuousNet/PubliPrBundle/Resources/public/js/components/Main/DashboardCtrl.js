@@ -1,6 +1,6 @@
 'use strict';
 
-function dashboardCtrl($scope, $interval, COLORS) {
+function dashboardCtrl($scope, $interval, COLORS, $localStorage, $filter, toaster) {
 
     var visits = [
         [0, 8],
@@ -201,8 +201,13 @@ function dashboardCtrl($scope, $interval, COLORS) {
         name: 'Earnings',
         data: seriesData2[0]
     }];
+
+    if ($localStorage.showWelcome) {
+        toaster.pop('success', $filter('translate')('content.common.NOTIFICATION'), $filter('translate')('login.WELCOME'));
+
+    }
 }
 
 angular
     .module('publiPrApp')
-    .controller('dashboardCtrl', ['$scope', '$interval', 'COLORS', dashboardCtrl]);
+    .controller('dashboardCtrl', ['$scope', '$interval', 'COLORS', $localStorage, $filter, toaster, dashboardCtrl]);
