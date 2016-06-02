@@ -23,10 +23,10 @@
                     <div class="col-xs-6">
                         <address class="no-margin">
                             <strong translate="payment.invoice.BILLEDTO">Billed To:</strong><br>
-                            [[ invoice.invoice.creator_user.first_name +'  '+ invoice.invoice.creator_user.last_name]]<br>
+                            [[ invoice.invoice.creator_user.name]]<br>
                             [[ invoice.invoice.creator_user.zip_code +' '+  invoice.invoice.creator_user.address ]]<br>
                             [[ invoice.invoice.creator_user.city ]]<br>
-                            [[ invoice.invoice.creator_user.country ]]<br>
+                            [[ invoice.country.name ]]<br>
                             [[ invoice.invoice.creator_user.email ]]
                         </address>
                     </div>
@@ -90,16 +90,16 @@
 
         <div class="invoice-totals">
             <div class="invoice-totals-row">
-                <strong class="invoice-totals-title" translate="payment.invoice.TVA">TVA % </strong>
-                <span class="invoice-totals-value">[[ invoice.tva ]] % </i></span>
+                <strong class="invoice-totals-title" translate="payment.invoice.VAT">VAT % </strong>
+                <span class="invoice-totals-value">[[ invoice.vat ]] % </i></span>
             </div>
             <div class="invoice-totals-row">
-                <strong class="invoice-totals-title" translate="payment.invoice.TVAVALUE">TVA <i class="fa fa-euro"></i> </strong>
-                <span class="invoice-totals-value">[[ invoice.price_tva ]] <i class="fa fa-euro"></i></span>
+                <strong class="invoice-totals-title" translate="payment.invoice.VATVALUE">VAT &euro; </strong>
+                <span class="invoice-totals-value">[[ invoice.price_vat ]] &euro;</span>
             </div>
             <div class="invoice-totals-row">
                 <strong class="invoice-totals-title" translate="payment.invoice.AMOUNTPAID">Total</strong>
-                <span class="invoice-totals-value">[[ invoice.total ]] <i class="fa fa-euro"></i></span>
+                <span class="invoice-totals-value">[[ invoice.total ]] &euro;</span>
             </div>
             <!--<div class="invoice-totals-row">
                 <strong class="invoice-totals-title" translate="payment.invoice.AMOUNTDUE">Amount Due</strong>

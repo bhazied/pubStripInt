@@ -36,7 +36,7 @@ class Configuration implements ConfigurationInterface
                             ->isRequired()
                             ->cannotBeEmpty()
                         ->end()
-                        ->integerNode('default_tva')
+                        ->integerNode('default_vat')
                         ->defaultValue(10)
                         ->isRequired()
                         ->cannotBeEmpty()

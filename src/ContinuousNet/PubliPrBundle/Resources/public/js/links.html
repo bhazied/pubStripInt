@@ -204,7 +204,7 @@
                     <span class="title" translate="content.list.PRODUCTS">Products</span>
                 </a>
             </li>
-            <li ng-if="user.roles.join('').indexOf('ADM') > -1" ng-class="{'active':$state.includes('app.billing.payments')}">
+            <li ng-if="user.roles.join('').indexOf('ADM') > -1 || user.roles.join('').indexOf('MAN') > -1" ng-class="{'active':$state.includes('app.billing.payments')}">
                 <a ui-sref="app.billing.payments">
                     <span class="title" translate="content.list.PAYMENTS">Payments</span>
                 </a>
