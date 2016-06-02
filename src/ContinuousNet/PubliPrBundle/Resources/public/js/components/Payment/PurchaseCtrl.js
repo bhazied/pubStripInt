@@ -6,24 +6,19 @@ app.controller('PurchaseCtrl',['$scope', '$rootScope', '$sce', '$timeout', '$fil
         $scope.productLoaded = false;
         $scope.totaleProducts = 0;
         $scope.payed = false;
-        $scope.hasPayed = function(){
-            $purchaseDataFactory.checkPayment().$promise.then(function(data){
-                $scope.payed = data.validate;
-                if($scope.payed){
-                    $state.go('app.billing.payments');
-                }
-                else
-                {
-                    SweetAlert.swal({
-                        title: $filter('translate')('payment.WARNINGTITLE'),
-                        text: $filter('translate')('payment.WARNINGTEXT'),
-                        timer : 2000,
-                        type: 'info'
-                    });
-                }
-            });
-        }
 
+        $scope.hasPayed = function() {
+            $purchaseDataFactory.checkPayment().$promise.then(function(data){
+
+                $scope.payed = data.validate;
+                $scope.payment = data;
+
+                if (!$scope.payed) {
+                    $scope.loadProducts();
+                }
+
+            });
+        };
 
         $scope.hasPayed();
 
@@ -38,12 +33,9 @@ app.controller('PurchaseCtrl',['$scope', '$rootScope', '$sce', '$timeout', '$fil
                     });
                 }
         }
-        if(!$scope.payed){
-            $scope.loadProducts();
-        }
 
-        $scope.doPayment = function(product){
-            if(angular.isDefined(product)){
+        $scope.doPayment = function(product) {
+            if (angular.isDefined(product)){
                 $localStorage.purchaseProduct = product;
                 $state.go('app.billing.purchasenew');
             }

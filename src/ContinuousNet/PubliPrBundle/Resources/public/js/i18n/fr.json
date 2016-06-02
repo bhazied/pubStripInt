@@ -170,10 +170,10 @@
         "DATETIME": "MM/dd/yyyy h:mma"
     },
     "payment":{
-        "WARNINGTITLE": "not yet paid",
-        "WARNINGTEXT": "choose and pay for the package that goes with you",
+        "SUCCESSTEXT": "You have an active subscription '[[ payment.productName ]]' from [[ payment.startDate ]] to [[ payment.endDate ]].",
+        "WARNINGTEXT": "You do not have a subscription right now, please choose one of the offers and make the payment.",
         "PROFILENOTCOMPLETE" : "Not complete profile",
-        "PROFILENOTCOMPLETETEXT" : "you must complete your profile (address, Zip code ..)",
+        "PROFILENOTCOMPLETETEXT" : "You must complete your profile (address, Zip code ..)",
         "TOTALPRICE" : "total to pay",
         "MONTHS" :{
             "SELECTMONTH": "Select a month",

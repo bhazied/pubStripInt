@@ -13,11 +13,27 @@
     <div class="row">
         <div class="col-md-12" ng-controller="PurchaseCtrl">
 
+
+            <div class="row" ng-if="payed">
+
+                <alert type="success" close="closeAlert(0)"><span translate="payment.SUCCESSTEXT" translate-values="{payment: payment}"></span></alert>
+
+                <div class="col-md-4 col-md-offset-3 text-center">
+                    <button class="btn btn-primary btn-lg btn-icon loading-demo mr5" type="button" ui-sref="app.billing.check_payment">
+                        <i class="fa fa-cc mr5"></i>
+                        <span translate="content.list.PAYMENTS">Payments</span>
+                    </button>
+                </div>
+            </div>
+
             <div class="row" ng-if="!payed">
+
+                <alert type="warning" close="closeAlert(0)"><span translate="payment.WARNINGTEXT"></span></alert>
+
                 <div class="col-md-4" ng-repeat="product in products">
-                    <div class="panel panel-success">
+                    <div class="panel panel-success" ng-click="doPayment('[[product.id]]')">
                         <div class="panel-heading">
-                            [[product.sku]] &euro;
+                            <h3>[[product.name]]</h3>
                         </div>
                         <div class="panel-body">
                             <p>
@@ -25,7 +41,7 @@
                             </p>
                         </div>
                         <div class="panel-heading">
-                            <a ng-click="doPayment('[[product.id]]')"  translate="[[product.name]]" >[[product.name]]</a>
+                            <h4>[[product.sku]] &euro;</h4>
                         </div>
                     </div>
                 </div>

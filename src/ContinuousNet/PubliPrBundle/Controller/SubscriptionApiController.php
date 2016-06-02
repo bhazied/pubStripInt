@@ -37,39 +37,39 @@ use Stripe;
 
 class SubscriptionApiController extends FOSRestController
 {
-/**
- * @GET("/CheckSubscription")
- * @param $request
- * @View(serializerEnableMaxDepthChecks=true)
- */
-    public function checkAction(Request $request){
-        try{
+    /**
+     * @GET("/CheckSubscription")
+     * @param $request
+     * @View(serializerEnableMaxDepthChecks=true)
+     */
+    public function checkAction(Request $request)
+    {
+        try {
             $data = array(
+                'productName' => '',
                 'startDate' => '',
                 'endDate' => '',
                 'validate' => false
-                );
+            );
             $currentDate = new \DateTime('now');
-            //$currentDate = $currentDate->format('Y-m-d H:m:s');
             $em = $this->getDoctrine()->getManager();
             $qb = $em->createQueryBuilder();
-            $qb->from("PubliPrBundle:Payment", "pay_");
-            $qb->leftJoin("\ContinuousNet\PubliPrBundle\Entity\User", "user", \Doctrine\ORM\Query\Expr\Join::WITH, "pay_.creatorUser=user.id");
-            $qb->andWhere("pay_.creatorUser=:creatorUser")->setParameter('creatorUser', $this->getUser()->getId());
-            $qb->andWhere(":currentDate BETWEEN pay_.startDate AND pay_.endDate")->setParameter('currentDate', $currentDate);
-            $qb->andWhere("pay_.isValid = :valid")->setParameter('valid', true);
-            $qb->select('pay_');
-            $result = $qb->getQuery()->getresult();
-            if($result){
-                $end = $result[0]->getEndDate();
-                //$diff = $end->diff($currentDate)->days;
-                //$data['validityPeriode'] = $diff;
+            $qb->select('p_');
+            $qb->from('PubliPrBundle:Payment', 'p_');
+            $qb->leftJoin('ContinuousNet\PubliPrBundle\Entity\Product', 'product', \Doctrine\ORM\Query\Expr\Join::WITH, 'p_.product = product.id');
+            $qb->leftJoin('\ContinuousNet\PubliPrBundle\Entity\User', 'user', \Doctrine\ORM\Query\Expr\Join::WITH, 'p_.creatorUser=user.id');
+            $qb->andWhere('p_.creatorUser=:creatorUser')->setParameter('creatorUser', $this->getUser()->getId());
+            $qb->andWhere(':currentDate BETWEEN p_.startDate AND p_.endDate')->setParameter('currentDate', $currentDate);
+            $qb->andWhere('p_.isValid = :valid')->setParameter('valid', true);
+            $payment = $qb->getQuery()->getOneOrNullResult();
+            if (!is_null($payment)) {
                 $data['validate'] = true;
-                $data['startDate'] = "";
-                $data['startDate'] = "";
+                $data['endDate'] = $payment->getEndDate();
+                $data['startDate'] = $payment->getStartDate();
+                $data['productName'] = $payment->getProduct()->getName();
             }
             return $data;
-        }catch (\Exception $e) {
+        } catch (\Exception $e) {
             return FOSView::create($e->getMessage(), Codes::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
