@@ -202,7 +202,7 @@
             "SUBTOTAL" : "Subtotal",
             "TOTAL": "Total",
             "VAT": "VAT",
-            "TVAVALUE": "VAT amount",
+            "VATVALUE": "VAT amount",
             "AMOUNTPAID": "Amount paid",
             "AMOUNTDUE" : "Amount due",
             "PAYMENTMETHOD": "Payment Method",
