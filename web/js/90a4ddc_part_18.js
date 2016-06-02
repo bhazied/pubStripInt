@@ -309,7 +309,7 @@ app.constant('APP_JS_REQUIRES', {
         'PaymentCtrl': '/bundles/publipr/js/components/Payment/PaymentCtrl.js',
         'PurchaseCtrl': '/bundles/publipr/js/components/Payment/PurchaseCtrl.js',
         'PurchaseFormCtrl': '/bundles/publipr/js/components/Payment/PurchaseFormCtrl.js',
-        'InvoiceCtrl': '/bundles/publipr/js/components/Payment/InvoiceCtrl.js',
+        'InvoiceCtrl': '/bundles/publipr/js/components/Invoice/InvoiceCtrl.js',
         'PressReleasesCtrl': '/bundles/publipr/js/components/PressRelease/PressReleasesCtrl.js',
         'PressReleaseFormCtrl': '/bundles/publipr/js/components/PressRelease/PressReleaseFormCtrl.js',
         'PressReleaseCtrl': '/bundles/publipr/js/components/PressRelease/PressReleaseCtrl.js',
@@ -408,8 +408,11 @@ app.constant('APP_JS_REQUIRES', {
         name: 'PurchaseService',
         files: ['/bundles/publipr/js/components/Payment/PurchaseService.js']
     },{
+        name: 'InvoiceService',
+        files: ['/bundles/publipr/js/components/Invoice/InvoiceService.js']
+    },{
         name: 'InvoiceDownloadService',
-        files: ['/bundles/publipr/js/components/Payment/InvoiceDownloadService.js']
+        files: ['/bundles/publipr/js/components/Invoice/InvoiceDownloadService.js']
     },{
         name: 'pressReleaseService',
         files: ['/bundles/publipr/js/components/PressRelease/PressReleaseService.js']
