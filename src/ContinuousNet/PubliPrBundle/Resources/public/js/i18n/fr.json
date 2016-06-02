@@ -10,14 +10,14 @@
         "EMAIL": "Email",
         "PASSWORD": "Password",
         "KEEPMESIGNEDID": "Keep me signed in",
-        "PLEASESIGNIN": "Please enter your email and password to log in.",
+        "PLEASESIGNIN": "Please enter your email and password to log in",
         "FORGOTPASSWORD": "I forgot my password",
         "KEEPMESIGNEDIN": "Keep me signed in",
         "LOGIN": "Sign in",
         "DONTHAVEACCOUNT": "Don't have an account yet?",
         "CREATEACCOUNT": "Create an account",
-        "ERROR": "Incorrect Email or Password.",
-        "WELCOME": "Welcome [[user.firstName]].",
+        "ERROR": "Incorrect Email or Password",
+        "WELCOME": "Welcome [[user.firstName]]",
         "ACCESSDENEID": "Access denied"
     },
     "register": {
