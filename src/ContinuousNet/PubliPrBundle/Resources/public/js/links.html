@@ -187,7 +187,7 @@
             </li>
         </ul>
     </li>
-    <li ng-if="user.roles.join('').indexOf('ADM') > -1 || user.roles.join('').indexOf('MAN') > -1" ng-class="{'active open':$state.includes('app.billing')}">
+    <li ng-if="user.roles.join('').indexOf('AD') > -1 || user.roles.join('').indexOf('MAN') > -1 || user.roles.join('').indexOf('ADM') > -1" ng-class="{'active open':$state.includes('app.billing')}">
         <a href="javascript:void(0)">
             <div class="item-content">
                 <div class="item-media">
@@ -204,7 +204,7 @@
                     <span class="title" translate="content.list.PRODUCTS">Products</span>
                 </a>
             </li>
-            <li ng-if="user.roles.join('').indexOf('ADM') > -1 || user.roles.join('').indexOf('MAN') > -1" ng-class="{'active':$state.includes('app.billing.payments')}">
+            <li ng-if="user.roles.join('').indexOf('AD') > -1 || user.roles.join('').indexOf('MAN') > -1" ng-class="{'active':$state.includes('app.billing.payments')}">
                 <a ui-sref="app.billing.payments">
                     <span class="title" translate="content.list.PAYMENTS">Payments</span>
                 </a>

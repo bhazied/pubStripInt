@@ -100,6 +100,14 @@ class PaymentRESTController extends BaseRESTController
                    }
                 }
             }
+            $roles = $this->getUser()->getRoles();
+            if (!empty($roles)) {
+                foreach ($roles as $role) {
+                   if (substr_count($role, 'MAN') > 0) {
+                       $qb->andWhere('p_.creatorUser = :user')->setParameter('user', $this->getUser()->getId());
+                   }
+                }
+            }
             $qbList = clone $qb;
             $qb->select('count(p_.id)');
             $data['inlineCount'] = $qb->getQuery()->getSingleScalarResult();
