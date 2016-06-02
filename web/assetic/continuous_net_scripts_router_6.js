@@ -846,7 +846,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label:'content.list.INVOICE'
         },
-        resolve: loadSequence('InvoiceCtrl', 'paymentService', 'InvoiceDownloadService')
+        resolve: loadSequence('InvoiceCtrl', 'paymentService', 'InvoiceDownloadService', 'InvoiceService')
     })
 .state('app.accesscontrol', {
         url: '/access-control',
