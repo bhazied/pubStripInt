@@ -128,6 +128,7 @@ class InvoiceRestController extends FOSRestController
                 $price_vat = ($result->getProduct()->getPrice() * $default_vat) / 100;
                 $price = $result->getProduct()->getPrice() - $price_vat;
                 $result->setAmount($price);
+                $data['country'] = $result->getCreatorUser()->getCountry();
                 $data['invoice'] = $result;
                 $data['price_vat'] = $price_vat;
                 $data['total'] = $price + $price_vat;
