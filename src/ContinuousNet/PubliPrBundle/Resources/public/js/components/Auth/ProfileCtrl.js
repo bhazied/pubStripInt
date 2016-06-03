@@ -21,31 +21,23 @@ app.controller('ProfileCtrl', ['$scope', '$stateParams', '$timeout', '$filter', 
         $scope.countriesLoaded = false;
 
         $scope.getCountries = function() {
-            $scope.countriesLoaded = true;
-            if ($scope.countries.length == 0) {
-                $scope.countries.push({});
-                var def = $q.defer();
-                $countriesDataFactory.query({offset: 0, limit: 10000, 'order_by[country.name]': 'asc'}).$promise.then(function(data) {
-                    $timeout(function(){
-                        if (data.results.length > 0) {
-                            $scope.countries.length = 0;
-                            for (var i in data.results) {
-                                $scope.countries.push({
-                                    id: data.results[i].id,
-                                    name: data.results[i].name
-                                });
-                                if ($scope.user.country.id == data.results[i].id) {
-                                    $scope.user.country = $scope.countries[i];
-                                }
-                            }
-                            def.resolve($scope.countries);
+            $timeout(function(){
+                $scope.countriesLoaded = true;
+                if ($scope.countries.length == 0) {
+                    $scope.countries.push({});
+                    var def = $q.defer();
+                    $countriesDataFactory.query({offset: 0, limit: 10000, 'order_by[country.name]': 'asc'}).$promise.then(function(data) {
+                        for (var i in data.results) {
+                            data.results[i].hidden = false;
                         }
+                        $scope.countries = data.results;
+                        def.resolve($scope.countries);
                     });
-                });
-                return def;
-            } else {
-                return $scope.countries;
-            }
+                    return def;
+                } else {
+                    return $scope.countries;
+                }
+            });
         };
 
         $scope.getCountries();
@@ -75,7 +67,7 @@ app.controller('ProfileCtrl', ['$scope', '$stateParams', '$timeout', '$filter', 
         $profileDataFactory.getProfile({locale: $localStorage.language}).$promise.then(function (data) {
             $timeout(function () {
                 $scope.user = data ;
-                console.log(data);
+                $scope.user.country = $scope.user.country.id;
             });
         });
 

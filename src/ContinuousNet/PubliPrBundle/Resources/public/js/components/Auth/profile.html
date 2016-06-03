@@ -147,7 +147,7 @@
                                         <span class="symbol required"></span>
                                     </label>
                                     <div class="block" ng-if="countriesLoaded">
-                                        <select ng-required="true" ng-options="item.id as item.name for item in countries" ng-model="user.country" name="country" id="userCountry" class="form-control" ng-required="false" ng-change="changeCountry()">
+                                        <select ng-options="item.id as item.name for item in countries | filter:{ hidden : false }" ng-model="user.country" name="country" id="userCountry" class="form-control" ng-required="true" ng-change="changeCountry()">
                                             <option translate="content.form.messages.SELECTCOUNTRY" value="">Select Country</option>
                                         </select>
                                     </div>
