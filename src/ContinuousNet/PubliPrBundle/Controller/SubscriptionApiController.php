@@ -362,6 +362,7 @@ class SubscriptionApiController extends FOSRestController
 
     private function sendConfirmationEmail($payment)
     {
+        $baseUrl = $this->container->get('request_stack')->getCurrentRequest()->getScheme().'://'.$this->container->get('request_stack')->getCurrentRequest()->getHttpHost().'/';
         try
         {
             $message = \Swift_Message::newInstance()
@@ -374,14 +375,10 @@ class SubscriptionApiController extends FOSRestController
                     $this->renderView(
                         'PubliPrBundle:Emails:invoice.html.twig',
                          array(
-                            'total' => $payment->getProduct()->getPrice(),
                             'user_name' => $payment->getCreatorUser()->getFirstName() . ' ' . $payment->getCreatorUser()->getLastName(),
-                            'invoice_number' => $payment->getInvoiceNumber(),
                             'created_at' => $payment->getCreatedAt()->format('F j, Y'),
-                            'product_name' => $payment->getProduct()->getName(),
-                            'product_price' => $payment->getProduct()->getPrice(),
-                            'url' => 'http://publipr',
-                            'publipr_contact' => $this->container->getParameter('publipr.contact.address')
+                             'order_id' => $payment->getToken(),
+                             'link' => $baseUrl.'#/app/billing/invoice/'.$payment->getId(),
                         )
                     ),
                     'text/html'
