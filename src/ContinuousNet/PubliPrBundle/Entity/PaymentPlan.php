@@ -118,16 +118,6 @@ class PaymentPlan
      */
     private $status;
 
-    /**
-     * @var integer
-     * @access private
-     *
-     * @ORM\Column(name="start_date", type="integer", nullable=false, unique=false)
-     * 
-     * @Expose
-     * 
-     */
-    private $startDate;
 
     /**
      * @var \DateTime
@@ -343,30 +333,6 @@ class PaymentPlan
     public function getStatus()
     {
         return $this->status;
-    }
-
-    /**
-     * Set startDate
-     *
-     * @access public
-     * @param integer $startDate
-     * @return PaymentPlan
-     */
-    public function setStartDate($startDate)
-    {
-        $this->startDate = $startDate;
-        return $this;
-    }
-
-    /**
-     * Get startDate
-     *
-     * @access public
-     * @return integer 
-     */
-    public function getStartDate()
-    {
-        return $this->startDate;
     }
 
     /**

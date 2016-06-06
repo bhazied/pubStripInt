@@ -6,7 +6,6 @@ CREATE TABLE `payment_plan` (
  `interval` varchar(50) NOT NULL,
  `interval_count` int(10) NOT NULL,
  `status` enum('active','disabled') NOT NULL,
- `start_date` int(11) NOT NULL,
  `creator_user_id` mediumint(8) unsigned NOT NULL COMMENT '{"prefix":"creator_"}',
  `created_at` datetime NOT NULL COMMENT '{"order":"desc"}',
  `modifier_user_id` mediumint(8) unsigned NOT NULL COMMENT '{"prefix":"modifier_"}',
@@ -16,4 +15,6 @@ CREATE TABLE `payment_plan` (
  KEY `modifier_user_id` (`modifier_user_id`),
  CONSTRAINT `payment_plan_ibfk_1` FOREIGN KEY (`creator_user_id`) REFERENCES `user` (`id`),
  CONSTRAINT `payment_plan_ibfk_2` FOREIGN KEY (`modifier_user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET= utf8_unicode_ci COMMENT='{"grp":"Billing","pstn":3,"rls":["ADM"]}'
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci  COMMENT='{"grp":"Billing","pstn":3,"rls":["ADM"]}'
+
+ALTER TABLE `payment_plan` CHANGE `status` `status` ENUM( 'Active', 'Disabled' ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL ;
