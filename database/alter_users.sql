@@ -1,0 +1,1 @@
+ALTER TABLE  `user` ADD  `stripe_reference` VARCHAR( 50 ) NULL AFTER  `name` ;
