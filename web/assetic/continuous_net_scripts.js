@@ -310,6 +310,9 @@ app.constant('APP_JS_REQUIRES', {
         'PurchaseCtrl': '/bundles/publipr/js/components/Payment/PurchaseCtrl.js',
         'PurchaseFormCtrl': '/bundles/publipr/js/components/Payment/PurchaseFormCtrl.js',
         'InvoiceCtrl': '/bundles/publipr/js/components/Invoice/InvoiceCtrl.js',
+        'PaymentPlansCtrl': '/bundles/publipr/js/components/PaymentPlan/PaymentPlansCtrl.js',
+        'PaymentPlanFormCtrl': '/bundles/publipr/js/components/PaymentPlan/PaymentPlanFormCtrl.js',
+        'PaymentPlanCtrl': '/bundles/publipr/js/components/PaymentPlan/PaymentPlanCtrl.js',
         'PressReleasesCtrl': '/bundles/publipr/js/components/PressRelease/PressReleasesCtrl.js',
         'PressReleaseFormCtrl': '/bundles/publipr/js/components/PressRelease/PressReleaseFormCtrl.js',
         'PressReleaseCtrl': '/bundles/publipr/js/components/PressRelease/PressReleaseCtrl.js',
@@ -333,7 +336,10 @@ app.constant('APP_JS_REQUIRES', {
         'TrackEmailCtrl': '/bundles/publipr/js/components/TrackEmail/TrackEmailCtrl.js',
         'TrackPressReleasesCtrl': '/bundles/publipr/js/components/TrackPressRelease/TrackPressReleasesCtrl.js',
         'TrackPressReleaseFormCtrl': '/bundles/publipr/js/components/TrackPressRelease/TrackPressReleaseFormCtrl.js',
-        'TrackPressReleaseCtrl': '/bundles/publipr/js/components/TrackPressRelease/TrackPressReleaseCtrl.js'
+        'TrackPressReleaseCtrl': '/bundles/publipr/js/components/TrackPressRelease/TrackPressReleaseCtrl.js',
+        'UserPaymentPlansCtrl': '/bundles/publipr/js/components/UserPaymentPlan/UserPaymentPlansCtrl.js',
+        'UserPaymentPlanFormCtrl': '/bundles/publipr/js/components/UserPaymentPlan/UserPaymentPlanFormCtrl.js',
+        'UserPaymentPlanCtrl': '/bundles/publipr/js/components/UserPaymentPlan/UserPaymentPlanCtrl.js'
     },
     modules: [{
         name: 'LoginService',
@@ -414,6 +420,9 @@ app.constant('APP_JS_REQUIRES', {
         name: 'InvoiceDownloadService',
         files: ['/bundles/publipr/js/components/Invoice/InvoiceDownloadService.js']
     },{
+        name: 'paymentPlanService',
+        files: ['/bundles/publipr/js/components/PaymentPlan/PaymentPlanService.js']
+    },{
         name: 'pressReleaseService',
         files: ['/bundles/publipr/js/components/PressRelease/PressReleaseService.js']
     },{
@@ -446,6 +455,9 @@ app.constant('APP_JS_REQUIRES', {
     },{
         name: 'trackPressReleaseService',
         files: ['/bundles/publipr/js/components/TrackPressRelease/TrackPressReleaseService.js']
+    },{
+        name: 'userPaymentPlanService',
+        files: ['/bundles/publipr/js/components/UserPaymentPlan/UserPaymentPlanService.js']
     }]
 });
 
@@ -2557,7 +2569,69 @@ function ($stateProvider) {
         },
         resolve: loadSequence('InvoiceCtrl', 'paymentService', 'InvoiceDownloadService', 'InvoiceService')
     })
-.state('app.accesscontrol', {
+.state('app.billing.paymentplans', {
+        url: '/payment-plans',
+        templateUrl: '/bundles/publipr/js/components/PaymentPlan/payment_plans.html',
+        title: 'content.list.PAYMENTPLANS',
+        ncyBreadcrumb: {
+            label: 'content.list.PAYMENTPLANS'
+        },
+        resolve: loadSequence('ngTable', 'PaymentPlansCtrl', 'paymentPlanService', 'userService')
+    }).state('app.billing.paymentplansnew', {
+        url: '/payment-plans/new',
+        templateUrl: '/bundles/publipr/js/components/PaymentPlan/payment_plan_form.html',
+        title: 'content.list.NEWPAYMENTPLAN',
+        ncyBreadcrumb: {
+            label: 'content.list.NEWPAYMENTPLAN'
+        },
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'PaymentPlanFormCtrl', 'paymentPlanService', 'userService')
+    }).state('app.billing.paymentplansedit', {
+        url: '/payment-plans/edit/:id',
+        templateUrl: '/bundles/publipr/js/components/PaymentPlan/payment_plan_form.html',
+        title: 'content.list.EDITPAYMENTPLAN',
+        ncyBreadcrumb: {
+            label: 'content.list.EDITPAYMENTPLAN'
+        },
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'PaymentPlanFormCtrl', 'paymentPlanService', 'userService')
+    }).state('app.billing.paymentplansdetails', {
+        url: '/payment-plans/details/:id',
+        templateUrl: '/bundles/publipr/js/components/PaymentPlan/payment_plan.html',
+        ncyBreadcrumb: {
+            label: 'content.list.PAYMENTPLANDETAILS'
+        },
+        resolve: loadSequence('PaymentPlanCtrl', 'paymentPlanService')
+    }).state('app.billing.userpaymentplans', {
+        url: '/user-payment-plans',
+        templateUrl: '/bundles/publipr/js/components/UserPaymentPlan/user_payment_plans.html',
+        title: 'content.list.USERPAYMENTPLANS',
+        ncyBreadcrumb: {
+            label: 'content.list.USERPAYMENTPLANS'
+        },
+        resolve: loadSequence('ngTable', 'UserPaymentPlansCtrl', 'userPaymentPlanService', 'userService', 'paymentPlanService')
+    }).state('app.billing.userpaymentplansnew', {
+        url: '/user-payment-plans/new',
+        templateUrl: '/bundles/publipr/js/components/UserPaymentPlan/user_payment_plan_form.html',
+        title: 'content.list.NEWUSERPAYMENTPLAN',
+        ncyBreadcrumb: {
+            label: 'content.list.NEWUSERPAYMENTPLAN'
+        },
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'UserPaymentPlanFormCtrl', 'userPaymentPlanService', 'userService', 'paymentPlanService')
+    }).state('app.billing.userpaymentplansedit', {
+        url: '/user-payment-plans/edit/:id',
+        templateUrl: '/bundles/publipr/js/components/UserPaymentPlan/user_payment_plan_form.html',
+        title: 'content.list.EDITUSERPAYMENTPLAN',
+        ncyBreadcrumb: {
+            label: 'content.list.EDITUSERPAYMENTPLAN'
+        },
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'UserPaymentPlanFormCtrl', 'userPaymentPlanService', 'userService', 'paymentPlanService')
+    }).state('app.billing.userpaymentplansdetails', {
+        url: '/user-payment-plans/details/:id',
+        templateUrl: '/bundles/publipr/js/components/UserPaymentPlan/user_payment_plan.html',
+        ncyBreadcrumb: {
+            label: 'content.list.USERPAYMENTPLANDETAILS'
+        },
+        resolve: loadSequence('UserPaymentPlanCtrl', 'userPaymentPlanService')
+    }).state('app.accesscontrol', {
         url: '/access-control',
         template: '<div ui-view class="fade-in-up"></div>',
         title: 'sidebar.nav.accesscontrol.MAIN',

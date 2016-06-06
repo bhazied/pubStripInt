@@ -40,5 +40,9 @@ app.controller('PurchaseCtrl',['$scope', '$rootScope', '$sce', '$timeout', '$fil
                 $state.go('app.billing.purchasenew');
             }
         }
+
+        $scope.recurrentPayment = function(){
+            $state.go('app.billing.recurrent')
+        }
     }
 ]);
