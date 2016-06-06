@@ -8,11 +8,11 @@ app.controller('PaymentPlanCtrl', ['$scope', '$state', '$stateParams', '$sce', '
 function($scope, $state, $stateParams, $sce, $timeout, $filter, $q, $interpolate, $localStorage, $paymentPlansDataFactory) {
 
     $scope.statuses = [{
-        id: 'active',
+        id: 'Active',
         title: $filter('translate')('content.list.fields.statuses.ACTIVE'),
         css: 'primary'
     }, {
-        id: 'disabled',
+        id: 'Disabled',
         title: $filter('translate')('content.list.fields.statuses.DISABLED'),
         css: 'success'
     }];

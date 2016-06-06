@@ -121,22 +121,6 @@
                             </div><!--/col-md-6-->
                         </div><!--/row-->
                         <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group" ng-class="{'has-error':paymentPlanForm.startDate.$dirty && paymentPlanForm.startDate.$invalid, 'has-success':paymentPlanForm.startDate.$valid}">
-                                    <label for="paymentPlanStartDate" class="control-label">
-                                        <span translate="content.list.fields.STARTDATE">Start Date</span>
-                                        <span class="symbol required"></span>
-                                    </label>
-                                    <span class="input-icon">
-                                        <input ng-model="paymentPlan.start_date" type="text" name="startDate" id="paymentPlanStartDate" class="form-control" placeholder="[[ 'content.form.messages.ENTERSTARTDATE' | translate ]]" touchspin data-min="-10000000" data-max="10000000" data-verticalbuttons="true" data-verticalupclass="ti-angle-up" data-verticaldownclass="ti-angle-down" ng-required="true" />
-                                        <i class="ti-calendar"></i>
-                                    </span><!--/input-icon-->
-                                    <span class="error text-small block" ng-if="paymentPlanForm.startDate.$dirty && paymentPlanForm.startDate.$error.required" translate="content.form.messages.STARTDATEREQUIRED">Start Date is required.</span>
-                                    <span class="success text-small block" ng-if="paymentPlanForm.startDate.$valid" translate="content.form.messages.OK">Ok!</span>
-                                </div><!--/form-group-->
-                            </div><!--/col-md-6-->
-                        </div><!--/row-->
-                        <div class="row">
                             <div class="col-md-4">
                                 <a ng-click="list()" class="btn btn-primary pull-left">
                                     <i class="ti-layout-list-thumb"></i> <span translate="content.list.BACKPAYMENTPLANS">Back to Payment Plans list</span>

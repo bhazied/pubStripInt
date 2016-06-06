@@ -64,6 +64,9 @@ app.constant('APP_JS_REQUIRES', {
         'PurchaseCtrl': '/bundles/publipr/js/components/Payment/PurchaseCtrl.js',
         'PurchaseFormCtrl': '/bundles/publipr/js/components/Payment/PurchaseFormCtrl.js',
         'InvoiceCtrl': '/bundles/publipr/js/components/Invoice/InvoiceCtrl.js',
+        'PaymentPlansCtrl': '/bundles/publipr/js/components/PaymentPlan/PaymentPlansCtrl.js',
+        'PaymentPlanFormCtrl': '/bundles/publipr/js/components/PaymentPlan/PaymentPlanFormCtrl.js',
+        'PaymentPlanCtrl': '/bundles/publipr/js/components/PaymentPlan/PaymentPlanCtrl.js',
         'PressReleasesCtrl': '/bundles/publipr/js/components/PressRelease/PressReleasesCtrl.js',
         'PressReleaseFormCtrl': '/bundles/publipr/js/components/PressRelease/PressReleaseFormCtrl.js',
         'PressReleaseCtrl': '/bundles/publipr/js/components/PressRelease/PressReleaseCtrl.js',
@@ -87,7 +90,10 @@ app.constant('APP_JS_REQUIRES', {
         'TrackEmailCtrl': '/bundles/publipr/js/components/TrackEmail/TrackEmailCtrl.js',
         'TrackPressReleasesCtrl': '/bundles/publipr/js/components/TrackPressRelease/TrackPressReleasesCtrl.js',
         'TrackPressReleaseFormCtrl': '/bundles/publipr/js/components/TrackPressRelease/TrackPressReleaseFormCtrl.js',
-        'TrackPressReleaseCtrl': '/bundles/publipr/js/components/TrackPressRelease/TrackPressReleaseCtrl.js'
+        'TrackPressReleaseCtrl': '/bundles/publipr/js/components/TrackPressRelease/TrackPressReleaseCtrl.js',
+        'UserPaymentPlansCtrl': '/bundles/publipr/js/components/UserPaymentPlan/UserPaymentPlansCtrl.js',
+        'UserPaymentPlanFormCtrl': '/bundles/publipr/js/components/UserPaymentPlan/UserPaymentPlanFormCtrl.js',
+        'UserPaymentPlanCtrl': '/bundles/publipr/js/components/UserPaymentPlan/UserPaymentPlanCtrl.js'
     },
     modules: [{
         name: 'LoginService',
@@ -168,6 +174,9 @@ app.constant('APP_JS_REQUIRES', {
         name: 'InvoiceDownloadService',
         files: ['/bundles/publipr/js/components/Invoice/InvoiceDownloadService.js']
     },{
+        name: 'paymentPlanService',
+        files: ['/bundles/publipr/js/components/PaymentPlan/PaymentPlanService.js']
+    },{
         name: 'pressReleaseService',
         files: ['/bundles/publipr/js/components/PressRelease/PressReleaseService.js']
     },{
@@ -200,5 +209,8 @@ app.constant('APP_JS_REQUIRES', {
     },{
         name: 'trackPressReleaseService',
         files: ['/bundles/publipr/js/components/TrackPressRelease/TrackPressReleaseService.js']
+    },{
+        name: 'userPaymentPlanService',
+        files: ['/bundles/publipr/js/components/UserPaymentPlan/UserPaymentPlanService.js']
     }]
 });
