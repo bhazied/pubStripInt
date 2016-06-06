@@ -1,0 +1,88 @@
+
+<!-- start: PAGE TITLE -->
+<section id="page-title">
+    <div class="row">
+        <div class="col-sm-8">
+            <h1 class="mainTitle" translate="content.list.USERPAYMENTPLANS">User Payment Plans</h1>
+            <span class="mainDescription"></span>
+        </div>
+        <div ncy-breadcrumb></div>
+    </div>
+</section>
+<!-- end: PAGE TITLE -->
+<!-- start: DETAILS -->
+<div class="container-fluid container-fullw bg-white">
+    <div class="row">
+        <div class="col-md-12" ng-controller="UserPaymentPlanCtrl">
+            <div>
+                <div class="row margin-bottom-10">
+                    <div class="col-md-4">
+                           <button ng-click="list()" class="btn btn-primary pull-left">
+                               <i class="ti-layout-list-thumb"></i> <span translate="content.list.BACKUSERPAYMENTPLANS">Back to User Payment Plans list</span>
+                           </button>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <button type="button" ng-click="add()" class="btn btn-primary">
+                            <i class="ti-plus"></i> <span translate="content.list.ADDUSERPAYMENTPLAN">Add User Payment Plan</span>
+                        </button>
+                    </div>
+                    <div class="col-md-4">
+                        <button type="button" ng-click="edit(userPaymentPlan)" class="btn btn-primary pull-right">
+                            <i class="ti-pencil-alt"></i> <span translate="content.list.EDITUSERPAYMENTPLAN">Edit User Payment Plan</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-condensed table-bordered">
+                        <thead>
+                            <tr>
+                                <th colspan="2" translate="content.list.USERPAYMENTPLANDETAILS">User Payment Plan Details</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span translate="content.list.fields.ID">Id</span></td>
+                                <td>
+                                    <div ng-bind-html="userPaymentPlan.id"></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span translate="content.list.fields.USER">User</span></td>
+                                <td><a ui-sref="app.access.usersdetails({id: userPaymentPlan.user.id})">[[ userPaymentPlan.user.username ]]</a></span></td>
+                            </tr>
+                            <tr>
+                                <td><span translate="content.list.fields.PAYMENTPLAN">Payment Plan</span></td>
+                                <td><a ui-sref="app.billing.paymentplansdetails({id: userPaymentPlan.payment_plan.id})">[[ userPaymentPlan.payment_plan.name ]]</a></span></td>
+                            </tr>
+                            <tr>
+                                <td><span translate="content.list.fields.STATUS">Status</span></td>
+                                <td>
+                                    <span my-enum="[[ userPaymentPlan.status ]]" my-enum-list="[[ statuses ]]"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span translate="content.list.fields.CREATEDAT">Created At</span></td>
+                                <td>
+                                    <span>[[ userPaymentPlan.created_at | date: datetimeFormat ]]</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span translate="content.list.fields.MODIFIEDAT">Modified At</span></td>
+                                <td>
+                                    <span>[[ userPaymentPlan.modified_at | date: datetimeFormat ]]</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span translate="content.list.fields.CLOSEDATE">Close Date</span></td>
+                                <td>
+                                    <span>[[ userPaymentPlan.close_date | date: datetimeFormat ]]</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div><!--/col-md-12-->
+    </div><!--/row-->
+</div><!--/container-fluid container-fullw-->
+<!-- end: DETAILS -->

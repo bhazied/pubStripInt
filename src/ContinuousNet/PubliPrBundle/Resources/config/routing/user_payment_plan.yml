@@ -1,0 +1,30 @@
+userpaymentplan:
+    path:     /
+    defaults: { _controller: "PubliPrBundle:UserPaymentPlan:index" }
+
+userpaymentplan_details:
+    path:     /{id}/details
+    defaults: { _controller: "PubliPrBundle:UserPaymentPlan:show" }
+
+userpaymentplan_new:
+    path:     /new
+    defaults: { _controller: "PubliPrBundle:UserPaymentPlan:new" }
+
+userpaymentplan_create:
+    path:     /create
+    defaults: { _controller: "PubliPrBundle:UserPaymentPlan:create" }
+    methods:  POST
+
+userpaymentplan_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "PubliPrBundle:UserPaymentPlan:edit" }
+
+userpaymentplan_update:
+    path:     /{id}/update
+    defaults: { _controller: "PubliPrBundle:UserPaymentPlan:update" }
+    methods:  [POST, PUT]
+
+userpaymentplan_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "PubliPrBundle:UserPaymentPlan:delete" }
+    methods:  [POST, DELETE]

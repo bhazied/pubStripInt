@@ -93,6 +93,17 @@ class User  extends BaseUser
      * @var string
      * @access protected
      *
+     * @ORM\Column(name="stripe_reference", type="string", length=50, nullable=true, unique=false)
+     * 
+     * @Expose
+     * 
+     */
+    protected $stripeReference;
+
+    /**
+     * @var string
+     * @access protected
+     *
      * @ORM\Column(name="email", type="string", length=360, nullable=false, unique=true)
      * 
      * @Expose
@@ -684,6 +695,30 @@ class User  extends BaseUser
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Set stripeReference
+     *
+     * @access public
+     * @param string $stripeReference
+     * @return User
+     */
+    public function setStripeReference($stripeReference = null)
+    {
+        $this->stripeReference = $stripeReference;
+        return $this;
+    }
+
+    /**
+     * Get stripeReference
+     *
+     * @access public
+     * @return string 
+     */
+    public function getStripeReference()
+    {
+        return $this->stripeReference;
     }
 
     /**

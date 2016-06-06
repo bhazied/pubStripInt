@@ -1,0 +1,30 @@
+paymentplan:
+    path:     /
+    defaults: { _controller: "PubliPrBundle:PaymentPlan:index" }
+
+paymentplan_details:
+    path:     /{id}/details
+    defaults: { _controller: "PubliPrBundle:PaymentPlan:show" }
+
+paymentplan_new:
+    path:     /new
+    defaults: { _controller: "PubliPrBundle:PaymentPlan:new" }
+
+paymentplan_create:
+    path:     /create
+    defaults: { _controller: "PubliPrBundle:PaymentPlan:create" }
+    methods:  POST
+
+paymentplan_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "PubliPrBundle:PaymentPlan:edit" }
+
+paymentplan_update:
+    path:     /{id}/update
+    defaults: { _controller: "PubliPrBundle:PaymentPlan:update" }
+    methods:  [POST, PUT]
+
+paymentplan_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "PubliPrBundle:PaymentPlan:delete" }
+    methods:  [POST, DELETE]
