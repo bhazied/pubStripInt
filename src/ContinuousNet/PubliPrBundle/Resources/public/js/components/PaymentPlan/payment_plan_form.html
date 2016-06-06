@@ -1,0 +1,162 @@
+
+<!-- start: PAGE TITLE -->
+<section id="page-title">
+    <div class="row">
+        <div class="col-sm-8">
+            <h1 class="mainTitle" translate="content.list.PAYMENTPLANS">Payment Plans</h1>
+            <span class="mainDescription"></span>
+        </div>
+        <div ncy-breadcrumb></div>
+    </div>
+</section>
+<!-- end: PAGE TITLE -->
+
+<!-- start: FORM -->
+<div class="container-fluid container-fullw bg-white">
+    <div class="row">
+        <div class="col-md-12" ng-controller="PaymentPlanFormCtrl">
+            <div>
+                <fieldset>
+                    <legend translate="content.list.NEWPAYMENTPLAN" ng-if="paymentPlan.id == 0">
+                        New Payment Plan
+                    </legend>
+                    <legend translate="content.list.EDITPAYMENTPLAN" ng-if="paymentPlan.id > 0">
+                        Edit Payment Plan
+                    </legend>
+                    <form name="paymentPlanForm" id="paymentPlanForm" novalidate ng-submit="submitForm(paymentPlanForm)">
+                        <div class="row">
+                            <input type="hidden" name="id" id="paymentPlanId" ng-model="paymentPlan.id" />
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':paymentPlanForm.name.$dirty && paymentPlanForm.name.$invalid, 'has-success':paymentPlanForm.name.$valid}">
+                                    <label for="paymentPlanName" class="control-label">
+                                        <span translate="content.list.fields.NAME">Name</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="paymentPlan.name" type="text" name="name" id="paymentPlanName" class="form-control" placeholder="[[ 'content.form.messages.ENTERNAME' | translate ]]" ng-required="true" />
+                                        <i class="ti-tag"></i>
+                                    </span><!--/input-icon-->
+                                    <span class="error text-small block" ng-if="paymentPlanForm.name.$dirty && paymentPlanForm.name.$error.required" translate="content.form.messages.NAMEREQUIRED">Name is required.</span>
+                                    <span class="success text-small block" ng-if="paymentPlanForm.name.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':paymentPlanForm.stripeReference.$dirty && paymentPlanForm.stripeReference.$invalid, 'has-success':paymentPlanForm.stripeReference.$valid}">
+                                    <label for="paymentPlanStripeReference" class="control-label">
+                                        <span translate="content.list.fields.STRIPEREFERENCE">Stripe Reference</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="paymentPlan.stripe_reference" type="text" name="stripeReference" id="paymentPlanStripeReference" class="form-control" placeholder="[[ 'content.form.messages.ENTERSTRIPEREFERENCE' | translate ]]" ng-required="true" />
+                                        <i class="ti-marker-alt"></i>
+                                    </span><!--/input-icon-->
+                                    <span class="error text-small block" ng-if="paymentPlanForm.stripeReference.$dirty && paymentPlanForm.stripeReference.$error.required" translate="content.form.messages.STRIPEREFERENCEREQUIRED">Stripe Reference is required.</span>
+                                    <span class="success text-small block" ng-if="paymentPlanForm.stripeReference.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':paymentPlanForm.amount.$dirty && paymentPlanForm.amount.$invalid, 'has-success':paymentPlanForm.amount.$valid}">
+                                    <label for="paymentPlanAmount" class="control-label">
+                                        <span translate="content.list.fields.AMOUNT">Amount</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                        <input ng-model="paymentPlan.amount" type="text" name="amount" id="paymentPlanAmount" class="form-control" placeholder="[[ 'content.form.messages.ENTERAMOUNT' | translate ]]" touchspin data-min="0" data-max="10000000"  data-verticalbuttons="true" data-verticalupclass="ti-angle-up" data-verticaldownclass="ti-angle-down" ng-required="true" />
+                                    <span class="error text-small block" ng-if="paymentPlanForm.amount.$dirty && paymentPlanForm.amount.$error.required" translate="content.form.messages.AMOUNTREQUIRED">Amount is required.</span>
+                                    <span class="success text-small block" ng-if="paymentPlanForm.amount.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':paymentPlanForm.interval.$dirty && paymentPlanForm.interval.$invalid, 'has-success':paymentPlanForm.interval.$valid}">
+                                    <label for="paymentPlanInterval" class="control-label">
+                                        <span translate="content.list.fields.INTERVAL">Interval</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="paymentPlan.interval" type="text" name="interval" id="paymentPlanInterval" class="form-control" placeholder="[[ 'content.form.messages.ENTERINTERVAL' | translate ]]" ng-required="true" />
+                                        <i class="ti-marker-alt"></i>
+                                    </span><!--/input-icon-->
+                                    <span class="error text-small block" ng-if="paymentPlanForm.interval.$dirty && paymentPlanForm.interval.$error.required" translate="content.form.messages.INTERVALREQUIRED">Interval is required.</span>
+                                    <span class="success text-small block" ng-if="paymentPlanForm.interval.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':paymentPlanForm.intervalCount.$dirty && paymentPlanForm.intervalCount.$invalid, 'has-success':paymentPlanForm.intervalCount.$valid}">
+                                    <label for="paymentPlanIntervalCount" class="control-label">
+                                        <span translate="content.list.fields.INTERVALCOUNT">Interval Count</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="paymentPlan.interval_count" type="text" name="intervalCount" id="paymentPlanIntervalCount" class="form-control" placeholder="[[ 'content.form.messages.ENTERINTERVALCOUNT' | translate ]]" touchspin data-min="-10000000" data-max="10000000" data-verticalbuttons="true" data-verticalupclass="ti-angle-up" data-verticaldownclass="ti-angle-down" ng-required="true" />
+                                        <i class="ti-marker-alt"></i>
+                                    </span><!--/input-icon-->
+                                    <span class="error text-small block" ng-if="paymentPlanForm.intervalCount.$dirty && paymentPlanForm.intervalCount.$error.required" translate="content.form.messages.INTERVALCOUNTREQUIRED">Interval Count is required.</span>
+                                    <span class="success text-small block" ng-if="paymentPlanForm.intervalCount.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':paymentPlanForm.status.$dirty && paymentPlanForm.status.$invalid, 'has-success':paymentPlanForm.status.$valid}">
+                                    <label for="paymentPlanStatus" class="control-label">
+                                        <span translate="content.list.fields.STATUS">Status</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <div class="continuous-radio radio-primary" ng-if="statuses.length < 10">
+                                        <input ng-disabled="false" ng-repeat-start="status in statuses" ng-model="paymentPlan.status" type="radio" id="status[[ status.id ]]" value="[[ status.id ]]" name="status" ng-required="true" />
+                                        <label ng-repeat-end for="status[[ status.id ]]">
+                                            [[ status.title ]]
+                                        </label>
+                                    </div>
+                                    <div class="block" ng-if="statuses.length >= 10">
+                                        <select ng-disabled="false" ng-options="item.id as item.title for item in statuses" ng-model="paymentPlan.status" name="status" id="paymentPlanStatus" class="form-control" ng-required="true">
+                                            <option translate="content.form.messages.SELECTSTATUS" value="">Select Status</option>
+                                        </select>
+                                        <span my-enum="[[ paymentPlan.status ]]" my-enum-list="[[ statuses ]]"></span>
+                                    </div>
+                                    <span class="error text-small block" ng-if="paymentPlanForm.status.$dirty && paymentPlanForm.status.$error.required" translate="content.form.messages.STATUSREQUIRED">Status is required.</span>
+                                    <span class="success text-small block" ng-if="paymentPlanForm.status.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':paymentPlanForm.startDate.$dirty && paymentPlanForm.startDate.$invalid, 'has-success':paymentPlanForm.startDate.$valid}">
+                                    <label for="paymentPlanStartDate" class="control-label">
+                                        <span translate="content.list.fields.STARTDATE">Start Date</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="paymentPlan.start_date" type="text" name="startDate" id="paymentPlanStartDate" class="form-control" placeholder="[[ 'content.form.messages.ENTERSTARTDATE' | translate ]]" touchspin data-min="-10000000" data-max="10000000" data-verticalbuttons="true" data-verticalupclass="ti-angle-up" data-verticaldownclass="ti-angle-down" ng-required="true" />
+                                        <i class="ti-calendar"></i>
+                                    </span><!--/input-icon-->
+                                    <span class="error text-small block" ng-if="paymentPlanForm.startDate.$dirty && paymentPlanForm.startDate.$error.required" translate="content.form.messages.STARTDATEREQUIRED">Start Date is required.</span>
+                                    <span class="success text-small block" ng-if="paymentPlanForm.startDate.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-4">
+                                <a ng-click="list()" class="btn btn-primary pull-left">
+                                    <i class="ti-layout-list-thumb"></i> <span translate="content.list.BACKPAYMENTPLANS">Back to Payment Plans list</span>
+                                </a>
+                            </div>
+                            <div class="col-md-4">
+                            </div>
+                            <div class="col-md-4">
+                                <button type="button" ng-click="submitForm(paymentPlanForm)" class="btn btn-primary pull-right" ng-disabled="disableSubmit"> <!--  ng-disabled="paymentPlanForm.$invalid" -->
+                                    <i class="fa fa-spinner fa-spin" ng-if="disableSubmit"></i><i class="ti-save" ng-if="!disableSubmit"></i> <span translate="content.common.SAVE">Save</span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="table-responsive" ng-if="paymentPlans.length > 0">
+                    </div>
+                </fieldset>
+            </div>
+        </div><!--/col-md-12-->
+    </div><!--/row-->
+</div><!--/container-fluid container-fullw-->
+<!-- end: FORM -->
+

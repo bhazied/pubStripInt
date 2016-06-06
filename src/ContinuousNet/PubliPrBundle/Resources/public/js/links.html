@@ -209,6 +209,16 @@
                     <span class="title" translate="content.list.PAYMENTS">Payments</span>
                 </a>
             </li>
+            <li ng-if="user.roles.join('').indexOf('ADM') > -1" ng-class="{'active':$state.includes('app.billing.paymentplans')}">
+                <a ui-sref="app.billing.paymentplans">
+                    <span class="title" translate="content.list.PAYMENTPLANS">Payment Plans</span>
+                </a>
+            </li>
+            <li ng-if="user.roles.join('').indexOf('ADM') > -1" ng-class="{'active':$state.includes('app.billing.userpaymentplans')}">
+                <a ui-sref="app.billing.userpaymentplans">
+                    <span class="title" translate="content.list.USERPAYMENTPLANS">User Payment Plans</span>
+                </a>
+            </li>
         </ul>
     </li>
     <li ng-if="user.roles.join('').indexOf('ADM') > -1" ng-class="{'active open':$state.includes('app.accesscontrol')}">

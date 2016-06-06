@@ -124,6 +124,11 @@ invoice:
     type:     rest
     prefix:   /api
 
+publi_pr_payment_plan_api:
+    resource: "@PubliPrBundle/Controller/PaymentPlanRESTController.php"
+    type:   rest
+    prefix:   /api
+
 publi_pr_press_release_api:
     resource: "@PubliPrBundle/Controller/PressReleaseRESTController.php"
     type:   rest
@@ -161,6 +166,11 @@ publi_pr_track_email_api:
 
 publi_pr_track_press_release_api:
     resource: "@PubliPrBundle/Controller/TrackPressReleaseRESTController.php"
+    type:   rest
+    prefix:   /api
+
+publi_pr_user_payment_plan_api:
+    resource: "@PubliPrBundle/Controller/UserPaymentPlanRESTController.php"
     type:   rest
     prefix:   /api
 
@@ -228,6 +238,10 @@ publi_pr_payment:
     resource: "@PubliPrBundle/Resources/config/routing/payment.yml"
     prefix:   /payment
 
+publi_pr_payment_plan:
+    resource: "@PubliPrBundle/Resources/config/routing/payment_plan.yml"
+    prefix:   /payment-plan
+
 publi_pr_press_release:
     resource: "@PubliPrBundle/Resources/config/routing/press_release.yml"
     prefix:   /press-release
@@ -255,4 +269,8 @@ publi_pr_track_email:
 publi_pr_track_press_release:
     resource: "@PubliPrBundle/Resources/config/routing/track_press_release.yml"
     prefix:   /track-press-release
+
+publi_pr_user_payment_plan:
+    resource: "@PubliPrBundle/Resources/config/routing/user_payment_plan.yml"
+    prefix:   /user-payment-plan
 
