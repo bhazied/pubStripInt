@@ -4,7 +4,6 @@ namespace ContinuousNet\PubliPrBundle\Controller;
 
 use ContinuousNet\PubliPrBundle\Entity\ContactGroup;
 use ContinuousNet\PubliPrBundle\Form\ContactGroupType;
-
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Controller\Annotations\RouteResource;
 use FOS\RestBundle\Controller\Annotations\View;
@@ -18,7 +17,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Finder\Finder;;
 use Symfony\Component\Finder\SplFileInfo;
-
 use Voryx\RESTGeneratorBundle\Controller\VoryxController;
 
 /**
@@ -140,12 +138,12 @@ class ContactGroupRESTController extends BaseRESTController
      */
     public function postAction(Request $request)
     {
+        $em = $this->getDoctrine()->getManager();
         $entity = new ContactGroup();
         $form = $this->createForm(new ContactGroupType(), $entity, array('method' => $request->getMethod()));
         $this->removeExtraFields($request, $form);
         $form->handleRequest($request);
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
             $entity->setCreatorUser($this->getUser());
             $em->persist($entity);
             $em->flush();

@@ -215,6 +215,7 @@
     },
    "content": {
         "common": {
+            "CREATENEW": "Create New",
             "ENABLEBATCHADD": "Enable batch add",
             "CLEARSORTING": "Clear sorting",
             "CLEARFILTER": "Clear filter",

@@ -4,7 +4,7 @@ namespace ContinuousNet\PubliPrBundle\Controller;
 
 use ContinuousNet\PubliPrBundle\Entity\Contact;
 use ContinuousNet\PubliPrBundle\Form\ContactType;
-
+use ContinuousNet\PubliPrBundle\Entity\ContactGroup;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Controller\Annotations\RouteResource;
 use FOS\RestBundle\Controller\Annotations\View;
@@ -18,7 +18,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Finder\Finder;;
 use Symfony\Component\Finder\SplFileInfo;
-
 use Voryx\RESTGeneratorBundle\Controller\VoryxController;
 
 /**
@@ -141,12 +140,20 @@ class ContactRESTController extends BaseRESTController
      */
     public function postAction(Request $request)
     {
+        $em = $this->getDoctrine()->getManager();
+        if ($request->request->get('contactGroup') == -1) {
+            $contactGroup = new ContactGroup();
+            $contactGroup->setName($request->request->get('contactGroupName'));
+            $contactGroup->setCreatorUser($this->getUser());
+            $em->persist($contactGroup);
+            $em->flush();
+            $request->request->set('contactGroup', $contactGroup->getId());
+        }
         $entity = new Contact();
         $form = $this->createForm(new ContactType(), $entity, array('method' => $request->getMethod()));
         $this->removeExtraFields($request, $form);
         $form->handleRequest($request);
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
             $entity->setCreatorUser($this->getUser());
             $em->persist($entity);
             $em->flush();
@@ -169,6 +176,14 @@ class ContactRESTController extends BaseRESTController
         try {
             $em = $this->getDoctrine()->getManager();
             $request->setMethod('PATCH'); //Treat all PUTs as PATCH
+            if ($request->request->get('contactGroup') == -1) {
+                $contactGroup = new ContactGroup();
+                $contactGroup->setName($request->request->get('contactGroupName'));
+                $contactGroup->setCreatorUser($this->getUser());
+                $em->persist($contactGroup);
+                $em->flush();
+                $request->request->set('contactGroup', $contactGroup->getId());
+            }
             $form = $this->createForm(new ContactType(), $entity, array('method' => $request->getMethod()));
             $this->removeExtraFields($request, $form);
             $form->handleRequest($request);
