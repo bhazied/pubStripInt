@@ -60,7 +60,7 @@ class ContactImporterController extends FOSRestController
                 $info = new \SplFileInfo($originalName);
                 $extension = $info->getExtension();
                 if ($extension) {
-                    if ($extension == 'xls<fx' || $extension == 'xls') {
+                    if ($extension == 'xlsx' || $extension == 'xls') {
                         $directory = $this->get('kernel')->getRootDir() . '/../web/uploads/import/';
                         $name = $this->getUser()->getId().'_'.time().'_'.$fileIndex.'.'.$extension;
                         $file = $uploadedFile->move($directory, $name);
@@ -113,7 +113,7 @@ class ContactImporterController extends FOSRestController
                         }
                         unlink($filePath);
                     } else {
-                        $data = array('status' => true, 'message' => $this->get('translator')->trans('contacts.not_allowed_extension'));
+                        $data = array('status' => false, 'message' => $this->get('translator')->trans('contacts.not_allowed_extension'));
                         return $data;
                     }
                 }
