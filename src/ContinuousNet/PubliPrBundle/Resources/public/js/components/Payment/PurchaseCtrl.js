@@ -6,16 +6,18 @@ app.controller('PurchaseCtrl',['$scope', '$rootScope', '$sce', '$timeout', '$fil
         $scope.productLoaded = false;
         $scope.totaleProducts = 0;
         $scope.payed = false;
-
+        $scope.recurrent = false;
         $scope.hasPayed = function() {
             $purchaseDataFactory.checkPayment().$promise.then(function(data){
 
                 $scope.payed = data.validate;
                 $scope.payment = data;
 
-                if (!$scope.payed) {
+                if (!$scope.payed && !$scope.recurrent) {
                     $scope.loadProducts();
                 }
+                $localStorage.recurrent = $scope.recurrent;
+                $localStorage.product = $scope.payed;
 
             });
         };

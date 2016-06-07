@@ -96,6 +96,17 @@ class UserPaymentPlan
      */
     private $closeDate;
 
+
+    /**
+     * @var string
+     * @access private
+     *
+     * @ORM\Column(name="stripe_reference", type="string", length=50,  nullable=false, unique=false)
+     *
+     * @Expose
+     */
+    private $stripeReference;
+
     /**
      * @var \ContinuousNet\PubliPrBundle\Entity\User
      * @access private
@@ -240,6 +251,30 @@ class UserPaymentPlan
     public function getCloseDate()
     {
         return $this->closeDate;
+    }
+
+    /**
+     * Set stripereference
+     *
+     * @access public
+     * @param \string $stripeReference
+     * @return UserPaymentPlan
+     */
+    public function setStripereference($stripeReference)
+    {
+        $this->stripeReference = $stripeReference;
+        return $this;
+    }
+
+    /**
+     * Get stripereference
+     *
+     * @access public
+     * @return string
+     */
+    public function getStripereference()
+    {
+        return $this->stripeReference;
     }
 
     /**

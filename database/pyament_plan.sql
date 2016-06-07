@@ -18,3 +18,6 @@ CREATE TABLE `payment_plan` (
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci  COMMENT='{"grp":"Billing","pstn":3,"rls":["ADM"]}'
 
 ALTER TABLE `payment_plan` CHANGE `status` `status` ENUM( 'Active', 'Disabled' ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL ;
+
+ALTER TABLE  `payment_plan` CHANGE  `modifier_user_id`  `modifier_user_id` MEDIUMINT( 8 ) UNSIGNED NULL COMMENT  '{"prefix":"modifier_"}',
+CHANGE  `modified_at`  `modified_at` DATETIME NULL ;

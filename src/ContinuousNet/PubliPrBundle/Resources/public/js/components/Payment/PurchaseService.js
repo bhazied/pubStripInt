@@ -11,7 +11,8 @@ app.factory('$purchaseDataFactory', ['$resource', '$rootScope',
             getSettings: {method: 'GET', url: $rootScope.app.apiURL+'Settings/:product'},
             sendPurchase : {method: 'POST', url: $rootScope.app.apiURL+'SendPurchase', isArray:false},
             getProducts : {method: 'GET', url:$rootScope.app.apiURL+'Products', isArray:false},
-            checkUser: {method: 'POST', url:$rootScope.app.apiURL+'CheckUser', isArray:false}
+            checkUser: {method: 'POST', url:$rootScope.app.apiURL+'CheckUser', isArray:false},
+            sendRecurrent: {method: 'POST',  url: $rootScope.app.apiURL+'SendRecurrent', isArray:false}
         });
 
     }]);
