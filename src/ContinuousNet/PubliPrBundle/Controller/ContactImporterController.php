@@ -39,7 +39,18 @@ class ContactImporterController extends FOSRestController
     public function importAction(Request $request) {
         try {
 
+            $em = $this->getDoctrine()->getManager();
+
             $contactGroupId = $request->request->get('contactGroup');
+            if ($contactGroupId == -1) {
+                $contactGroup = new ContactGroup();
+                $contactGroup->setName($contactGroupId);
+                $contactGroup->setCreatorUser($this->getUser());
+                $em->persist($contactGroup);
+                $em->flush();
+                $contactGroupId = $contactGroup->getId();
+            }
+
             $active = $request->request->get('active');
 
             $firstNameCol = $request->request->get('firstName');
@@ -47,7 +58,6 @@ class ContactImporterController extends FOSRestController
             $emailCol = $request->request->get('email');
             $phoneCol = $request->request->get('phone');
 
-            $em = $this->getDoctrine()->getManager();
             $contactGroup = $em->getRepository('PubliPrBundle:ContactGroup')->find($contactGroupId);
 
             $exist = 0;

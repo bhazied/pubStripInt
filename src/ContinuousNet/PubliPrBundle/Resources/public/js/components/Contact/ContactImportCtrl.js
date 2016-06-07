@@ -61,6 +61,11 @@ app.controller('ContactImportCtrl', ['$scope', '$rootScope', '$state', '$statePa
                         for (var i in data.results) {
                             data.results[i].hidden = false;
                         }
+                        data.results.push({
+                            id: -1,
+                            name: $filter('translate')('content.common.CREATENEW'),
+                            hidden: false
+                        });
                         $scope.contactGroups = data.results;
                         def.resolve($scope.contactGroups);
                     });
