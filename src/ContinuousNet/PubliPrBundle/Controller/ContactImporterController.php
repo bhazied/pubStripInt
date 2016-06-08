@@ -3,10 +3,9 @@
 namespace ContinuousNet\PubliPrBundle\Controller;
 
 use ContinuousNet\PubliPrBundle\Entity\Contact;
-
+use ContinuousNet\PubliPrBundle\Entity\ContactGroup;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
-
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Controller\Annotations\RouteResource;
 use FOS\RestBundle\Controller\Annotations\Get;
