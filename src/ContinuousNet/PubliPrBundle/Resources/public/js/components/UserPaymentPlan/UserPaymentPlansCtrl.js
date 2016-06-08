@@ -143,7 +143,7 @@ function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q,
             { field: 'created_at', title: $filter('translate')('content.list.fields.CREATEDAT'), sortable: 'userPaymentPlan.createdAt', filter: { 'userPaymentPlan.createdAt': 'number' }, show: $scope.getParamValue('created_at_show_filed', true), getValue: $scope.evaluatedValue, valueFormatter: 'date:\''+$filter('translate')('formats.DATETIME')+'\''},
             { field: 'modified_at', title: $filter('translate')('content.list.fields.MODIFIEDAT'), sortable: 'userPaymentPlan.modifiedAt', filter: { 'userPaymentPlan.modifiedAt': 'number' }, show: $scope.getParamValue('modified_at_show_filed', true), getValue: $scope.evaluatedValue, valueFormatter: 'date:\''+$filter('translate')('formats.DATETIME')+'\''},
             { field: 'close_date', title: $filter('translate')('content.list.fields.CLOSEDATE'), sortable: 'userPaymentPlan.closeDate', filter: { 'userPaymentPlan.closeDate': 'number' }, show: $scope.getParamValue('close_date_show_filed', true), getValue: $scope.evaluatedValue, valueFormatter: 'date:\''+$filter('translate')('formats.DATETIME')+'\''},
-            { title: $filter('translate')('content.common.ACTIONS'), show: true, getValue: $scope.interpolatedValue, interpolateExpr: $interpolate('<div class="btn-group pull-right"><button type="button" class="btn btn-success" tooltip-placement="top" uib-tooltip="'+$filter('translate')('content.common.EDIT')+'" ng-click="edit(row)"><i class="ti-pencil-alt"></i></button><button type="button" class="btn btn-warning" tooltip-placement="top" uib-tooltip="'+$filter('translate')('content.common.SHOWDETAILS')+'" ng-click="details(row)"><i class="ti-clipboard"></i></button><button type="button" class="btn btn-danger" tooltip-placement="top" uib-tooltip="'+$filter('translate')('content.common.REMOVE')+'" ng-click="delete(row)"><i class="ti-trash"></i></button></div>') }
+            { title: $filter('translate')('content.common.ACTIONS'), show: true, getValue: $scope.interpolatedValue, interpolateExpr: $interpolate('<div class="btn-group pull-right"><button type="button" class="btn btn-info" tooltip-placement="top" uib-tooltip="'+$filter('translate')('content.common.INVOICE')+'" ng-click="invoice(row)"><i class="ti-money"></i></button><button type="button" class="btn btn-danger" tooltip-placement="top" uib-tooltip="'+$filter('translate')('content.common.REMOVE')+'" ng-click="delete(row)"><i class="ti-trash"></i></button></div>') }
         ];
     };
 
@@ -232,17 +232,10 @@ function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q,
         });
     };
 
-    $scope.add = function() {
-        $state.go('app.billing.userpaymentplansnew');
+    $scope.invoice = function(row) {
+        $state.go('app.billing.invoice', {id: row.id});
     };
 
-    $scope.edit = function(row) {
-        $state.go('app.billing.userpaymentplansedit', {id: row.id});
-    };
-
-    $scope.details = function(row) {
-        $state.go('app.billing.userpaymentplansdetails', {id: row.id});
-    };
 
 }]);
 

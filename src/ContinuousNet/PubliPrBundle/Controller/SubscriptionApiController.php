@@ -51,12 +51,12 @@ class SubscriptionApiController extends FOSRestController
                 'productName' => '',
                 'startDate' => '',
                 'endDate' => '',
-                'validate' => false,
-                'recurrent' => false
+                'normal_payment' => false,
+                'recurrent_payment' => false
             );
             $payment = $this->getPayment();
             if (!is_null($payment)) {
-                $data['validate'] = true;
+                $data['normal_payment'] = true;
                 $data['endDate'] = $payment->getEndDate();
                 $data['startDate'] = $payment->getStartDate();
                 $data['productName'] = $payment->getProduct()->getName();
@@ -64,7 +64,7 @@ class SubscriptionApiController extends FOSRestController
             $recurrent = $this->getRecurrent();
             if(!is_null($recurrent))
             {
-                $data['recurrent'] = true;
+                $data['recurrent_payment'] = true;
                 if($recurrent->getPaymentPlan()->getInterval() == 'year')
                 {
                     $data['start_date'] = $recurrent->getCreatedAt();
@@ -309,9 +309,12 @@ class SubscriptionApiController extends FOSRestController
                 if(!is_string($customerStripe)){
                     $this->getUser()->setStripereference($customerStripe->id);
                     $em->persist($this->getUser());
-                    $this->addUserPaymentPlan($paymentPlan, $customerStripe->subscriptions->data[0]->id, $em);
+                    $userPaymentPlan = $this->addUserPaymentPlan($paymentPlan, $customerStripe->subscriptions->data[0]->id, $em);
+                    $em->persist($userPaymentPlan);
                     $em->flush();
-                    $response['message'] = $this->get('translator')->trans('recurrent.payment.success');
+                    //$response['message'] = $this->get('translator')->trans('recurrent.payment.success');
+                    $response['message'] = "Recurrent payment success";
+                    $this->sendConfirmationRecurrent($userPaymentPlan);
                 }
                 else
                 {
@@ -363,7 +366,7 @@ class SubscriptionApiController extends FOSRestController
         $userPaymentPlan->setPaymentPlan($paymentPlan);
         $userPaymentPlan->setStatus("Active");
         $userPaymentPlan->setStripereference($subId);
-        $em->persist($userPaymentPlan);
+        return $userPaymentPlan;
     }
 
     private function checkCustomerSubStripe($cusStripeReference)
@@ -530,6 +533,39 @@ class SubscriptionApiController extends FOSRestController
         catch(\Exception $e)
         {
            return false;
+        }
+    }
+
+    private function  sendConfirmationRecurrent($paymentPlan)
+    {
+        $baseUrl = $this->container->get('request_stack')->getCurrentRequest()->getScheme().'://'.$this->container->get('request_stack')->getCurrentRequest()->getHttpHost().'/';
+        try
+        {
+            //$id = !is_null($payment->getToken())  ? $payment->getToken() : $payment->getStripeReference();
+            $id = $paymentPlan->getStripereference();
+            $message = \Swift_Message::newInstance()
+                ->setSubject('PubliPr Payment')
+                ->setFrom($this->container->getParameter('publipr.contact.email'))
+                ->setFrom("contact@continuousnet.com")
+                ->setTo($paymentPlan->getUser()->getEmail())
+                ->setContentType('text/html')
+                ->setBody(
+                    $this->renderView(
+                        'PubliPrBundle:Emails:invoice.html.twig',
+                        array(
+                            'user_name' => $paymentPlan->getUser()->getFirstName() . ' ' . $paymentPlan->getUser()->getLastName(),
+                            'created_at' => $paymentPlan->getCreatedAt()->format('F j, Y'),
+                            'order_id' => $id,
+                            'link' => $baseUrl.'#/app/billing/invoice/'.$paymentPlan->getId(),
+                        )
+                    ),
+                    'text/html'
+                );
+            return $this->get('mailer')->send($message);
+        }
+        catch(\Exception $e)
+        {
+            return false;
         }
     }
 

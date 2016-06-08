@@ -10,14 +10,16 @@ app.controller('PurchaseCtrl',['$scope', '$rootScope', '$sce', '$timeout', '$fil
         $scope.hasPayed = function() {
             $purchaseDataFactory.checkPayment().$promise.then(function(data){
 
-                $scope.payed = data.validate;
+                $scope.payed = data.normal_payment;
+                $scope.recurrent = data.recurrent_payment;
                 $scope.payment = data;
 
                 if (!$scope.payed && !$scope.recurrent) {
                     $scope.loadProducts();
                 }
-                $localStorage.recurrent = $scope.recurrent;
-                $localStorage.product = $scope.payed;
+
+                $localStorage.recurrent_payment = $scope.recurrent;
+                $localStorage.normal_payment = $scope.payed;
 
             });
         };
@@ -45,6 +47,16 @@ app.controller('PurchaseCtrl',['$scope', '$rootScope', '$sce', '$timeout', '$fil
 
         $scope.recurrentPayment = function(){
             $state.go('app.billing.recurrent')
+        }
+        
+        $scope.goPaymentList = function () {
+            if($scope.payed)
+            {
+                $state.go('app.billing.payments');
+            }
+            else if($scope.recurrent){
+                $state.go('app.billing.userpaymentplans');
+            }
         }
     }
 ]);
