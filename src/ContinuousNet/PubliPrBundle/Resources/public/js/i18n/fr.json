@@ -503,7 +503,15 @@
                 "SELECTPAYMENTPLAN": "Sélectionner une valeur pour Payment Plan",
                 "PAYMENTPLANREQUIRED": "Le champs Payment Plan est obligatoire",
                 "SELECTCLOSEDATE": "Sélectionner une valeur pour Close Date",
-                "CLOSEDATEREQUIRED": "Le champs Close Date est obligatoire"
+                "CLOSEDATEREQUIRED": "Le champs Close Date est obligatoire",
+                "CARDNUMBER" : "Numéro de carte",
+                "CARDMONTHEXPR" : "mois d'expiration",
+                "CARDYEAREXPR" : "Année d'expiration",
+                "CARDCCV" : "CCV",
+                "CARDNUMBERREQUIRED" : "Numéro de la carte est obligatoire",
+                "CARDMONTHEXPRREQUIRED": "mois d'expiration est obligatoire",
+                "CARDYEAREXPRREQUIRED": "Année d'expiration est obligatoire",
+                "CARDCCVREQUIRED" : "Ccv est obligatoire"
             }
         },
         "list": {
