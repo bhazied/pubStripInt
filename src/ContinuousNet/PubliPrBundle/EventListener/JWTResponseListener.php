@@ -44,6 +44,7 @@ class JWTResponseListener
         $this->em->flush();
         
         $data['user'] = array(
+            'id' => $user->getId(),
             'email' => $user->getEmail(),
             'gender' => $user->getGender(),
             'name' => $user->getName(),
