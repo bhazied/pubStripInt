@@ -355,9 +355,13 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
                 folder: function() {
                     var company = '00000' + $localStorage.user.company;
                     company = company.substr(company.length - 5);
-                    var user_ = '00000' + $scope.user.id;
-                    user_ = user_.substr(user_.length - 5);
-                    return 'users/company_'+company+'/user_'+user_;
+                    var user_ = '';
+                    if ($scope.user.id != 0) {
+                        user_ = '00000' + $scope.user.id;
+                        user_ = user_.substr(user_.length - 5);
+                        user_ = '/user_'+user_;
+                    }
+                    return 'companies/company_'+company+user_;
                 }
             }
         });
