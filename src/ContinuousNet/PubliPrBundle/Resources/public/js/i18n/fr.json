@@ -218,6 +218,7 @@
     },
    "content": {
         "common": {
+	    "YESUNSUBSCRIBE": "Unsubscribe",
             "CREATENEW": "Create New",
             "ENABLEBATCHADD": "Enable batch add",
             "CLEARSORTING": "Clear sorting",
@@ -884,11 +885,12 @@
             "USERPAYMENTPLANNOTUPDATED": "Utilisateur Payment Plan non mise à jour",
             "USERPAYMENTPLANCREATED": "Utilisateur Payment Plan crée",
             "USERPAYMENTPLANNOTCREATED": "Utilisateur Payment Plan non crée",
-            "YOUWILLNOTBEABLETORECOVERUSERPAYMENTPLAN": "Vous ne serez pas en mesure de récupérer cette Utilisateur Payment Plan!",
+            "YOUWILLNOTBEABLETORECOVERRECURRENTPAYMENT": "Vous ne serez pas en mesure de récupérer cette Utilisateur Payment Plan!",
             "USERPAYMENTPLANDELETED": "Utilisateur Payment Plan supprimée",
             "USERPAYMENTPLANNOTDELETED": "Utilisateur Payment Plan non supprimée",
             "BACKUSERPAYMENTPLANS": "Retour à la liste des Utilisateur Payment Plans",
-            "YOURAREUNSUBSCRIBEDFROMRECURRENTPAYMENT": "You are unsubscribed  from recurring payment",
+            "YOUWILLNOTBEABLETORECOVERUSERPAYMENTPLAN": "Vous ne pouvez pas récuperer cette inscription",
+	    "YOURAREUNSUBSCRIBEDFROMRECURRENTPAYMENT" : "Your unsubscribe with success"
             "RECURRENTUNSUBSCRIBED": "Unsubscribed from service",
             "RECURRENTNOTUNSUBSCRIBED": "Not unsubscribed from service",
             "RECURRENT" : "Recurring payment",

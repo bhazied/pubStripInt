@@ -219,6 +219,7 @@
     },
    "content": {
         "common": {
+	    "YESUNSUBSCRIBE": "Unsubscribe",
             "CREATENEW": "Create New",
             "ENABLEBATCHADD": "Enable batch add",
             "CLEARSORTING": "Clear sorting",
@@ -887,10 +888,11 @@
             "USERPAYMENTPLANCREATED": "User Payment Plan Created",
             "USERPAYMENTPLANNOTCREATED": "User Payment Plan Not Created",
             "YOUWILLNOTBEABLETORECOVERUSERPAYMENTPLAN": "You will not be able to recover this User Payment Plan!",
+	    "YOURAREUNSUBSCRIBEDFROMRECURRENTPAYMENT" : "Your unsubscribe with success",
             "USERPAYMENTPLANDELETED": "User Payment Plan Deleted",
             "USERPAYMENTPLANNOTDELETED": "User Payment Plan Not Deleted",
             "BACKUSERPAYMENTPLANS": "Back To User Payment Plans List",
-            "YOURAREUNSUBSCRIBEDFROMRECURRENTPAYMENT": "You are unsubscribed  from recurring payment",
+	    "YOUWILLNOTBEABLETORECOVERRECURRENTPAYMENT": "You are unsubscribed  from recurring payment",
             "RECURRENTUNSUBSCRIBED": "Unsubscribed from service",
             "RECURRENTNOTUNSUBSCRIBED": "Not unsubscribed from service",
             "RECURRENT" : "Recurring payment",
