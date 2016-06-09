@@ -194,6 +194,9 @@
             "NOVEMBER": "November",
             "DECEMBER": "December"
         },
+        "RECURRENTPAYMENT": "Payment recurrent",
+        "RECURRENTPAYMENTDESCRIPTION": "This is a simple description for the recurring patmentmethod",
+        "RECURRENTPAYMENTAMOUNT": "par choix",
         "invoice" : {
             "ORDERDATE": "Order date",
             "DESCRIPTION" : "Description",
@@ -880,6 +883,10 @@
             "USERPAYMENTPLANDELETED": "Utilisateur Payment Plan supprimée",
             "USERPAYMENTPLANNOTDELETED": "Utilisateur Payment Plan non supprimée",
             "BACKUSERPAYMENTPLANS": "Retour à la liste des Utilisateur Payment Plans",
+            "YOURAREUNSUBSCRIBEDFROMRECURRENTPAYMENT": "You are unsubscribed  from recurring payment",
+            "RECURRENTUNSUBSCRIBED": "Unsubscribed from service",
+            "RECURRENTNOTUNSUBSCRIBED": "Not unsubscribed from service",
+            "RECURRENT" : "Recurring payment",
             "fields": {
                 "CARDNUMBER" : "Card Number",
                 "CARDMONTHEXPR" : "Expiration Month",
@@ -1061,6 +1068,7 @@
                 "USER": "Utilisateur",
                 "PAYMENTPLAN": "Payment Plan",
                 "CLOSEDATE": "Close Date",
+                "USERPLANINTERVAL": "Recurrence interval",
                 "blocktypes": {
                     "TEXT": "Texte",
                     "BOXEDTEXT": "Boxed Texte",

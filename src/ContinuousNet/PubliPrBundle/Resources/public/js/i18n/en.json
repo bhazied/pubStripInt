@@ -194,6 +194,10 @@
             "NOVEMBER": "November",
             "DECEMBER": "December"
         },
+        "RECURRENTPAYMENT": "Recurring payment",
+        "RECURRENTPAYMENTDESCRIPTION": "This is a simple description for the recurring patmentmethod",
+        "RECURRENTPAYMENTAMOUNT": "By choice",
+        "SUCCESS": "SUCCESS",
         "invoice" : {
             "ORDERDATE": "Order date",
             "DESCRIPTION" : "Description",
@@ -278,7 +282,8 @@
             "REMOVESEGMENTS": "Remove segments",
             "SEGMENTSREMOVED": "Segments removed",
             "SEGMENTSNOTREMOVED": "Segments not removed",
-            "COMINGSOON": "Coming Soon"
+            "COMINGSOON": "Coming Soon",
+            "UNSUBSCRIBED": "Unsubscribe"
         },
         "form": {
             "messages": {
@@ -880,6 +885,11 @@
             "USERPAYMENTPLANDELETED": "User Payment Plan Deleted",
             "USERPAYMENTPLANNOTDELETED": "User Payment Plan Not Deleted",
             "BACKUSERPAYMENTPLANS": "Back To User Payment Plans List",
+            "YOURAREUNSUBSCRIBEDFROMRECURRENTPAYMENT": "You are unsubscribed  from recurring payment",
+            "RECURRENTUNSUBSCRIBED": "Unsubscribed from service",
+            "RECURRENTNOTUNSUBSCRIBED": "Not unsubscribed from service",
+            "RECURRENT" : "Recurring payment",
+
             "fields": {
                 "CARDNUMBER" : "Card Number",
                 "CARDMONTHEXPR" : "Expiration Month",
@@ -1061,6 +1071,7 @@
                 "USER": "User",
                 "PAYMENTPLAN": "Payment Plan",
                 "CLOSEDATE": "Close Date",
+                "USERPLANINTERVAL": "Recurrence interval",
                 "blocktypes": {
                     "TEXT": "Text",
                     "BOXEDTEXT": "Boxed Text",

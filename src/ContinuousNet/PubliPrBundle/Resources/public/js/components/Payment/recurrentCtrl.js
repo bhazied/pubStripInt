@@ -11,7 +11,10 @@ app.controller('recurrentCtrl',['$scope', '$rootScope', '$sce', '$timeout', '$fi
                 $paymentPlansDataFactory.query({offset: 0, limit: 10000, 'order_by[paymentPlan.name]': 'asc'}).$promise.then(function (data) {
                     for (var i in data.results) {
                         data.results[i].hidden = false;
-                        $scope.recurrentPayments = data.results;
+                        if(data.results[i].status == "Active"){
+                            $scope.recurrentPayments[i] = data.results[i];
+                        }
+
                         def.resolve($scope.recurrentPayments);
                     }
                     return def;
@@ -65,6 +68,7 @@ app.controller('recurrentCtrl',['$scope', '$rootScope', '$sce', '$timeout', '$fi
             $purchaseDataFactory.sendRecurrent($scope.paymentPlan).$promise.then(function (data) {
                 console.log(data);
                 if(!data.hasError){
+                    toaster.pop('success', $filter('translate')('content.common.NOTIFICATION'), $filter('translate')('payment.SUCCESS'));
                     $state.go("app.billing.userpaymentplans");
                 }
                 else{

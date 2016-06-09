@@ -12,7 +12,16 @@ app.controller('PurchaseCtrl',['$scope', '$rootScope', '$sce', '$timeout', '$fil
 
                 $scope.payed = data.normal_payment;
                 $scope.recurrent = data.recurrent_payment;
-                $scope.payment = data;
+                if($scope.payed){
+                    $scope.payment = data;
+                    console.log($scope.payment);
+                }else if($scope.recurrent){
+                    $scope.payment = {
+                        startDate : data.start_date,
+                        endDate : data.end_date,
+                        productName: 'recurrent payment'
+                    };
+                }
 
                 if (!$scope.payed && !$scope.recurrent) {
                     $scope.loadProducts();

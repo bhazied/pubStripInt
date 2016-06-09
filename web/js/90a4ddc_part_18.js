@@ -2616,7 +2616,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.USERPAYMENTPLANS'
         },
-        resolve: loadSequence('ngTable', 'UserPaymentPlansCtrl', 'userPaymentPlanService', 'userService', 'paymentPlanService')
+        resolve: loadSequence('ngTable', 'UserPaymentPlansCtrl', 'userPaymentPlanService', 'userService', 'paymentPlanService', 'PurchaseService')
     }).state('app.billing.userpaymentplansnew', {
         url: '/user-payment-plans/new',
         templateUrl: '/bundles/publipr/js/components/UserPaymentPlan/user_payment_plan_form.html',

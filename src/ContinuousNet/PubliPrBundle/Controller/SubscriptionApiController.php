@@ -62,25 +62,37 @@ class SubscriptionApiController extends FOSRestController
                 $data['productName'] = $payment->getProduct()->getName();
             }
             $recurrent = $this->getRecurrent();
+            $now = new \DateTime('now');
             if(!is_null($recurrent))
             {
-                $data['recurrent_payment'] = true;
-                if($recurrent->getPaymentPlan()->getInterval() == 'year')
+                if($recurrent->getStatus() == 'Disabled' && ($recurrent->getCloseDate() < $now))
                 {
-                    $data['start_date'] = $recurrent->getCreatedAt();
-                    $data['end_date'] = $recurrent->getCreatedAt()->add(new \DateInterval( 'P'.$recurrent->getPaymentPlan()->getIntervalCount(). ucfirst( substr( $recurrent->getPaymentPlan()->getInterval(),0,1)) ) );
+                    $data['recurrent_payment'] = false;
                 }
-                else
-                {
-                    $data['start_date'] = $recurrent->getCreatedAt();
-                    $now = new \DateTime('now');
-                    $subscribeDay = $recurrent->getCreatedAt()->format('d');
-                    $currenMonth = $now->format('m');
-                    $currentYear = $now->format('Y');
-                    $datereference = new \DateTime($currentYear.'-'.$currenMonth.'-'.$subscribeDay);
-                    $data['end_date'] = $datereference->add(new \DateInterval( 'P'.$recurrent->getPaymentPlan()->getIntervalCount(). ucfirst( substr( $recurrent->getPaymentPlan()->getInterval(),0,1)) ) );
+                else {
+                    $data['recurrent_payment'] = true;
+                    if ($recurrent->getPaymentPlan()->getInterval() == 'year') {
+                        $data['start_date'] = $recurrent->getCreatedAt();
+                        $subscribeDay = $recurrent->getCreatedAt()->format('d');
+                        $currenMonth = $recurrent->getCreatedAt()->format('m');
+                        $currentYear = $now->format('Y');
+                        $datereference = new \DateTime($currentYear . '-' . $currenMonth . '-' . $subscribeDay);
+                        $data['end_date'] = $datereference->add(new \DateInterval('P' . $recurrent->getPaymentPlan()->getIntervalCount() . ucfirst(substr($recurrent->getPaymentPlan()->getInterval(), 0, 1))));
+                    } else {
+                        $data['start_date'] = $recurrent->getCreatedAt();
+                        $subscribeDay = $recurrent->getCreatedAt()->format('d');
+                        $currenMonth = $now->format('m');
+                        $currentYear = $now->format('Y');
+                        $datereference = new \DateTime($currentYear . '-' . $currenMonth . '-' . $subscribeDay);
+                        $data['end_date'] = $datereference->add(new \DateInterval('P' . $recurrent->getPaymentPlan()->getIntervalCount() . ucfirst(substr($recurrent->getPaymentPlan()->getInterval(), 0, 1))));
+                    }
+                    if ($recurrent->getStatus() == 'Disabled') {
+                        $data['end_date'] = $recurrent->getCloseDate();
+                    }
                 }
+
             }
+
             return $data;
         } catch (\Exception $e) {
             return FOSView::create($e->getMessage(), Codes::HTTP_INTERNAL_SERVER_ERROR);
@@ -326,7 +338,8 @@ class SubscriptionApiController extends FOSRestController
             {
                 //user created in stripe test
                 //check stripe subscription
-                if($this->checkCustomerSubStripe($this->getUser()->getStripereference()) == 0)
+                $subscription = $this->checkCustomerSubStripe($this->getUser()->getStripereference());
+                if($subscription->subscriptions->total_count == 0)
                 {
                     $subscription = Stripe\Subscription::create(array(
                         'customer' => $this->getUser()->getStripereference(),
@@ -342,13 +355,27 @@ class SubscriptionApiController extends FOSRestController
                     ));
                     if(!is_string($subscription))
                     {
-                        $response['message'] = $this->get('translator')->trans('recurrent.payment.success');
+                        $userPaymentPlan = $this->addUserPaymentPlan($paymentPlan, $subscription->id, $em);
+                        $em->persist($userPaymentPlan);
+                        $em->flush();
+                        $this->sendConfirmationRecurrent($userPaymentPlan);
+                        //$response['message'] = $this->get('translator')->trans('recurrent.payment.success');
+                        $response['message'] = "Recurrent payment success";
                     }
                     else
                     {
                         $response['message'] = $subscription;
                         $response['hasError'] = true;
                     }
+                }
+                else
+                {
+                    $userPaymentPlan = $this->addUserPaymentPlan($paymentPlan, $subscription->subscriptions->data[0]->id, $em);
+                    $em->persist($userPaymentPlan);
+                    $em->flush();
+                    $this->sendConfirmationRecurrent($userPaymentPlan);
+                    //$response['message'] = $this->get('translator')->trans('recurrent.payment.success');
+                    $response['message'] = "Recurrent payment success";
                 }
             }
             return $response;
@@ -358,6 +385,41 @@ class SubscriptionApiController extends FOSRestController
             return FOSView::create($e->getMessage(), Codes::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
+
+
+
+    /**
+     * @POST("/Unsubscribe")
+     * @param $request
+     * @View(serializerEnableMaxDepthChecks=true)
+     */
+    public function unsubscribeAction(Request $request)
+    {
+        try
+        {
+            $data= array(
+                'hasError' => false,
+                'message' => ''
+            );
+            $em = $this->getDoctrine()->getManager();
+            $userPaymentPlan = $em->getRepository('PubliPrBundle:UserPaymentPlan')->find($request->request->get('id'));
+            Stripe\Stripe::setApiKey($this->getStripeApiKey());
+            $subscribtion = Stripe\Subscription::retrieve($request->request->get('stripeReference'));
+            $result = $subscribtion->cancel();
+            $em = $this->getDoctrine()->getManager();
+            $userPaymentPlan = $em->getRepository('PubliPrBundle:UserPaymentPlan')->find($request->request->get('id'));
+            $userPaymentPlan->setCloseDate(new \DateTime('now'));
+            $userPaymentPlan->getUser()->setStripeReference(null);
+            $userPaymentPlan->setStatus("Disabled");
+            $em->flush();
+
+        }
+        catch (\Exception $e)
+        {
+            return $data['message'] = $e->getMessage();
+        }
+    }
+
 
     private function addUserPaymentPlan(PaymentPlan $paymentPlan, $subId, EntityManager $em)
     {
@@ -374,7 +436,7 @@ class SubscriptionApiController extends FOSRestController
 
         Stripe\Stripe::setApiKey($this->getStripeApiKey());
         $customer = Stripe\Customer::retrieve($cusStripeReference);
-        return $customer->subscriptions->total_count;
+        return $customer;
     }
 
     /**
