@@ -10,11 +10,11 @@ function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q,
     $scope.isFiltersVisible = false;
 
     $scope.statuses = [{
-        id: 'active',
+        id: 'Active',
         title: $filter('translate')('content.list.fields.statuses.ACTIVE'),
         css: 'primary'
     }, {
-        id: 'disabled',
+        id: 'Disabled',
         title: $filter('translate')('content.list.fields.statuses.DISABLED'),
         css: 'success'
     }];
@@ -113,7 +113,6 @@ function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q,
             { field: 'interval', title: $filter('translate')('content.list.fields.INTERVAL'), sortable: 'paymentPlan.interval', filter: { 'paymentPlan.interval': 'text' }, show: $scope.getParamValue('interval_show_filed', true), getValue: $scope.textValue },
             { field: 'interval_count', title: $filter('translate')('content.list.fields.INTERVALCOUNT'), sortable: 'paymentPlan.intervalCount', filter: { 'paymentPlan.intervalCount': 'number' }, show: $scope.getParamValue('interval_count_show_filed', true), getValue: $scope.textValue },
             { field: 'status', title: $filter('translate')('content.list.fields.STATUS'), sortable: 'paymentPlan.status', filter: { 'paymentPlan.status': 'select' }, show: $scope.getParamValue('status_show_filed', true), getValue: $scope.interpolatedValue, filterData : $scope.statuses, interpolateExpr: $interpolate('<span my-enum="[[ row.status ]]" my-enum-list=\'[[ statuses ]]\'></span>') },
-            { field: 'start_date', title: $filter('translate')('content.list.fields.STARTDATE'), sortable: 'paymentPlan.startDate', filter: { 'paymentPlan.startDate': 'number' }, show: $scope.getParamValue('start_date_show_filed', false), getValue: $scope.textValue },
             { field: 'creator_user', title: $filter('translate')('content.list.fields.CREATORUSER'), sortable: 'creator_user.username', filter: { 'paymentPlan.creatorUser': 'select' }, getValue: $scope.linkValue, filterData: $scope.getUsers(), show: $scope.getParamValue('creator_user_id_show_filed', false), displayField: 'username', state: 'app.access.usersdetails' },
             { field: 'created_at', title: $filter('translate')('content.list.fields.CREATEDAT'), sortable: 'paymentPlan.createdAt', filter: { 'paymentPlan.createdAt': 'number' }, show: $scope.getParamValue('created_at_show_filed', false), getValue: $scope.evaluatedValue, valueFormatter: 'date:\''+$filter('translate')('formats.DATETIME')+'\''},
             { field: 'modifier_user', title: $filter('translate')('content.list.fields.MODIFIERUSER'), sortable: 'modifier_user.username', filter: { 'paymentPlan.modifierUser': 'select' }, getValue: $scope.linkValue, filterData: $scope.getUsers(), show: $scope.getParamValue('modifier_user_id_show_filed', false), displayField: 'username', state: 'app.access.usersdetails' },

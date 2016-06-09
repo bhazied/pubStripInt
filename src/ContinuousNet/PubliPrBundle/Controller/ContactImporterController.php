@@ -3,10 +3,9 @@
 namespace ContinuousNet\PubliPrBundle\Controller;
 
 use ContinuousNet\PubliPrBundle\Entity\Contact;
-
+use ContinuousNet\PubliPrBundle\Entity\ContactGroup;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
-
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Controller\Annotations\RouteResource;
 use FOS\RestBundle\Controller\Annotations\Get;
@@ -39,7 +38,18 @@ class ContactImporterController extends FOSRestController
     public function importAction(Request $request) {
         try {
 
+            $em = $this->getDoctrine()->getManager();
+
             $contactGroupId = $request->request->get('contactGroup');
+            if ($contactGroupId == -1) {
+                $contactGroup = new ContactGroup();
+                $contactGroup->setName($contactGroupId);
+                $contactGroup->setCreatorUser($this->getUser());
+                $em->persist($contactGroup);
+                $em->flush();
+                $contactGroupId = $contactGroup->getId();
+            }
+
             $active = $request->request->get('active');
 
             $firstNameCol = $request->request->get('firstName');
@@ -47,7 +57,6 @@ class ContactImporterController extends FOSRestController
             $emailCol = $request->request->get('email');
             $phoneCol = $request->request->get('phone');
 
-            $em = $this->getDoctrine()->getManager();
             $contactGroup = $em->getRepository('PubliPrBundle:ContactGroup')->find($contactGroupId);
 
             $exist = 0;
@@ -60,7 +69,7 @@ class ContactImporterController extends FOSRestController
                 $info = new \SplFileInfo($originalName);
                 $extension = $info->getExtension();
                 if ($extension) {
-                    if ($extension == 'xls<fx' || $extension == 'xls') {
+                    if ($extension == 'xlsx' || $extension == 'xls') {
                         $directory = $this->get('kernel')->getRootDir() . '/../web/uploads/import/';
                         $name = $this->getUser()->getId().'_'.time().'_'.$fileIndex.'.'.$extension;
                         $file = $uploadedFile->move($directory, $name);
@@ -113,7 +122,7 @@ class ContactImporterController extends FOSRestController
                         }
                         unlink($filePath);
                     } else {
-                        $data = array('status' => true, 'message' => $this->get('translator')->trans('contacts.not_allowed_extension'));
+                        $data = array('status' => false, 'message' => $this->get('translator')->trans('contacts.not_allowed_extension'));
                         return $data;
                     }
                 }

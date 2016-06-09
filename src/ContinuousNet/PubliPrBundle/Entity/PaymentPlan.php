@@ -117,8 +117,7 @@ class PaymentPlan
      * 
      */
     private $status;
-
-
+    
     /**
      * @var \DateTime
      * @access private

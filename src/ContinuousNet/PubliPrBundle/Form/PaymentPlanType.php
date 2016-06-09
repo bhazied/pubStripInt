@@ -49,8 +49,7 @@ class PaymentPlanType extends AbstractType
             ->add('amount', TextType::class)
             ->add('interval', TextType::class)
             ->add('intervalCount', IntegerType::class)
-            ->add('status', ChoiceType::class, array('choices' => array('active' => 'active', 'disabled' => 'disabled', ), 'expanded' => false, 'multiple' => false))
-            ->add('startDate', IntegerType::class)
+            ->add('status', ChoiceType::class, array('choices' => array('Active' => 'Active', 'Disabled' => 'Disabled', ), 'expanded' => false, 'multiple' => false))
         ;
     }
     

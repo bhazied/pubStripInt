@@ -65,6 +65,17 @@
                         </div><!--/row-->
                         <div class="row">
                             <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="userPaymentPlanStripeReference" class="control-label">
+                                        <span translate="content.list.fields.STRIPEREFERENCE">Stripe Reference</span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="userPaymentPlan.stripe_reference" type="text" name="stripeReference" id="userPaymentPlanStripeReference" class="form-control" placeholder="[[ 'content.form.messages.ENTERSTRIPEREFERENCE' | translate ]]" ng-required="false" />
+                                        <i class="ti-marker-alt"></i>
+                                    </span><!--/input-icon-->
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-6">
                                 <div class="form-group" ng-class="{'has-error':userPaymentPlanForm.status.$dirty && userPaymentPlanForm.status.$invalid, 'has-success':userPaymentPlanForm.status.$valid}">
                                     <label for="userPaymentPlanStatus" class="control-label">
                                         <span translate="content.list.fields.STATUS">Status</span>
@@ -86,6 +97,8 @@
                                     <span class="success text-small block" ng-if="userPaymentPlanForm.status.$valid" translate="content.form.messages.OK">Ok!</span>
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group" ng-class="{'has-error':userPaymentPlanForm.closeDate.$dirty && userPaymentPlanForm.closeDate.$invalid, 'has-success':userPaymentPlanForm.closeDate.$valid}">
                                     <label for="userPaymentPlanCloseDate" class="control-label">

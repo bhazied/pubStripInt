@@ -22,6 +22,11 @@
                     </legend>
                     <form name="contactForm" id="contactForm" novalidate ng-submit="submitForm(contactForm)">
                         <div class="row">
+                            <div class="col-md-12">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                            </div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group" ng-class="{'has-error':contactForm.contactGroup.$dirty && contactForm.contactGroup.$invalid, 'has-success':contactForm.contactGroup.$valid}">
                                     <label for="contactContactGroup" class="control-label">
@@ -29,12 +34,16 @@
                                         <span class="symbol required"></span>
                                     </label>
                                     <div class="block" ng-if="contactGroupsLoaded">
-                                    <span class="input-icon">
-                                        <select ng-options="item.id as item.name for item in contactGroups | filter:{ hidden : false }" ng-model="contact.contact_group" name="contactGroup" id="contactContactGroup" class="form-control" ng-required="true">
-                                            <option translate="content.form.messages.SELECTCONTACTGROUP" value="">Select Contact Group</option>
-                                        </select>
-                                        <i class="ti-marker-alt"></i>
-                                    </span><!--/input-icon-->
+                                        <span class="input-icon">
+                                            <select ng-options="item.id as item.name for item in contactGroups | filter:{ hidden : false }" ng-model="contact.contact_group" name="contactGroup" id="contactContactGroup" class="form-control" ng-required="true">
+                                                <option translate="content.form.messages.SELECTCONTACTGROUP" value="">Select Contact Group</option>
+                                            </select>
+                                            <i class="ti-marker-alt"></i>
+                                        </span><!--/input-icon-->
+                                        <span ng-if="contact.contact_group == -1" class="input-icon">
+                                            <input ng-model="contact.contactGroup_name" type="text" name="contactGroupName" id="contactContactGroupName" class="form-control" placeholder="[[ 'content.form.messages.ENTERNAME' | translate ]]" />
+                                            <i class="ti-marker-alt"></i>
+                                        </span><!--/input-icon-->
                                     </div>
                                     <span class="error text-small block" ng-if="contactForm.contactGroup.$dirty && contactForm.contactGroup.$error.required" translate="content.form.messages.CONTACTGROUPREQUIRED">Contact Group is required.</span>
                                     <span class="success text-small block" ng-if="contactForm.contactGroup.$valid" translate="content.form.messages.OK">Ok!</span>

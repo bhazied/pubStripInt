@@ -215,6 +215,7 @@
     },
    "content": {
         "common": {
+            "CREATENEW": "Create New",
             "ENABLEBATCHADD": "Enable batch add",
             "CLEARSORTING": "Clear sorting",
             "CLEARFILTER": "Clear filter",
@@ -244,7 +245,9 @@
             "AREYOUSURE": "Are you sure?",
             "YESDELETE": "Yes, delete!",
             "NOCANCEL": "No cancel!",
+            "CANCELLED": "Operation cancelled!",
             "DELETED": "Deleted!",
+            "YESIHAVE": "Yes, i have!",
             "CLEAR": "Clear",
             "CLOSE": "Close",
             "DATE": "Date",
@@ -527,6 +530,8 @@
             "ADDCONTACT": "Ajouter une nouvelle Contact",
             "NEWCONTACT": "Nonuvelle Contact",
             "CONTACTDETAILS": "Détails Contact",
+            "YOUHAVEPERMISSIONTOSENEMAILSTOTHISCONTACTS": "You have permision to send emails to this Contacts",
+            "CONTACTSNOTDIMPORTED": "Contacts not imported",
             "IMPORTCONTACTS": "Importer Contacts",
             "EXPORTCONTACTS": "Exporter Contacts",
             "EDITCONTACT": "Modifier cette Contact",

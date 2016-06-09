@@ -56,6 +56,17 @@ class UserPaymentPlan
      * @var string
      * @access private
      *
+     * @ORM\Column(name="stripe_reference", type="string", length=50, nullable=true, unique=false)
+     * 
+     * @Expose
+     * 
+     */
+    private $stripeReference;
+
+    /**
+     * @var string
+     * @access private
+     *
      * @ORM\Column(name="status", type="string", nullable=false, unique=false)
      * 
      * @Expose
@@ -144,6 +155,30 @@ class UserPaymentPlan
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set stripeReference
+     *
+     * @access public
+     * @param string $stripeReference
+     * @return UserPaymentPlan
+     */
+    public function setStripeReference($stripeReference = null)
+    {
+        $this->stripeReference = $stripeReference;
+        return $this;
+    }
+
+    /**
+     * Get stripeReference
+     *
+     * @access public
+     * @return string 
+     */
+    public function getStripeReference()
+    {
+        return $this->stripeReference;
     }
 
     /**

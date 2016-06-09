@@ -39,6 +39,10 @@
                                         </select>
                                         <i class="ti-marker-alt"></i>
                                     </span><!--/input-icon-->
+                                    <span ng-if="contact.contact_group == -1" class="input-icon">
+                                        <input ng-model="contact.contactGroup_name" type="text" name="contactGroupName" id="contactContactGroupName" class="form-control" placeholder="[[ 'content.form.messages.ENTERNAME' | translate ]]" />
+                                        <i class="ti-marker-alt"></i>
+                                    </span><!--/input-icon-->
                                 </div>
                                     <span class="error text-small block" ng-if="contactForm.contactGroup.$dirty && contactForm.contactGroup.$error.required" translate="content.form.messages.CONTACTGROUPREQUIRED">Contact Group is required.</span>
                                     <span class="success text-small block" ng-if="contactForm.contactGroup.$valid" translate="content.form.messages.OK">Ok!</span>

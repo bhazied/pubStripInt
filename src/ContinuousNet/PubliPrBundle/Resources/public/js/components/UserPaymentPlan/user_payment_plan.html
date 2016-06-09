@@ -55,6 +55,12 @@
                                 <td><a ui-sref="app.billing.paymentplansdetails({id: userPaymentPlan.payment_plan.id})">[[ userPaymentPlan.payment_plan.name ]]</a></span></td>
                             </tr>
                             <tr>
+                                <td><span translate="content.list.fields.STRIPEREFERENCE">Stripe Reference</span></td>
+                                <td>
+                                    <div ng-bind-html="userPaymentPlan.stripe_reference"></div>
+                                </td>
+                            </tr>
+                            <tr>
                                 <td><span translate="content.list.fields.STATUS">Status</span></td>
                                 <td>
                                     <span my-enum="[[ userPaymentPlan.status ]]" my-enum-list="[[ statuses ]]"></span>

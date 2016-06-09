@@ -4,7 +4,6 @@ namespace ContinuousNet\PubliPrBundle\Controller;
 
 use ContinuousNet\PubliPrBundle\Entity\Company;
 use ContinuousNet\PubliPrBundle\Form\CompanyType;
-
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Controller\Annotations\RouteResource;
 use FOS\RestBundle\Controller\Annotations\View;
@@ -18,7 +17,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Finder\Finder;;
 use Symfony\Component\Finder\SplFileInfo;
-
 use Voryx\RESTGeneratorBundle\Controller\VoryxController;
 
 /**
@@ -140,12 +138,12 @@ class CompanyRESTController extends BaseRESTController
      */
     public function postAction(Request $request)
     {
+        $em = $this->getDoctrine()->getManager();
         $entity = new Company();
         $form = $this->createForm(new CompanyType(), $entity, array('method' => $request->getMethod()));
         $this->removeExtraFields($request, $form);
         $form->handleRequest($request);
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
             $entity->setCreatorUser($this->getUser());
             $em->persist($entity);
             $em->flush();

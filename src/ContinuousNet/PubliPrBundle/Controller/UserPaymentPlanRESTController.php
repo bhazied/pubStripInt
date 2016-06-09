@@ -4,7 +4,6 @@ namespace ContinuousNet\PubliPrBundle\Controller;
 
 use ContinuousNet\PubliPrBundle\Entity\UserPaymentPlan;
 use ContinuousNet\PubliPrBundle\Form\UserPaymentPlanType;
-
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Controller\Annotations\RouteResource;
 use FOS\RestBundle\Controller\Annotations\View;
@@ -18,7 +17,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Finder\Finder;;
 use Symfony\Component\Finder\SplFileInfo;
-
 use Voryx\RESTGeneratorBundle\Controller\VoryxController;
 
 /**
@@ -87,7 +85,7 @@ class UserPaymentPlanRESTController extends BaseRESTController
             $qb->from('PubliPrBundle:UserPaymentPlan', 'upp_');
             $qb->leftJoin('ContinuousNet\PubliPrBundle\Entity\User', 'user', \Doctrine\ORM\Query\Expr\Join::WITH, 'upp_.user = user.id');
             $qb->leftJoin('ContinuousNet\PubliPrBundle\Entity\PaymentPlan', 'payment_plan', \Doctrine\ORM\Query\Expr\Join::WITH, 'upp_.paymentPlan = payment_plan.id');
-            $textFields = array('');
+            $textFields = array('userPaymentPlan.stripeReference');
             foreach ($filters as $field => $value) {
                 $_field = str_replace('userPaymentPlan.', 'upp_.', $field);
                 $key = str_replace('.', '', $field);
@@ -132,12 +130,12 @@ class UserPaymentPlanRESTController extends BaseRESTController
      */
     public function postAction(Request $request)
     {
+        $em = $this->getDoctrine()->getManager();
         $entity = new UserPaymentPlan();
         $form = $this->createForm(new UserPaymentPlanType(), $entity, array('method' => $request->getMethod()));
         $this->removeExtraFields($request, $form);
         $form->handleRequest($request);
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
             $entity->setCreatorUser($this->getUser());
             $em->persist($entity);
             $em->flush();
