@@ -6,9 +6,11 @@ use ContinuousNet\PubliPrBundle\Entity\Email;
 use ContinuousNet\PubliPrBundle\Entity\EmailCampaign;
 use ContinuousNet\PubliPrBundle\Entity\Newsroom;
 use ContinuousNet\PubliPrBundle\Entity\Payment;
+use ContinuousNet\PubliPrBundle\Entity\PaymentPlan;
 use ContinuousNet\PubliPrBundle\Entity\PressRelease;
 
 use ContinuousNet\PubliPrBundle\Entity\Product;
+use ContinuousNet\PubliPrBundle\Entity\UserPaymentPlan;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query;
 use Symfony\Component\Config\Definition\Exception\Exception;
@@ -49,29 +51,82 @@ class SubscriptionApiController extends FOSRestController
                 'productName' => '',
                 'startDate' => '',
                 'endDate' => '',
-                'validate' => false
+                'normal_payment' => false,
+                'recurrent_payment' => false
             );
-            $currentDate = new \DateTime('now');
-            $em = $this->getDoctrine()->getManager();
-            $qb = $em->createQueryBuilder();
-            $qb->select('p_');
-            $qb->from('PubliPrBundle:Payment', 'p_');
-            $qb->leftJoin('ContinuousNet\PubliPrBundle\Entity\Product', 'product', \Doctrine\ORM\Query\Expr\Join::WITH, 'p_.product = product.id');
-            $qb->leftJoin('\ContinuousNet\PubliPrBundle\Entity\User', 'user', \Doctrine\ORM\Query\Expr\Join::WITH, 'p_.creatorUser=user.id');
-            $qb->andWhere('p_.creatorUser=:creatorUser')->setParameter('creatorUser', $this->getUser()->getId());
-            $qb->andWhere(':currentDate BETWEEN p_.startDate AND p_.endDate')->setParameter('currentDate', $currentDate);
-            $qb->andWhere('p_.isValid = :valid')->setParameter('valid', true);
-            $payment = $qb->getQuery()->getOneOrNullResult();
+            $payment = $this->getPayment();
             if (!is_null($payment)) {
-                $data['validate'] = true;
+                $data['normal_payment'] = true;
                 $data['endDate'] = $payment->getEndDate();
                 $data['startDate'] = $payment->getStartDate();
                 $data['productName'] = $payment->getProduct()->getName();
             }
+            $recurrent = $this->getRecurrent();
+            $now = new \DateTime('now');
+            if(!is_null($recurrent))
+            {
+                if($recurrent->getStatus() == 'Disabled' && ($recurrent->getCloseDate() < $now))
+                {
+                    $data['recurrent_payment'] = false;
+                }
+                else {
+                    $data['recurrent_payment'] = true;
+                    if ($recurrent->getPaymentPlan()->getInterval() == 'year') {
+                        $data['start_date'] = $recurrent->getCreatedAt();
+                        $subscribeDay = $recurrent->getCreatedAt()->format('d');
+                        $currenMonth = $recurrent->getCreatedAt()->format('m');
+                        $currentYear = $now->format('Y');
+                        $datereference = new \DateTime($currentYear . '-' . $currenMonth . '-' . $subscribeDay);
+                        $data['end_date'] = $datereference->add(new \DateInterval('P' . $recurrent->getPaymentPlan()->getIntervalCount() . ucfirst(substr($recurrent->getPaymentPlan()->getInterval(), 0, 1))));
+                    } else {
+                        $data['start_date'] = $recurrent->getCreatedAt();
+                        $subscribeDay = $recurrent->getCreatedAt()->format('d');
+                        $currenMonth = $now->format('m');
+                        $currentYear = $now->format('Y');
+                        $datereference = new \DateTime($currentYear . '-' . $currenMonth . '-' . $subscribeDay);
+                        $data['end_date'] = $datereference->add(new \DateInterval('P' . $recurrent->getPaymentPlan()->getIntervalCount() . ucfirst(substr($recurrent->getPaymentPlan()->getInterval(), 0, 1))));
+                    }
+                    if ($recurrent->getStatus() == 'Disabled') {
+                        $data['end_date'] = $recurrent->getCloseDate();
+                    }
+                }
+
+            }
+
             return $data;
         } catch (\Exception $e) {
             return FOSView::create($e->getMessage(), Codes::HTTP_INTERNAL_SERVER_ERROR);
         }
+    }
+
+    private function getPayment()
+    {
+        $currentDate = new \DateTime('now');
+        $em = $this->getDoctrine()->getManager();
+        $qb = $em->createQueryBuilder();
+        $qb->select('p_');
+        $qb->from('PubliPrBundle:Payment', 'p_');
+        $qb->leftJoin('ContinuousNet\PubliPrBundle\Entity\Product', 'product', \Doctrine\ORM\Query\Expr\Join::WITH, 'p_.product = product.id');
+        $qb->leftJoin('\ContinuousNet\PubliPrBundle\Entity\User', 'user', \Doctrine\ORM\Query\Expr\Join::WITH, 'p_.creatorUser=user.id');
+        $qb->andWhere('p_.creatorUser=:creatorUser')->setParameter('creatorUser', $this->getUser()->getId());
+        $qb->andWhere(':currentDate BETWEEN p_.startDate AND p_.endDate')->setParameter('currentDate', $currentDate);
+        $qb->andWhere('p_.isValid = :valid')->setParameter('valid', true);
+        $payment = $qb->getQuery()->getOneOrNullResult();
+        return $payment;
+    }
+
+    private function getRecurrent()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $qb = $em->createQueryBuilder();
+        $qb->select('p_');
+        $qb->from('PubliPrBundle:UserPaymentPlan', 'p_');
+        $qb->leftJoin('ContinuousNet\PubliPrBundle\Entity\PaymentPlan', 'paymentPlan', \Doctrine\ORM\Query\Expr\Join::WITH, 'p_.paymentPlan = paymentPlan.id');
+        $qb->leftJoin('\ContinuousNet\PubliPrBundle\Entity\User', 'user', \Doctrine\ORM\Query\Expr\Join::WITH, 'p_.user=user.id');
+        $qb->andWhere('p_.user=:user')->setParameter('user', $this->getUser()->getId());
+        $qb->andWhere('paymentPlan.status = :status')->setParameter('status', 'Active');
+        $paymentPlan = $qb->getQuery()->getOneOrNullResult();
+        return $paymentPlan;
     }
 
     /**
@@ -233,6 +288,156 @@ class SubscriptionApiController extends FOSRestController
         }
     }
 
+    /**
+     * @POST("/SendRecurrent")
+     * @param $request
+     * @View(serializerEnableMaxDepthChecks=true)
+     */
+    public function sendRecurrentAction(Request $request){
+        try{
+            $response = array(
+                'hasError' => false,
+                'message' => ''
+            );
+            $em = $this->getDoctrine()->getManager();
+            $paymentPlan = $em->getRepository('PubliPrBundle:PaymentPlan')->find($request->request->get('interval'));
+            Stripe\Stripe::setApiKey($this->getStripeApiKey());
+            if( is_null($this->getUser()->getStripeReference()))
+            {
+                //createCustomer througth stripe
+                $customerStripe =Stripe\Customer::create(array(
+                    'description' => 'customer for '.$this->getUser()->getEmail(),
+                    'email' => $this->getUser()->getEmail(),
+                    'plan' => $paymentPlan->getStripeReference(),
+                    'source' => array(
+                        'object' => 'card',
+                        'exp_month' => $request->request->get('cardMonthExpr'),
+                        'exp_year' => $request->request->get('cardYearExpr'),
+                        'number' => $request->request->get('cardNumber'),
+                        'cvc' => $request->request->get('cvc'),
+                        'name' => 'Card for User '. $this->getUser()->getName()
+                    )
+                ));
+                if(!is_string($customerStripe)){
+                    $this->getUser()->setStripereference($customerStripe->id);
+                    $em->persist($this->getUser());
+                    $userPaymentPlan = $this->addUserPaymentPlan($paymentPlan, $customerStripe->subscriptions->data[0]->id, $em);
+                    $em->persist($userPaymentPlan);
+                    $em->flush();
+                    //$response['message'] = $this->get('translator')->trans('recurrent.payment.success');
+                    $response['message'] = "Recurrent payment success";
+                    $this->sendConfirmationRecurrent($userPaymentPlan);
+                }
+                else
+                {
+                    $response['message'] = $customerStripe;
+                    $response['hasError'] = true;
+                }
+            }
+            else
+            {
+                //user created in stripe test
+                //check stripe subscription
+                $subscription = $this->checkCustomerSubStripe($this->getUser()->getStripereference());
+                if($subscription->subscriptions->total_count == 0)
+                {
+                    $subscription = Stripe\Subscription::create(array(
+                        'customer' => $this->getUser()->getStripereference(),
+                        'plan' => $paymentPlan->getStripeReference(),
+                        'source' => array(
+                            'object' => 'card',
+                            'exp_month' => $request->request->get('cardMonthExpr'),
+                            'exp_year' => $request->request->get('cardYearExpr'),
+                            'number' => $request->request->get('cardNumber'),
+                            'cvc' => $request->request->get('cvc'),
+                            'name' => 'Card for '. $this->getUser()->getName()
+                        )
+                    ));
+                    if(!is_string($subscription))
+                    {
+                        $userPaymentPlan = $this->addUserPaymentPlan($paymentPlan, $subscription->id, $em);
+                        $em->persist($userPaymentPlan);
+                        $em->flush();
+                        $this->sendConfirmationRecurrent($userPaymentPlan);
+                        //$response['message'] = $this->get('translator')->trans('recurrent.payment.success');
+                        $response['message'] = "Recurrent payment success";
+                    }
+                    else
+                    {
+                        $response['message'] = $subscription;
+                        $response['hasError'] = true;
+                    }
+                }
+                else
+                {
+                    $userPaymentPlan = $this->addUserPaymentPlan($paymentPlan, $subscription->subscriptions->data[0]->id, $em);
+                    $em->persist($userPaymentPlan);
+                    $em->flush();
+                    $this->sendConfirmationRecurrent($userPaymentPlan);
+                    //$response['message'] = $this->get('translator')->trans('recurrent.payment.success');
+                    $response['message'] = "Recurrent payment success";
+                }
+            }
+            return $response;
+        }
+        catch (\Exception $e)
+        {
+            return FOSView::create($e->getMessage(), Codes::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
+
+    /**
+     * @POST("/Unsubscribe")
+     * @param $request
+     * @View(serializerEnableMaxDepthChecks=true)
+     */
+    public function unsubscribeAction(Request $request)
+    {
+        try
+        {
+            $data= array(
+                'hasError' => false,
+                'message' => ''
+            );
+            $em = $this->getDoctrine()->getManager();
+            $userPaymentPlan = $em->getRepository('PubliPrBundle:UserPaymentPlan')->find($request->request->get('id'));
+            Stripe\Stripe::setApiKey($this->getStripeApiKey());
+            $subscribtion = Stripe\Subscription::retrieve($request->request->get('stripeReference'));
+            $result = $subscribtion->cancel();
+            $em = $this->getDoctrine()->getManager();
+            $userPaymentPlan = $em->getRepository('PubliPrBundle:UserPaymentPlan')->find($request->request->get('id'));
+            $userPaymentPlan->setCloseDate(new \DateTime('now'));
+            $userPaymentPlan->getUser()->setStripeReference(null);
+            $userPaymentPlan->setStatus("Disabled");
+            $em->flush();
+
+        }
+        catch (\Exception $e)
+        {
+            return $data['message'] = $e->getMessage();
+        }
+    }
+
+
+    private function addUserPaymentPlan(PaymentPlan $paymentPlan, $subId, EntityManager $em)
+    {
+        $userPaymentPlan = new UserPaymentPlan();
+        $userPaymentPlan->setUser($this->getUser());
+        $userPaymentPlan->setPaymentPlan($paymentPlan);
+        $userPaymentPlan->setStatus("Active");
+        $userPaymentPlan->setStripereference($subId);
+        return $userPaymentPlan;
+    }
+
+    private function checkCustomerSubStripe($cusStripeReference)
+    {
+
+        Stripe\Stripe::setApiKey($this->getStripeApiKey());
+        $customer = Stripe\Customer::retrieve($cusStripeReference);
+        return $customer;
+    }
 
     /**
      * @param $data
@@ -365,6 +570,8 @@ class SubscriptionApiController extends FOSRestController
         $baseUrl = $this->container->get('request_stack')->getCurrentRequest()->getScheme().'://'.$this->container->get('request_stack')->getCurrentRequest()->getHttpHost().'/';
         try
         {
+            //$id = !is_null($payment->getToken())  ? $payment->getToken() : $payment->getStripeReference();
+            $id = $payment->getToken();
             $message = \Swift_Message::newInstance()
                 ->setSubject('PubliPr Payment')
                 ->setFrom($this->container->getParameter('publipr.contact.email'))
@@ -377,7 +584,7 @@ class SubscriptionApiController extends FOSRestController
                          array(
                             'user_name' => $payment->getCreatorUser()->getFirstName() . ' ' . $payment->getCreatorUser()->getLastName(),
                             'created_at' => $payment->getCreatedAt()->format('F j, Y'),
-                             'order_id' => $payment->getToken(),
+                             'order_id' => $id,
                              'link' => $baseUrl.'#/app/billing/invoice/'.$payment->getId(),
                         )
                     ),
@@ -388,6 +595,39 @@ class SubscriptionApiController extends FOSRestController
         catch(\Exception $e)
         {
            return false;
+        }
+    }
+
+    private function  sendConfirmationRecurrent($paymentPlan)
+    {
+        $baseUrl = $this->container->get('request_stack')->getCurrentRequest()->getScheme().'://'.$this->container->get('request_stack')->getCurrentRequest()->getHttpHost().'/';
+        try
+        {
+            //$id = !is_null($payment->getToken())  ? $payment->getToken() : $payment->getStripeReference();
+            $id = $paymentPlan->getStripereference();
+            $message = \Swift_Message::newInstance()
+                ->setSubject('PubliPr Payment')
+                ->setFrom($this->container->getParameter('publipr.contact.email'))
+                ->setFrom("contact@continuousnet.com")
+                ->setTo($paymentPlan->getUser()->getEmail())
+                ->setContentType('text/html')
+                ->setBody(
+                    $this->renderView(
+                        'PubliPrBundle:Emails:invoice.html.twig',
+                        array(
+                            'user_name' => $paymentPlan->getUser()->getFirstName() . ' ' . $paymentPlan->getUser()->getLastName(),
+                            'created_at' => $paymentPlan->getCreatedAt()->format('F j, Y'),
+                            'order_id' => $id,
+                            'link' => $baseUrl.'#/app/billing/invoice/'.$paymentPlan->getId(),
+                        )
+                    ),
+                    'text/html'
+                );
+            return $this->get('mailer')->send($message);
+        }
+        catch(\Exception $e)
+        {
+            return false;
         }
     }
 

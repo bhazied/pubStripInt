@@ -22,6 +22,7 @@ use FOS\UserBundle\Model\GroupInterface;
  * PHP version 5.4.4
  * 
  * @category   Doctrine 2 Entity
+ * @category   Doctrine 2 Entity
  * @package    ContinuousNet\PubliPrBundle\Entity
  * @author     Sahbi KHALFALLAH <sahbi.khalfallah@continuousnet.com>
  * @copyright  2016 CONTINUOUS NET

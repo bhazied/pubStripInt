@@ -107,6 +107,7 @@ class UserPaymentPlan
      */
     private $closeDate;
 
+
     /**
      * @var \ContinuousNet\PubliPrBundle\Entity\User
      * @access private
@@ -276,6 +277,7 @@ class UserPaymentPlan
     {
         return $this->closeDate;
     }
+    
 
     /**
      * Set user

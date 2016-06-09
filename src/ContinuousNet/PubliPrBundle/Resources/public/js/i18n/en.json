@@ -194,6 +194,10 @@
             "NOVEMBER": "November",
             "DECEMBER": "December"
         },
+        "RECURRENTPAYMENT": "Recurring payment",
+        "RECURRENTPAYMENTDESCRIPTION": "This is a simple description for the recurring patmentmethod",
+        "RECURRENTPAYMENTAMOUNT": "By choice",
+        "SUCCESS": "SUCCESS",
         "invoice" : {
             "ORDERDATE": "Order date",
             "DESCRIPTION" : "Description",
@@ -281,7 +285,8 @@
             "REMOVESEGMENTS": "Remove segments",
             "SEGMENTSREMOVED": "Segments removed",
             "SEGMENTSNOTREMOVED": "Segments not removed",
-            "COMINGSOON": "Coming Soon"
+            "COMINGSOON": "Coming Soon",
+            "UNSUBSCRIBED": "Unsubscribe"
         },
         "form": {
             "messages": {
@@ -506,7 +511,15 @@
                 "SELECTPAYMENTPLAN": "Select Payment Plan",
                 "PAYMENTPLANREQUIRED": "The Payment Plan is required",
                 "SELECTCLOSEDATE": "Select Close Date",
-                "CLOSEDATEREQUIRED": "The Close Date is required"
+                "CLOSEDATEREQUIRED": "The Close Date is required",
+                "CARDNUMBER" : "Card Number",
+                "CARDMONTHEXPR" : "Expiration Month",
+                "CARDYEAREXPR" : "Expiration Year",
+                "CARDCCV" : "CCV",
+                "CARDNUMBERREQUIRED" : "Card number is required",
+                "CARDMONTHEXPRREQUIRED": "Expiry month is required",
+                "CARDYEAREXPRREQUIRED": "Expiry year is required",
+                "CARDCCVREQUIRED" : "Ccv is required"
             }
         },
         "list": {
@@ -877,6 +890,11 @@
             "USERPAYMENTPLANDELETED": "User Payment Plan Deleted",
             "USERPAYMENTPLANNOTDELETED": "User Payment Plan Not Deleted",
             "BACKUSERPAYMENTPLANS": "Back To User Payment Plans List",
+            "YOURAREUNSUBSCRIBEDFROMRECURRENTPAYMENT": "You are unsubscribed  from recurring payment",
+            "RECURRENTUNSUBSCRIBED": "Unsubscribed from service",
+            "RECURRENTNOTUNSUBSCRIBED": "Not unsubscribed from service",
+            "RECURRENT" : "Recurring payment",
+
             "fields": {
                 "CARDNUMBER" : "Card Number",
                 "CARDMONTHEXPR" : "Expiration Month",
@@ -1058,6 +1076,7 @@
                 "USER": "User",
                 "PAYMENTPLAN": "Payment Plan",
                 "CLOSEDATE": "Close Date",
+                "USERPLANINTERVAL": "Recurrence interval",
                 "blocktypes": {
                     "TEXT": "Text",
                     "BOXEDTEXT": "Boxed Text",

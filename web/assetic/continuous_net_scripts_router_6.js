@@ -831,6 +831,14 @@ function ($stateProvider) {
             label:'content.list.PURCHASE'
         },
         resolve: loadSequence('PurchaseCtrl', 'paymentService', 'PurchaseService')
+    }).state('app.billing.recurrent', {
+        url: '/recurrent',
+        templateUrl: '/bundles/publipr/js/components/Payment/recurrent_payment.html',
+        title: 'content.list.RECURRENT',
+        ncyBreadcrumb: {
+            label:'content.list.RECURRENT'
+        },
+        resolve: loadSequence('userPaymentPlanService', 'recurrentCtrl', 'paymentPlanService', 'PurchaseService')
     }).state('app.billing.purchasenew',{
         url: '/purchase/new',
         templateUrl: '/bundles/publipr/js/components/Payment/purchase_form.html',
@@ -886,7 +894,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.USERPAYMENTPLANS'
         },
-        resolve: loadSequence('ngTable', 'UserPaymentPlansCtrl', 'userPaymentPlanService', 'userService', 'paymentPlanService')
+        resolve: loadSequence('ngTable', 'UserPaymentPlansCtrl', 'userPaymentPlanService', 'userService', 'paymentPlanService', 'PurchaseService')
     }).state('app.billing.userpaymentplansnew', {
         url: '/user-payment-plans/new',
         templateUrl: '/bundles/publipr/js/components/UserPaymentPlan/user_payment_plan_form.html',
