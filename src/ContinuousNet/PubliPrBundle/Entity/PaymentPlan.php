@@ -133,7 +133,7 @@ class PaymentPlan
      * @var \DateTime
      * @access private
      *
-     * @ORM\Column(name="modified_at", type="datetime", nullable=false, unique=false)
+     * @ORM\Column(name="modified_at", type="datetime", nullable=true, unique=false)
      * 
      * @Expose
      * 
@@ -365,7 +365,7 @@ class PaymentPlan
      * @param \DateTime $modifiedAt
      * @return PaymentPlan
      */
-    public function setModifiedAt(\DateTime $modifiedAt)
+    public function setModifiedAt(\DateTime $modifiedAt = null)
     {
         $this->modifiedAt = $modifiedAt;
         return $this;

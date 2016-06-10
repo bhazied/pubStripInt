@@ -47,7 +47,7 @@ class UserPaymentPlanType extends AbstractType
             ->add('user', EntityType::class, array('expanded' => false, 'multiple' => false, 'class' => 'PubliPrBundle:User', 'choice_label' => 'username'))
             ->add('paymentPlan', EntityType::class, array('expanded' => false, 'multiple' => false, 'class' => 'PubliPrBundle:PaymentPlan', 'choice_label' => 'name'))
             ->add('stripeReference', TextType::class)
-            ->add('status', ChoiceType::class, array('choices' => array('active' => 'active', 'dsable' => 'dsable', ), 'expanded' => false, 'multiple' => false))
+            ->add('status', ChoiceType::class, array('choices' => array('Active' => 'Active', 'Disabled' => 'Disabled', ), 'expanded' => false, 'multiple' => false))
             ->add('closeDate', DateTimeType::class, array('widget' => 'single_text', 'input' => 'datetime'))
         ;
     }

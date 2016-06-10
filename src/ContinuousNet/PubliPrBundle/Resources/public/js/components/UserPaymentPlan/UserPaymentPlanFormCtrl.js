@@ -24,12 +24,12 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
     };
 
     $scope.statuses = [{
-        id: 'active',
+        id: 'Active',
         title: $filter('translate')('content.list.fields.statuses.ACTIVE'),
         css: 'primary'
     }, {
-        id: 'dsable',
-        title: $filter('translate')('content.list.fields.statuses.DSABLE'),
+        id: 'Disabled',
+        title: $filter('translate')('content.list.fields.statuses.DISABLED'),
         css: 'success'
     }];
 
@@ -163,7 +163,7 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
             });
         });
     } else {
-        $scope.userPaymentPlan = {id: 0, status: 'active', close_date: new Date()};
+        $scope.userPaymentPlan = {id: 0, status: 'Active', close_date: new Date()};
 
     }
 
