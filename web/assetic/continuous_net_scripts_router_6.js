@@ -879,25 +879,7 @@ function ($stateProvider) {
             label: 'content.list.PAYMENTPLANDETAILS'
         },
         resolve: loadSequence('PaymentPlanCtrl', 'paymentPlanService')
-    })    }).state('app.billing.invoice', {
-        url : '/invoice/:id',
-        templateUrl: '/bundles/publipr/js/components/Invoice/invoice.html',
-        title: 'content.list.INVOICE',
-        ncyBreadcrumb: {
-            label:'content.list.INVOICE'
-        },
-        resolve: loadSequence('InvoiceCtrl', 'paymentService', 'InvoiceDownloadService', 'InvoiceService')
-    })
-    }).state('app.billing.unsubscribe', {
-        url : '/unsubscribe/:id',
-        templateUrl: '/bundles/publipr/js/components/PaymentPlan/unsubscribe.html',
-        title: 'content.list.UNSUBSCRIBE',
-        ncyBreadcrumb: {
-            label:'content.list.UNSUBSCRIBE'
-        },
-        resolve: loadSequence('ngTable', 'UserPaymentPlansCtrl', 'userPaymentPlanService', 'userService', 'paymentPlanService', 'PurchaseService')
-    })
-.state('app.billing.userpaymentplans', {
+    }).state('app.billing.userpaymentplans', {
         url: '/user-payment-plans',
         templateUrl: '/bundles/publipr/js/components/UserPaymentPlan/user_payment_plans.html',
         title: 'content.list.USERPAYMENTPLANS',
@@ -928,7 +910,25 @@ function ($stateProvider) {
             label: 'content.list.USERPAYMENTPLANDETAILS'
         },
         resolve: loadSequence('UserPaymentPlanCtrl', 'userPaymentPlanService')
-    }).state('app.accesscontrol', {
+    })    }).state('app.billing.invoice', {
+        url : '/invoice/:id',
+        templateUrl: '/bundles/publipr/js/components/Invoice/invoice.html',
+        title: 'content.list.INVOICE',
+        ncyBreadcrumb: {
+            label:'content.list.INVOICE'
+        },
+        resolve: loadSequence('InvoiceCtrl', 'paymentService', 'InvoiceDownloadService', 'InvoiceService')
+    })
+    }).state('app.billing.unsubscribe', {
+        url : '/unsubscribe/:id',
+        templateUrl: '/bundles/publipr/js/components/UserPaymentPlan/unsubscribe.html',
+        title: 'content.list.UNSUBSCRIBE',
+        ncyBreadcrumb: {
+            label:'content.list.UNSUBSCRIBE'
+        },
+        resolve: loadSequence('ngTable', 'UserPaymentPlansCtrl', 'userPaymentPlanService', 'userService', 'paymentPlanService', 'PurchaseService')
+    })
+.state('app.accesscontrol', {
         url: '/access-control',
         template: '<div ui-view class="fade-in-up"></div>',
         title: 'sidebar.nav.accesscontrol.MAIN',
