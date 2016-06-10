@@ -21,3 +21,6 @@ ALTER TABLE `payment_plan` CHANGE `status` `status` ENUM( 'Active', 'Disabled' )
 
 ALTER TABLE  `payment_plan` CHANGE  `modifier_user_id`  `modifier_user_id` MEDIUMINT( 8 ) UNSIGNED NULL COMMENT  '{"prefix":"modifier_"}',
 CHANGE  `modified_at`  `modified_at` DATETIME NULL ;
+
+
+INSERT INTO `payment_plan` (`id`, `name`, `stripe_reference`, `amount`, `interval`, `interval_count`, `status`, `creator_user_id`, `created_at`, `modifier_user_id`, `modified_at`) VALUES (NULL, 'monthly recurrent', 'every-month', '25', 'month', '1', 'Active', '11', '2016-06-09 00:00:00', NULL, NULL), (NULL, 'yearly recurrent', 'every-year', '250', 'year', '1', 'Disabled', '11', '2016-06-09 00:00:00', NULL, NULL);
