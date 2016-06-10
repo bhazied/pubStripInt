@@ -38,8 +38,6 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $q, $interpolate
             $scope.paymentPlan = data;
         });
     }
-    
-    
 
 }]);
 
