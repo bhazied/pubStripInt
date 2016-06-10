@@ -11,7 +11,7 @@
             <!--<button type="button" class="btn btn-danger btn-block text-left no-print mb15" onclick="window.print();">
                 <i class="ti-printer mr5"></i>Print
             </button> -->
-            <button type="button" class="btn btn-info btn-block text-left no-print"  ng-click="exportInvoice(invoice.invoice.id)">
+            <button type="button" class="btn btn-info btn-block text-left no-print"  ng-click="exportInvoice(invoice.id)">
                 <i class="fa fa-spinner fa-spin" ng-if="disableExport"></i><i class="ti-download" ng-if="!disableExport"></i> <span translate="payment.invoice.EXPORTTOPDF">Export to PDF</span>
             </button>
         </div>

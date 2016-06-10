@@ -49,7 +49,14 @@ class InvoiceRestController extends FOSRestController
         try {
             $pdfFile = new Pdf();
             $pdfFile->binary =  $this->getParameter('wkpdftohtml_binary');
-            $fileContent = $this->persisteInvoice($request->request->get('paymentId'));
+            if($request->request->get('isNormal') == 1)
+            {
+                $fileContent = $this->persisteInvoiceFromProduct($request->request->get('paymentId'));
+            }
+            else
+            {
+                $fileContent = $this->persisteInvoiceFromRecurrent($request->request->get('paymentId'));
+            }
             $pdfFile->addPage($fileContent);
             $pdfFile->send('invoice_'.$this->getUser()->getFirstName().'_'.$this->getUser()->getLastName().'.pdf');
         } catch (\Exception $e) {
@@ -57,7 +64,7 @@ class InvoiceRestController extends FOSRestController
         }
     }
 
-    private function persisteInvoice($paymentId)
+    private function persisteInvoiceFromProduct($paymentId)
     {
         $fileContent = '';
         try
@@ -99,46 +106,141 @@ class InvoiceRestController extends FOSRestController
         }
     }
 
+    private function persisteInvoiceFromRecurrent($paymentPlanId)
+    {
+        $fileContent = '';
+        try
+        {
+            $em = $this->getDoctrine()->getManager();
+            $qb = $em->createQueryBuilder();
+            $qb->from('PubliPrBundle:UserPaymentPlan', 'p_');
+            $qb->leftJoin('ContinuousNet\PubliPrBundle\Entity\User', 'user', \Doctrine\ORM\Query\Expr\Join::WITH, 'p_.user = user.id');
+            $qb->leftJoin('ContinuousNet\PubliPrBundle\Entity\Country', 'Country', \Doctrine\ORM\Query\Expr\Join::WITH, 'user.country = Country.id');
+            $qb->where('p_.id = :id')->setParameter('id', $paymentPlanId);
+            $qb->select('p_');
+            $result = $qb->getQuery()->getSingleResult();
+            $price_vat = ($result->getPaymentPlan()->getAmount() * $this->container->getParameter('publipr.settings.default_vat')) / 100;
+            $price = $result->getPaymentPlan()->getAmount() - $price_vat;
+            $templateContent = file_get_contents('invoice.html');
+            $fileContent = str_replace('%product_name%', $result->getPaymentPlan()->getName(), $templateContent);
+            $fileContent = str_replace('%invoice_number%', $result->getId().'/'.$result->getUser()->getId(), $fileContent);
+            $fileContent = str_replace('%created_at%', $result->getCreatedAt()->format('F j, Y'), $fileContent);
+            $fileContent = str_replace('%due_at%', $result->getCreatedAt()->format('F j, Y'), $fileContent);
+            $fileContent = str_replace('%payment_method%', 'Stripe Api', $fileContent);
+            $fileContent = str_replace('%product_name%', $result->getPaymentPlan()->getName(), $fileContent);
+            $fileContent = str_replace('%description%', '', $fileContent);
+            $fileContent = str_replace('%price%', $price, $fileContent);
+            $fileContent = str_replace('%total%', $result->getPaymentPlan()->getAmount(), $fileContent);
+            $fileContent = str_replace('%user_name%', $result->getUser()->getName(), $fileContent);
+            $fileContent = str_replace('%zip_code%', $result->getUser()->getZipCode(), $fileContent);
+            $fileContent = str_replace('%address%', $result->getUser()->getAddress(), $fileContent);
+            $fileContent = str_replace('%city%', $result->getUser()->getCity(), $fileContent);
+            $fileContent = str_replace('%country%', $result->getUser()->getCountry()->getName(), $fileContent);
+            $fileContent = str_replace('%stripe_reference%', $result->getStripeReference(), $fileContent);
+            $fileContent = str_replace('%vat%', $this->container->getParameter('publipr.settings.default_vat'), $fileContent);
+            $fileContent = str_replace('%price_vat%', $price_vat, $fileContent);
+            $fileContent = str_replace('%logo%', $this->container->get('request_stack')->getCurrentRequest()->getUriForPath('/app/images/logo-dark.png'), $fileContent);
+            return $fileContent;
+        }
+        catch(\Exception $e)
+        {
+            return $e;
+        }
+    }
+
     /**
-     * @Get("/getInvoice/{paymentId}")
+     * @Get("/getInvoice/{paymentId}/{isNormal}")
      * @param $paymentId
      * @View(serializerEnableMaxDepthChecks=true)
      */
-    public function invoiceInfosAction($paymentId)
+    public function invoiceInfosAction($paymentId, $isNormal)
     {
         try {
-            $default_vat = $this->container->getParameter('publipr.settings.default_vat');
-            $data = array(
-                'invoice' => array(),
-                'total' => '',
-                'vat' => $default_vat,
-                'price_vat' => ''
-            );
 
-            $em = $this->getDoctrine()->getManager();
-            $qb = $em->createQueryBuilder();
-            $qb->from('PubliPrBundle:Payment', 'p_');
-            $qb->leftJoin('ContinuousNet\PubliPrBundle\Entity\User', 'creatorUser', \Doctrine\ORM\Query\Expr\Join::WITH, 'p_.creatorUser = creatorUser.id');
-            $qb->leftJoin('ContinuousNet\PubliPrBundle\Entity\Country', 'Country', \Doctrine\ORM\Query\Expr\Join::WITH, 'creatorUser.country = Country.id');
-            $qb->where('p_.id = :id')->setParameter('id', $paymentId);
-            $qb->select('p_');
-            $result = $qb->getQuery()->getSingleResult();
-
-            if ($result) {
-                $price_vat = ($result->getProduct()->getPrice() * $default_vat) / 100;
-                $price = $result->getProduct()->getPrice() - $price_vat;
-                $result->setAmount($price);
-                $data['country'] = $result->getCreatorUser()->getCountry();
-                $data['invoice'] = $result;
-                $data['price_vat'] = $price_vat;
-                $data['total'] = $price + $price_vat;
+            if($isNormal == 1)
+            {
+                return $this->invoiceFromProduct($paymentId);
             }
-
-            return $data;
-
+            else
+            {
+                return $this->invoiceFromRecurrent($paymentId);
+            }
         } catch (\Exception $e) {
             return FOSView::create($e->getMessage(), Codes::HTTP_INTERNAL_SERVER_ERROR);
         }
+    }
+
+    private function invoiceFromProduct($paymentId)
+    {
+        $default_vat = $this->container->getParameter('publipr.settings.default_vat');
+        $data = array(
+            'invoice' => array(),
+            'total' => '',
+            'vat' => $default_vat,
+            'price_vat' => ''
+        );
+
+        $em = $this->getDoctrine()->getManager();
+        $qb = $em->createQueryBuilder();
+        $qb->from('PubliPrBundle:Payment', 'p_');
+        $qb->leftJoin('ContinuousNet\PubliPrBundle\Entity\User', 'creatorUser', \Doctrine\ORM\Query\Expr\Join::WITH, 'p_.creatorUser = creatorUser.id');
+        $qb->leftJoin('ContinuousNet\PubliPrBundle\Entity\Country', 'Country', \Doctrine\ORM\Query\Expr\Join::WITH, 'creatorUser.country = Country.id');
+        $qb->where('p_.id = :id')->setParameter('id', $paymentId);
+        $qb->select('p_');
+        $result = $qb->getQuery()->getSingleResult();
+
+        if ($result) {
+            $price_vat = ($result->getProduct()->getPrice() * $default_vat) / 100;
+            $price = $result->getProduct()->getPrice() - $price_vat;
+            $result->setAmount($price);
+            $data['country'] = $result->getCreatorUser()->getCountry();
+            $data['invoice'] = $result;
+            $data['price_vat'] = $price_vat;
+            $data['total'] = $price + $price_vat;
+            $data['id'] = $result->getId();
+        }
+
+        return $data;
+    }
+
+    private function invoiceFromRecurrent($paymentPlanId)
+    {
+        $default_vat = $this->container->getParameter('publipr.settings.default_vat');
+        $data = array(
+            'invoice' => array(),
+            'total' => '',
+            'vat' => $default_vat,
+            'price_vat' => ''
+        );
+
+        $em = $this->getDoctrine()->getManager();
+        $qb = $em->createQueryBuilder();
+        $qb->from('PubliPrBundle:UserPaymentPlan', 'p_');
+        $qb->leftJoin('ContinuousNet\PubliPrBundle\Entity\User', 'user', \Doctrine\ORM\Query\Expr\Join::WITH, 'p_.user = user.id');
+        $qb->leftJoin('ContinuousNet\PubliPrBundle\Entity\Country', 'Country', \Doctrine\ORM\Query\Expr\Join::WITH, 'user.country = Country.id');
+        $qb->where('p_.id = :id')->setParameter('id', $paymentPlanId);
+        $qb->select('p_');
+        $result = $qb->getQuery()->getSingleResult();
+
+        if ($result) {
+            $payment = new Payment();
+            $product = new Product();
+            $price_vat = ($result->getPaymentPlan()->getAmount() * $default_vat) / 100;
+            $price = $result->getPaymentPlan()->getAmount() - $price_vat;
+            $payment->setAmount($price);
+            $payment->setCreatorUser($result->getUser());
+            $payment->setInvoiceNumber($result->getId().'/'.$payment->getCreatorUser()->getId());
+            $product->setDescription($result->getPaymentPlan()->getName());
+            $product->setName($result->getPaymentPlan()->getName());
+            $payment->setProduct($product);
+            $data['country'] = $result->getUser()->getCountry();
+            $data['invoice'] = $payment;
+            $data['price_vat'] = $price_vat;
+            $data['total'] = $price + $price_vat;
+            $data['id'] = $result->getId();
+        }
+
+        return $data;
     }
 
 }

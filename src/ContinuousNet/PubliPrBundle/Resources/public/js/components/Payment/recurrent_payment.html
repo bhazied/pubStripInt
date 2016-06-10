@@ -1,0 +1,124 @@
+
+<!-- start: PAGE TITLE -->
+<section id="page-title">
+    <div class="row">
+        <div class="col-sm-8">
+            <h1 class="mainTitle" translate="content.list.PURCHASE">Purchase</h1>
+            <span class="mainDescription"></span>
+        </div>
+        <div ncy-breadcrumb></div>
+    </div>
+</section>
+<!-- end: PAGE TITLE -->
+<!-- start: FORM -->
+<div class="container-fluid container-fullw bg-white" ng-controller="recurrentCtrl">
+    <div class="row">
+        <div class="col-md-12">
+            <div>
+                <fieldset>
+                    <legend translate="content.list.NEWPAYMENT" ng-if="paymentPlan.id == 0">
+                        New Payment
+                    </legend>
+                    <legend translate="content.list.EDITPAYMENT" ng-if="paymentPlan.id > 0">
+                        Edit Payment
+                    </legend>
+                    <form name="paymentPlanForm" id="paymentPlanForm" novalidate ng-submit="submitForm(paymentPlanForm)">
+                        <div class="row">
+                            <input type="hidden" name="currency" id="paymentPlanCurrency" ng-model="paymentPlan.currency" value="[[paymentPlan.currency]]">
+                            <input type="hidden" name="price" id="paymentPlanPrice" ng-model="paymentPlan.price" value="[[paymentPlan.price]]">
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="paymentPlanInterval">
+                                        <span translate="content.list.fields.USERPLANINTERVAL"></span>
+                                    </label>
+                                    <div class="continuous-radio radio-primary">
+                                        <input ng-disabled="false" ng-repeat-start="rp in recurrentPayments" ng-model="paymentPlan.interval" type="radio" id="paymentPlanInterval[[ rp.id ]]" value="[[ rp.id ]]" name="gender" ng-required="true" />
+                                        <label ng-repeat-end for="paymentPlanInterval[[ rp.id ]]">
+                                            [[ rp.name ]] for [[rp.amount]]  <i class="fa fa-eur" aria-hidden="true"></i>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group" ng-class="{'has-error':paymentPlanForm.cardNumber.$dirty && paymentPlanForm.cardNumber.$invalid, 'has-success':paymentPlanForm.cardNumber.$valid}">
+                                    <label for="paymentPlanCardNumber" class="control-label">
+                                        <span translate="content.list.fields.CARDNUMBER">Card Number</span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="paymentPlan.cardNumber" type="text" name="cardNumber" id="paymentPlanCardNumber" class="form-control" placeholder="[[ 'content.form.messages.CARDNUMBER' | translate ]]" ng-required="true" />
+                                        <i class="fa fa-credit-card"></i>
+                                    </span><!--/input-icon-->
+                                    <span class="error text-small block" ng-if="paymentPlanForm.cardNumber.$dirty && paymentPlanForm.cardNumber.$error.required" translate="content.form.messages.CARDNUMBERREQUIRED">Card number is required</span>
+                                    <span class="success text-small block" ng-if="paymentPlanForm.cardNumber.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-2">
+                                <div class="form-group" ng-class="{'has-error':paymentPlanForm.cardMonthExpr.$dirty && paymentPlanForm.cardMonthExpr.$invalid, 'has-success':paymentPlanForm.cardMonthExpr.$valid}">
+                                    <label for="paymentPlanCardMonthExpr" class="control-label">
+                                        <span translate="content.list.fields.CARDMONTHEXPR">Card Expr Month</span>
+                                        <span class="input-icon">
+                                            <select name="cardMonthExpr" id="paymentPlanCardMonthExpr" class="form-control" ng-model="paymentPlan.cardMonthExpr" ng-required="true">
+                                                <option ng-repeat="option in CardMonthExpr" value="[[option.id]]">[[option.text]]</option>
+                                            </select>
+                                            <i class="fa fa-calendar"></i>
+                                        </span>
+                                        <span class="error text-small block" ng-if="paymentPlanForm.cardMonthExpr.$dirty && paymentPlanForm.cardMonthExpr.$error.required" translate="content.form.messages.CARDMONTHEXPRREQUIRED">Card Exper month is required</span>
+                                        <span class="success text-small block" ng-if="paymentPlanForm.cardMonthExpr.$valid" translate="content.form.messages.OK">Ok!</span>
+                                    </label>
+                                </div><!-- /form-group-->
+                            </div><!-- /com-md-2 -->
+                            <div class="col-md-2">
+                                <div class="form-group"  ng-class="{'has-error':paymentPlanForm.cardYearExpr.$dirty && paymentPlanForm.cardYearExpr.$invalid, 'has-success':paymentPlanForm.cardYearExpr.$valid}">
+                                    <label for="paymentPlanCardYearExpr" class="control-label">
+                                        <span translate="content.list.fields.CARDYEAREXPR">Card Expr Year</span>
+                                        <span class="input-icon">
+                                            <div year-drop offset="0" range="5"></div>
+                                            <i class="fa fa-calendar"></i>
+                                        </span>
+                                        <span class="error text-small block" ng-if="paymentPlanForm.cardYEARExpr.$dirty && paymentPlanForm.cardMonthExpr.$error.required" translate="content.form.messages.CARDYEAREXPRREQUIRED">Card Expr Year is required</span>
+                                        <span class="success text-small block" ng-if="purchaseForm.cardYearExpr.$valid" translate="content.form.messages.OK">Ok!</span>
+                                    </label>
+                                </div><!-- /form-group-->
+                            </div><!-- /com-md-2 -->
+                            <div class="col-md-2">
+                                <div class="form-group" ng-class="{'has-error':paymentPlanForm.cardCcv.$dirty && paymentPlanForm.cardCcv.$invalid, 'has-success':paymentPlanForm.cardCcv.$valid}">
+                                    <label for="paymentPlanCardCcv" class="control-label">
+                                        <span translate="content.form.messages.CARDCCV">Ccv</span>
+                                        <span class="input-icon">
+                                            <input ng-model="paymentPlan.cardCcv" type="text" name="cardCcv" id="paymentPlanCardCcv" class="form-control" placeholder="[[ 'content.form.messages.CARDCCV' | translate ]]" ng-required="true" >
+                                            <i class="fa fa-cc-stripe"></i>
+                                        </span>
+                                        <span class="error text-small block" ng-if="paymentPlanForm.cardCcv.$dirty && paymentPlanForm.cardCcv.$error.required" translate="content.form.messages.CARDCCVREQUIRED">Ccv is required</span>
+                                        <span class="success text-small block" ng-if="paymentPlanForm.cardCcv.$valid" translate="content.form.messages.OK">Ok!</span>
+                                    </label>
+                                </div><!-- /form-group-->
+                            </div><!-- /com-md-2 -->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-4">
+                                <a ui-sref="app.billing.check_payment" class="btn btn-primary pull-left">
+                                    <i class="ti-layout-list-thumb"></i> <span translate="content.list.BACKTOPAYMENY">Back to Payment select model</span>
+                                </a>
+                            </div>
+                            <div class="col-md-4">
+                            </div>
+                            <div class="col-md-8">
+                                <button type="button" ng-click="submitForm(paymentPlanForm)" class="btn btn-primary pull-right" ng-disabled="disableSubmit"> <!--  ng-disabled="purchaseForm.$invalid" -->
+                                    <i class="fa fa-spinner fa-spin" ng-if="disableSubmit"></i><i class="ti-save" ng-if="!disableSubmit"></i> <span translate="content.common.SAVE">Save</span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="table-responsive" ng-if="purchases.length > 0">
+                    </div>
+                </fieldset>
+            </div>
+        </div><!--/col-md-12-->
+    </div><!--/row-->
+</div><!--/container-fluid container-fullw-->
+<!-- end: FORM -->
+

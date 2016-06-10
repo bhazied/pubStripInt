@@ -6,16 +6,29 @@ app.controller('PurchaseCtrl',['$scope', '$rootScope', '$sce', '$timeout', '$fil
         $scope.productLoaded = false;
         $scope.totaleProducts = 0;
         $scope.payed = false;
-
+        $scope.recurrent = false;
         $scope.hasPayed = function() {
             $purchaseDataFactory.checkPayment().$promise.then(function(data){
 
-                $scope.payed = data.validate;
-                $scope.payment = data;
+                $scope.payed = data.normal_payment;
+                $scope.recurrent = data.recurrent_payment;
+                if($scope.payed){
+                    $scope.payment = data;
+                    console.log($scope.payment);
+                }else if($scope.recurrent){
+                    $scope.payment = {
+                        startDate : data.start_date,
+                        endDate : data.end_date,
+                        productName: 'recurrent payment'
+                    };
+                }
 
-                if (!$scope.payed) {
+                if (!$scope.payed && !$scope.recurrent) {
                     $scope.loadProducts();
                 }
+
+                $localStorage.recurrent_payment = $scope.recurrent;
+                $localStorage.normal_payment = $scope.payed;
 
             });
         };
@@ -38,6 +51,20 @@ app.controller('PurchaseCtrl',['$scope', '$rootScope', '$sce', '$timeout', '$fil
             if (angular.isDefined(product)){
                 $localStorage.purchaseProduct = product;
                 $state.go('app.billing.purchasenew');
+            }
+        }
+
+        $scope.recurrentPayment = function(){
+            $state.go('app.billing.recurrent')
+        }
+        
+        $scope.goPaymentList = function () {
+            if($scope.payed)
+            {
+                $state.go('app.billing.payments');
+            }
+            else if($scope.recurrent){
+                $state.go('app.billing.userpaymentplans');
             }
         }
     }
