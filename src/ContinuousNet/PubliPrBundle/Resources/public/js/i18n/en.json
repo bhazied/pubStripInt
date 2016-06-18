@@ -887,6 +887,10 @@
             "USERPAYMENTPLANDELETED": "User Payment Plan Deleted",
             "USERPAYMENTPLANNOTDELETED": "User Payment Plan Not Deleted",
             "BACKUSERPAYMENTPLANS": "Back To User Payment Plans List",
+	        "YOUWILLNOTBEABLETORECOVERRECURRENTPAYMENT": "You are unsubscribed  from recurring payment",
+            "RECURRENTUNSUBSCRIBED": "Unsubscribed from service",
+            "RECURRENTNOTUNSUBSCRIBED": "Not unsubscribed from service",
+            "RECURRENT" : "Recurring payment",
             "fields": {
                 "CARDNUMBER" : "Card Number",
                 "CARDMONTHEXPR" : "Expiration Month",
@@ -1133,5 +1137,24 @@
                 }
             }
         }
+    },
+    "dashboard":{
+        "PRESSRELEASEINPROGRESS" : "Your Prs in progress",
+        "EMAILSTATS": "Statistics email",
+        "LASTPRESSRELEASE" : "Last Prs published",
+        "SENTEMAILS" : "Email sent",
+        "DELEVREDEMAILS": "Delivered email",
+        "OPENSEMAILS": "Opens email",
+        "CLICKSEMAILS": "number of click",
+        "DAY": "Day",
+        "WEEK": "Week",
+        "MONTH": "Month",
+        "ALLPRESSRELEASE": "All pressRelease",
+        "VISITSTATS": "Statistics visit",
+        "NBRVISITS": "Visits number",
+        "NBRVISITOR": "Visitor number",
+        "NBRVIEWPAGES": "Pages view",
+        "AVGVISIT": "Average visit",
+        "REBONDRATE": "Rebond rate"
     }
 }
