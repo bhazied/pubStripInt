@@ -847,7 +847,8 @@ function ($stateProvider) {
             label:'content.list.INVOICE'
         },
         resolve: loadSequence('InvoiceCtrl', 'paymentService', 'InvoiceDownloadService', 'InvoiceService')
-    }).state('app.billing.paymentplans', {
+    })
+.state('app.billing.paymentplans', {
         url: '/payment-plans',
         templateUrl: '/bundles/publipr/js/components/PaymentPlan/payment_plans.html',
         title: 'content.list.PAYMENTPLANS',
@@ -909,6 +910,15 @@ function ($stateProvider) {
             label: 'content.list.USERPAYMENTPLANDETAILS'
         },
         resolve: loadSequence('UserPaymentPlanCtrl', 'userPaymentPlanService')
+    })    }).state('app.billing.invoice', {
+        url : '/invoice/:id',
+        templateUrl: '/bundles/publipr/js/components/Invoice/invoice.html',
+        title: 'content.list.INVOICE',
+        ncyBreadcrumb: {
+            label:'content.list.INVOICE'
+        },
+        resolve: loadSequence('InvoiceCtrl', 'paymentService', 'InvoiceDownloadService', 'InvoiceService')
+    })
     }).state('app.billing.unsubscribe', {
         url : '/unsubscribe/:id',
         templateUrl: '/bundles/publipr/js/components/UserPaymentPlan/unsubscribe.html',

@@ -119,11 +119,6 @@ subscription:
     type:     rest
     prefix:   /api
 
-publi_pr_dasgboard_api:
-    resource: "@PubliPrBundle/Controller/DashboardRestController.php"
-    type:     rest
-    prefix:   /api
-
 invoice:
     resource: "@PubliPrBundle/Controller/InvoiceRestController.php"
     type:     rest
