@@ -100,7 +100,7 @@ class PressRelease
      * @var string
      * @access private
      *
-     * @ORM\Column(name="content", type="text", nullable=false, unique=false)
+     * @ORM\Column(name="content", type="text", nullable=true, unique=false)
      * 
      * @Expose
      * 
@@ -495,7 +495,7 @@ class PressRelease
      * @param string $content
      * @return PressRelease
      */
-    public function setContent($content)
+    public function setContent($content = null)
     {
         $this->content = $content;
         return $this;

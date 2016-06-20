@@ -82,17 +82,6 @@ class User  extends BaseUser
      * @var string
      * @access protected
      *
-     * @ORM\Column(name="name", type="string", length=100, nullable=false, unique=false)
-     * 
-     * @Expose
-     * 
-     */
-    protected $name;
-
-    /**
-     * @var string
-     * @access protected
-     *
      * @ORM\Column(name="stripe_reference", type="string", length=50, nullable=true, unique=false)
      * 
      * @Expose
@@ -671,30 +660,6 @@ class User  extends BaseUser
     public function getUsername()
     {
         return $this->username;
-    }
-
-    /**
-     * Set name
-     *
-     * @access public
-     * @param string $name
-     * @return User
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-        return $this;
-    }
-
-    /**
-     * Get name
-     *
-     * @access public
-     * @return string 
-     */
-    public function getName()
-    {
-        return $this->name;
     }
 
     /**

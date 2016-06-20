@@ -46,7 +46,6 @@ class UserType extends AbstractType
         $builder
             ->add('type', ChoiceType::class, array('choices' => array('Free' => 'Free', 'Manager' => 'Manager', 'Contributor' => 'Contributor', 'Administrator' => 'Administrator', ), 'expanded' => false, 'multiple' => false))
             ->add('username', TextType::class)
-            ->add('name', TextType::class)
             ->add('stripeReference', TextType::class)
             ->add('email', EmailType::class)
             ->add('password', PasswordType::class)

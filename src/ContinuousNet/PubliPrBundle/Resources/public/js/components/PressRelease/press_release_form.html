@@ -118,16 +118,13 @@
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
                             <div class="col-md-12">
-                                <div class="form-group" ng-class="{'has-error':pressReleaseForm.content.$dirty && pressReleaseForm.content.$invalid, 'has-success':pressReleaseForm.content.$valid}">
+                                <div class="form-group">
                                     <label for="pressReleaseContent" class="control-label">
                                         <span translate="content.list.fields.CONTENT">Content</span>
-                                        <span class="symbol required"></span>
                                     </label>
                                     <div class="note-editor">
-                                        <div ckeditor="editorOptions" ready="onReadyEditor()"ng-model="pressRelease.content" name="content" id="pressReleaseContent" class="form-control" placeholder="[[ 'content.form.messages.ENTERCONTENT' | translate ]]" class="form-control autosize area-animated msd-elastic: \n;" ng-required="true"></div>
+                                        <div ckeditor="editorOptions" ready="onReadyEditor()"ng-model="pressRelease.content" name="content" id="pressReleaseContent" class="form-control" placeholder="[[ 'content.form.messages.ENTERCONTENT' | translate ]]" class="form-control autosize area-animated msd-elastic: \n;" ng-required="false"></div>
                                     </div>
-                                    <span class="error text-small block" ng-if="pressReleaseForm.content.$dirty && pressReleaseForm.content.$error.required" translate="content.form.messages.CONTENTREQUIRED">Content is required.</span>
-                                    <span class="success text-small block" ng-if="pressReleaseForm.content.$valid" translate="content.form.messages.OK">Ok!</span>
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
                         </div><!--/row-->

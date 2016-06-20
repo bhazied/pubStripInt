@@ -27,20 +27,6 @@
                         <div class="row">
                             <input type="hidden" name="id" id="userId" ng-model="user.id" />
                             <div class="col-md-6">
-                                <div class="form-group" ng-class="{'has-error':userForm.name.$dirty && userForm.name.$invalid, 'has-success':userForm.name.$valid}">
-                                    <label for="userName" class="control-label">
-                                        <span translate="content.list.fields.NAME">Name</span>
-                                        <span class="symbol required"></span>
-                                    </label>
-                                    <span class="input-icon">
-                                        <input ng-model="user.name" type="text" name="name" id="userName" class="form-control" placeholder="[[ 'content.form.messages.ENTERNAME' | translate ]]" ng-required="true" />
-                                        <i class="ti-tag"></i>
-                                    </span><!--/input-icon-->
-                                    <span class="error text-small block" ng-if="userForm.name.$dirty && userForm.name.$error.required" translate="content.form.messages.NAMEREQUIRED">Name is required.</span>
-                                    <span class="success text-small block" ng-if="userForm.name.$valid" translate="content.form.messages.OK">Ok!</span>
-                                </div><!--/form-group-->
-                            </div><!--/col-md-6-->
-                            <div class="col-md-6">
                                 <div class="form-group" ng-class="{'has-error':userForm.email.$dirty && userForm.email.$invalid, 'has-success':userForm.email.$valid}">
                                     <label for="userEmail" class="control-label">
                                         <span translate="content.list.fields.EMAIL">Email</span>
@@ -55,8 +41,6 @@
                                     <span class="success text-small block" ng-if="userForm.email.$valid" translate="content.form.messages.OK">Ok!</span>
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
-                        </div><!--/row-->
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group" ng-class="{'has-error':userForm.password.$dirty && userForm.password.$invalid, 'has-success':userForm.password.$valid}">
                                     <label for="userPassword" class="control-label">
@@ -71,6 +55,8 @@
                                     <span class="success text-small block" ng-if="userForm.password.$valid" translate="content.form.messages.OK">Ok!</span>
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="userPhone" class="control-label">
@@ -82,8 +68,6 @@
                                     </span><!--/input-icon-->
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
-                        </div><!--/row-->
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="userGender" class="control-label">
@@ -103,6 +87,8 @@
                                     </div>
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="userFirstName" class="control-label">
@@ -114,8 +100,6 @@
                                     </span><!--/input-icon-->
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
-                        </div><!--/row-->
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="userLastName" class="control-label">
@@ -127,6 +111,8 @@
                                     </span><!--/input-icon-->
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="userBirthDate" class="control-label">
@@ -145,8 +131,6 @@
                                     </div>
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
-                        </div><!--/row-->
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="userPicture" class="control-label">
@@ -174,6 +158,8 @@
                                     </div>
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="userAddress" class="control-label">
@@ -185,8 +171,6 @@
                                     </span><!--/input-icon-->
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
-                        </div><!--/row-->
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="userZipCode" class="control-label">
@@ -198,6 +182,8 @@
                                     </span><!--/input-icon-->
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="userJob" class="control-label">
@@ -209,8 +195,6 @@
                                     </span><!--/input-icon-->
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
-                        </div><!--/row-->
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="userCountry" class="control-label">
@@ -226,6 +210,8 @@
                                 </div>
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="userCity" class="control-label">
@@ -237,8 +223,6 @@
                                     </span><!--/input-icon-->
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
-                        </div><!--/row-->
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="userLanguage" class="control-label">
@@ -254,6 +238,8 @@
                                 </div>
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group" ng-if="currentUser.roles.join('').indexOf('ADM') > -1"  ng-class="{'has-error':userForm.roles.$dirty && userForm.roles.$invalid, 'has-success':userForm.roles.$valid}">
                                     <label for="userRoles" class="control-label">
@@ -272,8 +258,6 @@
                                     <span class="success text-small block" ng-if="userForm.roles.$valid" translate="content.form.messages.OK">Ok!</span>
                                 </div><!--/form-group-->
                             </div><!--/col-md-6-->
-                        </div><!--/row-->
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="checkbox continuous-check check-primary">
                                     <input ng-model="user.enabled" type="checkbox" name="enabled" id="userEnabled" />
