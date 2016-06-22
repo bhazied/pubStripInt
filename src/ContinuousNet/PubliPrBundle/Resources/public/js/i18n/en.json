@@ -1155,6 +1155,11 @@
         "NBRVISITOR": "Visitor number",
         "NBRVIEWPAGES": "Pages view",
         "AVGVISIT": "Average visit",
-        "REBONDRATE": "Rebond rate"
+        "REBONDRATE": "Rebond rate",
+        "YOURACCOUNT": "Your account",
+        "INSCRIPTIONDATE": "Inscription date",
+        "NBRNEWSROOM": "Newsroom Number",
+        "SHOWALL": "Show all",
+        "FAQ": "FAQ"
     }
 }

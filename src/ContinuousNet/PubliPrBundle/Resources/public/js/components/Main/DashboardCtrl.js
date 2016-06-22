@@ -4,7 +4,7 @@ app.controller('dashboardCtrl', ['$scope', '$interval', 'COLORS', '$localStorage
     $scope.lastppr = [];
     $scope.emails = [];
     $scope.visits = [];
-    $scope.profilInformation = {};
+    $scope.profile = {};
 
     $scope.loadPpr = function(){
         var def = $q.defer();
@@ -71,15 +71,31 @@ app.controller('dashboardCtrl', ['$scope', '$interval', 'COLORS', '$localStorage
             return  def;
     }
 
+    $scope.loadProfile = function(){
+        var def = $q.defer();
+        $dashboardDataFactory.loadProfile({locale: $localStorage.language}).$promise.then(function(data){
+            $scope.profile = data;
+            console.log($scope.profile);
+        });
+        def.resolve($scope.profile);
+        return def;
+
+    }
+
     $scope.$watch($scope.ppr, function () {
         $scope.loadLastPpr();
         $scope.loadEmails('all');
         $scope.loadVisits('all');
     })
     $scope.loadPpr();
+    $scope.loadProfile();
 
     $scope.pressReleaseList = function () {
         $state.go("app.prmanager.pressreleases");
+    }
+
+    $scope.editprofile = function(){
+        $state.go("app.profile");
     }
 
 }]);

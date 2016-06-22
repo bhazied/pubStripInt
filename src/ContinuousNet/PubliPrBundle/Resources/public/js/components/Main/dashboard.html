@@ -72,22 +72,60 @@
                 </div>
 
             </div>
-        </div>
-        </div>
     </div>
-
     <div class="row">
-        <div class="col-md-12">
-            <div class="widget bg-white">
-                <div class="widget-details widget-list">
-                    <div class="mb20">
-                        <h4 class="no-margin text-uppercase">Last imported media</h4>
+        <div class="col-md-4">
+            <div>
+                <div class="widget bg-white">
+                    <div class="widget-icon bg-blue pull-left fa fa-user">
                     </div>
-
+                    <div class="overflow-hidden">
+                        <div class="mb20">
+                             <span class="pull-right">
+                                 <a type="button" class="btn btn-primary" ng-click="editprofile()">[["content.common.EDIT" | translate]]</a>
+                             </span>
+                            <small class="widget-title" translate="dashboard.YOURACCOUNT"></small>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="javascript:;">
+                              <span class="pull-left mt2 mr15">
+                                <img data-ng-src="/app/images/avatar.jpg" class="avatar avatar-xs img-circle" alt="">
+                              </span>
+                            </a>
+                            <span> [[ profile.name ]]</span>
+                            <span>[[ profile.type ]]</span>
+                        </div>
+                        <div class="col-md-8">
+                            <span>[["dashboard.INSCRIPTIONDATE" | translate]] : [[profile.inscriptionDate | date : translate:"formats.DATE"]]</span> <br>
+                            <span>[["dashboard.NBRNEWSROOM" | translate]] : 3</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div>
+                <div class="widget bg-white">
+                    <div class="widget-icon bg-blue pull-left fa fa-question-circle">
+                    </div>
+                    <div class="overflow-hidden">
+                        <div class="mb20">
+                             <span class="pull-right">
+                                 <a type="button" class="btn btn-primary" ng-click="showAll()">[["dashboard.SHOWALL" | translate]]</a>
+                             </span>
+                            <small class="widget-title" translate="dashboard.FAQ"></small>
+                        </div>
+                            <a href="javascript:;" class="widget-list-item">
+                                United States
+                            </a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
+</div>
+
     <!--<div class="row">
         <div class="col-md-3">
             <div>
