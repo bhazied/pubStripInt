@@ -27,7 +27,7 @@ class AppKernel extends Kernel
             new Liip\ImagineBundle\LiipImagineBundle(),
             new ContinuousNet\PubliPrBundle\PubliPrBundle(),
             new Liuggio\ExcelBundle\LiuggioExcelBundle(),
-            new Hip\MandrillBundle\HipMandrillBundle()
+            new Hip\MandrillBundle\HipMandrillBundle(),
 
         );
 
