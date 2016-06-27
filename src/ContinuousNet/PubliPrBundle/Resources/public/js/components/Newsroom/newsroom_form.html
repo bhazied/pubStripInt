@@ -395,6 +395,17 @@
                                     <label for="newsroomPublished" translate="content.list.fields.PUBLISHED">Published</label>
                                 </div><!--/checkbox continuous-check check-primary-->
                             </div><!--/col-md-6-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="newsroomPiwikReference" class="control-label">
+                                        <span translate="content.list.fields.PIWIKREFERENCE">Piwik Reference</span>
+                                    </label>
+                                    <span class="input-icon">
+                                        <input ng-model="newsroom.piwik_reference" type="text" name="piwikReference" id="newsroomPiwikReference" class="form-control" placeholder="[[ 'content.form.messages.ENTERPIWIKREFERENCE' | translate ]]" touchspin data-min="0" data-max="10000000" data-verticalbuttons="true" data-verticalupclass="ti-angle-up" data-verticaldownclass="ti-angle-down" ng-required="false" />
+                                        <i class="ti-marker-alt"></i>
+                                    </span><!--/input-icon-->
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
                         </div><!--/row-->
                         <div class="row">
                             <div class="col-md-12">

@@ -225,6 +225,12 @@
                                 </td>
                             </tr>
                             <tr>
+                                <td><span translate="content.list.fields.PIWIKREFERENCE">Piwik Reference</span></td>
+                                <td>
+                                    <div ng-bind-html="newsroom.piwik_reference"></div>
+                                </td>
+                            </tr>
+                            <tr>
                                 <td><span translate="content.list.fields.CREATORUSER">Creator User</span></td>
                                 <td><a ui-sref="app.access.usersdetails({id: newsroom.creator_user.id})">[[ newsroom.creator_user.username ]]</a></span></td>
                             </tr>

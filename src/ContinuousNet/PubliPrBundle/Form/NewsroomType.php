@@ -73,6 +73,7 @@ class NewsroomType extends AbstractType
             ->add('enableMedia', CheckboxType::class)
             ->add('enableDate', CheckboxType::class)
             ->add('published', CheckboxType::class)
+            ->add('piwikReference', IntegerType::class)
             ->add('users', EntityType::class, array('expanded' => true, 'multiple' => true, 'class' => 'PubliPrBundle:User', 'choice_label' => 'username'))
         ;
     }
