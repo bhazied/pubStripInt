@@ -177,11 +177,22 @@ class DashboardRestController extends FOSRestController
             $data = array(
 
             );
+            $em = $this->getDoctrine()->getManager();
+            $newsRooms = $em->getRepository('PubliPrBundle:Newsroom')->findBy(array('creatorUser' => $this->getUser()->getId()));
+            if(!is_null($newsRooms))
+            {
+                foreach ($newsRooms as $nr)
+                {
+
+                }
+            }
+            return $newsRooms;
         }
         catch(\Exception $e)
         {
             return FOSView::create($e->getMessage(), Codes::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
+
 
 }
