@@ -36,5 +36,6 @@ class PubliPrExtension extends Extension
         $container->setParameter('publipr.piwik.token', $config['piwik']['token']);
         $container->setParameter('publipr.piwik.response_format', $config['piwik']['response_format']);
         $container->setParameter('publipr.piwik.date_format', $config['piwik']['date_format']);
+        $container->setParameter('publipr.piwik.url', $config['piwik']['url']);
     }
 }

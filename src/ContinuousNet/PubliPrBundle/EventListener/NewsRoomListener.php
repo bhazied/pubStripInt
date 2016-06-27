@@ -31,7 +31,7 @@ class NewsRoomListener
             }
             $config = array('base_uri' => 'http://piwik.continuousnet.com/');
             $piwikClient = new PiwikGuzzleClient(new \GuzzleHttp\Client());
-            $api = new Api($piwikClient, "http://piwik.continuousnet.com/");
+            $api = new Api($piwikClient, $this->container->getParameter('publipr.piwik.url'));
             $api->setDefaultParams(array(
                 'token_auth' => $this->container->getParameter('publipr.piwik.token'),
                 'format' => $this->container->getParameter('publipr.piwik.response_format'),
@@ -59,10 +59,16 @@ class NewsRoomListener
             );
             $allSites = $api->getMethod("SitesManager.addSite")->call($params);
             $content = json_decode($allSites->getBody()->getContents());
+            $em = $args->getEntityManager();
             if(isset($content->result) && $content->result == 'error')
             {
-                $em = $args->getEntityManager();
                 $em->remove($entity);
+                $em->flush();
+            }
+            else
+            {
+                $entity->setPiwikReference($content->value);
+                $entity->setModifierUser($this->container->get('security.context')->getToken()->getUser());
                 $em->flush();
             }
 

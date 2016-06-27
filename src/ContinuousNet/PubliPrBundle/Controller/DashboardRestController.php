@@ -37,6 +37,8 @@ use Symfony\Component\Routing\Route;
 use Symfony\Component\Validator\Constraints\Date;
 use Symfony\Component\Validator\Constraints\DateTime;
 use Doctrine\ORM\Query\Expr;
+use Devhelp\Piwik\Api\Api;
+use Devhelp\Piwik\Api\Guzzle\Client\PiwikGuzzleClient;
 
 /**
  * Class SubscriptionApiController
@@ -175,15 +177,32 @@ class DashboardRestController extends FOSRestController
         try
         {
             $data = array(
-
+                'newsroom' => array()
             );
             $em = $this->getDoctrine()->getManager();
             $newsRooms = $em->getRepository('PubliPrBundle:Newsroom')->findBy(array('creatorUser' => $this->getUser()->getId()));
             if(!is_null($newsRooms))
             {
+                $piwikClient = new PiwikGuzzleClient(new \GuzzleHttp\Client());
+                $api = new Api($piwikClient, $this->getParameter('publipr.piwik.url'));
+                $api->setDefaultParams(array(
+                    'token_auth' => $this->getParameter('publipr.piwik.token'),
+                    'format' => $this->getParameter('publipr.piwik.response_format'),
+                    'date' => 'today'
+                ));
+                $now = new \DateTime('now');
+                $params = array(
+                    'period' => 'day',
+                    'date' => 'today'
+                );
                 foreach ($newsRooms as $nr)
                 {
-
+                    if(!is_null($nr->getPiwikReference()))
+                    {
+                        $params['idSite'] = $nr->getPiwikreference();
+                        $result = $api->getMethod('Actions.get')->call( $params );
+                        var_dump($result->getBody()->getContents());die;
+                    }
                 }
             }
             return $newsRooms;

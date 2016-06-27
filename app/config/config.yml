@@ -42,6 +42,7 @@ publi_pr:
         token: 58fefd1580f63cdffa72728db2dbd6f0
         response_format: json
         date_format: Y-m-d
+        url: http://piwik.continuousnet.com/
 
 
 
