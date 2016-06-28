@@ -170,5 +170,9 @@ app.controller('ContactImportCtrl', ['$scope', '$rootScope', '$state', '$statePa
 
         };
 
+        $scope.list = function(){
+            $state.go('app.contactmanager.contacts');
+        }
+
     }]);
 
