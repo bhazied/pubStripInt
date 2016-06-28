@@ -149,7 +149,7 @@ app.controller('ContactImportCtrl', ['$scope', '$rootScope', '$state', '$statePa
                                     type: 'error'
                                 });*/
                                 toaster.pop('error', $filter('translate')('content.common.ERROR'), $filter('translate')('content.form.messages.DATANOTIMPORTED'));
-                                console.warn(error)
+                                //console.warn(error);
                                 $scope.list();
                             });
 

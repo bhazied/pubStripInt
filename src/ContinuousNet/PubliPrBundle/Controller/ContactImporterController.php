@@ -93,10 +93,10 @@ class ContactImporterController extends FOSRestController
                                 foreach ($cellIterator as $cell) {
                                     $i++;
                                     if ($i == $firstNameCol) {
-                                        $contact->setFirstName($cell->getValue());
+                                        $contact->setFirstName($this->cleanText($cell->getValue()));
                                     }
                                     if ($i == $lastNameCol) {
-                                        $contact->setLastName($cell->getValue());
+                                        $contact->setLastName($this->cleanText($cell->getValue()));
                                     }
                                     if ($i == $emailCol) {
                                         $contact->setEmail($cell->getValue());
@@ -149,4 +149,11 @@ class ContactImporterController extends FOSRestController
         return ($qb->getQuery()->getSingleScalarResult() > 0);
     }
 
+    private function cleanText($input)
+    {
+        $output = "";
+        $output = iconv("UTF-8", "ISO-8859-1//TRANSLIT", $input);
+        $output = strtolower($output);
+        return $output;
+    }
 }
