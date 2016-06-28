@@ -2,4 +2,4 @@ ALTER TABLE `newsroom` CHANGE `logo_picture` `logo_picture` VARCHAR( 255 ) CHARA
 CHANGE `banner_picture` `banner_picture` VARCHAR( 255 ) CHARACTER SET utf8 COLLATE utf8_general_ci NULL ;
 
 
-ALTER TABLE  `newsroom` ADD  `piwik_id` INT NULL AFTER  `name` ;
+ALTER TABLE  `newsroom` ADD  `piwik_reference` INT NULL AFTER  `name` ;
