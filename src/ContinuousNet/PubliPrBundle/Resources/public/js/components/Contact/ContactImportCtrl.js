@@ -112,11 +112,11 @@ app.controller('ContactImportCtrl', ['$scope', '$rootScope', '$state', '$statePa
                         text: $filter('translate')('content.list.YOUHAVEPERMISSIONTOSENEMAILSTOTHISCONTACTS'),
                         type: 'warning',
                         showCancelButton: true,
-                        confirmButtonColor: '#DD6B55',
+                        //confirmButtonColor: '#DD6B55',
                         confirmButtonText: $filter('translate')('content.common.YESIHAVE'),
                         cancelButtonText: $filter('translate')('content.common.NOCANCEL'),
-                        closeOnConfirm: true,
-                        closeOnCancel: false,
+                        closeOnConfirm: false,
+                        closeOnCancel: true,
                         showLoaderOnConfirm: true
                     }, function (isConfirm) {
 
