@@ -41,9 +41,10 @@ class ContactImporterController extends FOSRestController
             $em = $this->getDoctrine()->getManager();
 
             $contactGroupId = $request->request->get('contactGroup');
+            $contactGroupName = $request->request->get('contactGroupName');
             if ($contactGroupId == -1) {
                 $contactGroup = new ContactGroup();
-                $contactGroup->setName($contactGroupId);
+                $contactGroup->setName($contactGroupName);
                 $contactGroup->setCreatorUser($this->getUser());
                 $em->persist($contactGroup);
                 $em->flush();
