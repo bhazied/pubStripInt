@@ -182,7 +182,7 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
                         newsroom_ = newsroom_.substr(newsroom_.length - 5);
                         newsroom_ = '/newsroom_'+newsroom_;
                     }
-                    return 'companies/company_'+company+newsroom_;
+                    return '/companies/company_'+company+newsroom_;
                 }
             }
         });
