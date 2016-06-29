@@ -111,7 +111,7 @@
                                     </div>
                                     <div class="user-image margin-top-10" ng-if="newsroom.logo_picture != '' && newsroom.logo_picture != null">
                                         <div class="thumbnail">
-                                            <img ng-src="[[ thumbURL + newsroom.logo_picture ]]" alt="" />
+                                            <img ng-src="/thumb?image=[[thumbURL  + newsroom.logo_picture ]]" alt="" />
                                         </div>
                                         <div class="user-image-buttons">
                                             <span class="btn btn-primary"  ng-click="showFileManager('logo_picture')"><i class="fa fa-pencil"></i></span>
@@ -138,7 +138,7 @@
                                     </div>
                                     <div class="user-image margin-top-10" ng-if="newsroom.banner_picture != '' && newsroom.banner_picture != null">
                                         <div class="thumbnail">
-                                            <img ng-src="[[ thumbURL + newsroom.banner_picture ]]" alt="" />
+                                            <img ng-src="/thumb?image=[[ thumbURL + newsroom.banner_picture ]]" alt="" />
                                         </div>
                                         <div class="user-image-buttons">
                                             <span class="btn btn-primary"  ng-click="showFileManager('banner_picture')"><i class="fa fa-pencil"></i></span>
