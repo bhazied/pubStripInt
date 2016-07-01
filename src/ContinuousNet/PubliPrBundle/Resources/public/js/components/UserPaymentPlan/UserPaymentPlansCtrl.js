@@ -4,8 +4,8 @@
  * Controller for User Payment Plans List
  */
 
-app.controller('UserPaymentPlansCtrl', ['$scope', '$rootScope', '$sce', '$timeout', '$filter', 'ngTableParams', '$state', '$q', '$interpolate', '$localStorage', 'toaster', 'SweetAlert', '$usersDataFactory', '$paymentPlansDataFactory', '$userPaymentPlansDataFactory',
-function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q, $interpolate, $localStorage, toaster, SweetAlert, $usersDataFactory, $paymentPlansDataFactory, $userPaymentPlansDataFactory) {
+app.controller('UserPaymentPlansCtrl', ['$scope', '$rootScope', '$sce', '$timeout', '$filter', 'ngTableParams', '$state', '$q', '$interpolate', '$localStorage', 'toaster', 'SweetAlert', '$usersDataFactory', '$paymentPlansDataFactory', '$userPaymentPlansDataFactory','$purchaseDataFactory',
+function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q, $interpolate, $localStorage, toaster, SweetAlert, $usersDataFactory, $paymentPlansDataFactory, $userPaymentPlansDataFactory, $purchaseDataFactory) {
 
     $scope.isFiltersVisible = false;
 
@@ -133,7 +133,9 @@ function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q,
             return defaultValue;
         }
     };
-
+    $scope.canUnsubscribe = function (row) {
+        return (row.status == 'Active');
+    }
     $scope.setCols = function() {
         $scope.cols = [
             { field: 'id', title: $filter('translate')('content.list.fields.ID'), sortable: 'userPaymentPlan.id', filter: { 'userPaymentPlan.id': 'number' }, show: $scope.getParamValue('id_show_filed', true), getValue: $scope.textValue },
@@ -146,7 +148,7 @@ function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q,
             { field: 'close_date', title: $filter('translate')('content.list.fields.CLOSEDATE'), sortable: 'userPaymentPlan.closeDate', filter: { 'userPaymentPlan.closeDate': 'text' }, show: $scope.getParamValue('close_date_show_filed', false), getValue: $scope.evaluatedValue, valueFormatter: 'date:\''+$filter('translate')('formats.DATETIME')+'\''},
             { title: $filter('translate')('content.common.ACTIONS'), show: true, getValue: $scope.interpolatedValue, interpolateExpr: $interpolate('<div class="btn-group pull-right">'
 +'<button type="button" class="btn btn-success" tooltip-placement="top" uib-tooltip="'+$filter('translate')('content.common.INVOICE')+'" ng-click="invoice(row)"><i class="ti-money"></i></button>'
-+'<button type="button" class="btn btn-danger" tooltip-placement="top" uib-tooltip="'+$filter('translate')('content.common.UNSUBSCRIBE')+'" ng-click="unsubscribe(row)"><i class="ti-close"></i></button>'
++'<button type="button" class="btn btn-danger" tooltip-placement="top" uib-tooltip="'+$filter('translate')('content.common.UNSUBSCRIBE')+'" ng-click="unsubscribe(row)" ng-if="canUnsubscribe(row)"><i class="ti-close"></i></button>'
 +'</div>') }
         ];
     };
@@ -253,7 +255,55 @@ function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q,
     };
 
     $scope.unsubscribe = function(row) {
-        $state.go('app.billing.unsubscribe', {id: row.id});
+        SweetAlert.swal({
+            title: $filter('translate')('content.common.AREYOUSURE'),
+            text: $filter('translate')('content.list.YOUWILLNOTBEABLETORECOVERRECURRENTPAYMENT'),
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#DD6B55',
+            confirmButtonText: $filter('translate')('content.common.YESDELETE'),
+            cancelButtonText: $filter('translate')('content.common.NOCANCEL'),
+            closeOnConfirm: false,
+            closeOnCancel: false,
+            showLoaderOnConfirm: true
+        }, function (isConfirm) {
+            if (isConfirm) {
+                $purchaseDataFactory.unsubscribe({id: row.id, stripe_reference: row.stripe_reference}).$promise.then(function(data) {
+                   if(data.hasError){
+                       SweetAlert.swal({
+                           title: $filter('translate')('content.common.ERROR'),
+                           text: $filter('translate')('content.list.RECURRENTNOTUNSUBSCRIBED'),
+                           type: 'warning',
+                           confirmButtonColor: '#007AFF'
+                       });
+                   }
+                    else
+                   {
+                       SweetAlert.swal({
+                           title: $filter('translate')('content.list.UNSUBSCRIBED'),
+                           text: $filter('translate')('content.list.YOUWILLNOTBEABLETORECOVERRECURRENTPAYMENT'),
+                           type: 'success',
+                           confirmButtonColor: '#007AFF'
+                       });
+                       $scope.tableParams.reload();
+                   }
+                }, function(error) {
+                    SweetAlert.swal({
+                        title: $filter('translate')('content.common.ERROR'),
+                        text: $filter('translate')('content.list.USERPAYMENTPLANNOTDELETED'),
+                        type: 'warning',
+                        confirmButtonColor: '#007AFF'
+                    });
+                });
+            } else {
+                SweetAlert.swal({
+                    title: $filter('translate')('content.common.CANCELLED'),
+                    text: $filter('translate')('content.list.USERPAYMENTPLANNOTDELETED'),
+                    type: 'error',
+                    confirmButtonColor: '#007AFF'
+                });
+            }
+        });
     };
 
 }]);

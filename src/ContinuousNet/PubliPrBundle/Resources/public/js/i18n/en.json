@@ -739,6 +739,7 @@
             "YOURAREUNSUBSCRIBEDFROMRECURRENTPAYMENT" : "Your unsubscribe with success",
             "RECURRENTUNSUBSCRIBED": "Unsubscribed from service",
             "RECURRENTNOTUNSUBSCRIBED": "Not unsubscribed from service",
+            "UNSUBSCRIBED": "Unsubscribed",
             "RECURRENT" : "Recurring payment",
             "INVOICE" : "Invoice",
             "PURCHASE": "Purchase of a package",

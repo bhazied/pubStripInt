@@ -83,7 +83,7 @@ app.controller('recurrentCtrl',['$scope', '$rootScope', '$sce', '$timeout', '$fi
             return false;
         }
     }
-
+        
 
     }
 ]);
