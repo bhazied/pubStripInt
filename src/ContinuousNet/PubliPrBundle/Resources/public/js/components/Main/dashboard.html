@@ -56,6 +56,7 @@
                     <div class="overflow-hidden">
                         <div class="mb20">
                             <span class="pull-right">
+                                <a type="button" class="btn btn-primary" ng-click="loadEmails('all')" ng-disabled="disableLoad_all || disableLoad_today || disableLoad_last_7_days || disableLoad_last_30_days"><i class="fa fa-spinner fa-spin" ng-if="disableLoad_today"></i>[["dashboard.DAY" | translate]]</a>
                                  <a type="button" class="btn btn-primary" ng-click="loadEmails('today')" ng-disabled="disableLoad_today || disableLoad_last_7_days || disableLoad_last_30_days"><i class="fa fa-spinner fa-spin" ng-if="disableLoad_today"></i>[["dashboard.DAY" | translate]]</a>
                                  <a type="button" class="btn btn-primary" ng-click="loadEmails('last_7_days')" ng-disabled="disableLoad_today || disableLoad_last_7_days || disableLoad_last_30_days"><i class="fa fa-spinner fa-spin" ng-if="disableLoad_last_7_days"></i>[["dashboard.WEEK" | translate]]</a>
                                  <a type="button" class="btn btn-primary" ng-click="loadEmails('last_30_days')" ng-disabled="disableLoad_today || disableLoad_last_7_days || disableLoad_last_30_days"><i class="fa fa-spinner fa-spin" ng-if="disableLoad_last_30_days"></i>[["dashboard.MONTH" | translate]]</a>
