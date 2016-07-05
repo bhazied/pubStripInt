@@ -201,6 +201,10 @@ class DashboardRestController extends FOSRestController
                     {
                         $params['idSite'] = $nr->getPiwikreference();
                         $result = $api->getMethod('Actions.get')->call( $params );
+                        $data['newsroom'] = array(
+                            'name' => $nr->getName,
+                            'stats' => $result->getBody()->getContent()
+                        );
                         var_dump($result->getBody()->getContents());die;
                     }
                 }

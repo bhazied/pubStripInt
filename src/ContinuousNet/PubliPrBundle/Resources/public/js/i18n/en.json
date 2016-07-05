@@ -1161,6 +1161,7 @@
         "INSCRIPTIONDATE": "Inscription date",
         "NBRNEWSROOM": "Newsroom Number",
         "SHOWALL": "Show all",
-        "FAQ": "FAQ"
+        "FAQ": "FAQ",
+        "ALL": "All"
     }
 }
