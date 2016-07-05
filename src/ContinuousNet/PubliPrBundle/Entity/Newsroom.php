@@ -363,9 +363,9 @@ class Newsroom
      * @access private
      *
      * @ORM\Column(name="piwik_reference", type="integer", nullable=true, unique=false)
-     * 
+     *
      * @Expose
-     * 
+     *
      */
     private $piwikReference;
 
@@ -1179,7 +1179,7 @@ class Newsroom
      * Get piwikReference
      *
      * @access public
-     * @return integer 
+     * @return integer
      */
     public function getPiwikReference()
     {

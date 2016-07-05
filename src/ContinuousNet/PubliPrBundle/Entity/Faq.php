@@ -259,7 +259,7 @@ class Faq
      * Get creatorUser
      *
      * @access public
-     * @return \ContinuousNet\PubliPrBundle\Entity\CreatorUser 
+     * @return \ContinuousNet\PubliPrBundle\Entity\CreatorUser
      */
     public function getCreatorUser()
     {
@@ -283,7 +283,7 @@ class Faq
      * Get modifierUser
      *
      * @access public
-     * @return \ContinuousNet\PubliPrBundle\Entity\ModifierUser 
+     * @return \ContinuousNet\PubliPrBundle\Entity\ModifierUser
      */
     public function getModifierUser()
     {
