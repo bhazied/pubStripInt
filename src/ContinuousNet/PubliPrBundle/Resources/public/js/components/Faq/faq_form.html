@@ -1,0 +1,79 @@
+
+<!-- start: PAGE TITLE -->
+<section id="page-title">
+    <div class="row">
+        <div class="col-sm-8">
+            <h1 class="mainTitle" translate="content.list.FAQS">Faqs</h1>
+            <span class="mainDescription"></span>
+        </div>
+        <div ncy-breadcrumb></div>
+    </div>
+</section>
+<!-- end: PAGE TITLE -->
+
+<!-- start: FORM -->
+<div class="container-fluid container-fullw bg-white">
+    <div class="row">
+        <div class="col-md-12" ng-controller="FaqFormCtrl">
+            <div>
+                <fieldset>
+                    <legend translate="content.list.NEWFAQ" ng-if="faq.id == 0">
+                        New Faq
+                    </legend>
+                    <legend translate="content.list.EDITFAQ" ng-if="faq.id > 0">
+                        Edit Faq
+                    </legend>
+                    <form name="faqForm" id="faqForm" novalidate ng-submit="submitForm(faqForm)">
+                        <div class="row">
+                            <input type="hidden" name="id" id="faqId" ng-model="faq.id" />
+                            <div class="col-md-12">
+                                <div class="form-group" ng-class="{'has-error':faqForm.question.$dirty && faqForm.question.$invalid, 'has-success':faqForm.question.$valid}">
+                                    <label for="faqQuestion" class="control-label">
+                                        <span translate="content.list.fields.QUESTION">Question</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <div class="note-editor">
+                                        <div ckeditor="editorOptions" ready="onReadyEditor()"ng-model="faq.question" name="question" id="faqQuestion" class="form-control" placeholder="[[ 'content.form.messages.ENTERQUESTION' | translate ]]" class="form-control autosize area-animated msd-elastic: \n;" ng-required="true"></div>
+                                    </div>
+                                    <span class="error text-small block" ng-if="faqForm.question.$dirty && faqForm.question.$error.required" translate="content.form.messages.QUESTIONREQUIRED">Question is required.</span>
+                                    <span class="success text-small block" ng-if="faqForm.question.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                            <div class="col-md-12">
+                                <div class="form-group" ng-class="{'has-error':faqForm.response.$dirty && faqForm.response.$invalid, 'has-success':faqForm.response.$valid}">
+                                    <label for="faqResponse" class="control-label">
+                                        <span translate="content.list.fields.RESPONSE">Response</span>
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <div class="note-editor">
+                                        <div ckeditor="editorOptions" ready="onReadyEditor()"ng-model="faq.response" name="response" id="faqResponse" class="form-control" placeholder="[[ 'content.form.messages.ENTERRESPONSE' | translate ]]" class="form-control autosize area-animated msd-elastic: \n;" ng-required="true"></div>
+                                    </div>
+                                    <span class="error text-small block" ng-if="faqForm.response.$dirty && faqForm.response.$error.required" translate="content.form.messages.RESPONSEREQUIRED">Response is required.</span>
+                                    <span class="success text-small block" ng-if="faqForm.response.$valid" translate="content.form.messages.OK">Ok!</span>
+                                </div><!--/form-group-->
+                            </div><!--/col-md-6-->
+                        </div><!--/row-->
+                        <div class="row">
+                            <div class="col-md-4">
+                                <a ng-click="list()" class="btn btn-primary pull-left">
+                                    <i class="ti-layout-list-thumb"></i> <span translate="content.list.BACKFAQS">Back to Faqs list</span>
+                                </a>
+                            </div>
+                            <div class="col-md-4">
+                            </div>
+                            <div class="col-md-4">
+                                <button type="button" ng-click="submitForm(faqForm)" class="btn btn-primary pull-right" ng-disabled="disableSubmit"> <!--  ng-disabled="faqForm.$invalid" -->
+                                    <i class="fa fa-spinner fa-spin" ng-if="disableSubmit"></i><i class="ti-save" ng-if="!disableSubmit"></i> <span translate="content.common.SAVE">Save</span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="table-responsive" ng-if="faqs.length > 0">
+                    </div>
+                </fieldset>
+            </div>
+        </div><!--/col-md-12-->
+    </div><!--/row-->
+</div><!--/container-fluid container-fullw-->
+<!-- end: FORM -->
+

@@ -151,11 +151,11 @@
         "distribution": {
             "MAIN": "Distribution"
         },
-        "prmanager": {
-            "MAIN": "PRManager"
-        },
         "settings": {
             "MAIN": "Settings"
+        },
+        "prmanager": {
+            "MAIN": "PRManager"
         },
         "billing": {
             "MAIN": "Billing"
@@ -373,6 +373,10 @@
                 "SUBJECTREQUIRED": "Le champs Sujet est obligatoire",
                 "ENTERBODY": "Entrer une valeur pour Corps",
                 "BODYREQUIRED": "Le champs Corps est obligatoire",
+                "ENTERQUESTION": "Entrer une valeur pour Question",
+                "QUESTIONREQUIRED": "Le champs Question est obligatoire",
+                "ENTERRESPONSE": "Entrer une valeur pour Réponse",
+                "RESPONSEREQUIRED": "Le champs Réponse est obligatoire",
                 "ENTERFILENAME": "Entrer une valeur pour Fichier Nonm",
                 "FILENAMEREQUIRED": "Le champs Fichier Nonm est obligatoire",
                 "ENTERCSSNAME": "Entrer une valeur pour Css Nonm",
@@ -632,6 +636,20 @@
             "EMAILTEMPLATEDELETED": "Email Modèle supprimée",
             "EMAILTEMPLATENOTDELETED": "Email Modèle non supprimée",
             "BACKEMAILTEMPLATES": "Retour à la liste des Email Modèles",
+            "FAQS": "Questions",
+            "FAQ": "Question",
+            "ADDFAQ": "Ajouter une nouvelle Question",
+            "NEWFAQ": "Nonuvelle Question",
+            "FAQDETAILS": "Détails Question",
+            "EDITFAQ": "Modifier cette Question",
+            "FAQUPDATED": "Question mise à jour",
+            "FAQNOTUPDATED": "Question non mise à jour",
+            "FAQCREATED": "Question crée",
+            "FAQNOTCREATED": "Question non crée",
+            "YOUWILLNOTBEABLETORECOVERFAQ": "Vous ne serez pas en mesure de récupérer cette Question!",
+            "FAQDELETED": "Question supprimée",
+            "FAQNOTDELETED": "Question non supprimée",
+            "BACKFAQS": "Retour à la liste des Questions",
             "FONTS": "Fonts",
             "FONT": "Font",
             "ADDFONT": "Ajouter une nouvelle Font",
@@ -944,6 +962,8 @@
                 "REPLYTOEMAIL": "Reply To Email",
                 "SUBJECT": "Sujet",
                 "BODY": "Corps",
+                "QUESTION": "Question",
+                "RESPONSE": "Réponse",
                 "FILENAME": "Fichier Nonm",
                 "CSSNAME": "Css Nonm",
                 "ISICON": "Is Icône",

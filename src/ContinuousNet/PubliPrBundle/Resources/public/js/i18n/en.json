@@ -151,11 +151,11 @@
         "distribution": {
             "MAIN": "Distribution"
         },
-        "prmanager": {
-            "MAIN": "PRManager"
-        },
         "settings": {
             "MAIN": "Settings"
+        },
+        "prmanager": {
+            "MAIN": "PRManager"
         },
         "billing": {
             "MAIN": "Billing"
@@ -373,6 +373,10 @@
                 "SUBJECTREQUIRED": "The Subject is required",
                 "ENTERBODY": "Enter the Body",
                 "BODYREQUIRED": "The Body is required",
+                "ENTERQUESTION": "Enter the Question",
+                "QUESTIONREQUIRED": "The Question is required",
+                "ENTERRESPONSE": "Enter the Response",
+                "RESPONSEREQUIRED": "The Response is required",
                 "ENTERFILENAME": "Enter the File Name",
                 "FILENAMEREQUIRED": "The File Name is required",
                 "ENTERCSSNAME": "Enter the Css Name",
@@ -632,6 +636,20 @@
             "EMAILTEMPLATEDELETED": "Email Template Deleted",
             "EMAILTEMPLATENOTDELETED": "Email Template Not Deleted",
             "BACKEMAILTEMPLATES": "Back To Email Templates List",
+            "FAQS": "Faqs",
+            "FAQ": "Faq",
+            "ADDFAQ": "Add New Faq",
+            "NEWFAQ": "New Faq",
+            "FAQDETAILS": "Faq Details",
+            "EDITFAQ": "Edit Faq",
+            "FAQUPDATED": "Faq Updated",
+            "FAQNOTUPDATED": "Faq Not Updated",
+            "FAQCREATED": "Faq Created",
+            "FAQNOTCREATED": "Faq Not Created",
+            "YOUWILLNOTBEABLETORECOVERFAQ": "You will not be able to recover this Faq!",
+            "FAQDELETED": "Faq Deleted",
+            "FAQNOTDELETED": "Faq Not Deleted",
+            "BACKFAQS": "Back To Faqs List",
             "FONTS": "Fonts",
             "FONT": "Font",
             "ADDFONT": "Add New Font",
@@ -944,6 +962,8 @@
                 "REPLYTOEMAIL": "Reply To Email",
                 "SUBJECT": "Subject",
                 "BODY": "Body",
+                "QUESTION": "Question",
+                "RESPONSE": "Response",
                 "FILENAME": "File Name",
                 "CSSNAME": "Css Name",
                 "ISICON": "Is Icon",

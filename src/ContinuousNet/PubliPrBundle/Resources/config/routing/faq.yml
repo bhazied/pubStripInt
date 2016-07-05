@@ -1,0 +1,30 @@
+faq:
+    path:     /
+    defaults: { _controller: "PubliPrBundle:Faq:index" }
+
+faq_details:
+    path:     /{id}/details
+    defaults: { _controller: "PubliPrBundle:Faq:show" }
+
+faq_new:
+    path:     /new
+    defaults: { _controller: "PubliPrBundle:Faq:new" }
+
+faq_create:
+    path:     /create
+    defaults: { _controller: "PubliPrBundle:Faq:create" }
+    methods:  POST
+
+faq_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "PubliPrBundle:Faq:edit" }
+
+faq_update:
+    path:     /{id}/update
+    defaults: { _controller: "PubliPrBundle:Faq:update" }
+    methods:  [POST, PUT]
+
+faq_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "PubliPrBundle:Faq:delete" }
+    methods:  [POST, DELETE]

@@ -1,0 +1,88 @@
+
+<!-- start: PAGE TITLE -->
+<section id="page-title">
+    <div class="row">
+        <div class="col-sm-8">
+            <h1 class="mainTitle" translate="content.list.FAQS">Faqs</h1>
+            <span class="mainDescription"></span>
+        </div>
+        <div ncy-breadcrumb></div>
+    </div>
+</section>
+<!-- end: PAGE TITLE -->
+<!-- start: DETAILS -->
+<div class="container-fluid container-fullw bg-white">
+    <div class="row">
+        <div class="col-md-12" ng-controller="FaqCtrl">
+            <div>
+                <div class="row margin-bottom-10">
+                    <div class="col-md-4">
+                           <button ng-click="list()" class="btn btn-primary pull-left">
+                               <i class="ti-layout-list-thumb"></i> <span translate="content.list.BACKFAQS">Back to Faqs list</span>
+                           </button>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <button type="button" ng-click="add()" class="btn btn-primary">
+                            <i class="ti-plus"></i> <span translate="content.list.ADDFAQ">Add Faq</span>
+                        </button>
+                    </div>
+                    <div class="col-md-4">
+                        <button type="button" ng-click="edit(faq)" class="btn btn-primary pull-right">
+                            <i class="ti-pencil-alt"></i> <span translate="content.list.EDITFAQ">Edit Faq</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-condensed table-bordered">
+                        <thead>
+                            <tr>
+                                <th colspan="2" translate="content.list.FAQDETAILS">Faq Details</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span translate="content.list.fields.ID">Id</span></td>
+                                <td>
+                                    <div ng-bind-html="faq.id"></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span translate="content.list.fields.QUESTION">Question</span></td>
+                                <td>
+                                    <div ng-bind-html="faq.question"></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span translate="content.list.fields.RESPONSE">Response</span></td>
+                                <td>
+                                    <div ng-bind-html="faq.response"></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span translate="content.list.fields.CREATORUSER">Creator User</span></td>
+                                <td><a ui-sref="app..details({id: faq.creator_user.id})">[[ faq.creator_user. ]]</a></span></td>
+                            </tr>
+                            <tr>
+                                <td><span translate="content.list.fields.CREATEDAT">Created At</span></td>
+                                <td>
+                                    <span>[[ faq.created_at | date: datetimeFormat ]]</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span translate="content.list.fields.MODIFIERUSER">Modifier User</span></td>
+                                <td><a ui-sref="app..details({id: faq.modifier_user.id})">[[ faq.modifier_user. ]]</a></span></td>
+                            </tr>
+                            <tr>
+                                <td><span translate="content.list.fields.MODIFIEDAT">Modified At</span></td>
+                                <td>
+                                    <span>[[ faq.modified_at | date: datetimeFormat ]]</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div><!--/col-md-12-->
+    </div><!--/row-->
+</div><!--/container-fluid container-fullw-->
+<!-- end: DETAILS -->

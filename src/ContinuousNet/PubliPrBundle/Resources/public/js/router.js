@@ -622,6 +622,75 @@ function ($stateProvider) {
             label: 'content.list.EMAILCAMPAIGNDETAILS'
         },
         resolve: loadSequence('EmailCampaignCtrl', 'emailCampaignService')
+    }).state('app.settings', {
+        url: '/settings',
+        template: '<div ui-view class="fade-in-up"></div>',
+        title: 'sidebar.nav.settings.MAIN',
+        ncyBreadcrumb: {
+            label: 'sidebar.nav.settings.MAIN'
+        }
+    }).state('app.settings.faqs', {
+        url: '/faqs',
+        templateUrl: '/bundles/publipr/js/components/Faq/faqs.html',
+        title: 'content.list.FAQS',
+        ncyBreadcrumb: {
+            label: 'content.list.FAQS'
+        },
+        resolve: loadSequence('ngTable', 'FaqsCtrl', 'faqService', 'creatorUserService', 'modifierUserService')
+    }).state('app.settings.faqsnew', {
+        url: '/faqs/new',
+        templateUrl: '/bundles/publipr/js/components/Faq/faq_form.html',
+        title: 'content.list.NEWFAQ',
+        ncyBreadcrumb: {
+            label: 'content.list.NEWFAQ'
+        },
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'FaqFormCtrl', 'faqService', 'creatorUserService', 'modifierUserService')
+    }).state('app.settings.faqsedit', {
+        url: '/faqs/edit/:id',
+        templateUrl: '/bundles/publipr/js/components/Faq/faq_form.html',
+        title: 'content.list.EDITFAQ',
+        ncyBreadcrumb: {
+            label: 'content.list.EDITFAQ'
+        },
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'FaqFormCtrl', 'faqService', 'creatorUserService', 'modifierUserService')
+    }).state('app.settings.faqsdetails', {
+        url: '/faqs/details/:id',
+        templateUrl: '/bundles/publipr/js/components/Faq/faq.html',
+        ncyBreadcrumb: {
+            label: 'content.list.FAQDETAILS'
+        },
+        resolve: loadSequence('FaqCtrl', 'faqService')
+    }).state('app.settings.newsroomtemplates', {
+        url: '/newsroom-templates',
+        templateUrl: '/bundles/publipr/js/components/NewsroomTemplate/newsroom_templates.html',
+        title: 'content.list.NEWSROOMTEMPLATES',
+        ncyBreadcrumb: {
+            label: 'content.list.NEWSROOMTEMPLATES'
+        },
+        resolve: loadSequence('ngTable', 'NewsroomTemplatesCtrl', 'newsroomTemplateService', 'userService')
+    }).state('app.settings.newsroomtemplatesnew', {
+        url: '/newsroom-templates/new',
+        templateUrl: '/bundles/publipr/js/components/NewsroomTemplate/newsroom_template_form.html',
+        title: 'content.list.NEWNEWSROOMTEMPLATE',
+        ncyBreadcrumb: {
+            label: 'content.list.NEWNEWSROOMTEMPLATE'
+        },
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'NewsroomTemplateFormCtrl', 'newsroomTemplateService', 'userService')
+    }).state('app.settings.newsroomtemplatesedit', {
+        url: '/newsroom-templates/edit/:id',
+        templateUrl: '/bundles/publipr/js/components/NewsroomTemplate/newsroom_template_form.html',
+        title: 'content.list.EDITNEWSROOMTEMPLATE',
+        ncyBreadcrumb: {
+            label: 'content.list.EDITNEWSROOMTEMPLATE'
+        },
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'NewsroomTemplateFormCtrl', 'newsroomTemplateService', 'userService')
+    }).state('app.settings.newsroomtemplatesdetails', {
+        url: '/newsroom-templates/details/:id',
+        templateUrl: '/bundles/publipr/js/components/NewsroomTemplate/newsroom_template.html',
+        ncyBreadcrumb: {
+            label: 'content.list.NEWSROOMTEMPLATEDETAILS'
+        },
+        resolve: loadSequence('NewsroomTemplateCtrl', 'newsroomTemplateService')
     }).state('app.prmanager', {
         url: '/p-r-manager',
         template: '<div ui-view class="fade-in-up"></div>',
@@ -716,44 +785,6 @@ function ($stateProvider) {
             label: 'content.list.PRESSRELEASESTATS'
         },
         resolve: loadSequence('ngTable', 'PressReleaseStatsCtrl', 'PressReleaseStatsService', 'pressReleaseService', 'PressReleaseEmailStatsService')
-    }).state('app.settings', {
-        url: '/settings',
-        template: '<div ui-view class="fade-in-up"></div>',
-        title: 'sidebar.nav.settings.MAIN',
-        ncyBreadcrumb: {
-            label: 'sidebar.nav.settings.MAIN'
-        }
-    }).state('app.settings.newsroomtemplates', {
-        url: '/newsroom-templates',
-        templateUrl: '/bundles/publipr/js/components/NewsroomTemplate/newsroom_templates.html',
-        title: 'content.list.NEWSROOMTEMPLATES',
-        ncyBreadcrumb: {
-            label: 'content.list.NEWSROOMTEMPLATES'
-        },
-        resolve: loadSequence('ngTable', 'NewsroomTemplatesCtrl', 'newsroomTemplateService', 'userService')
-    }).state('app.settings.newsroomtemplatesnew', {
-        url: '/newsroom-templates/new',
-        templateUrl: '/bundles/publipr/js/components/NewsroomTemplate/newsroom_template_form.html',
-        title: 'content.list.NEWNEWSROOMTEMPLATE',
-        ncyBreadcrumb: {
-            label: 'content.list.NEWNEWSROOMTEMPLATE'
-        },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'NewsroomTemplateFormCtrl', 'newsroomTemplateService', 'userService')
-    }).state('app.settings.newsroomtemplatesedit', {
-        url: '/newsroom-templates/edit/:id',
-        templateUrl: '/bundles/publipr/js/components/NewsroomTemplate/newsroom_template_form.html',
-        title: 'content.list.EDITNEWSROOMTEMPLATE',
-        ncyBreadcrumb: {
-            label: 'content.list.EDITNEWSROOMTEMPLATE'
-        },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'NewsroomTemplateFormCtrl', 'newsroomTemplateService', 'userService')
-    }).state('app.settings.newsroomtemplatesdetails', {
-        url: '/newsroom-templates/details/:id',
-        templateUrl: '/bundles/publipr/js/components/NewsroomTemplate/newsroom_template.html',
-        ncyBreadcrumb: {
-            label: 'content.list.NEWSROOMTEMPLATEDETAILS'
-        },
-        resolve: loadSequence('NewsroomTemplateCtrl', 'newsroomTemplateService')
     }).state('app.billing', {
         url: '/billing',
         template: '<div ui-view class="fade-in-up"></div>',

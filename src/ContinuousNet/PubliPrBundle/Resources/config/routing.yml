@@ -74,6 +74,11 @@ publi_pr_email_template_api:
     type:   rest
     prefix:   /api
 
+publi_pr_faq_api:
+    resource: "@PubliPrBundle/Controller/FaqRESTController.php"
+    type:   rest
+    prefix:   /api
+
 publi_pr_font_api:
     resource: "@PubliPrBundle/Controller/FontRESTController.php"
     type:   rest
@@ -205,6 +210,10 @@ publi_pr_email_campaign:
 publi_pr_email_template:
     resource: "@PubliPrBundle/Resources/config/routing/email_template.yml"
     prefix:   /email-template
+
+publi_pr_faq:
+    resource: "@PubliPrBundle/Resources/config/routing/faq.yml"
+    prefix:   /faq
 
 publi_pr_font:
     resource: "@PubliPrBundle/Resources/config/routing/font.yml"

@@ -37,6 +37,9 @@ app.constant('APP_JS_REQUIRES', {
         'EmailTemplatesCtrl': '/bundles/publipr/js/components/EmailTemplate/EmailTemplatesCtrl.js',
         'EmailTemplateFormCtrl': '/bundles/publipr/js/components/EmailTemplate/EmailTemplateFormCtrl.js',
         'EmailTemplateCtrl': '/bundles/publipr/js/components/EmailTemplate/EmailTemplateCtrl.js',
+        'FaqsCtrl': '/bundles/publipr/js/components/Faq/FaqsCtrl.js',
+        'FaqFormCtrl': '/bundles/publipr/js/components/Faq/FaqFormCtrl.js',
+        'FaqCtrl': '/bundles/publipr/js/components/Faq/FaqCtrl.js',
         'FontsCtrl': '/bundles/publipr/js/components/Font/FontsCtrl.js',
         'FontFormCtrl': '/bundles/publipr/js/components/Font/FontFormCtrl.js',
         'FontCtrl': '/bundles/publipr/js/components/Font/FontCtrl.js',
@@ -140,6 +143,9 @@ app.constant('APP_JS_REQUIRES', {
     },{
         name: 'emailTemplateService',
         files: ['/bundles/publipr/js/components/EmailTemplate/EmailTemplateService.js']
+    },{
+        name: 'faqService',
+        files: ['/bundles/publipr/js/components/Faq/FaqService.js']
     },{
         name: 'fontService',
         files: ['/bundles/publipr/js/components/Font/FontService.js']
