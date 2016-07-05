@@ -97,10 +97,10 @@ class Faq
     private $modifiedAt;
 
     /**
-     * @var \ContinuousNet\PubliPrBundle\Entity\CreatorUser
+     * @var \ContinuousNet\PubliPrBundle\Entity\User
      * @access private
      *
-     * @ORM\ManyToOne(targetEntity="CreatorUser")
+     * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumns({
      *        @ORM\JoinColumn(name="creator_user_id", referencedColumnName="id")
      * })
@@ -112,10 +112,10 @@ class Faq
     private $creatorUser;
 
     /**
-     * @var \ContinuousNet\PubliPrBundle\Entity\ModifierUser
+     * @var \ContinuousNet\PubliPrBundle\Entity\User
      * @access private
      *
-     * @ORM\ManyToOne(targetEntity="ModifierUser")
+     * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumns({
      *        @ORM\JoinColumn(name="modifier_user_id", referencedColumnName="id")
      * })
@@ -246,10 +246,10 @@ class Faq
      * Set creatorUser
      *
      * @access public
-     * @param \ContinuousNet\PubliPrBundle\Entity\CreatorUser $creatorUser
+     * @param \ContinuousNet\PubliPrBundle\Entity\User $creatorUser
      * @return Faq
      */
-    public function setCreatorUser(CreatorUser $creatorUser = null)
+    public function setCreatorUser(User $creatorUser = null)
     {
         $this->creatorUser = $creatorUser;
         return $this;
@@ -259,7 +259,7 @@ class Faq
      * Get creatorUser
      *
      * @access public
-     * @return \ContinuousNet\PubliPrBundle\Entity\CreatorUser
+     * @return \ContinuousNet\PubliPrBundle\Entity\User
      */
     public function getCreatorUser()
     {
@@ -270,10 +270,10 @@ class Faq
      * Set modifierUser
      *
      * @access public
-     * @param \ContinuousNet\PubliPrBundle\Entity\ModifierUser $modifierUser
+     * @param \ContinuousNet\PubliPrBundle\Entity\User $modifierUser
      * @return Faq
      */
-    public function setModifierUser(ModifierUser $modifierUser = null)
+    public function setModifierUser(User $modifierUser = null)
     {
         $this->modifierUser = $modifierUser;
         return $this;
@@ -283,7 +283,7 @@ class Faq
      * Get modifierUser
      *
      * @access public
-     * @return \ContinuousNet\PubliPrBundle\Entity\ModifierUser
+     * @return \ContinuousNet\PubliPrBundle\Entity\User
      */
     public function getModifierUser()
     {

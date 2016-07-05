@@ -47,7 +47,7 @@ class JWTResponseListener
             'id' => $user->getId(),
             'email' => $user->getEmail(),
             'gender' => $user->getGender(),
-            'name' => $user->getName(),
+            'name' => $user->getFirstName() . ' ' . $user->getLastName() ,
             'address' => $user->getAddress(),
             'city' => $user->getCity(),
             'phone' => $user->getPhone(),

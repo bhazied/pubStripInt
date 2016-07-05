@@ -179,6 +179,11 @@ publi_pr_user_payment_plan_api:
     type:   rest
     prefix:   /api
 
+publi_pr_dashboard_api:
+    resource: "@PubliPrBundle/Controller/DashboardRestController.php"
+    type:   rest
+    prefix:   /api
+
 publi_pr_company:
     resource: "@PubliPrBundle/Resources/config/routing/company.yml"
     prefix:   /company

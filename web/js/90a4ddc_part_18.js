@@ -2367,7 +2367,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.FAQS'
         },
-        resolve: loadSequence('ngTable', 'FaqsCtrl', 'faqService', 'creatorUserService', 'modifierUserService')
+        resolve: loadSequence('ngTable', 'FaqsCtrl', 'faqService', 'userService')
     }).state('app.settings.faqsnew', {
         url: '/faqs/new',
         templateUrl: '/bundles/publipr/js/components/Faq/faq_form.html',
@@ -2375,7 +2375,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.NEWFAQ'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'FaqFormCtrl', 'faqService', 'creatorUserService', 'modifierUserService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'FaqFormCtrl', 'faqService', 'userService')
     }).state('app.settings.faqsedit', {
         url: '/faqs/edit/:id',
         templateUrl: '/bundles/publipr/js/components/Faq/faq_form.html',
@@ -2383,7 +2383,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.EDITFAQ'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'FaqFormCtrl', 'faqService', 'creatorUserService', 'modifierUserService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'FaqFormCtrl', 'faqService', 'userService')
     }).state('app.settings.faqsdetails', {
         url: '/faqs/details/:id',
         templateUrl: '/bundles/publipr/js/components/Faq/faq.html',
@@ -2679,14 +2679,6 @@ function ($stateProvider) {
             label: 'content.list.USERPAYMENTPLANDETAILS'
         },
         resolve: loadSequence('UserPaymentPlanCtrl', 'userPaymentPlanService')
-    }).state('app.billing.invoice', {
-        url : '/invoice/:id',
-        templateUrl: '/bundles/publipr/js/components/Invoice/invoice.html',
-        title: 'content.list.INVOICE',
-        ncyBreadcrumb: {
-            label:'content.list.INVOICE'
-        },
-        resolve: loadSequence('InvoiceCtrl', 'paymentService', 'InvoiceDownloadService', 'InvoiceService')
     }).state('app.billing.unsubscribe', {
         url : '/unsubscribe/:id',
         templateUrl: '/bundles/publipr/js/components/UserPaymentPlan/unsubscribe.html',
