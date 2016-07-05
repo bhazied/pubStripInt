@@ -41,9 +41,10 @@ class ContactImporterController extends FOSRestController
             $em = $this->getDoctrine()->getManager();
 
             $contactGroupId = $request->request->get('contactGroup');
+            $contactGroupName = $request->request->get('contactGroupName');
             if ($contactGroupId == -1) {
                 $contactGroup = new ContactGroup();
-                $contactGroup->setName($contactGroupId);
+                $contactGroup->setName($contactGroupName);
                 $contactGroup->setCreatorUser($this->getUser());
                 $em->persist($contactGroup);
                 $em->flush();
@@ -92,10 +93,10 @@ class ContactImporterController extends FOSRestController
                                 foreach ($cellIterator as $cell) {
                                     $i++;
                                     if ($i == $firstNameCol) {
-                                        $contact->setFirstName($cell->getValue());
+                                        $contact->setFirstName($this->cleanText($cell->getValue()));
                                     }
                                     if ($i == $lastNameCol) {
-                                        $contact->setLastName($cell->getValue());
+                                        $contact->setLastName($this->cleanText($cell->getValue()));
                                     }
                                     if ($i == $emailCol) {
                                         $contact->setEmail($cell->getValue());
@@ -148,4 +149,11 @@ class ContactImporterController extends FOSRestController
         return ($qb->getQuery()->getSingleScalarResult() > 0);
     }
 
+    private function cleanText($input)
+    {
+        $output = "";
+        $output = iconv("UTF-8", "ISO-8859-1//TRANSLIT", $input);
+        $output = strtolower($output);
+        return $output;
+    }
 }

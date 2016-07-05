@@ -41,7 +41,9 @@
         "liuggio/ExcelBundle": "^2.0",
         "stripe/stripe-php": "^3.13",
         "mikehaertl/phpwkhtmltopdf": "^2.1",
-        "hipaway-travel/mandrill-bundle": "dev-master"
+        "hipaway-travel/mandrill-bundle": "dev-master",
+        "devhelp/piwik-api": "dev-master",
+        "devhelp/piwik-api-guzzle": "dev-master"
     },
     "require-dev": {
         "symfony/phpunit-bridge": "~2.7"

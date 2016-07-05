@@ -4,6 +4,7 @@ parameters:
     publi_pr.event.jwt_decoded_listener.class: ContinuousNet\PubliPrBundle\EventListener\JWTDecodedListener
     publi_pr.form.handler.registration.class: ContinuousNet\PubliPrBundle\Form\Handler\RegistrationFormHandler
     publi_pr.settings.class: ContinuousNet\PubliPrBundle\Services\Settings
+    publi_pr.event.newsroom_listner.class : ContinuousNet\PubliPrBundle\EventListener\NewsRoomListener
 
 services:
     publi_pr.event.jwt_response_listener:
@@ -40,3 +41,9 @@ services:
         class:  %publi_pr.settings.class%
         arguments:
           - @doctrine.orm.entity_manager
+    publi_pr.event.newsroom_listner:
+        class: %publi_pr.event.newsroom_listner.class%
+        tags:
+            - {name: doctrine.event_listener, event: postPersist, method: postPersist}
+            - {name: doctrine.event_listener, event: postUpdate, method: postUpdate}
+        arguments: ["@service_container"]

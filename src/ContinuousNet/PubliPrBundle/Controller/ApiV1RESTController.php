@@ -853,7 +853,8 @@ class ApiV1RESTController extends FOSRestController
                 'address' => $user->getAddress(),
                 'country' => $user->getCountry(),
                 'picture' => $user->getPicture(),
-                'lastLogin' => $user->getLastLogin()
+                'lastLogin' => $user->getLastLogin(),
+                'inscriptionDate' => $user->getCreatedAt()
             );
 
             return $data;

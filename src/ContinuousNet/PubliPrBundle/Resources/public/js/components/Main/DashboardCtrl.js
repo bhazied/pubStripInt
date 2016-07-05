@@ -4,8 +4,8 @@ app.controller('dashboardCtrl', ['$scope', '$interval', 'COLORS', '$localStorage
     $scope.lastppr = [];
     $scope.emails = [];
     $scope.visits = [];
-    $scope.profilInformation = {};
-
+    $scope.profile = {};
+    $scope.allPeriode = ['all', 'last_7_days', 'today', 'last_30_days'];
     $scope.loadPpr = function(){
         var def = $q.defer();
         if($scope.ppr.length == 0) {
@@ -42,10 +42,11 @@ app.controller('dashboardCtrl', ['$scope', '$interval', 'COLORS', '$localStorage
     $scope.loadVisits = function (periode) {
         var def = $q.defer();
         var params = {};
-        if(periode != 'all')
-        {
-            $scope['disableVisits_'+periode] = true;
-        }
+        $scope['disableVisits_'+periode] = true;
+        angular.forEach($scope.allPeriode, function (value) {
+            $scope['currentVisit_'+value] = false;
+        });
+        $scope['currentVisit_'+periode] = true;
         params.periode = periode;
             $dashboardDataFactory.loadVisits(params).$promise.then(function (data) {
                 $scope.visits = data;
@@ -58,10 +59,11 @@ app.controller('dashboardCtrl', ['$scope', '$interval', 'COLORS', '$localStorage
     $scope.loadEmails = function (periode) {
         var def = $q.defer();
             var params = {};
-            if(periode != 'all')
-            {
-                $scope['disableLoad_'+periode] = true;
-            }
+            $scope['disableLoad_'+periode] = true;
+        angular.forEach($scope.allPeriode, function (value) {
+            $scope['currentLoad_'+value] = false;
+        })
+        $scope['currentLoad_'+periode] = true;
             params.periode = periode;
             $dashboardDataFactory.loadEmails(params).$promise.then(function (data) {
                 $scope.emails = data;
@@ -71,15 +73,31 @@ app.controller('dashboardCtrl', ['$scope', '$interval', 'COLORS', '$localStorage
             return  def;
     }
 
+    $scope.loadProfile = function(){
+        var def = $q.defer();
+        $dashboardDataFactory.loadProfile({locale: $localStorage.language}).$promise.then(function(data){
+            $scope.profile = data;
+            console.log($scope.profile);
+        });
+        def.resolve($scope.profile);
+        return def;
+
+    }
+
     $scope.$watch($scope.ppr, function () {
         $scope.loadLastPpr();
         $scope.loadEmails('all');
         $scope.loadVisits('all');
     })
     $scope.loadPpr();
+    $scope.loadProfile();
 
     $scope.pressReleaseList = function () {
         $state.go("app.prmanager.pressreleases");
+    }
+
+    $scope.editprofile = function(){
+        $state.go("app.profile");
     }
 
 }]);

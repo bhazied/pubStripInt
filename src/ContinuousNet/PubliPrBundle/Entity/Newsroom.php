@@ -64,6 +64,15 @@ class Newsroom
     private $name;
 
     /**
+     * @var integer
+     * @access private
+     *
+     * @ORM\Column(name="piwik_reference", type="integer", nullable=true, unique=false)
+     * @Expose
+     */
+    private $piwikReference;
+
+    /**
      * @var string
      * @access private
      *
@@ -505,6 +514,28 @@ class Newsroom
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * get piwikReference
+     * @access public
+     * @return  integer
+     */
+    public function getPiwikReference()
+    {
+        return $this->piwikReference;
+    }
+
+    /**
+     * set piwikReference
+     * @access public
+     * @param integer $piwikReference
+     * @return Newsroom
+     */
+    public function setPiwikReference($piwikReference)
+    {
+        $this->piwikReference = $piwikReference;
+        return $this;
     }
 
     /**

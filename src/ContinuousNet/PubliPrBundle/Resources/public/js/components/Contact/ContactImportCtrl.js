@@ -112,11 +112,11 @@ app.controller('ContactImportCtrl', ['$scope', '$rootScope', '$state', '$statePa
                         text: $filter('translate')('content.list.YOUHAVEPERMISSIONTOSENEMAILSTOTHISCONTACTS'),
                         type: 'warning',
                         showCancelButton: true,
-                        confirmButtonColor: '#DD6B55',
+                        //confirmButtonColor: '#DD6B55',
                         confirmButtonText: $filter('translate')('content.common.YESIHAVE'),
                         cancelButtonText: $filter('translate')('content.common.NOCANCEL'),
                         closeOnConfirm: false,
-                        closeOnCancel: false,
+                        closeOnCancel: true,
                         showLoaderOnConfirm: true
                     }, function (isConfirm) {
 
@@ -125,50 +125,60 @@ app.controller('ContactImportCtrl', ['$scope', '$rootScope', '$state', '$statePa
                             fileUpload.uploadFileToUrl($scope.file, $rootScope.app.apiURL + 'contactsImport', $scope.contact, function (data, status, headers) {
                                 $scope.disableSubmit = false;
                                 if (status == 200) {
-                                    SweetAlert.swal({
+                                    /*SweetAlert.swal({
                                         title: $filter('translate')('content.common.NOTIFICATION'),
                                         text: data.message,
                                         type: 'success'
-                                    });
+                                    });*/
                                     toaster.pop('success', $filter('translate')('content.common.NOTIFICATION'), data.message);
+                                    $scope.list();
                                 } else {
-                                    SweetAlert.swal({
+                                    /*SweetAlert.swal({
                                         title: $filter('translate')('content.common.ERROR'),
                                         text: $filter('translate')('content.list.NODATATOIMPORT'),
                                         type: 'error'
-                                    });
+                                    });*/
                                     toaster.pop('warning', $filter('translate')('content.common.ERROR'), $filter('translate')('content.form.messages.NODATATOIMPORT'));
+                                    $scope.list();
                                 }
                             }, function (data, status) {
                                 $scope.disableSubmit = false;
-                                SweetAlert.swal({
+                                /*SweetAlert.swal({
                                     title: $filter('translate')('content.common.ERROR'),
                                     text: $filter('translate')('content.list.DATANOTIMPORTED'),
                                     type: 'error'
-                                });
+                                });*/
                                 toaster.pop('error', $filter('translate')('content.common.ERROR'), $filter('translate')('content.form.messages.DATANOTIMPORTED'));
-                                console.warn(error);
+                                //console.warn(error);
+                                $scope.list();
                             });
 
                         } else {
                             $scope.disableSubmit = false;
-                            SweetAlert.swal({
+                            /*SweetAlert.swal({
                                 title: $filter('translate')('content.common.CANCELLED'),
                                 text: $filter('translate')('content.list.CONTACTSNOTDIMPORTED'),
                                 type: 'error',
                                 confirmButtonColor: '#007AFF'
-                            });
+                            });*/
+                            toaster.pop('error', $filter('translate')('content.common.ERROR'), $filter('translate')('content.list.CONTACTSNOTDIMPORTED'));
+                            $scope.list();
                         }
                     });
 
                 } else {
                     toaster.pop('warning', $filter('translate')('content.common.ERROR'), $filter('translate')('content.form.messages.ALLOWEDFILEEXTENSIONS') + ' (' + $scope.allowedExtensions.join(', ') + ')');
+                    $scope.list();
                 }
                 return false;
 
             }
 
         };
+
+        $scope.list = function(){
+            $state.go('app.contactmanager.contacts');
+        }
 
     }]);
 

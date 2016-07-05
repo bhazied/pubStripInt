@@ -51,15 +51,15 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <button type="button" ng-click="add()" class="btn btn-primary pull-right">
+                        <!--<button type="button" ng-click="add()" class="btn btn-primary pull-right">
                             <i class="ti-plus"></i> <span translate="content.list.ADDUSERPAYMENTPLAN">Add User Payment Plan</span>
-                        </button>
+                        </button>-->
                     </div>
                 </div>
                 <p>
                     <strong translate="content.common.PAGE">Page:</strong> [[tableParams.page()]] - <strong translate="content.common.TOTAL">Total:</strong> [[tableParams.total()]] - <strong translate="content.common.COUNTPERPAGE">Count per page:</strong> [[tableParams.count()]]
                 </p>
-                <div class="table-responsive">
+                    <div class="table-responsive">
                     <table ng-table-dynamic="tableParams with cols" class="table table-condensed table-bordered table-striped" show-filter="isFiltersVisible">
                         <colgroup>
                             <col ng-repeat="col in $columns" />

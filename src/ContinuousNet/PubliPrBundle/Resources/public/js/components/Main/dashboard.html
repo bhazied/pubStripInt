@@ -1,6 +1,6 @@
 <div data-ng-controller="dashboardCtrl">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6 col-xs-12">
             <div>
                 <div class="widget bg-white">
                     <div class="widget-icon bg-blue pull-left fa fa-file-text-o">
@@ -25,25 +25,26 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6 col-xs-12">
             <div class="widget bg-white">
                 <div class="widget-icon bg-blue pull-left fa fa-binoculars">
                 </div>
                 <div class="overflow-hidden">
                     <div class="mb20">
                             <span class="pull-right">
-                                 <a type="button" class="btn btn-primary" ng-click="loadVisits('today')" ng-disabled="disableVisits_today || disableVisits_last_7_days || disableVisits_last_30_days"><i class="fa fa-spinner fa-spin" ng-if="disableVisits_today"></i>[["dashboard.DAY" | translate]]</a>
-                                 <a type="button" class="btn btn-primary" ng-click="loadVisits('last_7_days')" ng-disabled="disableVisits_today || disableVisits_last_7_days || disableVisits_last_30_days"><i class="fa fa-spinner fa-spin" ng-if="disableVisits_last_7_days"></i>[["dashboard.WEEK" | translate]]</a>
-                                 <a type="button" class="btn btn-primary" ng-click="loadVisits('last_30_days')" ng-disabled="disableVisits_today || disableVisits_last_7_days || disableVisits_last_30_days"><i class="fa fa-spinner fa-spin" ng-if="disableVisits_last_30_days"></i>[["dashboard.MONTH" | translate]]</a>
+                                <a type="button" class="btn btn-primary" ng-click="loadVisits('all')" ng-disabled="disableVisits_all || disableVisits_today || disableVisits_last_7_days || disableVisits_last_30_days" ng-class="{'disabled' : currentVisit_all}"><i class="fa fa-spinner fa-spin" ng-if="disableVisits_all"></i>[["dashboard.ALL" | translate]]</a>
+                                 <a type="button" class="btn btn-primary" ng-click="loadVisits('today')" ng-disabled="disableVisits_all || disableVisits_today || disableVisits_last_7_days || disableVisits_last_30_days" ng-class="{'disabled' : currentVisit_today}"><i class="fa fa-spinner fa-spin" ng-if="disableVisits_today"></i>[["dashboard.DAY" | translate]]</a>
+                                 <a type="button" class="btn btn-primary" ng-click="loadVisits('last_7_days')" ng-disabled="disableVisits_all || disableVisits_today || disableVisits_last_7_days || disableVisits_last_30_days" ng-class="{'disabled' : currentVisit_last_7_days}"><i class="fa fa-spinner fa-spin" ng-if="disableVisits_last_7_days"></i>[["dashboard.WEEK" | translate]]</a>
+                                 <a type="button" class="btn btn-primary" ng-click="loadVisits('last_30_days')" ng-disabled="disableVisits_all || disableVisits_today || disableVisits_last_7_days || disableVisits_last_30_days" ng-class="{'disabled' : currentVisit_last_30_days}"><i class="fa fa-spinner fa-spin" ng-if="disableVisits_last_30_days"></i>[["dashboard.MONTH" | translate]]</a>
                             </span>
                         <h4 class="no-margin text-uppercase" translate="dashboard.VISITSTATS"></h4>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-6 col-xs-12">
                         <span translate="dashboard.NBRVISITS"> </span> <span class="label label-info pull-right">0 </span> <br>
                         <span translate="dashboard.NBRVISITOR"> </span> <span class="label label-info pull-right">0 </span> <br>
                         <span translate="dashboard.NBRVIEWPAGES"> </span>  <span class="label label-info pull-right"> 0 </span> <br>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-6 col-xs-12">
                         <span translate="dashboard.AVGVISIT"> </span> <span class="label label-info pull-right"> 0 </span> <br>
                         <span translate="dashboard.REBONDRATE"> </span> <span class="label label-info pull-right"> 0 </span> <br>
                     </div>
@@ -56,9 +57,10 @@
                     <div class="overflow-hidden">
                         <div class="mb20">
                             <span class="pull-right">
-                                 <a type="button" class="btn btn-primary" ng-click="loadEmails('today')" ng-disabled="disableLoad_today || disableLoad_last_7_days || disableLoad_last_30_days"><i class="fa fa-spinner fa-spin" ng-if="disableLoad_today"></i>[["dashboard.DAY" | translate]]</a>
-                                 <a type="button" class="btn btn-primary" ng-click="loadEmails('last_7_days')" ng-disabled="disableLoad_today || disableLoad_last_7_days || disableLoad_last_30_days"><i class="fa fa-spinner fa-spin" ng-if="disableLoad_last_7_days"></i>[["dashboard.WEEK" | translate]]</a>
-                                 <a type="button" class="btn btn-primary" ng-click="loadEmails('last_30_days')" ng-disabled="disableLoad_today || disableLoad_last_7_days || disableLoad_last_30_days"><i class="fa fa-spinner fa-spin" ng-if="disableLoad_last_30_days"></i>[["dashboard.MONTH" | translate]]</a>
+                                <a type="button" class="btn btn-primary" ng-click="loadEmails('all')" ng-disabled="disableLoad_all || disableLoad_today || disableLoad_last_7_days || disableLoad_last_30_days" ng-class="{ 'disabled' : currentLoad_all }"><i class="fa fa-spinner fa-spin" ng-if="disableLoad_all"></i>[["dashboard.ALL" | translate]]</a>
+                                 <a type="button" class="btn btn-primary" ng-click="loadEmails('today')" ng-disabled="disableLoad_all ||disableLoad_today || disableLoad_last_7_days || disableLoad_last_30_days" ng-class="{ 'disabled' : currentLoad_today }"><i class="fa fa-spinner fa-spin" ng-if="disableLoad_today" ></i>[["dashboard.DAY" | translate]]</a>
+                                 <a type="button" class="btn btn-primary" ng-click="loadEmails('last_7_days')" ng-disabled="disableLoad_all ||disableLoad_today || disableLoad_last_7_days || disableLoad_last_30_days" ng-class="{ 'disabled' : currentLoad_last_7_days }"><i class="fa fa-spinner fa-spin" ng-if="disableLoad_last_7_days" ></i>[["dashboard.WEEK" | translate]]</a>
+                                 <a type="button" class="btn btn-primary" ng-click="loadEmails('last_30_days')" ng-disabled="disableLoad_all ||disableLoad_today || disableLoad_last_7_days || disableLoad_last_30_days" ng-class="{ 'disabled' : currentLoad_last_30_days }"><i class="fa fa-spinner fa-spin" ng-if="disableLoad_last_30_days" ></i>[["dashboard.MONTH" | translate]]</a>
                             </span>
                             <h4 class="no-margin text-uppercase" translate="dashboard.EMAILSTATS"></h4>
                         </div>
@@ -72,22 +74,60 @@
                 </div>
 
             </div>
-        </div>
-        </div>
     </div>
-
     <div class="row">
-        <div class="col-md-12">
-            <div class="widget bg-white">
-                <div class="widget-details widget-list">
-                    <div class="mb20">
-                        <h4 class="no-margin text-uppercase">Last imported media</h4>
+        <div class="col-md-4 col-xs-12">
+            <div>
+                <div class="widget bg-white">
+                    <div class="widget-icon bg-blue pull-left fa fa-user">
                     </div>
-
+                    <div class="overflow-hidden">
+                        <div class="mb20">
+                             <span class="pull-right">
+                                 <a type="button" class="btn btn-primary" ng-click="editprofile()">[["content.common.EDIT" | translate]]</a>
+                             </span>
+                            <small class="widget-title" translate="dashboard.YOURACCOUNT"></small>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="javascript:;">
+                              <span class="pull-left mt2 mr15">
+                                <img data-ng-src="/app/images/avatar.jpg" class="avatar avatar-xs img-circle" alt="">
+                              </span>
+                            </a>
+                            <span> [[ profile.name ]]</span>
+                            <span>[[ profile.type ]]</span>
+                        </div>
+                        <div class="col-md-8">
+                            <span>[["dashboard.INSCRIPTIONDATE" | translate]] : [[profile.inscriptionDate | date : translate:"formats.DATE"]]</span> <br>
+                            <span>[["dashboard.NBRNEWSROOM" | translate]] : 3</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-xs-12">
+            <div>
+                <div class="widget bg-white">
+                    <div class="widget-icon bg-blue pull-left fa fa-question-circle">
+                    </div>
+                    <div class="overflow-hidden">
+                        <div class="mb20">
+                             <span class="pull-right">
+                                 <a type="button" class="btn btn-primary" ng-click="showAll()">[["dashboard.SHOWALL" | translate]]</a>
+                             </span>
+                            <small class="widget-title" translate="dashboard.FAQ"></small>
+                        </div>
+                            <a href="javascript:;" class="widget-list-item">
+                                United States
+                            </a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
+</div>
+
     <!--<div class="row">
         <div class="col-md-3">
             <div>

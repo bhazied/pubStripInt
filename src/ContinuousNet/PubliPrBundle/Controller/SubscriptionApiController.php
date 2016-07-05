@@ -402,7 +402,6 @@ class SubscriptionApiController extends FOSRestController
                 'message' => ''
             );
             $em = $this->getDoctrine()->getManager();
-            $userPaymentPlan = $em->getRepository('PubliPrBundle:UserPaymentPlan')->find($request->request->get('id'));
             Stripe\Stripe::setApiKey($this->getStripeApiKey());
             $subscribtion = Stripe\Subscription::retrieve($request->request->get('stripeReference'));
             $result = $subscribtion->cancel();
@@ -416,7 +415,9 @@ class SubscriptionApiController extends FOSRestController
         }
         catch (\Exception $e)
         {
-            return $data['message'] = $e->getMessage();
+            $data['hasError'] = true;
+            $data['message'] = $e->getMessage();
+            return $data;
         }
     }
 

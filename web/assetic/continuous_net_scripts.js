@@ -342,7 +342,8 @@ app.constant('APP_JS_REQUIRES', {
         'TrackPressReleaseCtrl': '/bundles/publipr/js/components/TrackPressRelease/TrackPressReleaseCtrl.js',
         'UserPaymentPlansCtrl': '/bundles/publipr/js/components/UserPaymentPlan/UserPaymentPlansCtrl.js',
         'UserPaymentPlanFormCtrl': '/bundles/publipr/js/components/UserPaymentPlan/UserPaymentPlanFormCtrl.js',
-        'UserPaymentPlanCtrl': '/bundles/publipr/js/components/UserPaymentPlan/UserPaymentPlanCtrl.js'
+        'UserPaymentPlanCtrl': '/bundles/publipr/js/components/UserPaymentPlan/UserPaymentPlanCtrl.js',
+        'recurrentCtrl': '/bundles/publipr/js/components/Payment/recurrentCtrl.js'
     },
     modules: [{
         name: 'LoginService',
@@ -464,6 +465,9 @@ app.constant('APP_JS_REQUIRES', {
     },{
         name: 'userPaymentPlanService',
         files: ['/bundles/publipr/js/components/UserPaymentPlan/UserPaymentPlanService.js']
+    },{
+        name: 'purchaseService',
+        files: ['/bundles/publipr/js/components/Payment/PurchaseService.js']
     }]
 });
 
@@ -2605,8 +2609,15 @@ function ($stateProvider) {
             label:'content.list.INVOICE'
         },
         resolve: loadSequence('InvoiceCtrl', 'paymentService', 'InvoiceDownloadService', 'InvoiceService')
-    })
-.state('app.billing.paymentplans', {
+    }).state('app.billing.recurrent',{
+        url: '/recurrent',
+        templateUrl: '/bundles/publipr/js/components/Payment/recurrent_payment.html',
+        title: 'content.list.PAYMENTPLANS',
+        ncyBreadcrumb: {
+            label: 'content.list.PAYMENTPLANS'
+        },
+        resolve: loadSequence('recurrentCtrl', 'paymentPlanService', 'userService',  'paymentPlanService', 'userPaymentPlanService', 'purchaseService')
+    }).state('app.billing.paymentplans', {
         url: '/payment-plans',
         templateUrl: '/bundles/publipr/js/components/PaymentPlan/payment_plans.html',
         title: 'content.list.PAYMENTPLANS',
@@ -2644,7 +2655,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.USERPAYMENTPLANS'
         },
-        resolve: loadSequence('ngTable', 'UserPaymentPlansCtrl', 'userPaymentPlanService', 'userService', 'paymentPlanService')
+        resolve: loadSequence('ngTable', 'UserPaymentPlansCtrl', 'userPaymentPlanService', 'userService', 'paymentPlanService', 'purchaseService')
     }).state('app.billing.userpaymentplansnew', {
         url: '/user-payment-plans/new',
         templateUrl: '/bundles/publipr/js/components/UserPaymentPlan/user_payment_plan_form.html',
@@ -2668,7 +2679,7 @@ function ($stateProvider) {
             label: 'content.list.USERPAYMENTPLANDETAILS'
         },
         resolve: loadSequence('UserPaymentPlanCtrl', 'userPaymentPlanService')
-    })    }).state('app.billing.invoice', {
+    }).state('app.billing.invoice', {
         url : '/invoice/:id',
         templateUrl: '/bundles/publipr/js/components/Invoice/invoice.html',
         title: 'content.list.INVOICE',
@@ -2676,7 +2687,6 @@ function ($stateProvider) {
             label:'content.list.INVOICE'
         },
         resolve: loadSequence('InvoiceCtrl', 'paymentService', 'InvoiceDownloadService', 'InvoiceService')
-    })
     }).state('app.billing.unsubscribe', {
         url : '/unsubscribe/:id',
         templateUrl: '/bundles/publipr/js/components/UserPaymentPlan/unsubscribe.html',
@@ -2685,8 +2695,7 @@ function ($stateProvider) {
             label:'content.list.UNSUBSCRIBE'
         },
         resolve: loadSequence('ngTable', 'UserPaymentPlansCtrl', 'userPaymentPlanService', 'userService', 'paymentPlanService', 'PurchaseService')
-    })
-.state('app.accesscontrol', {
+    }).state('app.accesscontrol', {
         url: '/access-control',
         template: '<div ui-view class="fade-in-up"></div>',
         title: 'sidebar.nav.accesscontrol.MAIN',

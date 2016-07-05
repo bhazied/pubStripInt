@@ -757,6 +757,7 @@
             "YOURAREUNSUBSCRIBEDFROMRECURRENTPAYMENT" : "Your unsubscribe with success",
             "RECURRENTUNSUBSCRIBED": "Unsubscribed from service",
             "RECURRENTNOTUNSUBSCRIBED": "Not unsubscribed from service",
+            "UNSUBSCRIBED": "Unsubscribed",
             "RECURRENT" : "Recurring payment",
             "INVOICE" : "Invoice",
             "PURCHASE": "Purchase of a package",
@@ -1154,5 +1155,30 @@
                 }
             }
         }
+    },
+    "dashboard":{
+        "PRESSRELEASEINPROGRESS" : "Your Prs in progress",
+        "EMAILSTATS": "Statistics email",
+        "LASTPRESSRELEASE" : "Last Prs published",
+        "SENTEMAILS" : "Email sent",
+        "DELEVREDEMAILS": "Delivered email",
+        "OPENSEMAILS": "Opens email",
+        "CLICKSEMAILS": "number of click",
+        "DAY": "Day",
+        "WEEK": "Week",
+        "MONTH": "Month",
+        "ALLPRESSRELEASE": "All pressRelease",
+        "VISITSTATS": "Statistics visit",
+        "NBRVISITS": "Visits number",
+        "NBRVISITOR": "Visitor number",
+        "NBRVIEWPAGES": "Pages view",
+        "AVGVISIT": "Average visit",
+        "REBONDRATE": "Rebond rate",
+        "YOURACCOUNT": "Your account",
+        "INSCRIPTIONDATE": "Inscription date",
+        "NBRNEWSROOM": "Newsroom Number",
+        "SHOWALL": "Show all",
+        "FAQ": "FAQ",
+        "ALL": "All"
     }
 }
