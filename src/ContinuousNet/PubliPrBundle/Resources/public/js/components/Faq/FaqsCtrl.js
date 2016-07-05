@@ -4,8 +4,8 @@
  * Controller for Faqs List
  */
 
-app.controller('FaqsCtrl', ['$scope', '$rootScope', '$sce', '$timeout', '$filter', 'ngTableParams', '$state', '$q', '$interpolate', '$localStorage', 'toaster', 'SweetAlert', '$creatorUsersDataFactory', '$modifierUsersDataFactory', '$faqsDataFactory',
-function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q, $interpolate, $localStorage, toaster, SweetAlert, $creatorUsersDataFactory, $modifierUsersDataFactory, $faqsDataFactory) {
+app.controller('FaqsCtrl', ['$scope', '$rootScope', '$sce', '$timeout', '$filter', 'ngTableParams', '$state', '$q', '$interpolate', '$localStorage', 'toaster', 'SweetAlert', '$usersDataFactory', '$faqsDataFactory',
+function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q, $interpolate, $localStorage, toaster, SweetAlert, $usersDataFactory, $faqsDataFactory) {
 
     $scope.isFiltersVisible = false;
 
@@ -13,65 +13,35 @@ function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q,
     $scope.locale = (angular.isDefined($localStorage.language))?$localStorage.language:'en';
     $scope.showFieldsMenu = false;
 
-    $scope.creatorUsers = [];
-    $scope.creatorUsersLoaded = false;
+    $scope.users = [];
+    $scope.usersLoaded = false;
 
-    $scope.getCreatorUsers = function() {
-        $scope.creatorUsersLoaded = true;
-        if ($scope.creatorUsers.length == 0) {
-            $scope.creatorUsers.push({});
+    $scope.getUsers = function() {
+        $scope.usersLoaded = true;
+        if ($scope.users.length == 0) {
+            $scope.users.push({});
             var def = $q.defer();
-            $creatorUsersDataFactory.query({offset: 0, limit: 10000, 'order_by[creatorUser.id]': 'desc'}).$promise.then(function(data) {
+            $usersDataFactory.query({offset: 0, limit: 10000, 'order_by[user.id]': 'desc'}).$promise.then(function(data) {
                 $timeout(function(){
                     if (data.results.length > 0) {
-                        $scope.creatorUsers.length = 0;
+                        $scope.users.length = 0;
                         for (var i in data.results) {
-                            $scope.creatorUsers.push({
+                            $scope.users.push({
                                 id: data.results[i].id,
-                                title: data.results[i].
+                                title: data.results[i].username
                             });
                         }
-                        def.resolve($scope.creatorUsers);
+                        def.resolve($scope.users);
                     }
                 });
             });
             return def;
         } else {
-            return $scope.creatorUsers;
+            return $scope.users;
         }
     };
 
-    $scope.getCreatorUsers();
-
-    $scope.modifierUsers = [];
-    $scope.modifierUsersLoaded = false;
-
-    $scope.getModifierUsers = function() {
-        $scope.modifierUsersLoaded = true;
-        if ($scope.modifierUsers.length == 0) {
-            $scope.modifierUsers.push({});
-            var def = $q.defer();
-            $modifierUsersDataFactory.query({offset: 0, limit: 10000, 'order_by[modifierUser.id]': 'desc'}).$promise.then(function(data) {
-                $timeout(function(){
-                    if (data.results.length > 0) {
-                        $scope.modifierUsers.length = 0;
-                        for (var i in data.results) {
-                            $scope.modifierUsers.push({
-                                id: data.results[i].id,
-                                title: data.results[i].
-                            });
-                        }
-                        def.resolve($scope.modifierUsers);
-                    }
-                });
-            });
-            return def;
-        } else {
-            return $scope.modifierUsers;
-        }
-    };
-
-    $scope.getModifierUsers();
+    $scope.getUsers();
 
 
     $scope.textValue = function($scope, row) {
@@ -129,9 +99,9 @@ function($scope, $rootScope, $sce, $timeout, $filter, ngTableParams, $state, $q,
             { field: 'id', title: $filter('translate')('content.list.fields.ID'), sortable: 'faq.id', filter: { 'faq.id': 'number' }, show: $scope.getParamValue('id_show_filed', true), getValue: $scope.textValue },
             { field: 'question', title: $filter('translate')('content.list.fields.QUESTION'), sortable: 'faq.question', filter: { 'faq.question': 'text' }, show: $scope.getParamValue('question_show_filed', false), getValue: $scope.textValue },
             { field: 'response', title: $filter('translate')('content.list.fields.RESPONSE'), sortable: 'faq.response', filter: { 'faq.response': 'text' }, show: $scope.getParamValue('response_show_filed', false), getValue: $scope.textValue },
-            { field: 'creator_user', title: $filter('translate')('content.list.fields.CREATORUSER'), sortable: 'creator_user.', filter: { 'faq.creatorUser': 'select' }, getValue: $scope.linkValue, filterData: $scope.getCreatorUsers(), show: $scope.getParamValue('creator_user_id_show_filed', true), displayField: '', state: 'app..details' },
+            { field: 'creator_user', title: $filter('translate')('content.list.fields.CREATORUSER'), sortable: 'creator_user.username', filter: { 'faq.creatorUser': 'select' }, getValue: $scope.linkValue, filterData: $scope.getUsers(), show: $scope.getParamValue('creator_user_id_show_filed', true), displayField: 'username', state: 'app.access.usersdetails' },
             { field: 'created_at', title: $filter('translate')('content.list.fields.CREATEDAT'), sortable: 'faq.createdAt', filter: { 'faq.createdAt': 'text' }, show: $scope.getParamValue('created_at_show_filed', true), getValue: $scope.evaluatedValue, valueFormatter: 'date:\''+$filter('translate')('formats.DATETIME')+'\''},
-            { field: 'modifier_user', title: $filter('translate')('content.list.fields.MODIFIERUSER'), sortable: 'modifier_user.', filter: { 'faq.modifierUser': 'select' }, getValue: $scope.linkValue, filterData: $scope.getModifierUsers(), show: $scope.getParamValue('modifier_user_id_show_filed', true), displayField: '', state: 'app..details' },
+            { field: 'modifier_user', title: $filter('translate')('content.list.fields.MODIFIERUSER'), sortable: 'modifier_user.username', filter: { 'faq.modifierUser': 'select' }, getValue: $scope.linkValue, filterData: $scope.getUsers(), show: $scope.getParamValue('modifier_user_id_show_filed', true), displayField: 'username', state: 'app.access.usersdetails' },
             { field: 'modified_at', title: $filter('translate')('content.list.fields.MODIFIEDAT'), sortable: 'faq.modifiedAt', filter: { 'faq.modifiedAt': 'text' }, show: $scope.getParamValue('modified_at_show_filed', true), getValue: $scope.evaluatedValue, valueFormatter: 'date:\''+$filter('translate')('formats.DATETIME')+'\''},
             { title: $filter('translate')('content.common.ACTIONS'), show: true, getValue: $scope.interpolatedValue, interpolateExpr: $interpolate('<div class="btn-group pull-right">'
             +'<button type="button" class="btn btn-success" tooltip-placement="top" uib-tooltip="'+$filter('translate')('content.common.EDIT')+'" ng-click="edit(row)"><i class="ti-pencil-alt"></i></button>'

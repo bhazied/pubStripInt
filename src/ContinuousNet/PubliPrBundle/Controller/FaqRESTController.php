@@ -83,8 +83,8 @@ class FaqRESTController extends BaseRESTController
             $em = $this->getDoctrine()->getManager();
             $qb = $em->createQueryBuilder();
             $qb->from('PubliPrBundle:Faq', 'f_');
-            $qb->leftJoin('ContinuousNet\PubliPrBundle\Entity\CreatorUser', 'creator_user', \Doctrine\ORM\Query\Expr\Join::WITH, 'f_.creatorUser = creator_user.id');
-            $qb->leftJoin('ContinuousNet\PubliPrBundle\Entity\ModifierUser', 'modifier_user', \Doctrine\ORM\Query\Expr\Join::WITH, 'f_.modifierUser = modifier_user.id');
+            $qb->leftJoin('ContinuousNet\PubliPrBundle\Entity\User', 'creator_user', \Doctrine\ORM\Query\Expr\Join::WITH, 'f_.creatorUser = creator_user.id');
+            $qb->leftJoin('ContinuousNet\PubliPrBundle\Entity\User', 'modifier_user', \Doctrine\ORM\Query\Expr\Join::WITH, 'f_.modifierUser = modifier_user.id');
             $textFields = array('faq.question', 'faq.response');
             foreach ($filters as $field => $value) {
                 $_field = str_replace('faq.', 'f_.', $field);
