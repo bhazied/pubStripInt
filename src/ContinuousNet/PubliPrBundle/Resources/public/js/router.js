@@ -636,7 +636,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.FAQS'
         },
-        resolve: loadSequence('ngTable', 'FaqsCtrl', 'faqService', 'creatorUserService', 'modifierUserService')
+        resolve: loadSequence('ngTable', 'FaqsCtrl', 'faqService', 'userService')
     }).state('app.settings.faqsnew', {
         url: '/faqs/new',
         templateUrl: '/bundles/publipr/js/components/Faq/faq_form.html',
@@ -644,7 +644,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.NEWFAQ'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'FaqFormCtrl', 'faqService', 'creatorUserService', 'modifierUserService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'FaqFormCtrl', 'faqService', 'userService')
     }).state('app.settings.faqsedit', {
         url: '/faqs/edit/:id',
         templateUrl: '/bundles/publipr/js/components/Faq/faq_form.html',
@@ -652,7 +652,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.EDITFAQ'
         },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'FaqFormCtrl', 'faqService', 'creatorUserService', 'modifierUserService')
+        resolve: loadSequence('ui.select', 'monospaced.elastic', 'touchspin-plugin', 'checklist-model', 'ckeditor-plugin', 'ckeditor', 'FaqFormCtrl', 'faqService', 'userService')
     }).state('app.settings.faqsdetails', {
         url: '/faqs/details/:id',
         templateUrl: '/bundles/publipr/js/components/Faq/faq.html',

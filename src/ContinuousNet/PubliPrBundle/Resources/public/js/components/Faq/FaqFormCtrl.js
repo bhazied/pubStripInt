@@ -4,8 +4,8 @@
  * Controller for Faq Form
  */
 
-app.controller('FaqFormCtrl', ['$scope', '$state', '$stateParams', '$sce', '$timeout', '$filter', '$uibModal', '$q', '$interpolate', '$localStorage', 'toaster', 'SweetAlert', 'savable', '$creatorUsersDataFactory', '$modifierUsersDataFactory', '$faqsDataFactory',
-function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $interpolate, $localStorage, toaster, SweetAlert, savable, $creatorUsersDataFactory, $modifierUsersDataFactory, $faqsDataFactory) {
+app.controller('FaqFormCtrl', ['$scope', '$state', '$stateParams', '$sce', '$timeout', '$filter', '$uibModal', '$q', '$interpolate', '$localStorage', 'toaster', 'SweetAlert', 'savable', '$usersDataFactory', '$faqsDataFactory',
+function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $interpolate, $localStorage, toaster, SweetAlert, savable, $usersDataFactory, $faqsDataFactory) {
 
     $scope.locale = (angular.isDefined($localStorage.language))?$localStorage.language:'en';
 
@@ -24,55 +24,30 @@ function($scope, $state, $stateParams, $sce, $timeout, $filter, $uibModal, $q, $
     };
 
 
-    $scope.creatorUsers = [];
-    $scope.creatorUsersLoaded = false;
+    $scope.users = [];
+    $scope.usersLoaded = false;
 
-    $scope.getCreatorUsers = function() {
+    $scope.getUsers = function() {
         $timeout(function(){
-            $scope.creatorUsersLoaded = true;
-            if ($scope.creatorUsers.length == 0) {
-                $scope.creatorUsers.push({});
+            $scope.usersLoaded = true;
+            if ($scope.users.length == 0) {
+                $scope.users.push({});
                 var def = $q.defer();
-                $creatorUsersDataFactory.query({offset: 0, limit: 10000, 'order_by[creatorUser.]': 'asc'}).$promise.then(function(data) {
+                $usersDataFactory.query({offset: 0, limit: 10000, 'order_by[user.username]': 'asc'}).$promise.then(function(data) {
                     for (var i in data.results) {
                         data.results[i].hidden = false;
                     }
-                    $scope.creatorUsers = data.results;
-                    def.resolve($scope.creatorUsers);
+                    $scope.users = data.results;
+                    def.resolve($scope.users);
                 });
                 return def;
             } else {
-                return $scope.creatorUsers;
+                return $scope.users;
             }
         });
     };
 
-    $scope.getCreatorUsers();
-
-    $scope.modifierUsers = [];
-    $scope.modifierUsersLoaded = false;
-
-    $scope.getModifierUsers = function() {
-        $timeout(function(){
-            $scope.modifierUsersLoaded = true;
-            if ($scope.modifierUsers.length == 0) {
-                $scope.modifierUsers.push({});
-                var def = $q.defer();
-                $modifierUsersDataFactory.query({offset: 0, limit: 10000, 'order_by[modifierUser.]': 'asc'}).$promise.then(function(data) {
-                    for (var i in data.results) {
-                        data.results[i].hidden = false;
-                    }
-                    $scope.modifierUsers = data.results;
-                    def.resolve($scope.modifierUsers);
-                });
-                return def;
-            } else {
-                return $scope.modifierUsers;
-            }
-        });
-    };
-
-    $scope.getModifierUsers();
+    $scope.getUsers();
 
 
 
