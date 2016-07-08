@@ -12,7 +12,7 @@ app.factory('$dashboardDataFactory', ['$resource', '$rootScope',
             lastPpr: { method : 'GET', url: $rootScope.app.apiURL+ 'lastPpr', isArray:false},
             loadEmails: {method: 'GET',url: $rootScope.app.apiURL+ 'loadEmails/:periode', isArray: false},
             loadVisits: {method: 'GET',url: $rootScope.app.apiURL+ 'loadVisits/:periode', isArray: false},
-            loadProfile: {method: "GET", url: '/:locale' +$rootScope.app.apiURL+ $rootScope.app.apiVersion+ 'getProfile', isArray: false }
+            loadProfile: {method: "GET", url: '/:locale' +$rootScope.app.apiURL+ $rootScope.app.apiVersion+ 'getProfile', isArray: false },
         });
 
     }

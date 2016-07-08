@@ -1838,7 +1838,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.DASHBOARD'
         },
-        resolve: loadSequence('jquery-sparkline', 'DashboardCtrl', 'DashboardService')
+        resolve: loadSequence('jquery-sparkline', 'DashboardCtrl', 'DashboardService', 'faqService')
     }).state('app.access', {
         url: '/access',
         template: '<div ui-view class="fade-in-up"></div>',

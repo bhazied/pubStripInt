@@ -1,10 +1,11 @@
 'use strict';
-app.controller('dashboardCtrl', ['$scope', '$interval', 'COLORS', '$localStorage', '$filter', 'toaster','$q','$state','$dashboardDataFactory', function($scope, $interval, COLORS, $localStorage, $filter, toaster, $q, $state, $dashboardDataFactory){
+app.controller('dashboardCtrl', ['$scope', '$interval', 'COLORS', '$localStorage', '$filter', 'toaster','$q','$state','$dashboardDataFactory', '$faqsDataFactory' ,  function($scope, $interval, COLORS, $localStorage, $filter, toaster, $q, $state, $dashboardDataFactory, $faqsDataFactory){
     $scope.ppr = [];
     $scope.lastppr = [];
     $scope.emails = [];
     $scope.visits = [];
     $scope.profile = {};
+    $scope.faqs = [];
     $scope.allPeriode = ['all', 'last_7_days', 'today', 'last_30_days'];
     $scope.loadPpr = function(){
         var def = $q.defer();
@@ -77,20 +78,31 @@ app.controller('dashboardCtrl', ['$scope', '$interval', 'COLORS', '$localStorage
         var def = $q.defer();
         $dashboardDataFactory.loadProfile({locale: $localStorage.language}).$promise.then(function(data){
             $scope.profile = data;
-            console.log($scope.profile);
         });
         def.resolve($scope.profile);
         return def;
 
     }
 
+    $scope.loadFaqs = function () {
+        var def = $q.defer();
+        var params = {limit : 5};
+        $faqsDataFactory.get(params).$promise.then(function (data) {
+            $scope.faqs = data.results;
+            console.log($scope.faqs);
+        });
+        def.resolve($scope.faqs);
+        return def;
+    }
+
     $scope.$watch($scope.ppr, function () {
         $scope.loadLastPpr();
         $scope.loadEmails('all');
         $scope.loadVisits('all');
-    })
-    $scope.loadPpr();
-    $scope.loadProfile();
+        $scope.loadPpr();
+        $scope.loadProfile();
+        $scope.loadFaqs();
+    });
 
     $scope.pressReleaseList = function () {
         $state.go("app.prmanager.pressreleases");
