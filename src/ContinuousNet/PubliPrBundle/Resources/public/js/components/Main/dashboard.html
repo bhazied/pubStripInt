@@ -113,13 +113,17 @@
                     <div class="overflow-hidden">
                         <div class="mb20">
                              <span class="pull-right">
-                                 <a type="button" class="btn btn-primary" ng-click="showAll()">[["dashboard.SHOWALL" | translate]]</a>
+                                 <a type="button" class="btn btn-primary" ui-sref="app.settings.faqsShowAll">[["dashboard.SHOWALL" | translate]]</a>
                              </span>
                             <small class="widget-title" translate="dashboard.FAQ"></small>
                         </div>
-                            <a href="javascript:;" class="widget-list-item">
-                                United States
-                            </a>
+                        <div class="col-md-6 col-xs-12">
+                            <span ng-repeat="faq in faqs">
+                                <a ui-sref="app.settings.faqsShow({id: faq.id})" class="widget-list-item">
+                                    [[ faq.question ]]
+                                </a>
+                            </span>  <br>
+                        </div>
                     </div>
                 </div>
             </div>

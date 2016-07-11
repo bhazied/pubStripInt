@@ -839,7 +839,7 @@ class ApiV1RESTController extends FOSRestController
 
             $data = array(
                 'id' => $user->getId(),
-                'name' => $user->getName(),
+                'name' => $user->getFirstName() . ' ' . $user->getLastName(),
                 'email' => $user->getEmail(),
                 'username' => $user->getUsername(),
                 'firstName' => $user->getFirstName(),

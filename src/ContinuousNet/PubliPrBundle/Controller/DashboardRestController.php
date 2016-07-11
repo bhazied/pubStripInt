@@ -203,9 +203,8 @@ class DashboardRestController extends FOSRestController
                         $result = $api->getMethod('Actions.get')->call( $params );
                         $data['newsroom'] = array(
                             'name' => $nr->getName,
-                            'stats' => $result->getBody()->getContent()
+                            'stats' => $result->getBody()->getContents()
                         );
-                        var_dump($result->getBody()->getContents());die;
                     }
                 }
             }
