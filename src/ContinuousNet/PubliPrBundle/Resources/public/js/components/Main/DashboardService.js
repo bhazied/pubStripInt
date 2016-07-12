@@ -11,7 +11,7 @@ app.factory('$dashboardDataFactory', ['$resource', '$rootScope',
             progressPr: { method : 'GET', url: $rootScope.app.apiURL+ 'progressPr', isArray:false},
             lastPpr: { method : 'GET', url: $rootScope.app.apiURL+ 'lastPpr', isArray:false},
             loadEmails: {method: 'GET',url: $rootScope.app.apiURL+ 'loadEmails/:periode', isArray: false},
-            loadVisits: {method: 'GET',url: $rootScope.app.apiURL+ 'loadVisits/:periode', isArray: true},
+            loadVisits: {method: 'GET',url: $rootScope.app.apiURL+ 'loadVisits', isArray: false},
             loadProfile: {method: "GET", url: '/:locale' +$rootScope.app.apiURL+ $rootScope.app.apiVersion+ 'getProfile', isArray: false },
         });
 

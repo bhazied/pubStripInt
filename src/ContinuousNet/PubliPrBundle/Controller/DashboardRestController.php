@@ -168,17 +168,18 @@ class DashboardRestController extends FOSRestController
     }
 
     /**
-     * @GET("/loadVisits/{periode}")
-     * @param $request
+     * @GET("/loadVisits")
+     * @QueryParam(name="periode", requirements="[a-z]+", default="all", description="get the periode of search")
      * @View(serializerEnableMaxDepthChecks=true)
      */
-    public function loadVisitsAction(Request $request, $periode)
+    public function loadVisitsAction(ParamFetcherInterface $parameterFetcher)
     {
         try
         {
             $data = array(
                 'newsroom' => array()
             );
+            $periode = $parameterFetcher->get('periode');
             $em = $this->getDoctrine()->getManager();
             $newsRooms = $em->getRepository('PubliPrBundle:Newsroom')->findBy(array('creatorUser' => $this->getUser()->getId()));
             if(!is_null($newsRooms))
@@ -200,15 +201,28 @@ class DashboardRestController extends FOSRestController
                     if(!is_null($nr->getPiwikReference()))
                     {
                         $params['idSite'] = $nr->getPiwikreference();
-                        $result = $api->getMethod('Actions.get')->call( $params );
-                        $data['newsroom'] = array(
-                            'name' => $nr->getName,
-                            'stats' => $result->getBody()->getContents()
+                        $result = $api->getMethod('VisitsSummary.get')->call( $params );
+                        $stat = json_decode($result->getBody()->getContents());
+                        $data['newsroom'][] = array(
+                            'name' => $nr->getName(),
+                            'stats' => array(
+                                'nb_uniq_visitors' => $stat->nb_uniq_visitors,
+                                'nb_users' => $stat->nb_users,
+                                'nb_visits' => $stat->nb_visits,
+                                'nb_actions' => $stat->nb_actions,
+                                'nb_visits_converted' => $stat->nb_visits_converted,
+                                'bounce_count' => $stat->bounce_count,
+                                'sum_visit_length' => $stat->sum_visit_length,
+                                'max_actions' => $stat->max_actions,
+                                'bounce_rate' => $stat->bounce_rate,
+                                'nb_actions_per_visit' => $stat->nb_actions_per_visit,
+                                'avg_time_on_site' => $stat->avg_time_on_site
+                            )
                         );
                     }
                 }
             }
-            return $newsRooms;
+            return $data;
         }
         catch(\Exception $e)
         {

@@ -40,15 +40,17 @@
                         <h4 class="no-margin text-uppercase" translate="dashboard.VISITSTATS"></h4>
                     </div>
                     <div class="col-md-6 col-xs-12">
-                        <span translate="dashboard.NBRVISITS"> </span> <span class="label label-info pull-right">0 </span> <br>
-                        <span translate="dashboard.NBRVISITOR"> </span> <span class="label label-info pull-right">0 </span> <br>
-                        <span translate="dashboard.NBRVIEWPAGES"> </span>  <span class="label label-info pull-right"> 0 </span> <br>
+                        <span translate="dashboard.NBRVISITS"> </span> <span class="label label-info pull-right"> [[ visitToShow.stats.nb_visits ]] </span> <br>
+                        <span translate="dashboard.NBRVISITOR"> </span> <span class="label label-info pull-right"> [[ visitToShow.stats.nb_uniq_visitors ]] </span> <br>
+                        <span translate="dashboard.NBRVIEWPAGES"> </span>  <span class="label label-info pull-right"> [[ visitToShow.stats.nb_actions ]] </span> <br>
                     </div>
                     <div class="col-md-6 col-xs-12">
-                        <span translate="dashboard.AVGVISIT"> </span> <span class="label label-info pull-right"> 0 </span> <br>
-                        <span translate="dashboard.REBONDRATE"> </span> <span class="label label-info pull-right"> 0 </span> <br>
+                        <span translate="dashboard.AVGVISIT"> </span> <span class="label label-info pull-right"> [[ visitToShow.stats.avg_time_on_site ]] </span> <br>
+                        <span translate="dashboard.REBONDRATE"> </span> <span class="label label-info pull-right"> [[ visitToShow.stats.bounce_rate ]] </span> <br>
                     </div>
                 </div>
+                <pager total-items="visitTotalItems" ng-model="visitCurrentPage" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" ng-change="changeNewsroomVisit()"></pager>
+                <h4>[["dashboard.VISITSTATS" |  translate]] :  [[ visitToShow.name ]]</h4>
             </div>
 
             <div class="widget bg-white">

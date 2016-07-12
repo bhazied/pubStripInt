@@ -7,6 +7,9 @@ app.controller('dashboardCtrl', ['$scope', '$interval', 'COLORS', '$localStorage
     $scope.profile = {};
     $scope.faqs = [];
     $scope.allPeriode = ['all', 'last_7_days', 'today', 'last_30_days'];
+    $scope.visitTotalItems = 0;
+    $scope.visitCurrentPage = 1;
+    $scope.visitToShow = {};
     $scope.loadPpr = function(){
         var def = $q.defer();
         if($scope.ppr.length == 0) {
@@ -50,13 +53,18 @@ app.controller('dashboardCtrl', ['$scope', '$interval', 'COLORS', '$localStorage
         $scope['currentVisit_'+periode] = true;
         params.periode = periode;
             $dashboardDataFactory.loadVisits(params).$promise.then(function (data) {
-                $scope.visits = data;
                 $scope['disableVisits_'+periode] = false;
+                $scope.visitTotalItems = data.newsroom.length;
+                $scope.visits = data.newsroom;
+                $scope.visitToShow = $scope.visits[$scope.visitCurrentPage - 1];
             });
             def.resolve($scope.visits);
             return def;
     }
     
+    $scope.changeNewsroomVisit = function () {
+        $scope.visitToShow = $scope.visits[$scope.visitCurrentPage];
+    }
     $scope.loadEmails = function (periode) {
         var def = $q.defer();
             var params = {};
@@ -89,7 +97,6 @@ app.controller('dashboardCtrl', ['$scope', '$interval', 'COLORS', '$localStorage
         var params = {limit : 5};
         $faqsDataFactory.get(params).$promise.then(function (data) {
             $scope.faqs = data.results;
-            console.log($scope.faqs);
         });
         def.resolve($scope.faqs);
         return def;
