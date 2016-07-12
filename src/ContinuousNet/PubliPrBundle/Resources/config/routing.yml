@@ -288,3 +288,7 @@ publi_pr_user_payment_plan:
     resource: "@PubliPrBundle/Resources/config/routing/user_payment_plan.yml"
     prefix:   /user-payment-plan
 
+publi_pr_subdomain:
+    resource: "@PubliPrBundle/Controller/FrontController.php"
+    type:     annotation
+    prefix: /

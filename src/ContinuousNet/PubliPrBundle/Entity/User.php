@@ -115,6 +115,18 @@ class User  extends BaseUser
      * @var string
      * @access protected
      *
+     * @ORM\Column(name="alias", type="string", length=255, nullable=false, unique=false)
+     *
+     * @Exclude
+     *
+     */
+    protected $alias;
+
+
+    /**
+     * @var string
+     * @access protected
+     *
      * @ORM\Column(name="salt", type="string", length=255, nullable=true, unique=false)
      * 
      * @Exclude
@@ -733,6 +745,31 @@ class User  extends BaseUser
     {
         return $this->password;
     }
+
+    /**
+     * Set alias
+     *
+     * @access public
+     * @param string $alias
+     * @return User
+     */
+    public function setAlias($alias = null)
+    {
+        $this->alias = $alias;
+        return $this;
+    }
+
+    /**
+     * Get alias
+     *
+     * @access public
+     * @return string
+     */
+    public function getAlias()
+    {
+        return $this->alias;
+    }
+
 
     /**
      * Set salt

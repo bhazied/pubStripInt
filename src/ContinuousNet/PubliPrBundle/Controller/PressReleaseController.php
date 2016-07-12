@@ -46,7 +46,9 @@ class PressReleaseController extends BaseController
 		return $this->render('PubliPrBundle:PressRelease:index.html.twig', array(
 			'pressReleases' => $pressReleases,
 		));
+
 	}
+
 
 	/**
 	 * Creates a new PressRelease entity.
@@ -152,4 +154,5 @@ class PressReleaseController extends BaseController
 			->getForm()
 		;
 	}
+	
 }
