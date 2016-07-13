@@ -49,6 +49,7 @@ class UserType extends AbstractType
             ->add('stripeReference', TextType::class)
             ->add('email', EmailType::class)
             ->add('password', PasswordType::class)
+            ->add('alias', TextType::class)
             ->add('salt', TextType::class)
             ->add('phone', TextType::class)
             ->add('usernameCanonical', TextType::class)
