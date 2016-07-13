@@ -116,13 +116,12 @@ class User  extends BaseUser
      * @access protected
      *
      * @ORM\Column(name="alias", type="string", length=255, nullable=false, unique=false)
-     *
-     * @Exclude
-     *
+     * 
+     * @Expose
+     * 
      */
     protected $alias;
-
-
+    
     /**
      * @var string
      * @access protected
@@ -753,7 +752,8 @@ class User  extends BaseUser
      * @param string $alias
      * @return User
      */
-    public function setAlias($alias = null)
+
+    public function setAlias($alias)
     {
         $this->alias = $alias;
         return $this;
@@ -769,7 +769,6 @@ class User  extends BaseUser
     {
         return $this->alias;
     }
-
 
     /**
      * Set salt
