@@ -803,7 +803,7 @@ class ApiV1RESTController extends FOSRestController
                     if ($field == 'country') {
                         $value = $em->getRepository('PubliPrBundle:Country')->findOneById($value);
                     } else if ($field == 'language') {
-                        $value = $em->getRepository('PubliPrBundle:Language')->findOneByCode($value);
+                        $value = $em->getRe²pository('PubliPrBundle:Language')->findOneByCode($value);
                     } else if ($field == 'birthDate') {
                         $value = new \DateTime($value);
                     }

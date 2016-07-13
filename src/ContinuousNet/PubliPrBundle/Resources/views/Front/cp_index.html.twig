@@ -1,0 +1,12 @@
+{% extends 'PubliPrBundle::front.html.twig' %}
+
+{% block title %}
+    {{ pressRelease.title }}
+{% endblock %}
+{% block body %}
+    {% if  pressRelease %}
+        {{ site_id }} <br>
+    {% elseif pressRelease is null %}
+        no data here
+    {% endif %}
+{% endblock %}
