@@ -96,8 +96,7 @@ app.constant('APP_JS_REQUIRES', {
         'TrackPressReleaseCtrl': '/bundles/publipr/js/components/TrackPressRelease/TrackPressReleaseCtrl.js',
         'UserPaymentPlansCtrl': '/bundles/publipr/js/components/UserPaymentPlan/UserPaymentPlansCtrl.js',
         'UserPaymentPlanFormCtrl': '/bundles/publipr/js/components/UserPaymentPlan/UserPaymentPlanFormCtrl.js',
-        'UserPaymentPlanCtrl': '/bundles/publipr/js/components/UserPaymentPlan/UserPaymentPlanCtrl.js',
-        'recurrentCtrl': '/bundles/publipr/js/components/Payment/recurrentCtrl.js'
+        'UserPaymentPlanCtrl': '/bundles/publipr/js/components/UserPaymentPlan/UserPaymentPlanCtrl.js'
     },
     modules: [{
         name: 'LoginService',
@@ -219,8 +218,5 @@ app.constant('APP_JS_REQUIRES', {
     },{
         name: 'userPaymentPlanService',
         files: ['/bundles/publipr/js/components/UserPaymentPlan/UserPaymentPlanService.js']
-    },{
-        name: 'purchaseService',
-        files: ['/bundles/publipr/js/components/Payment/PurchaseService.js']
     }]
 });

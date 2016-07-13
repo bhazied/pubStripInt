@@ -33,7 +33,7 @@ use ContinuousNet\PubliPrBundle\Entity\Company;
  * @copyright  2016 CONTINUOUS NET
  * @license  CONTINUOUS NET REGULAR LICENSE
  * @version  Release: 1.0
- * @link    http://buckshunter.continuousnet.com/ContinuousNet/PubliPrBundle/Controller
+ * @link    http://publipr.continuousnet.com/ContinuousNet/PubliPrBundle/Controller
  * @see      ApiV1RESTController
  * @since      Class available since Release 1.0
  * @deprecated Nothing
