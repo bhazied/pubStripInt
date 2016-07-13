@@ -9,7 +9,7 @@ security:
         - { path: ^/api/emails,      roles: [ROLE_ADMIN, ROLE_SUPER_ADMIN], methods: [GET, POST, PUT, PATCH, DELETE] }
         - { path: ^/api/emailcampaigns,      roles: [ROLE_ADMIN, ROLE_SUPER_ADMIN], methods: [GET, POST, PUT, PATCH, DELETE] }
         - { path: ^/api/emailtemplates,      roles: [ROLE_ADMIN, ROLE_SUPER_ADMIN], methods: [GET, POST, PUT, PATCH, DELETE] }
-        - { path: ^/api/faqs,      roles: [ROLE_ADMIN, ROLE_SUPER_ADMIN], methods: [GET, POST, PUT, PATCH, DELETE] }
+        - { path: ^/api/faqs,      roles: [ROLE_ADMIN, ROLE_SUPER_ADMIN, ROLE_ACCOUNT_MANAGER], methods: [GET, POST, PUT, PATCH, DELETE] }
         - { path: ^/api/fonts,      roles: [ROLE_ACCOUNT_MANAGER, ROLE_ADMIN, ROLE_SUPER_ADMIN], methods: [GET, POST, PUT, PATCH, DELETE] }
         - { path: ^/api/languages,      roles: [ROLE_ACCOUNT_MANAGER, ROLE_ADMIN, ROLE_SUPER_ADMIN], methods: [GET, POST, PUT, PATCH, DELETE] }
         - { path: ^/api/layouts,      roles: [ROLE_ADMIN, ROLE_SUPER_ADMIN], methods: [GET, POST, PUT, PATCH, DELETE] }

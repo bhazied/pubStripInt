@@ -1,0 +1,16 @@
+subdomain:
+    path: /{client}/{newsroom_slug}/{cp_slug}
+    host: "{subdomain}.publipr"
+    defaults:
+        _controller: "PubliPrBundle:Default:show"
+        subdomain: client
+    requirements:
+        subdomain: client
+subdomain_free:
+    path: /{codeCp}
+    host: "{subdomain}.publipr"
+    defaults:
+        _controller: "PubliPrBundle:Default:show"
+        subdomain: free
+    requirements:
+        subdomain: public|free

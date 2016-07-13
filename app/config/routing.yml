@@ -1,14 +1,3 @@
-newsroom_homepage:
-    path:  /{customer}/{newsroom}
-    host:  client.publipr
-    defaults:  { _controller: PubliPrBundle:Public:newsroom }
-
-press_release_page:
-    path:  /{customer}/{newsroom}/{pressRelease}
-    host:  client.publipr
-    defaults:  { _controller: PubliPrBundle:Public:pressRelease }
-
-
 publi_pr:
     resource: "@PubliPrBundle/Resources/config/routing.yml"
     

@@ -286,6 +286,8 @@ app.constant('APP_JS_REQUIRES', {
         'FaqsCtrl': '/bundles/publipr/js/components/Faq/FaqsCtrl.js',
         'FaqFormCtrl': '/bundles/publipr/js/components/Faq/FaqFormCtrl.js',
         'FaqCtrl': '/bundles/publipr/js/components/Faq/FaqCtrl.js',
+        'FaqShowCtrl': '/bundles/publipr/js/components/Faq/FaqShowCtrl.js',
+        'FaqShowAllCtrl': '/bundles/publipr/js/components/Faq/FaqsShowAllCtrl.js',
         'FontsCtrl': '/bundles/publipr/js/components/Font/FontsCtrl.js',
         'FontFormCtrl': '/bundles/publipr/js/components/Font/FontFormCtrl.js',
         'FontCtrl': '/bundles/publipr/js/components/Font/FontCtrl.js',
@@ -1834,7 +1836,7 @@ function ($stateProvider) {
         ncyBreadcrumb: {
             label: 'content.list.DASHBOARD'
         },
-        resolve: loadSequence('jquery-sparkline', 'DashboardCtrl', 'DashboardService')
+        resolve: loadSequence('jquery-sparkline', 'DashboardCtrl', 'DashboardService', 'faqService')
     }).state('app.access', {
         url: '/access',
         template: '<div ui-view class="fade-in-up"></div>',
@@ -2387,6 +2389,20 @@ function ($stateProvider) {
             label: 'content.list.FAQDETAILS'
         },
         resolve: loadSequence('FaqCtrl', 'faqService')
+    }).state('app.settings.faqsShow',{
+        url: '/faqs/show/:id',
+        templateUrl: '/bundles/publipr/js/components/Faq/show.html',
+        ncyBreadcrumb: {
+            label: 'content.list.FAQDETAILS'
+        },
+        resolve: loadSequence('FaqCtrl', 'faqService', 'FaqShowCtrl')
+    }).state('app.settings.faqsShowAll', {
+        url: '/faqs/all/:id',
+        templateUrl: '/bundles/publipr/js/components/Faq/show_all.html',
+        ncyBreadcrumb: {
+            label: 'content.list.FAQS'
+        },
+        resolve: loadSequence('FaqCtrl', 'faqService', 'FaqShowAllCtrl')
     }).state('app.settings.newsroomtemplates', {
         url: '/newsroom-templates',
         templateUrl: '/bundles/publipr/js/components/NewsroomTemplate/newsroom_templates.html',

@@ -710,7 +710,7 @@ class ApiV1RESTController extends FOSRestController
             $user = $em->getRepository('PubliPrBundle:User')->find($this->getUser()->getId());
 
             $fields = array(
-                'name', 'firstName', 'lastName', 'gender', 'country', 'city', 'phone', 'address', 'zipCode'
+                'alias', 'firstName', 'lastName', 'gender', 'country', 'city', 'phone', 'address', 'zipCode'
             );
 
             $email = $request->request->get('email');
@@ -720,7 +720,7 @@ class ApiV1RESTController extends FOSRestController
                 return $data;
             }
 
-            $name = $request->request->get('name');
+            $alias = $request->request->get('alias');
             if (is_null($email) || empty($email)) {
                 $data['status'] = false;
                 $data['message'] = 'Missing name parameter';
@@ -839,7 +839,7 @@ class ApiV1RESTController extends FOSRestController
 
             $data = array(
                 'id' => $user->getId(),
-                'name' => $user->getName(),
+                'name' => $user->getFirstName() . ' ' . $user->getLastName(),
                 'email' => $user->getEmail(),
                 'username' => $user->getUsername(),
                 'firstName' => $user->getFirstName(),

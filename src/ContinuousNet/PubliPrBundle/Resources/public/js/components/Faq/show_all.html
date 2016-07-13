@@ -1,0 +1,34 @@
+<section id="page-title">
+    <div class="row">
+        <div class="col-sm-8">
+            <h1 class="mainTitle" translate="content.list.FAQS">Faqs</h1>
+            <span class="mainDescription"></span>
+        </div>
+        <div ncy-breadcrumb></div>
+    </div>
+</section>
+<div class="container-fluid container-fullw bg-white">
+    <div class="row">
+        <div class="col-md-12" ng-controller="FaqsShowAllCtrl">
+            <div class="panel">
+                <div class="panel-body">
+                    <div class="search-results">
+                        <ul class="search-results-list">
+                            <li class="search-result" ng-repeat="faq in faqs">
+                                <h5>
+                                    <a href="javascript:;" class="text-info">[[ faq.question ]]</a>
+                                </h5>
+                                <p>[[ faq.response ]]</p>
+                            </li>
+                            </ul>
+                        </div>
+                    <pagination boundary-links="true" total-items="totalItems" ng-model="currentPage"  max-size="maxSize" rotate="false" num-pages="numPages" ng-change="changePage()" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+                    <br/>
+                    <p>
+                        <strong translate="content.common.PAGE">Page:</strong> [[currentPage]] - <strong translate="content.common.TOTAL">Total:</strong> [[totalItems]] - <strong translate="content.common.COUNTPERPAGE">Count per page:</strong> [[numPerPage]]
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

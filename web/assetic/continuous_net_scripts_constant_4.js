@@ -40,6 +40,8 @@ app.constant('APP_JS_REQUIRES', {
         'FaqsCtrl': '/bundles/publipr/js/components/Faq/FaqsCtrl.js',
         'FaqFormCtrl': '/bundles/publipr/js/components/Faq/FaqFormCtrl.js',
         'FaqCtrl': '/bundles/publipr/js/components/Faq/FaqCtrl.js',
+        'FaqShowCtrl': '/bundles/publipr/js/components/Faq/FaqShowCtrl.js',
+        'FaqShowAllCtrl': '/bundles/publipr/js/components/Faq/FaqsShowAllCtrl.js',
         'FontsCtrl': '/bundles/publipr/js/components/Font/FontsCtrl.js',
         'FontFormCtrl': '/bundles/publipr/js/components/Font/FontFormCtrl.js',
         'FontCtrl': '/bundles/publipr/js/components/Font/FontCtrl.js',

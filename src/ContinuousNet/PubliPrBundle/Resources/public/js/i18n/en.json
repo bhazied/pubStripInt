@@ -1179,6 +1179,8 @@
         "NBRNEWSROOM": "Newsroom Number",
         "SHOWALL": "Show all",
         "FAQ": "FAQ",
-        "ALL": "All"
+        "ALL": "All",
+        "BLOG": "Blog",
+        "BLOGTITLE": "About PubliPr"
     }
 }
