@@ -1224,7 +1224,7 @@ function loadSequence() {
                         for (var m in appJsRequires.modules)
                             if (appJsRequires.modules[m].name && appJsRequires.modules[m].name === name)
                                 return appJsRequires.modules[m];
-                    return (jsRequires.scripts && jsRequires.scripts[name]) || (appJsRequires.scripts && appJsRequires.scripts[name]);
+                    return (jsRequires.scripts && jsRequires.scrifrpts[name]) || (appJsRequires.scripts && appJsRequires.scripts[name]);
                 }
             }]
     };
